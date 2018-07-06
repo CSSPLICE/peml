@@ -1,0 +1,48 @@
+exercise_id: edu.vt.cs.cs1114.sp2018.simple-PEML-example
+
+<i># Single-line comments start with #
+# Comments must be on lines by themselves</i>
+
+title: Palindromes (A Simple PEML Example)
+
+topics: Strings, loops, conditions
+prerequisites: variables, assignment, boolean operators
+
+instructions:----------
+Write a program that reads a single string (in the form of one line
+of text) from its standard input, and determines whether the string is
+a _palindrome_. A palindrome is a string that reads the same way
+backward as it does forward, such as "racecar" or "madam". Your
+program does not need to prompt for its input, and should only generate
+one line of output, in the following
+format:
+
+&lt;pre&gt;
+"racecar" is a palindrome.
+&lt;/pre&gt;
+
+Or:
+
+&lt;pre&gt;
+"Flintstone" is not a palindrome.
+&lt;/pre&gt;
+----------
+
+assets.test_format: stdin-stdout
+
+[systems]
+language: java
+version: >= 1.5
+
+[assets.tests]
+stdin: racecar
+stdout: "racecar" is a palindrome.
+
+stdin: Flintstone
+stdout: "Flintstone" is not a palindrome.
+
+stdin: url(some/local/input.txt)
+stdout: url(some/local/output.txt)
+
+stdin: url(http://my.school.edu/some/local/generator/input)
+stdout: url(http://my.school.edu/some/local/generator/output)
