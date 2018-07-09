@@ -3,14 +3,21 @@ require 'peml/version'
 module Peml
   class Loader
 
+    #~ Constants ...............................................................
+
     WHITESPACE_PATTERN = "\u0000\u0009\u000A\u000B\u000C\u000D\u0020\u00A0\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u200B\u2028\u2029\u202F\u205F\u3000\uFEFF"
     SLUG_BLACKLIST     = "#{WHITESPACE_PATTERN}\u005B\u005C\u005D\u007B\u007D\u003A"
 
-    START_KEY     = /^\s*([^#{Regexp.escape(SLUG_BLACKLIST)}]+)[ \t\r]*:[ \t\r]*(.*(?:\n|\r|$))/
-    COMMAND_KEY   = /^\s*:[ \t\r]*(endskip|ignore|skip|end)(.*(?:\n|\r|$))/i
+    START_KEY     = /^([^#{Regexp.escape(SLUG_BLACKLIST)}]+)[ \t\r]*:(((\S)\4{2,})|[ \t\r]*)(.*(?:\n|\r|$))/
+    COMMENT_LINE  = /^\s*(#.*(?:\n|\r|$))/
+    COMMAND_KEY   = /^:[ \t\r]*(endskip|ignore|skip|end)(.*(?:\n|\r|$))/i
     ARRAY_ELEMENT = /^\s*\*[ \t\r]*(.*(?:\n|\r|$))/
-    SCOPE_PATTERN = /^\s*(\[|\{)[ \t\r]*([\+\.]*)[ \t\r]*([^#{Regexp.escape(SLUG_BLACKLIST)}]*)[ \t\r]*(?:\]|\}).*?(\n|\r|$)/
+    SCOPE_PATTERN = /^(\[|\{)[ \t\r]*([\+\.]*)[ \t\r]*([^#{Regexp.escape(SLUG_BLACKLIST)}]*)[ \t\r]*(?:\]|\}).*?(\n|\r|$)/
 
+
+    #~ Public instance methods .................................................
+
+    # -------------------------------------------------------------
     def initialize(options = {})
       @data = @scope = {}
 
@@ -19,45 +26,77 @@ module Peml
 
       @buffer_scope = @buffer_key = nil
       @buffer_string = ''
+      @quote_string = ''
 
       @is_skipping = false
+      @is_quoted = false
       @done_parsing = false
+      @depth = 0
 
       @default_options = {
           comments: false
       }.merge(options)
     end
 
+
+    # -------------------------------------------------------------
     def load(stream, options = {})
       @options = @default_options.merge(options)
 
       stream.each_line do |line|
         return @data if @done_parsing
 
-        if match = line.match(COMMAND_KEY)
+        if @is_quoted
+          if line.match(/^#{@quote_string}(?:\n|\r|$)/)
+            # end quote
+            self.parse_command_key('end')
+            @is_quoted = false
+            @quote_string = ''
+          else
+            self.parse_text(line)
+          end
+
+        elsif match = line.match(COMMENT_LINE)
+          # just skip it!
+
+        elsif match = line.match(COMMAND_KEY)
           self.parse_command_key(match[1].downcase)
 
-        elsif !@is_skipping && (match = line.match(START_KEY)) && \
-            (!@stack_scope || @stack_scope[:array_type] != :simple)
-          self.parse_start_key(match[1], match[2] || '')
+        elsif @skipping
+          # should we just ignore this text, instead of parsing it?
+          self.parse_text(line)
 
-        elsif !@is_skipping && (match = line.match(ARRAY_ELEMENT)) && @stack_scope && \
-          @stack_scope[:array] && (@stack_scope[:array_type] != :complex ) && !@stack_scope[:flags].match(/\+/)
+        elsif (match = line.match(START_KEY)) &&
+            (!@stack_scope || @stack_scope[:array_type] != :simple)
+          self.parse_start_key(match[1], match[3], match[5] || '')
+
+        elsif (match = line.match(ARRAY_ELEMENT)) && @stack_scope &&
+          @stack_scope[:array] && (@stack_scope[:array_type] != :complex ) &&
+          !@stack_scope[:flags].match(/\+/)
           self.parse_array_element(match[1])
 
-        elsif !@is_skipping && match = line.match(SCOPE_PATTERN)
+        elsif match = line.match(SCOPE_PATTERN)
           self.parse_scope(match[1], match[2], match[3])
 
         else
+          # just plain text
           self.parse_text(line)
         end
       end
+
+      # Treat all keys as multi-line
+      self.parse_command_key('end')
 
       self.flush_buffer!
       return @data
     end
 
-    def parse_start_key(key, rest_of_line)
+
+    # -------------------------------------------------------------
+    def parse_start_key(key, quote, rest_of_line)
+      # Treat all keys as multi-line
+      self.parse_command_key('end')
+
       self.flush_buffer!
 
       self.increment_array_element(key)
@@ -68,9 +107,19 @@ module Peml
       @buffer_string = rest_of_line
 
       self.flush_buffer_into(key, replace: true)
+
+      if !quote.nil?
+        @is_quoted = true
+        @quote_string = quote
+      end
     end
 
+
+    # -------------------------------------------------------------
     def parse_array_element(value)
+      # Treat all keys as multi-line
+      self.parse_command_key('end')
+
       self.flush_buffer!
 
       @stack_scope[:array_type] ||= :simple
@@ -81,6 +130,8 @@ module Peml
       self.flush_buffer_into(@stack_scope[:array], replace: true)
     end
 
+
+    # -------------------------------------------------------------
     def parse_command_key(command)
       if @is_skipping && !%w(endskip ignore).include?(command)
         return self.flush_buffer!
@@ -89,12 +140,19 @@ module Peml
       case command
         when "end"
           self.flush_buffer_into(@buffer_key, replace: false) if @buffer_key
+          @buffer_key = nil
           return
 
         when "ignore"
+          # If this occurs in the middle of a multi-line value, save what
+          # has been accumulated so far
+          self.flush_buffer_into(@buffer_key, replace: false) if @buffer_key
           return @done_parsing = true
 
         when "skip"
+          # If this occurs in the middle of a multi-line value, save what
+          # has been accumulated so far
+          self.flush_buffer_into(@buffer_key, replace: false) if @buffer_key
           @is_skipping = true
 
         when "endskip"
@@ -104,7 +162,12 @@ module Peml
       self.flush_buffer!
     end
 
+
+    # -------------------------------------------------------------
     def parse_scope(scope_type, flags, scope_key)
+      # Treat all keys as multi-line
+      self.parse_command_key('end')
+
       self.flush_buffer!
 
       if scope_key == ''
@@ -177,6 +240,8 @@ module Peml
       end
     end
 
+
+    # -------------------------------------------------------------
     def parse_text(text)
       if @stack_scope && @stack_scope[:flags].match(/\+/) && text.match(/[^\n\r\s]/)
         @stack_scope[:array] << { "type" => "text", "value" => text.gsub(/(^\s*)|(\s*$)/, '') }
@@ -185,6 +250,8 @@ module Peml
       end
     end
 
+
+    # -------------------------------------------------------------
     def increment_array_element(key)
       # Special handling for arrays. If this is the start of the array, remember
       # which key was encountered first. If this is a duplicate encounter of
@@ -208,28 +275,41 @@ module Peml
       end
     end
 
+
+    # -------------------------------------------------------------
     def flush_buffer!
       result = @buffer_string.dup
+      puts "    flushed content = #{result.inspect}"
       @buffer_string = ''
       @buffer_key = nil
       return result
     end
 
+
+    # -------------------------------------------------------------
     def flush_buffer_into(key, options = {})
       existing_buffer_key = @buffer_key
       value = self.flush_buffer!
 
       if options[:replace]
-        value = self.format_value(value, :replace).sub(/^\s*/, '')
-        @buffer_string = value.match(/\s*\Z/)[0]
+        if @is_quoted
+          @buffer_string = value
+        else
+          value = self.format_value(value, :replace).sub(/^\s*/, '')
+          @buffer_string = value.match(/\s*\Z/)[0]
+        end
         @buffer_key = existing_buffer_key
       else
         value = self.format_value(value, :append)
       end
+      if !@is_quoted
+        value = value.sub(/\s*\Z/, '')
+      end
+      puts "    flushed content = #{value.inspect}"
 
       if key.class == Array
         key[key.length - 1] = '' if options[:replace]
-        key[key.length - 1] += value.sub(/\s*\Z/, '')
+        key[key.length - 1] += value
 
       else
         key_bits = key.split('.')
@@ -241,10 +321,12 @@ module Peml
         end
 
         @buffer_scope[key_bits.last] = '' if options[:replace]
-        @buffer_scope[key_bits.last] += value.sub(/\s*\Z/, '')
+        @buffer_scope[key_bits.last] += value
       end
     end
 
+
+    # -------------------------------------------------------------
     # type can be either :replace or :append.
     # If it's :replace, then the string is assumed to be the first line of a
     # value, and no escaping takes place.
@@ -252,16 +334,14 @@ module Peml
     # by prepending the line with a backslash.
     # (:, [, {, *, \) surrounding the first token of any line.
     def format_value(value, type)
-      # Deprecated
-      if @options[:comments]
-        value.gsub!(/(?:^\\)?\[[^\[\]\n\r]*\](?!\])/, '') # remove comments
-        value.gsub!(/\[\[([^\[\]\n\r]*)\]\]/, '[\1]') # [[]] => []
-      end
+      # backslash-escaped leading characters have been removed in favor of
+      # quoted values.
+      #
+      # if type == :append
+      #  value.gsub!(/^(\s*)\\/, '\1')
+      # end
 
-      if type == :append
-        value.gsub!(/^(\s*)\\/, '\1')
-      end
-
+      # puts "    after formatting = #{value.inspect}"
       value
     end
 
