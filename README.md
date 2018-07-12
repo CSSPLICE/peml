@@ -1,8 +1,27 @@
-# Peml
+# PEML: The Program Exercise Markup Language
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/peml`. To experiment with that code, run `bin/console` for an interactive prompt.
+This repository contains the **"peml" ruby gem**, a parser for PEML.
 
-TODO: Delete this and the text above, and describe your gem
+The **Programming Exercise Markup Language (PEML)** (feedback on
+name choice is welcome!) is intended to be a simple, easy format for
+CS and IT instructors of all kinds (college, community college, high
+school, whatever) to describe programming assignments and activities.
+We want it to be so easy (and obvious) to use that instructors won't
+see it as a technological or notational barrier to expressing their
+assignments.
+
+We intend for this format to be something that authors of automated
+grading tools can adopt, so they can provide a very easy, low-energy
+onboarding path for existing instructors to get programming activities
+into such tools. As a result, this notation leans heavily on supporting
+authors and streamlining common cases, even if this may require more
+work on the part of tool developers--the goal is to make it super easy
+for **authors** of programming activities, not to fit into a specific
+auto-grader or simplify tasks for tool writers.
+
+For full details on PEML, see:
+
+http://CSSPLICE.github.io/peml/
 
 ## Installation
 
@@ -22,14 +41,30 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```
+require 'peml'
 
-## Development
+Peml.load("string containing a PEML description")
+=> nested hash representation of exercise
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+Peml.load_file("file_name.peml")
+=> nested has representation of the exercise
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+Eventually, we'll also add support for:
+
+```
+require 'peml'
+
+Peml.dump(some_nested_hash)
+=> string containing exercise rendered in PEML format
+
+my_exercise.to_peml
+=> string containing exercise rendered in PEML format
+```
+
+... but these don't work yet.
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/peml.
+Bug reports and pull requests are welcome on GitHub at https://github.com/CSSPLICE/peml.
