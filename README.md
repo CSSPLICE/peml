@@ -28,16 +28,15 @@ http://CSSPLICE.github.io/peml/
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'peml'
+gem 'peml', :github => 'CSSPLICE/peml'
 ```
 
 And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install peml
+Or install it using the gem command (may require you to clone the repository
+and build your own local copy of the gem to install).
 
 ## Usage
 
