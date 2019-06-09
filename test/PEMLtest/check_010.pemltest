@@ -1,0 +1,17 @@
+# This form interprets the description as a class name to use for
+# the default "subject"
+describe: Answer
+{
+  import:
+    java.util.*
+    java.io.*
+
+  given:
+    {
+        // Some Java setup goes here
+    }
+
+  then:
+    it.isPalindrome("racecar") === true
+    it.isPalindrome("true") === false
+}

@@ -1,0 +1,12 @@
+# This is a ruby/python-style line comment
+// This is a Java/C++-style line comment
+check
+{
+    # Line comments can go here
+
+    /* and also
+     * multi-line
+     * block comments.
+     */
+
+}

@@ -6,7 +6,7 @@ module Peml
 
   # -------------------------------------------------------------
   def self.load(peml)
-    Peml::Loader.new().load(peml)
+    Peml::Loader.new.load(peml)
   end
 
 
@@ -18,13 +18,13 @@ module Peml
 
   # -------------------------------------------------------------
   def self.pemltest_parse(pemltest)
-    Peml::PemlTestParser.new().parse(pemltest)
+    Peml::PemlTestParser.new.parse(pemltest)
   end
 
 
   # -------------------------------------------------------------
   def self.pemltest_parse_file(filename)
-    self.pemltest_parse(File.open(filename))
+    self.pemltest_parse(File.read(filename))
   end
 
 end
