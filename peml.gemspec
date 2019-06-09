@@ -9,9 +9,29 @@ Gem::Specification.new do |spec|
   spec.authors       = ['s-edwards']
   spec.email         = ['edwards@cs.vt.edu']
 
-  spec.summary       = %q{TODO: Write a short summary, because RubyGems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{Provides parsing of PEML, the
+Programming Exercise Markup Language. Also provides for parsing of PEMLtest,
+the testing DSL provided as part of PEML, as well as transformers to convert
+PEMLtest descriptions into executable tests for Java and other programming
+languages.}
+  spec.description   = %q{The Programming Exercise Markup Language (PEML)
+is intended to be a simple, easy format for CS and IT instructors of all kinds
+(college, community college, high school, whatever) to describe programming
+assignments and activities. We want it to be so easy (and obvious) to use that
+instructors won't see it as a technological or notational barrier to
+expressing their assignments.
+
+We intend for this format to be something that authors of automated grading
+tools can adopt, so they can provide a very easy, low-energy onboarding path
+for existing instructors to get programming activities into such tools. As a
+result, this notation leans heavily on supporting authors and streamlining
+common cases, even if this may require more work on the part of tool
+developers--the goal is to make it super easy for authors of programming
+activities, not to fit into a specific auto-grader or simplify tasks for
+tool writers.
+
+For more details, see the PEML website.}
+  spec.homepage      = 'https://cssplice.github.io/peml/'
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
@@ -28,11 +48,13 @@ Gem::Specification.new do |spec|
     `git ls-files -z`.split("\x0").
       reject { |f| f.match(%r{^(test|spec|features)/}) }
   end
-  spec.bindir        = 'exe'
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  spec.bindir        = 'bin'
+  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_development_dependency 'bundler', '~> 1.16'
-  spec.add_development_dependency 'rake', '~> 10.0'
+  spec.add_development_dependency 'bundler'
+  spec.add_development_dependency 'rake'
   spec.add_development_dependency 'minitest', '~> 5.0'
+
+  spec.add_runtime_dependency 'parslet', '~> 1.8.2'
 end

@@ -279,7 +279,7 @@ module Peml
     # -------------------------------------------------------------
     def flush_buffer!
       result = @buffer_string.dup
-      puts "    flushed content = #{result.inspect}"
+      # puts "    flushed content = #{result.inspect}"
       @buffer_string = ''
       @buffer_key = nil
       return result
@@ -305,7 +305,7 @@ module Peml
       if !@is_quoted
         value = value.sub(/\s*\Z/, '')
       end
-      puts "    flushed content = #{value.inspect}"
+      # puts "    flushed content = #{value.inspect}"
 
       if key.class == Array
         key[key.length - 1] = '' if options[:replace]

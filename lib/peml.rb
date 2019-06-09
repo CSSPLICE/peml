@@ -1,4 +1,5 @@
 require 'peml/loader'
+require 'peml/parser'
 
 module Peml
   #~ Class methods ...........................................................
@@ -12,6 +13,18 @@ module Peml
   # -------------------------------------------------------------
   def self.load_file(filename)
     self.load(File.open(filename))
+  end
+
+
+  # -------------------------------------------------------------
+  def self.pemltest_parse(pemltest)
+    Peml::PemlTestParser.new().parse(pemltest)
+  end
+
+
+  # -------------------------------------------------------------
+  def self.pemltest_parse_file(filename)
+    self.pemltest_parse(File.open(filename))
   end
 
 end

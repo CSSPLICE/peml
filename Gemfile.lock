@@ -1,0 +1,24 @@
+PATH
+  remote: .
+  specs:
+    peml (0.1.1)
+      parslet (~> 1.8.2)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    minitest (5.11.3)
+    parslet (1.8.2)
+    rake (10.4.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bundler
+  minitest (~> 5.0)
+  peml!
+  rake
+
+BUNDLED WITH
+   1.16.2
