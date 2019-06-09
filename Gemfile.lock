@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     peml (0.1.1)
-      parslet (~> 1.8.2)
+      parslet (~> 1.8)
 
 GEM
   remote: https://rubygems.org/
@@ -15,10 +15,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler
+  bundler (~> 1.16)
   minitest (~> 5.0)
   peml!
-  rake
+  rake (~> 10.0)
 
 BUNDLED WITH
    1.16.2
