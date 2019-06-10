@@ -1,0 +1,6 @@
+check "nested 1" {
+  given:
+    something else
+  then:
+    checking another feature
+}
