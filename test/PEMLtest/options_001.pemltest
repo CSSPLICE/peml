@@ -6,6 +6,7 @@ describe: Answer
   {
     field1: value1
     field2: value2
+    complex.field: ignore [ with, array, value ]
   }
   import:
     java.util.*

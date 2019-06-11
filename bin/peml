@@ -8,5 +8,9 @@ require 'peml'
 #require 'simple-tracer'
 
 ARGV.each do |f|
-  pp Peml::load_file(f)
+  begin
+    pp Peml::load_file(f)
+  rescue Parslet::ParseFailed => e
+    puts e.parse_failure_cause.ascii_tree
+  end
 end

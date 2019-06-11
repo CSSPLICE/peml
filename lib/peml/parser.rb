@@ -46,15 +46,16 @@ module Peml
     end
 
     rule(:options) do
-      option_header >>
-        (clause_body >>
-          (option_header.maybe >> clause_body).repeat.as(:options)
-        ).as(:options) >>
-        space?
+      str('options') >> space? >> colon >> option_set >> space?
     end
 
-    rule(:option_header) do
-      str('option') >> str('s').maybe >> space? >> colon
+    rule :option_set do
+      str('{') >> space? >> option_kv.repeat.as(:options) >> str('}')
+    end
+
+    rule(:option_kv) do
+      identifier.as(:key) >> line_spaces >> str(':') >>
+        line_spaces >> (expression | code_block).as(:value) >> space?
     end
 
     rule(:imports) do
@@ -241,8 +242,7 @@ module Peml
     end
 
     rule(:unquoted_string_terminator) do
-      match('[ \t]').repeat >>
-        (line_comment | match('[\r]').maybe >> str("\n"))
+      line_spaces >> (line_comment | match('[\r]').maybe >> str("\n"))
     end
 
     rule :double_quoted_string do
@@ -273,6 +273,10 @@ module Peml
 
     rule(:whitespace) do
       match('\s')
+    end
+
+    rule(:line_spaces) do
+      match('[ \t]').repeat
     end
 
     rule(:block_comment) do
@@ -311,6 +315,9 @@ module Peml
     end
     rule(id: simple(:string)) do
       { id: string.to_s }
+    end
+    rule(key: {id: simple(:string)}, value: subtree(:value)) do
+      {key: string, value: value}
     end
     rule(simple(:x)) do
       x.to_s

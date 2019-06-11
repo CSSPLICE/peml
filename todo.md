@@ -4,7 +4,6 @@ Work items to complete on 0.1.1:
 
 + Define code asset model, and build parser for it
 + Add more examples of PEML
-+ Block out command line scripts
 
 
 # PEMLtest Syntax

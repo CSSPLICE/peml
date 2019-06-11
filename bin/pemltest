@@ -13,15 +13,19 @@ ARGV.each do |f|
   if f.match(/^--(parse|java|python|ruby)$/)
     mode = f[2..-1]
   else
-    case mode
-    when 'java'
-      puts "Code generation for '#{mode}' is not yet implemented"
-    when 'python'
-      puts "Code generation for '#{mode}' is not yet implemented"
-    when 'ruby'
-      puts "Code generation for '#{mode}' is not yet implemented"
-    else
-      pp Peml::pemltest_parse_file(f)
+    begin
+      case mode
+      when 'java'
+        puts "Code generation for '#{mode}' is not yet implemented"
+      when 'python'
+        puts "Code generation for '#{mode}' is not yet implemented"
+      when 'ruby'
+        puts "Code generation for '#{mode}' is not yet implemented"
+      else
+        pp Peml::pemltest_parse_file(f)
+      end
+    rescue Parslet::ParseFailed => e
+      puts e.parse_failure_cause.ascii_tree
     end
   end
 end
