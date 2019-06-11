@@ -159,7 +159,7 @@ module Peml
     end
 
     rule(:clause_body) do
-      (expression.as(:expr) | code_block) >> space?
+      expression >> space?
     end
 
     rule(:reserved_word_start) do
@@ -188,6 +188,7 @@ module Peml
         double_quoted_string |
         block_comment.as(:block_comment) |
         line_comment.as(:line_comment) |
+        regex |
         match('[^\{\}\(\)\[\]\"\']').as(:text)
     end
 
@@ -216,19 +217,18 @@ module Peml
     end
 
     rule(:string) do
-      (single_quoted_string | double_quoted_string | unquoted_string)
+      (single_quoted_string | double_quoted_string | regex | unquoted_string)
     end
 
     rule(:expression) do
-      (single_quoted_string | double_quoted_string | unquoted_expression)
+      unquoted_expression
     end
 
     rule(:unquoted_expression) do
       reserved_word_start.absent? >>
         suite_start_word.absent? >>
-        match('[\{\}\"\'\(\)\[\]]').absent? >>
         (unquoted_string_terminator.absent? >> nested_code).
-          repeat(1).as(:unquoted_string) >>
+          repeat(1).as(:expr) >>
         unquoted_string_terminator
     end
 
@@ -261,6 +261,17 @@ module Peml
           (str("'").absent? >> any)
         ).repeat.as(:body) >>
         str("'").as(:rb)).as(:balanced).as(:string)
+    end
+
+    rule :regex do
+      line_comment.absent? >>
+      (str('/').as(:lb) >>
+        (
+        (str('\\') >> any) |
+          (str('/').absent? >> any)
+        ).repeat.as(:body) >>
+        str('/').as(:rb) >> match('[a-z]').repeat.as(:modifiers)).
+        as(:balanced).as(:regex)
     end
 
     rule(:space?) do
@@ -333,51 +344,54 @@ module Peml
          rb: simple(:rb)) do
       {lb: lb, body: PemlTestAstCleaner.string_reduce(body), rb: rb}
     end
+    rule(expr: subtree(:expr)) do
+      {expr: PemlTestAstCleaner.string_reduce(expr)}
+    end
 
 
     rule(expr: subtree(:expr), imports: subtree(:y)) do
-      y.unshift( { expr: expr } )
+      y.unshift( { expr: PemlTestAstCleaner.string_reduce(expr) } )
     end
     rule(block: subtree(:expr), imports: subtree(:y)) do
-      y.unshift( { block: PemlTestAstCleaner.string_reduce(expr)} )
+      y.unshift( { block: PemlTestAstCleaner.string_reduce(expr) } )
     end
     rule(expr: subtree(:expr), givens_before_all: subtree(:y)) do
-      y.unshift( { expr: expr } )
+      y.unshift( { expr: PemlTestAstCleaner.string_reduce(expr) } )
     end
     rule(block: subtree(:expr), givens_before_all: subtree(:y)) do
-      y.unshift( { block: PemlTestAstCleaner.string_reduce(expr)} )
+      y.unshift( { block: PemlTestAstCleaner.string_reduce(expr) } )
     end
     rule(expr: subtree(:expr), givens: subtree(:y)) do
-      y.unshift( { expr: expr } )
+      y.unshift( { expr: PemlTestAstCleaner.string_reduce(expr) } )
     end
     rule(block: subtree(:expr), givens: subtree(:y)) do
-      y.unshift( { block: PemlTestAstCleaner.string_reduce(expr)} )
+      y.unshift( { block: PemlTestAstCleaner.string_reduce(expr) } )
     end
     rule(expr: subtree(:expr), whens: subtree(:y)) do
-      y.unshift( { expr: expr } )
+      y.unshift( { expr: PemlTestAstCleaner.string_reduce(expr) } )
     end
     rule(block: subtree(:expr), whens: subtree(:y)) do
-      y.unshift( { block: PemlTestAstCleaner.string_reduce(expr)} )
+      y.unshift( { block: PemlTestAstCleaner.string_reduce(expr) } )
     end
     rule(expr: subtree(:expr), thens: subtree(:y)) do
-      y.unshift( { expr: expr } )
+      y.unshift( { expr: PemlTestAstCleaner.string_reduce(expr) } )
     end
     rule(block: subtree(:expr), thens: subtree(:y)) do
-      y.unshift( { block: PemlTestAstCleaner.string_reduce(expr)} )
+      y.unshift( { block: PemlTestAstCleaner.string_reduce(expr) } )
     end
     rule(expr: subtree(:expr), finallys: subtree(:y)) do
-      y.unshift( { expr: expr } )
+      y.unshift( { expr: PemlTestAstCleaner.string_reduce(expr) } )
     end
     rule(block: subtree(:expr), finallys: subtree(:y)) do
-      y.unshift( { block: PemlTestAstCleaner.string_reduce(expr)} )
+      y.unshift( { block: PemlTestAstCleaner.string_reduce(expr) } )
     end
     rule(expr: subtree(:expr),
          finallys_before_all: subtree(:y)) do
-      y.unshift( { expr: expr } )
+      y.unshift( { expr: PemlTestAstCleaner.string_reduce(expr) } )
     end
     rule(block: subtree(:expr),
          finallys_before_all: subtree(:y)) do
-      y.unshift( { block: PemlTestAstCleaner.string_reduce(expr)} )
+      y.unshift( { block: PemlTestAstCleaner.string_reduce(expr) } )
     end
 
 

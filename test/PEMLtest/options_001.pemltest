@@ -6,7 +6,10 @@ describe: Answer
   {
     field1: value1
     field2: value2
-    complex.field: ignore [ with, array, value ]
+    complex.field: [with, array,
+        # over multiple lines with an embedded comment
+        value]
+    pattern: /^a regex/im
   }
   import:
     java.util.*
