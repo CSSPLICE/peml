@@ -11,12 +11,15 @@ module Peml
         suite_start_word >>
         left_brace >>
         description.maybe >>
+        options.maybe >>
         imports.maybe >>
+        givens_before_all.maybe >>
         givens.maybe >>
         invariants.maybe >>
         whens.maybe >>
         thens.maybe >>
         finallys.maybe >>
+        finallys_after_all.maybe >>
         suite.repeat.as(:suites) >>
         right_brace
     end
@@ -42,6 +45,18 @@ module Peml
       (str('scenario') | str('description')).as(:label) >> space? >> colon
     end
 
+    rule(:options) do
+      option_header >>
+        (clause_body >>
+          (option_header.maybe >> clause_body).repeat.as(:options)
+        ).as(:options) >>
+        space?
+    end
+
+    rule(:option_header) do
+      str('option') >> str('s').maybe >> space? >> colon
+    end
+
     rule(:imports) do
       import_header >>
         (clause_body >>
@@ -52,6 +67,20 @@ module Peml
 
     rule(:import_header) do
       str('import') >> str('s').maybe >> space? >> colon
+    end
+
+    rule(:givens_before_all) do
+      given_before_all_header >>
+        (clause_body >>
+          (given_before_all_header.maybe >> clause_body).repeat.
+            as(:givens_before_all)).as(:givens_before_all) >>
+        space?
+    end
+
+    rule(:given_before_all_header) do
+      str('given') >> str('s').maybe >>
+        space >> str('before') >> space >> str('all') >>
+        space? >> colon
     end
 
     rule(:givens) do
@@ -102,6 +131,20 @@ module Peml
       str('then') >> str('s').maybe >> space? >> colon
     end
 
+    rule(:finallys_after_all) do
+      finally_after_all_header >>
+        (clause_body >>
+          (finally_after_all_header.maybe >> clause_body).repeat.
+            as(:finallys_after_all)).as(:finallys_after_all) >>
+        space?
+    end
+
+    rule(:finally_after_all_header) do
+      str('finally') >> str('s').maybe >>
+        space >> str('after') >> space >> str('all') >>
+        space? >> colon
+    end
+
     rule(:finallys) do
       finally_header >>
         (clause_body >>
@@ -120,23 +163,31 @@ module Peml
 
     rule(:reserved_word_start) do
       (str('import') | str('given') | str('when') |
-        str('then') | str('invariant') | str('finally')) >>
+        str('then') | str('invariant') | str('finally') | str('option')) >>
         str('s').maybe >> space? >> colon
     end
 
     rule :code_block do
-      (str('{') >>
-        nested_code.repeat >>
-        str('}')).as(:block)
+      (str('{').as(:lb) >>
+        nested_code.repeat.as(:body) >>
+        str('}').as(:rb)).as(:balanced).as(:block)
     end
 
     rule(:nested_code) do
-      str('{') >> nested_code.repeat >> str('}') |
-        str('(') >> nested_code.repeat >> str(')') |
-        str('[') >> nested_code.repeat >> str(']') |
-        block_comment |
-        line_comment |
-        match('[^\{\}\(\)\[\]]')
+      (str('{').as(:lb) >>
+        nested_code.repeat.as(:body) >>
+        str('}').as(:rb)).as(:balanced) |
+        (str('(').as(:lb) >>
+          nested_code.repeat.as(:body) >>
+          str(')').as(:rb)).as(:balanced) |
+        (str('[').as(:lb) >>
+          nested_code.repeat.as(:body) >>
+          str(']').as(:rb)).as(:balanced) |
+        single_quoted_string |
+        double_quoted_string |
+        block_comment.as(:block_comment) |
+        line_comment.as(:line_comment) |
+        match('[^\{\}\(\)\[\]\"\']').as(:text)
     end
 
     rule(:colon) do
@@ -185,7 +236,7 @@ module Peml
         suite_start_word.absent? >>
         match('[\{\}\"\'\(\)\[\]]').absent? >>
         (unquoted_string_terminator.absent? >> match('[^\r\n]')).
-          repeat(1).as(:unquoted_string) >>
+          repeat(1).as(:string) >>
         unquoted_string_terminator
     end
 
@@ -195,21 +246,21 @@ module Peml
     end
 
     rule :double_quoted_string do
-      (str('"') >>
+      (str('"').as(:lb) >>
         (
           (str('\\') >> any) |
           (str('"').absent? >> any)
-        ).repeat.as(:double_quoted_string) >>
-        str('"'))
+        ).repeat.as(:body) >>
+        str('"').as(:rb)).as(:balanced).as(:string)
     end
 
     rule :single_quoted_string do
-      (str("'") >>
+      (str("'").as(:lb) >>
         (
         (str('\\') >> any) |
           (str("'").absent? >> any)
-        ).repeat.as(:singe_quoted_string) >>
-        str("'"))
+        ).repeat.as(:body) >>
+        str("'").as(:rb)).as(:balanced).as(:string)
     end
 
     rule(:space?) do
@@ -261,48 +312,72 @@ module Peml
     rule(id: simple(:string)) do
       { id: string.to_s }
     end
-    # rule(expr: simple(:string)) do
-    #   { expr: PemlTestAstCleaner.unquote(string.to_s) }
-    # end
-    rule(block: simple(:string)) do
-      { block: string.to_s }
-    end
     rule(simple(:x)) do
       x.to_s
     end
+    rule(unquoted_string: subtree(:text)) do
+      {unquoted_string: PemlTestAstCleaner.string_reduce(text)}
+    end
+    rule(block: subtree(:text)) do
+      {block: PemlTestAstCleaner.string_reduce(text)}
+    end
+    rule(lb: simple(:lb),
+         body: subtree(:body),
+         rb: simple(:rb)) do
+      {lb: lb, body: PemlTestAstCleaner.string_reduce(body), rb: rb}
+    end
+
+
     rule(expr: subtree(:expr), imports: subtree(:y)) do
       y.unshift( { expr: expr } )
     end
-    rule(block: simple(:expr), imports: subtree(:y)) do
-      y.unshift( { block: expr} )
+    rule(block: subtree(:expr), imports: subtree(:y)) do
+      y.unshift( { block: PemlTestAstCleaner.string_reduce(expr)} )
+    end
+    rule(expr: subtree(:expr), givens_before_all: subtree(:y)) do
+      y.unshift( { expr: expr } )
+    end
+    rule(block: subtree(:expr), givens_before_all: subtree(:y)) do
+      y.unshift( { block: PemlTestAstCleaner.string_reduce(expr)} )
     end
     rule(expr: subtree(:expr), givens: subtree(:y)) do
       y.unshift( { expr: expr } )
     end
-    rule(block: simple(:expr), givens: subtree(:y)) do
-      y.unshift( { block: expr} )
+    rule(block: subtree(:expr), givens: subtree(:y)) do
+      y.unshift( { block: PemlTestAstCleaner.string_reduce(expr)} )
     end
     rule(expr: subtree(:expr), whens: subtree(:y)) do
       y.unshift( { expr: expr } )
     end
-    rule(block: simple(:expr), whens: subtree(:y)) do
-      y.unshift( { block: expr} )
+    rule(block: subtree(:expr), whens: subtree(:y)) do
+      y.unshift( { block: PemlTestAstCleaner.string_reduce(expr)} )
     end
     rule(expr: subtree(:expr), thens: subtree(:y)) do
       y.unshift( { expr: expr } )
     end
-    rule(block: simple(:expr), thens: subtree(:y)) do
-      y.unshift( { block: expr} )
+    rule(block: subtree(:expr), thens: subtree(:y)) do
+      y.unshift( { block: PemlTestAstCleaner.string_reduce(expr)} )
     end
     rule(expr: subtree(:expr), finallys: subtree(:y)) do
       y.unshift( { expr: expr } )
     end
-    rule(block: simple(:expr), finallys: subtree(:y)) do
-      y.unshift( { block: expr} )
+    rule(block: subtree(:expr), finallys: subtree(:y)) do
+      y.unshift( { block: PemlTestAstCleaner.string_reduce(expr)} )
     end
+    rule(expr: subtree(:expr),
+         finallys_before_all: subtree(:y)) do
+      y.unshift( { expr: expr } )
+    end
+    rule(block: subtree(:expr),
+         finallys_before_all: subtree(:y)) do
+      y.unshift( { block: PemlTestAstCleaner.string_reduce(expr)} )
+    end
+
+
     rule(line: {unquoted_string: simple(:s)}) do
       s.to_s
     end
+
 
     def self.unquote(s)
       if s.start_with?('"') && s.end_with?('"') ||
@@ -311,6 +386,46 @@ module Peml
       else
         s
       end
+    end
+
+    def self.string_reduce(tree)
+      # puts "string_reduce: #{tree.inspect}"
+      if tree.is_a? Hash
+        result = Hash.new
+        tree.each do |k, v|
+          result[k] = string_reduce(v)
+        end
+      elsif tree.is_a? Array
+        result = Array.new
+        text = nil
+        tree.each do |v|
+          if v.is_a?(Hash) && v.has_key?(:text)
+            if text.nil?
+              text = v[:text]
+            else
+              text += v[:text]
+            end
+          else
+            if !text.nil?
+              result.push({text: text})
+              text = nil
+            end
+            result.push(v)
+          end
+        end
+        if !text.nil?
+          result.push({text: text})
+          text = nil
+        end
+        if result.length == 1 &&
+          result[0].is_a?(Hash) &&
+          result[0].has_key?(:text)
+          result = result[0][:text]
+        end
+      else
+        result = tree
+      end
+      result
     end
 
   end

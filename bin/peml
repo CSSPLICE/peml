@@ -5,6 +5,8 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 require 'pp'
 require 'peml'
-require 'simple-tracer'
+#require 'simple-tracer'
 
-pp Peml::load_file('../test/palindrome.peml')
+ARGV.each do |f|
+  pp Peml::load_file(f)
+end

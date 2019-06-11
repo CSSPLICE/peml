@@ -41,7 +41,8 @@ For more details, see the PEML website.}
       reject { |f| f.match(%r{^(test|spec|features)/}) }
   end
   spec.bindir        = 'bin'
-  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  # spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  spec.executables   = ['peml', 'pemltest']
   spec.require_paths = ['lib']
 
   spec.add_development_dependency 'bundler', '~> 1.16'
