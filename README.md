@@ -47,7 +47,7 @@ Peml.load("string containing a PEML description")
 => nested hash representation of exercise
 
 Peml.load_file("file_name.peml")
-=> nested has representation of the exercise
+=> nested hash representation of the exercise
 ```
 
 Eventually, we'll also add support for:

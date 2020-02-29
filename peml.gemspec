@@ -48,6 +48,7 @@ For more details, see the PEML website.}
   spec.add_development_dependency 'bundler', '~> 1.16'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'minitest', '~> 5.0'
+  spec.add_development_dependency 'json_schemer', '~> 0.2.8'
 
   spec.add_runtime_dependency 'parslet', '~> 1.8'
 end

@@ -8,10 +8,14 @@ Work items to complete on 0.1.1:
 
 # PEMLtest Syntax
 
-+ Add support for variables
++ Add support for variables (actually, fold these into local defs)
 + Add support for local definitions
 + Add support for subject
-+ Add configuration parameter support (including remote inclusion)
++ Add line continuation for binary operators (including \ for
+  Python)
++ Add "and" as alternative for continued
+  given/when/invariant/then headers
++ Add junit-style synonyms for the main sections?
 + Add description support to then clauses
   + May require slight changes to "check" suite starter,
     in order to keep syntax uniform between the two
@@ -39,6 +43,7 @@ Work items to complete on 0.1.1:
   + equality
   + close to
   + regex contains
+  + try to do everything with ===, ==~, =!=, =!~
 + Define literal value factory extensions for target language
   + pairs
   + lists

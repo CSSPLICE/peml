@@ -1,0 +1,47 @@
+exercise_id: codingbat-sumNumbers
+title: sumNumbers
+
+tag.topics: String, conditionals, loops
+tag.style: code writing
+version.timestamp: 2016-04-01T20:18:53-04:00
+author: metarus208@gmail.com
+
+instructions:----------
+Given a string, return the sum of the numbers appearing in the string,
+ignoring all other characters. A number is a series of 1 or more digit
+`char`s in a row. (Note: `Character.isDigit(char)` tests if a `char` is
+one of the `char`s '0', '1', .. '9'. `Integer.parseInt(string)` converts
+a string to an `int`.)
+----------
+
+[systems]
+language: Java
+
+[assets.code.starter.files]
+content:----------
+public int sumNumbers(String str)
+{
+    /* ___ */
+}
+----------
+
+
+[assets.test.files]
+format: text/csv-unquoted
+pattern_actual: subject.sumNumbers({{str}})
+content:----------
+str,expected,description
+"abc123xyz",123,example
+"aa11b33",44,example
+"7 11",18,example
+"Chocolate",0
+"5hoco1a1e",7
+"5$$1;;1!!",7
+"a1234bb11",1245
+"",0
+"a22bbb3",25
+"FS3453g36fs25",3514,hidden
+"dfg64g21ge743",828,hidden
+"2sdf4523sdfsd7",4532,hidden
+"sdffherbwm",0,hidden
+----------

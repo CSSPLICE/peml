@@ -1,5 +1,6 @@
 require 'peml/loader'
 require 'peml/parser'
+require 'peml/emitter'
 
 module Peml
   #~ Class methods ...........................................................
@@ -25,6 +26,11 @@ module Peml
   # -------------------------------------------------------------
   def self.pemltest_parse_file(filename)
     self.pemltest_parse(File.read(filename))
+  end
+
+  # -------------------------------------------------------------
+  def self.to_peml(value)
+    Peml::Emitter.new.emit(value)
   end
 
 end

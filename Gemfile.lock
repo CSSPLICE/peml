@@ -7,18 +7,29 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
+    ecma-re-validator (0.2.0)
+      regexp_parser (~> 1.2)
+    hana (1.3.5)
+    json_schemer (0.2.8)
+      ecma-re-validator (~> 0.2)
+      hana (~> 1.3)
+      regexp_parser (~> 1.5)
+      uri_template (~> 0.7)
     minitest (5.11.3)
     parslet (1.8.2)
     rake (10.4.2)
+    regexp_parser (1.6.0)
+    uri_template (0.7.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   bundler (~> 1.16)
+  json_schemer (~> 0.2.8)
   minitest (~> 5.0)
   peml!
   rake (~> 10.0)
 
 BUNDLED WITH
-   1.16.2
+   1.17.3
