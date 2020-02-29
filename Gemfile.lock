@@ -17,7 +17,7 @@ GEM
       uri_template (~> 0.7)
     minitest (5.14.0)
     parslet (1.8.2)
-    rake (10.5.0)
+    rake (13.0.1)
     regexp_parser (1.7.0)
     uri_template (0.7.0)
 
@@ -29,7 +29,7 @@ DEPENDENCIES
   json_schemer (~> 0.2.8)
   minitest (~> 5.0)
   peml!
-  rake (~> 10.0)
+  rake (~> 13.0)
 
 BUNDLED WITH
    1.17.3
