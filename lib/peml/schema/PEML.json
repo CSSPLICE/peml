@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://cssplice.github.io/peml/schemas/peml.json",
+  "$id": "https://CSSPLICE.github.io/peml/schemas/PEML.json",
   "title": "PEML",
   "description": "This schema defines the data model for PEML, the Program Exercise Markup Language (https://cssplice.github.io/peml/). The data model is intended to be represented in PEML notation, but the same data model can easily be expressed in JSON or YAML or any similar structured data format, so this serves as a JSON Schema for the common data model behind the content.",
 
@@ -9,20 +9,30 @@
       "type": "string",
       "minLength": 1
     },
-    "id": {
+    "string_no_whitespace": {
       "$ref": "#/definitions/nonempty_string",
       "pattern": "^[^\\s]+$"
+    },
+    "id": {
+      "description": "An id is a non-empty string containing no whitespace and no commas (which might be used as separators in strings denoting lists of ids).",
+      "$ref": "#/definitions/nonempty_string",
+      "pattern": "^[^\\s,]+$"
+    },
+    "id_list": {
+      "description": "Either a single id (no spaces or commas) or a comma-separate (or space-separated) list of multiple ids.",
+      "$ref": "#/definitions/nonempty_string",
+      "pattern": "^[^\\s,]+(\\s*[, ]\\s*[^\\s,]+)*$"
     },
     "timestamp": {
       "description": "A human-readable timestamp indicating the time at which this version of the exercise was last modified. For lack of a better option, at the moment this should be an RFC 3339/ISO 8601 UTC timestamp (if you know of something more user-friendly but equally unambiguous, let us know!). That format is: YYYY-MM-DDThh:mm:ss.nnn±hh:mm. See https://stackoverflow.com/questions/28020805/regex-validate-correct-iso8601-date-string-with-time for the regex info.",
       "$ref": "#/definitions/nonempty_string",
       "pattern": "^(?:[1-9]\\d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29)T(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d{1,9})?(?:Z|[+-][01]\\d:[0-5]\\d)$"
     },
-    "email_address": { "$ref": "#/definitions/nonempty_string" },
+    "email_address": { "$ref": "#/definitions/id" },
     "email_address_list": {
-      "description": "Can be either a single e-mail address, or an array of addresses.",
+      "description": "Can be either a single e-mail address, a string representing a comma-separate (or space-separated) list of e-mail addresses, or an array of addresses.",
       "oneOf": [
-        { "$ref": "#/definitions/email_address" },
+        { "$ref": "#/definitions/id_list" },
         {
           "type": "array",
           "items": { "$ref": "#/definitions/email_address" },
@@ -33,23 +43,13 @@
     "tag_list": {
       "description": "Can be either a single string representing a list of comma-delimited tags/elements, or an array of strings representing the same content.",
       "oneOf": [
-        { "type": "string" },
+        { "$ref": "#/definitions/nonempty_string" },
         {
           "type": "array",
-          "items": { "type": "string" }
+          "items": { "$ref": "#/definitions/nonempty_string" },
+          "minItems": 1
         }
       ]
-    },
-    "version_descriptor": {
-      "type": "object",
-      "required": ["timestamp"],
-      "properties": {
-        "timestamp": { "$ref": "#/definitions/timestamp" },
-        "type": { "$ref": "#/definitions/nonempty_string" },
-        "id": { "$ref": "#/definitions/nonempty_string" },
-        "repository": { "$ref": "#/definitions/location" },
-        "location": { "$ref": "#/definitions/relative_location" }
-      }
     },
     "location": {
       "description": "A string that may also be a url(...) defining an addressable location.",
@@ -58,18 +58,6 @@
     "relative_location": {
       "description": "A string that intended to define a relative location, probably using a url(...).",
       "$ref": "#/definitions/location"
-    },
-    "license_descriptor": {
-      "type": "object",
-      "required": ["id", "owner"],
-      "properties": {
-        "id": { "$ref": "#/definitions/nonempty_string" },
-        "owner": { "$ref": "#/definitions/nonempty_string" },
-        "book": { "$ref": "#/definitions/nonempty_string" },
-        "attribution": { "$ref": "#/definitions/nonempty_string" },
-        "acknowledgements": { "$ref": "string" },
-        "acknowledgments": { "$ref": "string" }
-      }
     },
     "file": {},
     "directory": {},
@@ -81,11 +69,12 @@
 
   "type": "object",
 
-  "required": ["exercise_id", "title", "instructions", "version"],
+  "required": ["exercise_id", "title"],
   "allOf": [
     { "anyOf": [
       { "required": ["instructions"] },
-      { "required": ["assets"] }
+      { "required": ["suites"] },
+      { "required": ["systems"] }
     ] },
     { "anyOf": [
       { "required": ["author"] },
@@ -103,8 +92,28 @@
       "description": "Synonym for 'author', but typically used if there are multiple individuals to list. Can be either a comma-separated string, or a nested array.",
       "$ref": "#/definitions/email_address_list"
     },
-    "version" : { "$ref": "#/definitions/version_descriptor" },
-    "license" : { "$ref": "#/definitions/license_descriptor" },
+    "version": {
+      "type": "object",
+      "properties": {
+        "timestamp": { "$ref": "#/definitions/timestamp" },
+        "type": { "$ref": "#/definitions/nonempty_string" },
+        "id": { "$ref": "#/definitions/nonempty_string" },
+        "repository": { "$ref": "#/definitions/location" },
+        "location": { "$ref": "#/definitions/relative_location" }
+      }
+    },
+    "license": {
+      "type": "object",
+      "required": ["id", "owner"],
+      "properties": {
+        "id": { "$ref": "#/definitions/nonempty_string" },
+        "owner": { "$ref": "#/definitions/nonempty_string" },
+        "book": { "$ref": "#/definitions/nonempty_string" },
+        "attribution": { "$ref": "#/definitions/nonempty_string" },
+        "acknowledgements": { "type": "string" },
+        "acknowledgments": { "type": "string" }
+      }
+    },
     "difficulty": {
       "type": "integer",
       "minimum": 0,

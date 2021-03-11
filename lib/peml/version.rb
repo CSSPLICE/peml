@@ -1,3 +1,4 @@
 module Peml
-  VERSION = "0.1.1"
+  NAME = 'peml'
+  VERSION = '0.1.1'
 end

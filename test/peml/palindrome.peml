@@ -5,8 +5,8 @@ exercise_id: edu.vt.cs.cs1114.sp2018.simple-PEML-example
 
 title: Palindromes (A Simple PEML Example)
 
-topics: Strings, loops, conditions
-prerequisites: variables, assignment, boolean operators
+tag.topics: strings; loops; conditions
+tag.prerequisites: variables; assignment; boolean operators
 
 instructions:----------
 Write a program that reads a single string (in the form of one line
@@ -17,15 +17,15 @@ program does not need to prompt for its input, and should only generate
 one line of output, in the following
 format:
 
-&lt;pre&gt;
+```
 "racecar" is a palindrome.
-&lt;/pre&gt;
+```
 
 Or:
 
-&lt;pre&gt;
+```
 "Flintstone" is not a palindrome.
-&lt;/pre&gt;
+```
 ----------
 
 assets.test_format: stdin-stdout
