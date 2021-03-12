@@ -16,7 +16,7 @@ module Peml
     end
     value = Peml::Loader.new.load(peml)
     if !params[:result_only]
-      diags = Utils.unpack_schema_diagnostics(Utils.schema.validate(value))
+      diags = validate(value)
     end
     if params[:interpolate]
       value = Peml::interpolate(value)
@@ -36,7 +36,15 @@ module Peml
 
 
   # -------------------------------------------------------------
-  # handle mustache variable interpolation
+  # Validate a PEML data structure (parsed PEML structured as a nested hash)
+  def self.validate(peml)
+    diags = Utils.unpack_schema_diagnostics(Utils.schema.validate(peml))
+  end
+
+
+  # -------------------------------------------------------------
+  # handle mustache variable interpolation in fields inside
+  # a PEML data structure (parsed PEML structured as a nested hash)
   # currently, not implemented
   def self.interpolate(peml)
     peml
@@ -44,7 +52,8 @@ module Peml
 
 
   # -------------------------------------------------------------
-  # convert markdown or other markup formats to html
+  # convert markdown or other markup formats to html in fields inside
+  # a PEML data structure (parsed PEML structured as a nested hash)
   # currently, not implemented
   def self.render_to_html(peml)
     peml
@@ -52,7 +61,8 @@ module Peml
 
 
   # -------------------------------------------------------------
-  # inline external file contents
+  # inline external file contents in fields inside
+  # a PEML data structure (parsed PEML structured as a nested hash)
   # currently, not implemented
   def self.inline(peml)
     peml
@@ -60,6 +70,7 @@ module Peml
 
 
   # -------------------------------------------------------------
+  # parse PEMLtest text input into a data structure
   def self.pemltest_parse(pemltest: nil, filename: nil)
     if filename
       pemltest = File.open(filename)
@@ -69,6 +80,8 @@ module Peml
 
 
   # -------------------------------------------------------------
+  # render (unparse) a PEML data structure (parsed PEML structured as a
+  # nested hash) into plain-text PEML notation
   def self.to_peml(value)
     Peml::Emitter.new.emit(value)
   end

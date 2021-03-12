@@ -26,17 +26,58 @@ module Peml
 
     # extract schema validation info from validator return results
     def self.unpack_schema_diagnostics(diags)
-      result = []
-      diags.each do |v|
+      if diags
+        diags.map { |e| human_readable_message_from(e) }
+      else
+        diags
+      end
+    end
+
+
+    # -------------------------------------------------------------
+    def self.human_readable_message_from(verr)
+      if verr['data_pointer'] && !verr['data_pointer'].empty?
+        location = "Path '#{verr['data_pointer']}'"
+      else
+        location = "The document"
+      end
+
+      case verr['type']
+      when 'required'
+        phrase = 'missing key'
+        if verr['details']['missing_keys'].length == 1
+          "#{location} is missing key: #{verr['details']['missing_keys'][0]}"
+        else
+          "#{location} is missing keys: #{verr['details']['missing_keys'].join ', '}"
+        end
+      when 'format'
+        "#{location} is not in the required format (#{verr['schema']['format']})"
+      when 'pattern'
+        "#{location} does not match the required pattern (#{verr['schema']['pattern']})"
+      when 'object'
+        "#{location} does not have sub-keys (has the wrong structure)."
+      when 'string'
+        "#{location} is not a string."
+      when 'integer'
+        "#{location} is not an integer."
+      when 'array'
+        "#{location} is not an array (has the wrong structure)."
+      when 'minLength'
+        "#{location} is not long enough (min #{verr['schema']['minLength']})"
+      when 'minimum'
+        "#{location} is too low (minimum #{verr['schema']['minimum']})"
+      when 'maximum'
+        "#{location} is too high (maximum #{verr['schema']['maximum']})"
+      else
         err = {}
-        v.each do |k, v|
-          if !v.empty? && !k.match(/^(data|schema|root_schema|schema_pointer)$/)
+        verr.each do |k, v|
+          # if !v.empty? && !k.match(/^(data|schema|root_schema|schema_pointer)$/)
+          if !v.empty? && !k.match(/^(data|root_schema)$/)
             err[k] = v
           end
         end
-        result.unshift(err)
+        "#{location} has a problem. Please check your input.\n#{JSON.pretty_generate(err)}"
       end
-      result
     end
 
   end
