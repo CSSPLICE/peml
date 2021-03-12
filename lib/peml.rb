@@ -8,23 +8,30 @@ module Peml
 
 
   # -------------------------------------------------------------
-  def self.parse(peml: nil, filename: nil,
-    interpolate: false, render_to_html: false, inline: false)
-    if filename
-      peml = File.open(filename)
+  def self.parse(params = {})
+    if params[:filename]
+      peml = File.open(params[:filename])
+    else
+      peml = params[:peml]
     end
     value = Peml::Loader.new.load(peml)
-    diags = Utils.unpack_schema_diagnostics(Utils.schema.validate(value))
-    if interpolate
+    if !params[:result_only]
+      diags = Utils.unpack_schema_diagnostics(Utils.schema.validate(value))
+    end
+    if params[:interpolate]
       value = Peml::interpolate(value)
     end
-    if render_to_html
+    if params[:render_to_html]
       value = Peml::render_to_html(value)
     end
-    if inline
+    if params[:inline]
       value = Peml::inline(value)
     end
-    { value: value, diagnostics: diags }
+    if params[:result_only]
+      value
+    else
+      { value: value, diagnostics: diags }
+    end
   end
 
 
