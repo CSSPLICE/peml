@@ -43,19 +43,61 @@ and build your own local copy of the gem to install).
 ```
 require 'peml'
 
-Peml.load("string containing a PEML description")
-=> nested hash representation of exercise
+Peml.parse(peml: "string containing a PEML description")
 
-Peml.load_file("file_name.peml")
-=> nested hash representation of the exercise
+Peml.parse(filename: "file_name.peml")
 ```
+
+The result returned by the `parse()` function is a hash
+containing two key/value pairs, where `value` is the
+parsed result of the PEML input in nested hash form, and
+`diagnostics` contains an array of any diagnostic messages
+(errors or other validation messages) produced.
+
+The following additional arguments can be provided as named
+parameters:
+
+**result_only** (boolean)
+<br/>
+Indicate whether to return just the parse result (true), or (the default) a
+hash of the form `{ value: <parse_result>, diagnostics: [<messages>] }`.
+
+**interpolate** (boolean) (not yet implemented)
+<br/>
+Indicate whether or not to interpolate variables embedded in
+PEML field values.
+
+**render_to_html** (boolean) (not yet implemented)
+<br/>
+Indicate whether PEML fields containing markdown/markup values
+should be rendered to HTML in the result.
+
+**inline** (boolean) (not yet implemented)
+<br/>
+Indicate whether to inline field contents in the PEML description when the
+value is specified as a URL.
+
+**format** (string)
+<br/>
+This parameter indicates the format requested for the response, which is
+one of (json, yaml, xml). This can be specified as an explicit parameter
+named "format" passed in the request, or can be specified directly in the
+request URL as a file name extension (e.g., requesting
+from <code>https://skynet.cs.vt.edu/peml-live/api/parse.yaml?...</code>).
+If not explicitly provided, it will be inferred through the "Accept:"
+headers provided in the request, or defaults to json if not specified
+anywhere else.
+See the <a href="https://github.com/ruby-grape/grape">grape</a>
+gem's <a href="https://github.com/ruby-grape/grape#api-formats">discussion
+of API formats</a> for more details about how the format of the
+response is determined.
 
 Eventually, we'll also add support for:
 
 ```
 require 'peml'
 
-Peml.dump(some_nested_hash)
+Peml.to_peml(some_nested_hash)
 => string containing exercise rendered in PEML format
 
 my_exercise.to_peml

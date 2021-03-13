@@ -18,14 +18,14 @@ module Peml
     if !params[:result_only]
       diags = validate(value)
     end
+    if params[:inline]
+      value = Peml::inline(value)
+    end
     if params[:interpolate]
       value = Peml::interpolate(value)
     end
     if params[:render_to_html]
       value = Peml::render_to_html(value)
-    end
-    if params[:inline]
-      value = Peml::inline(value)
     end
     if params[:result_only]
       value
@@ -43,6 +43,15 @@ module Peml
 
 
   # -------------------------------------------------------------
+  # inline external file contents in fields inside
+  # a PEML data structure (parsed PEML structured as a nested hash)
+  # currently, not implemented
+  def self.inline(peml)
+    peml
+  end
+
+
+  # -------------------------------------------------------------
   # handle mustache variable interpolation in fields inside
   # a PEML data structure (parsed PEML structured as a nested hash)
   # currently, not implemented
@@ -56,15 +65,6 @@ module Peml
   # a PEML data structure (parsed PEML structured as a nested hash)
   # currently, not implemented
   def self.render_to_html(peml)
-    peml
-  end
-
-
-  # -------------------------------------------------------------
-  # inline external file contents in fields inside
-  # a PEML data structure (parsed PEML structured as a nested hash)
-  # currently, not implemented
-  def self.inline(peml)
     peml
   end
 
