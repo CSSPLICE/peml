@@ -1,0 +1,93 @@
+exercise_id: https://cssplice.github.io/peml/examples/03-template.peml
+
+# A basic template to fill in a new exercise description, including
+# common fields you can use
+
+title: <Insert your title here>
+
+license.id: cc-sa-4.0 <pick your license>
+license.owner.email: 
+license.owner.name: 
+
+# tags describing this exercise. All are optional. Generally, a
+# semi-colon-separated list of terms can be used for any tags. When
+# in doubt, consider using terms from the ACM Computing Curricula
+# recommendations at:
+# https://www.acm.org/education/curricula-recommendations
+# For example, refer to the Computer Science Curricula 2013
+# (specifically, Appendix A: The Body of Knowledge):
+# https://www.acm.org/binaries/content/assets/education/cs2013_web_final.pdf
+
+# just remove the ones you do not want to use
+
+tags.topics: <topic(s) this exercise focuses on practicing>
+tags.prerequisites: <should already know these, can specify: exposure, familiarity, mastery>
+tags.style: code-writing <or other choice>
+tags.course: <name your course, if relevant>
+tags.book: <name your textbook, if relevant>
+tags.personal: <optional personal/custom values that aren't topics>
+
+
+instructions:----------
+Write your instructions here (using markdown and/or html tags).
+
+Include images or resources using relative links, which are resolved relative
+to the "public_html" key.
+
+markdown-style image: ![my picture](image1.png)
+or html: <img src="image2.png" alt="my second picture"/>
+
+Use fenced code blocks:
+
+```java
+if (something.hasProperty())
+{
+  System.out.println("ok!");
+}
+```
+----------
+
+# By convention, relative URLs in the instructions refer to contents
+# in the subdirectory named "public_html" alongside
+# this PEML description (or packaged in its zip file), or you can
+# specify a different URL or file set
+# public_html: url(public_html)
+
+
+# Can support multiple languages/systems, but only one shown here for
+# simplicity
+[systems]
+language: Java
+version: >= 1.9
+
+# All associated resources are, by convention, found in appropriately
+# named subdirectories located alongside this PEML description (or
+# packaged in its zip file).
+
+# Place any initial source files that students are given as a starting
+# point for creating their answer in:
+# src/starter/files/...
+
+# Place any (optional) test suite files in:
+# suites/...
+
+# Place any (optional) solution(s) you have in directories like:
+# solutions/<name-of-solution>/...
+#
+# Use the solution name "reference" for a reference solution, if you
+# have one.
+
+# Place any additional files (set the discussion of environments) in:
+# environment/start/files/...
+# environment/build/files/...
+# environment/run/files/...
+# environment/test/files/...
+
+# If multiple systems are listed, system-specific resources default to
+# the following subdirectories by convention, adding to/replacing any
+# from the non-system-specific directories listed above:
+# systems/<language-name>/src/files/...
+# systems/<language-name>/src/solutions/<name-of-solution>/...
+# systems/<language-name>/suites/...
+# systems/<language-name>/environment/start/files/...
+# etc.

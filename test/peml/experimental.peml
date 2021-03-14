@@ -1,0 +1,131 @@
+exercise_id: edu.vt.cs.cs1114.sp2018.simple-PEML-example
+
+# Single-line comments start with #
+# Comments must be on lines by themselves
+
+title: Palindromes (A Simple PEML Example)
+
+author: edwards@cs.vt.edu
+
+tag.topics: strings; loops; conditions
+tag.prerequisites: variables; assignment; boolean operators
+
+instructions:----------
+Write a program that reads a single string (in the form of one line
+of text) from its standard input, and determines whether the string is
+a _palindrome_. A palindrome is a string that reads the same way
+backward as it does forward, such as "racecar" or "madam". Your
+program does not need to prompt for its input, and should only generate
+one line of output, in the following
+format:
+
+```
+"racecar" is a palindrome.
+```
+
+Or:
+
+```
+"Flintstone" is not a palindrome.
+```
+----------
+
+# For converting key paths to file paths, arrays receive the value of
+# nested dict's name/type/language key, or the numeric position
+
+[public_html]
+name: some_image.png
+content: url(some_image.png)
+
+[systems]
+language: java
+version: >= 1.5
+[.src.files]
+name: starter1.txt
+[]
+[.src.starter.files]
+name: starter1.txt
+[]
+[.src.frame.files]
+name: wrapper1.txt
+[]
+[.src.solutions]
+name: reference
+summary: an optional description
+correct: true
+[.files]
+name: solution_file_1.java
+[]
+[]
+
+environment.start.image: docker stuff
+environment.start.repository: xxx
+environment.start.repository_path: xxx
+[.environment.start.files]
+[]
+
+environment.build.image: docker stuff
+environment.build.repository: xxx
+environment.build.repository_path: xxx
+[.environment.build.files]
+name: name1
+name: name2
+[]
+
+environment.run.image: docker stuff
+environment.run.repository: xxx
+environment.run.repository_branch: xxx
+environment.run.repository_path: xxx
+[.environment.run.files]
+name: name3
+name: name4
+[]
+
+environment.test.image: docker stuff
+environment.test.repository: xxx
+environment.test.repository_path: xxx
+[.environment.test.files]
+name: name5
+name: name6
+[]
+
+[.suites]
+name: foo
+visibility: public | private | ...
+type: mime type or tag or whatever
+template:
+  self.assertEqual({{expected}}, subject.squirrelPlay({{temp}}, {{isSummer}}))
+[.cases]
+stdin: racecar
+stdout: "racecar" is a palindrome.
+
+stdin: Flintstone
+stdout: "Flintstone" is not a palindrome.
+
+stdin: url(some/local/input.txt)
+stdout: url(some/local/output.txt)
+
+stdin: url(http://my.school.edu/some/local/generator/input)
+stdout: url(http://my.school.edu/some/local/generator/output)
+[]
+name: bar
+type: text/x-unquoted-csv
+patterns.actual: subject.sumNumbers({{str}})
+content:----------
+str,expected,description
+"abc123xyz",123,example
+"aa11b33",44,example
+"7 11",18,example
+"Chocolate",0
+"5hoco1a1e",7
+"5$$1;;1!!",7
+"a1234bb11",1245
+"",0
+"a22bbb3",25
+"FS3453g36fs25",3514,hidden
+"dfg64g21ge743",828,hidden
+"2sdf4523sdfsd7",4532,hidden
+"sdffherbwm",0,hidden
+----------
+[]
+[]

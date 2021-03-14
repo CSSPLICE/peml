@@ -1,12 +1,14 @@
-exercise_id: edu.vt.cs.cs1114.sp2018.simple-PEML-example
+exercise_id: edu.vt.cs.cs1114.palindromes
 
 # Single-line comments start with #
 # Comments must be on lines by themselves
 
 title: Palindromes (A Simple PEML Example)
 
-tag.topics: strings; loops; conditions
-tag.prerequisites: variables; assignment; boolean operators
+author: edwards@cs.vt.edu
+
+topics: Strings, loops, conditions
+prerequisites: variables, assignment, boolean operators
 
 instructions:----------
 Write a program that reads a single string (in the form of one line
@@ -33,16 +35,25 @@ assets.test_format: stdin-stdout
 [systems]
 language: java
 version: >= 1.5
+[]
 
-[assets.tests]
+[suites]
+[.cases]
+
 stdin: racecar
 stdout: "racecar" is a palindrome.
+
 
 stdin: Flintstone
 stdout: "Flintstone" is not a palindrome.
 
+
 stdin: url(some/local/input.txt)
 stdout: url(some/local/output.txt)
 
+
 stdin: url(http://my.school.edu/some/local/generator/input)
 stdout: url(http://my.school.edu/some/local/generator/output)
+
+[]
+[]

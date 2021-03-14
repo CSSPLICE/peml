@@ -1,0 +1,21 @@
+exercise_id: https://cssplice.github.io/peml/examples/02-minimal-license.peml
+
+# This is a minimalist example of the barest properties needed for
+# an exercise description. It includes a license instead of author
+# (you can provide both, if desired)
+
+# title is required
+title: A Minimal PEML Description
+
+# Listing the license is very strongly encouraged, but not mandatory
+# See: https://cssplice.github.io/peml/schemas/exercise.html#license
+# For id's, see keywords at:
+# https://help.github.com/en/articles/licensing-a-repository
+license.id: cc-sa-4.0
+license.owner.email: edwards@cs.vt.edu
+license.owner.name: Stephen Edwards
+
+# Must include at least one of: instructions or systems or suites
+instructions:----------
+Write instructions for the the exercise here.
+----------

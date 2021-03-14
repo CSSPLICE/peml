@@ -1,0 +1,17 @@
+exercise_id: https://cssplice.github.io/peml/examples/01-minimal.peml
+
+# This is a minimalist example of the barest properties needed for
+# an exercise description
+
+# title is required
+title: A Minimal PEML Description
+
+# Must include one of: author, authors, or (license.owner + license.id)
+# Here, both email and name are provided, but only email is required
+author.email: edwards@cs.vt.edu
+author.name: Stephen Edwards
+
+# Must include at least one of: instructions or systems or suites
+instructions:----------
+Write instructions for the the exercise here.
+----------

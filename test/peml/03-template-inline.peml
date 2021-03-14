@@ -1,0 +1,150 @@
+exercise_id: https://cssplice.github.io/peml/examples/04-template-inline.peml
+
+# A basic template that shows how to inline some of the contents
+
+title: <Insert your title here>
+
+license.id: cc-sa-4.0 <pick your license>
+license.owner.email: 
+license.owner.name: 
+
+# tags describing this exercise. All are optional. Generally, a
+# semi-colon-separated list of terms can be used for any tags. When
+# in doubt, consider using terms from the ACM Computing Curricula
+# recommendations at:
+# https://www.acm.org/education/curricula-recommendations
+# For example, refer to the Computer Science Curricula 2013
+# (specifically, Appendix A: The Body of Knowledge):
+# https://www.acm.org/binaries/content/assets/education/cs2013_web_final.pdf
+
+# just remove the ones you do not want to use
+
+tags.topics: <topic(s) this exercise focuses on practicing>
+tags.prerequisites: <should already know these, can specify: exposure, familiarity, mastery>
+tags.style: code-writing <or other choice>
+tags.course: <name your course, if relevant>
+tags.book: <name your textbook, if relevant>
+tags.personal: <optional personal/custom values that aren't topics>
+
+
+instructions:----------
+Write your instructions here (using markdown and/or html tags).
+
+Include images or resources using relative links, which are resolved relative
+to the "public_html" key.
+
+markdown-style image: ![my picture](image1.png)
+or html: <img src="image2.png" alt="my second picture"/>
+
+Use fenced code blocks:
+
+```java
+if (something.hasProperty())
+{
+  System.out.println("ok!");
+}
+```
+----------
+
+# Specify an explicit location, instead of using the default
+public_html: url(https://cssplice.github.io/peml/examples/images)
+
+
+# Can support multiple languages/systems, but only one shown here for
+# simplicity
+[systems]
+language: Java
+version: >= 1.9
+
+# Initial files provided to student to create their solution
+# This value is being explicitly specified; otherwise, it would come from:
+# systems/Java/src/files/...
+[.src.files]
+
+# Example of file included inline:
+name: Answer.java
+content:----------
+public class Answer
+{
+    // Insert your answer here
+}
+----------
+
+# Example of file included inline, URL relative to PEML description:
+name: AnswerTest.java
+content: url(src/files/AnswerTest.java)
+
+[]
+# Empty square brackets above marks end of list of [.src.files]
+
+
+# Solution(s) provided by author
+[.src.solutions]
+name: reference solution
+description: an optional description
+reference: true
+# "files" is a file set, and can be provided inline if needed
+files: url(src/solutions/reference)
+[]
+# Empty square brackets above marks end of list of [.src.solutions]
+
+[.suites]
+# First suite includes tabular values specified in PEML directly
+name: peml_stdio_tests
+visibility: public
+pattern.description: {{stdout}}
+template:
+  // Here, the code is based on a specific tool that generates JUnit-style
+  // tests using this as a template, and substituting variables based on
+  // the "columns" in the list of cases.
+
+  setSystemIn({{stdin}});
+  Answer.main();
+  assertEquals({{description}}, {{stdout}}, systemOut().getHistory());
+[.cases]
+stdin: racecar
+stdout: "racecar" is a palindrome.
+
+stdin: Flintstone
+stdout: "Flintstone" is not a palindrome.
+[]
+
+name: csv_stdio_tests
+type: text/x-unquoted-csv
+# patterns are user-defined strings built by variable interpolation from the
+# "columns"/fields in a test case.
+pattern.description: sumNumbers({{str}}) -> {{expected}}
+pattern.actual: subject.sumNumbers({{str}})
+# Some tools may use a template, populated by variable substitution using
+# the columns/fields/patterns for one test cases, to produce an executable test.
+# whether and how this is supported is tool-dependent.
+template:
+    assertEquals({{expected}}, {{actual}});
+content:----------
+str,expected,description
+"abc123xyz",123,example
+"aa11b33",44,example
+"7 11",18,example
+"Chocolate",0
+"5hoco1a1e",7
+"5$$1;;1!!",7
+"a1234bb11",1245
+"",0
+"a22bbb3",25
+"FS3453g36fs25",3514,hidden
+"dfg64g21ge743",828,hidden
+"2sdf4523sdfsd7",4532,hidden
+"sdffherbwm",0,hidden
+----------
+[]
+[]
+
+# environments can be specified through containers
+environment.build.image: cs1.vt.edu/java-1_9:1.1.0
+environment.build.registry: https://hub.docker.com/
+
+[.environment.test.files]
+name: some-file-available-during-testing.txt
+content:----------
+some data ...
+----------
