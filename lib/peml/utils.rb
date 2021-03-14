@@ -44,7 +44,6 @@ module Peml
 
       case verr['type']
       when 'required'
-        phrase = 'missing key'
         if verr['details']['missing_keys'].length == 1
           "#{location} is missing key: #{verr['details']['missing_keys'][0]}"
         else

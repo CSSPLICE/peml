@@ -1,7 +1,5 @@
 require 'test_helper'
 
-schema = JSONSchemer.schema(File.expand_path('../peml/PEML.json', __FILE__))
-
 describe Peml do
 
   describe "#load_file" do
@@ -10,9 +8,10 @@ describe Peml do
       slug = File.basename(f)
 
       it "parses #{slug}" do
-        ex = Peml::load_file(f)
-        ex.wont_be_nil
-        schema.validate(ex).to_a.must_be_empty
+        ex = Peml::parse(filename: f)
+        _(ex).wont_be_nil
+        _(ex[:value]).wont_be_nil
+        _(ex[:diagnostics]).must_be_empty
       end
     end
   end

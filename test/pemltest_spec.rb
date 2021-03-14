@@ -48,14 +48,14 @@ describe Peml do
 
       it "parses #{slug}" do
         begin
-          ast = Peml::pemltest_parse_file(f)
+          ast = Peml::pemltest_parse(filename: f)
           if print_asts
             puts "\nAST for #{slug}:"
             pp ast
             # puts ast.to_yaml
             puts ''
           end
-          ast.wont_be_nil
+          _(ast).wont_be_nil
         rescue Parslet::ParseFailed => e
           fail e.parse_failure_cause.ascii_tree
         end

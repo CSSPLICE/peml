@@ -62,9 +62,8 @@ module Peml
         elsif match = line.match(COMMAND_KEY)
           self.parse_command_key(match[1].downcase)
 
-        elsif @skipping
-          # should we just ignore this text, instead of parsing it?
-          self.parse_text(line)
+        elsif @is_skipping
+          # just skip it!
 
         elsif (match = line.match(START_KEY)) &&
             (!@stack_scope || @stack_scope[:array_type] != :simple)

@@ -10,7 +10,12 @@ module Peml
   # -------------------------------------------------------------
   def self.parse(params = {})
     if params[:filename]
-      peml = File.open(params[:filename])
+      file = File.open(params[:filename])
+      begin
+        peml = file.read
+      ensure
+        file.close
+      end
     else
       peml = params[:peml]
     end
@@ -38,7 +43,7 @@ module Peml
   # -------------------------------------------------------------
   # Validate a PEML data structure (parsed PEML structured as a nested hash)
   def self.validate(peml)
-    diags = Utils.unpack_schema_diagnostics(Utils.schema.validate(peml))
+    Utils.unpack_schema_diagnostics(Utils.schema.validate(peml))
   end
 
 
@@ -73,7 +78,12 @@ module Peml
   # parse PEMLtest text input into a data structure
   def self.pemltest_parse(pemltest: nil, filename: nil)
     if filename
-      pemltest = File.open(filename)
+      file = File.open(filename)
+      begin
+        pemltest = file.read
+      ensure
+        file.close
+      end
     end
     Peml::PemlTestParser.new.parse(pemltest)
   end
