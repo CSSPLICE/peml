@@ -19,11 +19,33 @@ work on the part of tool developers--the goal is to make it super easy
 for **authors** of programming activities, not to fit into a specific
 auto-grader or simplify tasks for tool writers.
 
+## Documentation for PEML
+
 For full details on PEML, see:
 
-http://CSSPLICE.github.io/peml/
+https://CSSPLICE.github.io/peml/
 
-## Installation
+
+## Try PEML Live
+
+You can try out PEML in your browser using our live, interactive parser
+here:
+
+https://skynet.cs.vt.edu/peml-live/
+
+
+## REST API for Parsing PEML
+
+If you are working on an application and want to make use of PEML,
+but do not want to use the Ruby parser implementation in this gem
+or you prefer to use a different programming language, you can use
+the parser via our REST API from the **PEML Live!** website. Documentation
+is available at:
+
+https://skynet.cs.vt.edu/peml-live/api/
+
+
+## Installing the Gem
 
 Add this line to your application's Gemfile:
 
