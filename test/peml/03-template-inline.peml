@@ -1,4 +1,4 @@
-exercise_id: https://cssplice.github.io/peml/examples/04-template-inline.peml
+exercise_id: https://cssplice.github.io/peml/examples/03-template-inline.peml
 
 # A basic template that shows how to inline some of the contents
 
@@ -72,7 +72,7 @@ public class Answer
 
 # Example of file included inline, URL relative to PEML description:
 name: AnswerTest.java
-content: url(src/files/AnswerTest.java)
+content: url(src/AnswerTest.java)
 
 []
 # Empty square brackets above marks end of list of [.src.files]

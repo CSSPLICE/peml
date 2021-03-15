@@ -1,4 +1,4 @@
-exercise_id: https://cssplice.github.io/peml/examples/02-minimal-license.peml
+exercise_id: https://cssplice.github.io/peml/examples/01-minimal.peml
 
 # This is a minimalist example of the barest properties needed for
 # an exercise description. It includes a license instead of author
@@ -17,5 +17,5 @@ license.owner.name: Stephen Edwards
 
 # Must include at least one of: instructions or systems or suites
 instructions:----------
-Write instructions for the the exercise here.
+Write instructions for your exercise here.
 ----------
