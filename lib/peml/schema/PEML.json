@@ -22,7 +22,7 @@
         { "type": "integer",  "minimum": "0", "maximum": "1" },
         {
           "type": "string",
-          "pattern": "^(true|True|TRUE|t|T|false|False|FALSE|f|F|yes|Yes|YES|y|Y|no|No|NO|n|N|0|1)$"
+          "pattern": "^(true|True|TRUE|false|False|FALSE|yes|Yes|YES|no|No|NO|on|On|ON|off|Off|OFF|0|1)$"
         }
       ]
     },
@@ -310,7 +310,7 @@
         "timestamp": { "$ref": "#/definitions/timestamp" },
         "type": { "$ref": "#/definitions/nonempty_string" },
         "id": { "$ref": "#/definitions/nonempty_string" },
-        "repository": { "$ref": "#/definitions/location" },
+        "repository": { "$ref": "#/definitions/repository" },
         "location": { "$ref": "#/definitions/relative_location" }
       }
     },
