@@ -3,13 +3,7 @@ require 'peml/parser'
 require 'peml/emitter'
 require 'peml/utils'
 
-require "kramdown"
-require 'kramdown-parser-gfm'
-
 module Peml
-  # Class Variables
-  @@pemlGlobal = ""
-  @@subHash = {}
   #~ Class methods ...........................................................
 
 
@@ -26,7 +20,6 @@ module Peml
       peml = params[:peml]
     end
     value = Peml::Loader.new.load(peml)
-    @@pemlGlobal = value
     if !params[:result_only]
       diags = validate(value)
     end
@@ -57,7 +50,7 @@ module Peml
   # -------------------------------------------------------------
   # inline external file contents in fields inside
   # a PEML data structure (parsed PEML structured as a nested hash)
-  # will not be implemented
+  # currently, not implemented
   def self.inline(peml)
     peml
   end
@@ -66,74 +59,18 @@ module Peml
   # -------------------------------------------------------------
   # handle mustache variable interpolation in fields inside
   # a PEML data structure (parsed PEML structured as a nested hash)
+  # currently, not implemented
   def self.interpolate(peml)
-    peml.each do |key, value|
-      if !(@@pemlGlobal.key?("exclude") && @@pemlGlobal["exclude"].include?(key))
-        if value.is_a?(Hash)
-          Peml::interpolate(value)
-        elsif value.is_a?(Array)
-          value.each do |element|
-            Peml::interpolate(element)
-          end
-        elsif value.respond_to?(:to_s) || value.respond_to(:to_i)
-          if value.match(/\{\{(.*?)\}\}/)
-            arr = value.scan(/\{\{(.*?)\}\}/).flatten
-            substitute_values = Peml::interpolate_helper(arr)
-            peml[key] = value.gsub(/\{\{(.*?)\}\}/) { |x| substitute_values[x] }
-          end
-        end
-      else
-        peml[key] = value
-      end
-    end
+    peml
   end
 
 
   # -------------------------------------------------------------
   # convert markdown or other markup formats to html in fields inside
   # a PEML data structure (parsed PEML structured as a nested hash)
+  # currently, not implemented
   def self.render_to_html(peml)
-    peml.each do |key, value|
-      if value.is_a?(Hash)
-        Peml::render_to_html(value)
-      elsif value.is_a?(Array)
-        value.each do |element|
-          Peml::render_to_html(element)
-        end
-      elsif value.respond_to?(:to_s) || value.respond_to(:to_i)
-        peml[key]=Peml::render_helper(value)
-      end
-    end
-  end
-
-  
-  def self.render_helper(value)
-    return Kramdown::Document.new(value, :auto_ids => false, input: 'GFM').to_html
-  end
-  
-
-  def self.interpolate_helper(arr)
-    substituteValues={}
-    arr.length.times do |i|
-      if @@subHash.key?(arr[i])
-        substituteValues["{{"+arr[i]++"}}"] = @@subHash[arr[i]]
-      else
-        keys = arr[i].split(".")
-        val = @@pemlGlobal
-        keys.each do |key|
-          if key.include? "["
-            indx = key[key.index('[')+1, key.index(']')].to_i
-            val = val[key[0, key.index('[')]][indx]
-          else
-            val = val[key]
-          end
-        end
-        @@subHash[arr[i]] = val
-        subKey = "{{"+arr[i]++"}}"
-        substituteValues[subKey] = val
-      end
-    end
-    return substituteValues
+    peml
   end
 
 
