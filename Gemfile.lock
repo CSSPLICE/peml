@@ -23,14 +23,12 @@ GEM
     redcarpet (3.5.1)
     regexp_parser (2.1.1)
     uri_template (0.7.0)
-    kramdown (2.3.1)
-    kramdown-parser-gfm(1.1.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 2.2.22)
+  bundler (~> 1.16)
   minitest (~> 5.0)
   peml!
   rake (>= 13.0)
