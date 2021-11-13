@@ -3,6 +3,7 @@ require 'peml/parser'
 require 'peml/emitter'
 require 'peml/utils'
 
+require "dottie/ext"
 require "kramdown"
 require 'kramdown-parser-gfm'
 
@@ -26,7 +27,7 @@ module Peml
       peml = params[:peml]
     end
     value = Peml::Loader.new.load(peml)
-    @@pemlGlobal = value
+    @@pemlGlobal = Marshal.load(Marshal.dump(value)).dottie!
     if !params[:result_only]
       diags = validate(value)
     end
@@ -67,31 +68,9 @@ module Peml
   # handle mustache variable interpolation in fields inside
   # a PEML data structure (parsed PEML structured as a nested hash)
   def self.interpolate(peml)
-    peml.each do |key, value|
-      if !(@@pemlGlobal.key?("exclude") && @@pemlGlobal["exclude"].include?(key))
-        if value.is_a?(Hash)
-          Peml::interpolate(value)
-        elsif value.is_a?(Array)
-          value.length.times do |i|
-            if value[i].is_a?(Hash) || value[i].is_a?(Array)
-              Peml::interpolate(value[i])
-            elsif value[i].match(/\{\{(.*?)\}\}/)
-              arr = value[i].scan(/\{\{(.*?)\}\}/).flatten
-              substitute_values = Peml::interpolate_helper(arr)
-              value[i] = value[i].gsub(/\{\{(.*?)\}\}/) { |x| substitute_values[x] }
-            end
-          end
-        elsif value.respond_to?(:to_s) || value.respond_to(:to_i)
-          if value.match(/\{\{(.*?)\}\}/)
-            arr = value.scan(/\{\{(.*?)\}\}/).flatten
-            substitute_values = Peml::interpolate_helper(arr)
-            peml[key] = value.gsub(/\{\{(.*?)\}\}/) { |x| substitute_values[x] }
-          end
-        end
-      else
-        peml[key] = value
-      end
-    end
+    peml = Peml::recurse_hash(peml, "interpolate")
+    peml = peml.dottie!
+    peml = Peml::handle_exclusion(peml)
   end
 
 
@@ -99,15 +78,36 @@ module Peml
   # convert markdown or other markup formats to html in fields inside
   # a PEML data structure (parsed PEML structured as a nested hash)
   def self.render_to_html(peml)
+    peml = Peml::recurse_hash(peml, "render_to_html")
+  end
+
+
+   # -------------------------------------------------------------
+   # recurse through the nested hash and perform specified operation
+   # on values. Traversal and operations are loosely coupled to support
+   # future changes and updates
+  def self.recurse_hash(peml, operation)
     peml.each do |key, value|
       if value.is_a?(Hash)
-        Peml::render_to_html(value)
+        Peml::recurse_hash(value, operation)
       elsif value.is_a?(Array)
-        value.each do |element|
-          Peml::render_to_html(element)
+        value.length.times do |i|
+          if value[i].is_a?(Hash)
+            Peml::recurse_hash(value[i], operation)
+          elsif value[i].respond_to?(:to_s) || value[i].respond_to(:to_i)
+            if operation == "interpolate"
+              peml[key][i] = Peml::interpolate_helper(value[i])
+            elsif operation == "render_to_html"
+              peml[key][i] = Peml::render_helper(value[i])
+            end
+          end
         end
       elsif value.respond_to?(:to_s) || value.respond_to(:to_i)
-        peml[key]=Peml::render_helper(value)
+        if operation == "interpolate"
+          peml[key] = Peml::interpolate_helper(value)
+        elsif operation == "render_to_html"
+          peml[key] = Peml::render_helper(value)
+        end
       end
     end
   end
@@ -116,30 +116,39 @@ module Peml
   def self.render_helper(value)
     return Kramdown::Document.new(value, :auto_ids => false, input: 'GFM').to_html
   end
-  
 
-  def self.interpolate_helper(arr)
-    substituteValues={}
+  
+  def self.interpolate_helper(value)
+    if value.match(/\{\{(.*?)\}\}/)
+      arr = value.scan(/\{\{(.*?)\}\}/).flatten
+      substitute_values = Peml::substitute_variables(arr)
+      value = value.gsub(/\{\{(.*?)\}\}/) { |x| substitute_values[x] }
+    end
+    return value
+  end
+
+
+  def self.substitute_variables(arr)
+    substitute_values={}
     arr.length.times do |i|
       if @@subHash.key?(arr[i])
-        substituteValues["{{"+arr[i]++"}}"] = @@subHash[arr[i]]
+        substitute_values["{{"+arr[i]++"}}"] = @@subHash[arr[i]]
       else
-        keys = arr[i].split(".")
-        val = @@pemlGlobal
-        keys.each do |key|
-          if key.include? "["
-            indx = key[key.index('[')+1, key.index(']')].to_i
-            val = val[key[0, key.index('[')]][indx]
-          else
-            val = val[key]
-          end
-        end
-        @@subHash[arr[i]] = val
-        subKey = "{{"+arr[i]++"}}"
-        substituteValues[subKey] = val
+        @@subHash[arr[i]] = @@pemlGlobal[arr[i]]
+        substitute_values["{{"+arr[i]++"}}"] = @@pemlGlobal[arr[i]]
       end
     end
-    return substituteValues
+    return substitute_values
+  end
+
+
+  def self.handle_exclusion(peml)
+    if @@pemlGlobal.key?("exclude")
+      peml["exclude"].each do |element|
+        peml[element]=@@pemlGlobal[element]
+      end
+    end
+    return peml
   end
 
 
