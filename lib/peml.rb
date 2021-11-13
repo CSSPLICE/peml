@@ -72,8 +72,14 @@ module Peml
         if value.is_a?(Hash)
           Peml::interpolate(value)
         elsif value.is_a?(Array)
-          value.each do |element|
-            Peml::interpolate(element)
+          value.length.times do |i|
+            if value[i].is_a?(Hash) || value[i].is_a?(Array)
+              Peml::interpolate(value[i])
+            elsif value[i].match(/\{\{(.*?)\}\}/)
+              arr = value[i].scan(/\{\{(.*?)\}\}/).flatten
+              substitute_values = Peml::interpolate_helper(arr)
+              value[i] = value[i].gsub(/\{\{(.*?)\}\}/) { |x| substitute_values[x] }
+            end
           end
         elsif value.respond_to?(:to_s) || value.respond_to(:to_i)
           if value.match(/\{\{(.*?)\}\}/)
