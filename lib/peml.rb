@@ -2,6 +2,7 @@ require 'peml/loader'
 require 'peml/parser'
 require 'peml/emitter'
 require 'peml/utils'
+require 'peml/tester'
 
 require "dottie/ext"
 require "kramdown"
@@ -27,6 +28,7 @@ module Peml
       peml = params[:peml]
     end
     value = Peml::Loader.new.load(peml)
+    value = Peml::Tester.new.generate_tests(value)
     @@pemlGlobal = Marshal.load(Marshal.dump(value)).dottie!
     if !params[:result_only]
       diags = validate(value)
