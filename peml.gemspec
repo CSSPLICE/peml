@@ -55,5 +55,6 @@ For more details, see the PEML website.}
   spec.add_runtime_dependency 'kramdown', '~> 2.3.1'
   spec.add_runtime_dependency 'kramdown-parser-gfm', '~> 1.1.0'
   spec.add_runtime_dependency 'dottie', '~> 0.0.1'
+  spec.add_runtime_dependency 'liquid', '>= 3.0.6'
   
 end

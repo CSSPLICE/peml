@@ -1,0 +1,10 @@
+class {{ class_name }}
+{
+    {% for import in imports %}
+        {{ import | append: ";" }}
+    {% endfor %}
+
+    {% for method in methods %}
+        {{ method }}
+    {% endfor %}
+}
