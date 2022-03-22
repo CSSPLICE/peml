@@ -4,10 +4,14 @@ require "liquid"
 module Peml
     class Tester
 
+        #This path points to the directory where the liquid templates are saved
+        @@template_path = File.expand_path('../../test/templates/', __dir__) + "/"
+
+
         #This function parses tests written in the PEML Test
         #dsl. Each of the blocks are collected into a hash and
         #then sent ahead to make a class/test methods out of
-        def generate_tests_from_dsl(peml)
+        def generate_tests_from_dsl(peml, language="java")
             test_hash={}
             test_hash["class_name"]=peml[:id]
             if(peml.key?(:imports))
@@ -22,7 +26,7 @@ module Peml
             if(peml.key?(:thens))
                 test_hash["thens"] = self.get_statements(:thens, peml)
             end
-            self.get_tests_from_template(test_hash)
+            self.get_tests_from_template(test_hash, language)
             return peml
         end
 
@@ -61,28 +65,51 @@ module Peml
         #for templating. We first template the functions using givens,
         #whens and thens and then we template the class using class 
         #name, imports and each of the methods.
-        def get_tests_from_template(test_hash)
+        def get_tests_from_template(test_hash, language)
             methods=[]
-            java_method = Liquid::Template.parse(File.open("/peml/test/templates/java_function.liquid").read, :error_mode => :strict)
-            java_class = Liquid::Template.parse(File.open("/peml/test/templates/java_class.liquid").read, :error_mode => :strict)
+            template_method = Liquid::Template.parse(File.open(@@template_path+language+"_function.liquid").read, :error_mode => :strict)
+            template_class = Liquid::Template.parse(File.open(@@template_path+language+"_class.liquid").read, :error_mode => :strict)
             test_hash["thens"].length.times do |i|
-                methods.push(java_method.render('id' => i, 'givens' => test_hash["givens"], 
+                methods.push(template_method.render('id' => i, 'givens' => test_hash["givens"], 
                     'whens' => test_hash["whens"], 'then' => self.parse_then(test_hash["thens"][i])))
             end
-            puts(java_class.render('class_name' => test_hash["class_name"],'imports' => test_hash["imports"], 'methods' => methods))
+            puts(template_class.render('class_name' => test_hash["class_name"],'imports' => test_hash["imports"], 'methods' => methods))
         end
 
-        #only basic assert equals parsing for now, more
-        #features will be added to this function, need work
-        #with handling expressions that are not assert type
+        #some additional featues have been added based on
+        #my understanding, needs review and will be updated
         def parse_then(then_statement)
             if then_statement.include?("===")
                 then_arr = then_statement.split("===")
-                return "assertEquals(" + then_arr[0]+","+then_arr[1]+");"+"\n"
+                if then_arr[0].include?("[]") || then_arr[1].include?("[]")
+                    return "assertArrayEquals(" + then_arr[0]+","+then_arr[1]+")"
+                elsif then_arr[0].match(/some_regex/)
+                    return "assertTrue(" + then_arr[1]+".match("+then_arr[0]+"))"
+                elsif then_arr[1].match(/some_regex/)
+                    return "assertTrue(" + then_arr[0]+".match("+then_arr[1]+"))"
+                else
+                    return "assertEquals(" + then_arr[0]+","+then_arr[1]+")"
+                end
+            elsif then_statement.include?("!==")
+                then_arr = then_statement.split("!==")
+                if then_arr[0].include?("[]") || then_arr[1].include?("[]")
+                    return "assertArrayNotEquals(" + then_arr[0]+","+then_arr[1]+")"
+                elsif then_arr[0].match(/some_regex/)
+                    return "assertFalse(" + then_arr[1]+".match("+then_arr[0]+"))"
+                elsif then_arr[1].match(/some_regex/)
+                    return "assertFalse(" + then_arr[0]+".match("+then_arr[1]+"))"
+                else
+                    return "assertNotEquals(" + then_arr[0]+","+then_arr[1]+")"
+                end
+            elsif then_statement.include?("=&=")
+                then_arr = then_statement.split("=&=")
+                return "assertSame(" + then_arr[0]+","+then_arr[1]+")"
+            elsif then_statement.include?("!&=")
+                then_arr = then_statement.split("!&=")
+                return "assertNotSame(" + then_arr[0]+","+then_arr[1]+")"
             else
                 return then_statement
-            end
-            
+            end   
         end
 
         #This function has been designed for parsing test cases presented in 
