@@ -1,0 +1,9 @@
+class {{ class_name }}
+    {% for import in imports %}
+       require {{ import | prepend: """ | append: """}}
+    {% endfor %}
+
+    {% for method in methods %}
+        {{ method }}
+    {% endfor %}
+end
