@@ -1,33 +1,8 @@
 require "dottie/ext"
 require "liquid"
 
-require
-
 module Peml
     class Tester
-
-        #will remove these variables. the templates will be imported.
-        @@j_class = "class {{ class_name }}
-                    {
-                        {% for import in imports %}
-                            {{ import | append: \";\" }}
-                        {% endfor %}
-
-                        {% for method in methods %}
-                            {{ method }}
-                        {% endfor %}
-                    }"
-        
-        @@j_method = "public void test{{ id }}
-                    {
-                        {% for given in givens %}
-                        {{ given | append: \";\" }}
-                        {% endfor %}
-                        {% for when in whens %}
-                        {{ when | append: \";\" }}
-                        {% endfor %}
-                        {{ then | append: \";\" }}
-                    }"
 
         #This function parses tests written in the PEML Test
         #dsl. Each of the blocks are collected into a hash and
@@ -88,11 +63,11 @@ module Peml
         #name, imports and each of the methods.
         def get_tests_from_template(test_hash)
             methods=[]
-            java_method = Liquid::Template.parse(@@j_method, :error_mode => :strict)
-            java_class = Liquid::Template.parse(@@j_class, :error_mode => :strict)
+            java_method = Liquid::Template.parse(File.open("/peml/test/templates/java_function.liquid").read, :error_mode => :strict)
+            java_class = Liquid::Template.parse(File.open("/peml/test/templates/java_class.liquid").read, :error_mode => :strict)
             test_hash["thens"].length.times do |i|
                 methods.push(java_method.render('id' => i, 'givens' => test_hash["givens"], 
-                    'whens' => test_hash["whens"], 'then' => self.parse_then(test_hash["thens"][i]))
+                    'whens' => test_hash["whens"], 'then' => self.parse_then(test_hash["thens"][i])))
             end
             puts(java_class.render('class_name' => test_hash["class_name"],'imports' => test_hash["imports"], 'methods' => methods))
         end
