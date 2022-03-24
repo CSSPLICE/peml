@@ -9,7 +9,7 @@ require 'peml'
 
 ARGV.each do |f|
   begin
-    pp Peml::load_file(f)
+    pp Peml::load_file(filename: f)
   rescue Parslet::ParseFailed => e
     puts e.parse_failure_cause.ascii_tree
   end
