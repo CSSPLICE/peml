@@ -48,7 +48,7 @@ describe Peml do
 
       it "parses #{slug}" do
         begin
-          ast = Peml::pemltest_parse(filename: f)
+          ast = Peml::pemltest_parse(nil, filename: f)
           if print_asts
             puts "\nAST for #{slug}:"
             pp ast

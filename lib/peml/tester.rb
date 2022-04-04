@@ -5,7 +5,7 @@ module Peml
     class Tester
 
         #This path points to the directory where the liquid templates are saved
-        @@template_path = File.expand_path('../../test/templates/', __dir__) + "/"
+        @@template_path = File.expand_path('templates/', __dir__) + "/"
 
 
         #This function parses tests written in the PEML Test
