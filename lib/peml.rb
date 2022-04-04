@@ -27,6 +27,7 @@ module Peml
     else
       peml = params[:peml]
     end
+    ##how to parse the two differently
     value = Peml::Loader.new.load(peml)
     #value = Peml::pemltest_parse(peml)
     if(value.key?(:givens) || value.key?(:whens) || value.key?(:thens))
