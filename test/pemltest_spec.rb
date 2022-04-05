@@ -65,12 +65,12 @@ describe Peml do
 
   describe "#peml_template_parse" do
     # Test that it successfully parses every positive example
-    Dir.glob(File.expand_path('../PEMLtemplateTest/*.pemltest', __FILE__)).each do |f|
+    Dir.glob(File.expand_path('../PemltemplateTest/*.pemltest', __FILE__)).each do |f|
       slug = File.basename(f)
 
       it "parses #{slug}" do
         begin
-          ast = Peml::parse(filename: f)
+          ast = Peml::parse({filename: f}, language: f[(f.index('_')+1)..(f.index('.')-1)])   
           if print_asts
             puts "\nAST for #{slug}:"
             pp ast

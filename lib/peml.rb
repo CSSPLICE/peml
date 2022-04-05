@@ -16,7 +16,7 @@ module Peml
 
 
   # -------------------------------------------------------------
-  def self.parse(params = {})
+  def self.parse(params = {}, language: nil)
     if params[:filename]
       file = File.open(params[:filename])
       begin
@@ -31,7 +31,7 @@ module Peml
     #value = Peml::Loader.new.load(peml)
     value = Peml::pemltest_parse(peml)
     if(value.key?(:givens) || value.key?(:whens) || value.key?(:thens))
-      value = Peml::Tester.new.generate_tests_from_dsl(value)
+      value = Peml::Tester.new.generate_tests_from_dsl(value, language)
     elsif(value.key?("assets") || (value.key?("systems") && value["systems"][0].key?("suites")))
       value = Peml::Tester.new.generate_tests(value)
     end

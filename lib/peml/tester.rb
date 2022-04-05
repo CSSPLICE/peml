@@ -7,11 +7,15 @@ module Peml
         #This path points to the directory where the liquid templates are saved
         @@template_path = File.expand_path('templates/', __dir__) + "/"
 
+        #This variable is used to pick the xunit parser based on the language
+        @@xunit_parser
+
 
         #This function parses tests written in the PEML Test
         #dsl. Each of the blocks are collected into a hash and
         #then sent ahead to make a class/test methods out of
-        def generate_tests_from_dsl(peml, language="java")
+        def generate_tests_from_dsl(peml, language)
+            xunit_parser = self.pick_parser(language)
             test_hash={}
             test_hash["class_name"]=peml[:id]
             if(peml.key?(:imports))
@@ -110,6 +114,10 @@ module Peml
             else
                 return then_statement
             end   
+        end
+
+        def pick_parser(language)
+            
         end
 
         #This function has been designed for parsing test cases presented in 
