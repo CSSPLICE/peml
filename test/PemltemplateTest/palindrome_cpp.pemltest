@@ -1,0 +1,13 @@
+describe: Answer
+{
+  given:
+        String a = racecar
+        String b = nope
+
+  when:
+        Boolean check1 = checkPalindrome(a);
+        Boolean check2 = checkPalindrome(b);
+  then:
+    check1 === true
+    check2 === false
+}

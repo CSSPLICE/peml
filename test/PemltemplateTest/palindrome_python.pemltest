@@ -1,0 +1,13 @@
+describe: Answer
+{
+  given:
+        a = racecar
+        b = nope
+
+  when:
+        check1 = checkPalindrome(a);
+        check2 = checkPalindrome(b);
+  then:
+    check1 === true
+    check2 === false
+}

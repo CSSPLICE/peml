@@ -63,4 +63,26 @@ describe Peml do
     end
   end
 
+  describe "#peml_template_parse" do
+    # Test that it successfully parses every positive example
+    Dir.glob(File.expand_path('../PEMLtemplateTest/*.pemltest', __FILE__)).each do |f|
+      slug = File.basename(f)
+
+      it "parses #{slug}" do
+        begin
+          ast = Peml::parse(filename: f)
+          if print_asts
+            puts "\nAST for #{slug}:"
+            pp ast
+            # puts ast.to_yaml
+            puts ''
+          end
+          _(ast).wont_be_nil
+        rescue Parslet::ParseFailed => e
+          fail e.parse_failure_cause.ascii_tree
+        end
+      end
+    end
+  end
+
 end
