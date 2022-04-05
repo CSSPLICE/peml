@@ -20,28 +20,18 @@ class PyUnit_Parser < XUnit_Parser
     end
 
     def parse_array_equivalence(then_statement)
-        if then_statement.include?("===")
-            then_arr = then_statement.split("===")
-            return "assertArrayEquals(" + then_arr[0]+","+then_arr[1]+")"
-        elsif then_statement.include?("!==")
-            then_arr = then_statement.split("!==")
-            return "assertArrayNotEquals(" + then_arr[0]+","+then_arr[1]+")"
-        end
+        
     end
 
     def parse_regex(statement)
+
     end
 
     def parse_floating_point(statement)
-        if then_statement.include?("===")
-            then_arr = then_statement.split("===")
-            return "assertEquals(" + then_arr[0]+","+then_arr[1]+")"
-        elsif then_statement.include?("!==")
-            then_arr = then_statement.split("!==")
-            return "assertNotEquals(" + then_arr[0]+","+then_arr[1]+")"
-        end
+        
     end
 
     def parse_messages(statement)
+        
     end
 end
