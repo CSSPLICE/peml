@@ -1,6 +1,11 @@
 require "dottie/ext"
 require "liquid"
 
+require 'xunit_parsing/ctest_parsing'
+require 'xunit_parsing/junit_parsing'
+require 'xunit_parsing/minitest_parsing'
+require 'xunit_parsing/pyunit_parsing'
+
 module Peml
     class Tester
 
@@ -8,8 +13,20 @@ module Peml
         @@template_path = File.expand_path('templates/', __dir__) + "/"
 
         #This variable is used to pick the xunit parser based on the language
-        @@xunit_parser
+        @xunit_parser
 
+        #~ Public instance methods .................................................
+        def initialize(language)
+            case language
+            when 'java'
+                @xunit_parser = JUnit_Parser.new()
+            when 'cpp'
+                @xunit_parser = CTest_Parser.new()
+            when 'python'
+                @xunit_parser = PyUnit_Parser.new()
+            when 'ruby'
+                @xunit_parser = MiniTest_Parser.new()
+        end
 
         #This function parses tests written in the PEML Test
         #dsl. Each of the blocks are collected into a hash and
@@ -75,49 +92,9 @@ module Peml
             template_class = Liquid::Template.parse(File.open(@@template_path+language+"_class.liquid").read, :error_mode => :strict)
             test_hash["thens"].length.times do |i|
                 methods.push(template_method.render('id' => i, 'givens' => test_hash["givens"], 
-                    'whens' => test_hash["whens"], 'then' => self.parse_then(test_hash["thens"][i])))
+                    'whens' => test_hash["whens"], 'then' => @xunit_parser.parse_then(test_hash["thens"][i])))
             end
             puts(template_class.render('class_name' => test_hash["class_name"],'imports' => test_hash["imports"], 'methods' => methods))
-        end
-
-        #some additional featues have been added based on
-        #my understanding, needs review and will be updated
-        def parse_then(then_statement)
-            if then_statement.include?("===")
-                then_arr = then_statement.split("===")
-                if then_arr[0].include?("[]") || then_arr[1].include?("[]")
-                    return "assertArrayEquals(" + then_arr[0]+","+then_arr[1]+")"
-                elsif then_arr[0].match(/some_regex/)
-                    return "assertTrue(" + then_arr[1]+".match("+then_arr[0]+"))"
-                elsif then_arr[1].match(/some_regex/)
-                    return "assertTrue(" + then_arr[0]+".match("+then_arr[1]+"))"
-                else
-                    return "assertEquals(" + then_arr[0]+","+then_arr[1]+")"
-                end
-            elsif then_statement.include?("!==")
-                then_arr = then_statement.split("!==")
-                if then_arr[0].include?("[]") || then_arr[1].include?("[]")
-                    return "assertArrayNotEquals(" + then_arr[0]+","+then_arr[1]+")"
-                elsif then_arr[0].match(/some_regex/)
-                    return "assertFalse(" + then_arr[1]+".match("+then_arr[0]+"))"
-                elsif then_arr[1].match(/some_regex/)
-                    return "assertFalse(" + then_arr[0]+".match("+then_arr[1]+"))"
-                else
-                    return "assertNotEquals(" + then_arr[0]+","+then_arr[1]+")"
-                end
-            elsif then_statement.include?("=&=")
-                then_arr = then_statement.split("=&=")
-                return "assertSame(" + then_arr[0]+","+then_arr[1]+")"
-            elsif then_statement.include?("!&=")
-                then_arr = then_statement.split("!&=")
-                return "assertNotSame(" + then_arr[0]+","+then_arr[1]+")"
-            else
-                return then_statement
-            end   
-        end
-
-        def pick_parser(language)
-            
         end
 
         #This function has been designed for parsing test cases presented in 
