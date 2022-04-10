@@ -3,6 +3,9 @@ require "dottie/ext"
 module Peml
     class DatadrivenTestRenderer
 
+        #This path points to the directory where the liquid templates are saved
+        @@template_path = File.expand_path('templates/', __dir__) + "/"
+
         #This function has been designed for parsing test cases presented in 
         #tabular format to individual testable x-unti style methods. Needs 
         #better refracotring. 
@@ -14,8 +17,10 @@ module Peml
             elsif(value["systems.[0].suites"]!=nil)
                 file_arr = self.parse_hash(value["systems.[0].suites"])
             end
+            tests = []
             id=0
             languages.length.times do |i|
+                template_class = Liquid::Template.parse(File.open(@@template_path+languages[i].downcase+"_class.liquid").read, :error_mode => :strict)
                 file_arr.length.times do |j|
                     file_arr[j].length.times do |k|
                         id=id+1
@@ -30,7 +35,7 @@ module Peml
                         class_name = "Test"
                         negative_feedback= "you should do better"
 
-                        puts(TEST_METHOD_TEMPLATES[languages[i]]%{
+                        tests.append(TEST_METHOD_TEMPLATES[languages[i]]%{
                             id: id,
                             expected_output: expected_output,
                             method_name: method_name,
@@ -40,6 +45,7 @@ module Peml
                 })
                     end
                 end
+            puts(template_class.render('class_name' => "Answer", 'methods' => tests))
             end
             return peml
         end
