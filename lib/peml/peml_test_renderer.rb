@@ -1,9 +1,9 @@
 require "liquid"
 
-require 'xunit_parsing/ctest_parsing'
-require 'xunit_parsing/junit_parsing'
-require 'xunit_parsing/minitest_parsing'
-require 'xunit_parsing/pyunit_parsing'
+require_relative 'xunit_parsing/ctest_parsing'
+require_relative 'xunit_parsing/junit_parsing'
+require_relative 'xunit_parsing/minitest_parsing'
+require_relative 'xunit_parsing/pyunit_parsing'
 
 module Peml
     class PemlTestRenderer
@@ -12,7 +12,7 @@ module Peml
         @@template_path = File.expand_path('templates/', __dir__) + "/"
 
         #This variable is used to pick the xunit parser based on the language
-        @xunit_parser
+        @xunit_parser = Peml::XUnit_Parser.new()
 
         #~ Public instance methods .................................................
         def initialize(language)
@@ -25,6 +25,7 @@ module Peml
                 @xunit_parser = PyUnit_Parser.new()
             when 'ruby'
                 @xunit_parser = MiniTest_Parser.new()
+            end
         end
 
         #This function parses tests written in the PEML Test

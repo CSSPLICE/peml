@@ -1,4 +1,6 @@
-class CTest_Parser < XUnit_Parser
+require_relative '../xunitparser'
+
+class CTest_Parser < Peml::XUnit_Parser
 
     def parse_then(then_statement)
         if then_statement.include?("[]")
@@ -17,6 +19,7 @@ class CTest_Parser < XUnit_Parser
             return "assertNotSame(" + then_arr[0]+","+then_arr[1]+")"
         else
             return then_statement
+        end
     end
 
     def parse_array_equivalence(then_statement)

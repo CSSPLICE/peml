@@ -1,9 +1,9 @@
-require 'peml/loader'
-require 'peml/parser'
-require 'peml/emitter'
-require 'peml/utils'
-require 'peml/peml_test_renderer'
-require 'peml/datadriven_test_renderer'
+require_relative 'peml/loader'
+require_relative 'peml/parser'
+require_relative 'peml/emitter'
+require_relative 'peml/utils'
+require_relative 'peml/peml_test_renderer'
+require_relative 'peml/datadriven_test_renderer'
 
 require "dottie/ext"
 require "kramdown"

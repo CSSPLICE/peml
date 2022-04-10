@@ -21,13 +21,11 @@ module Peml
                         id=id+1
                         if(value["assets.test.files"]!=nil)
                             method_pattern = value["assets.test.files"][j]["pattern_actual"]
-                            method_name = method_pattern[method_pattern.index('.')+1..method_pattern.index('(')-1]
-                            intput = method_pattern[method_pattern.index('(')+1..method_pattern.index(')')-1].gsub(/\{\{(.*?)\}\}/) { |x| file_arr[j][k][x] }
                         elsif(value["systems.[0].suites"]!=nil)
                             method_pattern = value["systems.[0].suites"][j]["template"]
-                            method_name = method_pattern[method_pattern.index('.')+1..method_pattern.index('(')-1]
-                            intput = method_pattern[method_pattern.index('(')+1..method_pattern.index(')')-1].gsub(/\{\{(.*?)\}\}/) { |x| file_arr[j][k][x] }
                         end
+                        method_name = method_pattern[method_pattern.index('.')+1..method_pattern.index('(')-1]
+                        intput = method_pattern[method_pattern.index('(')+1..method_pattern.index(')')-1].gsub(/\{\{(.*?)\}\}/) { |x| file_arr[j][k][x] }
                         expected_output = file_arr[j][k]["expected"]
                         class_name = "Test"
                         negative_feedback= "you should do better"
@@ -61,7 +59,19 @@ module Peml
         def parse_hash(files)
             file_arr=[]
             files.length.times do |i|
-                file_arr.push(files[i]["cases"])
+                temp_arr=[]
+                files[i]["cases"].length.times do |j|
+                    temp_hash={}
+                    files[i]["cases"][j].each do |key, value|
+                        if key!="expected" && key!="description"
+                            temp_hash["{{"+key+"}}"]=value
+                        else
+                            temp_hash[key] = value
+                        end
+                    end
+                    temp_arr.append(temp_hash)
+                end
+                file_arr.push(temp_arr)
             end
             return file_arr
         end
