@@ -8,7 +8,7 @@ describe Peml do
       slug = File.basename(f)
 
       it "parses #{slug}" do
-        ex = Peml::parse(filename: f)
+        ex = Peml::parse({filename: f})
         _(ex).wont_be_nil
         _(ex[:value]).wont_be_nil
         _(ex[:diagnostics]).must_be_empty

@@ -1,4 +1,4 @@
-require 'peml/version'
+require_relative 'version'
 
 module Peml
   class Loader

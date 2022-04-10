@@ -1,8 +1,9 @@
-require 'peml/loader'
-require 'peml/parser'
-require 'peml/emitter'
-require 'peml/utils'
-require 'peml/tester'
+require_relative 'peml/loader'
+require_relative 'peml/parser'
+require_relative 'peml/emitter'
+require_relative 'peml/utils'
+require_relative 'peml/peml_test_renderer'
+require_relative 'peml/datadriven_test_renderer'
 
 require "dottie/ext"
 require "kramdown"
@@ -16,7 +17,7 @@ module Peml
 
 
   # -------------------------------------------------------------
-  def self.parse(params = {})
+  def self.parse(params = {}, language: nil)
     if params[:filename]
       file = File.open(params[:filename])
       begin
@@ -27,12 +28,12 @@ module Peml
     else
       peml = params[:peml]
     end
-    #value = Peml::Loader.new.load(peml)
-    value = Peml::pemltest_parse(peml)
+    value = Peml::Loader.new.load(peml)
+    #value = Peml::pemltest_parse(peml)
     if(value.key?(:givens) || value.key?(:whens) || value.key?(:thens))
-      value = Peml::Tester.new.generate_tests_from_dsl(value)
+      value = Peml::PemlTestRenderer.new.generate_tests_from_dsl(value, language)
     elsif(value.key?("assets") || (value.key?("systems") && value["systems"][0].key?("suites")))
-      value = Peml::Tester.new.generate_tests(value)
+      value = Peml::DatadrivenTestRenderer.new.generate_tests(value)
     end
     @@pemlGlobal = Marshal.load(Marshal.dump(value)).dottie!
     if !params[:result_only]
