@@ -47,6 +47,7 @@ module Peml
                 end
             puts(template_class.render('class_name' => "Answer", 'methods' => tests))
             end
+            peml["test_script"] = template_class.render('class_name' => "Answer", 'methods' => tests)
             return peml
         end
 

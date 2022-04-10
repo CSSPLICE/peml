@@ -47,7 +47,7 @@ module Peml
             if(peml.key?(:thens))
                 test_hash["thens"] = self.get_statements(:thens, peml)
             end
-            self.get_tests_from_template(test_hash, language)
+            peml["test_script"] = self.get_tests_from_template(test_hash, language)
             return peml
         end
 
@@ -95,6 +95,7 @@ module Peml
                     'whens' => test_hash["whens"], 'then' => @xunit_parser.parse_then(test_hash["thens"][i])))
             end
             puts(template_class.render('class_name' => test_hash["class_name"],'imports' => test_hash["imports"], 'methods' => methods))
+            return template_class.render('class_name' => test_hash["class_name"],'imports' => test_hash["imports"], 'methods' => methods)
         end
     end
 end
