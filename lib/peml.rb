@@ -2,7 +2,8 @@ require 'peml/loader'
 require 'peml/parser'
 require 'peml/emitter'
 require 'peml/utils'
-require 'peml/tester'
+require 'peml/peml_test_renderer'
+require 'peml/datadriven_test_renderer'
 
 require "dottie/ext"
 require "kramdown"
@@ -27,13 +28,12 @@ module Peml
     else
       peml = params[:peml]
     end
-    ##how to parse the two differently
-    #value = Peml::Loader.new.load(peml)
-    value = Peml::pemltest_parse(peml)
+    value = Peml::Loader.new.load(peml)
+    #value = Peml::pemltest_parse(peml)
     if(value.key?(:givens) || value.key?(:whens) || value.key?(:thens))
-      value = Peml::Tester.new.generate_tests_from_dsl(value, language)
+      value = Peml::PemlTestRenderer.new.generate_tests_from_dsl(value, language)
     elsif(value.key?("assets") || (value.key?("systems") && value["systems"][0].key?("suites")))
-      value = Peml::Tester.new.generate_tests(value)
+      value = Peml::DatadrivenTestRenderer.new.generate_tests(value)
     end
     @@pemlGlobal = Marshal.load(Marshal.dump(value)).dottie!
     if !params[:result_only]
