@@ -17,6 +17,9 @@ module Peml
             elsif(value["systems.[0].suites"]!=nil)
                 file_arr = self.parse_hash(value["systems.[0].suites"])
             end
+            test_script = ''
+            test_structure = {'class_name' => 'Answer', 'test_case_count': file_arr.length}
+            test_cases = []
             tests = []
             id=0
             languages.length.times do |i|
@@ -43,11 +46,16 @@ module Peml
                             input: intput,
                             negative_feedback: negative_feedback
                 })
+                        metadata_temp = {'file': j, 'number': k, 'method_name': 'test'+id.to_s, 'example': true, 'hidden': false}  
+                        test_cases.push(metadata_temp.merge(file_arr[j][k]))  
                     end
                 end
             puts(template_class.render('class_name' => "Answer", 'methods' => tests))
+            test_script += template_class.render('class_name' => "Answer", 'methods' => tests) + '\n'
             end
-            peml["test_script"] = template_class.render('class_name' => "Answer", 'methods' => tests)
+            peml["test_script"] = test_script
+            test_structure['test_cases'] = test_cases
+            puts(test_structure)
             return peml
         end
 
@@ -122,7 +130,7 @@ RUBY_TEST
 PYTHON_TEST
       'Java' => <<JAVA_TEST,
     @Test
-    public void test_%{id}()
+    public void test%{id}()
     {
         assertEquals(
           "%{negative_feedback}",
@@ -130,22 +138,6 @@ PYTHON_TEST
           subject.%{method_name}(%{input}));
     }
 JAVA_TEST
-      'JavaMethod' => <<JAVA_TEST_METHOD,
-    @Test
-    public void test_%{id}()
-    {
-        %{givenStr}
-        %{whenStr}
-        %{thenStr}
-    }
-JAVA_TEST_METHOD
-      'JavaClass' => <<JAVA_TEST_CLASS,
-    class %{class_name}
-    {
-        %{importStr}
-        %{test_methods}
-    } 
-JAVA_TEST_CLASS
       'C++' => <<CPP_TEST
     void test%{id}()
     {
