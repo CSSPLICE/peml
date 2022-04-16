@@ -28,8 +28,8 @@ module Peml
     else
       peml = params[:peml]
     end
-    value = Peml::Loader.new.load(peml)
-    #value = Peml::pemltest_parse(peml)
+    #value = Peml::Loader.new.load(peml)
+    value = Peml::pemltest_parse(peml)
     if(value.key?(:givens) || value.key?(:whens) || value.key?(:thens))
       value = Peml::PemlTestRenderer.new.generate_tests_from_dsl(value, language)
     elsif(value.key?("assets") || (value.key?("systems") && value["systems"][0].key?("suites")))

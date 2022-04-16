@@ -107,12 +107,13 @@ module Peml
             metadata = {'raw_pemltest': peml, 'language': language, 'class_name': peml[:id],
             'test_case_count': test_hash['thens'].length, 'imports': test_hash['imports']}
             test_cases=[]
-            for test_hash['thens'].length.times do |i|
+            test_hash['thens'].length.times do |i|
                 test_case = {'test_number': i, 'method_name': 'test' + i.to_s, 'given_statements': test_hash['givens'],
                 'when_statements': test_hash['whens'], 'then_statement': test_hash['thens'][i]}
                 test_cases.append(test_case)
             end
             metadata['test_cases'] = test_cases
+            return metadata
         end
     end
 end
