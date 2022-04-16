@@ -53,10 +53,14 @@ module Peml
             puts(template_class.render('class_name' => "Answer", 'methods' => tests))
             test_script += template_class.render('class_name' => "Answer", 'methods' => tests) + '\n'
             end
-            peml["test_script"] = test_script
-            test_structure['test_cases'] = test_cases
-            puts(test_structure)
-            return peml
+            if(value["assets.test.files"]!=nil)
+                value['assets.test.files']['parsed_tests'] = test_script
+                value['assets.test.files']['test_structure'] = test_structure
+            elsif(value["systems.[0].suites"]!=nil)
+                value['systems.[0]']['parsed_tests'] = test_script
+                value['systems.[0]']['test_structure'] = test_structure
+            end
+            return value
         end
 
         #Gets list of language we need test cases for. Only used
