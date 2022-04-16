@@ -3,6 +3,9 @@ require "dottie/ext"
 module Peml
     class DatadrivenTestRenderer
 
+        #This path points to the directory where the liquid templates are saved
+        @@template_path = File.expand_path('templates/', __dir__) + "/"
+
         #This function has been designed for parsing test cases presented in 
         #tabular format to individual testable x-unti style methods. Needs 
         #better refracotring. 
@@ -14,9 +17,15 @@ module Peml
             elsif(value["systems.[0].suites"]!=nil)
                 file_arr = self.parse_hash(value["systems.[0].suites"])
             end
+            test_structure = {'class_name' => 'Answer'}
+            test_cases = []
             id=0
             languages.length.times do |i|
+                test_structure['language'] = languages[i]
+                template_class = Liquid::Template.parse(File.open(@@template_path+languages[i].downcase+"_class.liquid").read, :error_mode => :strict)
                 file_arr.length.times do |j|
+                    tests = []
+                    test_structure['test_case_count'] = file_arr[j].length
                     file_arr[j].length.times do |k|
                         id=id+1
                         if(value["assets.test.files"]!=nil)
@@ -30,7 +39,7 @@ module Peml
                         class_name = "Test"
                         negative_feedback= "you should do better"
 
-                        puts(TEST_METHOD_TEMPLATES[languages[i]]%{
+                        tests.append(TEST_METHOD_TEMPLATES[languages[i]]%{
                             id: id,
                             expected_output: expected_output,
                             method_name: method_name,
@@ -38,10 +47,20 @@ module Peml
                             input: intput,
                             negative_feedback: negative_feedback
                 })
+                        metadata_temp = {'file': j, 'number': k, 'method_name': 'test'+id.to_s, 'example': true, 'hidden': false}  
+                        test_cases.push(metadata_temp.merge(file_arr[j][k]))  
                     end
+                    test_structure['test_cases'] = test_cases 
+                    if(value["assets.test.files"]!=nil)
+                        value['assets.test.files'][j]['parsed_tests'] = template_class.render('class_name' => "Answer", 'methods' => tests)
+                        value['assets.test.files'][j]['test_structure'] = test_structure
+                    elsif(value["systems.[0].suites"]!=nil)
+                        value['systems.[0]']['parsed_tests'] = template_class.render('class_name' => "Answer", 'methods' => tests)
+                        value['systems.[0]']['test_structure'] = test_structure
+                    end 
                 end
             end
-            return peml
+            return value
         end
 
         #Gets list of language we need test cases for. Only used
@@ -115,7 +134,7 @@ RUBY_TEST
 PYTHON_TEST
       'Java' => <<JAVA_TEST,
     @Test
-    public void test_%{id}()
+    public void test%{id}()
     {
         assertEquals(
           "%{negative_feedback}",
@@ -123,22 +142,6 @@ PYTHON_TEST
           subject.%{method_name}(%{input}));
     }
 JAVA_TEST
-      'JavaMethod' => <<JAVA_TEST_METHOD,
-    @Test
-    public void test_%{id}()
-    {
-        %{givenStr}
-        %{whenStr}
-        %{thenStr}
-    }
-JAVA_TEST_METHOD
-      'JavaClass' => <<JAVA_TEST_CLASS,
-    class %{class_name}
-    {
-        %{importStr}
-        %{test_methods}
-    } 
-JAVA_TEST_CLASS
       'C++' => <<CPP_TEST
     void test%{id}()
     {

@@ -1,8 +1,4 @@
-class {{ class_name }}:
-    {% for import in imports %}
-       import {{ import }}
-    {% endfor %}
-
-    {% for method in methods %}
-        {{ method }}
-    {% endfor %}
+class {{ class_name }}: {% for import in imports %} import {{ import }}
+{% endfor %} {% for method in methods %}
+{{ method }}
+{% endfor %}
