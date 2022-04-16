@@ -17,14 +17,15 @@ module Peml
             elsif(value["systems.[0].suites"]!=nil)
                 file_arr = self.parse_hash(value["systems.[0].suites"])
             end
-            test_script = ''
-            test_structure = {'class_name' => 'Answer', 'test_case_count': file_arr.length}
+            test_structure = {'class_name' => 'Answer'}
             test_cases = []
-            tests = []
             id=0
             languages.length.times do |i|
+                test_structure['language'] = languages[i]
                 template_class = Liquid::Template.parse(File.open(@@template_path+languages[i].downcase+"_class.liquid").read, :error_mode => :strict)
                 file_arr.length.times do |j|
+                    tests = []
+                    test_structure['test_case_count'] = file_arr[j].length
                     file_arr[j].length.times do |k|
                         id=id+1
                         if(value["assets.test.files"]!=nil)
@@ -49,16 +50,15 @@ module Peml
                         metadata_temp = {'file': j, 'number': k, 'method_name': 'test'+id.to_s, 'example': true, 'hidden': false}  
                         test_cases.push(metadata_temp.merge(file_arr[j][k]))  
                     end
+                    test_structure['test_cases'] = test_cases 
+                    if(value["assets.test.files"]!=nil)
+                        value['assets.test.files'][j]['parsed_tests'] = template_class.render('class_name' => "Answer", 'methods' => tests)
+                        value['assets.test.files'][j]['test_structure'] = test_structure
+                    elsif(value["systems.[0].suites"]!=nil)
+                        value['systems.[0]']['parsed_tests'] = template_class.render('class_name' => "Answer", 'methods' => tests)
+                        value['systems.[0]']['test_structure'] = test_structure
+                    end 
                 end
-            puts(template_class.render('class_name' => "Answer", 'methods' => tests))
-            test_script += template_class.render('class_name' => "Answer", 'methods' => tests) + '\n'
-            end
-            if(value["assets.test.files"]!=nil)
-                value['assets.test.files']['parsed_tests'] = test_script
-                value['assets.test.files']['test_structure'] = test_structure
-            elsif(value["systems.[0].suites"]!=nil)
-                value['systems.[0]']['parsed_tests'] = test_script
-                value['systems.[0]']['test_structure'] = test_structure
             end
             return value
         end
