@@ -1,10 +1,7 @@
-def test{{id}}(self):
-        {% for given in givens %}
-            {{ given  }}
-        {% endfor %}
+def test{{ id }}(self): {% for given in givens %}
+{{ given }}
+{% endfor %} {% for when in whens %}
+{{ when }}
+{% endfor %}
 
-        {% for when in whens %}
-            {{ when }}
-        {% endfor %}
-
-            {{ then }}
+{{ then }}

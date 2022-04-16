@@ -47,7 +47,8 @@ module Peml
             if(peml.key?(:thens))
                 test_hash["thens"] = self.get_statements(:thens, peml)
             end
-            peml["test_script"] = self.get_tests_from_template(test_hash, language)
+            peml['test_script'] = self.get_tests_from_template(test_hash, language)
+            peml['test_metadata'] = self.get_metadata_from_tests(peml, test_hash, language)
             return peml
         end
 
@@ -96,6 +97,22 @@ module Peml
             end
             puts(template_class.render('class_name' => test_hash["class_name"],'imports' => test_hash["imports"], 'methods' => methods))
             return template_class.render('class_name' => test_hash["class_name"],'imports' => test_hash["imports"], 'methods' => methods)
+        end
+
+        #This function is used to generate metadata for PEML Test
+        #descriptions to be used by client to understand the tests
+        #better. We also write back the raw parsed hash to be used
+        #by tools in case they want to perform their own rendering.
+        def get_metadata_from_tests(peml, test_hash, language)
+            metadata = {'raw_pemltest': peml, 'language': language, 'class_name': peml[:id],
+            'test_case_count': test_hash['thens'].length, 'imports': test_hash['imports']}
+            test_cases=[]
+            for test_hash['thens'].length.times do |i|
+                test_case = {'test_number': i, 'method_name': 'test' + i.to_s, 'given_statements': test_hash['givens'],
+                'when_statements': test_hash['whens'], 'then_statement': test_hash['thens'][i]}
+                test_cases.append(test_case)
+            end
+            metadata['test_cases'] = test_cases
         end
     end
 end
