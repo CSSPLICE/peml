@@ -1,0 +1,62 @@
+exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/21/practice?workout_id=1799
+
+title: CodeWorkout LuckySum
+external_id: codingbat-luckySum
+is_public: true
+experience: 50
+language_list: Java
+
+license.id: cc-sa-4.0
+license.owner.email: admin@codeworkout.org
+license.owner.name: codeworkout
+
+tags.topics: logic, conditionals, if
+tags.style: code-writing
+
+instructions:----------
+Write a function in Java that implements the following logic: Given
+3 int values, `a`, `b`, and `c`, return their sum. However, if one
+of the values is 13 then it does not count towards the sum and
+values to its right do not count. So for example, if `b` is 13,
+then both `b` and `c` do not count.
+----------
+
+[systems]
+language: Java
+
+[assets.code.starter.files]
+content:----------
+public int luckySum(int a, int b, int c)
+{
+    ___
+}
+----------
+
+
+[assets.test.files]
+format: text/csv-unquoted
+pattern_actual: subject.luckySum({{a}}, {{b}}, {{c}})
+content:----------
+a,b,c,expected,description
+1,2,3,6
+1,2,13,3
+1,13,13,1
+1,13,13,1
+6,5,2,13
+13,2,3,0
+13,2,13,0
+13,13,2,0
+9,4,13,13
+8,13,2,8
+7,2,1,10
+3,3,13,6
+56,13,13,56,hidden
+12,28,37,77,hidden
+13,13,13,0,hidden
+13,152,13,0,hidden
+13,23,13,0,hidden
+13,13,17,0,hidden
+13,13,32,0,hidden
+10,-8,13,2,hidden
+----------
+

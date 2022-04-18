@@ -1,0 +1,61 @@
+exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/4/practice?workout_id=1799
+
+title: CodeWorkout TeaParty
+external_id: codingbat-teaParty
+is_public: true
+experience: 50
+language_list: Java
+
+license.id: cc-sa-4.0
+license.owner.email: admin@codeworkout.org
+license.owner.name: codeworkout
+
+tags.topics: logic, conditionals, if
+tags.style: code-writing
+
+instructions:----------
+Write a function in Java that implements the following logic: We
+are having a party with amounts of tea and candy. Return the int
+outcome of the party encoded as 0 = bad, 1 = good, or 2 = great. A
+party is good (1) if both tea and candy are at least 5. However, if
+either tea or candy is at least double the amount of the other one,
+the party is great (2). However, in all cases, if either tea or
+candy is less than 5, the party is always bad (0).
+----------
+
+[systems]
+language: Java
+
+[assets.code.starter.files]
+content:----------
+public int teaParty(int tea, int candy)
+{
+    ___
+}
+----------
+
+
+[assets.test.files]
+format: text/csv-unquoted
+pattern_actual: subject.teaParty({{tea}}, {{candy}})
+content:----------
+tea,candy,expected,description
+6,8,1
+10,12,1
+11,9,1
+3,8,0
+1,3,0
+2,1,0
+5,4,0
+4,5,0
+5,5,1
+20,6,2
+12,6,2,hidden
+5,10,2,hidden
+7,14,2,hidden
+7,15,2,hidden
+7,13,1,hidden
+11,6,1,hidden
+13,6,2,hidden
+----------
+

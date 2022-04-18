@@ -1,0 +1,56 @@
+exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/1/practice?workout_id=1799
+
+title: CodeWorkout SortaSum
+external_id: codingbat-sortaSum
+is_public: true
+experience: 50
+language_list: Java
+
+license.id: cc-sa-4.0
+license.owner.email: admin@codeworkout.org
+license.owner.name: codeworkout
+
+tags.topics: logic, conditionals, if
+tags.style: code-writing
+
+instructions:----------
+Write a function in Java that implements the following logic:
+Given 2 ints, a and b, return their sum. However, sums in the
+range 10..19 inclusive, are forbidden, so in that case just
+return 20.
+----------
+
+[systems]
+language: Java
+
+[assets.code.starter.files]
+content:----------
+public int sortaSum(int a, int b)
+{
+    ___
+}
+----------
+
+
+[assets.test.files]
+format: text/csv-unquoted
+pattern_actual: subject.sortaSum({{a}}, {{b}})
+content:----------
+a,b,expected,description
+3,4,7
+9,4,20
+10,11,21
+12,-3,9
+4,6,20
+10,9,20
+-3,12,9,hidden
+4,5,9,hidden
+1,18,20,hidden
+7,3,20,hidden
+5,6,20,hidden
+14,7,21,hidden
+14,6,20,hidden
+19,2,21,hidden
+7,18,25,hidden
+----------
+
