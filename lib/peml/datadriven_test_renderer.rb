@@ -47,7 +47,7 @@ module Peml
                             input: intput,
                             negative_feedback: negative_feedback
                 })
-                        metadata_temp = {'file': j, 'number': k, 'method_name': 'test'+id.to_s, 'example': true, 'hidden': false}  
+                        metadata_temp = {'file': j, 'number': k, 'method_name': 'test'+id.to_s, 'example': file_arr[j][k]['description'] == 'example', 'hidden': file_arr[j][k]['description'] == 'hidden'}  
                         test_cases.push(metadata_temp.merge(file_arr[j][k]))  
                     end
                     test_structure['test_cases'] = test_cases 
