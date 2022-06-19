@@ -27,6 +27,14 @@ higher in all cases.
 [systems]
 language: Java
 
+[assets.code.wrapper.files]
+content:----------
+public class Answer
+{
+    ___
+}
+----------
+
 [assets.code.starter.files]
 content:----------
 public boolean caughtSpeeding(int speed, boolean isBirthday)

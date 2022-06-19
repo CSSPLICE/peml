@@ -1,0 +1,62 @@
+exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/839/practice?workout_id=1334
+
+title: CodeWorkout Calling Super Practice 1
+external_id: CS1114_Week2SyntaxDrill4
+is_public: true
+experience: 50
+language_list: Java
+
+license.id: cc-sa-4.0
+license.owner.email: admin@codeworkout.org
+license.owner.name: codeworkout
+
+tags.topics: CS1114, Parameters, Methods, java
+tags.style: code-writing
+
+instructions:----------
+For this problem assume you have access to a Person class. 
+Below, you'll see the start of a Student class that is a 
+subclass of Person. Finish creating the constructor by calling 
+`super`.
+----------
+
+[systems]
+language: Java
+
+[assets.code.wrapper.files]
+content:----------
+public class syntax4to5 {
+    public static class Person{
+        private boolean superWasCalled = false;
+        public Person() {
+            superWasCalled = true;
+        }
+
+        public boolean getSuperWasCalled() {
+            return superWasCalled;
+        }
+
+    }
+    public static class Student extends Person{
+        ___
+    }
+
+}
+----------
+
+[assets.code.starter.files]
+content:----------
+public Student() {
+    ___
+}
+----------
+
+
+[assets.test.files]
+format: text/csv-unquoted
+pattern_actual: subject.testStudent.getSuperWasCalled()
+content:----------
+expected,description
+true,example
+----------
+

@@ -23,6 +23,14 @@ return 20.
 [systems]
 language: Java
 
+[assets.code.wrapper.files]
+content:----------
+public class Answer
+{
+    ___
+}
+----------
+
 [assets.code.starter.files]
 content:----------
 public int sortaSum(int a, int b)

@@ -24,6 +24,14 @@ then both `b` and `c` do not count.
 [systems]
 language: Java
 
+[assets.code.wrapper.files]
+content:----------
+public class Answer
+{
+    ___
+}
+----------
+
 [assets.code.starter.files]
 content:----------
 public int luckySum(int a, int b, int c)

@@ -1,0 +1,69 @@
+exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/843/practice?workout_id=1334
+
+title: CodeWorkout Parameter Practice 4
+external_id: CS1114_Week2SyntaxDrill8
+is_public: true
+experience: 50
+language_list: Java
+
+license.id: cc-sa-4.0
+license.owner.email: admin@codeworkout.org
+license.owner.name: codeworkout
+
+tags.topics: CS1114, Parameters, Methods, java
+tags.style: code-writing
+
+instructions:----------
+public int subtract(int a, int b){
+          return a - b;
+        }
+            
+
+Use the method defined above to subtract 10 from 100 (as in 100 - 10).
+----------
+
+[systems]
+language: Java
+
+[assets.code.wrapper.files]
+content:----------
+public class Syntax8to10 {
+    private int aVal;
+    private int bVal;
+
+    public int subtract(int a, int b){
+        aVal = a;
+        bVal = b;
+        return a - b;
+      }
+
+    public void run() {
+        ___
+    }
+
+    public int getA() {
+        return aVal;
+    }
+
+    public int getB() {
+        return bVal;
+    }
+
+}
+----------
+
+[assets.code.starter.files]
+content:----------
+___
+----------
+
+
+[assets.test.files]
+format: text/csv-unquoted
+pattern_actual: subject.test.run()
+content:----------
+aVal,bVal,expected,description
+100,10,100,"100 should be the first parameter passed!"
+100,10,10,"10 should be the second parameter passed!"
+----------
+

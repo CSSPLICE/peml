@@ -1,4 +1,4 @@
-exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/4/practice?workout_id=1799
+exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/230/practice
 
 title: CodeWorkout CigarParty
 external_id: codingbat-cigarParty
@@ -23,6 +23,14 @@ is successful, or `false` otherwise.
 
 [systems]
 language: Java
+
+[assets.code.wrapper.files]
+content:----------
+public class Answer
+{
+    ___
+}
+----------
 
 [assets.code.starter.files]
 content:----------

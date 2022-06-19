@@ -1,0 +1,74 @@
+exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/855/practice?workout_id=1342
+
+title: CodeWorkout Jeroo Create and Place 
+external_id: edu.vt.cs.1114.jeroo_create_and_place
+is_public: true
+experience: 50
+language_list: Java
+
+license.id: cc-sa-4.0
+license.owner.email: edwards@cs.vt.edu
+license.owner.name: Stephen H. Edwards
+
+tags.topics: Jeroo, constructors, methods, syntax practice
+tags.style: code writing
+
+instructions:----------
+The following `myProgram()` method creates a `Jeroo` and
+adds it to the island at (1, 1). Change the code so the
+`Jeroo` begins facing north at (2, 3) instead.
+----------
+
+[systems]
+language: Java
+
+[assets.code.wrapper.files]
+content:----------
+import student.micro.jeroo.Flower;
+import student.micro.jeroo.Net;
+import student.micro.jeroo.Water;
+import student.micro.jeroo.Island;
+import student.micro.jeroo.CompassDirection;
+import student.micro.jeroo.RelativeDirection;
+import static student.micro.jeroo.CompassDirection.*;
+import static student.micro.jeroo.RelativeDirection.*;
+
+public class Answer extends Island {
+  public static class Jeroo extends student.micro.jeroo.Jeroo {
+    private CompassDirection facing;
+    private int holdingFlowers;
+    public Jeroo() { this(EAST, 0); }
+    public Jeroo(int flowers) { this(EAST, flowers); }
+    public Jeroo(CompassDirection direction) { this(direction, 0); }
+    public Jeroo(CompassDirection direction, int flowers)
+    {
+      super(direction, flowers);
+      facing = direction;
+      holdingFlowers = flowers;
+    }
+    public int __getFlowers() { return holdingFlowers; }
+    public CompassDirection __getFacing() { return facing; }
+  }
+  ___
+}
+----------
+    
+
+
+[assets.code.starter.files]
+content:----------
+public void myProgram()
+{
+    Jeroo jose = new Jeroo();
+    this.addObject(jose, 1, 1);
+}
+----------
+
+[assets.test.files]
+format: text/csv-unquoted
+pattern_actual: subject.Answer().run()
+content:----------
+expected,description
+not null,"The Jeroo was not added at the correct position"
+CompassDirection.NORTH,"The Jeroo is not facing the correct direction"
+----------

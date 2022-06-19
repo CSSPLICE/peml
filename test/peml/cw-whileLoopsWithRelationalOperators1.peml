@@ -1,0 +1,91 @@
+exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/917/practice?workout_id=1402
+
+title: CodeWorkout While Loops with Relational Operators 1
+external_id: CS1114_Week4SyntaxDrill_1
+is_public: true
+experience: 50
+language_list: Java
+
+license.id: cc-sa-4.0
+license.owner.email: edwards@cs.vt.edu
+license.owner.name: Stephen H. Edwards
+
+tags.topics: CS1114, Jeroo, loop, java, relational
+tags.style: code writing
+
+instructions:----------
+For this question, we will be working with a subclass of Jeroo called CountingJeroo that tracks the number of hops it has peformed.
+You can get the number of hops performed so far by calling the `getHopCount()` method.
+Below is a while loop with using a Jeroo named `imani`.
+Currently, this loop will cause the jeroo to hop 10 times.
+Change the conditon so that the jeroo will only hop five times instead.
+----------
+
+[systems]
+language: Java
+
+[assets.code.wrapper.files]
+content:----------
+import student.micro.jeroo.Jeroo;
+import student.micro.jeroo.RelativeDirection;
+import static student.micro.jeroo.RelativeDirection.*;
+import java.util.ArrayList;
+
+public class syntax1 {
+
+    public static class CountingJeroo extends Jeroo {
+        public int hopCount;
+
+        public CountingJeroo() {
+            this.hopCount = 0;
+        }
+
+
+
+        public int getHopCount() {
+            return hopCount;
+        }
+
+        public boolean willHop() {
+            return hopCount < 10;
+        }
+
+        @Override
+        public void hop() {
+            hopCount++;
+        }
+
+        @Override
+        public void hop(int numHops) {
+            hopCount= hopCount + numHops;
+        }
+
+
+    }// end testJeroo
+
+
+    public static class Runner {
+        ___
+    }// end runner
+
+}
+----------
+
+[assets.code.starter.files]
+content:----------
+public void question1(CountingJeroo imani)
+{
+    while (imani.getHopCount() < 10)
+    {
+        imani.hop();
+    }
+}
+----------
+
+[assets.test.files]
+format: text/csv-unquoted
+pattern_actual: subject.run.question1(testJ)
+content:----------
+expected,description
+5,"Jeroo should hop 5 times"
+----------

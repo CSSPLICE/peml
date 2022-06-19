@@ -1,0 +1,69 @@
+exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/854/practice?workout_id=1342
+
+title: CodeWorkout Jeroo Instantiation 
+external_id: edu.vt.cs.1114.jeroo_instantiation
+is_public: true
+experience: 50
+language_list: Java
+
+license.id: cc-sa-4.0
+license.owner.email: edwards@cs.vt.edu
+license.owner.name: Stephen H. Edwards
+
+tags.topics: Jeroo, constructors, syntax practice
+tags.style: code writing
+
+instructions:----------
+The following declaration introduces a variable named `jessica`
+that refers to a `Jeroo`, and also creates a new instance of the
+`Jeroo` class that starts off facing the default direction.
+Add parameters
+to the constructor call so the Jeroo starts out facing south
+with 2 flowers.
+----------
+
+[systems]
+language: Java
+
+[assets.code.wrapper.files]
+content:----------
+import student.micro.jeroo.CompassDirection;
+import static student.micro.jeroo.CompassDirection.*;
+public class Answer {
+  public static class Jeroo extends student.micro.jeroo.Jeroo {
+    private CompassDirection facing;
+    private int holdingFlowers;
+    public Jeroo() { this(EAST, 0); }
+    public Jeroo(int flowers) { this(EAST, flowers); }
+    public Jeroo(CompassDirection direction) { this(direction, 0); }
+    public Jeroo(CompassDirection direction, int flowers)
+    {
+      super(direction, flowers);
+      facing = direction;
+      holdingFlowers = flowers;
+    }
+    public int __getFlowers() { return holdingFlowers; }
+    public CompassDirection __getFacing() { return facing; }
+  }
+  public Jeroo run () {
+    ___
+    return jessica;
+  }
+}
+----------
+    
+
+
+[assets.code.starter.files]
+content:----------
+Jeroo jessica = new Jeroo();
+----------
+
+[assets.test.files]
+format: text/csv-unquoted
+pattern_actual: subject.Answer().run();
+content:----------
+expected,description
+CompassDirection.SOUTH,"The Jeroo is not facing the correct direction"
+2,"The Jeroo is not holding 2 flowers"
+----------
