@@ -1,0 +1,98 @@
+exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/841/practice?workout_id=1334
+
+title: CodeWorkout Using Parameters 1
+external_id: CS1114_Week2SyntaxDrill6
+is_public: true
+experience: 50
+language_list: Java
+
+license.id: cc-sa-4.0
+license.owner.email: admin@codeworkout.org
+license.owner.name: codeworkout
+
+tags.topics: CS1114, Parameters, Methods, java
+tags.style: code-writing
+
+instructions:----------
+For this problem assume you have access to a Person class defined here:
+
+    
+            public class Person{
+              public String name;
+              private int age;
+    
+              public void setAge(int a){
+                age = a;
+              }
+    
+              public void setName(String n){
+                name = n;
+              }
+            }
+            
+
+Below you've been given a method and a Person object has been created. 
+Using the methods defined above, set age to 42 and name to "Peter".
+----------
+
+[systems]
+language: Java
+
+[assets.code.wrapper.files]
+content:----------
+public class syntax6to7 {
+    public static class Person{
+        public String name;
+        private int age;
+
+        public void setAge(int a){
+          age = a;
+        }
+
+        public void setName(String n){
+          name = n;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public int getAge() {
+            return age;
+        }
+
+
+    }
+
+    public static class Runner{
+        private Person peter;
+        ___
+
+        public Person run() {
+            peter = new Person();
+            setAgeAndName(peter);
+            return peter;
+        }
+
+    }
+
+}
+----------
+
+[assets.code.starter.files]
+content:----------
+public void setAgeAndName(Person p) {
+   ___
+}
+----------
+
+
+[assets.test.files]
+format: text/csv-unquoted
+pattern_actual: subject.testPerson.getName()
+content:----------
+expected,description
+"Peter","Name has not been set correctly"
+42,"Age has not been set correctly"
+----------
+

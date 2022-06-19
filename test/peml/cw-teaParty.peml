@@ -26,6 +26,14 @@ candy is less than 5, the party is always bad (0).
 [systems]
 language: Java
 
+[assets.code.wrapper.files]
+content:----------
+public class Answer
+{
+    ___
+}
+----------
+
 [assets.code.starter.files]
 content:----------
 public int teaParty(int tea, int candy)

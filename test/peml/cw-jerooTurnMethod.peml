@@ -1,0 +1,71 @@
+exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/851/practice?workout_id=1342
+
+title: CodeWorkout Jeroo turn() method
+external_id: edu.vt.cs.1114.jeroo_turn_method
+is_public: true
+experience: 50
+language_list: Java
+
+license.id: cc-sa-4.0
+license.owner.email: edwards@cs.vt.edu
+license.owner.name: Stephen H. Edwards
+
+tags.topics: Jeroo, methods, syntax practice
+tags.style: code writing
+
+instructions:----------
+Your TA was helping you with a problem a suggested the following lines
+of code for controlling a `Jeroo`. However, the TA accidentally used
+the turn methods for a `LightBot`. Fix the turn methods to use the
+correct methods fr a `Jeroo`.
+----------
+
+[systems]
+language: Java
+
+[assets.code.wrapper.files]
+content:----------
+import java.util.ArrayList;
+import student.micro.jeroo.*;
+
+public class Answer extends Jeroo {
+  private ArrayList<String> moveHistory = new ArrayList<String>();
+
+    public ArrayList<String> getMoveHistory() {
+      return moveHistory;
+    }
+    public void pick() { moveHistory.add("pick"); }
+    public void plant() { moveHistory.add("plant"); }
+    public void toss() { moveHistory.add("toss"); }
+    public void jump() { moveHistory.add("jump"); }
+    public void turn(RelativeDirection dir)
+      { moveHistory.add("turn(" + dir + ")"); }
+    public void give(RelativeDirection dir)
+      { moveHistory.add("give(" + dir + ")"); }
+    public void hop() { moveHistory.add("hop"); }
+    public void move() { hop(); }
+    public void move(int n) { hop(n); }
+    public void run (Answer jeroo) {
+      ___
+    }
+}
+----------
+    
+
+
+[assets.code.starter.files]
+content:----------
+jeroo.hop();
+jeroo.turnLeft();
+jeroo.hop();
+jeroo.turnRight();
+----------
+
+[assets.test.files]
+format: text/csv-unquoted
+pattern_actual: subject.testJeroo.run(testJeroo);
+content:----------
+expected,description
+4,"extra method calls have been added"
+"hop","hop() calls should not be modified"
+----------

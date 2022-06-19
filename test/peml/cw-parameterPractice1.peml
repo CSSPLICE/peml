@@ -1,0 +1,78 @@
+exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/836/practice?workout_id=1334
+
+title: CodeWorkout Parameter Practice 1
+external_id: CS1114_Week2SyntaxDrill1
+is_public: true
+experience: 50
+language_list: Java
+
+license.id: cc-sa-4.0
+license.owner.email: admin@codeworkout.org
+license.owner.name: codeworkout
+
+tags.topics: CS1114, Parameters, Methods, java
+tags.style: code-writing
+
+instructions:----------
+Assume you have access to the following method.
+
+    public int add3Ints(int a, int b, int c){
+              return a + b + c;
+            }
+            
+
+Call `add3Ints` and pass the numbers 4, 10, and 9 as parameters.
+----------
+
+[systems]
+language: Java
+
+[assets.code.wrapper.files]
+content:----------
+public class Syntax1to3 {
+    private int aVal;
+    private int bVal;
+    private int cVal;
+
+    public int add3Ints(int a, int b, int c){
+        aVal = a;
+        bVal = b;
+        cVal = c;
+        return a + b + c;
+      }
+
+    public void run() {
+      ___
+    }
+
+    public int getA() {
+        return aVal;
+    }
+
+    public int getB() {
+        return bVal;
+    }
+
+    public int getC() {
+        return cVal;
+    }
+
+}
+----------
+
+[assets.code.starter.files]
+content:----------
+___
+----------
+
+
+[assets.test.files]
+format: text/csv-unquoted
+pattern_actual: subject.test.run()
+content:----------
+aVal,bVal,cVal,expected,description
+4,10,9,4,"4 should be the first parameter passed!"
+4,10,9,10,"10 should be the second parameter passed!"
+4,10,9,9,"9 should be the third parameter passed!"
+----------
+
