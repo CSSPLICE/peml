@@ -89,9 +89,27 @@ public void question3(CountingJeroo imani) {
 ----------
 
 [assets.test.files]
-format: text/csv-unquoted
-pattern_actual: subject.run.question3(testJ)
+format: java/junit
 content:----------
-expected,description
-1,"Jeroo should have 1 flower"
+import codeworkout.CodeWorkoutTest;
+import codeworkout.Description;
+import codeworkout.Hint;
+import java.util.Random;
+public class syntax3Test extends CodeWorkoutTest  {
+
+    @Description("Checks loop stops when jeroo has 1 flower left")
+    public void test1() {
+        Random r = new Random();
+        int startingFlowers = r.nextInt(10)+1;
+        syntax3.CountingJeroo testJ = new syntax3.CountingJeroo(startingFlowers);
+        syntax3.Runner run = new syntax3.Runner();
+
+        run.question3(testJ);
+
+        assertEquals("Jeroo should have "+1 +" flower but has"
+            + testJ.getFlowerCount(), 1, testJ.getFlowerCount());
+
+    }
+
+}
 ----------

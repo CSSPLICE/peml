@@ -59,9 +59,26 @@ public void turnAround()
 ----------
 
 [assets.test.files]
-format: text/csv-unquoted
-pattern_actual: subject.testJeroo.run(testJeroo);
+format: java/junit
 content:----------
-expected,description
-2,"extra method calls have been added"
+import codeworkout.*;
+public class AnswerTest extends CodeWorkoutTest {
+  private Answer testJeroo;
+  private java.util.ArrayList calls;
+
+  public void setUp() {
+      testJeroo = new Answer();
+      testJeroo.turnAround();
+      calls = testJeroo.getMoveHistory();
+  }
+
+  @Description("turnAround() implemented to turn right twice")
+  public void testTurnAround() {
+    assertEquals("extra method calls have been added", 2, calls.size());
+    if (!"turn(RIGHT)".equals(calls.get(0)) || !"turn(RIGHT)".equals(calls.get(1)))
+    {
+      fail("turnAround() is not implemented using two right turns");
+    }
+  }
+}
 ----------

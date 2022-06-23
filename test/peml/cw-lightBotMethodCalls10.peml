@@ -99,12 +99,36 @@ public void run(SimpleLightBot andy)
 ----------
 
 [assets.test.files]
-format: text/csv-unquoted
-pattern_actual: subject.testBot.getMoveHistory()
+format: java/junit
 content:----------
-expected,description
-2,example
-""jump", "turnLeft"",example
-4,example
-""turnLeft", "turnLeft", "turnLeft", "turnLeft"",example
+import codeworkout.CodeWorkoutTest;
+public class syntax10Test extends CodeWorkoutTest {
+    private syntax10.SimpleLightBot testBot;
+    private syntax10.Runner runner;
+
+    public void setUp() {
+        testBot = new syntax10.SimpleLightBot();
+        runner = new syntax10.Runner();
+    }
+
+    public void testLightBotRun() {
+        String[] expected = {"jump", "turnLeft"};
+        runner.run(testBot);
+
+        String[] testResult = testBot.getMoveHistory();
+
+        assertEquals(expected.length, testResult.length);
+        assertEquals(expected, testResult);
+    }
+
+    public void testSpinStillExists() {
+        String[] expected = {"turnLeft", "turnLeft", "turnLeft", "turnLeft"};
+        runner.spin(testBot);
+
+        String[] testResult = testBot.getMoveHistory();
+
+        assertEquals(expected.length, testResult.length);
+        assertEquals(expected, testResult);
+    }
+}
 ----------

@@ -98,10 +98,43 @@ public void question2(CountingJeroo imani)
 
 
 [assets.test.files]
-format: text/csv-unquoted
-pattern_actual: subject.run.question2(testJ)
+format: java/junit
 content:----------
-expected,description
-10,"Jeroo should hop 10 times"
-0,"Jeroo should have gotten rid of all of its flowers"
+import codeworkout.CodeWorkoutTest;
+import codeworkout.Description;
+import codeworkout.Hint;
+import java.util.Random;
+public class syntax2Test extends CodeWorkoutTest  {
+
+    @Description("Checks jeroo stops after 10 hops if it has 10 flowers")
+    @Hint("You don't need to change the condition that's already there, just add a new one!")
+    public void test1() {
+        syntax2.CountingJeroo testJ = new syntax2.CountingJeroo(10);
+        int expectedHops = 10;
+        syntax2.Runner run = new syntax2.Runner();
+
+        run.question2(testJ);
+
+        assertEquals("Jeroo should hop "+expectedHops+" times.  "
+            + "Hopped: "+testJ.getHopCount()+" times", expectedHops, testJ.getHopCount());
+    }
+
+    @Description("Checks jeroo stops after less than 5 hops if it has less than 5 flowers")
+    @Hint("You don't need to change the condition that's already there, just add a new one!")
+    public void test2() {
+        Random r = new Random();
+        int flowers = r.nextInt(4)+1;
+        syntax2.CountingJeroo testJ = new syntax2.CountingJeroo(flowers);
+        int expectedHops = flowers;
+        syntax2.Runner run = new syntax2.Runner();
+
+        run.question2(testJ);
+
+        assertEquals("Jeroo should hop " + expectedHops + " times.  "
+            + "Hopped: "+testJ.getHopCount()+" times", expectedHops, testJ.getHopCount());
+
+        assertEquals("Jeroo should have gotten rid of all of its flowers but has: "
+            + testJ.getFlowerCount(), 0, testJ.getFlowerCount());
+    }
+}
 ----------

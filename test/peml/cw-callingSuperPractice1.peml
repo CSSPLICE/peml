@@ -53,10 +53,16 @@ public Student() {
 
 
 [assets.test.files]
-format: text/csv-unquoted
-pattern_actual: subject.testStudent.getSuperWasCalled()
+format: java/junit
 content:----------
-expected,description
-true,example
+import codeworkout.CodeWorkoutTest;
+public class syntax4to5Test extends CodeWorkoutTest{
+
+    public void testSuperIsCalled() {
+        syntax4to5.Student testStudent = new syntax4to5.Student();
+
+        assertTrue("You must call super in the constructor!", testStudent.getSuperWasCalled());
+    }
+}
 ----------
 

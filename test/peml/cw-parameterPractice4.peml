@@ -59,11 +59,24 @@ ___
 
 
 [assets.test.files]
-format: text/csv-unquoted
-pattern_actual: subject.test.run()
+format: java/junit
 content:----------
-aVal,bVal,expected,description
-100,10,100,"100 should be the first parameter passed!"
-100,10,10,"10 should be the second parameter passed!"
+import codeworkout.CodeWorkoutTest;
+public class Syntax8to10Test extends CodeWorkoutTest {
+
+    public Syntax8to10 test;
+    public void setUp() {
+        test = new Syntax8to10();
+    }
+
+    public void testParametersSetCorrectly() {
+        int aVal = 100;
+        int bVal = 10;
+
+        assertEquals(aVal + " should be the first parameter passed!", aVal, test.getA());
+        assertEquals(bVal + " should be the second parameter passed!", bVal, test.getB());
+
+    }
+}
 ----------
 
