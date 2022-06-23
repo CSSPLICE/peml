@@ -55,15 +55,28 @@ public class Answer {
 
 
 [assets.code.starter.files]
+format: java/junit
 content:----------
-Jeroo jessica = new Jeroo();
-----------
+import codeworkout.*;
+import student.micro.jeroo.CompassDirection;
 
-[assets.test.files]
-format: text/csv-unquoted
-pattern_actual: subject.Answer().run();
-content:----------
-expected,description
-CompassDirection.SOUTH,"The Jeroo is not facing the correct direction"
-2,"The Jeroo is not holding 2 flowers"
+public class AnswerTest extends CodeWorkoutTest {
+    private Answer.Jeroo answer;
+
+    public void setUp() {
+        answer = new Answer().run();
+    }
+
+    @Description("The Jeroo is facing south")
+    public void test1() {
+      assertEquals("The Jeroo is not facing the correct direction",
+        CompassDirection.SOUTH, answer.__getFacing());
+    }
+
+    @Description("The Jeroo is holding 2 flowers")
+    public void test2() {
+      assertEquals("The Jeroo is not holding 2 flowers",
+        2, answer.__getFlowers());
+    }
+}
 ----------

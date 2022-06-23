@@ -67,12 +67,27 @@ ___
 
 
 [assets.test.files]
-format: text/csv-unquoted
-pattern_actual: subject.test.run()
+format: java/junit
 content:----------
-aVal,bVal,cVal,expected,description
-4,10,9,4,"4 should be the first parameter passed!"
-4,10,9,10,"10 should be the second parameter passed!"
-4,10,9,9,"9 should be the third parameter passed!"
+import codeworkout.CodeWorkoutTest;
+public class Syntax1to3Test extends CodeWorkoutTest {
+
+  public Syntax1to3 test;
+  public void setUp() {
+      test = new Syntax1to3();
+  }
+
+  public void testParametersSetCorrectly() {
+      int aVal = 4;
+      int bVal = 10;
+      int cVal = 9;
+
+      test.run();
+
+      assertEquals(aVal + " should be the first parameter passed!", aVal, test.getA());
+      assertEquals(bVal + " should be the second parameter passed!", bVal, test.getB());
+      assertEquals(cVal + " should be the third parameter passed!", cVal, test.getC());
+  }
+}
 ----------
 

@@ -62,10 +62,35 @@ jeroo.turnRight();
 ----------
 
 [assets.test.files]
-format: text/csv-unquoted
-pattern_actual: subject.testJeroo.run(testJeroo);
+format: java/junit
 content:----------
-expected,description
-4,"extra method calls have been added"
-"hop","hop() calls should not be modified"
+import codeworkout.*;
+public class AnswerTest extends CodeWorkoutTest {
+    private Answer testJeroo;
+    private java.util.ArrayList calls;
+
+    public void setUp() {
+        testJeroo = new Answer();
+        testJeroo.run(testJeroo);
+        calls = testJeroo.getMoveHistory();
+    }
+
+    @Description("Both turn method calls are fixed")
+    public void testBothTurnMethodCallsAreFixed() {
+      assertEquals("extra method calls have been added", 4, calls.size());
+      assertEquals("hop() calls should not be modified",
+        "hop", calls.get(0));
+      assertEquals("hop() calls should not be modified",
+        "hop", calls.get(2));
+      if (!"turn(LEFT)".equals(calls.get(1)))
+      {
+        fail("first turn method call was not revised properly");
+      }
+      if (!"turn(RIGHT)".equals(calls.get(3)))
+      {
+        fail("second turn method call was not revised properly");
+      }
+    }
+}
+
 ----------

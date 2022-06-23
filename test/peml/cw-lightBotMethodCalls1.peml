@@ -87,10 +87,27 @@ andy.jump();
 ----------
 
 [assets.test.files]
-format: text/csv-unquoted
-pattern_actual: subject.testBot.getMoveHistory()
+format: java/junit
 content:----------
-expected,description
-4,example
-""turnRight", "turnRight", "turnRight", "jump"",example
+import codeworkout.CodeWorkoutTest;
+public class syntax1Test extends CodeWorkoutTest {
+    private syntax1.SimpleLightBot testBot;
+    private syntax1.Runner runner;
+
+    public void setUp() {
+        testBot = new syntax1.SimpleLightBot();
+        runner = new syntax1.Runner();
+    }
+
+    public void testLightBotRun() {
+        String[] expected = {"turnRight", "turnRight", "turnRight", "jump"};
+        runner.run(testBot);
+
+        String[] testResult = testBot.getMoveHistory();
+
+        assertEquals(expected.length, testResult.length);
+        assertEquals(expected, testResult);
+    }
+
+}
 ----------

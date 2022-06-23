@@ -83,9 +83,24 @@ public void question1(CountingJeroo imani)
 ----------
 
 [assets.test.files]
-format: text/csv-unquoted
-pattern_actual: subject.run.question1(testJ)
+format: java/junit
 content:----------
-expected,description
-5,"Jeroo should hop 5 times"
+import codeworkout.CodeWorkoutTest;
+import codeworkout.Description;
+import codeworkout.Hint;
+public class syntax1Test extends CodeWorkoutTest  {
+
+    @Description("Checks jeroo stops after 5 hops")
+    public void test1() {
+        syntax1.CountingJeroo testJ = new syntax1.CountingJeroo();
+        int expectedHops = 5;
+        syntax1.Runner run = new syntax1.Runner();
+
+        run.question1(testJ);
+
+        assertEquals("Jeroo should hop "+expectedHops+" times.  "
+            + "Hopped: "+testJ.getHopCount()+" times", expectedHops, testJ.getHopCount());
+
+    }
+}
 ----------

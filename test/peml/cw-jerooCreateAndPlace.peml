@@ -65,10 +65,32 @@ public void myProgram()
 ----------
 
 [assets.test.files]
-format: text/csv-unquoted
-pattern_actual: subject.Answer().run()
+format: java/junit
 content:----------
-expected,description
-not null,"The Jeroo was not added at the correct position"
-CompassDirection.NORTH,"The Jeroo is not facing the correct direction"
+import codeworkout.*;
+import student.micro.jeroo.CompassDirection;
+public class AnswerTest extends CodeWorkoutTest {
+    private Answer answer;
+    private Answer.Jeroo jeroo;
+
+    public void setUp() {
+        answer = new Answer();
+        answer.myProgram();
+        jeroo = answer.getOneObjectAt(2, 3, Answer.Jeroo.class);
+    }
+
+    @Description("Correct position")
+    public void test1() {
+      assertNotNull("The Jeroo was not added at the correct position",
+        jeroo);
+    }
+
+    @Description("Facing north")
+    public void test2() {
+      assertNotNull("The Jeroo was not added at the correct position",
+        jeroo);
+      assertEquals("The Jeroo is not facing the correct direction",
+        CompassDirection.NORTH, jeroo.__getFacing());
+    }
+}
 ----------

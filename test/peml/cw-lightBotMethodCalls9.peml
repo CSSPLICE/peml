@@ -99,10 +99,27 @@ public void run(SimpleLightBot andy)
 ----------
 
 [assets.test.files]
-format: text/csv-unquoted
-pattern_actual: subject.testBot.getMoveHistory()
+format: java/junit
 content:----------
-expected,description
-6,example
-""turnRight", "turnRight","turnRight","turnRight","jump", "turnRight"",example
+import codeworkout.CodeWorkoutTest;
+public class syntax9Test extends CodeWorkoutTest {
+    private syntax9.SimpleLightBot testBot;
+    private syntax9.Runner runner;
+
+    public void setUp() {
+        testBot = new syntax9.SimpleLightBot();
+        runner = new syntax9.Runner();
+    }
+
+    public void testLightBotRun() {
+        String[] expected = { "turnRight", "turnRight","turnRight","turnRight","jump", "turnRight"};
+        runner.run(testBot);
+
+        String[] testResult = testBot.getMoveHistory();
+
+        assertEquals(expected.length, testResult.length);
+        assertEquals(expected, testResult);
+    }
+
+}
 ----------

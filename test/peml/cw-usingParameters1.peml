@@ -88,11 +88,23 @@ public void setAgeAndName(Person p) {
 
 
 [assets.test.files]
-format: text/csv-unquoted
-pattern_actual: subject.testPerson.getName()
+format: java/junit
 content:----------
-expected,description
-"Peter","Name has not been set correctly"
-42,"Age has not been set correctly"
+import codeworkout.CodeWorkoutTest;
+public class syntax6to7Test extends CodeWorkoutTest {
+
+  public void testMethodsHaveBeenCalledCorrectly() {
+      syntax6to7.Runner runner = new syntax6to7.Runner();
+
+      syntax6to7.Person testPerson = runner.run();
+
+      String expectedName = "Peter";
+      int expectedAge = 42;
+
+      assertEquals("Name has not been set correctly", expectedName, testPerson.getName());
+      assertEquals("Age has not been set correctly", expectedAge, testPerson.getAge());
+
+  }
+}
 ----------
 
