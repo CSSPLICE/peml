@@ -1,0 +1,55 @@
+exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/269/practice?workout_id=53
+
+title: Recursion Programming Exercise: Sum of the Digits
+external_id: RecC-SumOfDigits
+is_public: true
+experience: 10
+language_list: Java
+
+license.id: cc-sa-4.0
+license.owner.email: sallyhamouda@gmail.com
+license.owner.name: sallyhamouda
+
+tags.topics: recursion
+tags.style: code writing
+
+instructions:----------
+For function `sumOfDigits`, write the missing recursive
+call. This function takes a non-negative integer and
+returns the sum of its digits.
+----------
+
+[systems]
+language: Java
+
+[assets.code.wrapper.files]
+content:----------
+public class  RecCSumOfDigits
+{
+    ___
+}
+----------
+
+[assets.code.starter.files]
+content:----------
+public int sumOfDigits(int number) {
+    if (number < 10)
+      return number;
+    return <<Missing a Recursive case action>>
+}
+----------
+
+
+[assets.test.files]
+format: text/csv-unquoted
+pattern_actual: subject.addOdd({{n}})
+content:----------
+n,expected,description
+1234,10,example
+5678,26
+0,0
+10000,1
+12,3,hidden
+100002,3,hidden
+----------
+

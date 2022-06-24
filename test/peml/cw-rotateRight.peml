@@ -1,0 +1,128 @@
+exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/561/practice?workout_id=759
+
+title: rotateRight
+external_id: ITSC1213_rotate_right
+is_public: true
+experience: 10
+language_list: Java
+
+license.id: cc-sa-4.0
+license.owner.email: lcao2@uncc.edu
+license.owner.name: lcao2
+
+tags.topics: array, loop
+tags.style: coding problem
+
+instructions:----------
+This method takes an array of integers as its parameters and returns
+nothing. The method moves each element in the array to the right by one position,
+except the last element, which moves to the front. For example, if the original
+array is {1, 2, 3, 4}, the array should be {4, 1, 2, 3} after the method execution.
+----------
+
+[systems]
+language: Java
+
+[assets.code.wrapper.files]
+content:----------
+public class ArrayProblem
+{
+   ___
+}
+----------
+
+[assets.code.starter.files]
+content:----------
+public void rotateRight(int[] nums)
+{
+   ___
+}
+----------
+
+
+[assets.test.files]
+format: java/junit
+content:----------
+import static org.junit.Assert.*;
+import org.junit.*;
+import codeworkout.*;
+import java.util.Arrays;
+public class ArrayProblemTest extends CodeWorkoutTest {
+    private ArrayProblem a;
+
+    @Before
+    public void setUp() {
+        a = new ArrayProblem();
+    }
+
+    @Test
+    @Example
+    @Description("rotateRight({1, 2, 3, 4})")
+    public void testRotateRight1() {
+        int[] nums = {1, 2, 3, 4};
+        a.rotateRight(nums);
+        assertArrayEquals("Expected:
+        [4, 1, 2, 3] but was: " + Arrays.toString(nums), new int[]{4, 1, 2, 3}, nums);
+
+    }
+
+    @Test
+    @Description("rotateRight({})")
+    public void testRotateRight2() {
+        int[] nums = {};
+        a.rotateRight(nums);
+        assertArrayEquals("Expected: [] but was: " + Arrays.toString(nums), new int[]{}, nums);
+    }
+
+    @Test
+    @Description("rotateRight({1})")
+    public void testRotateRight3() {
+        int[] nums = {1};
+        a.rotateRight(nums);
+        assertArrayEquals("Expected: [1] but was: " + Arrays.toString(nums), new int[]{1}, nums);
+    }
+
+    @Test
+    @Description("rotateRight({1, 1, 1})")
+    public void testRotateRight4() {
+        int[] nums = {1, 1, 1};
+        a.rotateRight(nums);
+        assertArrayEquals("Expected: [1, 1, 1] but was: " + Arrays.toString(nums), new int[]{1, 1, 1}, nums);
+
+    }
+    
+    @Test
+    @Description("rotateRight({1, 1, 3, 3, 4})")
+    public void testRotateRight5() {
+        int[] nums = {1, 1, 3, 3, 4};
+        a.rotateRight(nums);
+        assertArrayEquals("Expected: [4, 1, 1, 3, 3] but was: " + Arrays.toString(nums), new int[]{4, 1, 1, 3, 3}, nums);
+    }
+
+    @Test
+    @Description("rotateRight({3, 4})")
+    public
+        void testRotateRight6() {
+        int[] nums = {3, 4};
+        a.rotateRight(nums);
+               assertArrayEquals("Expected: [4, 3] but was: " + Arrays.toString(nums), new int[]{4, 3}, nums);
+    }
+
+    @Test
+    @Description("rotateRight({3, 4, 5})")
+    public void testRotateRight7() {
+        int[] nums = {3, 4, 5};
+        a.rotateRight(nums);
+        assertArrayEquals("Expected: [5, 3, 4] but was: " + Arrays.toString(nums), new int[]{5, 3, 4}, nums);
+     }
+    
+    @Test
+    @Description("rotateRight({1, 2, 2, 3, 3})")
+    public void testRotateRight8() {
+        int[] nums = {1, 2, 2, 3, 3};
+        a.rotateRight(nums);
+        assertArrayEquals("Expected: [3, 1, 2, 2, 3] but was: " + Arrays.toString(nums), new int[]{3, 1, 2, 2, 3},nums);
+    }
+}
+----------
+
