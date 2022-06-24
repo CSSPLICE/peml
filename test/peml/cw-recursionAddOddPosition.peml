@@ -1,0 +1,64 @@
+exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/268/practice?workout_id=52
+
+title: Recursion Programming Exercise: Add odd values
+external_id: RecC-Addodd
+is_public: true
+experience: 10
+language_list: Java
+
+license.id: cc-sa-4.0
+license.owner.email: sallyhamouda@gmail.com
+license.owner.name: sallyhamouda
+
+tags.topics: recursion
+tags.style: code writing
+
+instructions:----------
+For function `addOdd(n)` write the missing recursive call.
+This function should return the sum of all postive odd
+numbers less than or equal to `n`.
+----------
+
+[systems]
+language: Java
+
+[assets.code.wrapper.files]
+content:----------
+public class RecCAddodd
+{
+    ___
+}
+----------
+
+[assets.code.starter.files]
+content:----------
+public int addOdd(int n) {
+    if (n <= 0) {
+      return 0;
+    }
+    if (n % 2 != 0) { // Odd value
+      return <<Missing a Recursive call>>
+    } else { // Even value
+      return addOdd(n - 1);
+    }
+}
+----------
+
+
+[assets.test.files]
+format: text/csv-unquoted
+pattern_actual: subject.addOdd({{n}})
+content:----------
+n,expected,description
+1,1,example
+2,1,example
+3,4,example
+7,16,example
+8,16
+9,25
+10,25
+11,36
+12,36,hidden
+0,0,hidden
+----------
+

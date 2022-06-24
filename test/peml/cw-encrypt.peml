@@ -1,0 +1,56 @@
+exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/582/practice?workout_id=759
+
+title: encrypt
+external_id: ITSC1213_encrypt
+is_public: true
+experience: 20
+language_list: Java
+
+license.id: cc-sa-4.0
+license.owner.email: lcao2@uncc.edu
+license.owner.name: lcao2
+
+tags.topics: String, loop
+tags.style: coding problem
+
+instructions:----------
+This methods takes a String object as a parameter and returns an
+encrypted version of the object. The encryption is done in two steps: First,
+the first letter of the original string is moved to the end. Then, “ay” is
+appended at the end of the String. For example, if the String is “How”, the
+method should return “owHay”. If the length of the string is less than 1,
+it should not be changed. \n
+----------
+
+[systems]
+language: Java
+
+[assets.code.wrapper.files]
+content:----------
+public class StringProblem
+{
+   ___
+}
+----------
+
+[assets.code.starter.files]
+content:----------
+public String encrypt(String message)
+{
+   ___
+}
+----------
+
+
+[assets.test.files]
+format: text/csv-unquoted
+pattern_actual: subject.encrypt({{message}})
+content:----------
+message,expected,description
+"""How""","""owHay""",example
+"""""",""""""
+"""z""","""zay"""
+"""CS""","""SCay"""
+"""lambda""","""ambdalzy"""
+----------
+

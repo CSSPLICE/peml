@@ -1,0 +1,59 @@
+exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/264/practice?workout_id=47
+
+title: Recursion Programming Exercise: Multiply
+external_id: RecC-Multiply
+is_public: true
+experience: 10
+language_list: Java
+
+license.id: cc-sa-4.0
+license.owner.email: sallyhamouda@gmail.com
+license.owner.name: sallyhamouda
+
+tags.topics: recursion
+tags.style: code writing
+
+instructions:----------
+For function `multiply`, write the missing base case
+condition and action. This function will multiply two
+numbers `x` and `y`. You can assume that both `x` and
+`y` are positive.
+
+If `x` equals one then there is only one `y`.
+----------
+
+[systems]
+language: Java
+
+[assets.code.wrapper.files]
+content:----------
+public class  RecCMultiply
+{
+    ___
+}
+----------
+
+[assets.code.starter.files]
+content:----------
+public int multiply(int x, int y) {
+    if <<Missing base case condition>> {
+      <<Missing base case action>>
+    } else {
+      return multiply(x - 1, y) + y;
+    }
+}
+----------
+
+
+[assets.test.files]
+format: text/csv-unquoted
+pattern_actual: subject.multiply({{x}}, {{y}})
+content:----------
+x,y,expected,description
+2,3,6,example
+4,4,16
+9,10,90
+7,15,105
+1,1,1,hidden
+----------
+

@@ -1,0 +1,119 @@
+exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/595/practice?workout_id=759
+
+title: removeOdd
+external_id: ITSC1213_removeOdd
+is_public: true
+experience: 20
+language_list: Java
+
+license.id: cc-sa-4.0
+license.owner.email: lcao2@uncc.edu
+license.owner.name: lcao
+
+tags.topics: String, loop
+tags.style: coding problem
+
+instructions:----------
+This method takes an ArrayList of integers as a parameter and does
+not return anything. The method will remove all of the odd elements in the
+given list. If there is no element in the given list, the list does not change.
+You must modify the given list.
+----------
+
+[systems]
+language: Java
+
+[assets.code.wrapper.files]
+content:----------
+import java.util.ArrayList;
+public class ArrayListProblem
+{
+   ___
+}
+----------
+
+[assets.code.starter.files]
+content:----------
+public void removeOdd(ArrayList list)
+{
+   ___
+}
+----------
+
+
+[assets.test.files]
+format: java/junit
+content:----------
+// static tests:
+// keyword:new,prohibited,static:screening
+import static org.junit.Assert.*;
+import org.junit.*;
+import codeworkout.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class ArrayListProblemTest extends CodeWorkoutTest{
+
+    private ArrayListProblem ap;
+
+    @Before
+    public void setUp() 
+    {
+        ap = new ArrayListProblem();
+    }
+
+
+    @Test
+    @Description("removeOdd({})")
+    public void testRemoveOdd1()
+    {
+        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(new Integer[]{}));
+        ArrayList<Integer> expResult = new ArrayList<>(Arrays.asList(new Integer[] {}));
+        ap.removeOdd(list);
+        assertEquals(expResult,list);
+    }
+    
+    @Test
+    @Description("removeOdd({1})")
+    public void testRemoveOdd2() 
+    {
+        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(new Integer[] {1}));
+        ArrayList<Integer> expResult = new ArrayList<>(Arrays.asList(new Integer[] {}));
+        ap.removeOdd(list);
+        assertEquals(expResult, list);
+    }
+    
+    @Test
+    @Description("removeOdd({1, 2, 3, 4, 5, 7})")
+    public void testRemoveOdd3() 
+    {
+        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(new Integer[] {1, 2, 3, 4, 5, 7}));
+        ArrayList<Integer> expResult = new ArrayList<>(Arrays.asList(new Integer[] {2, 4}));
+        ap.removeOdd(list);
+        assertEquals(expResult, list);
+    }
+    
+    @Test
+    @Description("removeOdd({1, 3, 2, 7, 8, 9, 10})")
+    @Hidden
+    public void testRemoveOdd4() 
+    {
+        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(new Integer[] {1, 3, 2, 7, 8, 9, 10}));
+        ArrayList<Integer> expResult = new ArrayList<>(Arrays.asList(new Integer[] {2, 8, 10}));
+        ap.removeOdd(list);
+        assertEquals(expResult, list);
+    }
+    
+    @Test
+    @Description("removeOdd({2, 4, 6})")
+    @Hidden
+    public void testRemoveOdd5() 
+    {
+        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(new Integer[] {2, 4, 6}));
+        ArrayList<Integer> expResult = new ArrayList<>(Arrays.asList(new Integer[] {2, 4, 6}));
+        ap.removeOdd(list);
+        assertEquals(expResult, list);
+    }
+}
+----------
+

@@ -1,0 +1,59 @@
+exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/562/practice?workout_id=759
+
+title: isUnique
+external_id: ITSC1213_is_unique
+is_public: true
+experience: 20
+language_list: Java
+
+license.id: cc-sa-4.0
+license.owner.email: lcao2@uncc.edu
+license.owner.name: lcao2
+
+tags.topics: array, loop
+tags.style: coding problem
+
+instructions:----------
+This method takes an array of integers as a parameter. It returns
+true if the elements in the array are unique, false otherwise. For example,
+if the array passed stores {12, 7, -1, 25, 3}, your method should return true,
+if the array passed stores {5, 3, 5, 2}, your method should return false.
+An array with 0 or 1 element should be considered unique.
+----------
+
+[systems]
+language: Java
+
+[assets.code.wrapper.files]
+content:----------
+public class ArrayProblem
+{
+   ___
+}
+----------
+
+[assets.code.starter.files]
+content:----------
+public boolean isUnique(int[] nums)
+{
+   ___
+}
+----------
+
+
+[assets.test.files]
+format: text/csv-unquoted
+pattern_actual: subject.isUnique({{nums}})
+content:----------
+nums,expected,description
+"new int[] {}",true
+"new int[] {12, 7, -1, 25, 3}",true,example
+"new int[] {5, 3, 5, 2}",false,example
+"new int[] {2}",true
+"new int[] {5, 5, 3, 2}",false
+"new int[] {5, 5, 5, 5}",false
+"new int[] {3, 2, 1, 1}",false
+"new int[] {1, 2, 2, 3}",false
+"new int[] {1, 2, 3, 1}",false
+----------
+
