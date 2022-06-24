@@ -1,0 +1,56 @@
+exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/586/practice?workout_id=759
+
+title: isUniqueString
+external_id: ITSC1213_is_unique_string
+is_public: true
+experience: 10
+language_list: Java
+
+license.id: cc-sa-4.0
+license.owner.email: lcao2@uncc.edu
+license.owner.name: lcao2
+
+tags.topics: String, loop
+tags.style: coding problem
+
+instructions:----------
+This method accepts a String object as a parameter. It returns true
+if the String has all unique characters, false otherwise. For example, if
+the String is "coding", the method returns true; if the String is "Lambda",
+the method returns false. The method should return true if the the length
+of the String is less than 1.
+----------
+
+[systems]
+language: Java
+
+[assets.code.wrapper.files]
+content:----------
+public class StringProblem
+{
+   ___
+}
+----------
+
+[assets.code.starter.files]
+content:----------
+public boolean isUniqueString(String message)
+{
+   ___
+}
+----------
+
+
+[assets.test.files]
+format: text/csv-unquoted
+pattern_actual: subject.isUniqueString({{message}})
+content:----------
+message,expected,description
+"""coding""",true,example
+"""Lambda""",false,example
+"""Hlamnh""",true
+"""ab cd ef""",false
+"""""",true
+"""hello world""",false,hidden
+----------
+
