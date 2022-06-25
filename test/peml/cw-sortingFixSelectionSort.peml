@@ -1,0 +1,68 @@
+exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/466/practice?workout_id=680
+
+title: Sorting - Fix Selection Sort
+external_id: cw-x49
+is_public: true
+experience: 30
+language_list: Java
+
+license.id: cc-sa-4.0
+license.owner.email: edwards@cs.vt.edu
+license.owner.name: Stephen Edwards
+
+tags.topics: sorting, array, int, selection sort
+tags.style: coding problem
+
+instructions:----------
+The following method is a Selection Sort method. Within the method,
+there is an error on one line. You job is to find that line and fix that one
+error so that the method may work properly. You will need to understand exactly
+how a selection sort method works.
+----------
+
+[systems]
+language: Java
+
+[assets.code.wrapper.files]
+content:----------
+public class Answer {
+    ___
+}
+----------
+
+[assets.code.starter.files]
+content:----------
+public int[] selectionSort(int[] array) {
+    for (int i = 0; i < array.length - 1; i++) {
+     int min = array[i];
+     int minIndex = i;
+       for (int j = i + 1; j < array.length; j++) {
+         if (min > array[j]) {
+           min = array[j];
+           minIndex = j;
+           }
+        }
+       if (minIndex == i) {
+         array[minIndex] = array[i];
+         array[i] = min;
+       }
+      }
+    return array;
+}
+----------
+
+
+[assets.test.files]
+format: text/csv-unquoted
+pattern_actual: subject.selectionSort({{array}})
+content:----------
+aray,expected,description
+"new int[]{4,7,1}","new int[]{1,4,7}",example
+"new int[]{80,6,6,8,2}","new int[]{2,6,6,8,80}",example
+"new int[]{77,104,33,5}","new int[]{5,33,77,104}"
+"new int[]{2,4,6}","new int[]{2,4,6}"
+"new int[]{5,2,0,8}","new int[]{0,2,5,8}"
+"new int[]{10}","new int[]{10}"
+"new int[]{4,10,4,0}","new int[]{0,4,4,10}",hidden
+----------
+

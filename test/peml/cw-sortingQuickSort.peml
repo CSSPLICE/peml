@@ -1,0 +1,58 @@
+exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/488/practice?workout_id=680
+
+title: Sorting - Quick Sort
+external_id: cw-x58
+is_public: true
+experience: 70
+language_list: Java
+
+license.id: cc-sa-4.0
+license.owner.email: edwards@cs.vt.edu
+license.owner.name: Stephen Edwards
+
+tags.topics: recursion, sorting, quicksort
+tags.style: coding problem
+
+instructions:----------
+Write a method quicksort that takes in an ArrayList of integers and
+returns them in ascending order, using a quicksort style of sorting. Remember
+that this style relies on choosing a pivot integer and breaking the set into
+values less than the pivot and more than the pivot, then repeating this process
+on each half until only single values are left, which are then put back together.
+----------
+
+[systems]
+language: Java
+
+[assets.code.wrapper.files]
+content:----------
+import java.util.*;
+public class Answer {
+    public static ArrayList<Integer> test1 = new ArrayList<>(Arrays.asList(4, 6, 1, 2, 3, 5, 6, 8, 9, 8, 4, 2));
+    public static ArrayList<Integer> answ1 = new ArrayList<>(Arrays.asList(1, 2, 2, 3, 4, 4, 5, 6, 6, 8, 8, 9));
+    public static ArrayList<Integer> test2 = new ArrayList<>(Arrays.asList(47, 81, 30, 64, 78, 67, 58, 96, 47, 5));
+    public static ArrayList<Integer> answ2 = new ArrayList<>(Arrays.asList(5, 30, 47, 47, 58, 64, 67, 78, 81, 96));
+    public static ArrayList<Integer> test3 = new ArrayList<>(Arrays.asList(32, 23, 9, 17, 24, 18, 19));
+    public static ArrayList<Integer> answ3 = new ArrayList<>(Arrays.asList(9, 17, 18, 19, 23, 24, 32));
+    ___
+}
+----------
+
+[assets.code.starter.files]
+content:----------
+public ArrayList<Integer> quickSort(ArrayList<Integer> list) {
+    ___
+}
+----------
+
+
+[assets.test.files]
+format: text/csv-unquoted
+pattern_actual: subject.quickSort({{list}})
+content:----------
+list,expected,description
+Answer.test1,Answer.answ1,"(4, 6, 1, 2, 3, 5, 6, 8, 9, 8, 4, 2) -> (1, 2, 2, 3, 4, 4, 5, 6, 6, 8, 8, 9)", example
+Answer.test2,Answer.answ2,"(47, 81, 30, 64, 78, 67, 58, 96, 47, 5) -> (5, 30, 47, 47, 58, 64, 67, 78, 81, 96)"
+Answer.test3,Answer.answ3,"(32, 23, 9, 17, 24, 18, 19) -> (9, 17, 18, 19, 23, 24, 32)"
+----------
+

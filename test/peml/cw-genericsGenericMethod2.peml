@@ -1,0 +1,70 @@
+exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/468/practice?workout_id=680
+
+title: Generics - Generic Method 2
+external_id: cw-x51
+is_public: true
+experience: 10
+language_list: Java
+
+license.id: cc-sa-4.0
+license.owner.email: edwards@cs.vt.edu
+license.owner.name: Stephen Edwards
+
+tags.topics: generic, char, int, String
+tags.style: coding problem
+
+instructions:----------
+You have been handed a mysterious piece of data by an unknown person. Judging
+by his shifty eyes and maniacal laughter you don't think he can be trusted.
+Complete the below method to tell you the type for this unknown data.
+
+The example already implemented can be adapted for other wrapper classes as well.
+Complete the method to analyze String, Character, and Double.
+----------
+
+[systems]
+language: Java
+
+[assets.code.wrapper.files]
+content:----------
+public class Answer <E>
+{
+ ___
+}
+----------
+
+[assets.code.starter.files]
+content:----------
+public String whatAmI(E e){
+    //.getClass() returns the
+        runtime class of an object
+    //.equals() determines whether two objects
+        are equivalent
+    //by calling a new static instance of a wrapper object
+        we can analyze 
+    //it's class type and compare it to the variable passed
+        in
+    if(e.getClass().equals(new Integer(1).getClass())){
+        return
+        "Integer";
+    }else{
+        return "Who knows!";
+    }
+}
+----------
+
+
+[assets.test.files]
+format: text/csv-unquoted
+pattern_actual: subject.whatAmI({{e}})
+content:----------
+e,expected,description
+"1",""Integer"",example
+""(╯°□°）╯︵ ┻━┻)"",""String""
+""┬─┬ノ( º _ ºノ)"",""String""
+""Boring String Example"",""String""
+"'c'",""Character""
+"2.2",""Double""
+"new Object()",""Who knows!""
+----------
+
