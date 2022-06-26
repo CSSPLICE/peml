@@ -1,0 +1,74 @@
+exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/439/practice?workout_id=680
+
+title: Generics - Binary Search (non-recursive)
+external_id: cw-x22
+is_public: true
+experience: 40
+language_list: Java
+
+license.id: cc-sa-4.0
+license.owner.email: edwards@cs.vt.edu
+license.owner.name: Stephen Edwards
+
+tags.topics: binary search, search, array, int
+tags.style: coding problem
+
+instructions:----------
+Complete the following binary search method. Find the number `num`
+in the array `array`. Return -1 if the number is not found. You may
+assume the array is properly ordered.
+----------
+
+[systems]
+language: Java
+
+[assets.code.wrapper.files]
+content:----------
+public class Answer {
+    ___
+}
+----------
+
+[assets.code.starter.files]
+content:----------
+public int binarySearch(int[]array, int num) {
+  int low = 0; //low range
+  int high = array.length -1; //high range 
+  int mid; //mid range
+  while ()  //while low is less than or equal to high
+  {
+    mid = ; //set middle range to be (low + high) /2
+    if () { //if the array in the middle range = input number 
+    //return mid range
+    }
+    else
+        if () { //if the array in the middle range > input number
+            //set the high value to be the mid value minus 1
+        }
+        else {
+            //set low value to be mid value plus one
+        }     
+  }
+  //return -1 here because that would mean that the number is not found in the loop
+}
+----------
+
+
+[assets.test.files]
+format: text/csv-unquoted
+pattern_actual: subject.binarySearch({{array}}, {{num}})
+content:----------
+aray,num,expected,description
+"new int[]{1,4,7}",7,2,example
+"new int[]{2,6,6,8,80}",6,2,example
+"new int[]{5,33,77,104}",104,3
+"new int[]{2,4,6}",2,0
+"new int[]{0,2,5,8}",2,1
+"new int[]{0,1,5,5,5,10,13}",5,3
+"new int[]{10}",4,-1
+"new int[]{0,4,4,10}",4,1,hidden
+"new int[]{0,4,4,10}",2,-1,hidden
+"new int[]{1,5,6,9}",1,0,hidden
+"new int[]{1,5,6,6,6,9,10,11,11}",6,4,hidden
+----------
+

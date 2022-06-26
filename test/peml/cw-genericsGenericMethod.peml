@@ -1,0 +1,55 @@
+exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/469/practice?workout_id=680
+
+title: Generics - Generic Method
+external_id: cw-x52
+is_public: true
+experience: 10
+language_list: Java
+
+license.id: cc-sa-4.0
+license.owner.email: edwards@cs.vt.edu
+license.owner.name: Stephen Edwards
+
+tags.topics: generic, char, int, String
+tags.style: coding problem
+
+instructions:----------
+Given a class ``Answer<E>``, write a method that converts argument
+``e`` into String and returns that value. If the value is a primitve,
+(``int`` or ``char``), then you must do the conversion. If the value
+is an object, then just call ``toString()``.
+----------
+
+[systems]
+language: Java
+
+[assets.code.wrapper.files]
+content:----------
+public class Answer <E>
+{
+ ___
+}
+----------
+
+[assets.code.starter.files]
+content:----------
+public String allString(E e)
+{
+    ___
+}
+----------
+
+
+[assets.test.files]
+format: text/csv-unquoted
+pattern_actual: subject.allString({{e}})
+content:----------
+e,expected,description
+"'c'",""c"",example
+"1",""1"",example
+"'z'",""z""
+"2",""2""
+"'o'",""o"",hidden
+"10",""10"",hidden
+----------
+

@@ -1,0 +1,75 @@
+exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/475/practice?workout_id=680
+
+title: Sorting - Insertion Sort
+external_id: cw-x58
+is_public: true
+experience: 30
+language_list: Java
+
+license.id: cc-sa-4.0
+license.owner.email: edwards@cs.vt.edu
+license.owner.name: Stephen Edwards
+
+tags.topics: array, int, sorting, insertion sort
+tags.style: coding problem
+
+instructions:----------
+Finish the code to complete the **insertion sort** method. Each comment
+denoted with //_________________ is a single line that needs to be filled
+out.
+----------
+
+[systems]
+language: Java
+
+[assets.code.wrapper.files]
+content:----------
+public class Answer
+{
+ ___
+}
+----------
+
+[assets.code.starter.files]
+content:----------
+public int[] insertionSort(int[] arr)
+{
+    //Iterate through each index of the array
+    for (int i=1; i<arr.length; ++i)
+    {
+        //Key value is set to the current index of the outer loop
+        int key = arr[i];
+
+        //Index to begin comparisons to key value
+        int j = i-1;
+
+        //Iterate backwards through the array
+        //Search for a value larger than the key
+        while (j>=0 && arr[j] > key)
+        {
+            //Shift values that do not fit the condition
+            //This will make room for the key once we find a place
+            //____________________________
+
+            //Decrement j
+            //___________________________
+        }
+
+        //Using the current value of j, place the key in it's new position
+        //______________________________
+    }
+    return arr;
+}
+----------
+
+
+[assets.test.files]
+format: text/csv-unquoted
+pattern_actual: subject.insertionSort({{array}})
+content:----------
+aray,expected,description
+"new int[]{2, 0, 3, 4, 8, 10, 1}","new int[]{0, 1, 2, 3, 4, 8, 10}",example
+"new int[]{4, 3, 0, 10, 33, 2}","new int[]{0, 2, 3, 4, 10, 33}"
+"new int[]{99, 6, 10, 7}","new int[]{6, 7, 10, 99}",hidden
+----------
+

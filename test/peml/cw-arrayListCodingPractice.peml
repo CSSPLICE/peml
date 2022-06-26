@@ -1,0 +1,47 @@
+exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/424/practice?workout_id=980
+
+title: ArrayList Coding Practice
+external_id: cw-x7
+is_public: true
+experience: 25
+language_list: Java
+
+license.id: cc-sa-4.0
+license.owner.email: admin@codwworkout.com
+license.owner.name: admin
+
+tags.topics: arraylist, coding
+tags.style: coding problem
+
+instructions:----------
+Write a method that reverses the contents of any given string array,
+then return the reversed conents as an arraylist. If the given array list
+is empty, return an empty array list.
+----------
+
+[systems]
+language: Java
+
+[assets.code.wrapper.files]
+content:----------
+import java.util.*;
+public class Answer {
+    ___
+}
+----------
+
+[assets.code.starter.files]
+content:----------
+public ArrayList<Integer> reverseContents(int[] contents) {
+    ___
+}
+----------
+
+
+[assets.test.files]
+format: text/csv-unquoted
+pattern_actual: subject.reverseContents({{contents}})
+content:----------
+contents,expected,description
+"new int[]{1, 2, 3, 4}","new java.util.ArrayList<Integer>(){{add(4);add(3);add(2);add(1);}}",example
+----------

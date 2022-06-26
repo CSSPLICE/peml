@@ -1,0 +1,52 @@
+exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/694/practice?workout_id=955
+
+title: Sorting - Simple C++ Primitives
+external_id: chico_primitives
+is_public: true
+experience: 50
+language_list: C++
+
+license.id: cc-sa-4.0
+license.owner.email: ayaan@vt.edu
+license.owner.name: Ayaan
+
+tags.topics: variables
+tags.style: code writing
+
+instructions:----------
+Replace the `/*date type*/` comments with the appropriate data types for each variable.
+----------
+
+[systems]
+language: C++
+
+[assets.code.wrapper.files]
+content:----------
+class Primitives 
+{
+  public:
+    ___
+};
+----------
+
+[assets.code.starter.files]
+content:----------
+int primitives()
+{
+    /* data type */ luckyNumber = 16;
+    /* data type */ percentage = 0.95;
+    /* data type */ letter = 'B';
+    /* data type */ truth = false;
+    return 0;
+}
+----------
+
+
+[assets.test.files]
+format: text/csv-unquoted
+pattern_actual: subject.primitives()
+content:----------
+expected,description
+0
+----------
+

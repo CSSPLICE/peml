@@ -1,0 +1,136 @@
+exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/435/practice?workout_id=680
+
+title: Generics - Comparable Cage
+external_id: cw-x18
+is_public: true
+experience: 40
+language_list: Java
+
+license.id: cc-sa-4.0
+license.owner.email: edwards@cs.vt.edu
+license.owner.name: Stephen Edwards
+
+tags.topics: generics, Comparable, abstract classes
+tags.style: coding problem
+
+instructions:----------
+Modify the `Cage` class to implement `Comparable`. The definition of the
+`Comparable` interface can be found [here](https://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html).
+Remember that Comparable has one abstract
+method, `int compareTo(T o)`. Two `Cages` can be compared based on their size
+obtained via `getSize()`.
+You must (1) implement the interface, and (2) define the `compareTo` method.
+----------
+
+[systems]
+language: Java
+
+[assets.code.wrapper.files]
+content:----------
+public class Answer {
+public abstract class Pet {
+    private int age;
+    private int size;
+    public Pet(int a, int s) {
+        age = a;
+        size = s;
+    }
+    public abstract String speak();
+    public int getSize() {
+        return size;
+    }
+}
+public class Dog extends Pet {
+    private int age;
+    private int size;
+    public Dog(int a, int s) {
+        super(a, s);
+    }
+    public String speak() {
+        return "woof";
+    }
+}
+___
+
+    public int cageComparer(Cage<Dog> dogCage1, Cage<Dog> dogCage2) {
+        return dogCage1.compareTo(dogCage2);
+    }
+    public boolean greaterZero(int n) {
+        return n > 0;
+    }
+    public boolean lesserZero(int n) {
+        return n < 0;
+    }
+    public boolean equalZero(int n) {
+        return n == 0;
+    }
+    public boolean tester(int testNum) {
+        if (testNum == 1) {
+            Cage<Dog> cg1 = new Cage<>(new Dog(1, 1), 2);
+            Cage<Dog> cg2 = new Cage<>(new Dog(1, 1), 1);
+            return greaterZero(cageComparer(cg1, cg2));
+        } else if (testNum == 3) {
+            Cage<Dog> cg1 = new Cage<>(new Dog(1, 1), -3);
+            Cage<Dog> cg2 = new Cage<>(new Dog(1, 1), 0);
+            return lesserZero(cageComparer(cg1, cg2));
+        } else if (testNum == 5) {
+            Cage<Dog> cg1 = new Cage<>(new Dog(1, 1), 2);
+            Cage<Dog> cg2 = new Cage<>(new Dog(1, 1), 2);
+            return equalZero(cageComparer(cg1, cg2));
+        } else if (testNum == 2) {
+            Cage<Dog> cg1 = new Cage<>(new Dog(1, 1), 4);
+            Cage<Dog> cg2 = new Cage<>(new Dog(1, 1), 5);
+            return greaterZero(cageComparer(cg1, cg2));
+        } else if (testNum == 4) {
+            Cage<Dog> cg1 = new Cage<>(new Dog(1, 1), 2);
+            Cage<Dog> cg2 = new Cage<>(new Dog(1, 1), 1);
+            return lesserZero(cageComparer(cg1, cg2));
+        } else if (testNum == 6) {
+            Cage<Dog> cg1 = new Cage<>(new Dog(1, 1), 2);
+            Cage<Dog> cg2 = new Cage<>(new Dog(1, 1), 1);
+            return equalZero(cageComparer(cg1, cg2));
+        }
+        return false;
+    }
+}
+----------
+
+[assets.code.starter.files]
+content:----------
+public class Cage <P extends Pet> ___{
+    private int size;
+    private P pet;
+    public Cage(P p, int s) {
+        size = s;
+        pet = p;
+    }
+    public boolean checkSize() {
+        if (pet.getSize() > size) {
+            return false;
+        }
+        return true;
+    }
+    public int getSize() {
+        return size;
+    }
+    public P getPet() {
+        return pet;
+    }
+    ___
+}
+----------
+
+
+[assets.test.files]
+format: text/csv-unquoted
+pattern_actual: subject.tester({{testNum}})
+content:----------
+testNum,expected,description
+1,true,"size2Cage.compareTo(size1Cage) > 0 -> true"
+2,false,"size4Cage.compareTo(size5Cage) > 0 -> false"
+3,true,"sizeNeg3Cage.compareTo(size0Cage) < 0 -> true"
+4,false,"size2Cage.compareTo(size1Cage) < 0 -> false"
+5,true,"size2Cage.compareTo(otherSize2Cage) == 0 -> true"
+6,false,"size2Cage.compareTo(size1Cage) == 0 -> false"
+----------
+
