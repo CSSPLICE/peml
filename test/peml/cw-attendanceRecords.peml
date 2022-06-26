@@ -1,0 +1,51 @@
+exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/425/practice?workout_id=980
+
+title: Attendance Records
+external_id: cw-x8
+is_public: true
+experience: 25
+language_list: Java
+
+license.id: cc-sa-4.0
+license.owner.email: admin@codwworkout.com
+license.owner.name: admin
+
+tags.topics: arraylist, coding
+tags.style: coding problem
+
+instructions:----------
+The Student Chapter for the Association for Computing Machinery (ACM)\nrequested
+your help. Throughout the semester, attendance \nfor the weekly club meetings
+has been very unpredictable. The club \nkeeps track of attendance each week
+but would like to have a\nmaster attendance list for the semester. Given a
+``String`` array, \ncreate an ``ArrayList`` of all members of the ACM club.
+----------
+
+[systems]
+language: Java
+
+[assets.code.wrapper.files]
+content:----------
+import java.util.ArrayList;
+public class Answer {
+    ___
+}
+----------
+
+[assets.code.starter.files]
+content:----------
+public ArrayList processAttendance(String[] members)
+{
+  ___
+}
+----------
+
+
+[assets.test.files]
+format: text/csv-unquoted
+pattern_actual: subject.processAttendance({{members}})
+content:----------
+members,expected,description
+"new String[]{""Don"",""Mike"",""Phillip""}","new java.util.ArrayList<String>(){{add(""Don"");add(""Mike"");add(""Phillip"");}}",example
+"new String[]{""Demetri"",""Ollie"",""Tyler"",""Holland""}","new java.util.ArrayList<String>(){{add(""Demetri"");add(""Ollie"");add(""Tyler"");add(""Holland"");}}",hidden
+----------

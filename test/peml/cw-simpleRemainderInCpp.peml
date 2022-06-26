@@ -1,0 +1,57 @@
+exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/695/practice?workout_id=955
+
+title: Sorting - Simple Remainder in C++
+external_id: chico_simpleRemainder
+is_public: true
+experience: 50
+language_list: C++
+
+license.id: cc-sa-4.0
+license.owner.email: ayaan@vt.edu
+license.owner.name: Ayaan
+
+tags.topics: arithmetic
+tags.style: code writing
+
+instructions:----------
+With the variables given to you, calculate the remainder when the variable numerator
+is divided by the variable denominator and store the result in the variable remainder.
+----------
+
+[systems]
+language: C++
+
+[assets.code.wrapper.files]
+content:----------
+class Remainder 
+{
+  public:
+    ___
+};
+----------
+
+[assets.code.starter.files]
+content:----------
+int remainder()
+{
+    int numerator = 395;
+    int denominator = 13;
+    int remainder;
+    // In the space below, complete the necessary code.
+    
+    ___
+    
+    // Do not change the code below this
+    return remainder;
+}
+----------
+
+
+[assets.test.files]
+format: text/csv-unquoted
+pattern_actual: subject.remainder()
+content:----------
+expected,description
+5
+----------
+
