@@ -19,7 +19,7 @@ is divided by the variable denominator and store the result in the variable rema
 ----------
 
 [systems]
-language: C++
+language: cpp
 
 [assets.code.wrapper.files]
 content:----------
