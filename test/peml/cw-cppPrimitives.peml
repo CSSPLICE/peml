@@ -18,7 +18,7 @@ Replace the `/*date type*/` comments with the appropriate data types for each va
 ----------
 
 [systems]
-language: C++
+language: cpp
 
 [assets.code.wrapper.files]
 content:----------
