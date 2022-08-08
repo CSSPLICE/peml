@@ -1,0 +1,9 @@
+void test{{ id }}
+{ {% for given in givens %}
+{{ given | append: ";" }}
+{% endfor %} {% for when in whens %}
+{{ when | append: ";" }}
+{% endfor %}
+
+{{ then | append: ";" }}
+}

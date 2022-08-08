@@ -1,0 +1,55 @@
+exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/593/practice?workout_id=759
+
+title: getMaxLength
+external_id: ITSC1213_get_maxlength
+is_public: true
+experience: 10
+language_list: Java
+
+license.id: cc-sa-4.0
+license.owner.email: lcao2@uncc.edu
+license.owner.name: lcao
+
+tags.topics: arraylist, loops, String
+tags.style: coding problem
+
+instructions:----------
+This method takes an ArrayList of Strings as a parameter and returns
+the length of the longest String in the list. If the list is empty, the method
+should return 0. For example, if an ArrayList variable called list stores
+{"four", "and", "years", "ago"}, findMaxLength(list) should return 5.
+----------
+
+[systems]
+language: Java
+
+[assets.code.wrapper.files]
+content:----------
+import java.util.ArrayList;
+public class ArrayListProblem
+{
+   ___
+}
+----------
+
+[assets.code.starter.files]
+content:----------
+public int getMaxLength(ArrayList list)
+{
+   ___
+}
+----------
+
+
+[assets.test.files]
+format: text/csv-unquoted
+pattern_actual: subject.getMaxLength({{list}})
+content:----------
+list,expected,description
+"new java.util.ArrayList(){{add(""four"");add(""and"");add(""years"");add(""ago"");}}",5,example
+"new java.util.ArrayList()",0
+"new java.util.ArrayList(){{add(""once"");add(""upon"");add(""a"");add(""time"");}}",4
+"new java.util.ArrayList(){{add(""greetings"");add(""hello"");add(""welcome"");add(""byebye"");}}",8,hidden
+"new java.util.ArrayList(){{add(""
+----------
+

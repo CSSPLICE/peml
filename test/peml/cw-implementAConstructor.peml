@@ -1,0 +1,72 @@
+exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/607/practice?workout_id=759
+
+title: Implement a Constructor
+external_id: ITSC1213_constructor_2
+is_public: false
+experience: 10
+language_list: Java
+
+license.id: cc-sa-4.0
+license.owner.email: smcleo12@uncc.edu
+license.owner.name: smcleo12
+
+tags.topics: constructors
+tags.style: code writing
+
+instructions:----------
+Given the following constructor, set the fields to the corresponding parameters.
+----------
+
+[systems]
+language: Java
+
+[assets.code.wrapper.files]
+content:----------
+___ 
+----------
+
+[assets.code.starter.files]
+content:----------
+public class Course
+{
+   public int number;
+   public String title;
+   public String department;
+   public int capacity;
+
+   public Course(int num, String t, String dept, int cap)
+   {
+     ___
+   }
+}
+----------
+
+
+[assets.test.files]
+format: java/junit
+content:----------
+import static org.junit.Assert.*;
+import org.junit.*;
+import codeworkout.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Type;
+
+public class CourseTest extends CodeWorkoutTest
+{
+    @Before
+    public void setUp()
+    {
+    }
+
+   @Description("Checking that the fields are set correctly")
+   @Test
+   public void testConstructorExercise()
+   {
+     boolean correctValues = false;
+     Course c = new Course(1213, "Intro to CS II", "ITSC", 72);
+     correctValues = (c.number == 1213 && "Intro to CS II".equals(c.title) && "ITSC".equals(c.department) && c.capacity == 72);
+     assertTrue("Fields were not set correctly",correctValues);
+   }
+}
+----------
+

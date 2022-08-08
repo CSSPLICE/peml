@@ -1,0 +1,113 @@
+exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/821/practice?workout_id=1307
+
+title: CodeWorkout LightBot Method Calls 1
+external_id: CS1114_Week1SyntaxDrill1
+is_public: true
+experience: 50
+language_list: Java
+
+license.id: cc-sa-4.0
+license.owner.email: edwards@cs.vt.edu
+license.owner.name: Stephen H. Edwards
+
+tags.topics: CS1114, LightBot, Methods, java
+tags.style: code-writing
+
+instructions:----------
+For the question below, assume we are working with a simplified LightBot that can perform the following actions
+
+*   Turn Left
+*   Turn Right
+*   Move Forward
+*   Jump
+
+Each of these actions is represented by a method call:
+
+*   Turn Left --> `turnLeft()`
+*   Turn Right --> `turnRight()`
+*   Move Forward --> `moveForward()`
+*   Jump --> `jump()`
+
+For this problem, you'll be working with a LightBot object named `andy`.
+
+Change the code below so that instead of turning left three times and jumping, the LightBot turns right three times and then jumps.
+----------
+
+[systems]
+language: Java
+
+[assets.code.wrapper.files]
+content:----------
+import java.util.ArrayList;
+public class syntax1 {
+    public static class SimpleLightBot {
+        private ArrayList<String> moveHistory;
+        public SimpleLightBot() {
+            moveHistory = new ArrayList<String>();
+        }
+        
+        public String[] getMoveHistory() {
+            String[] a = new String[moveHistory.size()];
+            return moveHistory.toArray(a);
+        }
+        
+        public void jump() {
+            moveHistory.add("jump");
+        }
+        
+        public void turnLeft() {
+            moveHistory.add("turnLeft");
+        }
+        
+        public void turnRight() {
+            moveHistory.add("turnRight");
+        }
+        
+        public void moveForward() {
+            moveHistory.add("moveForward");
+        }
+    }
+        
+    public static class Runner{
+        public void run(SimpleLightBot andy) {
+            ___
+        }
+    }
+}
+----------
+    
+
+
+[assets.code.starter.files]
+content:----------
+andy.turnLeft();
+andy.turnLeft();
+andy.turnLeft();
+andy.jump();
+----------
+
+[assets.test.files]
+format: java/junit
+content:----------
+import codeworkout.CodeWorkoutTest;
+public class syntax1Test extends CodeWorkoutTest {
+    private syntax1.SimpleLightBot testBot;
+    private syntax1.Runner runner;
+
+    public void setUp() {
+        testBot = new syntax1.SimpleLightBot();
+        runner = new syntax1.Runner();
+    }
+
+    public void testLightBotRun() {
+        String[] expected = {"turnRight", "turnRight", "turnRight", "jump"};
+        runner.run(testBot);
+
+        String[] testResult = testBot.getMoveHistory();
+
+        assertEquals(expected.length, testResult.length);
+        assertEquals(expected, testResult);
+    }
+
+}
+----------

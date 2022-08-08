@@ -23,6 +23,9 @@ GEM
     redcarpet (3.5.1)
     regexp_parser (2.1.1)
     uri_template (0.7.0)
+    kramdown (2.3.1)
+    kramdown-parser-gfm(1.1.0)
+    dottie(0.0.1)
 
 PLATFORMS
   ruby

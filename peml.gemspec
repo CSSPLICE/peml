@@ -52,4 +52,8 @@ For more details, see the PEML website.}
   spec.add_runtime_dependency 'parslet', '>= 1.8'
   spec.add_runtime_dependency 'json_schemer', '>= 0.2'
   spec.add_runtime_dependency 'redcarpet', '>= 3.5'
+  spec.add_runtime_dependency 'kramdown', '~> 2.3.1'
+  spec.add_runtime_dependency 'kramdown-parser-gfm', '~> 1.1.0'
+  spec.add_runtime_dependency 'dottie', '~> 0.0.1'
+  spec.add_runtime_dependency 'liquid', '>= 3.0.6'
 end

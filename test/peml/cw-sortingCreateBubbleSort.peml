@@ -1,0 +1,54 @@
+exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/440/practice?workout_id=680
+
+title: Generics - Sorting - Create Bubble Sort
+external_id: cw-x23
+is_public: true
+experience: 65
+language_list: Java
+
+license.id: cc-sa-4.0
+license.owner.email: edwards@cs.vt.edu
+license.owner.name: Stephen Edwards
+
+tags.topics: bubble sort, sorting, array, int
+tags.style: coding problem
+
+instructions:----------
+Write a function in Java that takes in the `int[] array`, sorts
+it using bubble sort, then returns back the sorted array.
+----------
+
+[systems]
+language: Java
+
+[assets.code.wrapper.files]
+content:----------
+public class Answer {
+    ___
+}
+----------
+
+[assets.code.starter.files]
+content:----------
+public int[] bubbleSort(int[] array) {
+    int n = array.length;
+    int temp = 0;
+    ___
+}
+----------
+
+
+[assets.test.files]
+format: text/csv-unquoted
+pattern_actual: subject.bubbleSort({{array}})
+content:----------
+aray,expected,description
+"new int[]{4,7,1}","new int[]{1,4,7}",example
+"new int[]{80,6,6,8,2}","new int[]{2,6,6,8,80}",example
+"new int[]{77,104,33,5}","new int[]{5,33,77,104}"
+"new int[]{2,4,6}","new int[]{2,4,6}"
+"new int[]{5,2,0,8}","new int[]{0,2,5,8}"
+"new int[]{10}","new int[]{10}"
+"new int[]{4,10,4,0}","new int[]{0,4,4,10}",hidden
+----------
+

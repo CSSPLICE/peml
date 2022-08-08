@@ -1,0 +1,84 @@
+exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/852/practice?workout_id=1342
+
+title: CodeWorkout Jeroo turnAround()
+external_id: edu.vt.cs.1114.jeroo_turnAround
+is_public: true
+experience: 50
+language_list: Java
+
+license.id: cc-sa-4.0
+license.owner.email: edwards@cs.vt.edu
+license.owner.name: Stephen H. Edwards
+
+tags.topics: Jeroo, methods, syntax practice
+tags.style: code writing
+
+instructions:----------
+The following method could be added to a `Jeroo` subclass to
+provide an action to turn around by turning left twice.
+Change the method so that it turns right twice instead.
+----------
+
+[systems]
+language: Java
+
+[assets.code.wrapper.files]
+content:----------
+import java.util.ArrayList;
+import student.micro.jeroo.*;
+public class Answer extends Jeroo {
+  private ArrayList<String> moveHistory = new ArrayList<String>();
+
+    public ArrayList<String> getMoveHistory() {
+      return moveHistory;
+    }
+    public void pick() { moveHistory.add("pick"); }
+    public void plant() { moveHistory.add("plant"); }
+    public void toss() { moveHistory.add("toss"); }
+    public void jump() { moveHistory.add("jump"); }
+    public void turn(RelativeDirection dir)
+      { moveHistory.add("turn(" + dir + ")"); }
+    public void give(RelativeDirection dir)
+      { moveHistory.add("give(" + dir + ")"); }
+    public void hop() { moveHistory.add("hop"); }
+    public void move() { hop(); }
+    public void move(int n) { hop(n); }
+    ___
+}
+----------
+    
+
+
+[assets.code.starter.files]
+content:----------
+public void turnAround()
+{
+    this.turn(LEFT);
+    this.turn(LEFT);
+}
+----------
+
+[assets.test.files]
+format: java/junit
+content:----------
+import codeworkout.*;
+public class AnswerTest extends CodeWorkoutTest {
+  private Answer testJeroo;
+  private java.util.ArrayList calls;
+
+  public void setUp() {
+      testJeroo = new Answer();
+      testJeroo.turnAround();
+      calls = testJeroo.getMoveHistory();
+  }
+
+  @Description("turnAround() implemented to turn right twice")
+  public void testTurnAround() {
+    assertEquals("extra method calls have been added", 2, calls.size());
+    if (!"turn(RIGHT)".equals(calls.get(0)) || !"turn(RIGHT)".equals(calls.get(1)))
+    {
+      fail("turnAround() is not implemented using two right turns");
+    }
+  }
+}
+----------

@@ -1,0 +1,68 @@
+exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/840/practice?workout_id=1334
+
+title: CodeWorkout Calling Super Practice 2
+external_id: CS1114_Week2SyntaxDrill5
+is_public: true
+experience: 50
+language_list: Java
+
+license.id: cc-sa-4.0
+license.owner.email: admin@codeworkout.org
+license.owner.name: codeworkout
+
+tags.topics: CS1114, Parameters, Methods, java
+tags.style: code-writing
+
+instructions:----------
+For this problem assume you have access to a Shape class. 
+Below, you'll see the start of a Square class that is a 
+subclass of Shape. Finish creating the constructor by calling 
+`super`
+----------
+
+[systems]
+language: Java
+
+[assets.code.wrapper.files]
+content:----------
+public class syntax4to5 {
+    public static class Shape{
+        private boolean superWasCalled = false;
+        public Shape() {
+            superWasCalled = true;
+        }
+
+        public boolean getSuperWasCalled() {
+            return superWasCalled;
+        }
+
+    }
+    public static class Square extends Shape{
+        ___
+    }
+
+}
+----------
+
+[assets.code.starter.files]
+content:----------
+public Square() {
+    ___
+}
+----------
+
+
+[assets.test.files]
+format: java/junit
+content:----------
+import codeworkout.CodeWorkoutTest;
+public class syntax4to5Test extends CodeWorkoutTest{
+
+    public void testSuperIsCalled() {
+        syntax4to5.Square testSquare = new syntax4to5.Square();
+
+        assertTrue("You must call super in the constructor!", testSquare.getSuperWasCalled());
+    }
+}
+----------
+
