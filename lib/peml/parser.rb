@@ -1,4 +1,5 @@
 require 'parslet'
+require_relative 'utils'
 
 module Peml
 
@@ -302,8 +303,11 @@ module Peml
         str("\n")
     end
 
-    def parse(text)
-      ast = super(text)
+    def parse(text, reporter = nil)
+      if !reporter
+        reporter = Parslet::ErrorReporter::Deepest.new
+      end
+      ast = super(text, reporter: reporter)
       #puts "AST before cleaning:"
       #pp ast
       ast = PemlTestAstCleaner.new.apply(ast)
@@ -334,119 +338,69 @@ module Peml
       x.to_s
     end
     rule(unquoted_string: subtree(:text)) do
-      {unquoted_string: PemlTestAstCleaner.string_reduce(text)}
+      {unquoted_string: Utils::string_reduce(text)}
     end
     rule(block: subtree(:text)) do
-      {block: PemlTestAstCleaner.string_reduce(text)}
+      {block: Utils::string_reduce(text)}
     end
     rule(lb: simple(:lb),
          body: subtree(:body),
          rb: simple(:rb)) do
-      {lb: lb, body: PemlTestAstCleaner.string_reduce(body), rb: rb}
+      {lb: lb, body: Utils::string_reduce(body), rb: rb}
     end
     rule(expr: subtree(:expr)) do
-      {expr: PemlTestAstCleaner.string_reduce(expr)}
+      {expr: Utils::string_reduce(expr)}
     end
 
 
     rule(expr: subtree(:expr), imports: subtree(:y)) do
-      y.unshift( { expr: PemlTestAstCleaner.string_reduce(expr) } )
+      y.unshift( { expr: Utils::string_reduce(expr) } )
     end
     rule(block: subtree(:expr), imports: subtree(:y)) do
-      y.unshift( { block: PemlTestAstCleaner.string_reduce(expr) } )
+      y.unshift( { block: Utils::string_reduce(expr) } )
     end
     rule(expr: subtree(:expr), givens_before_all: subtree(:y)) do
-      y.unshift( { expr: PemlTestAstCleaner.string_reduce(expr) } )
+      y.unshift( { expr: Utils::string_reduce(expr) } )
     end
     rule(block: subtree(:expr), givens_before_all: subtree(:y)) do
-      y.unshift( { block: PemlTestAstCleaner.string_reduce(expr) } )
+      y.unshift( { block: Utils::string_reduce(expr) } )
     end
     rule(expr: subtree(:expr), givens: subtree(:y)) do
-      y.unshift( { expr: PemlTestAstCleaner.string_reduce(expr) } )
+      y.unshift( { expr: Utils::string_reduce(expr) } )
     end
     rule(block: subtree(:expr), givens: subtree(:y)) do
-      y.unshift( { block: PemlTestAstCleaner.string_reduce(expr) } )
+      y.unshift( { block: Utils::string_reduce(expr) } )
     end
     rule(expr: subtree(:expr), whens: subtree(:y)) do
-      y.unshift( { expr: PemlTestAstCleaner.string_reduce(expr) } )
+      y.unshift( { expr: Utils::string_reduce(expr) } )
     end
     rule(block: subtree(:expr), whens: subtree(:y)) do
-      y.unshift( { block: PemlTestAstCleaner.string_reduce(expr) } )
+      y.unshift( { block: Utils::string_reduce(expr) } )
     end
     rule(expr: subtree(:expr), thens: subtree(:y)) do
-      y.unshift( { expr: PemlTestAstCleaner.string_reduce(expr) } )
+      y.unshift( { expr: Utils::string_reduce(expr) } )
     end
     rule(block: subtree(:expr), thens: subtree(:y)) do
-      y.unshift( { block: PemlTestAstCleaner.string_reduce(expr) } )
+      y.unshift( { block: Utils::string_reduce(expr) } )
     end
     rule(expr: subtree(:expr), finallys: subtree(:y)) do
-      y.unshift( { expr: PemlTestAstCleaner.string_reduce(expr) } )
+      y.unshift( { expr: Utils::string_reduce(expr) } )
     end
     rule(block: subtree(:expr), finallys: subtree(:y)) do
-      y.unshift( { block: PemlTestAstCleaner.string_reduce(expr) } )
+      y.unshift( { block: Utils::string_reduce(expr) } )
     end
     rule(expr: subtree(:expr),
          finallys_before_all: subtree(:y)) do
-      y.unshift( { expr: PemlTestAstCleaner.string_reduce(expr) } )
+      y.unshift( { expr: Utils::string_reduce(expr) } )
     end
     rule(block: subtree(:expr),
          finallys_before_all: subtree(:y)) do
-      y.unshift( { block: PemlTestAstCleaner.string_reduce(expr) } )
+      y.unshift( { block: Utils::string_reduce(expr) } )
     end
 
 
     rule(line: {unquoted_string: simple(:s)}) do
       s.to_s
-    end
-
-
-    def self.unquote(s)
-      if s.start_with?('"') && s.end_with?('"') ||
-        s.start_with?("'") && s.end_with?("'")
-        s[1..-2]
-      else
-        s
-      end
-    end
-
-    def self.string_reduce(tree)
-      # puts "string_reduce: #{tree.inspect}"
-      if tree.is_a? Hash
-        result = Hash.new
-        tree.each do |k, v|
-          result[k] = string_reduce(v)
-        end
-      elsif tree.is_a? Array
-        result = Array.new
-        text = nil
-        tree.each do |v|
-          if v.is_a?(Hash) && v.has_key?(:text)
-            if text.nil?
-              text = v[:text]
-            else
-              text += v[:text]
-            end
-          else
-            if !text.nil?
-              result.push({text: text})
-              text = nil
-            end
-            result.push(v)
-          end
-        end
-        if !text.nil?
-          result.push({text: text})
-          text = nil
-        end
-        if result.length == 1 &&
-          result[0].is_a?(Hash) &&
-          result[0].has_key?(:text)
-          result = result[0][:text]
-        end
-      else
-        result = tree
-      end
-      result
     end
 
   end

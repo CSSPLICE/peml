@@ -37,8 +37,6 @@ GEM
 
 PLATFORMS
   arm64-darwin-21
-
-DEPENDENCIES
   bundler (~> 2.3)
   minitest (~> 5.0)
   peml!

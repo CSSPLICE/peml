@@ -56,7 +56,7 @@ module Peml
   # -------------------------------------------------------------
   # inline external file contents in fields inside
   # a PEML data structure (parsed PEML structured as a nested hash)
-  # will not be implemented
+  # currently, not implemented
   def self.inline(peml)
     peml
   end
@@ -65,6 +65,7 @@ module Peml
   # -------------------------------------------------------------
   # handle mustache variable interpolation in fields inside
   # a PEML data structure (parsed PEML structured as a nested hash)
+  # currently, not implemented
   def self.interpolate(peml)
     default_peml = Marshal.load(Marshal.dump(peml)).dottie!
     puts Utils.handle_exclusion(default_peml, Utils.recurse_hash(peml, :interpolate_helper, default_peml).dottie!)
@@ -74,6 +75,7 @@ module Peml
   # -------------------------------------------------------------
   # convert markdown or other markup formats to html in fields inside
   # a PEML data structure (parsed PEML structured as a nested hash)
+  # currently, not implemented
   def self.render_to_html(peml)
     Utils.recurse_hash(peml, :render_helper, {})
   end

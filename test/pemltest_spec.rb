@@ -70,7 +70,7 @@ describe Peml do
 
       it "parses #{slug}" do
         begin
-          ast = Peml::parse({filename: f}, language: f[(f.index('_')+1)..(f.index('.')-1)])   
+          ast = Peml::parse({filename: f}, language: f[(f.index('_')+1)..(f.index('.')-1)])
           if print_asts
             puts "\nAST for #{slug}:"
             pp ast
