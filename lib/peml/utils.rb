@@ -1,4 +1,7 @@
 require 'json_schemer'
+require "dottie/ext"
+require "kramdown"
+require 'kramdown-parser-gfm'
 require_relative 'version'
 
 module Peml
@@ -78,6 +81,61 @@ module Peml
         "#{location} has a problem. Please check your input.\n#{JSON.pretty_generate(err)}"
       end
     end
+
+  # -------------------------------------------------------------
+  # recurse through the nested hash and perform specified operation
+  # on values. Traversal and operations are loosely coupled to support
+  # future changes and updates
+   def self.recurse_hash(peml, operation, default_peml)
+    peml.each do |key, value|
+      if value.is_a?(Hash)
+        Utils.recurse_hash(value, operation, default_peml)
+      elsif value.is_a?(Array)
+        value.length.times do |i|
+          if value[i].is_a?(Hash)
+            Utils.recurse_hash(value[i], operation, default_peml)
+          elsif value[i].respond_to?(:to_s) || value[i].respond_to(:to_i)
+            peml[key][i] = method(operation).call(value[i], default_peml)
+          end
+        end
+      elsif value.respond_to?(:to_s) || value.respond_to(:to_i)
+        peml[key] = method(operation).call(value, default_peml)
+      end
+    end
+  end
+
+  #kramdown parser has changed to add \n idky why, needs fixing 
+  def self.render_helper(value, default_peml)
+    Kramdown::Document.new(value, :auto_ids => false, input: 'GFM', hard_wrap: ["false"]).to_html
+  end
+
+  
+  def self.interpolate_helper(value, default_peml)
+    if value.match(/\{\{(.*?)\}\}/)
+      substitute_values = Utils.substitute_variables(value.scan(/\{\{(.*?)\}\}/).flatten, default_peml)
+      value = value.gsub(/\{\{(.*?)\}\}/) { |x| substitute_values[x] }
+    end
+    value
+  end
+
+
+  def self.substitute_variables(arr, default_peml)
+    substitute_values={}
+    arr.length.times do |i|
+      substitute_values["{{"+arr[i]++"}}"] = default_peml[arr[i]]
+    end
+    substitute_values
+  end
+
+
+  def self.handle_exclusion(unchanged_peml, peml)
+    if unchanged_peml.key?("exclude")
+      peml["exclude"].each do |element|
+        peml[element]=unchanged_peml[element]
+      end
+    end
+    peml
+  end
 
   end
 end
