@@ -6,13 +6,10 @@ require_relative 'peml/peml_test_renderer'
 require_relative 'peml/datadriven_test_renderer'
 
 require "dottie/ext"
-require "kramdown"
-require 'kramdown-parser-gfm'
 
 module Peml
+
   #~ Class methods ...........................................................
-
-
   # -------------------------------------------------------------
   def self.parse(params = {}, language: nil)
     if params[:filename]
@@ -25,18 +22,10 @@ module Peml
     else
       peml = params[:peml]
     end
-    #value = Peml::Loader.new.load(peml)
-
-    # This new code looks incorrect, since pemltest_parse is intended to
-    # parse PEMLtest code, but this method is intended to parse PEML
-    # (that might contain PEMLtest in nested files)
-    value = Peml::pemltest_parse(peml)
-    if(value.key?(:givens) || value.key?(:whens) || value.key?(:thens))
-      value = Peml::PemlTestRenderer.new.generate_tests_from_dsl(value, language)
-    elsif(value.key?("assets") || (value.key?("systems") && value["systems"][0].key?("suites")))
+    value = Peml::Loader.new.load(peml)
+    if(value.key?("assets") || (value.key?("systems") && value["systems"][0].key?("suites")))
       value = Peml::DatadrivenTestRenderer.new.generate_tests(value)
     end
-    @@pemlGlobal = Marshal.load(Marshal.dump(value)).dottie!
     if !params[:result_only]
       diags = validate(value)
     end
@@ -78,9 +67,8 @@ module Peml
   # a PEML data structure (parsed PEML structured as a nested hash)
   # currently, not implemented
   def self.interpolate(peml)
-    peml = Peml::recurse_hash(peml, "interpolate")
-    peml = peml.dottie!
-    peml = Peml::handle_exclusion(peml)
+    default_peml = Marshal.load(Marshal.dump(peml)).dottie!
+    puts Utils.handle_exclusion(default_peml, Utils.recurse_hash(peml, :interpolate_helper, default_peml).dottie!)
   end
 
 
@@ -89,77 +77,7 @@ module Peml
   # a PEML data structure (parsed PEML structured as a nested hash)
   # currently, not implemented
   def self.render_to_html(peml)
-    peml = Peml::recurse_hash(peml, "render_to_html")
-  end
-
-
-   # -------------------------------------------------------------
-   # recurse through the nested hash and perform specified operation
-   # on values. Traversal and operations are loosely coupled to support
-   # future changes and updates
-  def self.recurse_hash(peml, operation)
-    peml.each do |key, value|
-      if value.is_a?(Hash)
-        Peml::recurse_hash(value, operation)
-      elsif value.is_a?(Array)
-        value.length.times do |i|
-          if value[i].is_a?(Hash)
-            Peml::recurse_hash(value[i], operation)
-          elsif value[i].respond_to?(:to_s) || value[i].respond_to(:to_i)
-            if operation == "interpolate"
-              peml[key][i] = Peml::interpolate_helper(value[i])
-            elsif operation == "render_to_html"
-              peml[key][i] = Peml::render_helper(value[i])
-            end
-          end
-        end
-      elsif value.respond_to?(:to_s) || value.respond_to(:to_i)
-        if operation == "interpolate"
-          peml[key] = Peml::interpolate_helper(value)
-        elsif operation == "render_to_html"
-          peml[key] = Peml::render_helper(value)
-        end
-      end
-    end
-  end
-
-
-  def self.render_helper(value)
-    return Kramdown::Document.new(value, :auto_ids => false, input: 'GFM').to_html
-  end
-
-
-  def self.interpolate_helper(value)
-    if value.match(/\{\{(.*?)\}\}/)
-      arr = value.scan(/\{\{(.*?)\}\}/).flatten
-      substitute_values = Peml::substitute_variables(arr)
-      value = value.gsub(/\{\{(.*?)\}\}/) { |x| substitute_values[x] }
-    end
-    return value
-  end
-
-
-  def self.substitute_variables(arr)
-    substitute_values={}
-    arr.length.times do |i|
-      if @@subHash.key?(arr[i])
-        substitute_values["{{"+arr[i]++"}}"] = @@subHash[arr[i]]
-      else
-        @@subHash[arr[i]] = @@pemlGlobal[arr[i]]
-        substitute_values["{{"+arr[i]++"}}"] = @@pemlGlobal[arr[i]]
-      end
-    end
-    return substitute_values
-  end
-
-
-  def self.handle_exclusion(peml)
-    if @@pemlGlobal.key?("exclude")
-      peml["exclude"].each do |element|
-        peml[element]=@@pemlGlobal[element]
-      end
-    end
-    return peml
+    Utils.recurse_hash(peml, :render_helper, {})
   end
 
 
