@@ -23,9 +23,6 @@ module Peml
       peml = params[:peml]
     end
     value = Peml::Loader.new.load(peml)
-    if(value.key?("assets") || (value.key?("systems") && value["systems"][0].key?("suites")))
-      value = Peml::DatadrivenTestRenderer.new.generate_tests(value)
-    end
     if !params[:result_only]
       diags = validate(value)
     end
