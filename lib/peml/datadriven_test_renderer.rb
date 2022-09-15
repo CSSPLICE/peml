@@ -18,18 +18,16 @@ module Peml
             tests = self.recurse_hash(value, {})
             if(tests[:format].include?('csv'))
                 peml['parsed_tests']=[]
-                tests[:content] = hashify_test(tests[:content])
+                tests[:content] = hashify_test(tests)
                 languages.each do |language|
                     template_class = Liquid::Template.parse(File.open("#{@@template_path}#{language.downcase}_class.liquid").read, :error_mode => :strict)
-                    peml['parsed_tests']<<{language: language, test_class: template_class.render('class_name' => "Answer", 'methods' => generate_methods(tests, language))}
+                    peml['parsed_tests']<<{language: language, test_class: template_class.render('class_name' => 'Answer', 'methods' => generate_methods(tests, language))}
                 end
             else
                 peml['parsed_tests'] = tests[:content]
             end
             peml
         end
-
-        
 
         # Gets list of language we need test cases for. Only used
         # by test cases with tabular data for now.
@@ -45,9 +43,13 @@ module Peml
         # a hash of test cases example header => test_variable
         def hashify_test(tests)
             content_arr=[]
-            tests = Peml::CsvUnquotedParser.new.parse(tests)
-            (1..tests.length-2).each do |i|
-                test_hash = Hash[tests[0].map(&:to_sym).zip(tests[i])]
+            if(tests[:format].include?('text/csv-unquoted'))
+                tests[:content] = Peml::CsvUnquotedParser.new.parse(tests[:content])
+            else
+                tests[:content] = CSV.new(tests[:content]).read
+            end
+            (1..tests[:content].length-2).each do |i|
+                test_hash = Hash[tests[:content][0].map(&:to_sym).zip(tests[:content][i])]
                 content_arr<<test_hash
             end
             content_arr
