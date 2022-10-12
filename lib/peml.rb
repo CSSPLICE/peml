@@ -23,6 +23,8 @@ module Peml
       peml = params[:peml]
     end
     value = Peml::Loader.new.load(peml)
+    #Should we provide a param to render test cases?
+    value = Peml::DatadrivenTestRenderer.new.generate_tests(value)
     if !params[:result_only]
       diags = validate(value)
     end
@@ -65,7 +67,7 @@ module Peml
   # currently, not implemented
   def self.interpolate(peml)
     default_peml = Marshal.load(Marshal.dump(peml)).dottie!
-    puts Utils.handle_exclusion(default_peml, Utils.recurse_hash(peml, :interpolate_helper, default_peml).dottie!)
+    Utils.handle_exclusion(default_peml, Utils.recurse_hash(peml, :interpolate_helper, default_peml).dottie!)
   end
 
 

@@ -1,4 +1,7 @@
-require "dottie/ext"
+
+require_relative 'csv_unquoted_parser'
+require 'dottie/ext'
+require 'csv'
 
 module Peml
     class DatadrivenTestRenderer
@@ -6,123 +9,103 @@ module Peml
         #This path points to the directory where the liquid templates are saved
         @@template_path = File.expand_path('templates/', __dir__) + "/"
 
-        #This function has been designed for parsing test cases presented in 
-        #tabular format to individual testable x-unti style methods. Needs 
-        #better refracotring. 
+        # This is the entry function for data-driven test generation
+        # We fetch languages and then generate tests for each using 
+        # the helper function written below.
         def generate_tests(peml)
-            value=peml.dottie!
+            value = peml.dottie!
             languages = self.get_languages(value)
-            if(value["assets.test.files"]!=nil)
-                file_arr = self.parse_csv(value["assets.test.files"])
-            elsif(value["systems.[0].suites"]!=nil)
-                file_arr = self.parse_hash(value["systems.[0].suites"])
-            end
-            test_structure = {'class_name' => 'Answer'}
-            test_cases = []
-            id=0
-            languages.length.times do |i|
-                test_structure['language'] = languages[i]
-                template_class = Liquid::Template.parse(File.open(@@template_path+languages[i].downcase+"_class.liquid").read, :error_mode => :strict)
-                file_arr.length.times do |j|
-                    tests = []
-                    test_structure['test_case_count'] = file_arr[j].length
-                    file_arr[j].length.times do |k|
-                        id=id+1
-                        if(value["assets.test.files"]!=nil)
-                            method_pattern = value["assets.test.files"][j]["pattern_actual"]
-                        elsif(value["systems.[0].suites"]!=nil)
-                            method_pattern = value["systems.[0].suites"][j]["template"]
-                        end
-                        method_name = method_pattern[method_pattern.index('.')+1..method_pattern.index('(')-1]
-                        intput = method_pattern[method_pattern.index('(')+1..method_pattern.index(')')-1].gsub(/\{\{(.*?)\}\}/) { |x| file_arr[j][k][x] }
-                        expected_output = file_arr[j][k]["expected"]
-                        class_name = "Test"
-                        negative_feedback= "you should do better"
-
-                        tests.append(TEST_METHOD_TEMPLATES[languages[i]]%{
-                            id: id,
-                            expected_output: expected_output,
-                            method_name: method_name,
-                            class_name: class_name,
-                            input: intput,
-                            negative_feedback: negative_feedback
-                })
-                        metadata_temp = {'file': j, 'number': k, 'method_name': 'test'+id.to_s, 'example': file_arr[j][k]['description'] == 'example', 'hidden': file_arr[j][k]['description'] == 'hidden'}  
-                        test_cases.push(metadata_temp.merge(file_arr[j][k]))  
-                    end
-                    test_structure['test_cases'] = test_cases 
-                    if(value["assets.test.files"]!=nil)
-                        value['assets.test.files'][j]['parsed_tests'] = template_class.render('class_name' => "Answer", 'methods' => tests)
-                        value['assets.test.files'][j]['test_structure'] = test_structure
-                    elsif(value["systems.[0].suites"]!=nil)
-                        value['systems.[0]']['parsed_tests'] = template_class.render('class_name' => "Answer", 'methods' => tests)
-                        value['systems.[0]']['test_structure'] = test_structure
-                    end 
+            tests = self.recurse_hash(value, {})
+            if(tests[:format].include?('csv'))
+                peml['parsed_tests']=[]
+                tests[:content] = hashify_test(tests)
+                languages.each do |language|
+                    template_class = Liquid::Template.parse(File.open("#{@@template_path}#{language.downcase}_class.liquid").read, :error_mode => :strict)
+                    peml['parsed_tests']<<{language: language, test_class: template_class.render('class_name' => 'Answer', 'methods' => generate_methods(tests, language))}
                 end
+            else
+                peml['parsed_tests'] = tests[:content]
             end
-            return value
+            peml
         end
 
-        #Gets list of language we need test cases for. Only used
-        #by test cases with tabular data for now.
+        # Gets list of language we need test cases for. Only used
+        # by test cases with tabular data for now.
         def get_languages(value)
-            systems = value["systems"]
             languages=[]
-            systems.length.times do |i|
-                languages.push(systems[i]["language"])
+            value['systems'].each do |system|
+                languages<<system['language']
             end
-            return languages
+            languages
         end
 
-        #Parses the suites array into an array of hashes
-        def parse_hash(files)
-            file_arr=[]
-            files.length.times do |i|
-                temp_arr=[]
-                files[i]["cases"].length.times do |j|
-                    temp_hash={}
-                    files[i]["cases"][j].each do |key, value|
-                        if key!="expected" && key!="description"
-                            temp_hash["{{"+key+"}}"]=value
+        # Converts the csv file parsed by the csv unquoted parser into 
+        # a hash of test cases example header => test_variable
+        def hashify_test(tests)
+            content_arr=[]
+            if(tests[:format].include?('text/csv-unquoted'))
+                tests[:content] = Peml::CsvUnquotedParser.new.parse(tests[:content])
+            else
+                tests[:content] = CSV.new(tests[:content]).read
+            end
+            (1..tests[:content].length-2).each do |i|
+                test_hash = Hash[tests[:content][0].map(&:to_sym).zip(tests[:content][i])]
+                content_arr<<test_hash
+            end
+            content_arr
+        end
+
+        # A recursiive walker that walks through the hash and returns files
+        # that will most likely have testcases in them (idenitified by form
+        # and content keys)
+        def recurse_hash(peml, test_hash)
+            peml.each do |key, value|
+                if value.is_a?(Hash)
+                    if value.key?('content') && value.key?('format')
+                        test_hash = {content: value['content'], format: value['format'], pattern: value.key?('pattern_actual')?value['pattern_actual']: nil}
+                    else
+                        test_hash = recurse_hash(value, test_hash)
+                    end
+                elsif value.is_a?(Array)
+                    value.each do |element|
+                        if element.key?('content') && element.key?('format')
+                            test_hash = {content: element['content'], format: element['format'], pattern: element.key?('pattern_actual')?element['pattern_actual']: nil}
                         else
-                            temp_hash[key] = value
+                            test_hash = recurse_hash(element, test_hash)
                         end
                     end
-                    temp_arr.append(temp_hash)
                 end
-                file_arr.push(temp_arr)
             end
-            return file_arr
+            test_hash
         end
 
-        #Parses CSV tabular data into an array of hashes to make
-        #the two testing format similar.
-        def parse_csv(files)
-            file_arr = []
-            files.length.times do |i|
-                content_lines = files[i]["content"].split("\n")
-                header = content_lines[0].split(",")
-                content_arr = []
-                (1..content_lines.length-1).each do |j|
-                    content_row = content_lines[j].split(",")
-                    content_hash_entry = {}
-                    content_row.length.times do |k|
-                        if header[k]!="expected" && header[k]!="description"
-                            content_hash_entry["{{"+header[k]+"}}"] = content_row[k]
-                        else
-                            content_hash_entry[header[k]] = content_row[k]
-                        end  
-                    end
-                    content_arr.push(content_hash_entry)
-                end
-                file_arr.push(content_arr)
+        # This function returns an array of test functions which are then
+        # interpolated into a class before being written into the peml hash
+        def generate_methods(tests, language)
+            tests_arr=[]
+            id=0
+            method_name = tests[:pattern][tests[:pattern].index('.')+1..tests[:pattern].index('(')-1]
+            tests[:content].each do |test_case|
+                id+=1
+                intput = tests[:pattern][tests[:pattern].index('(')+1..tests[:pattern].index(')')-1].gsub(/\{\{(.*?)\}\}/) { |x|  test_case[x[2..-3].to_sym]  }
+                expected_output = test_case[:expected]
+                class_name = "Test"
+                negative_feedback= 'you should do better'
+                tests_arr<<(TEST_METHOD_TEMPLATES[language]%{
+                        id: id,
+                        expected_output: expected_output,
+                        method_name: method_name,
+                        class_name: class_name,
+                        input: intput,
+                        negative_feedback: negative_feedback
+                })
             end
-            return file_arr
+            tests_arr
         end
     end
 
-    #List of templates that have been utilized for generating tests.
-    TEST_METHOD_TEMPLATES = {
+#List of templates that have been utilized for generating tests.
+TEST_METHOD_TEMPLATES = {
       'Ruby' => <<RUBY_TEST,
   def test%{id}
     assert_equal(%{expected_output}, @@subject.%{method_name}(%{input}), "%{negative_feedback}")
@@ -153,3 +136,4 @@ JAVA_TEST
 CPP_TEST
     }
 end
+
