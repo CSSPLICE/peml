@@ -1,4 +1,4 @@
-# PEML: The Program Exercise Markup Language
+# PEML: The Programming Exercise Markup Language
 
 This repository contains the **"peml" ruby gem**, a parser for PEML.
 
