@@ -31,7 +31,7 @@ https://CSSPLICE.github.io/peml/
 You can try out PEML in your browser using our live, interactive parser
 here:
 
-https://skynet.cs.vt.edu/peml-live/
+https://discovery.cs.vt.edu/peml-live
 
 
 ## REST API for Parsing PEML
@@ -42,7 +42,7 @@ or you prefer to use a different programming language, you can use
 the parser via our REST API from the **PEML Live!** website. Documentation
 is available at:
 
-https://skynet.cs.vt.edu/peml-live/api/
+https://discovery.cs.vt.edu/peml-live/api
 
 
 ## Installing the Gem
@@ -105,7 +105,7 @@ This parameter indicates the format requested for the response, which is
 one of (json, yaml, xml). This can be specified as an explicit parameter
 named "format" passed in the request, or can be specified directly in the
 request URL as a file name extension (e.g., requesting
-from <code>https://skynet.cs.vt.edu/peml-live/api/parse.yaml?...</code>).
+from <code>https://discovery.cs.vt.edu/peml-live/api/parse.yaml?...</code>).
 If not explicitly provided, it will be inferred through the "Accept:"
 headers provided in the request, or defaults to json if not specified
 anywhere else.
