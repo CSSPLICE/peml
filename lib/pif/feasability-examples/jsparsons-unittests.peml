@@ -1,0 +1,74 @@
+# Basic example of using unit tests to grade.
+# Python exercise, indentation, execute.
+
+exercise_id: https://github.com/CSSPLICE/peml-feasibility-examples/blob/main/parsons/jsparsons-unittests.peml
+
+title: JSParsons Unittests
+external_id: JSParsons Unittests
+
+license.id: MIT
+license.owner.name: Cliff Shaffer
+license.owner.email: shaffer@vt.edu
+
+tags.topics: PEML Demo Parsons Problem
+tags.style: parsons, indent, execute
+
+instructions:----------
+Your task is to construct a function which returns the index of the largest element in the array.
+----------
+
+[systems]
+language: Python
+[]
+
+[assets.code.wrapper.files]
+content:----------
+    ___
+----------
+[]
+
+[assets.code.starter.files]
+[.content]
+blockid: one
+display: def maxindex(arg):
+indent: 0
+
+blockid: two
+display: ans = 0
+indent: 1
+
+blockid: three
+display: for i in range(len(arg)):
+indent: 1
+
+blockid: four
+display: if arg[i] > arg[ans]:
+indent: 2
+
+blockid: five
+display: ans = i
+indent: 3
+
+blockid: six
+display: return ans
+indent: 1
+
+blockid: d1
+display: while True
+
+blockid: d2
+display: pass
+[]
+[]
+
+[assets.test.files]
+format: text/csv-unquoted
+template:
+  maxindex(arr)
+content:----------
+arr,expected,description
+[0, 2, 4], 2, example
+[7, 2, 4], 0, hidden
+[7, 8, 4], 1, example
+----------
+[]

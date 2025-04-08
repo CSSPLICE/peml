@@ -1,0 +1,46 @@
+# Simple example of a problem that is assessed by the order of the
+# blocks. Correct indentation is required.
+# Technically this is a Java exercise, but this is a moot point
+# because the assessment is by block order.
+# The order requirements are defaulted to the block ordering.
+# Derived from jsParsons
+# https://github.com/js-parsons/js-parsons/blob/master/examples/java-example.html
+
+exercise_id: https://github.com/CSSPLICE/peml-feasibility-examples/blob/main/parsons/jsparsons-java-example-order.peml
+
+title: Simple js-parsons Java example assignment - order
+author: Cliff Shaffer (from js-Parsons, converted to PEML)
+license.id: MIT
+license.owner.name: Cliff Shaffer
+license.owner.email: shaffer@vt.edu
+
+tags.topics: PEML Demo Parsons Problem
+tags.style: parsons, indent, order
+
+instructions:----------
+Construct code by reordering and indenting the lines.
+----------
+
+[assets.code.starter.files]
+[.content]
+blockid: one
+display: for (int i=0;i<3;i++) {
+indent: 0
+
+blockid: two
+display: System.out.print("I ");
+indent: 1
+
+blockid: three
+display: System.out.print("am ");
+indent: 1
+
+blockid: four
+display: System.out.print("a Java program ");
+indent: 1
+
+blockid: five
+display: }
+indent: 0
+[]
+[]

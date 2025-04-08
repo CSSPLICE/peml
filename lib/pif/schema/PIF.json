@@ -1,48 +1,48 @@
 {
-  "schema": "http://json-schema.org/draft-07/schema#",
-  "title": "PIF",
-  "description": "This schema defines the data model for the Parsons Problems Input File.",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Parsons Problems Input File (PIF) Schema",
+  "description": "Schema defining the structure and validation rules for the Parsons Problems Input File.",
 
   "definitions": {
     "nonempty_string": {
-      "$id": "nonempty_string",
-      "type": "string",
-      "minLength": 1
-    },
-    "char": {
-      "$id": "char",
       "type": "string",
       "minLength": 1,
-      "maxLength": 1
+      "description": "A non-empty string value."
+    },
+    "char": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1,
+      "description": "A single character string."
     },
     "string_number": {
-      "$id": "string_number",
       "type": "string",
-      "pattern": "^\\d+$"
+      "pattern": "^\\d+$",
+      "description": "Numeric value represented as a string."
     },
     "id": {
-      "$id": "id",
-      "description": "An id is a non-empty string containing no whitespace.",
-      "$ref": "#/definitions/nonempty_string",
-      "pattern": "^[^\\s]+$"
+      "allOf": [
+        { "$ref": "#/definitions/nonempty_string" },
+        { "pattern": "^[^\\s]+$" }
+      ],
+      "description": "A unique identifier without whitespace."
     },
     "email_address": {
-      "$id": "email_address",
-      "description": "An email_address is a non-empty string conforming to the idn-email format.",
-      "$ref": "#/definitions/nonempty_string",
-      "format": "idn-email"
+      "allOf": [
+        { "$ref": "#/definitions/nonempty_string" },
+        { "format": "idn-email" }
+      ],
+      "description": "Email address conforming to idn-email format."
     },
-    "tag_list": {
-      "$id": "tag_list",
-      "description": "A single string representing a list of comma-delimited tags/elements",
+    "dependencies": {
       "type": "string",
-      "pattern": "^[^\\s,]+(\\s*,\\s*[^\\s,]+)*$"
+      "pattern": "^([^\\s,]+(\\s*,\\s*[^\\s,]+)*)?$",
+      "description": "Comma-separated tags or block IDs."
     },
     "block": {
-      "$id": "block",
-      "description": "An individual unit or entity that a student arranges or modifies in the Parsons Problem.",
       "type": "object",
       "required": ["display"],
+      "description": "A single, arrangeable element in a Parsons Problem.",
       "properties": {
         "blockid": { "$ref": "#/definitions/nonempty_string" },
         "code": { "$ref": "#/definitions/nonempty_string" },
@@ -51,22 +51,22 @@
         "feedback": { "$ref": "#/definitions/nonempty_string" },
         "indent": { "$ref": "#/definitions/string_number" },
         "reusable": { "type": "boolean" },
-        "depends": { "$ref": "#/definitions/tag_list" }
+        "depends": { "$ref": "#/definitions/dependencies" }
       }
     },
     "blocklist": {
-      "$id": "blocklist",
-      "description": "A group of related blocks.",
       "type": "object",
       "required": ["blocklist"],
+      "description": "A collection of related blocks.",
       "properties": {
-        "pickone": { "$ref": "#/definitions/nonempty_string" },
+        "depends": { "$ref": "#/definitions/dependencies" },
+        "pickone": { "type": "boolean" },
         "blockid": { "$ref": "#/definitions/nonempty_string" },
         "layout": { "enum": ["horizontal", "vertical"] },
         "delimiter": { "$ref": "#/definitions/char" },
         "blocklist": {
           "type": "array",
-          "items": [{ "$ref": "#/definitions/block" }]
+          "items": { "$ref": "#/definitions/block" }
         }
       }
     }
@@ -83,7 +83,7 @@
   ],
   "properties": {
     "exercise_id": { "$ref": "#/definitions/id" },
-    "title": { "type": "string" },
+    "title": { "$ref": "#/definitions/nonempty_string" },
     "license": {
       "type": "object",
       "required": ["id", "owner"],
@@ -105,13 +105,14 @@
       "properties": {
         "style": {
           "type": "string",
-          "pattern": "parsons\\s*,\\s*(order|execute)(\\s*,\\s*indent)?$"
+          "pattern": "^parsons\\s*,\\s*(order|execute)(\\s*,\\s*indent)?$",
+          "description": "Defines the Parsons Problem style, including 'order', 'execute', and optionally 'indent'."
         },
         "topics": { "$ref": "#/definitions/nonempty_string" },
         "interface_layout": { "enum": ["horizontal", "vertical"] }
       }
     },
-    "instructions": { "type": "string" },
+    "instructions": { "$ref": "#/definitions/nonempty_string" },
     "systems": {
       "type": "array",
       "minItems": 1,
@@ -127,18 +128,22 @@
     "numbered": { "type": "boolean" },
     "assets": {
       "type": "object",
+      "required": ["code"],
       "properties": {
         "code": {
           "type": "object",
+          "required": ["starter"],
           "properties": {
             "wrapper": {
               "type": "object",
+              "required": ["files"],
               "properties": {
                 "files": {
                   "type": "array",
                   "minItems": 1,
                   "maxItems": 1,
                   "items": {
+                    "type": "object",
                     "required": ["content"],
                     "properties": {
                       "content": { "$ref": "#/definitions/nonempty_string" }
@@ -149,6 +154,7 @@
             },
             "starter": {
               "type": "object",
+              "required": ["files"],
               "properties": {
                 "files": {
                   "type": "array",
@@ -156,22 +162,16 @@
                   "maxItems": 1,
                   "items": {
                     "type": "object",
+                    "required": ["content"],
                     "properties": {
                       "delimiter": { "$ref": "#/definitions/char" },
                       "content": {
                         "type": "array",
                         "minItems": 1,
                         "items": {
-                          "if": {
-                            "type": "object",
-                            "required": ["blocklist"]
-                          },
-                          "then": {
-                            "$ref": "#/definitions/blocklist"
-                          },
-                          "else": {
-                            "$ref": "#/definitions/block"
-                          }
+                          "if": { "required": ["blocklist"] },
+                          "then": { "$ref": "#/definitions/blocklist" },
+                          "else": { "$ref": "#/definitions/block" }
                         }
                       }
                     }
@@ -189,8 +189,13 @@
               "minItems": 1,
               "maxItems": 1,
               "items": {
+                "type": "object",
+                "required": ["format", "content"],
                 "properties": {
-                  "format": { "$ref": "#/definitions/nonempty_string" },
+                  "format": {
+                    "type": "string",
+                    "pattern": "^(text/csv|text/csv-unquoted)$"
+                  },
                   "pattern_actual": { "$ref": "#/definitions/nonempty_string" },
                   "content": { "$ref": "#/definitions/nonempty_string" }
                 }
@@ -200,83 +205,5 @@
         }
       }
     }
-  },
-
-  "allOf": [
-    {
-      "if": {
-        "properties": {
-          "tags": {
-            "properties": {
-              "style": {
-                "type": "string",
-                "pattern": "^parsons\\s*,\\s*execute(\\s*,\\s*indent)?$"
-              }
-            }
-          }
-        }
-      },
-      "then": {
-        "required": ["systems"]
-      }
-    },
-    {
-      "if": {
-        "properties": {
-          "tags": {
-            "properties": {
-              "style": {
-                "type": "string",
-                "pattern": "^parsons\\s*,\\s*(order|execute)\\s*,\\s*indent$"
-              }
-            }
-          }
-        }
-      },
-      "then": {
-        "properties": {
-          "assets": {
-            "properties": {
-              "code": {
-                "properties": {
-                  "starter": {
-                    "properties": {
-                      "files": {
-                        "items": {
-                          "properties": {
-                            "content": {
-                              "type": "array",
-                              "items": {
-                                "if": {
-                                  "type": "object",
-                                  "required": ["blocklist"]
-                                },
-                                "then": {
-                                  "properties": {
-                                    "blocklist": {
-                                      "type": "array",
-                                      "items": {
-                                        "required": ["indent"]
-                                      }
-                                    }
-                                  }
-                                },
-                                "else": {
-                                  "required": ["indent"]
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  ]
+  }
 }

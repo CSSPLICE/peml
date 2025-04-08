@@ -1,0 +1,64 @@
+# Demonstration of order grading that requires DAG nesting.
+
+exercise_id: https://github.com/CSSPLICE/peml-feasibility-examples/blob/main/parsons/nesteddag2.peml
+
+title: Nested DAG Demo: Implicit DAG
+author: Cliff Shaffer
+license.id: MIT
+license.owner: Cliff Shaffer
+
+tags.topics: PEML Demo Parsons Problem
+tags.style: parsons, order
+
+instructions:----------
+Associate each test with its corresponding work, but you can do the
+tests in any order.
+----------
+
+[assets.code.starter.files]
+[.content]
+blockid: testAblock
+depends:
+[.blocklist]
+blockid: caseA
+display: if (testA) {
+depends:
+
+blockid: stuffA
+display:----------
+  doAstuff();
+}
+----------
+depends: caseA
+[]
+
+blockid: testBblock
+depends:
+[.blocklist]
+blockid: caseB
+display: if (testB) {
+depends:
+
+blockid: stuffB
+display:----------
+  doBstuff();
+}
+----------
+depends: caseB
+[]
+
+blockid: testCblock
+depends:
+[.blocklist]
+blockid: caseC
+display: if (testC) {
+depends:
+
+blockid: stuffC
+display:----------
+  doCstuff();
+}
+----------
+depends: caseC
+[]
+[]

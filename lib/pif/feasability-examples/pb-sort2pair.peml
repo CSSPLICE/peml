@@ -1,0 +1,61 @@
+# Reduction of sorting to pairing proof
+
+exercise_id: https://github.com/CSSPLICE/peml-feasibility-examples/blob/main/parsons/pb-sort2pair.peml
+
+title: Reduction of SORTING to PAIRING
+author: Cliff Shaffer
+license.id: MIT
+license.owner.name: Cliff Shaffer
+license.owner.email: shaffer@vt.edu
+
+tags.topics: PEML reduction
+tags.style: parsons, order
+
+instructions:----------
+Show the steps to prove that the SORTING problem can be reduced to the PAIRING problem.
+----------
+
+[assets.code.starter.files]
+[.content]
+
+blockid: start
+display: Start with an input instance to SORTING (an array of records).
+depends:
+
+blockid: d1
+display: Start with an input instance to PAIRING (an array of records).
+depends: -1
+
+blockid: d2
+display: Start with an input instance to PAIRING (two arrays, one an array of n arbitrary records, the other with the values 0 to n-1).
+depends: -1
+
+blockid: t1
+display: Define a transformation that converts an arbitrary instance of SORTING to some instance of PAIRING.
+depends: start
+
+blockid: d3
+display: Define a transformation that converts an arbitrary instance of PAIRING to some instance of SORTING.
+depends: -1
+
+blockid: pairingin
+display: Feed to PAIRING the following two arrays: the input to SORTING (array A of size n) along with a second array with values 0 to n-1.
+depends: t1
+
+block: pairing
+display: Compute PAIRING on its input. The result is <b>SLN’</b>, an array of paired records, where each such paired record is defined as (pos, pairedInput).
+depends: pairingin
+
+block: t2
+display: Convert <b>SLN’</b> to array <b>SLN</b>, the solution to SORTING, by doing a binsort on A’. In particular, for each pair (pos, pairedInput) in <b>SLN’</b>, place pairedInput into position pos in array <b>SLN</b>.
+depends: pairing
+
+block: finish
+display: Return SLN, the solution to SORTING.
+depends: t2
+
+block: d4
+display: Return SLN, the solution to PAIRING.
+depends: -1
+[]
+[]

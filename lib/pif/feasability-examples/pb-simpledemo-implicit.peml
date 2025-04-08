@@ -1,0 +1,44 @@
+# Simple ProofBlocks demo proof problem. Primarily, this illustrates a
+# (slightly) non-trivial DAG. This version does NOT use any math formatting.
+# Sourcecode: See
+# https://github.com/PrairieLearn/PrairieLearn/blob/master/exampleCourse/questions/element/orderBlocks/question.html
+# Demo: See
+# https://us.prairielearn.com/pl/course/108/question/9058236/preview,
+# Example 4.
+# This version uses implicit definition of the DAG within the blocks.
+
+exercise_id: https://github.com/CSSPLICE/peml-feasibility-examples/blob/main/parsons/pb-simpledemo-implicit.peml
+
+title: ProofBlocks Simple Proof Demo
+author: Cliff Shaffer (from ProofBlocks demo problem)
+license.id: MIT
+license.owner.name: Cliff Shaffer
+license.owner.email: shaffer@vt.edu
+
+tags.topics: PEML Demo Parsons Problem
+tags.style: parsons, order
+
+instructions:----------
+Prove that (A AND B AND C) implies (A AND C).
+----------
+
+[assets.code.starter.files]
+[.content]
+
+blockid: one
+display: Assume A AND B AND C.
+depends:
+
+blockid: two
+display: Then A is TRUE.
+depends: one
+
+blockid: three
+display: Then C is TRUE.
+depends: one
+
+blockid: four
+display: Since A and C are TRUE, we know (A AND C) is TRUE.
+depends: two, three
+[]
+[]

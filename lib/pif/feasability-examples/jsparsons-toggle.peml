@@ -1,0 +1,54 @@
+# Simple example of a problem with toggles (places where the student
+# has to select from a fixed choice what to put in a box in a block).
+# This is a Python example with code execution.
+# Derived from jsParsons
+# https://github.com/js-parsons/js-parsons/blob/master/examples/jsparsons-toggle.html
+
+exercise_id: https://github.com/CSSPLICE/peml-feasibility-examples/blob/main/parsons/jsparsons-toggle.peml
+
+title: Print min value
+license.id: MIT
+license.owner.name: Cliff Shaffer
+license.owner.email: shaffer@vt.edu
+
+tags.topics: PEML Demo Parsons Problem
+tags.style: parsons, indent, execute
+
+instructions:----------
+The constructed code should print the minimum of variables a and b.
+----------
+
+[systems]
+language: Python
+[]
+
+[assets.code.wrapper.files]
+content:----------
+a = 4
+b = 2
+----------
+[]
+
+[assets.code.starter.files]
+[.content]
+blockid: one1
+display: if ``a`b`c`` ``<`>`>=`` b
+
+blockid: two
+display: print(a)
+
+blockid: three
+display: else
+
+blockid four
+display: print(b)
+[]
+[]
+
+[assets.test.files]
+format: text/csv-unquoted
+content:----------
+expected,description
+2
+----------
+[]

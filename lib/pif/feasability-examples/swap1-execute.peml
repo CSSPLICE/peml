@@ -1,0 +1,86 @@
+# Simple swap function assessed by execution.
+# This is a Java exercise.
+# No indentation is required.
+# Illustrates fixed code shown to students
+# Illustrates a multi-line block
+# Illustrates a simple distractor. Note that it is not marked in any
+# mandatory way (a comment is provided to identify it, but this does
+# not affect exercise presentation). Actually, the distractor block is
+# indistinguishable from another block, but it doesn't matter which
+# one is actually used.
+
+exercise_id: https://github.com/CSSPLICE/peml-feasibility-examples/blob/main/parsons/swap1-execute.peml
+
+title: Swap1_execute_PEML
+
+license.id: MIT
+license.owner.name: Cliff Shaffer
+license.owner.email: shaffer@vt.edu
+
+tags.topics: PEML Demo Parsons Problem: Swap
+tags.style: parsons, execute
+
+instructions:----------
+Write a function to swap two elements in the array by reordering the
+lines. Your function should return the array.
+----------
+
+[systems]
+language: Java
+[]
+
+[assets.code.wrapper.files]
+content:----------
+public class Answer
+{
+    ___
+}
+----------
+[]
+
+[assets.code.starter.files]
+[.content]
+tag: fixed
+display:----------
+public int[] Swap(int[] arr, int i, int j)
+{
+----------
+
+blockid: one
+display: int temp = arr[i];
+
+# This happens to be a distractor, but it could actually be used
+# in place of block "one" just fine. There is nothing special about
+# the marking of a distractor block in a problem evaluated by
+# execution.
+blockid: onea
+display: int temp = arr[i];
+
+blockid: two
+display: arr[i] = arr[j];
+
+blockid: three
+display: arr[j] = temp;
+
+# This is a distractor
+blockid: four
+display: int temp = arr[j];
+
+blockid: fixed
+display:----------
+    return arr;
+}
+----------
+[]
+[]
+
+[assets.test.files]
+format: text/csv-unquoted
+template:
+pattern_actual: subject.Swap({{arr,i,j}})
+content:----------
+arr,i,j,expected,description
+"new int[]{1, 2, 3, 4}, 2, 3","new int[]{1,2,4,3}",example
+"new int[]{1, 2, 3, 4}, 0, 3","new int[]{4,2,3,1}",hidden
+----------
+[]

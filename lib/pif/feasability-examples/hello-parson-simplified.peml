@@ -1,0 +1,35 @@
+# Simple example of a problem that is assessed by the order of the
+# blocks. No indentation is expected/supported.
+# This is a minimalist version: No blockids or dependencies. Grading
+# is on simple (implicit) block order. There is one distractor, to be ignored.
+# This is (nominally) a Python example.
+# Derived from jsParsons.
+# https://github.com/js-parsons/js-parsons/blob/master/examples/hello-parson-noindent.html
+
+exercise_id: https://github.com/CSSPLICE/peml-feasibility-examples/blob/main/parsons/hello-parson-simplified.peml
+
+title: Your First Parsons Problem -- Simplified
+author: Cliff Shaffer (from js-Parsons, converted to PEML)
+license.id: MIT
+license.owner.name: Cliff Shaffer
+license.owner.email: shaffer@vt.edu
+
+tags.topics: PEML Demo Parsons Problem
+tags.style: parsons, order
+
+instructions:----------
+**Your task**: Construct a Python program that prints strings "Hello", "Parsons", and "Problems" on their own lines. You should construct your program by dragging and dropping the lines to the solution area on the right.
+----------
+
+[assets.code.starter.files]
+[.content]
+display: print('Hello')
+
+display: print('Parsons')
+
+display: print('Oops!')
+depends: -1
+
+display: print('Problems!')
+[]
+[]

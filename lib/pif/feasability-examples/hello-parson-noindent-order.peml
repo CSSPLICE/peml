@@ -1,0 +1,35 @@
+# Simple example of a problem that is assessed by the order of the
+# blocks. No indentation is expected/supported.
+# Since there is a simple linearing order, the DAG is implied by the
+# order of the given blocks.
+# This is a Python example.
+# Derived from jsParsons
+# https://github.com/js-parsons/js-parsons/blob/master/examples/hello-parson-noindent.html
+
+exercise_id: https://github.com/CSSPLICE/peml-feasibility-examples/blob/main/parsons/hello-parson-noindent-order.peml
+
+title: Your First Parsons Problem -- Ordered
+author: Cliff Shaffer (from js-Parsons, converted to PEML)
+license.id: MIT
+license.owner.name: Cliff Shaffer
+license.owner.email: shaffer@vt.edu
+
+tags.topics: PEML Demo Parsons Problem
+tags.style: parsons, order
+
+instructions:----------
+**Your task**: Construct a Python program that prints strings "Hello", "Parsons", and "Problems" on their own lines. You can get feedback on your current solution with the feedback button. You should construct your program by dragging and dropping the lines to the solution area on the right.
+----------
+
+[assets.code.starter.files]
+[.content]
+blockid: one
+display: print('Hello')
+
+blockid: two
+display: print('Parsons')
+
+blockid: three
+display: print('Problems!')
+[]
+[]

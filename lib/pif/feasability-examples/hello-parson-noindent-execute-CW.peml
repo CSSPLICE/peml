@@ -1,0 +1,50 @@
+# Conversion of a Parsons Problem to a Code Workout coding problem,
+# for testing purposes.
+# Simple example of a problem that is assessed by executing code and
+# comparing the result to the given string. This is not using test
+# cases -- there are no input/output pairs since there is no
+# input. No indentation is expected/supported.
+# This is a Python example.
+# Derived from jsParsons
+# https://github.com/js-parsons/js-parsons/blob/master/examples/hello-parson-noindent-CW.html
+
+exercise_id: https://github.com/CSSPLICE/peml-feasibility-examples/blob/main/parsons/hello-parson-noindent-execute-CW.peml
+
+title: Your First Parsons Problem -- Execute
+author: Cliff Shaffer (from js-Parsons, converted to PEML)
+external_id: JSparsons-hello-parson
+is_public: true
+experience: 40
+language_list: Python
+
+license.id: MIT
+license.owner: Cliff Shaffer
+
+tags.topics: PEML Demo Parsons Problem
+tags.style: coding problem
+
+instructions:----------
+**Your task**: Construct a Python program that prints strings "Hello", "Parsons", and "Problems" on their own lines. You can get feedback on your current solution with the feedback button. You should construct your program by dragging and dropping the lines to the solution area on the right.
+----------
+
+[systems]
+language: Python
+[]
+
+[assets.code.wrapper.files]
+content:----------
+    ___
+----------
+
+[assets.code.starter.files]
+content:----------
+    ___
+----------
+
+[assets.test.files]
+format: text/csv-unquoted
+content:----------
+expected,description
+Hello\nParsons\nProblems!,example
+----------
+[]
