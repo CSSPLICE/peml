@@ -27,8 +27,7 @@ content:----------
 ----------
 []
 
-[assets.code.starter.files]
-[.content]
+[assets.code.blocks.content]
 blockid: one
 display: def maxindex(arg):
 indent: 0
@@ -58,7 +57,6 @@ display: while True
 
 blockid: d2
 display: pass
-[]
 []
 
 [assets.test.files]

@@ -30,9 +30,8 @@ b = 2
 ----------
 []
 
-[assets.code.starter.files]
-delimiter: \
-[.content]
+assets.code.blocks.delimiter: \
+[assets.code.blocks.content]
 blockid: one1
 display: if \\a\b\c\\ \\<\>\>=\ b
 
@@ -44,7 +43,6 @@ display: else
 
 blockid four
 display: print(b)
-[]
 []
 
 [assets.test.files]

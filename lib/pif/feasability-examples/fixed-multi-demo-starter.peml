@@ -1,5 +1,6 @@
 # Demonstration of intermixed "fixed" blocks with other blocks,
-# similar to "fixed-demo". However, this also adds several multi-line blocks.
+# similar to "fixed-demo-multi". However, this uses
+# [assets.code.starter.files] to define the start and end code.
 
 exercise_id: https://github.com/CSSPLICE/peml-feasibility-examples/blob/main/parsons/fixed-multi-demo.peml
 
@@ -16,6 +17,20 @@ instructions:----------
 Put the blocks in the proper order.
 ----------
 
+# Define bounding content (before and after the moveable blocks)
+# using [assets.code.starter.files].
+
+[assets.code.starter.files]
+content:---------
+Fixed Start
+  This block goes at the beginning
+  of the exercise.
+  ___
+Fixed End
+      This block appears at the end.
+---------
+
+
 # Note that the DAG implied by the depends tags
 # only indicates the relative positioning of the
 # adjustable blocks. It is the responsibility of the system
@@ -24,13 +39,6 @@ Put the blocks in the proper order.
 # the user can place an orderable block so that things appear in a
 # reasonable order.
 [assets.code.blocks.content]
-blockid: fixed
-display:----------
-Fixed Start
-  This block goes at the beginning
-  of the exercise.
-----------
-
 blockid: randomg1b1
 display:----------
 Random Group 1 Block 1
@@ -73,10 +81,4 @@ Random Group 2 Block 3
 This is the final adjustable block.
 ----------
 depends: randomg2b2
-
-blockid: fixed
-display:----------
-Fixed End
-      This block appears at the end.
-----------
 []

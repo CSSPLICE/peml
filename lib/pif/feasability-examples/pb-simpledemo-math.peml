@@ -11,7 +11,8 @@ exercise_id: https://github.com/CSSPLICE/peml-feasibility-examples/blob/main/par
 title: ProofBlocks Simple Proof Demo
 author: Cliff Shaffer (from ProofBlocks demo problem)
 license.id: MIT
-license.owner: Cliff Shaffer
+license.owner.name: Cliff Shaffer
+license.owner.email: shaffer@vt.edu
 
 tags.topics: PEML Demo Parsons Problem
 tags.style: parsons, noindent, order
@@ -20,9 +21,7 @@ instructions:----------
 Prove that $A \land B \land C) \rightarrow A \land C$.
 ----------
 
-[assets.code.starter.files]
-[.content]
-
+[assets.code.blocks.content]
 blockid: one
 display: Assume $A \land B \land C$.
 
@@ -34,7 +33,6 @@ display: Then $C$ is true.
 
 blockid: four
 display: Since $A$ and $C$, we know $A \land C$.
-[]
 []
 
 [assets.test.files]

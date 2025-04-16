@@ -15,9 +15,7 @@ instructions:----------
 Show the steps to prove that the SORTING problem can be reduced to the PAIRING problem.
 ----------
 
-[assets.code.starter.files]
-[.content]
-
+[assets.code.blocks.content]
 blockid: start
 display: Start with an input instance to SORTING (an array of records).
 depends:
@@ -57,5 +55,4 @@ depends: t2
 block: d4
 display: Return SLN, the solution to PAIRING.
 depends: -1
-[]
 []

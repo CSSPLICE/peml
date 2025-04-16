@@ -22,9 +22,7 @@ instructions:----------
 Prove that (A AND B AND C) implies (A AND C).
 ----------
 
-[assets.code.starter.files]
-[.content]
-
+[assets.code.blocks.content]
 blockid: one
 display: Assume A AND B AND C.
 depends:
@@ -40,5 +38,4 @@ depends: one
 blockid: four
 display: Since A and C are TRUE, we know (A AND C) is TRUE.
 depends: two, three
-[]
 []

@@ -4,6 +4,10 @@
   "description": "Schema defining the structure and validation rules for the Parsons Problems Input File.",
 
   "definitions": {
+    "boolean": {
+      "type": "string", 
+      "pattern": "^(true|false)$"
+    },
     "nonempty_string": {
       "type": "string",
       "minLength": 1,
@@ -50,7 +54,7 @@
         "display": { "$ref": "#/definitions/nonempty_string" },
         "feedback": { "$ref": "#/definitions/nonempty_string" },
         "indent": { "$ref": "#/definitions/string_number" },
-        "reusable": { "type": "boolean" },
+        "reusable": { "$ref": "#/definitions/boolean" },
         "depends": { "$ref": "#/definitions/dependencies" }
       }
     },
@@ -60,12 +64,13 @@
       "description": "A collection of related blocks.",
       "properties": {
         "depends": { "$ref": "#/definitions/dependencies" },
-        "pickone": { "type": "boolean" },
+        "pickone": { "$ref": "#/definitions/boolean" },
         "blockid": { "$ref": "#/definitions/nonempty_string" },
         "layout": { "enum": ["horizontal", "vertical"] },
         "delimiter": { "$ref": "#/definitions/char" },
         "blocklist": {
           "type": "array",
+          "minItems": 1,
           "items": { "$ref": "#/definitions/block" }
         }
       }
@@ -125,14 +130,14 @@
         }
       }
     },
-    "numbered": { "type": "boolean" },
+    "numbered": { "$ref": "#/definitions/boolean" },
     "assets": {
       "type": "object",
       "required": ["code"],
       "properties": {
         "code": {
           "type": "object",
-          "required": ["starter"],
+          "required": ["blocks"],
           "properties": {
             "wrapper": {
               "type": "object",
@@ -152,29 +157,18 @@
                 }
               }
             },
-            "starter": {
+            "blocks": {
               "type": "object",
-              "required": ["files"],
+              "required": ["content"],
               "properties": {
-                "files": {
+                "delimiter": { "$ref": "#/definitions/char" },
+                "content": {
                   "type": "array",
                   "minItems": 1,
-                  "maxItems": 1,
                   "items": {
-                    "type": "object",
-                    "required": ["content"],
-                    "properties": {
-                      "delimiter": { "$ref": "#/definitions/char" },
-                      "content": {
-                        "type": "array",
-                        "minItems": 1,
-                        "items": {
-                          "if": { "required": ["blocklist"] },
-                          "then": { "$ref": "#/definitions/blocklist" },
-                          "else": { "$ref": "#/definitions/block" }
-                        }
-                      }
-                    }
+                    "if": { "required": ["blocklist"] },
+                    "then": { "$ref": "#/definitions/blocklist" },
+                    "else": { "$ref": "#/definitions/block" }
                   }
                 }
               }

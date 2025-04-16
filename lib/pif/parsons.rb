@@ -1,7 +1,9 @@
 module Parsons 
+    # Still need to add a field for test (one added to spec)
+    # Assumes an already validated and parsed PIF hash is passed
     def self.convert_PIF(pif)
         tags = pif['tags']
-        blocks = pif['assets.code.starter.files[0].content']
+        blocks = pif['assets.code.blocks.content']
   
         parsons_data_model = {
           "question_text" => pif["instructions"], 
@@ -20,11 +22,20 @@ module Parsons
           }, 
           "blocks" => [],
         }.dottie!
+
+        diags = []
+        # Validates that the language specified is supported 
+        language = pif["systems[0].language"]
+        supported_languages = ["python", "java", "javascript", "html", "c", "c++", "ruby", "natural"]
+        if !supported_languages.include?(language)
+          diags << "#{language} is not a supported langauge"
+        end
   
+        # Converts each PIF block into a Parsons block 
         blocks.each do |block|
           block = block.dottie!
   
-          block_data_model = {
+          parsons_block = {
             "text" => "", 
             "type" => "", 
             "tag" => "",
@@ -34,35 +45,40 @@ module Parsons
   
           has_blocklist = block["blocklist"]
   
+          # Parsons cannot support nontrivial blocklists 
           if has_blocklist && !block["pickone"]
-            return nil 
-          elsif has_blocklist
-            block_data_model["text"] = block["blocklist[0].display"]
-            block_data_model["tag"] = block["blocklist[0].blockid"] || ""
-            block_data_model["depends"] = block["depends"] || ""
-            parsons_data_model["blocks"] << block_data_model
+            diags << "Parsons does not support nontrivial blocklists: #{block}."
+          # Case: Pickone blocklist
+          elsif 
+            # Adds the root of the blocklist 
+            parsons_block["text"] = block["blocklist[0].display"]
+            parsons_block["tag"] = block["blocklist[0].blockid"] || ""
+            parsons_block["depends"] = block["depends"] || ""
+            parsons_data_model["blocks"] << parsons_block
   
+            # Adds the closest distractor 
             if (block["blocklist"].length > 1)
-              paired_distractor = block["blocklist[1]"]
-              paired_distractor_data_model = {
-                "text" => paired_distractor["display"], 
+              distractor = block["blocklist[1]"]
+              parsons_distractor = {
+                "text" => distractor["display"], 
                 "tag" => "paired", 
                 "depends" => "", 
                 "displaymath" => "",
               }
-              parsons_data_model["blocks"] << paired_distractor_data_model
+              parsons_data_model["blocks"] << parsons_distractor
             end
+          # Case: Normal block 
           else
-            block_data_model["text"] = block["display"]
+            parsons_block["text"] = block["display"]
   
             if block["depends"] == -1 
-              block_data_model["type"] = "distractor"
+              parsons_block["type"] = "distractor"
             else 
-              block_data_model["tag"] = block["blockid"] || ""
-              block_data_model["depends"] = block["depends"] || ""
+              parsons_block["tag"] = block["blockid"] || ""
+              parsons_block["depends"] = block["depends"] || ""
             end 
   
-            parsons_data_model["blocks"] << block_data_model
+            parsons_data_model["blocks"] << parsons_block
           end 
         end
         parsons_data_model

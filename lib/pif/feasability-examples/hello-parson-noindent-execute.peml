@@ -30,8 +30,7 @@ content:----------
 ----------
 []
 
-[assets.code.starter.files]
-[.content]
+[assets.code.block.content]
 blockid: one
 display: print('Hello')
 
@@ -40,7 +39,6 @@ display: print('Parsons')
 
 blockid: three
 display: print('Problems!')
-[]
 []
 
 [assets.test.files]

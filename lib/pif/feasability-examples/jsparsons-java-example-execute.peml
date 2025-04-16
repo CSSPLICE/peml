@@ -36,8 +36,7 @@ public class Parsons {
 ----------
 []
 
-[assets.code.starter.files]
-[.content]
+[assets.code.blocks.content]
 blockid: one
 display: for (int i=0;i<3;i++) {
 indent: 0
@@ -57,7 +56,6 @@ indent: 1
 blockid: five
 display: }
 indent: 0
-[]
 []
 
 [assets.test.files]

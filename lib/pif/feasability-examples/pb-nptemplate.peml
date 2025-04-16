@@ -15,9 +15,7 @@ instructions:----------
 Show the general process for an NP-Completeness Proof.
 ----------
 
-[assets.code.starter.files]
-[.content]
-
+[assets.code.blocks.content]
 blockid: starter
 display: To prove that a problem X is NP-complete do this:
 depends:
@@ -54,6 +52,5 @@ depends: trans
 blockid: t2
 display: Describe a polynomial-time transformation from the solution for <b>I’</b> in problem ``X`A`` (call it <b>SLN’</b>) to <b>SLN</b> such that <b>SLN</b> is the solution for <b>I</b> in problem ``A`X``.
 depends: trans
-[]
 []
 []

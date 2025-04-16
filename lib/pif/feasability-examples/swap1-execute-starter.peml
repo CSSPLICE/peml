@@ -8,6 +8,7 @@
 # not affect exercise presentation). Actually, the distractor block is
 # indistinguishable from another block, but it doesn't matter which
 # one is actually used.
+# Use starter code instead of fixed blocks
 
 exercise_id: https://github.com/CSSPLICE/peml-feasibility-examples/blob/main/parsons/swap1-execute.peml
 
@@ -38,13 +39,17 @@ public class Answer
 ----------
 []
 
-[assets.code.blocks.content]
-tag: fixed
-display:----------
+[assets.code.starter.files]
+content:----------
 public int[] Swap(int[] arr, int i, int j)
 {
+    ___
+    return arr;
+}
 ----------
 
+
+[assets.code.blocks.content]
 blockid: one
 display: int temp = arr[i];
 
@@ -64,12 +69,6 @@ display: arr[j] = temp;
 # This is a distractor
 blockid: four
 display: int temp = arr[j];
-
-blockid: fixed
-display:----------
-    return arr;
-}
-----------
 []
 
 [assets.test.files]

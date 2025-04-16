@@ -4,12 +4,11 @@ require 'csv'
 
 # Notes to self: 
 # 1.) For the first block in each blocklist, ensure that its depends tag is empty 
-# 2.) Possibly expand interpretation of blocklist, depending on if [.pickone] is kept
+## 2.) Possibly expand interpretation of blocklist, depending on if [.pickone] is kept
 # 3.) Might be easier if cycle detection is needed to explicitly set depends of first block 
 #     in blocklist to the depends tag of the list 
-# 4.) Removed indentation check from schema. Add function equivalent 
 # 5.) Removed order/execute type from schema. Add function equivalent 
-# 6.) For execution-based testing, ask if only test.content and test.format fields are necessary 
+## 6.) For execution-based testing, ask if only test.content and test.format fields are necessary 
 #     or if wrapper is and pattern_actual is also needed.
 # #7.) Only if test format is specified do we need to validate that the content is csv formatted (could be explicit ordering) 
 
@@ -43,23 +42,40 @@ module Parser
       # Extended validation
       if (diags.empty?)
         style_tag = value["tags.style"] # Structurally required 
-        block_content = value['assets.code.starter.files[0].content'] # Structurally required
+        block_content = value['assets.code.blocks.content'] # Structurally required
         test_content = value['assets.test.files[0].content'] # Optional 
 
         # Blocks separated by type
+        # Altered into format {"pos": block_position, "block": original_block_info}
         s = separate_blocks(block_content)
         normal_blocks = s[0]
         blocklists = s[1]
         distractors = s[2]
 
+        # Validates that the first block of a blocklist (including "assets.code.blocks.content")
+        # has an empty or implicit dependency 
+        if (!block_content[0]["blocklist"])
+          diags << "The first block is considered the root of a DAG. It's dependency should be empty or implicit."
+        end
+
+        blocklists.each do |blocklist|
+          raw_blocklist = blocklist["block"]["blocklist"] # Retreives blocklist's original form before separate_blocks
+          root = raw_blocklist[0] # Structurally required
+
+          if (root["depends"] && root["depends"] != "")
+            diags << "Block at position #{blocklist["pos"]}.1 is considered the root of a DAG. It's dependency should be empty or implicit."
+          end
+        end
+
         # Validates that indentation values are provided if required 
         if (style_tag.include?("indent"))
+          puts normal_blocks
           normal_blocks.each do |block|
             indent = block["indent"]
             if (!indent)
-              diags += "Block at position #{block["pos"]} missing required indent field."
+              diags << "Block at position #{block["pos"]} missing required indent field."
             elsif (Integer(indent) < 0)
-              diags += "Block at position #{block["pos"]} uses negative indent."
+              diags << "Block at position #{block["pos"]} uses negative indent."
             end
           end
         end

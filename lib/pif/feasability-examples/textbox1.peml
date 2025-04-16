@@ -29,8 +29,7 @@ b = 2
 ----------
 []
 
-[assets.code.starter.files]
-[.content]
+[assets.code.blocks.content]
 blockid: one1
 display: if a ```` b
 
@@ -42,7 +41,6 @@ display: else
 
 blockid four
 display: print(b)
-[]
 []
 
 [assets.test.files]

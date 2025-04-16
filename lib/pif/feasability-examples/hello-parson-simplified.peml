@@ -21,8 +21,7 @@ instructions:----------
 **Your task**: Construct a Python program that prints strings "Hello", "Parsons", and "Problems" on their own lines. You should construct your program by dragging and dropping the lines to the solution area on the right.
 ----------
 
-[assets.code.starter.files]
-[.content]
+[assets.code.blocks.content]
 display: print('Hello')
 
 display: print('Parsons')
@@ -31,5 +30,4 @@ display: print('Oops!')
 depends: -1
 
 display: print('Problems!')
-[]
 []

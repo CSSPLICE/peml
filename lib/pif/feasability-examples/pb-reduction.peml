@@ -15,9 +15,7 @@ instructions:----------
 Show the general process for reducing one problem to another.
 ----------
 
-[assets.code.starter.files]
-[.content]
-
+[assets.code.blocks.content]
 blockid: start
 display: Consider any two problems for which a suitable reduction from one to the other can be found.
 depends:
@@ -41,5 +39,4 @@ depends: transform
 blockid: finish
 display: Transform <b>SLN’</b> to the solution of <b>I</b>, known as <b>SLN</b>. Note that <b>SLN</b> must in fact be the correct solution for <b>I</b> for the reduction to be acceptable.
 depends: transform
-[]
 []

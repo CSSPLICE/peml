@@ -18,8 +18,7 @@ instructions:----------
 Show a proof that the decision form of Independent Set is NP-complete.
 ----------
 
-[assets.code.starter.files]
-[.content]
+[assets.code.blocks.content]
 
 blockid: inNP
 display: 1. Show that INDEPENDENT SET is in NP.
@@ -82,5 +81,4 @@ depends: iff
 blockid: onlyif
 display: <b>If there is a clique of size $k$ in the graph $G$</b>, it implies all vertices share an edge with all others in $G$, which further implies no two of these vertices share an edge in $G'$ (thus forming an Independent Set. That is, <b>there exists an independent set of size $k$ in $G'$</b>.
 depends: iff
-[]
 []

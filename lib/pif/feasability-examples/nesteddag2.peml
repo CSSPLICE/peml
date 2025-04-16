@@ -15,8 +15,7 @@ Associate each test with its corresponding work, but you can do the
 tests in any order.
 ----------
 
-[assets.code.starter.files]
-[.content]
+[assets.code.blocks.content]
 blockid: testAblock
 depends:
 [.blocklist]
