@@ -15,7 +15,7 @@ license.owner.name: Cliff Shaffer
 license.owner.email: shaffer@vt.edu
 
 tags.topics: PEML Demo Parsons Problem
-tags.style: parsons, noindent, order
+tags.style: parsons, order
 
 instructions:----------
 Prove that $A \land B \land C) \rightarrow A \land C$.

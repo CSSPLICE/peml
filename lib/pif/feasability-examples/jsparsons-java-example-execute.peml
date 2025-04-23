@@ -15,7 +15,7 @@ license.owner.name: Cliff Shaffer
 license.owner.email: shaffer@vt.edu
 
 tags.topics: PEML Demo Parsons Problem
-tags.style: parsons, indent, execute
+tags.style: parsons, execute, indent
 
 instructions:----------
 Construct code by reordering and indenting the lines.
@@ -61,7 +61,7 @@ indent: 0
 [assets.test.files]
 format: text/csv-unquoted
 content:----------
-expected,description
+expected
 I am a Java program I am a Java program I am a Java program
 ----------
 []

@@ -1,0 +1,47 @@
+{"value"=>
+  {"question_text"=>
+    "Show the steps to prove that the SORTING problem can be reduced to the PAIRING problem.\n",
+   "options"=>
+    {"grader"=>{"type"=>"dag", "showFeedback"=>true},
+     "maxdist"=>0,
+     "order"=>"",
+     "noindent"=>true,
+     "adaptive"=>true,
+     "numbered"=>false,
+     "language"=>"",
+     "runnable"=>true},
+   "blocks"=>
+    [{"text"=>"Start with an input instance to SORTING (an array of records).",
+      "type"=>"",
+      "tag"=>"start",
+      "depends"=>"",
+      "displaymath"=>true},
+     {"text"=>"Start with an input instance to PAIRING (an array of records).",
+      "type"=>"",
+      "tag"=>"d1",
+      "depends"=>"-1",
+      "displaymath"=>true},
+     {"text"=>
+       "Start with an input instance to PAIRING (two arrays, one an array of n arbitrary records, the other with the values 0 to n-1).",
+      "type"=>"",
+      "tag"=>"d2",
+      "depends"=>"-1",
+      "displaymath"=>true},
+     {"text"=>
+       "Define a transformation that converts an arbitrary instance of SORTING to some instance of PAIRING.",
+      "type"=>"",
+      "tag"=>"t1",
+      "depends"=>"start",
+      "displaymath"=>true},
+     {"text"=>
+       "Define a transformation that converts an arbitrary instance of PAIRING to some instance of SORTING.",
+      "type"=>"",
+      "tag"=>"d3",
+      "depends"=>"-1",
+      "displaymath"=>true},
+     {"text"=>"Return SLN, the solution to PAIRING.",
+      "type"=>"",
+      "tag"=>"pairingin",
+      "depends"=>"-1",
+      "displaymath"=>true}]},
+ "diags"=>[]}

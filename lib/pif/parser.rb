@@ -3,14 +3,13 @@ require 'dottie/ext'
 require 'csv'
 
 # Notes to self: 
-# 1.) For the first block in each blocklist, ensure that its depends tag is empty 
-## 2.) Possibly expand interpretation of blocklist, depending on if [.pickone] is kept
-# 3.) Might be easier if cycle detection is needed to explicitly set depends of first block 
-#     in blocklist to the depends tag of the list 
-# 5.) Removed order/execute type from schema. Add function equivalent 
-## 6.) For execution-based testing, ask if only test.content and test.format fields are necessary 
-#     or if wrapper is and pattern_actual is also needed.
-# #7.) Only if test format is specified do we need to validate that the content is csv formatted (could be explicit ordering) 
+# 1.) Determine whether both blocklist and blocklist[0] and have 
+#     depends fields, and if so, what each represents 
+# 2.) If using execution-based grading, does PIF require all of the following: 
+#     tabular test content, format, wrapper, and pattern_actual 
+# 3.) Check for duplicate blockids
+# 4.) Currently, I am not sure how my code would be compiled into a Ruby gem 
+#     (assuming we're going in that direction). The 
 
 module Parser
   # ------------------------------------------------------------------------------
@@ -52,26 +51,29 @@ module Parser
         blocklists = s[1]
         distractors = s[2]
 
+        # (replace possibly)
         # Validates that the first block of a blocklist (including "assets.code.blocks.content")
         # has an empty or implicit dependency 
-        if (!block_content[0]["blocklist"])
+        first_block = block_content[0]
+        first_block_deps = first_block["depends"]
+        if (!first_block["blocklist"] && first_block_deps && first_block_deps != "")
           diags << "The first block is considered the root of a DAG. It's dependency should be empty or implicit."
         end
 
         blocklists.each do |blocklist|
           raw_blocklist = blocklist["block"]["blocklist"] # Retreives blocklist's original form before separate_blocks
           root = raw_blocklist[0] # Structurally required
+          root_deps = root["depends"]
 
-          if (root["depends"] && root["depends"] != "")
+          if (root["depends"] && root_deps != "")
             diags << "Block at position #{blocklist["pos"]}.1 is considered the root of a DAG. It's dependency should be empty or implicit."
           end
         end
 
         # Validates that indentation values are provided if required 
         if (style_tag.include?("indent"))
-          puts normal_blocks
           normal_blocks.each do |block|
-            indent = block["indent"]
+            indent = block["block"]["indent"]
             if (!indent)
               diags << "Block at position #{block["pos"]} missing required indent field."
             elsif (Integer(indent) < 0)
@@ -80,12 +82,22 @@ module Parser
           end
         end
 
+        # Validates that blockids are unique 
+        
+
         # Validates that all blockids are recognized references 
         diags += validate_blockdeps(block_content)
 
         # Validates that csv test data is correctly formatted
         if (test_content) 
-          diags += validate_test_content(test_content)
+          parsed_test_content = Peml::CsvUnquotedParser.new.parse(test_content)
+          header = parsed_test_content[0]
+
+          parsed_test_content[1..].each_with_index do |row, i|
+            if (row.length != header.length)
+              diags << "Row #{i} of the test content does not match its header length."
+            end
+          end
         end
       end
     end
@@ -174,7 +186,7 @@ module Parser
   end
 
   # ------------------------------------------------------------------------------
-  # Validates that CSV test content is properly formatted 
+  # Validates that CSV test content is properly formatted
   def self.validate_test_content(content)
     err = []
     lines = content.lines 

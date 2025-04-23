@@ -78,7 +78,7 @@ template:
 pattern_actual: subject.Swap({{arr,i,j}})
 content:----------
 arr,i,j,expected,description
-"new int[]{1, 2, 3, 4}, 2, 3","new int[]{1,2,4,3}",example
-"new int[]{1, 2, 3, 4}, 0, 3","new int[]{4,2,3,1}",hidden
+"new int[]{1, 2, 3, 4}", 2, 3,"new int[]{1,2,4,3}",example
+"new int[]{1, 2, 3, 4}", 0, 3,"new int[]{4,2,3,1}",hidden
 ----------
 []

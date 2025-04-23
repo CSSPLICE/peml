@@ -11,7 +11,7 @@ license.owner.name: Cliff Shaffer
 license.owner.email: shaffer@vt.edu
 
 tags.topics: PEML Demo Parsons Problem
-tags.style: parsons, indent, execute
+tags.style: parsons, execute, indent
 
 instructions:----------
 Your task is to construct a function which returns the index of the largest element in the array.
@@ -51,12 +51,6 @@ indent: 3
 blockid: six
 display: return ans
 indent: 1
-
-blockid: d1
-display: while True
-
-blockid: d2
-display: pass
 []
 
 [assets.test.files]

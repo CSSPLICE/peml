@@ -12,7 +12,7 @@ license.owner.name: Cliff Shaffer
 license.owner.email: shaffer@vt.edu
 
 tags.topics: PEML Demo Parsons Problem
-tags.style: parsons, indent, execute
+tags.style: parsons, execute, indent
 
 instructions:----------
 The constructed code should print the minimum of variables a and b.
@@ -32,21 +32,25 @@ b = 2
 [assets.code.blocks.content]
 blockid: one1
 display: if a ```` b
+indent: 0
 
 blockid: two
 display: print(a)
+indent: 1
 
 blockid: three
 display: else
+indent: 0
 
 blockid four
 display: print(b)
+indent: 1
 []
 
 [assets.test.files]
 format: text/csv-unquoted
 content:----------
-expected,description
+expected
 2
 ----------
 []

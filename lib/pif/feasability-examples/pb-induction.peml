@@ -33,7 +33,7 @@ display: Inductive Predicate: $P(n): \sum_{j=0}^n 2(-7)^j = \frac{1-(-7)^{n+1}}{
 depends: starter
 
 blockid: basecase
-depends: pedicate
+depends: predicate
 pickone: true
 [.blocklist]
 blockid: base1
@@ -61,7 +61,7 @@ depends: IH
 pickone: true
 [.blocklist]
 blockid: IS1
-diplay: Inductive Step: We need to show that $P(k+1):$ $\sum_{j=0}^{k+1} 2(-7)^j = \frac{1-(-7)^{k+2}}{4}$ holds.
+display: Inductive Step: We need to show that $P(k+1):$ $\sum_{j=0}^{k+1} 2(-7)^j = \frac{1-(-7)^{k+2}}{4}$ holds.
 
 blockid: IS2
 display: Inductive Step: We need to show that $P(k+1):$ $\sum_{j=0}^{k} 2(-7)^j = \frac{1-(-7)^{k+2}}{4}$ holds.
@@ -77,7 +77,7 @@ depends: left
 pickone: true
 [.blocklist]
 blockid: useIH1
-By the inductive hypothesis we have $\sum_{j=0}^k 2(-7)^j = \frac{1-(-7)^{k+1}}{4}$. So then substituting we get $\frac{1-(-7)^{k+1}}{4} + 2(-7)^{k+1}$ $= \frac{1-(-7)^{k+1} + 8(-7)^{k+1}}{4}$ $= \frac{1+7(-7)^{k+1}}{4}$ which simplifies to $= \frac{1-(-7)^{k+2}}{4}$
+display: By the inductive hypothesis we have $\sum_{j=0}^k 2(-7)^j = \frac{1-(-7)^{k+1}}{4}$. So then substituting we get $\frac{1-(-7)^{k+1}}{4} + 2(-7)^{k+1}$ $= \frac{1-(-7)^{k+1} + 8(-7)^{k+1}}{4}$ $= \frac{1+7(-7)^{k+1}}{4}$ which simplifies to $= \frac{1-(-7)^{k+2}}{4}$
 
 blockid: useIH2
 display: By the inductive hypothesis we have $\sum_{j=0}^{k+1} 2(-7)^j = \sum_{j=0}^k 2(-7)^j + 2(-7)^{k+1}$. So then substituting we get $\frac{1-(-7)^{k+1}}{4} + 2(-7)^{k+1}$ $= \frac{1-(-7)^{k+1} + 8(-7)^{k+1}}{4}$ $= \frac{1+7(-7)^{k+1}}{4}$ which simplifies to $= \frac{1-(-7)^{k+2}}{4}$

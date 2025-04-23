@@ -30,7 +30,7 @@ content:----------
 ----------
 []
 
-[assets.code.block.content]
+[assets.code.blocks.content]
 blockid: one
 display: print('Hello')
 
@@ -44,7 +44,7 @@ display: print('Problems!')
 [assets.test.files]
 format: text/csv-unquoted
 content:----------
-expected,description
+expected
 Hello\nParsons\nProblems!
 ----------
 []

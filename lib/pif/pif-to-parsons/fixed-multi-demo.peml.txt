@@ -1,0 +1,71 @@
+{"value"=>
+  {"question_text"=>"Put the blocks in the proper order.\n",
+   "options"=>
+    {"grader"=>{"type"=>"dag", "showFeedback"=>true},
+     "maxdist"=>0,
+     "order"=>"",
+     "noindent"=>true,
+     "adaptive"=>true,
+     "numbered"=>false,
+     "language"=>"",
+     "runnable"=>true},
+   "blocks"=>
+    [{"text"=>
+       "Fixed Start\n" +
+       "  This block goes at the beginning\n" +
+       "  of the exercise.\n",
+      "type"=>"",
+      "tag"=>"fixed",
+      "depends"=>"",
+      "displaymath"=>true},
+     {"text"=>
+       "Random Group 1 Block 1\n" +
+       "  This block is the first block after the \"Fixed Start\" block.\n",
+      "type"=>"",
+      "tag"=>"randomg1b1",
+      "depends"=>"",
+      "displaymath"=>true},
+     {"text"=>
+       "Random Group 1 Block 2\n" +
+       "  This block is the second block after the \"Fixed Start\" block.\n",
+      "type"=>"",
+      "tag"=>"randomg1b2",
+      "depends"=>"randomg1b1",
+      "displaymath"=>true},
+     {"text"=>"Random Group 1 Block 3: the third block in the first group",
+      "type"=>"",
+      "tag"=>"randomg1b3",
+      "depends"=>"randomg1b2",
+      "displaymath"=>true},
+     {"text"=>"Fixed Middle: Appears in the middle of the exercise",
+      "type"=>"",
+      "tag"=>"fixed",
+      "depends"=>"",
+      "displaymath"=>true},
+     {"text"=>
+       "Random Group 2 Block 1\n" +
+       "  This block is the first block after the \"Fixed Middle\" block.\n",
+      "type"=>"",
+      "tag"=>"randomg2b1",
+      "depends"=>"randomg1b3",
+      "displaymath"=>true},
+     {"text"=>
+       "Random Group 2 Block 2\n" +
+       "  This block is the second block\n" +
+       "that comes after the \"Fixed Start\" block.\n",
+      "type"=>"",
+      "tag"=>"randomg2b2",
+      "depends"=>"randomg2b1",
+      "displaymath"=>true},
+     {"text"=>
+       "Random Group 2 Block 3\n" + "This is the final adjustable block.\n",
+      "type"=>"",
+      "tag"=>"randomg1b3",
+      "depends"=>"randomg2b2",
+      "displaymath"=>true},
+     {"text"=>"Fixed End\n" + "      This block appears at the end.\n",
+      "type"=>"",
+      "tag"=>"fixed",
+      "depends"=>"",
+      "displaymath"=>true}]},
+ "diags"=>[]}
