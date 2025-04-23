@@ -1,0 +1,25 @@
+{:value=>
+  {"exercise_id"=>
+    "https://github.com/CSSPLICE/peml-feasibility-examples/blob/main/parsons/textbox2.peml",
+   "title"=>"Print min value - textbox 2",
+   "license"=>
+    {"id"=>"MIT",
+     "owner"=>{"name"=>"Cliff Shaffer", "email"=>"shaffer@vt.edu"}},
+   "tags"=>
+    {"topics"=>"PEML Demo Parsons Problem",
+     "style"=>"parsons, execute, indent"},
+   "instructions"=>
+    "The constructed code should print the minimum of variables a and b.\n",
+   "systems"=>[{"language"=>"Python"}],
+   "assets"=>
+    {"code"=>
+      {"wrapper"=>{"files"=>[{"content"=>"a = 4\n" + "b = 2\n"}]},
+       "blocks"=>
+        {"content"=>
+          [{"blockid"=>"one1", "display"=>"if a ``<>`` b", "indent"=>"0"},
+           {"blockid"=>"two", "display"=>"print(a)", "indent"=>"1"},
+           {"blockid"=>"three", "display"=>"print(b)", "indent"=>"1"}]}},
+     "test"=>
+      {"files"=>
+        [{"format"=>"text/csv-unquoted", "content"=>"expected\n" + "2\n"}]}}},
+ :diagnostics=>[]}

@@ -31,8 +31,8 @@
       "depends"=>"two",
       "displaymath"=>true},
      {"text"=>"int temp = arr[j];",
-      "type"=>"",
-      "tag"=>"four",
-      "depends"=>"-1",
+      "type"=>"distractor",
+      "tag"=>"",
+      "depends"=>"",
       "displaymath"=>true}]},
  "diags"=>[]}

@@ -1,0 +1,39 @@
+{:value=>
+  {"exercise_id"=>
+    "https://github.com/CSSPLICE/peml-feasibility-examples/blob/main/parsons/jsparsons-unittests.peml",
+   "title"=>"JSParsons Unittests",
+   "external_id"=>"JSParsons Unittests",
+   "license"=>
+    {"id"=>"MIT",
+     "owner"=>{"name"=>"Cliff Shaffer", "email"=>"shaffer@vt.edu"}},
+   "tags"=>
+    {"topics"=>"PEML Demo Parsons Problem",
+     "style"=>"parsons, execute, indent"},
+   "instructions"=>
+    "Your task is to construct a function which returns the index of the largest element in the array.\n",
+   "systems"=>[{"language"=>"Python"}],
+   "assets"=>
+    {"code"=>
+      {"wrapper"=>{"files"=>[{"content"=>"    ___\n"}]},
+       "blocks"=>
+        {"content"=>
+          [{"blockid"=>"one", "display"=>"def maxindex(arg):", "indent"=>"0"},
+           {"blockid"=>"two", "display"=>"ans = 0", "indent"=>"1"},
+           {"blockid"=>"three",
+            "display"=>"for i in range(len(arg)):",
+            "indent"=>"1"},
+           {"blockid"=>"four",
+            "display"=>"if arg[i] > arg[ans]:",
+            "indent"=>"2"},
+           {"blockid"=>"five", "display"=>"ans = i", "indent"=>"3"},
+           {"blockid"=>"six", "display"=>"return ans", "indent"=>"1"}]}},
+     "test"=>
+      {"files"=>
+        [{"format"=>"text/csv-unquoted",
+          "template"=>"  maxindex(arr)",
+          "content"=>
+           "arr,expected,description\n" +
+           "[0, 2, 4], 2, example\n" +
+           "[7, 2, 4], 0, hidden\n" +
+           "[7, 8, 4], 1, example\n"}]}}},
+ :diagnostics=>[]}

@@ -1,0 +1,19 @@
+{:value=>
+  {"exercise_id"=>
+    "https://github.com/CSSPLICE/peml-feasibility-examples/blob/main/parsons/hello-parson-noindent-order.peml",
+   "title"=>"Your First Parsons Problem -- Ordered",
+   "author"=>"Cliff Shaffer (from js-Parsons, converted to PEML)",
+   "license"=>
+    {"id"=>"MIT",
+     "owner"=>{"name"=>"Cliff Shaffer", "email"=>"shaffer@vt.edu"}},
+   "tags"=>{"topics"=>"PEML Demo Parsons Problem", "style"=>"parsons, order"},
+   "instructions"=>
+    "**Your task**: Construct a Python program that prints strings \"Hello\", \"Parsons\", and \"Problems\" on their own lines. You can get feedback on your current solution with the feedback button. You should construct your program by dragging and dropping the lines to the solution area on the right.\n",
+   "assets"=>
+    {"code"=>
+      {"blocks"=>
+        {"content"=>
+          [{"blockid"=>"one", "display"=>"print('Hello')"},
+           {"blockid"=>"two", "display"=>"print('Parsons')"},
+           {"blockid"=>"three", "display"=>"print('Problems!')"}]}}}},
+ :diagnostics=>[]}

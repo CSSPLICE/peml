@@ -1,0 +1,40 @@
+{:value=>
+  {"exercise_id"=>
+    "https://github.com/CSSPLICE/peml-feasibility-examples/blob/main/parsons/pb-sort2pair.peml",
+   "title"=>"Reduction of SORTING to PAIRING",
+   "author"=>"Cliff Shaffer",
+   "license"=>
+    {"id"=>"MIT",
+     "owner"=>{"name"=>"Cliff Shaffer", "email"=>"shaffer@vt.edu"}},
+   "tags"=>{"topics"=>"PEML reduction", "style"=>"parsons, order"},
+   "instructions"=>
+    "Show the steps to prove that the SORTING problem can be reduced to the PAIRING problem.\n",
+   "assets"=>
+    {"code"=>
+      {"blocks"=>
+        {"content"=>
+          [{"blockid"=>"start",
+            "display"=>
+             "Start with an input instance to SORTING (an array of records).",
+            "depends"=>""},
+           {"blockid"=>"d1",
+            "display"=>
+             "Start with an input instance to PAIRING (an array of records).",
+            "depends"=>"-1"},
+           {"blockid"=>"d2",
+            "display"=>
+             "Start with an input instance to PAIRING (two arrays, one an array of n arbitrary records, the other with the values 0 to n-1).",
+            "depends"=>"-1"},
+           {"blockid"=>"t1",
+            "display"=>
+             "Define a transformation that converts an arbitrary instance of SORTING to some instance of PAIRING.",
+            "depends"=>"start"},
+           {"blockid"=>"d3",
+            "display"=>
+             "Define a transformation that converts an arbitrary instance of PAIRING to some instance of SORTING.",
+            "depends"=>"-1"},
+           {"blockid"=>"pairingin",
+            "display"=>"Return SLN, the solution to PAIRING.",
+            "depends"=>"-1",
+            "block"=>"d4"}]}}}},
+ :diagnostics=>[]}

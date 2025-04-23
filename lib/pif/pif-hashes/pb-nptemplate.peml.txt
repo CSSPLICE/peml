@@ -1,0 +1,48 @@
+{:value=>
+  {"exercise_id"=>
+    "https://github.com/CSSPLICE/peml-feasibility-examples/blob/main/parsons/pb-nptemplate.peml",
+   "title"=>"NP-completeness proof template",
+   "author"=>"Cliff Shaffer",
+   "license"=>
+    {"id"=>"MIT",
+     "owner"=>{"name"=>"Cliff Shaffer", "email"=>"shaffer@vt.edu"}},
+   "tags"=>{"topics"=>"PEML NP-completeness", "style"=>"parsons, order"},
+   "instructions"=>"Show the general process for an NP-Completeness Proof.\n",
+   "assets"=>
+    {"code"=>
+      {"blocks"=>
+        {"content"=>
+          [{"blockid"=>"starter",
+            "display"=>"To prove that a problem X is NP-complete do this:",
+            "depends"=>""},
+           {"blockid"=>"inNP",
+            "blocklist"=>
+             [{"blockid"=>"xinNP",
+               "display"=>"Show that X is in NP.",
+               "depends"=>"starter"},
+              {"blockid"=>"algorithm",
+               "display"=>
+                "Create an algorithm to solve X (that might or might not use non-determinism) that runs in polynomial time.",
+               "depends"=>"inNP"}]},
+           {"blockid"=>"NPhard",
+            "blocklist"=>
+             [{"blockid"=>"starthard",
+               "display"=>"Show that X is NP-hard.",
+               "depends"=>"starter"},
+              {"blockid"=>"choose",
+               "display"=>"Choose a known NP-hard problem A.",
+               "depends"=>"starthard"},
+              {"blockid"=>"trans",
+               "display"=>"Define two transformations.",
+               "depends"=>"choose"},
+              {"blockid"=>"t1",
+               "display"=>
+                "Describe a polynomial-time algorithm that takes an arbitrary instance <b>I</b> of ``A`X`` to an instance <b>I′</b> of ``X`A``.",
+               "depends"=>"trans"},
+              {"blockid"=>"t2",
+               "display"=>
+                "Describe a polynomial-time transformation from the solution for <b>I’</b> in problem ``X`A`` (call it <b>SLN’</b>) to <b>SLN</b> such that <b>SLN</b> is the solution for <b>I</b> in problem ``A`X``.",
+               "depends"=>"trans"}]}]}}}},
+ :diagnostics=>
+  ["Block at position 1.1 is considered the root of a DAG. It's dependency should be empty or implicit.",
+   "Block at position 2.1 is considered the root of a DAG. It's dependency should be empty or implicit."]}

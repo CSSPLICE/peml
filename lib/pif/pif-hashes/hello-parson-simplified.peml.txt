@@ -1,0 +1,20 @@
+{:value=>
+  {"exercise_id"=>
+    "https://github.com/CSSPLICE/peml-feasibility-examples/blob/main/parsons/hello-parson-simplified.peml",
+   "title"=>"Your First Parsons Problem -- Simplified",
+   "author"=>"Cliff Shaffer (from js-Parsons, converted to PEML)",
+   "license"=>
+    {"id"=>"MIT",
+     "owner"=>{"name"=>"Cliff Shaffer", "email"=>"shaffer@vt.edu"}},
+   "tags"=>{"topics"=>"PEML Demo Parsons Problem", "style"=>"parsons, order"},
+   "instructions"=>
+    "**Your task**: Construct a Python program that prints strings \"Hello\", \"Parsons\", and \"Problems\" on their own lines. You should construct your program by dragging and dropping the lines to the solution area on the right.\n",
+   "assets"=>
+    {"code"=>
+      {"blocks"=>
+        {"content"=>
+          [{"display"=>"print('Hello')"},
+           {"display"=>"print('Parsons')"},
+           {"display"=>"print('Oops!')", "depends"=>"-1"},
+           {"display"=>"print('Problems!')"}]}}}},
+ :diagnostics=>[]}

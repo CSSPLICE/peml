@@ -1,0 +1,28 @@
+{:value=>
+  {"exercise_id"=>
+    "https://github.com/CSSPLICE/peml-feasibility-examples/blob/main/parsons/pb-simpledemo-math.peml",
+   "title"=>"ProofBlocks Simple Proof Demo",
+   "author"=>"Cliff Shaffer (from ProofBlocks demo problem)",
+   "license"=>
+    {"id"=>"MIT",
+     "owner"=>{"name"=>"Cliff Shaffer", "email"=>"shaffer@vt.edu"}},
+   "tags"=>{"topics"=>"PEML Demo Parsons Problem", "style"=>"parsons, order"},
+   "instructions"=>
+    "Prove that $A \\land B \\land C) \\rightarrow A \\land C$.\n",
+   "assets"=>
+    {"code"=>
+      {"blocks"=>
+        {"content"=>
+          [{"blockid"=>"one", "display"=>"Assume $A \\land B \\land C$."},
+           {"blockid"=>"two", "display"=>"Then $A$ is true."},
+           {"blockid"=>"three", "display"=>"Then $C$ is true."},
+           {"blockid"=>"four",
+            "display"=>"Since $A$ and $C$, we know $A \\land C$."}]}},
+     "test"=>
+      {"files"=>
+        [{"content"=>
+           "one:\n" +
+           "two: one\n" +
+           "three: one\n" +
+           "four: two, three\n"}]}}},
+ :diagnostics=>["Path '/assets/test/files/0' is missing key: format"]}
