@@ -27,9 +27,12 @@
             "depends"=>"first"},
            {"blockid"=>"transform",
             "display"=>
+             "Transform an arbitrary instance of the first problem to an instance of the second problem. In other words, there must be a transformation from any instance <b>I</b> of the first problem to an instance <b>I’</b> of the second problem.",
+            "depends"=>"second"},
+           {"blockid"=>"algorithm",
+            "display"=>
              "Apply an algorithm for the second problem to the instance <b>I’</b>, yielding a solution <b>SLN’</b>.",
-            "depends"=>"transform",
-            "block"=>"algorithm"},
+            "depends"=>"transform"},
            {"blockid"=>"finish",
             "display"=>
              "Transform <b>SLN’</b> to the solution of <b>I</b>, known as <b>SLN</b>. Note that <b>SLN</b> must in fact be the correct solution for <b>I</b> for the reduction to be acceptable.",

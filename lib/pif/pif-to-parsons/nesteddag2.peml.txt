@@ -1,18 +1,26 @@
-{"value"=>
-  {"question_text"=>
-    "Associate each test with its corresponding work, but you can do the\n" +
-    "tests in any order.\n",
-   "options"=>
-    {"grader"=>{"type"=>"dag", "showFeedback"=>true},
-     "maxdist"=>0,
-     "order"=>"",
-     "noindent"=>true,
-     "adaptive"=>true,
-     "numbered"=>false,
-     "language"=>"",
-     "runnable"=>true},
-   "blocks"=>[]},
- "diags"=>
-  ["Parsons does not support nontrivial blocklists: {\"blockid\"=>\"testAblock\", \"depends\"=>\"\", \"blocklist\"=>[{\"blockid\"=>\"caseA\", \"display\"=>\"if (testA) {\", \"depends\"=>\"\"}, {\"blockid\"=>\"stuffA\", \"display\"=>\"  doAstuff();\\n}\\n\", \"depends\"=>\"caseA\"}]}.",
-   "Parsons does not support nontrivial blocklists: {\"blockid\"=>\"testBblock\", \"depends\"=>\"\", \"blocklist\"=>[{\"blockid\"=>\"caseB\", \"display\"=>\"if (testB) {\", \"depends\"=>\"\"}, {\"blockid\"=>\"stuffB\", \"display\"=>\"  doBstuff();\\n}\\n\", \"depends\"=>\"caseB\"}]}.",
-   "Parsons does not support nontrivial blocklists: {\"blockid\"=>\"testCblock\", \"depends\"=>\"\", \"blocklist\"=>[{\"blockid\"=>\"caseC\", \"display\"=>\"if (testC) {\", \"depends\"=>\"\"}, {\"blockid\"=>\"stuffC\", \"display\"=>\"  doCstuff();\\n}\\n\", \"depends\"=>\"caseC\"}]}."]}
+{
+  "value": {
+    "question_text": "Associate each test with its corresponding work, but you can do the\ntests in any order.\n",
+    "options": {
+      "grader": {
+        "type": "dag",
+        "showFeedback": true
+      },
+      "maxdist": 0,
+      "order": "",
+      "noindent": true,
+      "adaptive": true,
+      "numbered": false,
+      "language": "",
+      "runnable": true
+    },
+    "blocks": [
+
+    ]
+  },
+  "diags": [
+    "Parsons does not support nontrivial blocklists: {\"blockid\"=>\"testAblock\", \"depends\"=>\"\", \"blocklist\"=>[{\"blockid\"=>\"caseA\", \"display\"=>\"if (testA) {\", \"depends\"=>\"\"}, {\"blockid\"=>\"stuffA\", \"display\"=>\"  doAstuff();\\n}\\n\", \"depends\"=>\"caseA\"}]}.",
+    "Parsons does not support nontrivial blocklists: {\"blockid\"=>\"testBblock\", \"depends\"=>\"\", \"blocklist\"=>[{\"blockid\"=>\"caseB\", \"display\"=>\"if (testB) {\", \"depends\"=>\"\"}, {\"blockid\"=>\"stuffB\", \"display\"=>\"  doBstuff();\\n}\\n\", \"depends\"=>\"caseB\"}]}.",
+    "Parsons does not support nontrivial blocklists: {\"blockid\"=>\"testCblock\", \"depends\"=>\"\", \"blocklist\"=>[{\"blockid\"=>\"caseC\", \"display\"=>\"if (testC) {\", \"depends\"=>\"\"}, {\"blockid\"=>\"stuffC\", \"display\"=>\"  doCstuff();\\n}\\n\", \"depends\"=>\"caseC\"}]}."
+  ]
+}

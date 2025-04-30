@@ -1,34 +1,51 @@
-{"value"=>
-  {"question_text"=>
-    "**Your task**: Construct a Python program that prints strings \"Hello\", \"Parsons\", and \"Problems\" on their own lines. You should construct your program by dragging and dropping the lines to the solution area on the right.\n",
-   "options"=>
-    {"grader"=>{"type"=>"dag", "showFeedback"=>true},
-     "maxdist"=>0,
-     "order"=>"",
-     "noindent"=>true,
-     "adaptive"=>true,
-     "numbered"=>false,
-     "language"=>"",
-     "runnable"=>true},
-   "blocks"=>
-    [{"text"=>"print('Hello')",
-      "type"=>"",
-      "tag"=>"",
-      "depends"=>"",
-      "displaymath"=>true},
-     {"text"=>"print('Parsons')",
-      "type"=>"",
-      "tag"=>"",
-      "depends"=>"",
-      "displaymath"=>true},
-     {"text"=>"print('Oops!')",
-      "type"=>"",
-      "tag"=>"",
-      "depends"=>"-1",
-      "displaymath"=>true},
-     {"text"=>"print('Problems!')",
-      "type"=>"",
-      "tag"=>"",
-      "depends"=>"",
-      "displaymath"=>true}]},
- "diags"=>[]}
+{
+  "value": {
+    "question_text": "**Your task**: Construct a Python program that prints strings \"Hello\", \"Parsons\", and \"Problems\" on their own lines. You should construct your program by dragging and dropping the lines to the solution area on the right.\n",
+    "options": {
+      "grader": {
+        "type": "dag",
+        "showFeedback": true
+      },
+      "maxdist": 0,
+      "order": "",
+      "noindent": true,
+      "adaptive": true,
+      "numbered": false,
+      "language": "",
+      "runnable": true
+    },
+    "blocks": [
+      {
+        "text": "print('Hello')",
+        "type": "",
+        "tag": "",
+        "depends": "",
+        "displaymath": true
+      },
+      {
+        "text": "print('Parsons')",
+        "type": "",
+        "tag": "",
+        "depends": "",
+        "displaymath": true
+      },
+      {
+        "text": "print('Oops!')",
+        "type": "",
+        "tag": "",
+        "depends": "-1",
+        "displaymath": true
+      },
+      {
+        "text": "print('Problems!')",
+        "type": "",
+        "tag": "",
+        "depends": "",
+        "displaymath": true
+      }
+    ]
+  },
+  "diags": [
+
+  ]
+}

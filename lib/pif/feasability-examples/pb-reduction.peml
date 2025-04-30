@@ -32,7 +32,7 @@ blockid: transform
 display: Transform an arbitrary instance of the first problem to an instance of the second problem. In other words, there must be a transformation from any instance <b>I</b> of the first problem to an instance <b>I’</b> of the second problem.
 depends: second
 
-block: algorithm
+blockid: algorithm
 display: Apply an algorithm for the second problem to the instance <b>I’</b>, yielding a solution <b>SLN’</b>.
 depends: transform
 

@@ -1,38 +1,57 @@
-{"value"=>
-  {"question_text"=>
-    "Write a function to swap two array elements by reordering the lines.\n",
-   "options"=>
-    {"grader"=>{"type"=>"dag", "showFeedback"=>true},
-     "maxdist"=>0,
-     "order"=>"",
-     "noindent"=>true,
-     "adaptive"=>true,
-     "numbered"=>false,
-     "language"=>"",
-     "runnable"=>true},
-   "blocks"=>
-    [{"text"=>"int temp = arr[i];",
-      "type"=>"",
-      "tag"=>"one",
-      "depends"=>"",
-      "displaymath"=>true},
-     {"text"=>"int temp = arr[j];",
-      "tag"=>"paired",
-      "depends"=>"",
-      "displaymath"=>""},
-     {"text"=>"arr[i] = arr[j];",
-      "type"=>"",
-      "tag"=>"two",
-      "depends"=>"group1",
-      "displaymath"=>true},
-     {"text"=>"arr[j] = temp;",
-      "type"=>"",
-      "tag"=>"three",
-      "depends"=>"two",
-      "displaymath"=>true},
-     {"text"=>"int temp = arr[j];",
-      "type"=>"",
-      "tag"=>"four",
-      "depends"=>"-1",
-      "displaymath"=>true}]},
- "diags"=>[]}
+{
+  "value": {
+    "question_text": "Write a function to swap two array elements by reordering the lines.\n",
+    "options": {
+      "grader": {
+        "type": "dag",
+        "showFeedback": true
+      },
+      "maxdist": 0,
+      "order": "",
+      "noindent": true,
+      "adaptive": true,
+      "numbered": false,
+      "language": "",
+      "runnable": true
+    },
+    "blocks": [
+      {
+        "text": "int temp = arr[i];",
+        "type": "",
+        "tag": "one",
+        "depends": "",
+        "displaymath": true
+      },
+      {
+        "text": "int temp = arr[j];",
+        "tag": "paired",
+        "depends": "",
+        "displaymath": ""
+      },
+      {
+        "text": "arr[i] = arr[j];",
+        "type": "",
+        "tag": "two",
+        "depends": "group1",
+        "displaymath": true
+      },
+      {
+        "text": "arr[j] = temp;",
+        "type": "",
+        "tag": "three",
+        "depends": "two",
+        "displaymath": true
+      },
+      {
+        "text": "int temp = arr[j];",
+        "type": "",
+        "tag": "four",
+        "depends": "-1",
+        "displaymath": true
+      }
+    ]
+  },
+  "diags": [
+
+  ]
+}

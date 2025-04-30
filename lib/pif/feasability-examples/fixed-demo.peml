@@ -50,7 +50,7 @@ blockid: randomg2b2
 display: Random Group 2 Block 2
 depends: randomg2b1
 
-blockid: randomg1b3
+blockid: randomg2b3
 display: Random Group 2 Block 3
 depends: randomg2b2
 

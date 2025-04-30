@@ -1,33 +1,51 @@
-{"value"=>
-  {"question_text"=>"Prove that (A AND B AND C) implies (A AND C).\n",
-   "options"=>
-    {"grader"=>{"type"=>"dag", "showFeedback"=>true},
-     "maxdist"=>0,
-     "order"=>"",
-     "noindent"=>true,
-     "adaptive"=>true,
-     "numbered"=>false,
-     "language"=>"",
-     "runnable"=>true},
-   "blocks"=>
-    [{"text"=>"Assume A AND B AND C.",
-      "type"=>"",
-      "tag"=>"one",
-      "depends"=>"",
-      "displaymath"=>true},
-     {"text"=>"Then A is TRUE.",
-      "type"=>"",
-      "tag"=>"two",
-      "depends"=>"one",
-      "displaymath"=>true},
-     {"text"=>"Then C is TRUE.",
-      "type"=>"",
-      "tag"=>"three",
-      "depends"=>"one",
-      "displaymath"=>true},
-     {"text"=>"Since A and C are TRUE, we know (A AND C) is TRUE.",
-      "type"=>"",
-      "tag"=>"four",
-      "depends"=>"two, three",
-      "displaymath"=>true}]},
- "diags"=>[]}
+{
+  "value": {
+    "question_text": "Prove that (A AND B AND C) implies (A AND C).\n",
+    "options": {
+      "grader": {
+        "type": "dag",
+        "showFeedback": true
+      },
+      "maxdist": 0,
+      "order": "",
+      "noindent": true,
+      "adaptive": true,
+      "numbered": false,
+      "language": "",
+      "runnable": true
+    },
+    "blocks": [
+      {
+        "text": "Assume A AND B AND C.",
+        "type": "",
+        "tag": "one",
+        "depends": "",
+        "displaymath": true
+      },
+      {
+        "text": "Then A is TRUE.",
+        "type": "",
+        "tag": "two",
+        "depends": "one",
+        "displaymath": true
+      },
+      {
+        "text": "Then C is TRUE.",
+        "type": "",
+        "tag": "three",
+        "depends": "one",
+        "displaymath": true
+      },
+      {
+        "text": "Since A and C are TRUE, we know (A AND C) is TRUE.",
+        "type": "",
+        "tag": "four",
+        "depends": "two, three",
+        "displaymath": true
+      }
+    ]
+  },
+  "diags": [
+
+  ]
+}

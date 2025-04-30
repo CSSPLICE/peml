@@ -28,7 +28,7 @@ depends: starter
 
 blockid: algorithm
 display: Create an algorithm to solve X (that might or might not use non-determinism) that runs in polynomial time.
-depends: inNP
+depends: xinNP
 []
 
 blockid: NPhard

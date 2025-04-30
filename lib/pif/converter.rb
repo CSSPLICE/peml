@@ -1,6 +1,10 @@
-module Parsons 
-    # Assumes an already validated and parsed PIF hash is passed
-    def self.convert_PIF(pif)
+require "json"
+require "yaml"
+
+module Converter
+    # Assumes an already validated and parsed PIF hash is passed 
+    # (specifically the :value field)
+    def self.to_Runestone(pif, format=nil)
       # PIF-to-Parsons directly mappable data
       tags = pif['tags']
       style = tags['style']
@@ -99,13 +103,25 @@ module Parsons
             parsons_block["depends"] = block["depends"] || ""
           end 
 
+          # Appends converted block 
           parsons_data_model["blocks"] << parsons_block
         end 
       end
 
-      {
+      result = {
         "value" => parsons_data_model, 
         "diags" => diags
       }
+
+      if (format)
+        case format 
+        when "json"
+          result = JSON.pretty_generate(result)
+        when "yaml"
+          result = result.to_yaml
+        end
+      end
+
+      return result
   end
 end

@@ -1,44 +1,65 @@
-{"value"=>
-  {"question_text"=>
-    "Show the general process for reducing one problem to another.\n",
-   "options"=>
-    {"grader"=>{"type"=>"dag", "showFeedback"=>true},
-     "maxdist"=>0,
-     "order"=>"",
-     "noindent"=>true,
-     "adaptive"=>true,
-     "numbered"=>false,
-     "language"=>"",
-     "runnable"=>true},
-   "blocks"=>
-    [{"text"=>
-       "Consider any two problems for which a suitable reduction from one to the other can be found.",
-      "type"=>"",
-      "tag"=>"start",
-      "depends"=>"",
-      "displaymath"=>true},
-     {"text"=>
-       "The first problem takes an arbitrary instance of its input, which we will call <b>I</b>, and transforms <b>I</b> to a solution, which we will call <b>SLN</b>.",
-      "type"=>"",
-      "tag"=>"first",
-      "depends"=>"start",
-      "displaymath"=>true},
-     {"text"=>
-       "The second problem takes an arbitrary instance of its input, which we will call <b>I’</b>, and transforms <b>I’</b> to a solution, which we will call <b>SLN’</b>.",
-      "type"=>"",
-      "tag"=>"second",
-      "depends"=>"first",
-      "displaymath"=>true},
-     {"text"=>
-       "Apply an algorithm for the second problem to the instance <b>I’</b>, yielding a solution <b>SLN’</b>.",
-      "type"=>"",
-      "tag"=>"transform",
-      "depends"=>"transform",
-      "displaymath"=>true},
-     {"text"=>
-       "Transform <b>SLN’</b> to the solution of <b>I</b>, known as <b>SLN</b>. Note that <b>SLN</b> must in fact be the correct solution for <b>I</b> for the reduction to be acceptable.",
-      "type"=>"",
-      "tag"=>"finish",
-      "depends"=>"transform",
-      "displaymath"=>true}]},
- "diags"=>[]}
+{
+  "value": {
+    "question_text": "Show the general process for reducing one problem to another.\n",
+    "options": {
+      "grader": {
+        "type": "dag",
+        "showFeedback": true
+      },
+      "maxdist": 0,
+      "order": "",
+      "noindent": true,
+      "adaptive": true,
+      "numbered": false,
+      "language": "",
+      "runnable": true
+    },
+    "blocks": [
+      {
+        "text": "Consider any two problems for which a suitable reduction from one to the other can be found.",
+        "type": "",
+        "tag": "start",
+        "depends": "",
+        "displaymath": true
+      },
+      {
+        "text": "The first problem takes an arbitrary instance of its input, which we will call <b>I</b>, and transforms <b>I</b> to a solution, which we will call <b>SLN</b>.",
+        "type": "",
+        "tag": "first",
+        "depends": "start",
+        "displaymath": true
+      },
+      {
+        "text": "The second problem takes an arbitrary instance of its input, which we will call <b>I’</b>, and transforms <b>I’</b> to a solution, which we will call <b>SLN’</b>.",
+        "type": "",
+        "tag": "second",
+        "depends": "first",
+        "displaymath": true
+      },
+      {
+        "text": "Transform an arbitrary instance of the first problem to an instance of the second problem. In other words, there must be a transformation from any instance <b>I</b> of the first problem to an instance <b>I’</b> of the second problem.",
+        "type": "",
+        "tag": "transform",
+        "depends": "second",
+        "displaymath": true
+      },
+      {
+        "text": "Apply an algorithm for the second problem to the instance <b>I’</b>, yielding a solution <b>SLN’</b>.",
+        "type": "",
+        "tag": "algorithm",
+        "depends": "transform",
+        "displaymath": true
+      },
+      {
+        "text": "Transform <b>SLN’</b> to the solution of <b>I</b>, known as <b>SLN</b>. Note that <b>SLN</b> must in fact be the correct solution for <b>I</b> for the reduction to be acceptable.",
+        "type": "",
+        "tag": "finish",
+        "depends": "transform",
+        "displaymath": true
+      }
+    ]
+  },
+  "diags": [
+
+  ]
+}

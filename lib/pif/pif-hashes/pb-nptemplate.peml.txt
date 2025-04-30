@@ -23,7 +23,7 @@
               {"blockid"=>"algorithm",
                "display"=>
                 "Create an algorithm to solve X (that might or might not use non-determinism) that runs in polynomial time.",
-               "depends"=>"inNP"}]},
+               "depends"=>"xinNP"}]},
            {"blockid"=>"NPhard",
             "blocklist"=>
              [{"blockid"=>"starthard",
@@ -43,6 +43,4 @@
                "display"=>
                 "Describe a polynomial-time transformation from the solution for <b>I’</b> in problem ``X`A`` (call it <b>SLN’</b>) to <b>SLN</b> such that <b>SLN</b> is the solution for <b>I</b> in problem ``A`X``.",
                "depends"=>"trans"}]}]}}}},
- :diagnostics=>
-  ["Block at position 1.1 is considered the root of a DAG. It's dependency should be empty or implicit.",
-   "Block at position 2.1 is considered the root of a DAG. It's dependency should be empty or implicit."]}
+ :diagnostics=>[]}
