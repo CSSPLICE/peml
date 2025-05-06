@@ -76,5 +76,5 @@
            {"blockid"=>"final",
             "display"=>
              "So $\\sum_{j=0}^{k+1} 2(-7)^j = \\frac{1-(-7)^{k+2}}{4}$, which was what we needed to show.",
-            "depends"=>"useIH2"}]}}}},
- :diagnostics=>["Unknown block dependencies: [[[\"useIH2\"]]]"]}
+            "depends"=>"useIH"}]}}}},
+ :diagnostics=>[]}

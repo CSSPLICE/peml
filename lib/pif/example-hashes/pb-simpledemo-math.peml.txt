@@ -13,16 +13,16 @@
     {"code"=>
       {"blocks"=>
         {"content"=>
-          [{"blockid"=>"one", "display"=>"Assume $A \\land B \\land C$."},
-           {"blockid"=>"two", "display"=>"Then $A$ is true."},
-           {"blockid"=>"three", "display"=>"Then $C$ is true."},
+          [{"blockid"=>"one",
+            "display"=>"Assume $A \\land B \\land C$.",
+            "depends"=>""},
+           {"blockid"=>"two",
+            "display"=>"Then $A$ is true.",
+            "depends"=>"one"},
+           {"blockid"=>"three",
+            "display"=>"Then $C$ is true.",
+            "depends"=>"one"},
            {"blockid"=>"four",
-            "display"=>"Since $A$ and $C$, we know $A \\land C$."}]}},
-     "test"=>
-      {"files"=>
-        [{"content"=>
-           "one:\n" +
-           "two: one\n" +
-           "three: one\n" +
-           "four: two, three\n"}]}}},
- :diagnostics=>["Path '/assets/test/files/0' is missing key: format"]}
+            "display"=>"Since $A$ and $C$, we know $A \\land C$.",
+            "depends"=>"two, three"}]}}}},
+ :diagnostics=>[]}

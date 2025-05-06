@@ -8,10 +8,11 @@ require 'csv'
 # 2.) Ask if there are two adjacent blocklists, will the second 
 #     depend on the first if its dependency array is empty? 
 
-# 2.) If using execution-based grading, does PIF require all of the following: 
+# 3.) If using execution-based grading, does PIF require all of the following: 
 #     tabular test content, format, wrapper, and pattern_actual <-- required exactly
 #     pattern.actual (compared against expected)
 #     So wrapper is not necessary <-- there is a default 
+# 4.) Ask for Runestone handles blank dependencies. Would there ever be more than a single root? How would we differentiate them? 
 # ISSUES: 
 # reduction example was missing a blockid (resultied in a false cycle detection)
 # simpledemo-math flagged because uses explicit ordering (any test content should be for execution-based grading)
@@ -36,10 +37,10 @@ module Parser
       pif = params[:pif]
     end
 
-    # Parses PIF content as PEML 
+    # Parses content as PEML 
     value = Peml::Loader.new.load(pif).dottie!
 
-    # Validates PIF 
+    # Validates PEML as PIF
     if !params[:result_only]
       # Structural validation based on PIF schema 
       base_dir = File.dirname(File.expand_path(__FILE__))
@@ -56,12 +57,13 @@ module Parser
         style_tag = value["tags.style"] # Structurally required 
         block_content = value['assets.code.blocks.content'] # Structurally required
         test_content = value['assets.test.files[0].content'] # Optional 
-        test_format = value['assets.test.files[0].format'] # Optional 
+        test_format = value['assets.test.files[0].format'] # Optional
+        systems = value['systems'] # Optional 
 
         # Checks that the required fields for execution-based grading 
         # are included 
-        if (style_tag.include?("execute") && (!test_content || !test_format))
-          diags << 'Missing required test content and test format'\
+        if (style_tag.include?("execute") && (!test_content || !test_format || !systems))
+          diags << 'Missing required test content, test format, or language '\
                    'fields for execution-based grading.'
         end
 
@@ -72,10 +74,9 @@ module Parser
         blocklists = s[1]
         distractors = s[2]
 
-        # Checks for a dependency cycle (currently capable of only 
-        # checking blocklist-free problems)
-        if (blocklists.empty? && has_cycle(normal_blocks))
-          diags << "Dependency cycle detected."
+        if (deps_violation(block_content))
+          diags << 'Dependencies must refer to previously defined blocks '\
+                    'within the same blocklist scope.'
         end
 
         # Checks if indentation is required and 
@@ -141,27 +142,24 @@ module Parser
   def self.get_blockids_helper(block)
     curr_blockid = block["blockid"]
     blocklist = block["blocklist"]
-    depends = block["depends"]
-    feedback = block["feedback"]
-    is_distractor = depends == -1 || feedback
+    is_distractor = block["depends"]&.match?(/\s*-1\s*/) || 
+        !block["feedback"].nil?
 
-    # Case: Normal block 
-    if (!blocklist && curr_blockid && !is_distractor)
-      return [curr_blockid]
-    end
-
-    # Case: Blocklist 
-    if (blocklist)
+    # Case: Distractor
+    if (is_distractor)
+      return []
+    # Case: Blocklist
+    elsif (blocklist)
       # Recursively gets blockids of nested elements 
-      blockids = curr_blockid ? [curr_blockid] : []
+      blockids = Array(curr_blockid)
       blocklist.each do |nested_block| 
         blockids += get_blockids_helper(nested_block)
       end
       return blockids 
+    # Case: Normal block
+    else (blocklist)
+      return Array(curr_blockid)
     end
-
-    # Case: Distractor 
-    return []
   end
 
   # ------------------------------------------------------------------------------
@@ -173,27 +171,25 @@ module Parser
   # ------------------------------------------------------------------------------
   # Recursive helper for get_blockdeps
   def self.get_blockdeps_helper(block)
-    depends = block["depends"]
-    feedback = block["feedback"]
-
-    curr_blockdeps = unless !depends || depends == "-1" || feedback
-      block["depends"].split(/\s*,\s*/)
-    else
-      []
-    end    
+    parsed_depends = block["depends"]&.split(/\s*,\s*/)  || []
     blocklist = block["blocklist"]
-
-    # Case : Normal block 
-    if (!blocklist)
-      return curr_blockdeps
-    # Case: Blocklist 
-    else 
-      blockdeps = curr_blockdeps
+    is_distractor = parsed_depends&.include?("-1") ||
+        !block["feedback"].nil?
+    
+    # Case: Distractor
+    if (is_distractor)
+      return []
+    # Case : Blocklist
+    elsif (blocklist)
+      blockdeps = parsed_depends
       # Recursively gets dependencies of all nested elements 
       blocklist.each do |nested_block|
         blockdeps += get_blockdeps_helper(nested_block)
       end
       return blockdeps
+    # Case: Normal block
+    else
+      return parsed_depends
     end
   end
 
@@ -207,7 +203,7 @@ module Parser
       curr_blockid = block["blockid"]
       curr_deps = get_blockdeps_helper(block)
 
-      if (!curr_deps.all? {|d| blockids.include?(d)})
+      if (!(curr_deps - blockids).empty?)
         unrecognized_refs = [curr_deps - blockids]
         errors << "Unknown block dependencies: [#{unrecognized_refs}]"
       end
@@ -269,7 +265,7 @@ module Parser
   end
 
   # ------------------------------------------------------------------------------
-  # Checks whether any blocks form a cycle
+  # Checks whether any blocks form a cycle (replaced by deps_violation())
   def self.has_cycle(blocks) 
     num_blocks = blocks.length 
 
@@ -288,16 +284,20 @@ module Parser
     dependencies_lookup = Array.new(num_blocks)
     blocks.each_with_index do |block, i|
       depends = block["depends"]
-           &.split(/\s*,\s*/)
-           &.map { |d| block_position_lookup[d] } || []
-
+      
+      # Root status (empty dependencies)
+      if (!depends)
+        dependencies_lookup[i] = []
       # Implicit dependency on previous, non-distractor 
-      # block 
-      if (depends.empty? && i != 0)
-        depends = [i - 1] 
+      # block (missing dependencies)
+      elsif (depends == "" && i != 0)
+        dependencies_lookup[i] = [i - 1]
+      # Explicit dependencies 
+      else 
+        dependencies_lookup[i] = depends 
+            .split(/\s*,\s*/)
+            .map { |d| block_position_lookup[d] }
       end
-
-      dependencies_lookup[i] = depends
     end
 
     # Number of prerequisites per block  
@@ -338,5 +338,37 @@ module Parser
     end
 
     return !!marked.index(false)
+  end
+
+  # ------------------------------------------------------------------------------
+  # Ensures that dependencies reference only prior blocks, and nested blocks
+  # only reference blocks in the same list. Prevents cycles as a result. 
+  def self.deps_violation(blocks)
+    previous_blocks = []
+    violation = false
+  
+    blocks.each_with_index do |block|
+      blockid = block["blockid"]
+      blocklist = block["blocklist"]
+      parsed_depends = block["depends"]&.split(/\s*,\s*/)  || []
+      is_distractor = parsed_depends&.include?("-1") || block["feedback"]
+  
+      if (is_distractor)
+        next
+      end
+  
+      # Case: Sublist fails recursive call or dependency not 
+      # found among previous blocks 
+      if ((blocklist && deps_violation(blocklist)) ||
+          (!(parsed_depends - previous_blocks).empty?))
+          return true
+      end
+
+      if (blockid && blockid != "fixed" && blockid != "reusable")
+          previous_blocks << blockid
+      end
+    end
+  
+    return false
   end
 end

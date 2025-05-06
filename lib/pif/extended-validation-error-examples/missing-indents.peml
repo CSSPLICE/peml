@@ -1,0 +1,64 @@
+# Example of an almost valid, execution-based PIF file that requires 
+# indentation, but does not correctly provide indent levels for 
+# all mandatory blocks, i.e., non-blocklists and non-distractors. 
+
+exercise_id: missing_indentation_error
+title: Missing Indentation Error
+author: Cliff Shaffer
+license.id: MIT
+license.owner.name: Cliff Shaffer
+license.owner.email: shaffer@vt.edu
+
+tags.topics: PIF Error Demo
+tags.style: parsons, execute, indent
+
+instructions:----------
+Construct code by reordering and indenting the lines.
+----------
+
+[systems]
+language: Java
+[]
+
+[assets.code.wrapper.files]
+content:----------
+public class Parsons {
+
+    public static void main(String[] args) {
+    ___
+    }
+}
+----------
+[]
+
+[assets.code.blocks.content]
+blockid: one
+display: for (int i=0;i<3;i++) {
+
+blockid: two
+display: System.out.print("I ");
+indent: 1
+
+blockid: three
+display: System.out.print("am ");
+indent: 1
+
+blockid: four
+display: System.out.print("a Java program ");
+indent: 1
+
+blockid: four_b
+display: System.out.print("a Python program ");
+
+blockid: five
+display: }
+indent: 0
+[]
+
+[assets.test.files]
+format: text/csv-unquoted
+content:----------
+expected
+I am a Java program I am a Java program I am a Java program
+----------
+[]

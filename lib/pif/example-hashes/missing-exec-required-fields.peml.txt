@@ -1,0 +1,43 @@
+{:value=>
+  {"exercise_id"=>"negative_indentation_error",
+   "title"=>"Negative Indentation Error",
+   "author"=>"Cliff Shaffer",
+   "license"=>
+    {"id"=>"MIT",
+     "owner"=>{"name"=>"Cliff Shaffer", "email"=>"shaffer@vt.edu"}},
+   "tags"=>{"topics"=>"PIF Error Demo", "style"=>"parsons, execute, indent"},
+   "instructions"=>"Construct code by reordering and indenting the lines.\n",
+   "systems"=>[{"language"=>"Java"}],
+   "assets"=>
+    {"code"=>
+      {"wrapper"=>
+        {"files"=>
+          [{"content"=>
+             "public class Parsons {\n" +
+             "\n" +
+             "    public static void main(String[] args) {\n" +
+             "    ___\n" +
+             "    }\n" +
+             "}\n"}]},
+       "blocks"=>
+        {"content"=>
+          [{"blockid"=>"one",
+            "display"=>"for (int i=0;i<3;i++) {",
+            "indent"=>"0"},
+           {"blockid"=>"two",
+            "display"=>"System.out.print(\"I \");",
+            "indent"=>"1"},
+           {"blockid"=>"three",
+            "display"=>"System.out.print(\"am \");",
+            "indent"=>"1"},
+           {"blockid"=>"four",
+            "display"=>"System.out.print(\"a Java program \");",
+            "indent"=>"1"},
+           {"blockid"=>"five", "display"=>"}", "indent"=>"0"}]}},
+     "test"=>
+      {"files"=>
+        [{"format"=>"text/csv-unquoted",
+          "content"=>
+           "expected, description\n" +
+           "I am a Java program I am a Java program I am a Java program\n"}]}}},
+ :diagnostics=>["Row 0 of the test content does not match its header length."]}

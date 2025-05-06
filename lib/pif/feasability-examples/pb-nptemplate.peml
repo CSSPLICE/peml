@@ -21,10 +21,10 @@ display: To prove that a problem X is NP-complete do this:
 depends:
 
 blockid: inNP
+depends: starter
 [.blocklist]
 blockid: xinNP
 display: Show that X is in NP.
-depends: starter
 
 blockid: algorithm
 display: Create an algorithm to solve X (that might or might not use non-determinism) that runs in polynomial time.
@@ -32,10 +32,10 @@ depends: xinNP
 []
 
 blockid: NPhard
+depends: starter
 [.blocklist]
 blockid: starthard
 display: Show that X is NP-hard.
-depends: starter
 
 blockid: choose
 display: Choose a known NP-hard problem A.

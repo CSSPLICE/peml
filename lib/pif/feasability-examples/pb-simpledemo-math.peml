@@ -24,22 +24,17 @@ Prove that $A \land B \land C) \rightarrow A \land C$.
 [assets.code.blocks.content]
 blockid: one
 display: Assume $A \land B \land C$.
+depends: 
 
 blockid: two
 display: Then $A$ is true.
+depends: one
 
 blockid: three
 display: Then $C$ is true.
+depends: one
 
 blockid: four
 display: Since $A$ and $C$, we know $A \land C$.
-[]
-
-[assets.test.files]
-content:----------
-one:
-two: one
-three: one
-four: two, three
-----------
+depends: two, three
 []

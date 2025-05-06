@@ -1,0 +1,18 @@
+{:value=>
+  {"exercise_id"=>"inconsistent_block_definitions_error_#2",
+   "title"=>"Missing Indentation Error",
+   "author"=>"Cliff Shaffer",
+   "license"=>
+    {"id"=>"MIT",
+     "owner"=>{"name"=>"Cliff Shaffer", "email"=>"shaffer@vt.edu"}},
+   "tags"=>{"topics"=>"PIF Error Demo", "style"=>"parsons, order"},
+   "instructions"=>
+    "**Your task**: Construct a Python program that prints strings \"Good\", \"Morning\", \"World!\" on separate lines. You should construct your program by dragging and dropping the lines to the solution area on the right.\n",
+   "assets"=>
+    {"code"=>
+      {"blocks"=>
+        {"content"=>
+          [{"display"=>"print('Good')", "blockid"=>"id2"},
+           {"display"=>"print('Morning')", "blockid"=>"id3"},
+           {"display"=>"print('World!')"}]}}}},
+ :diagnostics=>[]}

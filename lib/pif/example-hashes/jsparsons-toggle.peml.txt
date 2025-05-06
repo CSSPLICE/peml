@@ -13,7 +13,7 @@
    "systems"=>[{"language"=>"Python"}],
    "assets"=>
     {"code"=>
-      {"wrapper"=>{"files"=>[{"content"=>"a = 4\n" + "b = 2\n"}]},
+      {"wrapper"=>{"files"=>[{"content"=>"a = 4\n" + "b = 2\n" + "___\n"}]},
        "blocks"=>
         {"content"=>
           [{"blockid"=>"one1",

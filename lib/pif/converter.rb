@@ -54,7 +54,7 @@ module Converter
       end
 
       # Converts each PIF block into a Parsons block 
-      blocks.each do |block|
+      blocks.each_with_index do |block, i|
         block = block.dottie!
 
         parsons_block = {

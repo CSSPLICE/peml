@@ -1,0 +1,44 @@
+{
+  "value": {
+    "question_text": "**Your task**: Construct a Python program that prints strings \"Good\", \"Morning\", \"World!\" on separate lines. You should construct your program by dragging and dropping the lines to the solution area on the right.\n",
+    "options": {
+      "grader": {
+        "type": "dag",
+        "showFeedback": true
+      },
+      "maxdist": 0,
+      "order": "",
+      "noindent": true,
+      "adaptive": true,
+      "numbered": false,
+      "language": "",
+      "runnable": true
+    },
+    "blocks": [
+      {
+        "text": "print('Good')",
+        "type": "",
+        "tag": "id2",
+        "depends": "",
+        "displaymath": true
+      },
+      {
+        "text": "print('Morning')",
+        "type": "",
+        "tag": "id3",
+        "depends": "",
+        "displaymath": true
+      },
+      {
+        "text": "print('World!')",
+        "type": "",
+        "tag": "",
+        "depends": "",
+        "displaymath": true
+      }
+    ]
+  },
+  "diags": [
+
+  ]
+}

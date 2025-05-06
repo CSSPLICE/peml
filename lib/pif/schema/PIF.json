@@ -139,6 +139,26 @@
           "type": "object",
           "required": ["blocks"],
           "properties": {
+            "starter": {
+              "type": "object", 
+              "required": ["files"], 
+              "properties": {
+                "files": {
+                  "type": "array", 
+                  "minItems": 1,
+                  "maxItems": 1, 
+                  "items": {
+                    "type": "object", 
+                    "required": ["content"],
+                    "properties": {
+                      "content": {
+                        "pattern": ".*___.*"
+                      }
+                    }
+                  }
+                }
+              }
+            },
             "wrapper": {
               "type": "object",
               "required": ["files"],
@@ -151,7 +171,9 @@
                     "type": "object",
                     "required": ["content"],
                     "properties": {
-                      "content": { "$ref": "#/definitions/nonempty_string" }
+                      "content": {
+                        "pattern": ".*___.*"
+                      }
                     }
                   }
                 }

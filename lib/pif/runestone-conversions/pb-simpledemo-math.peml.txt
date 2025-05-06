@@ -1,0 +1,51 @@
+{
+  "value": {
+    "question_text": "Prove that $A \\land B \\land C) \\rightarrow A \\land C$.\n",
+    "options": {
+      "grader": {
+        "type": "dag",
+        "showFeedback": true
+      },
+      "maxdist": 0,
+      "order": "",
+      "noindent": true,
+      "adaptive": true,
+      "numbered": false,
+      "language": "",
+      "runnable": true
+    },
+    "blocks": [
+      {
+        "text": "Assume $A \\land B \\land C$.",
+        "type": "",
+        "tag": "one",
+        "depends": "",
+        "displaymath": true
+      },
+      {
+        "text": "Then $A$ is true.",
+        "type": "",
+        "tag": "two",
+        "depends": "one",
+        "displaymath": true
+      },
+      {
+        "text": "Then $C$ is true.",
+        "type": "",
+        "tag": "three",
+        "depends": "one",
+        "displaymath": true
+      },
+      {
+        "text": "Since $A$ and $C$, we know $A \\land C$.",
+        "type": "",
+        "tag": "four",
+        "depends": "two, three",
+        "displaymath": true
+      }
+    ]
+  },
+  "diags": [
+
+  ]
+}
