@@ -2,27 +2,11 @@ require_relative "../peml"
 require 'dottie/ext'
 require 'csv'
 
-# Notes to self: 
-# 1.) Determine whether both blocklist and blocklist[0] and have 
-#     depends fields, and if so, what each represents 
-# 2.) Ask if there are two adjacent blocklists, will the second 
-#     depend on the first if its dependency array is empty? 
-
-# 3.) If using execution-based grading, does PIF require all of the following: 
-#     tabular test content, format, wrapper, and pattern_actual <-- required exactly
-#     pattern.actual (compared against expected)
-#     So wrapper is not necessary <-- there is a default 
-# 4.) Ask for Runestone handles blank dependencies. Would there ever be more than a single root? How would we differentiate them? 
-# ISSUES: 
-# reduction example was missing a blockid (resultied in a false cycle detection)
-# simpledemo-math flagged because uses explicit ordering (any test content should be for execution-based grading)
-# pb-induction has dependency on distractor 
-# duplicateid in fixed demos (should be random2b3)
-# peml parser having trouble corresponding blockids and overwriting display fields
-
 module Parser
   # ------------------------------------------------------------------------------
   # Parses and validates a PIF file/string 
+  # Returns a hash structured, by default, as {value: , diags:}
+  # or, if result-only is set to true, the equivalent of hash[:value]. 
   def self.parse(params = {})
     # Gets file contents 
     if params[:filename]

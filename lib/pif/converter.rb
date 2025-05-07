@@ -3,7 +3,7 @@ require "yaml"
 
 module Converter
     # Assumes an already validated and parsed PIF hash is passed 
-    # (specifically the :value field)
+    # - specifically the :value field.
     def self.to_Runestone(pif, format=nil)
       # PIF-to-Parsons directly mappable data
       tags = pif['tags']
