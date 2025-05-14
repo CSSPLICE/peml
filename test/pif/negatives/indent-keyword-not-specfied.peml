@@ -1,7 +1,6 @@
 # Example of an almost valid, execution-based PIF that 
-# incorrectly formats its CSV test content. Namely, 
-# not all CSV rows match the length of the defined 
-# header. 
+# does not use the 'indent' style keyword, but 
+# has block(s) with indent fields. 
 
 exercise_id: test_content_conflict_error
 title: Test Content Conflict Error
@@ -11,7 +10,7 @@ license.owner.name: Cliff Shaffer
 license.owner.email: shaffer@vt.edu
 
 tags.topics: PIF Error Demo
-tags.style: parsons, execute, indent
+tags.style: parsons, execute
 
 instructions:----------
 Construct code by reordering and indenting the lines.
@@ -57,7 +56,7 @@ indent: 0
 [assets.test.files]
 format: text/csv-unquoted
 content:----------
-expected, description
+expected
 I am a Java program I am a Java program I am a Java program
 ----------
 []

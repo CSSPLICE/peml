@@ -44,11 +44,28 @@ module Parser
         test_format = value['assets.test.files[0].format'] # Optional
         systems = value['systems'] # Optional 
 
+        # Style tag indicators (case-sensitive)
+        parsed_style_tag = style_tag.split(/\s*,\s*/)
+        has_parsons_tag = parsed_style_tag.include?("parsons")
+        has_execute_tag = parsed_style_tag.include?("execute")
+        has_order_tag = parsed_style_tag.include?("order")
+        has_indent_tag = parsed_style_tag.include?("indent")
+
+        # Checks that style tag contains "parsons" AND
+        # EITHER "order" or "execute" (in no specific order)
+        if (!has_parsons_tag || 
+            !(has_execute_tag ||
+              has_order_tag) || 
+            (has_execute_tag && has_order_tag)
+           )
+           diags << "Style tag requires 'parsons' and either 'order' or 'execute' keywords."
+        end
+
         # Checks that the required fields for execution-based grading 
         # are included 
-        if (style_tag.include?("execute") && (!test_content || !test_format || !systems))
-          diags << 'Missing required test content, test format, or language '\
-                   'fields for execution-based grading.'
+        if (has_execute_tag && (!test_content || !test_format || !systems))
+          diags << "Missing required test content, test format, or language "\
+                   "fields for execution-based grading."
         end
 
         # Separates blocks into normal blocks, blocklists, and distractors 
@@ -59,13 +76,14 @@ module Parser
         distractors = s[2]
 
         if (deps_violation(block_content))
-          diags << 'Dependencies must refer to previously defined blocks '\
-                    'within the same blocklist scope.'
+          diags << "Dependencies must refer to previously defined blocks "\
+                    "within the same blocklist scope."
         end
 
-        # Checks if indentation is required and 
-        # if all normal blocks have an indent level
-        if (style_tag.include?("indent"))
+        # Checks if indentation is required and, if so, 
+        # whether all normal blocks have an indent level
+        if (has_indent_tag && 
+            has_order_tag)
           normal_blocks.each do |block|
             indent =  block["indent"]
             pos = block["pos"]
@@ -73,11 +91,31 @@ module Parser
             if indent.nil?
               diags << "Block at position #{pos} is missing the required "\
                         "indent field."
-            elsif indent.to_i < 0
-              diags << "Block at position #{pos} has a negative indent."
             end
             
           end
+        end
+
+        # If indent style keyword is not used, 
+        # then checks that no block contains an indent level. 
+        if (!has_indent_tag)
+          # Could recursively process block_content - 
+          # but previous operation has already separated 
+          # them into easily workable form 
+          
+          catch(:illegal_indent) do 
+            s.each do |block_group|
+              block_group.each do |block|
+                indent = block["indent"]
+
+                if !indent.nil?
+                  diags << "Block(s) contain indent fields despite missing 'indent' style keyword."
+                  throw :illegal_indent
+                end
+              end
+            end
+          end
+          
         end
 
         # Checks that blockids are unique 
@@ -92,7 +130,7 @@ module Parser
 
         # Checks that the CSV test content is correctly formatted, 
         # i.e., the header length matches all row lengths 
-        if (style_tag.include?("execute") && test_content) 
+        if (has_execute_tag && test_content) 
           parsed_test_content = Peml::CsvUnquotedParser.new.parse(
             test_content
           )

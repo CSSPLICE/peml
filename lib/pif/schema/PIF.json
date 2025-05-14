@@ -27,7 +27,7 @@
     "id": {
       "allOf": [
         { "$ref": "#/definitions/nonempty_string" },
-        { "pattern": "^[^\\s]+$" }
+        { "pattern": "^[^\\s,]+$" }
       ],
       "description": "A unique identifier without whitespace."
     },
@@ -110,7 +110,7 @@
       "properties": {
         "style": {
           "type": "string",
-          "pattern": "^parsons\\s*,\\s*(order|execute)(\\s*,\\s*indent)?$",
+          "pattern": "^[^,]+(?:\\s*,\\s*[^,]+)*$",
           "description": "Defines the Parsons Problem style, including 'order', 'execute', and optionally 'indent'."
         },
         "topics": { "$ref": "#/definitions/nonempty_string" },
