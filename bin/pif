@@ -11,13 +11,12 @@ require_relative '../lib/pif/converter'
 input_file_path = ARGV[0]
 output_dir = ARGV[1]
 
-filename = File.basename(input_file_path, File.extname(input_file_path))
-
 if input_file_path && output_dir
+    filename = File.basename(input_file_path, File.extname(input_file_path))
+
     file = File.open(input_file_path,"r:UTF-8")
     content = file.read
-    # puts content
-    parsed = Parser.parse({pif:content})
+    parsed = PifParser.parse({pif:content})
     value = parsed[:value].dottie!
     diagnostics = parsed[:diagnostics];
 
@@ -26,17 +25,15 @@ if input_file_path && output_dir
 
     if (diagnostics.length == 0 && !has_nontrivial_blocklist)
         File.open("#{output_dir}/#{filename}.json", 'w') do |file|
-
-            file.puts(Converter.to_Runestone(parsed[:value], "json"))
-            # puts Converter.to_Runestone(parsed[:value], "json")
+            # PIF File is parsed to fit runestone parsons as the default for now.
+            # The option to select a specific parsons version
+            # or native PIF will be added soon
+            file.puts(PifConverter.to_Runestone(parsed[:value], "json"))
         end
     end
 
-    # File.open("#{example_hashes_path}/#{filename}.txt", 'w') do |file|
-    #     PP.pp(parsed, file)
-    # end
-    # puts parsons
 else
     puts "Usage: pif <filename> <output directory>"
     exit 1
 end
+

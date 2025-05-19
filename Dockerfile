@@ -20,4 +20,4 @@ RUN bundle install --full-index
 
 #COPY . .
 
-CMD ruby /peml/runner.rb
+#CMD ruby /peml/runner.rb
