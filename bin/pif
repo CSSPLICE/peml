@@ -1,0 +1,42 @@
+#!/usr/bin/env ruby
+# encoding: UTF-8
+
+lib = File.expand_path("../../lib", __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+
+# require 'pp'
+require_relative '../lib/pif/parser'
+require_relative '../lib/pif/converter'
+
+input_file_path = ARGV[0]
+output_dir = ARGV[1]
+
+filename = File.basename(input_file_path, File.extname(input_file_path))
+
+if input_file_path && output_dir
+    file = File.open(input_file_path,"r:UTF-8")
+    content = file.read
+    # puts content
+    parsed = Parser.parse({pif:content})
+    value = parsed[:value].dottie!
+    diagnostics = parsed[:diagnostics];
+
+    has_nontrivial_blocklist= value["assets.code.blocks.content"]
+                                &.any? {|block| block["blocklist"] && !block["pickone"]}
+
+    if (diagnostics.length == 0 && !has_nontrivial_blocklist)
+        File.open("#{output_dir}/#{filename}.json", 'w') do |file|
+
+            file.puts(Converter.to_Runestone(parsed[:value], "json"))
+            # puts Converter.to_Runestone(parsed[:value], "json")
+        end
+    end
+
+    # File.open("#{example_hashes_path}/#{filename}.txt", 'w') do |file|
+    #     PP.pp(parsed, file)
+    # end
+    # puts parsons
+else
+    puts "Usage: pif <filename> <output directory>"
+    exit 1
+end

@@ -42,7 +42,7 @@ For more details, see the PEML website.}
   end
   spec.bindir        = 'bin'
   # spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  spec.executables   = ['peml', 'pemltest']
+  spec.executables   = ['peml', 'pemltest', 'pif']
   spec.require_paths = ['lib']
 
 
