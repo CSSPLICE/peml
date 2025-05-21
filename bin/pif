@@ -10,8 +10,20 @@ require_relative '../lib/pif/converter'
 
 input_file_path = ARGV[0]
 output_dir = ARGV[1]
+flag = ARGV[2]
+output_format = ARGV[3]
+
+valid_output_formats = ["rs","pif"]
 
 if input_file_path && output_dir
+    #Check for calid flag and output_format
+    if flag && output_format
+        if flag != "-f" || !valid_output_formats.include?(output_format)
+            puts "Unknown flag or format used"
+        end
+    end
+
+
     filename = File.basename(input_file_path, File.extname(input_file_path))
 
     file = File.open(input_file_path,"r:UTF-8")
@@ -28,12 +40,20 @@ if input_file_path && output_dir
             # PIF File is parsed to fit runestone parsons as the default for now.
             # The option to select a specific parsons version
             # or native PIF will be added soon
-            file.puts(PifConverter.to_Runestone(parsed[:value], "json"))
+            case output_format
+            when "pif"
+                file.puts(parsed[:value].to_json)
+            when "rs"
+                file.puts(PifConverter.to_Runestone(parsed[:value], "json"))
+            else
+                puts "the else"
+                file.puts(PifConverter.to_Runestone(parsed[:value], "json"))
+            end
         end
     end
 
 else
-    puts "Usage: pif <filename> <output directory>"
+    puts "Usage: pif <filename> <output directory> \n flag -f : Output format"
     exit 1
 end
 
