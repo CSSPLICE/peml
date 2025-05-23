@@ -4,7 +4,7 @@ require "yaml"
 module PifConverter
   # Assumes an already validated and parsed PIF hash is passed
   # - specifically the :value field.
-  def self.to_Runestone(pif, format=nil)
+  def self.to_Runestone(pif, format = nil)
     # PIF-to-Parsons directly mappable data
     tags = pif['tags']
     style = tags['style']
@@ -13,7 +13,7 @@ module PifConverter
     grader = style.include?('execute') ?
                'exec' :
                'dag'
-    noindent = !style.include?('indent')
+    indent = style.include?('indent')
     numbered = pif['numbered'] || false
     language = pif['systems[0].language']&.downcase || ''
 
@@ -27,7 +27,7 @@ module PifConverter
         },
         "maxdist" => 0,
         "order" => "",
-        "noindent" => noindent,
+        "indent" => indent,
         "adaptive" => true,
         "numbered" => numbered,
         "language" => language,
@@ -62,6 +62,7 @@ module PifConverter
         "type" => "",
         "tag" => "",
         "depends" => "",
+        "indent" => 0,
         "displaymath" => true,
       }.dottie!
 
@@ -101,6 +102,7 @@ module PifConverter
           # Case: Normal Block
           parsons_block["tag"] = block["blockid"] || ""
           parsons_block["depends"] = block["depends"] || ""
+          parsons_block["indent"] = block["indent"] || ""
         end
 
         # Appends converted block

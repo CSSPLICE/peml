@@ -46,7 +46,6 @@ if input_file_path && output_dir
             when "rs"
                 file.puts(PifConverter.to_Runestone(parsed[:value], "json"))
             else
-                puts "the else"
                 file.puts(PifConverter.to_Runestone(parsed[:value], "json"))
             end
         end
