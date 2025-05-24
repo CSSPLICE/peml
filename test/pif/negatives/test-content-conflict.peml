@@ -1,0 +1,63 @@
+# Example of an almost valid, execution-based PIF that 
+# incorrectly formats its CSV test content. Namely, 
+# not all CSV rows match the length of the defined 
+# header. 
+
+exercise_id: test_content_conflict_error
+title: Test Content Conflict Error
+author: Cliff Shaffer
+license.id: MIT
+license.owner.name: Cliff Shaffer
+license.owner.email: shaffer@vt.edu
+
+tags.topics: PIF Error Demo
+tags.style: parsons, execute, indent
+
+instructions:----------
+Construct code by reordering and indenting the lines.
+----------
+
+[systems]
+language: Java
+[]
+
+[assets.code.wrapper.files]
+content:----------
+public class Parsons {
+
+    public static void main(String[] args) {
+    ___
+    }
+}
+----------
+[]
+
+[assets.code.blocks.content]
+blockid: one
+display: for (int i=0;i<3;i++) {
+indent: 0
+
+blockid: two
+display: System.out.print("I ");
+indent: 1
+
+blockid: three
+display: System.out.print("am ");
+indent: 1
+
+blockid: four
+display: System.out.print("a Java program ");
+indent: 1
+
+blockid: five
+display: }
+indent: 0
+[]
+
+[assets.test.files]
+format: text/csv-unquoted
+content:----------
+expected, description
+I am a Java program I am a Java program I am a Java program
+----------
+[]

@@ -1,0 +1,67 @@
+# Example of using executable "pseudocode". In this case, what
+# displays to the user looks like Java (these are defined by the
+# "display" lines of the blocks). What gets sent to be executed is
+# defined by the "code" lines of the blocks, and this is Python code.
+# This is not using test cases -- there are no input/output pairs
+# since there is no input. Correct indentation is required.
+# Derived from jsParsons
+# https://github.com/js-parsons/js-parsons/blob/master/examples/java-example.html
+
+exercise_id: https://github.com/CSSPLICE/peml-feasibility-examples/blob/main/parsons/jsparsons-java-example-pseudo-execute.peml
+
+title: Simple js-parsons Java example assignment - execute
+author: Cliff Shaffer (from js-Parsons, converted to PEML)
+license.id: MIT
+license.owner.name: Cliff Shaffer
+license.owner.email: shaffer@vt.edu
+
+tags.topics: PEML Demo Parsons Problem
+tags.style: parsons, execute, indent
+
+instructions:----------
+Construct code by reordering and indenting the lines.
+----------
+
+[systems]
+language: Python
+[]
+
+[assets.code.wrapper.files]
+content:----------
+    ___
+----------
+[]
+
+[assets.code.blocks.content]
+blockid: one
+display: for (int i=0;i<3;i++) {
+code: for i in range(3):
+indent: 0
+
+blockid: two
+display: System.out.print("I ");
+code: print('I ', end='')
+indent: 1
+
+blockid: three
+display: System.out.print("am ");
+code: print('am ', end='')
+indent: 1
+
+blockid: four
+display: System.out.print("a Java program ");
+code: print('a Java program ', end='')
+indent: 1
+
+blockid: five
+display: }
+indent: 0
+[]
+
+[assets.test.files]
+format: text/csv-unquoted
+content:----------
+expected
+I am a Java program I am a Java program I am a Java program
+----------
+[]

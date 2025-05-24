@@ -9,3 +9,7 @@
 /t/
 /.idea/
 *.gem
+/lib/pif/schema/PIF2.json
+/lib/pif/a.rb
+/lib/pif/pif.rb
+/lib/pif/test.rb

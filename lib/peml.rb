@@ -102,4 +102,19 @@ module Peml
     Peml::Emitter.new.emit(value)
   end
 
+  # Pif Methods------------------------------------------------------
+  def self.pif_parse(pif)
+    # pif  = {}, Takes string as {pif:"content"}
+    # or filename as {filename:"./file.peml"}
+    PifParser.parse(pif)
+  end
+
+
+  # parsed_pif should be a product of pif.parse
+  # format options are 'json' and 'yaml'.
+  #   If nil a ruby has is returned.
+  def self.pif_to_runestone(parsed_pif, format: nil)
+    PifConverter.to_Runestone(parsed_pif, format: format)
+  end
+
 end

@@ -1,0 +1,33 @@
+# Example demonstrating parser issue caused by inconsistent block definitions.
+# The first line of the first block dictates how subsequent blocks are delimited.
+# Because the first block begins with a 'display', all blocks must start similarly.
+# As such, all content until the next valid'"display' is considered part of the 
+# previous block. Due to this, blockids become incorrectly associated with earlier
+# blocks, creating a cascading misalignment effect. Namely, the first block is 
+# incorrectly paired with id2 and so on.  
+
+exercise_id: inconsistent_block_definitions_error_#2
+
+title: Inconsistent Block Definitions Error #2
+title: Missing Indentation Error
+author: Cliff Shaffer 
+license.id: MIT
+license.owner.name: Cliff Shaffer
+license.owner.email: shaffer@vt.edu
+
+tags.topics: PIF Error Demo
+tags.style: parsons, order
+
+instructions:----------
+**Your task**: Construct a Python program that prints strings "Good", "Morning", "World!" on separate lines. You should construct your program by dragging and dropping the lines to the solution area on the right.
+----------
+
+[assets.code.blocks.content]
+display: print('Good')
+
+blockid: id2
+display: print('Morning')
+
+blockid: id3 
+display: print('World!')
+[]
