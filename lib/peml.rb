@@ -4,6 +4,8 @@ require_relative 'peml/emitter'
 require_relative 'peml/utils'
 require_relative 'peml/peml_test_renderer'
 require_relative 'peml/datadriven_test_renderer'
+require_relative 'pif/converter'
+require_relative 'pif/parser'
 
 require "dottie/ext"
 
@@ -96,6 +98,8 @@ module Peml
     Peml::Emitter.new.emit(value)
   end
 
+
+
   # Pif Methods------------------------------------------------------
   def self.pif_parse(pif)
     # pif  = {}, Takes string as {pif:"content"}
@@ -105,9 +109,18 @@ module Peml
 
   # parsed_pif should be a product of pif.parse
   # format options are 'json' and 'yaml'.
-  #   If nil a ruby has is returned.
-  def self.pif_to_runestone(parsed_pif, format: nil)
-    PifConverter.to_Runestone(parsed_pif, format: format)
+  #   If nil a ruby hash is returned.
+  def self.pif_to_runestone(parsed_pif, format = nil)
+    if !parsed_pif[:diagnostics].empty?
+      # TODO handle this better and return a good error message
+      result = parsed_pif[:diagnostics]
+      if format == 'json'
+        result = result.to_json
+      end
+    else
+      result = PifConverter.to_runestone(parsed_pif[:value], format: format)
+    end
+    result
   end
 
 end

@@ -44,9 +44,9 @@ if input_file_path && output_dir
             when "pif"
                 file.puts(parsed[:value].to_json)
             when "rs"
-                file.puts(PifConverter.to_Runestone(parsed[:value], "json"))
+                file.puts(PifConverter.to_runestone(parsed[:value], "json"))
             else
-                file.puts(PifConverter.to_Runestone(parsed[:value], "json"))
+                file.puts(PifConverter.to_runestone(parsed[:value], "json"))
             end
         end
     end

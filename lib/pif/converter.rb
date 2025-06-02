@@ -4,7 +4,7 @@ require "yaml"
 module PifConverter
   # Assumes an already validated and parsed PIF hash is passed
   # - specifically the :value field.
-  def self.to_Runestone(pif, format = nil)
+  def self.to_runestone(pif, format = nil)
     # PIF-to-Parsons directly mappable data
     tags = pif['tags']
     style = tags['style']
