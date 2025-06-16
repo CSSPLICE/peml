@@ -3,7 +3,7 @@ PATH
   specs:
     peml (0.1.1)
       dottie (~> 0.0.1)
-      json_schemer (>= 0.2)
+      json_schemer (= 0.2.21)
       kramdown (~> 2.3.1)
       kramdown-parser-gfm (~> 1.1.0)
       liquid (>= 3.0.6)
@@ -36,7 +36,11 @@ GEM
     uri_template (0.7.0)
 
 PLATFORMS
+  aarch64-linux
   arm64-darwin-21
+  unknown
+
+DEPENDENCIES
   bundler (~> 2.3)
   minitest (~> 5.0)
   peml!

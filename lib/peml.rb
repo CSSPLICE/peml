@@ -24,6 +24,7 @@ module Peml
     end
     value = Peml::Loader.new.load(peml)
     # Should we provide a param to render test cases?
+    puts "value: #{value}"
     value = Peml::DatadrivenTestRenderer.new.generate_tests(value)
     if !params[:result_only]
       diags = validate(value)

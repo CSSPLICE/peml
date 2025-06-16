@@ -15,7 +15,7 @@ WORKDIR peml
 RUN gem install bundler:2.3.7
 RUN bundle _2.3.7_ install
 
-RUN bundle install --full-index
+#RUN #bundle install --full-index
 
 
 #COPY . .
