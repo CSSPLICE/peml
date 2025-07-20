@@ -26,7 +26,6 @@ module Peml
     end
     value = Peml::Loader.new.load(peml)
     # Should we provide a param to render test cases?
-    puts "value: #{value}"
     value = Peml::DatadrivenTestRenderer.new.generate_tests(value)
     if !params[:result_only]
       diags = validate(value)
@@ -99,13 +98,26 @@ module Peml
     Peml::Emitter.new.emit(value)
   end
 
-
-
   # Pif Methods------------------------------------------------------
-  def self.pif_parse(pif)
+  def self.pif_parse(params)
     # pif  = {}, Takes string as {pif:"content"}
     # or filename as {filename:"./file.peml"}
-    PifParser.parse(pif)
+    if params[:pif]
+      parsed_pif = PifParser.parse({ pif: params[:pif] })
+    else
+      return "Error: pif not parsed"
+    end
+    
+    if params[:render_to_html]
+      parsed_pif[:value] = PifParser.markdown_renderer(parsed_pif[:value])
+    end
+
+    if params[:result_only]
+      parsed_pif[:value]
+    else
+      parsed_pif
+    end
+
   end
 
   # parsed_pif should be a product of pif.parse
