@@ -426,6 +426,7 @@ module PifParser
 
   # Not the cleanest way to do this, but it works.
   def self.strip_tags_and_convert_to_latex(html)
+    puts "html: #{html}"
     # Remove wrapping <p> and </p> tags
     html = html.strip.sub(/\A<p[^>]*>/i, '').sub(/<\/p>\z/i, '')
   
@@ -438,13 +439,14 @@ module PifParser
       /<u>(.*?)<\/u>/i => '$\\underline{\1}$',
       /<br\s*\/?>/i => " $\\\\$",
       /<sup>(.*?)<\/sup>/i => '$^{\1}$',
-      /<sub>(.*?)<\/sub>/i => '$_{\1$',
+      /<sub>(.*?)<\/sub>/i => '$_{\1}$',
     }
   
     replacements.each do |regex, replacement|
       html = html.gsub(regex, replacement)
     end
   
+    puts "html_after: #{html}"
     html
   end
 
