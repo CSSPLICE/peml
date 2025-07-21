@@ -108,9 +108,7 @@ module Peml
       return "Error: pif not parsed"
     end
     
-    if params[:render_to_html]
-      parsed_pif[:value] = PifParser.markdown_renderer(parsed_pif[:value])
-    end
+    parsed_pif[:value] = PifParser.markdown_renderer(parsed_pif[:value])
 
     if params[:result_only]
       parsed_pif[:value]

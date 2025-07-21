@@ -27,7 +27,7 @@ if input_file_path && output_dir
 
   file = File.open(input_file_path, "r:UTF-8")
   content = file.read
-  parsed = Peml.pif_parse({ pif: content, render_to_html: true })
+  parsed = Peml.pif_parse({ pif: content })
   value = parsed[:value].dottie!
   diagnostics = parsed[:diagnostics];
 
