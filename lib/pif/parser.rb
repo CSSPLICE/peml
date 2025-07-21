@@ -431,14 +431,14 @@ module PifParser
   
     # HTML tag to LaTeX replacements
     replacements = {
-      /<b>(.*?)<\/b>/i => '\\textbf{\1}',
-      /<strong>(.*?)<\/strong>/i => '\\textbf{\1}',
-      /<i>(.*?)<\/i>/i => '\\textit{\1}',
-      /<em>(.*?)<\/em>/i => '\\textit{\1}',
-      /<u>(.*?)<\/u>/i => '\\underline{\1}',
-      /<br\s*\/?>/i => "\\\\",
-      /<sup>(.*?)<\/sup>/i => '^{\1}',
-      /<sub>(.*?)<\/sub>/i => '_{\1}',
+      /<b>(.*?)<\/b>/i => '$\\textbf{\1}$',
+      /<strong>(.*?)<\/strong>/i => '$\\textbf{\1}$',
+      /<i>(.*?)<\/i>/i => '$\\textit{\1}$',
+      /<em>(.*?)<\/em>/i => '$\\textit{\1}$',
+      /<u>(.*?)<\/u>/i => '$\\underline{\1}$',
+      /<br\s*\/?>/i => " $\\\\$",
+      /<sup>(.*?)<\/sup>/i => '$^{\1}$',
+      /<sub>(.*?)<\/sub>/i => '$_{\1$',
     }
   
     replacements.each do |regex, replacement|
