@@ -402,19 +402,22 @@ module PifParser
   def self.markdown_renderer(hash)
     hash["instructions"] = Peml::Utils.render_helper(hash["instructions"], {})
 
-    language = hash["systems"][0]["language"]
+    if hash["systems"].present?
+      
+      language = hash["systems"]&.first&.[]("language")
 
-    if language.downcase == "math" || language.downcase == "natural"
-      hash["assets"]["code"]["blocks"]["content"].each do |block|
-        parsed_to_html = Kramdown::Document.new(
-          block["display"], 
-          :auto_ids => false, 
-          input: 'GFM', 
-          math_engine: "katex"
-          ).to_html
+      if language&.downcase.in?(["math", "natural"])
+        hash["assets"]["code"]["blocks"]["content"].each do |block|
+          parsed_to_html = Kramdown::Document.new(
+            block["display"], 
+            :auto_ids => false, 
+            input: 'GFM', 
+            math_engine: "katex"
+            ).to_html
 
-        block["display"] = PifParser.strip_tags_and_convert_to_latex(parsed_to_html)
-        
+          block["display"] = PifParser.strip_tags_and_convert_to_latex(parsed_to_html)
+          
+        end
       end
     end
 
@@ -444,7 +447,7 @@ module PifParser
     replacements.each do |regex, replacement|
       html = html.gsub(regex, replacement)
     end
-
+  
     html
   end
 
