@@ -400,24 +400,33 @@ module PifParser
   end
 
   def self.markdown_renderer(hash)
+
+    # puts "instructions: #{hash["instructions"]}"
     hash["instructions"] = Peml::Utils.render_helper(hash["instructions"], {})
+    # puts "new instructions: #{hash["instructions"]}"
 
-    if hash["systems"].present?
-      
+    if hash.has_key?("systems")
       language = hash["systems"]&.first&.[]("language")
+      is_git_flavored_markdown = ["math", "natural"].include?(language&.downcase)
+    else
+      is_git_flavored_markdown = true
+    end
 
-      if language&.downcase.in?(["math", "natural"])
-        hash["assets"]["code"]["blocks"]["content"].each do |block|
-          parsed_to_html = Kramdown::Document.new(
-            block["display"], 
-            :auto_ids => false, 
-            input: 'GFM', 
-            math_engine: "katex"
-            ).to_html
+    # puts "is_git_flavored_markdown: #{is_git_flavored_markdown}"
 
-          block["display"] = PifParser.strip_tags_and_convert_to_latex(parsed_to_html)
-          
-        end
+    if is_git_flavored_markdown
+      hash["assets"]["code"]["blocks"]["content"].each do |block|
+        # puts "block: #{block["display"]}"
+        parsed_to_html = Kramdown::Document.new(
+          block["display"], 
+          :auto_ids => false, 
+          input: 'GFM', 
+          math_engine: "katex"
+          ).to_html
+
+        block["display"] = PifParser.strip_tags_and_convert_to_latex(parsed_to_html)
+        # puts "new block: #{block["display"]}"
+        
       end
     end
 
