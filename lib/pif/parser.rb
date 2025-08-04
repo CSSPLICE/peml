@@ -6,7 +6,6 @@ require "kramdown"
 require 'kramdown-parser-gfm'
 require 'kramdown-math-katex'
 
-
 module PifParser
   # ------------------------------------------------------------------------------
   # Parses and validates a PIF file/string
@@ -169,7 +168,7 @@ module PifParser
     curr_blockid = block["blockid"]
     blocklist = block["blocklist"]
     is_distractor = block["depends"]&.match?(/\s*-1\s*/) ||
-      !block["feedback"].nil?
+                    !block["feedback"].nil?
 
     # Case: Distractor
     if (is_distractor)
@@ -201,7 +200,7 @@ module PifParser
     parsed_depends = block["depends"]&.split(/\s*,\s*/) || []
     blocklist = block["blocklist"]
     is_distractor = parsed_depends&.include?("-1") ||
-      !block["feedback"].nil?
+                    !block["feedback"].nil?
 
     # Case: Distractor
     if (is_distractor)
@@ -402,7 +401,12 @@ module PifParser
   def self.markdown_renderer(hash)
 
     # puts "instructions: #{hash["instructions"]}"
-    hash["instructions"] = Peml::Utils.render_helper(hash["instructions"], {})
+    instruction_text = PifParser.identify_inline_delimiters(hash["instructions"])
+    hash["instructions"] = Peml::Utils.render_helper(
+      instruction_text,
+      math_engine: :katex,
+      math_engine_options: { output: 'mathml' }
+    )
     # puts "new instructions: #{hash["instructions"]}"
 
     if hash.has_key?("systems")
@@ -417,16 +421,17 @@ module PifParser
     if is_git_flavored_markdown
       hash["assets"]["code"]["blocks"]["content"].each do |block|
         # puts "block: #{block["display"]}"
+        display_text = PifParser.identify_inline_delimiters(block["display"])
         parsed_to_html = Kramdown::Document.new(
-          block["display"], 
-          :auto_ids => false, 
-          input: 'GFM', 
+          display_text,
+          :auto_ids => false,
+          input: 'GFM',
           math_engine: "katex"
-          ).to_html
+        ).to_html
 
         block["display"] = PifParser.strip_tags_and_convert_to_latex(parsed_to_html)
         # puts "new block: #{block["display"]}"
-        
+
       end
     end
 
@@ -440,7 +445,7 @@ module PifParser
   def self.strip_tags_and_convert_to_latex(html)
     # Remove wrapping <p> and </p> tags
     html = html.strip.sub(/\A<p[^>]*>/i, '').sub(/<\/p>\z/i, '')
-  
+
     # HTML tag to LaTeX replacements
     replacements = {
       /<b>(.*?)<\/b>/i => '$\\textbf{\1}$',
@@ -452,11 +457,28 @@ module PifParser
       /<sup>(.*?)<\/sup>/i => '$^{\1}$',
       /<sub>(.*?)<\/sub>/i => '$_{\1}$',
     }
-  
+
     replacements.each do |regex, replacement|
       html = html.gsub(regex, replacement)
     end
-  
+
+    html
+  end
+
+  def self.identify_inline_delimiters(html)
+    # Remove wrapping <p> and </p> tags
+    html = html.strip.sub(/\A<p[^>]*>/i, '').sub(/<\/p>\z/i, '')
+
+    # HTML tag to LaTeX replacements
+    replacements = {
+      /\\\((.*?)\\\)/i => '$\1$',
+      /\\\[(.*?)\\\]/i => '$$\1$$',
+    }
+
+    replacements.each do |regex, replacement|
+      html = html.gsub(regex, replacement)
+    end
+
     html
   end
 
