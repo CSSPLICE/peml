@@ -15,7 +15,7 @@ module PifConverter
                'dag'
     indent = style.include?('indent')
     numbered = pif['numbered'] || false
-    language = pif['systems[0].language']&.downcase || ''
+    language = pif['systems[0].language']&.downcase || 'math'
 
     # Parsons model
     parsons_data_model = {
@@ -49,7 +49,7 @@ module PifConverter
       "natural"
     ]
     if grader == "exec" &&
-      !supported_languages.include?(language)
+       !supported_languages.include?(language)
       diags << "#{language} is not a supported langauge."
     end
 
@@ -96,7 +96,7 @@ module PifConverter
 
         # Case: Distractor
         if block["depends"] == -1 ||
-          block["feedback"]
+           block["feedback"]
           parsons_block["type"] = "distractor"
         else
           # Case: Normal Block
