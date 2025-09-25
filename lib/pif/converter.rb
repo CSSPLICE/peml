@@ -64,6 +64,7 @@ module PifConverter
         "depends" => "",
         "indent" => 0,
         "displaymath" => true,
+        "feedback" => "",
       }.dottie!
 
       has_blocklist = block["blocklist"]
@@ -98,6 +99,7 @@ module PifConverter
         if block["depends"] == -1 ||
           block["feedback"]
           parsons_block["type"] = "distractor"
+          parsons_block["feedback"] = block["feedback"] || ""
         else
           # Case: Normal Block
           parsons_block["tag"] = block["blockid"] || ""
