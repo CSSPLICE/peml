@@ -31,7 +31,7 @@ module PifConverter
         "adaptive" => true,
         "numbered" => numbered,
         "language" => language,
-        "runnable" => true,
+        "runnable" => false,
       },
       "blocks" => [],
     }.dottie!

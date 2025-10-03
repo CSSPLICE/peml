@@ -4,7 +4,7 @@ WORKDIR /peml
 
 RUN gem install bundler:2.3.7
 
-RUN gem build peml.gemspec && gem install peml-0.1.1.gem
+#RUN gem build peml.gemspec && gem install peml-0.1.1.gem
 
 
 CMD ["sleep", "infinity"]
