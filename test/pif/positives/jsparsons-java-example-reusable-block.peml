@@ -1,0 +1,60 @@
+# Simple example of a problem that uses execute grading with reusable blocks.
+
+exercise_id: java_example_execute_reusable
+
+title: Simple js-parsons Java example assignment - execute with reusable blocks
+author: Sean Rothenberger (from js-Parsons, converted to PEML)
+license.id: MIT
+license.owner.name: Sean Rothenberger
+license.owner.email: seanr06@vt.edu
+
+tags.topics: execute grading, reusable blocks
+tags.style: parsons, execute, indent
+
+instructions:----------
+Construct code by reordering and indenting the lines.
+You MUST reuse the `}` block twice to complete the program.
+----------
+
+[systems]
+language: Java
+[]
+
+[assets.code.wrapper.files]
+content:----------
+public class Parsons {
+    public static void main(String[] args) {
+        ___
+    }
+}
+----------
+[]
+
+[assets.code.blocks.content]
+blockid: one
+display: for (int i = 0; i < 10; i++) {
+indent: 0
+
+blockid: two
+display: if (i % 2 == 0) {
+indent: 0
+
+blockid: three
+display: System.out.print(i);
+indent: 0
+
+# Only one closing brace block provided
+# But the solution needs two
+blockid: four
+display: }
+reusable: true
+indent: 0
+[]
+ 
+[assets.test.files]
+format: text/csv-unquoted
+content:----------
+expected
+02468
+----------
+[]

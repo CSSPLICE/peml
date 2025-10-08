@@ -65,7 +65,6 @@ module PifConverter
         "indent" => 0,
         "displaymath" => true,
         "feedback" => "",
-        "pickOneBlockCount" => 0
       }.dottie!
 
       has_blocklist = block["blocklist"]
@@ -77,19 +76,20 @@ module PifConverter
       elsif
         # Adds the root of the blocklist
       parsons_block["text"] = block["blocklist[0].display"]
-        parsons_block["pickOneBlockCount"] = block["blocklist"].length;
-        parsons_block["tag"] = block["blocklist[0].blockid"] || ""
+        parsons_block["tag"] = "#{block["blockid"]}-#{block["blocklist[0].blockid"]}"
         parsons_block["depends"] = block["depends"] || ""
         parsons_data_model["blocks"] << parsons_block
 
         # Adds the closest distractor
         if (block["blocklist"].length > 1)
           distractor = block["blocklist[1]"]
+          # puts "blocklist: #{block["blocklist"]}"
           parsons_distractor = {
             "text" => distractor["display"],
-            "tag" => "paired",
-            "depends" => "",
-            "displaymath" => "",
+            "tag" => "#{block["blockid"]}-#{block["blocklist[1].blockid"]}",
+            "depends" => "-1",
+            "displaymath" => true,
+            "feedback" => distractor["feedback"],
           }
           parsons_data_model["blocks"] << parsons_distractor
         end

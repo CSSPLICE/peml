@@ -25,14 +25,19 @@ if input_file_path && output_dir
 
   filename = File.basename(input_file_path, File.extname(input_file_path))
 
+  puts "Parsing #{filename}.peml ..."
   file = File.open(input_file_path, "r:UTF-8")
   content = file.read
   parsed = Peml.pif_parse({ pif: content })
   value = parsed[:value].dottie!
   diagnostics = parsed[:diagnostics];
+  puts "Parsing complete..."
 
   has_nontrivial_blocklist = value["assets.code.blocks.content"]
                                &.any? { |block| block["blocklist"] && !block["pickone"] }
+  if has_nontrivial_blocklist
+    puts "This file has a blocklist but doesnt have a blocklist pickone value"
+  end
 
   if (diagnostics.length == 0 && !has_nontrivial_blocklist)
     File.open("#{output_dir}/#{filename}.json", 'w') do |file|
@@ -43,8 +48,10 @@ if input_file_path && output_dir
       when "pif"
         file.puts(parsed.to_json)
       when "rs"
+        puts "Converting to rs format..."
         file.puts(PifConverter.to_runestone(parsed[:value], "json"))
       else
+        puts "Converting to rs format..."
         file.puts(PifConverter.to_runestone(parsed[:value], "json"))
       end
     end

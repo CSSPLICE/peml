@@ -419,17 +419,34 @@ module PifParser
     # puts "is_git_flavored_markdown: #{is_git_flavored_markdown}"
 
     if is_git_flavored_markdown
+      # puts hash["assets"]["code"]["blocks"]["content"]
       hash["assets"]["code"]["blocks"]["content"].each do |block|
         # puts "block: #{block["display"]}"
-        display_text = PifParser.identify_inline_delimiters(block["display"])
-        parsed_to_html = Kramdown::Document.new(
-          display_text,
-          :auto_ids => false,
-          input: 'GFM',
-          math_engine: "katex"
-        ).to_html
+        if block["blocklist"] && !block["blocklist"].empty?
+          block["blocklist"].each do |sub_block|
+            display_text = PifParser.identify_inline_delimiters(sub_block["display"])
+            parsed_to_html = Kramdown::Document.new(
+              display_text,
+              :auto_ids => false,
+              input: 'GFM',
+              math_engine: "katex"
+            ).to_html
 
-        block["display"] = PifParser.strip_tags_and_convert_to_latex(parsed_to_html)
+            sub_block["display"] = PifParser.strip_tags_and_convert_to_latex(parsed_to_html)
+          end
+
+        else
+          display_text = PifParser.identify_inline_delimiters(block["display"])
+          parsed_to_html = Kramdown::Document.new(
+            display_text,
+            :auto_ids => false,
+            input: 'GFM',
+            math_engine: "katex"
+          ).to_html
+
+          block["display"] = PifParser.strip_tags_and_convert_to_latex(parsed_to_html)
+        end
+
         # puts "new block: #{block["display"]}"
 
       end
