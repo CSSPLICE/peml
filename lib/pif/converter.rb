@@ -5,6 +5,7 @@ module PifConverter
   # Assumes an already validated and parsed PIF hash is passed
   # - specifically the :value field.
   def self.to_runestone(pif, format = nil)
+    puts "raw pif parse: #{pif['assets.code.blocks.content']}"
     # PIF-to-Parsons directly mappable data
     tags = pif['tags']
     style = tags['style']
@@ -64,7 +65,6 @@ module PifConverter
         "depends" => "",
         "indent" => 0,
         "displaymath" => true,
-        "feedback" => "",
       }.dottie!
 
       has_blocklist = block["blocklist"]
@@ -78,6 +78,9 @@ module PifConverter
       parsons_block["text"] = block["blocklist[0].display"]
         parsons_block["tag"] = "#{block["blockid"]}-#{block["blocklist[0].blockid"]}"
         parsons_block["depends"] = block["depends"] || ""
+        if block["reusable"]
+          parsons_block["reusable"] = block["reusable"].to_s.strip.downcase == "true"
+        end
         parsons_data_model["blocks"] << parsons_block
 
         # Adds the closest distractor
@@ -93,6 +96,9 @@ module PifConverter
             "displaymath" => true,
             "feedback" => distractor["feedback"],
           }
+          if block["reusable"]
+            parsons_distractor["reusable"] = block["reusable"].to_s.strip.downcase == "true"
+          end
           parsons_data_model["blocks"] << parsons_distractor
         end
         # Case: Single Block Entity
@@ -109,6 +115,10 @@ module PifConverter
           parsons_block["tag"] = block["blockid"] || ""
           parsons_block["depends"] = block["depends"] || ""
           parsons_block["indent"] = block["indent"] || ""
+        end
+
+        if block["reusable"]
+          parsons_block["reusable"] = block["reusable"].to_s.strip.downcase == "true"
         end
 
         # Appends converted block
