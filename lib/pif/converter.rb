@@ -81,8 +81,10 @@ module PifConverter
         parsons_data_model["blocks"] << parsons_block
 
         # Adds the closest distractor
+        # todo Pick as many distractors as specified in the picklimit
         if (block["blocklist"].length > 1)
           distractor = block["blocklist[1]"]
+          # todo you can uncomment the line below to view the structure of the blocklist
           # puts "blocklist: #{block["blocklist"]}"
           parsons_distractor = {
             "text" => distractor["display"],
