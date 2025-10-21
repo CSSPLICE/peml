@@ -26,7 +26,7 @@ GEM
       rexml
     kramdown-parser-gfm (1.1.0)
       kramdown (~> 2.0)
-    liquid (5.3.0)
+    liquid (5.4.0)
     minitest (5.16.3)
     parslet (2.0.0)
     rake (13.0.6)
@@ -37,14 +37,10 @@ GEM
 
 PLATFORMS
   arm64-darwin-21
-  unknown
-  x86_64-linux
-
-DEPENDENCIES
   bundler (~> 2.3)
   minitest (~> 5.0)
   peml!
   rake (>= 13.0)
 
 BUNDLED WITH
-   2.4.22
+   2.3.7
