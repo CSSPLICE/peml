@@ -80,6 +80,11 @@ module PifParser
             "within the same blocklist scope."
         end
 
+        if (picklimit_violation(blocklists))
+          diags << "Invalid pick limit, pick limit must be a positive int "\
+            "less than the number of blocks"
+        end
+
         # Checks if indentation is required and, if so,
         # whether all normal blocks have an indent level
         if (has_indent_tag &&
@@ -393,5 +398,22 @@ module PifParser
 
     return false
   end
-end
 
+  def self.picklimit_violation(blocklists)
+    blocklists.each_with_index do |blocklist|
+      picklimit = 0
+      begin 
+        picklimit = blocklist["picklimit"].to_i
+      rescue StandardError
+        return true;
+      end
+
+      if(picklimit < 0 || \
+        picklimit > blocklist["blocklist"].length)
+        return true
+      end
+    end
+
+    return false
+  end
+end

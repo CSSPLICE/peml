@@ -65,7 +65,7 @@ module PifConverter
         "indent" => 0,
         "displaymath" => true,
         "feedback" => "",
-        "pickOneBlockCount" => 0
+        "picklimit" => 0,
       }.dottie!
 
       has_blocklist = block["blocklist"]
@@ -77,22 +77,32 @@ module PifConverter
       elsif
         # Adds the root of the blocklist
       parsons_block["text"] = block["blocklist[0].display"]
-        parsons_block["pickOneBlockCount"] = block["blocklist"].length;
+        parsons_block["picklimit"] = block["picklimit"].to_i || 0
         parsons_block["tag"] = block["blocklist[0].blockid"] || ""
         parsons_block["depends"] = block["depends"] || ""
         parsons_data_model["blocks"] << parsons_block
 
-        # Adds the closest distractor
-        if (block["blocklist"].length > 1)
-          distractor = block["blocklist[1]"]
-          parsons_distractor = {
+        #adds a picklimit number of distractors to the data model
+        selected_distractors = blocks.sample(parsons_block["picklimit"])
+        selected_distractors.each do |distractor|
+          parsons_data_model["blocks"] << {
             "text" => distractor["display"],
             "tag" => "paired",
             "depends" => "",
-            "displaymath" => "",
+            "displaymath" => ""
           }
-          parsons_data_model["blocks"] << parsons_distractor
         end
+        # Adds the closest distractor
+        # if (block["blocklist"].length > 1)
+        #   distractor = block["blocklist[1]"]
+        #   parsons_distractor = {
+        #     "text" => distractor["display"],
+        #     "tag" => "paired",
+        #     "depends" => "",
+        #     "displaymath" => "",
+        #   }
+        #   parsons_data_model["blocks"] << parsons_distractor
+        # end
         # Case: Single Block Entity
       else
         parsons_block["text"] = block["display"]
