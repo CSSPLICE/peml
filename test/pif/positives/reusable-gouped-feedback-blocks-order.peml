@@ -1,0 +1,53 @@
+# Negative test case: Order-based grading with a reusable block
+# This should fail because order-based grading does not support reusable blocks.
+
+exercise_id: java_example_order_reuse_negative
+
+title: Simple js-parsons Java example assignment - order with reusable blocks
+author: Sean Rothenberger
+license.id: MIT
+license.owner.name: Sean Rothenberger
+license.owner.email: seanr06@vt.edu
+
+tags.topics: order grading, reusable blocks
+tags.style: parsons, order, indent
+
+instructions:----------
+Construct code by reordering and indenting the lines.
+You MUST reuse the `}` block twice to complete the program.
+----------
+
+[assets.code.blocks.content]
+blockid: myblocklist
+pickone: true
+picklimit: 2
+[.blocklist]
+blockid: onea
+display: for (int i = 0; i < 10; i++) {
+indent: 0
+
+blockid: oneb
+display: for (int i = 0; i > 10; i++) {
+feedback: The condition is false to start with, so the loop will not run at all
+indent: 0
+
+blockid: onec
+display: for (int i = 0; i > 10; i+) {
+feedback: The increment has invalid syntax
+indent: 0
+[]
+
+blockid: two
+display: if (i % 2 == 0) {
+indent: 0
+
+blockid: three
+display: System.out.print(i);
+indent: 0
+
+# This brace CANNOT be reused in order-based grading.
+blockid: four
+display: }
+reusable: true
+indent: 0
+[]

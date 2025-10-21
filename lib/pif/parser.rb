@@ -2,6 +2,10 @@ require_relative "../peml"
 require 'dottie/ext'
 require 'csv'
 
+require "kramdown"
+require 'kramdown-parser-gfm'
+require 'kramdown-math-katex'
+
 module PifParser
   # ------------------------------------------------------------------------------
   # Parses and validates a PIF file/string
@@ -35,7 +39,6 @@ module PifParser
       sv = schema.validate(value)
       diags = Peml::Utils.unpack_schema_diagnostics(sv)
 
-
       # Extended validation
       if (diags.empty?)
         style_tag = value["tags.style"] # Structurally required
@@ -64,7 +67,7 @@ module PifParser
         # Checks that the required fields for execution-based grading
         # are included
         if (has_execute_tag && (!test_content || !test_format || !systems))
-          diags << "Missing required test content, test format, or language "\
+          diags << "Missing required test content, test format, or language " \
             "fields for execution-based grading."
         end
 
@@ -76,7 +79,7 @@ module PifParser
         distractors = s[2]
 
         if (deps_violation(block_content))
-          diags << "Dependencies must refer to previously defined blocks "\
+          diags << "Dependencies must refer to previously defined blocks " \
             "within the same blocklist scope."
         end
 
@@ -90,11 +93,11 @@ module PifParser
         if (has_indent_tag &&
           has_order_tag)
           normal_blocks.each do |block|
-            indent =  block["indent"]
+            indent = block["indent"]
             pos = block["pos"]
 
             if indent.nil?
-              diags << "Block at position #{pos} is missing the required "\
+              diags << "Block at position #{pos} is missing the required " \
                 "indent field."
             end
 
@@ -143,7 +146,7 @@ module PifParser
 
           parsed_test_content[1..].each_with_index do |row, i|
             if (row.length != header.length)
-              diags << "Row #{i} of the test content does not match "\
+              diags << "Row #{i} of the test content does not match " \
                 "its header length."
             end
           end
@@ -161,7 +164,7 @@ module PifParser
   # ------------------------------------------------------------------------------
   # Gets all blockids for non-distractor elements
   def self.get_blockids(blocks)
-    blocks.inject([]) {|ids, block| ids + get_blockids_helper(block)}
+    blocks.inject([]) { |ids, block| ids + get_blockids_helper(block) }
   end
 
   # ------------------------------------------------------------------------------
@@ -170,7 +173,7 @@ module PifParser
     curr_blockid = block["blockid"]
     blocklist = block["blocklist"]
     is_distractor = block["depends"]&.match?(/\s*-1\s*/) ||
-      !block["feedback"].nil?
+                    !block["feedback"].nil?
 
     # Case: Distractor
     if (is_distractor)
@@ -184,24 +187,25 @@ module PifParser
       end
       return blockids
       # Case: Normal block
-    else (blocklist)
-    return Array(curr_blockid)
+    else
+      (blocklist)
+      return Array(curr_blockid)
     end
   end
 
   # ------------------------------------------------------------------------------
   # Gets all block dependencies for non-distractor elements
   def self.get_blockdeps(blocks)
-    blocks.inject([]) {|depends, block| depends + get_blockdeps_helper(block)}
+    blocks.inject([]) { |depends, block| depends + get_blockdeps_helper(block) }
   end
 
   # ------------------------------------------------------------------------------
   # Recursive helper for get_blockdeps
   def self.get_blockdeps_helper(block)
-    parsed_depends = block["depends"]&.split(/\s*,\s*/)  || []
+    parsed_depends = block["depends"]&.split(/\s*,\s*/) || []
     blocklist = block["blocklist"]
     is_distractor = parsed_depends&.include?("-1") ||
-      !block["feedback"].nil?
+                    !block["feedback"].nil?
 
     # Case: Distractor
     if (is_distractor)
@@ -246,7 +250,7 @@ module PifParser
   def self.separate_blocks(blocks)
     i = 0
 
-    blocks.inject([[],[],[]]) do |res, block|
+    blocks.inject([[], [], []]) do |res, block|
       s = separate_blocks_helper("#{i}", block)
       res[0] += s[0] # normal blocks
       res[1] += s[1] # blocklists
@@ -267,7 +271,7 @@ module PifParser
     feedback = block["feedback"]
     depends = block["depends"]
 
-    block = block.merge({"pos" => pos})
+    block = block.merge({ "pos" => pos })
 
     # Case: Blocklist
     if (blocklist)
@@ -275,7 +279,7 @@ module PifParser
 
       # Recursively separates nested blocks and merges results
       blocklist.each_with_index do |nested_block, i|
-        x, y, z = separate_blocks_helper("#{pos}.#{i+1}", nested_block)
+        x, y, z = separate_blocks_helper("#{pos}.#{i + 1}", nested_block)
         norms += x
         blocklists += y
         distractors += z
@@ -377,7 +381,7 @@ module PifParser
     blocks.each_with_index do |block|
       blockid = block["blockid"]
       blocklist = block["blocklist"]
-      parsed_depends = block["depends"]&.split(/\s*,\s*/)  || []
+      parsed_depends = block["depends"]&.split(/\s*,\s*/) || []
       is_distractor = parsed_depends&.include?("-1") || block["feedback"]
 
       if (is_distractor)
@@ -398,6 +402,109 @@ module PifParser
 
     return false
   end
+
+  def self.markdown_renderer(hash)
+
+    # puts "instructions: #{hash["instructions"]}"
+    instruction_text = PifParser.identify_inline_delimiters(hash["instructions"])
+    hash["instructions"] = Peml::Utils.render_helper(
+      instruction_text,
+      math_engine: :katex,
+      math_engine_options: { output: 'mathml' }
+    )
+    # puts "new instructions: #{hash["instructions"]}"
+
+    if hash.has_key?("systems")
+      language = hash["systems"]&.first&.[]("language")
+      is_git_flavored_markdown = ["math", "natural"].include?(language&.downcase)
+    else
+      is_git_flavored_markdown = true
+    end
+
+    # puts "is_git_flavored_markdown: #{is_git_flavored_markdown}"
+
+    if is_git_flavored_markdown
+      # puts hash["assets"]["code"]["blocks"]["content"]
+      hash["assets"]["code"]["blocks"]["content"].each do |block|
+        # puts "block: #{block["display"]}"
+        if block["blocklist"] && !block["blocklist"].empty?
+          block["blocklist"].each do |sub_block|
+            display_text = PifParser.identify_inline_delimiters(sub_block["display"])
+            parsed_to_html = Kramdown::Document.new(
+              display_text,
+              :auto_ids => false,
+              input: 'GFM',
+              math_engine: "katex"
+            ).to_html
+
+            sub_block["display"] = PifParser.strip_tags_and_convert_to_latex(parsed_to_html)
+          end
+
+        else
+          display_text = PifParser.identify_inline_delimiters(block["display"])
+          parsed_to_html = Kramdown::Document.new(
+            display_text,
+            :auto_ids => false,
+            input: 'GFM',
+            math_engine: "katex"
+          ).to_html
+
+          block["display"] = PifParser.strip_tags_and_convert_to_latex(parsed_to_html)
+        end
+
+        # puts "new block: #{block["display"]}"
+
+      end
+    end
+
+    hash
+
+  end
+
+  private
+
+  # Not the cleanest way to do this, but it works.
+  def self.strip_tags_and_convert_to_latex(html)
+    # Remove wrapping <p> and </p> tags
+    html = html.strip.sub(/\A<p[^>]*>/i, '').sub(/<\/p>\z/i, '')
+
+    # HTML tag to LaTeX replacements
+    replacements = {
+      /<b>(.*?)<\/b>/i => '$\\textbf{\1}$',
+      /<strong>(.*?)<\/strong>/i => '$\\textbf{\1}$',
+      /<i>(.*?)<\/i>/i => '$\\textit{\1}$',
+      /<em>(.*?)<\/em>/i => '$\\textit{\1}$',
+      /<u>(.*?)<\/u>/i => '$\\underline{\1}$',
+      /<br\s*\/?>/i => " $\\\\$",
+      /<sup>(.*?)<\/sup>/i => '$^{\1}$',
+      /<sub>(.*?)<\/sub>/i => '$_{\1}$',
+    }
+
+    replacements.each do |regex, replacement|
+      html = html.gsub(regex, replacement)
+    end
+
+    html
+  end
+
+  def self.identify_inline_delimiters(html)
+    # Remove wrapping <p> and </p> tags
+    html = html.strip.sub(/\A<p[^>]*>/i, '').sub(/<\/p>\z/i, '')
+
+    # HTML tag to LaTeX replacements
+    replacements = {
+      /\\\((.*?)\\\)/i => '$\1$',
+      /\\\[(.*?)\\\]/i => '$$\1$$',
+    }
+
+    replacements.each do |regex, replacement|
+      html = html.gsub(regex, replacement)
+    end
+
+    html
+  end
+
+end
 
   def self.picklimit_violation(blocklists)
     blocklists.each_with_index do |blocklist|

@@ -4,7 +4,8 @@ require "yaml"
 module PifConverter
   # Assumes an already validated and parsed PIF hash is passed
   # - specifically the :value field.
-  def self.to_Runestone(pif, format = nil)
+  def self.to_runestone(pif, format = nil)
+    puts "raw pif parse: #{pif['assets.code.blocks.content']}"
     # PIF-to-Parsons directly mappable data
     tags = pif['tags']
     style = tags['style']
@@ -15,7 +16,7 @@ module PifConverter
                'dag'
     indent = style.include?('indent')
     numbered = pif['numbered'] || false
-    language = pif['systems[0].language']&.downcase || ''
+    language = pif['systems[0].language']&.downcase || 'math'
 
     # Parsons model
     parsons_data_model = {
@@ -31,7 +32,7 @@ module PifConverter
         "adaptive" => true,
         "numbered" => numbered,
         "language" => language,
-        "runnable" => true,
+        "runnable" => false,
       },
       "blocks" => [],
     }.dottie!
@@ -49,7 +50,7 @@ module PifConverter
       "natural"
     ]
     if grader == "exec" &&
-      !supported_languages.include?(language)
+       !supported_languages.include?(language)
       diags << "#{language} is not a supported langauge."
     end
 
@@ -65,7 +66,6 @@ module PifConverter
         "indent" => 0,
         "displaymath" => true,
         "feedback" => "",
-        "picklimit" => 0,
       }.dottie!
 
       has_blocklist = block["blocklist"]
@@ -77,20 +77,28 @@ module PifConverter
       elsif
         # Adds the root of the blocklist
       parsons_block["text"] = block["blocklist[0].display"]
-        parsons_block["picklimit"] = block["picklimit"].to_i || 0
-        parsons_block["tag"] = block["blocklist[0].blockid"] || ""
+        parsons_block["tag"] = "#{block["blockid"]}-#{block["blocklist[0].blockid"]}"
         parsons_block["depends"] = block["depends"] || ""
+        if block["reusable"]
+          parsons_block["reusable"] = block["reusable"].to_s.strip.downcase == "true"
+        end
         parsons_data_model["blocks"] << parsons_block
+
 
         #adds a picklimit number of distractors to the data model
         selected_distractors = blocks.sample(parsons_block["picklimit"])
         selected_distractors.each do |distractor|
           parsons_data_model["blocks"] << {
             "text" => distractor["display"],
-            "tag" => "paired",
-            "depends" => "",
-            "displaymath" => ""
+            "tag" => "#{block["blockid"]}-#{block["blocklist[1].blockid"]}",
+            "depends" => "-1",
+            "displaymath" => true,
+            "feedback" => distractor["feedback"],
           }
+          if block["reusable"]
+            parsons_distractor["reusable"] = block["reusable"].to_s.strip.downcase == "true"
+          end
+          parsons_data_model["blocks"] << parsons_distractor
         end
         # Adds the closest distractor
         # if (block["blocklist"].length > 1)
@@ -109,7 +117,7 @@ module PifConverter
 
         # Case: Distractor
         if block["depends"] == -1 ||
-          block["feedback"]
+           block["feedback"]
           parsons_block["type"] = "distractor"
           parsons_block["feedback"] = block["feedback"]
         else
@@ -117,6 +125,10 @@ module PifConverter
           parsons_block["tag"] = block["blockid"] || ""
           parsons_block["depends"] = block["depends"] || ""
           parsons_block["indent"] = block["indent"] || ""
+        end
+
+        if block["reusable"]
+          parsons_block["reusable"] = block["reusable"].to_s.strip.downcase == "true"
         end
 
         # Appends converted block
