@@ -84,7 +84,7 @@ module PifParser
         end
 
         if (picklimit_violation(blocklists))
-          diags << "Invalid pick limit, pick limit must be a positive int "\
+          diags << "Invalid pick limit, pick limit must be a positive int " \
             "less than the number of blocks"
         end
 
@@ -504,18 +504,16 @@ module PifParser
     html
   end
 
-end
-
   def self.picklimit_violation(blocklists)
     blocklists.each_with_index do |blocklist|
       picklimit = 0
-      begin 
+      begin
         picklimit = blocklist["picklimit"].to_i
       rescue StandardError
         return true;
       end
 
-      if(picklimit < 0 || \
+      if (picklimit < 0 || \
         picklimit > blocklist["blocklist"].length)
         return true
       end

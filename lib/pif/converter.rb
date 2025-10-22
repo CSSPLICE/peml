@@ -5,7 +5,7 @@ module PifConverter
   # Assumes an already validated and parsed PIF hash is passed
   # - specifically the :value field.
   def self.to_runestone(pif, format = nil)
-    puts "raw pif parse: #{pif['assets.code.blocks.content']}"
+    # puts "raw pif parse: #{pif['assets.code.blocks.content']}"
     # PIF-to-Parsons directly mappable data
     tags = pif['tags']
     style = tags['style']
@@ -84,21 +84,25 @@ module PifConverter
         end
         parsons_data_model["blocks"] << parsons_block
 
-
-        #adds a picklimit number of distractors to the data model
-        selected_distractors = blocks.sample(parsons_block["picklimit"])
+        # adds a picklimit number of distractors to the data model
+        grouped_distractors = block["blocklist"].drop(1)
+        puts "blocklist: #{block["blocklist"]}"
+        puts "grouped distractors: #{grouped_distractors}"
+        puts "picklimit: #{block["picklimit"]}"
+        selected_distractors = grouped_distractors.sample(block["picklimit"].to_i)
         selected_distractors.each do |distractor|
           parsons_data_model["blocks"] << {
             "text" => distractor["display"],
-            "tag" => "#{block["blockid"]}-#{block["blocklist[1].blockid"]}",
+            "tag" => "#{block["blockid"]}-#{distractor["blockid"]}",
             "depends" => "-1",
             "displaymath" => true,
             "feedback" => distractor["feedback"],
+            "reusable" => block["reusable"].to_s.strip.downcase == "true",
           }
-          if block["reusable"]
-            parsons_distractor["reusable"] = block["reusable"].to_s.strip.downcase == "true"
-          end
-          parsons_data_model["blocks"] << parsons_distractor
+          # if block["reusable"]
+          #   parsons_distractor["reusable"] = block["reusable"].to_s.strip.downcase == "true"
+          # end
+          # parsons_data_model["blocks"] << parsons_distractor
         end
         # Adds the closest distractor
         # if (block["blocklist"].length > 1)

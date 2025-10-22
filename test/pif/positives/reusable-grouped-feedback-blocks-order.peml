@@ -20,7 +20,7 @@ You MUST reuse the `}` block twice to complete the program.
 [assets.code.blocks.content]
 blockid: myblocklist
 pickone: true
-picklimit: 2
+picklimit: 1
 [.blocklist]
 blockid: onea
 display: for (int i = 0; i < 10; i++) {
