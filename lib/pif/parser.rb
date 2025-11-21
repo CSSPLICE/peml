@@ -192,7 +192,6 @@ module PifParser
       block["text_toggle_options"].concat(toggle_options)
     end
 
-    puts block["text_toggle_options"]
   end
   
   # ------------------------------------------------------------------------------
