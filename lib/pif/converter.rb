@@ -16,6 +16,7 @@ module PifConverter
     indent = style.include?('indent')
     numbered = pif['numbered'] || false
     language = pif['systems[0].language']&.downcase || ''
+    delimiter = pif['assets.code.blocks.delimiter'] || '`'
 
     # Parsons model
     parsons_data_model = {
@@ -32,6 +33,7 @@ module PifConverter
         "numbered" => numbered,
         "language" => language,
         "runnable" => true,
+        "delimiter" => delimiter
       },
       "blocks" => [],
     }.dottie!
@@ -60,6 +62,7 @@ module PifConverter
       parsons_block = {
         "text" => "",
         "type" => "",
+        "text_toggle_options" => [],
         "tag" => "",
         "depends" => "",
         "indent" => 0,
@@ -76,13 +79,13 @@ module PifConverter
         # Case: Pickone blocklist
       elsif
         # Adds the root of the blocklist
-      parsons_block["text"] = block["blocklist[0].display"]
+        parsons_block["text"] = block["blocklist[0].display"]
         parsons_block["picklimit"] = block["picklimit"].to_i || 0
         parsons_block["tag"] = block["blocklist[0].blockid"] || ""
         parsons_block["depends"] = block["depends"] || ""
         parsons_data_model["blocks"] << parsons_block
 
-        #adds a picklimit number of distractors to the data model
+        # Adds a picklimit number of distractors to the data model
         selected_distractors = blocks.sample(parsons_block["picklimit"])
         selected_distractors.each do |distractor|
           parsons_data_model["blocks"] << {
@@ -106,6 +109,7 @@ module PifConverter
         # Case: Single Block Entity
       else
         parsons_block["text"] = block["display"]
+        parsons_block["text_toggle_options"] = block["text_toggle_options"]
 
         # Case: Distractor
         if block["depends"] == -1 ||
