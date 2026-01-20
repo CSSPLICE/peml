@@ -167,7 +167,7 @@ module PifParser
   # ------------------------------------------------------------------------------
   # Gets all toggle options and text inputs for blocks
   def self.get_toggles_and_text_input(blocks, delimiter)
-    blocks.each do |block|
+    blocks.each_with_index do |block|
       self.get_toggles_and_text_input_helper(block, delimiter)
     end
   end
@@ -183,48 +183,72 @@ module PifParser
       end
     end
 
-    text_options = get_text_input(block, delimiter)
-    toggle_options = get_toggles(block, delimiter)
-
-    if(text_options || toggle_options)
-      block["text_toggle_options"] = []
-      block["text_toggle_options"].concat(text_options)
-      block["text_toggle_options"].concat(toggle_options)
-    end
-
+    block["text_options"] = get_text_input(block, delimiter)
+    block["toggle_options"] = get_toggles(block, delimiter)
   end
   
   # ------------------------------------------------------------------------------
-  # Searches for toggle options within 2 delimiter groups
+  # Searches for toggle options within 2 delimiters
   def self.get_toggles(block, delimiter)
-    toggles = []
+    toggleCount = 0;
+    toggles = {}
     # Scans for groups of 2 or greater delimiters
     toggleMatches = block["display"].split(/#{Regexp.escape(delimiter)}{2}/)
 
     endOfDelimiterGroup = 0
+
+    replacement_array = [] #holds the indexes where the text should be replaced with key
+
     toggleMatches.each_with_index do |str, index| # Loop through each toggle match
       next if index.even? # skip text outside of toggle group delimiters
 
+      toggleCount += 1;
+      toggleKey = "t_#{toggleCount}";
       #Search from end of last delimiter group or start of string
       startOfDelimiterGroup = block["display"].index(/#{Regexp.escape(delimiter)}{2}/, endOfDelimiterGroup) 
       endOfDelimiterGroup = block["display"].index(/#{Regexp.escape(delimiter)}{2}/, startOfDelimiterGroup + 2) + 2 #Search for ending delimiter from end of starting delimiter
 
-      toggle_options = str.split(delimiter) #All toggle options within toggle group
-      toggles << {start_index: startOfDelimiterGroup, end_index: endOfDelimiterGroup, values: toggle_options, type: "toggle"}
+      replacement_array << {"start" => startOfDelimiterGroup, "chars" => endOfDelimiterGroup - startOfDelimiterGroup, "key" => toggleKey};
+
+      options = str.split(delimiter) #All toggle options within toggle group
+      toggles[toggleKey] = options;
     end
 
+    self.replace_text_with_key(block, replacement_array);
+
     return toggles
+  end
+
+  def self.replace_text_with_key(block, replacement_array)
+    offset = 0
+    replacement_array.each do |replacement|
+      start = replacement["start"] + offset
+      chars = replacement["chars"]
+      key = "{"+ replacement["key"] + "}";
+      block["display"][start, chars] = key
+      offset -= chars - key.length
+    end
   end
 
   # ------------------------------------------------------------------------------
   # Searches for groups of 4 delimiter
   def self.get_text_input(block, delimiter)
-    text_inputs = []
+    inputCount = 0;
+    text_inputs = {}
     match_end = 0 # Variable to store the index after the last matched group
+
+    replacement_array = [] #holds the indexes where the text should be replaced with key
+
     while match = block["display"].index(/#{Regexp.escape(delimiter)}{4}/, match_end)
+      inputCount += 1
+      inputKey = "i_#{inputCount}"
       match_end = match + 4
-      text_inputs << {start_index: match, end_index: match_end, type: "text"}
+      replacement_array << {"start" => match, "chars" => match_end, "key" => inputKey}
+      text_inputs[inputKey] = {}
     end
+
+    self.replace_text_with_key(block, replacement_array)
+
     return text_inputs
   end
 
