@@ -10,6 +10,7 @@ module PifConverter
     tags = pif['tags']
     style = tags['style']
     blocks = pif['assets.code.blocks.content']
+    starter = pif['assets.code.starter.files']
     instructions = pif['instructions']
     grader = style.include?('execute') ?
                'exec' :
@@ -94,7 +95,10 @@ module PifConverter
         puts "blocklist: #{block["blocklist"]}"
         puts "grouped distractors: #{grouped_distractors}"
         puts "picklimit: #{block["picklimit"]}"
-        selected_distractors = grouped_distractors.sample(block["picklimit"].to_i)
+        selected_distractors =
+            block["picklimit"] ?
+            grouped_distractors.sample(block["picklimit"].to_i) :
+            grouped_distractors
         selected_distractors.each do |distractor|
           parsons_data_model["blocks"] << {
             "text" => distractor["display"],
@@ -145,6 +149,27 @@ module PifConverter
         # Appends converted block
         parsons_data_model["blocks"] << parsons_block
       end
+    end
+
+    starterLines = starter[0]["content"].split("___")
+    starterLines.each do |starterLine|
+      starterLine = starterLine.strip()
+
+      parsons_block = {
+        "text" => "",
+        "type" => "",
+        "toggle_options" => {},
+        "text_options" => {},
+        "tag" => "",
+        "depends" => "",
+        "indent" => "",
+        "displaymath" => true,
+        "feedback" => "",
+      }.dottie!
+
+      parsons_block["text"] = starterLine
+      parsons_block["tag"] = "fixed"
+      parsons_data_model["blocks"] << parsons_block
     end
 
     result = {
