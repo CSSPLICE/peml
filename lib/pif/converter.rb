@@ -35,7 +35,6 @@ module PifConverter
         "numbered" => numbered,
         "language" => language,
         "runnable" => true,
-        "delimiter" => delimiter
       },
       "blocks" => [],
     }.dottie!
@@ -64,8 +63,8 @@ module PifConverter
       parsons_block = {
         "text" => "",
         "type" => "",
-        "toggle_options" => {},
-        "text_options" => {},
+        "toggle_options" => [],
+        "text_options" => [],
         "tag" => "",
         "depends" => "",
         "indent" => 0,
@@ -81,7 +80,7 @@ module PifConverter
         # Case: Pickone blocklist
       elsif
         # Adds the root of the blocklist
-        parsons_block["text"] = block["blocklist[0].display"]
+      parsons_block["text"] = block["blocklist[0].display"]
         parsons_block["picklimit"] = block["picklimit"].to_i || 0
         parsons_block["tag"] = "#{block["blockid"]}-#{block["blocklist[0].blockid"]}"
         parsons_block["depends"] = block["depends"] || ""
@@ -151,25 +150,27 @@ module PifConverter
       end
     end
 
-    starterLines = starter[0]["content"].split("___")
-    starterLines.each do |starterLine|
-      starterLine = starterLine.strip()
+    if starter
+      starterLines = starter[0]["content"].split("___")
+      starterLines.each do |starterLine|
+        starterLine = starterLine.strip()
 
-      parsons_block = {
-        "text" => "",
-        "type" => "",
-        "toggle_options" => {},
-        "text_options" => {},
-        "tag" => "",
-        "depends" => "",
-        "indent" => "",
-        "displaymath" => true,
-        "feedback" => "",
-      }.dottie!
+        parsons_block = {
+          "text" => "",
+          "type" => "",
+          "toggle_options" => [],
+          "text_options" => [],
+          "tag" => "",
+          "depends" => "",
+          "indent" => "",
+          "displaymath" => true,
+          "feedback" => "",
+        }.dottie!
 
-      parsons_block["text"] = starterLine
-      parsons_block["tag"] = "fixed"
-      parsons_data_model["blocks"] << parsons_block
+        parsons_block["text"] = starterLine
+        parsons_block["tag"] = "fixed"
+        parsons_data_model["blocks"] << parsons_block
+      end
     end
 
     result = {
