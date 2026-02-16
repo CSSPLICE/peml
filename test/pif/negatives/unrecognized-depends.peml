@@ -1,0 +1,43 @@
+# An example of an almost valid PIF that uses an 
+# unrecognized blockid as a dependency. 
+
+exercise_id: missing_indentation_error
+title: Missing Indentation Error
+author: Cliff Shaffer
+license.id: MIT
+license.owner.name: Cliff Shaffer
+license.owner.email: shaffer@vt.edu
+
+tags.topics: PIF Error Demo
+tags.style: parsons, order
+
+instructions:----------
+Put the blocks in the proper order.
+----------
+
+[assets.code.blocks.content]
+blockid: randomg1b1
+display: Random Group 1 Block 1
+depends:
+
+blockid: randomg1b2
+display: Random Group 1 Block 2
+depends: unrecognized_id
+
+blockid: randomg1b3
+display: Random Group 1 Block 3
+depends: randomg1b2
+
+blockid: randomg2b1
+display: Random Group 2 Block 1
+depends: randomg1b3
+
+blockid: randomg2b2
+display: Random Group 2 Block 2
+depends: randomg2b1
+
+blockid: randomg2b3
+display: Random Group 2 Block 3
+depends: randomg2b2
+[]
+

@@ -1,0 +1,32 @@
+# Example demonstrating parser issue caused by inconsistent block definitions.
+# The first line of the first block dictates how subsequent blocks are delimited.
+# Because the first block begins with a 'blockid', all blocks must start similarly.
+# Here, the third block lacks an initial 'blockid', causing it to be interpreted
+# as a continuation of the previous block. This results in the second block's
+# 'display' field being overridden and leaves only two arrangeable blocks: 
+# "print('Good')" and "print('World!')". 
+
+exercise_id: inconsistent_block_definitions_error_#1
+
+title: Inconsistent Block Definitions Error #1 
+author: Cliff Shaffer
+license.id: MIT
+license.owner.name: Cliff Shaffer
+license.owner.email: shaffer@vt.edu
+
+tags.topics: PIF Error Demo
+tags.style: parsons, order
+
+instructions:----------
+**Your task**: Construct a Python program that prints strings "Good", "Morning", "World!" on separate lines. You should construct your program by dragging and dropping the lines to the solution area on the right.
+----------
+
+[assets.code.blocks.content]
+blockid: id1
+display: print('Good')
+
+blockid: id2
+display: print('Morning')
+
+display: print('World!')
+[]

@@ -1,0 +1,62 @@
+# Simple swap function assessed by the order of the blocks.
+# Technically this is a Java exercise, but this is a moot point
+# because the assessment is by block order.
+# No indentation is required.
+# Illustrates fixed code shown to students.
+# Illustrates a multi-line block.
+# Illustrates two forms of distractor. One is a "pick-one" distractor
+# where the user must pick exactly one of a group of blocks (many
+# systems will give visual signaling that these are grouped).
+# The other is a block that cannot appear in the answer.
+# Illustrates feedback for the distractors.
+
+exercise_id: https://github.com/CSSPLICE/peml-feasibility-examples/blob/main/parsons/swap1-order-feedback.peml
+
+title: Swap1 - order
+author: Cliff Shaffer
+license.id: MIT
+license.owner.name: Cliff Shaffer
+license.owner.email: shaffer@vt.edu
+
+tags.topics: PEML Demo Parsons Problem
+tags.style: parsons, order
+
+instructions:----------
+Write a function to swap two array elements by reordering the lines.
+----------
+
+[assets.code.blocks.content]
+blockid: fixed
+display:----------
+public static void Swap(int[] arr, int i, int j)
+{
+----------
+
+blockid: group1
+depends:
+pickone: true
+[.blocklist]
+blockid: one
+display: int temp = arr[i];
+
+blockid: onea
+display: int temp = arr[j];
+feedback: This was the wrong choice.
+[]
+
+blockid: two
+display: arr[i] = arr[j];
+depends: group1
+
+blockid: three
+display: arr[j] = temp;
+depends: two
+
+blockid: four
+display: int temp = arr[j];
+feedback: This line should not appear in the answer.
+depends: -1
+
+blockid: fixed
+display: }
+[]
