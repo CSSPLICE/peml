@@ -55,6 +55,29 @@ For more details, see the PEML website.}
   spec.add_runtime_dependency 'redcarpet', '>= 3.5'
   spec.add_runtime_dependency 'kramdown', '~> 2.3.1'
   spec.add_runtime_dependency 'kramdown-parser-gfm', '~> 1.1.0'
-  spec.add_runtime_dependency 'dottie', '~> 0.0.1'
+  spec.add_runtime_dependency 'dottie', '~> 0.0.3'
   spec.add_runtime_dependency 'liquid', '>= 3.0.6'
+
+  # Fetching rake 13.0.6
+  # Installing rake 13.0.6
+  # Fetching dottie 0.0.3 (was 0.0.2)
+  # Fetching minitest 5.16.3
+  # Fetching base64 0.3.0
+  # Fetching bigdecimal 3.3.1
+  # Fetching regexp_parser 2.11.3 (was 2.5.0)
+  # Fetching simpleidn 0.2.3
+  # Fetching rexml 3.4.4 (was 3.2.5)
+  # Fetching redcarpet 3.6.1 (was 3.5.1)
+  # Using liquid 5.3.0 (was 5.4.0)
+  # Installing base64 0.3.0
+  # Installing dottie 0.0.3 (was 0.0.2)
+  # Installing minitest 5.16.3
+  # Installing bigdecimal 3.3.1 with native extensions
+  # Installing regexp_parser 2.11.3 (was 2.5.0)
+  # Installing redcarpet 3.6.1 (was 3.5.1) with native extensions
+  # Installing rexml 3.4.4 (was 3.2.5)
+  # Installing simpleidn 0.2.3
+  # Fetching json_schemer 2.2.1 (was 0.2.21)
+  # Installing json_schemer 2.2.1 (was 0.2.21)
+
 end

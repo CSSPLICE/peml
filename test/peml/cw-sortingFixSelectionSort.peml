@@ -54,7 +54,7 @@ public int[] selectionSort(int[] array) {
 
 [assets.test.files]
 format: text/csv-unquoted
-pattern_actual: subject.selectionSort({{array}})
+pattern.actual: subject.selectionSort({{array}})
 content:----------
 aray,expected,description
 "new int[]{4,7,1}","new int[]{1,4,7}",example

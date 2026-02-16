@@ -45,7 +45,7 @@ public String getLongestString(ArrayList list)
 
 [assets.test.files]
 format: text/csv-unquoted
-pattern_actual: subject.getLongestString({{list}})
+pattern.actual: subject.getLongestString({{list}})
 content:----------
 list,expected,description
 "new java.util.ArrayList(){{add(""once"");add(""upon"");add(""a"");add(""time"");}}","""once""",example

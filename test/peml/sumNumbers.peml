@@ -28,7 +28,7 @@ public int sumNumbers(String str)
 
 [assets.test.files]
 format: text/csv-unquoted
-pattern_actual: subject.sumNumbers({{str}})
+pattern.actual: subject.sumNumbers({{str}})
 content:----------
 str,expected,description
 "abc123xyz",123,example

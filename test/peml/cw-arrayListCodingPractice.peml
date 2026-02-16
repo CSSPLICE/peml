@@ -40,7 +40,7 @@ public ArrayList<Integer> reverseContents(int[] contents) {
 
 [assets.test.files]
 format: text/csv-unquoted
-pattern_actual: subject.reverseContents({{contents}})
+pattern.actual: subject.reverseContents({{contents}})
 content:----------
 contents,expected,description
 "new int[]{1, 2, 3, 4}","new java.util.ArrayList<Integer>(){{add(4);add(3);add(2);add(1);}}",example

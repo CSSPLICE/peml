@@ -33,12 +33,12 @@ public class Answer {
 content:----------
 public int binarySearch(int[]array, int num) {
   int low = 0; //low range
-  int high = array.length -1; //high range 
+  int high = array.length -1; //high range
   int mid; //mid range
   while ()  //while low is less than or equal to high
   {
     mid = ; //set middle range to be (low + high) /2
-    if () { //if the array in the middle range = input number 
+    if () { //if the array in the middle range = input number
     //return mid range
     }
     else
@@ -47,7 +47,7 @@ public int binarySearch(int[]array, int num) {
         }
         else {
             //set low value to be mid value plus one
-        }     
+        }
   }
   //return -1 here because that would mean that the number is not found in the loop
 }
@@ -56,7 +56,7 @@ public int binarySearch(int[]array, int num) {
 
 [assets.test.files]
 format: text/csv-unquoted
-pattern_actual: subject.binarySearch({{array}}, {{num}})
+pattern.actual: subject.binarySearch({{array}}, {{num}})
 content:----------
 aray,num,expected,description
 "new int[]{1,4,7}",7,2,example

@@ -40,7 +40,7 @@ public int[] bubbleSort(int[] array) {
 
 [assets.test.files]
 format: text/csv-unquoted
-pattern_actual: subject.bubbleSort({{array}})
+pattern.actual: subject.bubbleSort({{array}})
 content:----------
 aray,expected,description
 "new int[]{4,7,1}","new int[]{1,4,7}",example

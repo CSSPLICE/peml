@@ -42,7 +42,7 @@ public String allString(E e)
 
 [assets.test.files]
 format: text/csv-unquoted
-pattern_actual: subject.allString({{e}})
+pattern.actual: subject.allString({{e}})
 content:----------
 e,expected,description
 "'c'",""c"",example

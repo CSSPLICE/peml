@@ -47,7 +47,7 @@ public int multiply(int x, int y) {
 
 [assets.test.files]
 format: text/csv-unquoted
-pattern_actual: subject.multiply({{x}}, {{y}})
+pattern.actual: subject.multiply({{x}}, {{y}})
 content:----------
 x,y,expected,description
 2,3,6,example

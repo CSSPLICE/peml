@@ -48,7 +48,7 @@ public int largest(int[] numbers, int index) {
 
 [assets.test.files]
 format: text/csv-unquoted
-pattern_actual: subject.largest({{nums}}, {{index}})
+pattern.actual: subject.largest({{nums}}, {{index}})
 content:----------
 nums,index,expected,description
 "new int [] {2, 4, 8}",2,8,example

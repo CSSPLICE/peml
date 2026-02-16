@@ -22,7 +22,7 @@ language: cpp
 
 [assets.code.wrapper.files]
 content:----------
-class Primitives 
+class Primitives
 {
   public:
     ___
@@ -44,7 +44,7 @@ int primitives()
 
 [assets.test.files]
 format: text/csv-unquoted
-pattern_actual: subject.primitives()
+pattern.actual: subject.primitives()
 content:----------
 expected,description
 0

@@ -43,7 +43,7 @@ public int[] mergeIntArrays(int[] nums1, int[] nums2)
 
 [assets.test.files]
 format: text/csv-unquoted
-pattern_actual: subject.mergeIntArrays({{nums1}}, {{nums2}})
+pattern.actual: subject.mergeIntArrays({{nums1}}, {{nums2}})
 content:----------
 nums1,nums2,expected,description
 "new int[] {}","new int[] {1, 2, 3, 4}","new int[] {1, 2, 3, 4}"

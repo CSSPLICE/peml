@@ -45,7 +45,7 @@ public int minDiff(int[] nums)
 
 [assets.test.files]
 format: text/csv-unquoted
-pattern_actual: subject.minDiff({{nums}})
+pattern.actual: subject.minDiff({{nums}})
 content:----------
 nums,expected,description
 "new int[] {3, 5, 11, 4, 8}",-7,example

@@ -47,7 +47,7 @@ public int log(int b, int n ) {
 
 [assets.test.files]
 format: text/csv-unquoted
-pattern_actual: subject.log({{x}}, {{y}})
+pattern.actual: subject.log({{x}}, {{y}})
 content:----------
 x,y,expected,description
 2,4,2,example

@@ -41,7 +41,7 @@ public String whatAmI(E e){
     //.equals() determines whether two objects
         are equivalent
     //by calling a new static instance of a wrapper object
-        we can analyze 
+        we can analyze
     //it's class type and compare it to the variable passed
         in
     if(e.getClass().equals(new Integer(1).getClass())){
@@ -56,7 +56,7 @@ public String whatAmI(E e){
 
 [assets.test.files]
 format: text/csv-unquoted
-pattern_actual: subject.whatAmI({{e}})
+pattern.actual: subject.whatAmI({{e}})
 content:----------
 e,expected,description
 "1",""Integer"",example

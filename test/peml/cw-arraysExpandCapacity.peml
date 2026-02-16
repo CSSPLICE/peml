@@ -40,7 +40,7 @@ public int[] expandCapacity(int[] arr) {
 
 [assets.test.files]
 format: text/csv-unquoted
-pattern_actual: subject.expandCapacity({{array}})
+pattern.actual: subject.expandCapacity({{array}})
 content:----------
 aray,expected,description
 "new int[]{2,3,0}","new int[]{2,3,0,0,0,0}",example

@@ -47,7 +47,7 @@ public int addOdd(int n) {
 
 [assets.test.files]
 format: text/csv-unquoted
-pattern_actual: subject.addOdd({{n}})
+pattern.actual: subject.addOdd({{n}})
 content:----------
 n,expected,description
 1,1,example

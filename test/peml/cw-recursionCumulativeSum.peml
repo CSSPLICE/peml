@@ -45,7 +45,7 @@ public int sumtok(int k) {
 
 [assets.test.files]
 format: text/csv-unquoted
-pattern_actual: subject.sumtok({{k}})
+pattern.actual: subject.sumtok({{k}})
 content:----------
 k,expected,description
 5,15,example

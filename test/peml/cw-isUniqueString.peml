@@ -43,7 +43,7 @@ public boolean isUniqueString(String message)
 
 [assets.test.files]
 format: text/csv-unquoted
-pattern_actual: subject.isUniqueString({{message}})
+pattern.actual: subject.isUniqueString({{message}})
 content:----------
 message,expected,description
 """coding""",true,example

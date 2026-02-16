@@ -38,9 +38,9 @@ int addThree()
     int third = 10;
     int sum;
     // In the space below, complete the necessary code.
-            
+
     ___
-    
+
     // Do not change the code below this
     return sum;
 }
@@ -49,7 +49,7 @@ int addThree()
 
 [assets.test.files]
 format: text/csv-unquoted
-pattern_actual: subject.addThree()
+pattern.actual: subject.addThree()
 content:----------
 expected,description
 18

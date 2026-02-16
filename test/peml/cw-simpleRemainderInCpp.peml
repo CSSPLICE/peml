@@ -23,7 +23,7 @@ language: cpp
 
 [assets.code.wrapper.files]
 content:----------
-class Remainder 
+class Remainder
 {
   public:
     ___
@@ -38,9 +38,9 @@ int remainder()
     int denominator = 13;
     int remainder;
     // In the space below, complete the necessary code.
-    
+
     ___
-    
+
     // Do not change the code below this
     return remainder;
 }
@@ -49,7 +49,7 @@ int remainder()
 
 [assets.test.files]
 format: text/csv-unquoted
-pattern_actual: subject.remainder()
+pattern.actual: subject.remainder()
 content:----------
 expected,description
 5

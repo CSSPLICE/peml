@@ -3,14 +3,15 @@ require_relative 'csv_unquoted_parser'
 require 'dottie/ext'
 require 'csv'
 
+# need to fix pattern.actual
 module Peml
     class DatadrivenTestRenderer
 
-        #This path points to the directory where the liquid templates are saved
+        # points to the directory where the liquid templates are saved
         @@template_path = File.expand_path('templates/', __dir__) + "/"
 
         # This is the entry function for data-driven test generation
-        # We fetch languages and then generate tests for each using 
+        # We fetch languages and then generate tests for each using
         # the helper function written below.
         def generate_tests(peml)
             value = peml.dottie!
@@ -34,15 +35,15 @@ module Peml
         def get_languages(value)
             languages=[]
             value['systems'].each do |system|
-                languages<<system['language']
+                languages << system['language']
             end
             languages
         end
 
-        # Converts the csv file parsed by the csv unquoted parser into 
+        # Converts the csv file parsed by the csv unquoted parser into
         # a hash of test cases example header => test_variable
         def hashify_test(tests)
-            content_arr=[]
+            content_arr = []
             if(tests[:format].include?('text/csv-unquoted'))
                 tests[:content] = Peml::CsvUnquotedParser.new.parse(tests[:content])
             else
@@ -50,7 +51,7 @@ module Peml
             end
             (1..tests[:content].length-2).each do |i|
                 test_hash = Hash[tests[:content][0].map(&:to_sym).zip(tests[:content][i])]
-                content_arr<<test_hash
+                content_arr << test_hash
             end
             content_arr
         end
@@ -82,16 +83,16 @@ module Peml
         # This function returns an array of test functions which are then
         # interpolated into a class before being written into the peml hash
         def generate_methods(tests, language)
-            tests_arr=[]
-            id=0
+            tests_arr = []
+            id = 0
             method_name = tests[:pattern][tests[:pattern].index('.')+1..tests[:pattern].index('(')-1]
             tests[:content].each do |test_case|
-                id+=1
+                id += 1
                 intput = tests[:pattern][tests[:pattern].index('(')+1..tests[:pattern].index(')')-1].gsub(/\{\{(.*?)\}\}/) { |x|  test_case[x[2..-3].to_sym]  }
                 expected_output = test_case[:expected]
                 class_name = "Test"
                 negative_feedback= 'you should do better'
-                tests_arr<<(TEST_METHOD_TEMPLATES[language]%{
+                tests_arr << (TEST_METHOD_TEMPLATES[language]%{
                         id: id,
                         expected_output: expected_output,
                         method_name: method_name,

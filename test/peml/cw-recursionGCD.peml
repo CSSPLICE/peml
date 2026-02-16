@@ -47,7 +47,7 @@ public int GCD(int x, int y) {
 
 [assets.test.files]
 format: text/csv-unquoted
-pattern_actual: subject.GCD({{x}}, {{y}})
+pattern.actual: subject.GCD({{x}}, {{y}})
 content:----------
 x,y,expected,description
 6,4,2,example

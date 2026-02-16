@@ -46,7 +46,7 @@ public String compressString(String message)
 
 [assets.test.files]
 format: text/csv-unquoted
-pattern_actual: subject.compressString({{message}})
+pattern.actual: subject.compressString({{message}})
 content:----------
 message,expected,description
 """bbbaaccccd""","""b3a2c4d1""",example

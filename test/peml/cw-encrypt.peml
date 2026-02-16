@@ -44,7 +44,7 @@ public String encrypt(String message)
 
 [assets.test.files]
 format: text/csv-unquoted
-pattern_actual: subject.encrypt({{message}})
+pattern.actual: subject.encrypt({{message}})
 content:----------
 message,expected,description
 """How""","""owHay""",example

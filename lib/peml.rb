@@ -11,7 +11,7 @@ module Peml
 
   #~ Class methods ...........................................................
   # -------------------------------------------------------------
-  def self.parse(params = {}, language: nil)
+  def self.parse(params = {})
     if params[:filename]
       file = File.open(params[:filename])
       begin
@@ -22,12 +22,10 @@ module Peml
     else
       peml = params[:peml]
     end
+    raise ArgumentError, "peml cannot be empty or nil" if peml.nil? || peml.empty?
     value = Peml::Loader.new.load(peml)
     #Should we provide a param to render test cases?
     value = Peml::DatadrivenTestRenderer.new.generate_tests(value)
-    if !params[:result_only]
-      diags = validate(value)
-    end
     if params[:inline]
       value = Peml::inline(value)
     end
@@ -40,7 +38,7 @@ module Peml
     if params[:result_only]
       value
     else
-      { value: value, diagnostics: diags }
+      { value: value, diagnostics: validate(value) }
     end
   end
 
@@ -67,7 +65,9 @@ module Peml
   # currently, not implemented
   def self.interpolate(peml)
     default_peml = Marshal.load(Marshal.dump(peml)).dottie!
-    Utils.handle_exclusion(default_peml, Utils.recurse_hash(peml, :interpolate_helper, default_peml).dottie!)
+    Utils.handle_exclusion(
+      default_peml,
+      Utils.recurse_hash(peml, :interpolate_helper, default_peml).dottie!)
   end
 
 

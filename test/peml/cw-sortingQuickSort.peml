@@ -48,7 +48,7 @@ public ArrayList<Integer> quickSort(ArrayList<Integer> list) {
 
 [assets.test.files]
 format: text/csv-unquoted
-pattern_actual: subject.quickSort({{list}})
+pattern.actual: subject.quickSort({{list}})
 content:----------
 list,expected,description
 Answer.test1,Answer.answ1,"(4, 6, 1, 2, 3, 5, 6, 8, 9, 8, 4, 2) -> (1, 2, 2, 3, 4, 4, 5, 6, 6, 8, 8, 9)", example

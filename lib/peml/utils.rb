@@ -86,7 +86,7 @@ module Peml
   # recurse through the nested hash and perform specified operation
   # on values. Traversal and operations are loosely coupled to support
   # future changes and updates
-   def self.recurse_hash(peml, operation, default_peml)
+  def self.recurse_hash(peml, operation, default_peml)
     peml.each do |key, value|
       if value.is_a?(Hash)
         Utils.recurse_hash(value, operation, default_peml)
@@ -104,12 +104,12 @@ module Peml
     end
   end
 
-  #kramdown parser has changed to add \n idky why, needs fixing 
+  #kramdown parser has changed to add \n idky why, needs fixing
   def self.render_helper(value, default_peml)
     Kramdown::Document.new(value, :auto_ids => false, input: 'GFM', hard_wrap: ["false"]).to_html
   end
 
-  
+
   def self.interpolate_helper(value, default_peml)
     if value.match(/\{\{(.*?)\}\}/)
       substitute_values = Utils.substitute_variables(value.scan(/\{\{(.*?)\}\}/).flatten, default_peml)

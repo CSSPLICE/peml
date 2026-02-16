@@ -123,7 +123,7 @@ public class Cage <P extends Pet> ___{
 
 [assets.test.files]
 format: text/csv-unquoted
-pattern_actual: subject.tester({{testNum}})
+pattern.actual: subject.tester({{testNum}})
 content:----------
 testNum,expected,description
 1,true,"size2Cage.compareTo(size1Cage) > 0 -> true"

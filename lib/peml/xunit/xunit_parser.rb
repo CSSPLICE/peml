@@ -1,8 +1,8 @@
 module Peml
-    class XUnit_Parser
+    class XUnitParser
         def parse_then(statement)
         end
-        
+
         def parse_array_equivalence(statement)
         end
 
