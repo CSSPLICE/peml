@@ -2,6 +2,7 @@
 require_relative 'csv_unquoted_parser'
 require 'dottie/ext'
 require 'csv'
+require 'liquid'
 
 # need to fix pattern.actual
 module Peml
@@ -16,13 +17,21 @@ module Peml
         def generate_tests(peml)
             value = peml.dottie!
             languages = self.get_languages(value)
-            tests = self.recurse_hash(value, {})
+            tests = self.extract_test_metadata(value, {})
             if tests && tests[:format] && tests[:format].include?('csv')
                 peml['parsed_tests']=[]
                 tests[:content] = hashify_test(tests)
                 languages.each do |language|
-                    template_class = Liquid::Template.parse(File.open("#{@@template_path}#{language.downcase}_class.liquid").read, :error_mode => :strict)
-                    peml['parsed_tests']<<{language: language, test_class: template_class.render('class_name' => 'Answer', 'methods' => generate_methods(tests, language))}
+                    template_source = File.read("#{@@template_path}#{language.downcase}_class.liquid")
+                    template_class = Liquid::Template.parse(template_source, :error_mode => :strict)
+                    resolver = PemlTemplateResolver.new(value, language)
+                    peml['parsed_tests'] << {
+                        language: language,
+                        test_class: template_class.render(
+                            { 'class_name' => 'Answer', 'methods' => generate_methods(tests, language) },
+                            registers: { file_system: resolver }
+                        )
+                    }
                 end
             elsif tests && tests[:content]
                 peml['parsed_tests'] = tests[:content]
@@ -58,23 +67,23 @@ module Peml
             content_arr
         end
 
-        # A recursiive walker that walks through the hash and returns files
-        # that will most likely have testcases in them (idenitified by form
+        # A recursive walker that walks through the hash and returns files
+        # that will most likely have testcases in them (identified by form
         # and content keys)
-        def recurse_hash(peml, test_hash)
+        def extract_test_metadata(peml, test_hash)
             peml.each do |key, value|
                 if value.is_a?(Hash)
                     if value.key?('content') && value.key?('format')
                         test_hash = {content: value['content'], format: value['format'], pattern: value.key?('pattern_actual')?value['pattern_actual']: nil}
                     else
-                        test_hash = recurse_hash(value, test_hash)
+                        test_hash = extract_test_metadata(value, test_hash)
                     end
                 elsif value.is_a?(Array)
                     value.each do |element|
                         if element.key?('content') && element.key?('format')
                             test_hash = {content: element['content'], format: element['format'], pattern: element.key?('pattern_actual')?element['pattern_actual']: nil}
                         else
-                            test_hash = recurse_hash(element, test_hash)
+                            test_hash = extract_test_metadata(element, test_hash)
                         end
                     end
                 end
@@ -139,5 +148,51 @@ JAVA_TEST
     }
 CPP_TEST
     }
+
+    class PemlInclude < Liquid::Include
+      def initialize(tag_name, markup, options)
+          @mysig = "#{tag_name} #{markup}"
+          @for_idx = 0
+          super
+      end
+
+      def render_to_output_buffer(context, output)
+          @for_idx += 1
+          extra_scope = { 'for_idx' => @for_idx }
+          # puts "render_to_output_buffer: #{@mysig} #{@for_id}"
+          if @attributes.key?('flatten')
+              extra_scope.merge!(@attributes['flatten'].evaluate(context))
+          end
+          context.stack(extra_scope) do
+              super
+          end
+      end
+    end
+
+
+    class PemlTemplateResolver
+      def initialize(programmatic_definitions, language)
+          @overrides = programmatic_definitions
+          @base_path = File.expand_path("templates/", __dir__)
+          @base_lang_path = File.expand_path("templates/#{language.downcase}/", __dir__)
+      end
+
+      def read_template_file(template_path)
+          # 1. Check programmatic overrides first (precedence)
+          return @overrides[template_path].strip if @overrides.key?(template_path)
+
+          # 2. Fall back to language specific base templates on disk
+          file_path = File.join(@base_lang_path, "#{template_path}.liquid")
+          return File.read(file_path).strip if File.exist?(file_path)
+
+          # 3. Fall back to standard base templates on disk
+          file_path = File.join(@base_path, "#{template_path}.liquid")
+          return File.read(file_path).strip if File.exist?(file_path)
+
+          raise Liquid::FileSystemError, "No such template '#{template_path}'"
+      end
+    end
+
+    Liquid::Template.register_tag('include', PemlInclude)
 end
 

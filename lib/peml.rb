@@ -5,24 +5,27 @@ require_relative 'peml/utils'
 require_relative 'peml/peml_test_renderer'
 require_relative 'peml/datadriven_test_renderer'
 
-require "dottie/ext"
+require 'dottie/ext'
+require 'open-uri'
 
 module Peml
 
   # Ordered pipeline of optional transformation steps.
   # Each entry maps a params key to the method that performs it.
   TRANSFORMS = {
-    inline:         -> (v) { Peml.inline(v) },
-    test_renderer:  -> (v) { Peml::DatadrivenTestRenderer.new.generate_tests(v) },
-    interpolate:    -> (v) { Peml.interpolate(v) },
-    render_to_html: -> (v) { Peml.render_to_html(v) },
+    inline:             -> (v) { Peml.inline(v) },
+    inline_data_files:  -> (v) { Peml.inline_data_files(v) },
+    test_renderer:      -> (v) { Peml::DatadrivenTestRenderer.new.generate_tests(v) },
+    interpolate:        -> (v) { Peml.interpolate(v) },
+    render_to_html:     -> (v) { Peml.render_to_html(v) },
   }.freeze
 
 
   #~ Class methods ..........................................................
 
   # -------------------------------------------------------------
-  def self.parse(params = {})
+  def self.parse(params = {}, more_params = {})
+    params = params.merge(more_params)
     if params[:filename]
       file = File.open(params[:filename])
       begin
@@ -31,13 +34,17 @@ module Peml
         file.close
       end
     elsif params[:url]
-      require 'open-uri'
       peml = URI.open(params[:url]).read
     else
       peml = params[:peml]
     end
     raise ArgumentError, "peml cannot be empty or nil" if peml.nil? || peml.empty?
     value = Peml::Loader.new.load(peml)
+
+    # test renderer requires inline data files
+    if params[:test_renderer]
+      params[:inline_data_files] = true 
+    end
 
     # Apply requested transformation steps in pipeline order
     TRANSFORMS.each do |key, transform|
@@ -69,6 +76,14 @@ module Peml
 
 
   # -------------------------------------------------------------
+  # inline structured data file contents into native PEML structured
+  # data
+  def self.inline_data_files(peml)
+    Utils.deep_transform_files!(peml, :inline_data_file)
+  end
+
+
+  # -------------------------------------------------------------
   # handle mustache variable interpolation in fields inside
   # a PEML data structure (parsed PEML structured as a nested hash)
   # currently, not implemented
@@ -76,7 +91,7 @@ module Peml
     default_peml = Marshal.load(Marshal.dump(peml)).dottie!
     Utils.handle_exclusion(
       default_peml,
-      Utils.recurse_hash(peml, :interpolate_helper, default_peml).dottie!)
+      Utils.deep_transform_values!(peml, :interpolate_helper, default_peml).dottie!)
   end
 
 
@@ -85,7 +100,7 @@ module Peml
   # a PEML data structure (parsed PEML structured as a nested hash)
   # currently, not implemented
   def self.render_to_html(peml)
-    Utils.recurse_hash(peml, :render_helper, {})
+    Utils.deep_transform_values!(peml, :render_helper)
   end
 
 

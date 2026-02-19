@@ -61,7 +61,7 @@ module Peml
         def get_statements(key, peml)
             arr = []
             peml[key].each do |stmt|
-                arr.push(self.recurse_hash_to_string(stmt, ''))
+                arr.push(self.deep_to_string(stmt, ''))
             end
             arr
         end
@@ -70,16 +70,16 @@ module Peml
         #individual hashes, through sub-hashes and arrays, all the way
         #to the low level string/text values and concatenates them into
         #one line of code or one nested expression.
-        def recurse_hash_to_string(hash, str)
+        def deep_to_string(hash, str)
             # FIXME: This code looks broken, since it clobbers any value in
             # str each time it goes through the loop, unless the hash value
             # is a string. I'm not even sure what this is for?
             hash.each do |key, value|
                 if value.is_a?(Hash)
-                    str = recurse_hash_to_string(value, str)
+                    str = deep_to_string(value, str)
                 elsif value.is_a?(Array) && value.length > 0
                     value.length.times do |i|
-                        str = recurse_hash_to_string(value[i], str)
+                        str = deep_to_string(value[i], str)
                     end
                 elsif value.is_a?(String) || value == nil
                     str += value != nil ? value : ''

@@ -1,0 +1,13 @@
+{% include 'stock_imports' %}
+{% include 'extra_imports' %}
+public class {% include 'test_class_name' %}
+  {% include 'test_class_extends' %}
+{
+  {% include 'extra_declarations' %}
+  {% include 'subject_declaration' %}
+  {% include 'setup' %}
+  {% for test_case in test_cases %}
+    {% include 'test_method', flatten: test_case %}
+  {% endfor %}
+  {% include 'teardown' %}
+}

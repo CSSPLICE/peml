@@ -93,7 +93,51 @@ describe Peml::Utils do
         _(Peml::Utils.mime_type({'content' => 'hello'})).must_be_nil
       end
     end
+  end
 
+  describe ".tabular_to_hashes" do
+    it "converts a simple table to an array of hashes" do
+      data = [
+        ['name', 'age'],
+        ['Alice', 30],
+        ['Bob', 25]
+      ]
+      expected = [
+        { 'name' => 'Alice', 'age' => 30 },
+        { 'name' => 'Bob', 'age' => 25 }
+      ]
+      _(Peml::Utils.tabular_to_hashes(data)).must_equal expected
+    end
+
+    it "handles an empty table" do
+      _(Peml::Utils.tabular_to_hashes([])).must_equal []
+    end
+
+    it "handles a table with only headers" do
+      _(Peml::Utils.tabular_to_hashes([['name', 'age']])).must_equal []
+    end
+
+    it "handles mismatched row lengths (shorter rows)" do
+      data = [
+        ['name', 'age'],
+        ['Alice']
+      ]
+      expected = [{ 'name' => 'Alice', 'age' => nil }]
+      _(Peml::Utils.tabular_to_hashes(data)).must_equal expected
+    end
+
+    it "handles mismatched row lengths (longer rows)" do
+      data = [
+        ['name'],
+        ['Alice', 30]
+      ]
+      expected = [{ 'name' => 'Alice' }]
+      _(Peml::Utils.tabular_to_hashes(data)).must_equal expected
+    end
+
+    it "returns an empty array for nil input" do
+      _(Peml::Utils.tabular_to_hashes(nil)).must_equal []
+    end
   end
 
 end

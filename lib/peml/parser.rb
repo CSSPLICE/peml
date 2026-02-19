@@ -34,6 +34,7 @@ module Peml
         space? >>
         ( colon.maybe >>
           (identifier >> space? >> left_brace.present? |
+            string.as(:message) >> space? >> left_brace.present? |
             expression.as(:message)) >> space? >> left_brace.present?).maybe
     end
 

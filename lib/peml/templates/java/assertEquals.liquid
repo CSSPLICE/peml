@@ -1,0 +1,6 @@
+{% if expected %}
+  assertEquals(
+    {% include 'opt_negative_feedback' %}
+    {% include 'expected_template' %},
+    {% include 'actual' %});
+{% endif %}

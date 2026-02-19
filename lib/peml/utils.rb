@@ -1,7 +1,12 @@
 require 'json_schemer'
 require "dottie/ext"
 require "kramdown"
+require 'rexml/document'
 require 'kramdown-parser-gfm'
+require 'yaml'
+require 'json'
+require 'csv'
+require 'uri'
 require_relative 'version'
 
 module Peml
@@ -82,23 +87,47 @@ module Peml
       end
     end
 
+    # -------------------------------------------------------------
+
+    # A recursive walker that walks through the hash and transforms files
+    # that map to structured data formats (YAML, JSON, CSV, etc.)
+    def self.deep_transform_files!(peml, operation)
+      peml.each do |key, value|
+        if key == 'file' && value.is_a?(Hash)
+          peml[key] = method(operation).call(value)
+        elsif key == 'files' && value.is_a?(Array)
+          value.length.times do |i|
+            if value[i].is_a?(Hash)
+              peml[key][i] = method(operation).call(value[i])
+            end
+          end
+        elsif value.is_a?(Hash)
+          Utils.deep_transform_files!(value, operation)
+        elsif value.is_a?(Array)
+          value.each do |element|
+            Utils.deep_transform_files!(element, operation) if element.is_a?(Hash)
+          end
+        end
+      end
+    end
+
   # -------------------------------------------------------------
-  # recurse through the nested hash and perform specified operation
-  # on values. Traversal and operations are loosely coupled to support
+  # deep transform values in a nested hash/array structure
+  # Traversal and operations are loosely coupled to support
   # future changes and updates
-  def self.recurse_hash(peml, operation, default_peml)
+  def self.deep_transform_values!(peml, operation, default_peml = {})
     peml.each do |key, value|
       if value.is_a?(Hash)
-        Utils.recurse_hash(value, operation, default_peml)
+        Utils.deep_transform_values!(value, operation, default_peml)
       elsif value.is_a?(Array)
         value.length.times do |i|
           if value[i].is_a?(Hash)
-            Utils.recurse_hash(value[i], operation, default_peml)
-          elsif value[i].respond_to?(:to_s) || value[i].respond_to(:to_i)
+            Utils.deep_transform_values!(value[i], operation, default_peml)
+          elsif value[i].respond_to?(:to_s) || value[i].respond_to?(:to_i)
             peml[key][i] = method(operation).call(value[i], default_peml)
           end
         end
-      elsif value.respond_to?(:to_s) || value.respond_to(:to_i)
+      elsif value.respond_to?(:to_s) || value.respond_to?(:to_i)
         peml[key] = method(operation).call(value, default_peml)
       end
     end
@@ -139,6 +168,134 @@ module Peml
 
 
   # -------------------------------------------------------------
+  def self.inline_data_file(value)
+    if value.is_a?(Hash)
+      content = value['content']
+      if content.is_a?(String) # Only parse if it's a string
+        type = mime_type(value)
+        case type
+        when 'text/yaml'
+          value['content'] = YAML.load(content)
+        when 'application/json'
+          value['content'] = JSON.parse(content)
+        when 'text/csv'
+          value['content'] = tabular_to_hashes(CSV.parse(content))
+        when 'application/xml', 'text/xml'
+          value['content'] = xml_to_hash(REXML::Document.new(content).root)
+        when 'text/x-unquoted-csv'
+          value['content'] = tabular_to_hashes(Peml::CsvUnquotedParser.new.parse(content))
+        end
+      end
+    end
+    value
+  end
+
+
+  # -------------------------------------------------------------
+  # convert an array of arrays representing CSV-style row-based data
+  # where the first row represents column headings.
+  # Returns a new data structure consisting of an array of hashes,
+  # one per row, where each hash is a key/value mapping column names
+  # to cell values for that row.
+  def self.tabular_to_hashes(data)
+    result = []
+    if data && data.is_a?(Array) && data.length > 0
+      headers = data[0]
+      (1...data.length).each do |i|
+        row = data[i]
+        hash = {}
+        headers.each_with_index do |header, j|
+          hash[header] = row[j]
+        end
+        result << hash
+      end
+    end
+    result
+  end
+
+
+  # -------------------------------------------------------------
+  # Recursively convert a REXML element into a nested hash/array structure.
+  def self.xml_to_hash(element)
+    return nil if element.nil?
+    result = {}
+    element.attributes.each do |name, value|
+      result["@#{name}"] = value
+    end
+    element.elements.each do |child|
+      child_result = xml_to_hash(child)
+      if result[child.name]
+        if result[child.name].is_a?(Array)
+          result[child.name] << child_result
+        else
+          result[child.name] = [result[child.name], child_result]
+        end
+      else
+        result[child.name] = child_result
+      end
+    end
+    if result.empty?
+      return element.text
+    else
+      text = element.text ? element.text.strip : nil
+      result['content'] = text if text && !text.empty?
+      return result
+    end
+  end
+
+
+  # -------------------------------------------------------------
+  # Used in AST cleanup transforms for parslet parsers to "clean up"
+  # nested hashes/arrays of nodes by simplifying values to text strings
+  # where possible.
+  def self.string_reduce(tree)
+    # puts "string_reduce: #{tree.inspect}"
+    if tree.is_a? Hash
+      result = Hash.new
+      tree.each do |k, v|
+        result[k] = Utils.string_reduce(v)
+      end
+    elsif tree.is_a? Array
+      result = Array.new
+      text = nil
+      tree.each do |v|
+        if v.is_a?(Hash) && v.has_key?(:text)
+          if text.nil?
+            text = v[:text].to_s
+          else
+            text += v[:text].to_s
+          end
+        elsif v.is_a?(String)
+          if text.nil?
+            text = v
+          else
+            text += v
+          end
+        else
+          if !text.nil?
+            result.push({text: text})
+            text = nil
+          end
+          result.push(v)
+        end
+      end
+      if !text.nil?
+        result.push({text: text})
+        text = nil
+      end
+      if result.length == 1 &&
+         result[0].is_a?(Hash) &&
+         result[0].has_key?(:text)
+        result = result[0][:text]
+      end
+    else
+      result = tree
+    end
+    result
+  end
+
+
+  # -------------------------------------------------------------
   # Infer the MIME type from a file hash or URL string.
   #
   # If file_hash is a Hash:
@@ -166,14 +323,24 @@ module Peml
     '.csvu'   => 'text/x-unquoted-csv',
     '.csvuq'  => 'text/x-unquoted-csv',
     '.ucsv'   => 'text/x-unquoted-csv',
+    '.html'   => 'text/html',
+    '.htm'    => 'text/html',
+    '.css'    => 'text/css',
     '.csv-unquoted'   => 'text/x-unquoted-csv',
+    '.png'   => 'image/png',
+    '.jpg'   => 'image/jpeg',
+    '.jpeg'  => 'image/jpeg',
+    '.gif'   => 'image/gif',
+    '.pdf'   => 'application/pdf',
+    '.zip'   => 'application/zip',
+    '.svg'   => 'image/svg+xml'
   }.freeze
 
   def self.mime_type(file_hash)
     result = nil
     if file_hash.is_a?(Hash)
       result = file_hash['type'] if file_hash['type']
-      result = mime_type_from_filename(file_hash['name']) if file_hash['name']
+      result = mime_type_from_filename(file_hash['name']) if file_hash['name'] && result.nil?
     elsif file_hash.is_a?(String)
       if (match = file_hash.match(/\Aurl\((.*)\)\z/))
         url = match[1]

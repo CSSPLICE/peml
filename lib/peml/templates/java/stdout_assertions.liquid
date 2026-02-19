@@ -1,0 +1,6 @@
+{% if stdout %}
+  assertEquals(
+    {% include 'opt_negative_feedback' %}
+    {% include 'stdout_template' %},
+    systemOut().getHistory());
+{% endif %}
