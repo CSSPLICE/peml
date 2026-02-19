@@ -84,17 +84,17 @@ describe Peml::CsvUnquotedParser do
   describe "double-quoted strings" do
     it "parses a simple double-quoted string" do
       result = @parser.parse("\"hello\",value\n")
-      _(result).must_equal [[[{string: '"hello"'}], "value"]]
+      _(result).must_equal [["\"hello\"", "value"]]
     end
 
     it "preserves commas inside double-quoted strings" do
       result = @parser.parse("\"a, b\",c\n")
-      _(result).must_equal [[[{string: '"a, b"'}], "c"]]
+      _(result).must_equal [["\"a, b\"", "c"]]
     end
 
     it "handles escaped characters in double-quoted strings" do
       result = @parser.parse("\"hello\\\"world\",value\n")
-      _(result).must_equal [[[{string: '"hello\\"world"'}], "value"]]
+      _(result).must_equal [["\"hello\\\"world\"", "value"]]
     end
   end
 
@@ -103,12 +103,12 @@ describe Peml::CsvUnquotedParser do
   describe "single-quoted strings" do
     it "parses a single-quoted string field" do
       result = @parser.parse("'hello world',42\n")
-      _(result).must_equal [[[{string: "'hello world'"}], "42"]]
+      _(result).must_equal [["'hello world'", "42"]]
     end
 
     it "handles escaped characters in single-quoted strings" do
       result = @parser.parse("'it\\'s',value\n")
-      _(result).must_equal [[[{string: "'it\\'s'"}], "value"]]
+      _(result).must_equal [["'it\\'s'", "value"]]
     end
   end
 
@@ -154,9 +154,9 @@ describe Peml::CsvUnquotedParser do
       result = @parser.parse(csv)
       _(result).must_equal [
         ["nums", "expected", "description"],
-        [[{string: '"new int[] {12, 7, 8, 25, 3}"'}], "true", "example"],
-        [[{string: '"new int[] {1}"'}], "true"],
-        [[{string: '"new int[] {}"'}], "false"]
+        ['"new int[] {12, 7, 8, 25, 3}"', "true", "example"],
+        ['"new int[] {1}"', "true"],
+        ['"new int[] {}"', "false"]
       ]
     end
   end
@@ -166,12 +166,17 @@ describe Peml::CsvUnquotedParser do
   describe "regex literals" do
     it "parses a regex literal field" do
       result = @parser.parse("/abc/i,value\n")
-      _(result).must_equal [[[{regex: {balanced: {lb: "/", body: "abc", rb: "/", modifiers: "i"}}}], "value"]]
+      _(result).must_equal [["/abc/i", "value"]]
     end
 
     it "parses a regex without modifiers" do
       result = @parser.parse("/pattern/,value\n")
-      _(result).must_equal [[[{regex: {balanced: {lb: "/", body: "pattern", rb: "/", modifiers: []}}}], "value"]]
+      _(result).must_equal [["/pattern/", "value"]]
+    end
+
+    it "parses a regex with multiple modifiers" do
+      result = @parser.parse("/pattern/gi,value\n")
+      _(result).must_equal [["/pattern/gi", "value"]]
     end
   end
 
