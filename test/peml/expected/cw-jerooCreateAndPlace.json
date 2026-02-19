@@ -48,8 +48,7 @@
           }
         ]
       }
-    },
-    "parsed_tests": "import codeworkout.*;\nimport student.micro.jeroo.CompassDirection;\npublic class AnswerTest extends CodeWorkoutTest {\n    private Answer answer;\n    private Answer.Jeroo jeroo;\n\n    public void setUp() {\n        answer = new Answer();\n        answer.myProgram();\n        jeroo = answer.getOneObjectAt(2, 3, Answer.Jeroo.class);\n    }\n\n    @Description(\"Correct position\")\n    public void test1() {\n      assertNotNull(\"The Jeroo was not added at the correct position\",\n        jeroo);\n    }\n\n    @Description(\"Facing north\")\n    public void test2() {\n      assertNotNull(\"The Jeroo was not added at the correct position\",\n        jeroo);\n      assertEquals(\"The Jeroo is not facing the correct direction\",\n        CompassDirection.NORTH, jeroo.__getFacing());\n    }\n}\n"
+    }
   },
   "diagnostics": [
 

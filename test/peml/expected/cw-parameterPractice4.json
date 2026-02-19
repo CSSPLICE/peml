@@ -48,8 +48,7 @@
           }
         ]
       }
-    },
-    "parsed_tests": "import codeworkout.CodeWorkoutTest;\npublic class Syntax8to10Test extends CodeWorkoutTest {\n\n    public Syntax8to10 test;\n    public void setUp() {\n        test = new Syntax8to10();\n    }\n\n    public void testParametersSetCorrectly() {\n        int aVal = 100;\n        int bVal = 10;\n\n        assertEquals(aVal + \" should be the first parameter passed!\", aVal, test.getA());\n        assertEquals(bVal + \" should be the second parameter passed!\", bVal, test.getB());\n\n    }\n}\n"
+    }
   },
   "diagnostics": [
 

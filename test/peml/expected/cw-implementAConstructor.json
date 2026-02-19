@@ -48,8 +48,7 @@
           }
         ]
       }
-    },
-    "parsed_tests": "import static org.junit.Assert.*;\nimport org.junit.*;\nimport codeworkout.*;\nimport java.lang.reflect.Constructor;\nimport java.lang.reflect.Type;\n\npublic class CourseTest extends CodeWorkoutTest\n{\n    @Before\n    public void setUp()\n    {\n    }\n\n   @Description(\"Checking that the fields are set correctly\")\n   @Test\n   public void testConstructorExercise()\n   {\n     boolean correctValues = false;\n     Course c = new Course(1213, \"Intro to CS II\", \"ITSC\", 72);\n     correctValues = (c.number == 1213 && \"Intro to CS II\".equals(c.title) && \"ITSC\".equals(c.department) && c.capacity == 72);\n     assertTrue(\"Fields were not set correctly\",correctValues);\n   }\n}\n"
+    }
   },
   "diagnostics": [
 

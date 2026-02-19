@@ -48,8 +48,7 @@
           }
         ]
       }
-    },
-    "parsed_tests": "import codeworkout.*;\npublic class AnswerTest extends CodeWorkoutTest {\n    private Answer testJeroo;\n    private java.util.ArrayList calls;\n\n    public void setUp() {\n        testJeroo = new Answer();\n        testJeroo.run(testJeroo);\n        calls = testJeroo.getMoveHistory();\n    }\n\n    @Description(\"Both turn method calls are fixed\")\n    public void testBothTurnMethodCallsAreFixed() {\n      assertEquals(\"extra method calls have been added\", 4, calls.size());\n      assertEquals(\"hop() calls should not be modified\",\n        \"hop\", calls.get(0));\n      assertEquals(\"hop() calls should not be modified\",\n        \"hop\", calls.get(2));\n      if (!\"turn(LEFT)\".equals(calls.get(1)))\n      {\n        fail(\"first turn method call was not revised properly\");\n      }\n      if (!\"turn(RIGHT)\".equals(calls.get(3)))\n      {\n        fail(\"second turn method call was not revised properly\");\n      }\n    }\n}\n\n"
+    }
   },
   "diagnostics": [
 

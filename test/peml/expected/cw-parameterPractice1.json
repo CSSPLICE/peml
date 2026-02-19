@@ -48,8 +48,7 @@
           }
         ]
       }
-    },
-    "parsed_tests": "import codeworkout.CodeWorkoutTest;\npublic class Syntax1to3Test extends CodeWorkoutTest {\n\n  public Syntax1to3 test;\n  public void setUp() {\n      test = new Syntax1to3();\n  }\n\n  public void testParametersSetCorrectly() {\n      int aVal = 4;\n      int bVal = 10;\n      int cVal = 9;\n\n      test.run();\n\n      assertEquals(aVal + \" should be the first parameter passed!\", aVal, test.getA());\n      assertEquals(bVal + \" should be the second parameter passed!\", bVal, test.getB());\n      assertEquals(cVal + \" should be the third parameter passed!\", cVal, test.getC());\n  }\n}\n"
+    }
   },
   "diagnostics": [
 

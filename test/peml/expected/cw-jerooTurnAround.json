@@ -48,8 +48,7 @@
           }
         ]
       }
-    },
-    "parsed_tests": "import codeworkout.*;\npublic class AnswerTest extends CodeWorkoutTest {\n  private Answer testJeroo;\n  private java.util.ArrayList calls;\n\n  public void setUp() {\n      testJeroo = new Answer();\n      testJeroo.turnAround();\n      calls = testJeroo.getMoveHistory();\n  }\n\n  @Description(\"turnAround() implemented to turn right twice\")\n  public void testTurnAround() {\n    assertEquals(\"extra method calls have been added\", 2, calls.size());\n    if (!\"turn(RIGHT)\".equals(calls.get(0)) || !\"turn(RIGHT)\".equals(calls.get(1)))\n    {\n      fail(\"turnAround() is not implemented using two right turns\");\n    }\n  }\n}\n"
+    }
   },
   "diagnostics": [
 

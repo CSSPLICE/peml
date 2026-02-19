@@ -48,8 +48,7 @@
           }
         ]
       }
-    },
-    "parsed_tests": "import codeworkout.CodeWorkoutTest;\nimport codeworkout.Description;\nimport codeworkout.Hint;\npublic class syntax1Test extends CodeWorkoutTest  {\n\n    @Description(\"Checks jeroo stops after 5 hops\")\n    public void test1() {\n        syntax1.CountingJeroo testJ = new syntax1.CountingJeroo();\n        int expectedHops = 5;\n        syntax1.Runner run = new syntax1.Runner();\n\n        run.question1(testJ);\n\n        assertEquals(\"Jeroo should hop \"+expectedHops+\" times.  \"\n            + \"Hopped: \"+testJ.getHopCount()+\" times\", expectedHops, testJ.getHopCount());\n\n    }\n}\n"
+    }
   },
   "diagnostics": [
 

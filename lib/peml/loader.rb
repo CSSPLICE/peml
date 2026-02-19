@@ -321,6 +321,19 @@ module Peml
 
         @buffer_scope[key_bits.last] = '' if options[:replace]
         @buffer_scope[key_bits.last] += value
+
+        # PEML spec: "Any leading/trailing white space is trimmed
+        # (including newlines), and multi-line values (i.e., those
+        # containing embedded newline(s) after trimming) are
+        # automatically terminated with a single newline."
+        if !options[:replace] && !@is_quoted
+          full_val = @buffer_scope[key_bits.last]
+          if full_val.is_a?(String)
+            full_val = full_val.strip
+            full_val += "\n" if full_val.include?("\n")
+            @buffer_scope[key_bits.last] = full_val
+          end
+        end
       end
     end
 

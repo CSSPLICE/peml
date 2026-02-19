@@ -24,7 +24,7 @@
         },
         "suites": [
           {
-            "template": "  subject.squirrelPlay({{temp}}, {{isSummer}})",
+            "template": "subject.squirrelPlay({{temp}}, {{isSummer}})",
             "cases": [
               {
                 "temp": "40",
@@ -79,7 +79,7 @@
             ]
           },
           {
-            "template": "  subject.squirrelPlay({{temp}}, {{isSummer}})",
+            "template": "subject.squirrelPlay({{temp}}, {{isSummer}})",
             "cases": [
               {
                 "temp": "40",

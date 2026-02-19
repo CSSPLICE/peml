@@ -37,13 +37,7 @@
           }
         ]
       }
-    },
-    "parsed_tests": [
-      {
-        "language": "Java",
-        "test_class": "class Answer {   }\n"
-      }
-    ]
+    }
   },
   "diagnostics": [
 

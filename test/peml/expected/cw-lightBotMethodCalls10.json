@@ -48,8 +48,7 @@
           }
         ]
       }
-    },
-    "parsed_tests": "import codeworkout.CodeWorkoutTest;\npublic class syntax10Test extends CodeWorkoutTest {\n    private syntax10.SimpleLightBot testBot;\n    private syntax10.Runner runner;\n\n    public void setUp() {\n        testBot = new syntax10.SimpleLightBot();\n        runner = new syntax10.Runner();\n    }\n\n    public void testLightBotRun() {\n        String[] expected = {\"jump\", \"turnLeft\"};\n        runner.run(testBot);\n\n        String[] testResult = testBot.getMoveHistory();\n\n        assertEquals(expected.length, testResult.length);\n        assertEquals(expected, testResult);\n    }\n\n    public void testSpinStillExists() {\n        String[] expected = {\"turnLeft\", \"turnLeft\", \"turnLeft\", \"turnLeft\"};\n        runner.spin(testBot);\n\n        String[] testResult = testBot.getMoveHistory();\n\n        assertEquals(expected.length, testResult.length);\n        assertEquals(expected, testResult);\n    }\n}\n"
+    }
   },
   "diagnostics": [
 

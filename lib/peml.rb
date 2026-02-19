@@ -9,7 +9,18 @@ require "dottie/ext"
 
 module Peml
 
-  #~ Class methods ...........................................................
+  # Ordered pipeline of optional transformation steps.
+  # Each entry maps a params key to the method that performs it.
+  TRANSFORMS = {
+    inline:         -> (v) { Peml.inline(v) },
+    test_renderer:  -> (v) { Peml::DatadrivenTestRenderer.new.generate_tests(v) },
+    interpolate:    -> (v) { Peml.interpolate(v) },
+    render_to_html: -> (v) { Peml.render_to_html(v) },
+  }.freeze
+
+
+  #~ Class methods ..........................................................
+
   # -------------------------------------------------------------
   def self.parse(params = {})
     if params[:filename]
@@ -27,17 +38,12 @@ module Peml
     end
     raise ArgumentError, "peml cannot be empty or nil" if peml.nil? || peml.empty?
     value = Peml::Loader.new.load(peml)
-    #Should we provide a param to render test cases?
-    value = Peml::DatadrivenTestRenderer.new.generate_tests(value)
-    if params[:inline]
-      value = Peml::inline(value)
+
+    # Apply requested transformation steps in pipeline order
+    TRANSFORMS.each do |key, transform|
+      value = transform.call(value) if params[key]
     end
-    if params[:interpolate]
-      value = Peml::interpolate(value)
-    end
-    if params[:render_to_html]
-      value = Peml::render_to_html(value)
-    end
+
     if params[:result_only]
       value
     else

@@ -1,0 +1,59 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/688/practice?workout_id=955",
+    "title": "Sorting - AddThree C++",
+    "external_id": "addThree",
+    "is_public": "true",
+    "experience": "50",
+    "language_list": "C++",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "ayaan@vt.edu",
+        "name": "Ayaan"
+      }
+    },
+    "tags": {
+      "topics": "arithmetic",
+      "style": "code writing"
+    },
+    "instructions": "With the variables given to you, add the numbers together and store it in the variable called sum.\n",
+    "systems": [
+      {
+        "language": "C++"
+      }
+    ],
+    "assets": {
+      "code": {
+        "wrapper": {
+          "files": [
+            {
+              "content": "class AddThree\n{\n  public:\n    ___\n};\n"
+            }
+          ]
+        },
+        "starter": {
+          "files": [
+            {
+              "content": "int addThree()\n{\n    int first = 5;\n    int second = 3;\n    int third = 10;\n    int sum;\n    // In the space below, complete the necessary code.\n\n    ___\n\n    // Do not change the code below this\n    return sum;\n}\n"
+            }
+          ]
+        }
+      },
+      "test": {
+        "files": [
+          {
+            "format": "text/csv-unquoted",
+            "pattern": {
+              "actual": "subject.addThree()"
+            },
+            "content": "expected,description\n18\n"
+          }
+        ]
+      }
+    }
+  },
+  "diagnostics": [
+
+  ]
+}

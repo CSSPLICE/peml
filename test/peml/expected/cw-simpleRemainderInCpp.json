@@ -51,13 +51,7 @@
           }
         ]
       }
-    },
-    "parsed_tests": [
-      {
-        "language": "cpp",
-        "test_class": "class Answer {  }; \n"
-      }
-    ]
+    }
   },
   "diagnostics": [
 

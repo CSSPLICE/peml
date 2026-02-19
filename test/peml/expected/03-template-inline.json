@@ -50,7 +50,7 @@
             "pattern": {
               "description": "{{stdout}}"
             },
-            "template": "  // Here, the code is based on a specific tool that generates JUnit-style\n  // tests using this as a template, and substituting variables based on\n  // the \"columns\" in the list of cases.\n\n  setSystemIn({{stdin}});\n  Answer.main();\n  assertEquals({{description}}, {{stdout}}, systemOut().getHistory());",
+            "template": "// Here, the code is based on a specific tool that generates JUnit-style\n  // tests using this as a template, and substituting variables based on\n  // the \"columns\" in the list of cases.\n\n  setSystemIn({{stdin}});\n  Answer.main();\n  assertEquals({{description}}, {{stdout}}, systemOut().getHistory());\n",
             "cases": [
               {
                 "stdin": "racecar",
@@ -69,7 +69,7 @@
               "description": "sumNumbers({{str}}) -> {{expected}}",
               "actual": "subject.sumNumbers({{str}})"
             },
-            "template": "    assertEquals({{expected}}, {{actual}});",
+            "template": "assertEquals({{expected}}, {{actual}});",
             "content": "str,expected,description\n\"abc123xyz\",123,example\n\"aa11b33\",44,example\n\"7 11\",18,example\n\"Chocolate\",0\n\"5hoco1a1e\",7\n\"5$$1;;1!!\",7\n\"a1234bb11\",1245\n\"\",0\n\"a22bbb3\",25\n\"FS3453g36fs25\",3514,hidden\n\"dfg64g21ge743\",828,hidden\n\"2sdf4523sdfsd7\",4532,hidden\n\"sdffherbwm\",0,hidden\n"
           }
         ]

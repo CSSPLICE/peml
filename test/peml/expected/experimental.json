@@ -106,7 +106,7 @@
             "name": "foo",
             "visibility": "public | private | ...",
             "type": "mime type or tag or whatever",
-            "template": "  self.assertEqual({{expected}}, subject.squirrelPlay({{temp}}, {{isSummer}}))",
+            "template": "self.assertEqual({{expected}}, subject.squirrelPlay({{temp}}, {{isSummer}}))",
             "cases": [
               {
                 "stdin": "racecar",

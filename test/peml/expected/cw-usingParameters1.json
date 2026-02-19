@@ -48,8 +48,7 @@
           }
         ]
       }
-    },
-    "parsed_tests": "import codeworkout.CodeWorkoutTest;\npublic class syntax6to7Test extends CodeWorkoutTest {\n\n  public void testMethodsHaveBeenCalledCorrectly() {\n      syntax6to7.Runner runner = new syntax6to7.Runner();\n\n      syntax6to7.Person testPerson = runner.run();\n\n      String expectedName = \"Peter\";\n      int expectedAge = 42;\n\n      assertEquals(\"Name has not been set correctly\", expectedName, testPerson.getName());\n      assertEquals(\"Age has not been set correctly\", expectedAge, testPerson.getAge());\n\n  }\n}\n"
+    }
   },
   "diagnostics": [
 

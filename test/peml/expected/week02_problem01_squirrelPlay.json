@@ -24,7 +24,7 @@
         },
         "suites": [
           {
-            "template": "  self.assertEqual({{expected}}, subject.squirrelPlay({{temp}}, {{isSummer}}))",
+            "template": "self.assertEqual({{expected}}, subject.squirrelPlay({{temp}}, {{isSummer}}))",
             "cases": [
               {
                 "temp": "40",

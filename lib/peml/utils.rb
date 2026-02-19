@@ -137,5 +137,62 @@ module Peml
     peml
   end
 
+
+  # -------------------------------------------------------------
+  # Infer the MIME type from a file hash or URL string.
+  #
+  # If file_hash is a Hash:
+  #   - returns the "type" value if present
+  #   - otherwise infers from the extension of the "name" value
+  # If file_hash is a String matching "url(...)":
+  #   - infers from the file extension at the end of the URL path
+  # Returns nil if the type cannot be determined.
+  MIME_TYPES = {
+    '.rb'    => 'text/x-ruby',
+    '.py'    => 'text/x-python',
+    '.java'  => 'text/x-java',
+    '.c'     => 'text/x-csrc',
+    '.cpp'   => 'text/x-c++src',
+    '.h'     => 'text/x-chdr',
+    '.js'    => 'text/javascript',
+    '.ts'    => 'text/typescript',
+    '.json'  => 'application/json',
+    '.xml'   => 'application/xml',
+    '.yaml'  => 'text/yaml',
+    '.yml'   => 'text/yaml',
+    '.md'    => 'text/markdown',
+    '.txt'   => 'text/plain',
+    '.csv'   => 'text/csv',
+    '.csvu'   => 'text/x-unquoted-csv',
+    '.csvuq'  => 'text/x-unquoted-csv',
+    '.ucsv'   => 'text/x-unquoted-csv',
+    '.csv-unquoted'   => 'text/x-unquoted-csv',
+  }.freeze
+
+  def self.mime_type(file_hash)
+    result = nil
+    if file_hash.is_a?(Hash)
+      result = file_hash['type'] if file_hash['type']
+      result = mime_type_from_filename(file_hash['name']) if file_hash['name']
+    elsif file_hash.is_a?(String)
+      if (match = file_hash.match(/\Aurl\((.*)\)\z/))
+        url = match[1]
+        path = URI.parse(url).path rescue url
+        result = mime_type_from_filename(path)
+      else
+        result = mime_type_from_filename(file_hash)
+      end
+    end
+    if result == 'text/csv-unquoted' || result == 'csv-unquoted'
+      result = 'text/x-unquoted-csv'
+    end
+    result
+  end
+
+  def self.mime_type_from_filename(filename)
+    ext = File.extname(filename).downcase
+    MIME_TYPES[ext]
+  end
+
   end
 end

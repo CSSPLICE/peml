@@ -48,8 +48,7 @@
           }
         ]
       }
-    },
-    "parsed_tests": "import codeworkout.CodeWorkoutTest;\npublic class syntax4to5Test extends CodeWorkoutTest{\n\n    public void testSuperIsCalled() {\n        syntax4to5.Student testStudent = new syntax4to5.Student();\n\n        assertTrue(\"You must call super in the constructor!\", testStudent.getSuperWasCalled());\n    }\n}\n"
+    }
   },
   "diagnostics": [
 
