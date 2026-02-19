@@ -1,0 +1,57 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/852/practice?workout_id=1342",
+    "title": "CodeWorkout Jeroo turnAround()",
+    "external_id": "edu.vt.cs.1114.jeroo_turnAround",
+    "is_public": "true",
+    "experience": "50",
+    "language_list": "Java",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "edwards@cs.vt.edu",
+        "name": "Stephen H. Edwards"
+      }
+    },
+    "tags": {
+      "topics": "Jeroo, methods, syntax practice",
+      "style": "code writing"
+    },
+    "instructions": "The following method could be added to a `Jeroo` subclass to\nprovide an action to turn around by turning left twice.\nChange the method so that it turns right twice instead.\n",
+    "systems": [
+      {
+        "language": "Java"
+      }
+    ],
+    "assets": {
+      "code": {
+        "wrapper": {
+          "files": [
+            {
+              "content": "import java.util.ArrayList;\nimport student.micro.jeroo.*;\npublic class Answer extends Jeroo {\n  private ArrayList<String> moveHistory = new ArrayList<String>();\n\n    public ArrayList<String> getMoveHistory() {\n      return moveHistory;\n    }\n    public void pick() { moveHistory.add(\"pick\"); }\n    public void plant() { moveHistory.add(\"plant\"); }\n    public void toss() { moveHistory.add(\"toss\"); }\n    public void jump() { moveHistory.add(\"jump\"); }\n    public void turn(RelativeDirection dir)\n      { moveHistory.add(\"turn(\" + dir + \")\"); }\n    public void give(RelativeDirection dir)\n      { moveHistory.add(\"give(\" + dir + \")\"); }\n    public void hop() { moveHistory.add(\"hop\"); }\n    public void move() { hop(); }\n    public void move(int n) { hop(n); }\n    ___\n}\n"
+            }
+          ]
+        },
+        "starter": {
+          "files": [
+            {
+              "content": "public void turnAround()\n{\n    this.turn(LEFT);\n    this.turn(LEFT);\n}\n"
+            }
+          ]
+        }
+      },
+      "test": {
+        "files": [
+          {
+            "format": "java/junit",
+            "content": "import codeworkout.*;\npublic class AnswerTest extends CodeWorkoutTest {\n  private Answer testJeroo;\n  private java.util.ArrayList calls;\n\n  public void setUp() {\n      testJeroo = new Answer();\n      testJeroo.turnAround();\n      calls = testJeroo.getMoveHistory();\n  }\n\n  @Description(\"turnAround() implemented to turn right twice\")\n  public void testTurnAround() {\n    assertEquals(\"extra method calls have been added\", 2, calls.size());\n    if (!\"turn(RIGHT)\".equals(calls.get(0)) || !\"turn(RIGHT)\".equals(calls.get(1)))\n    {\n      fail(\"turnAround() is not implemented using two right turns\");\n    }\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    "parsed_tests": "import codeworkout.*;\npublic class AnswerTest extends CodeWorkoutTest {\n  private Answer testJeroo;\n  private java.util.ArrayList calls;\n\n  public void setUp() {\n      testJeroo = new Answer();\n      testJeroo.turnAround();\n      calls = testJeroo.getMoveHistory();\n  }\n\n  @Description(\"turnAround() implemented to turn right twice\")\n  public void testTurnAround() {\n    assertEquals(\"extra method calls have been added\", 2, calls.size());\n    if (!\"turn(RIGHT)\".equals(calls.get(0)) || !\"turn(RIGHT)\".equals(calls.get(1)))\n    {\n      fail(\"turnAround() is not implemented using two right turns\");\n    }\n  }\n}\n"
+  },
+  "diagnostics": [
+
+  ]
+}

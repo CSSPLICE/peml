@@ -1,0 +1,57 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/851/practice?workout_id=1342",
+    "title": "CodeWorkout Jeroo turn() method",
+    "external_id": "edu.vt.cs.1114.jeroo_turn_method",
+    "is_public": "true",
+    "experience": "50",
+    "language_list": "Java",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "edwards@cs.vt.edu",
+        "name": "Stephen H. Edwards"
+      }
+    },
+    "tags": {
+      "topics": "Jeroo, methods, syntax practice",
+      "style": "code writing"
+    },
+    "instructions": "Your TA was helping you with a problem a suggested the following lines\nof code for controlling a `Jeroo`. However, the TA accidentally used\nthe turn methods for a `LightBot`. Fix the turn methods to use the\ncorrect methods fr a `Jeroo`.\n",
+    "systems": [
+      {
+        "language": "Java"
+      }
+    ],
+    "assets": {
+      "code": {
+        "wrapper": {
+          "files": [
+            {
+              "content": "import java.util.ArrayList;\nimport student.micro.jeroo.*;\n\npublic class Answer extends Jeroo {\n  private ArrayList<String> moveHistory = new ArrayList<String>();\n\n    public ArrayList<String> getMoveHistory() {\n      return moveHistory;\n    }\n    public void pick() { moveHistory.add(\"pick\"); }\n    public void plant() { moveHistory.add(\"plant\"); }\n    public void toss() { moveHistory.add(\"toss\"); }\n    public void jump() { moveHistory.add(\"jump\"); }\n    public void turn(RelativeDirection dir)\n      { moveHistory.add(\"turn(\" + dir + \")\"); }\n    public void give(RelativeDirection dir)\n      { moveHistory.add(\"give(\" + dir + \")\"); }\n    public void hop() { moveHistory.add(\"hop\"); }\n    public void move() { hop(); }\n    public void move(int n) { hop(n); }\n    public void run (Answer jeroo) {\n      ___\n    }\n}\n"
+            }
+          ]
+        },
+        "starter": {
+          "files": [
+            {
+              "content": "jeroo.hop();\njeroo.turnLeft();\njeroo.hop();\njeroo.turnRight();\n"
+            }
+          ]
+        }
+      },
+      "test": {
+        "files": [
+          {
+            "format": "java/junit",
+            "content": "import codeworkout.*;\npublic class AnswerTest extends CodeWorkoutTest {\n    private Answer testJeroo;\n    private java.util.ArrayList calls;\n\n    public void setUp() {\n        testJeroo = new Answer();\n        testJeroo.run(testJeroo);\n        calls = testJeroo.getMoveHistory();\n    }\n\n    @Description(\"Both turn method calls are fixed\")\n    public void testBothTurnMethodCallsAreFixed() {\n      assertEquals(\"extra method calls have been added\", 4, calls.size());\n      assertEquals(\"hop() calls should not be modified\",\n        \"hop\", calls.get(0));\n      assertEquals(\"hop() calls should not be modified\",\n        \"hop\", calls.get(2));\n      if (!\"turn(LEFT)\".equals(calls.get(1)))\n      {\n        fail(\"first turn method call was not revised properly\");\n      }\n      if (!\"turn(RIGHT)\".equals(calls.get(3)))\n      {\n        fail(\"second turn method call was not revised properly\");\n      }\n    }\n}\n\n"
+          }
+        ]
+      }
+    },
+    "parsed_tests": "import codeworkout.*;\npublic class AnswerTest extends CodeWorkoutTest {\n    private Answer testJeroo;\n    private java.util.ArrayList calls;\n\n    public void setUp() {\n        testJeroo = new Answer();\n        testJeroo.run(testJeroo);\n        calls = testJeroo.getMoveHistory();\n    }\n\n    @Description(\"Both turn method calls are fixed\")\n    public void testBothTurnMethodCallsAreFixed() {\n      assertEquals(\"extra method calls have been added\", 4, calls.size());\n      assertEquals(\"hop() calls should not be modified\",\n        \"hop\", calls.get(0));\n      assertEquals(\"hop() calls should not be modified\",\n        \"hop\", calls.get(2));\n      if (!\"turn(LEFT)\".equals(calls.get(1)))\n      {\n        fail(\"first turn method call was not revised properly\");\n      }\n      if (!\"turn(RIGHT)\".equals(calls.get(3)))\n      {\n        fail(\"second turn method call was not revised properly\");\n      }\n    }\n}\n\n"
+  },
+  "diagnostics": [
+
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/855/practice?workout_id=1342",
+    "title": "CodeWorkout Jeroo Create and Place",
+    "external_id": "edu.vt.cs.1114.jeroo_create_and_place",
+    "is_public": "true",
+    "experience": "50",
+    "language_list": "Java",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "edwards@cs.vt.edu",
+        "name": "Stephen H. Edwards"
+      }
+    },
+    "tags": {
+      "topics": "Jeroo, constructors, methods, syntax practice",
+      "style": "code writing"
+    },
+    "instructions": "The following `myProgram()` method creates a `Jeroo` and\nadds it to the island at (1, 1). Change the code so the\n`Jeroo` begins facing north at (2, 3) instead.\n",
+    "systems": [
+      {
+        "language": "Java"
+      }
+    ],
+    "assets": {
+      "code": {
+        "wrapper": {
+          "files": [
+            {
+              "content": "import student.micro.jeroo.Flower;\nimport student.micro.jeroo.Net;\nimport student.micro.jeroo.Water;\nimport student.micro.jeroo.Island;\nimport student.micro.jeroo.CompassDirection;\nimport student.micro.jeroo.RelativeDirection;\nimport static student.micro.jeroo.CompassDirection.*;\nimport static student.micro.jeroo.RelativeDirection.*;\n\npublic class Answer extends Island {\n  public static class Jeroo extends student.micro.jeroo.Jeroo {\n    private CompassDirection facing;\n    private int holdingFlowers;\n    public Jeroo() { this(EAST, 0); }\n    public Jeroo(int flowers) { this(EAST, flowers); }\n    public Jeroo(CompassDirection direction) { this(direction, 0); }\n    public Jeroo(CompassDirection direction, int flowers)\n    {\n      super(direction, flowers);\n      facing = direction;\n      holdingFlowers = flowers;\n    }\n    public int __getFlowers() { return holdingFlowers; }\n    public CompassDirection __getFacing() { return facing; }\n  }\n  ___\n}\n"
+            }
+          ]
+        },
+        "starter": {
+          "files": [
+            {
+              "content": "public void myProgram()\n{\n    Jeroo jose = new Jeroo();\n    this.addObject(jose, 1, 1);\n}\n"
+            }
+          ]
+        }
+      },
+      "test": {
+        "files": [
+          {
+            "format": "java/junit",
+            "content": "import codeworkout.*;\nimport student.micro.jeroo.CompassDirection;\npublic class AnswerTest extends CodeWorkoutTest {\n    private Answer answer;\n    private Answer.Jeroo jeroo;\n\n    public void setUp() {\n        answer = new Answer();\n        answer.myProgram();\n        jeroo = answer.getOneObjectAt(2, 3, Answer.Jeroo.class);\n    }\n\n    @Description(\"Correct position\")\n    public void test1() {\n      assertNotNull(\"The Jeroo was not added at the correct position\",\n        jeroo);\n    }\n\n    @Description(\"Facing north\")\n    public void test2() {\n      assertNotNull(\"The Jeroo was not added at the correct position\",\n        jeroo);\n      assertEquals(\"The Jeroo is not facing the correct direction\",\n        CompassDirection.NORTH, jeroo.__getFacing());\n    }\n}\n"
+          }
+        ]
+      }
+    },
+    "parsed_tests": "import codeworkout.*;\nimport student.micro.jeroo.CompassDirection;\npublic class AnswerTest extends CodeWorkoutTest {\n    private Answer answer;\n    private Answer.Jeroo jeroo;\n\n    public void setUp() {\n        answer = new Answer();\n        answer.myProgram();\n        jeroo = answer.getOneObjectAt(2, 3, Answer.Jeroo.class);\n    }\n\n    @Description(\"Correct position\")\n    public void test1() {\n      assertNotNull(\"The Jeroo was not added at the correct position\",\n        jeroo);\n    }\n\n    @Description(\"Facing north\")\n    public void test2() {\n      assertNotNull(\"The Jeroo was not added at the correct position\",\n        jeroo);\n      assertEquals(\"The Jeroo is not facing the correct direction\",\n        CompassDirection.NORTH, jeroo.__getFacing());\n    }\n}\n"
+  },
+  "diagnostics": [
+
+  ]
+}

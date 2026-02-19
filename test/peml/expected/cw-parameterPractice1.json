@@ -1,0 +1,57 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/836/practice?workout_id=1334",
+    "title": "CodeWorkout Parameter Practice 1",
+    "external_id": "CS1114_Week2SyntaxDrill1",
+    "is_public": "true",
+    "experience": "50",
+    "language_list": "Java",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "admin@codeworkout.org",
+        "name": "codeworkout"
+      }
+    },
+    "tags": {
+      "topics": "CS1114, Parameters, Methods, java",
+      "style": "code-writing"
+    },
+    "instructions": "Assume you have access to the following method.\n\n    public int add3Ints(int a, int b, int c){\n              return a + b + c;\n            }\n            \n\nCall `add3Ints` and pass the numbers 4, 10, and 9 as parameters.\n",
+    "systems": [
+      {
+        "language": "Java"
+      }
+    ],
+    "assets": {
+      "code": {
+        "wrapper": {
+          "files": [
+            {
+              "content": "public class Syntax1to3 {\n    private int aVal;\n    private int bVal;\n    private int cVal;\n\n    public int add3Ints(int a, int b, int c){\n        aVal = a;\n        bVal = b;\n        cVal = c;\n        return a + b + c;\n      }\n\n    public void run() {\n      ___\n    }\n\n    public int getA() {\n        return aVal;\n    }\n\n    public int getB() {\n        return bVal;\n    }\n\n    public int getC() {\n        return cVal;\n    }\n\n}\n"
+            }
+          ]
+        },
+        "starter": {
+          "files": [
+            {
+              "content": "___\n"
+            }
+          ]
+        }
+      },
+      "test": {
+        "files": [
+          {
+            "format": "java/junit",
+            "content": "import codeworkout.CodeWorkoutTest;\npublic class Syntax1to3Test extends CodeWorkoutTest {\n\n  public Syntax1to3 test;\n  public void setUp() {\n      test = new Syntax1to3();\n  }\n\n  public void testParametersSetCorrectly() {\n      int aVal = 4;\n      int bVal = 10;\n      int cVal = 9;\n\n      test.run();\n\n      assertEquals(aVal + \" should be the first parameter passed!\", aVal, test.getA());\n      assertEquals(bVal + \" should be the second parameter passed!\", bVal, test.getB());\n      assertEquals(cVal + \" should be the third parameter passed!\", cVal, test.getC());\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    "parsed_tests": "import codeworkout.CodeWorkoutTest;\npublic class Syntax1to3Test extends CodeWorkoutTest {\n\n  public Syntax1to3 test;\n  public void setUp() {\n      test = new Syntax1to3();\n  }\n\n  public void testParametersSetCorrectly() {\n      int aVal = 4;\n      int bVal = 10;\n      int cVal = 9;\n\n      test.run();\n\n      assertEquals(aVal + \" should be the first parameter passed!\", aVal, test.getA());\n      assertEquals(bVal + \" should be the second parameter passed!\", bVal, test.getB());\n      assertEquals(cVal + \" should be the third parameter passed!\", cVal, test.getC());\n  }\n}\n"
+  },
+  "diagnostics": [
+
+  ]
+}

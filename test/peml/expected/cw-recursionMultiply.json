@@ -1,0 +1,65 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/264/practice?workout_id=47",
+    "title": "Recursion Programming Exercise: Multiply",
+    "external_id": "RecC-Multiply",
+    "is_public": "true",
+    "experience": "10",
+    "language_list": "Java",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "sallyhamouda@gmail.com",
+        "name": "sallyhamouda"
+      }
+    },
+    "tags": {
+      "topics": "recursion",
+      "style": "code writing"
+    },
+    "instructions": "For function `multiply`, write the missing base case\ncondition and action. This function will multiply two\nnumbers `x` and `y`. You can assume that both `x` and\n`y` are positive.\n\nIf `x` equals one then there is only one `y`.\n",
+    "systems": [
+      {
+        "language": "Java"
+      }
+    ],
+    "assets": {
+      "code": {
+        "wrapper": {
+          "files": [
+            {
+              "content": "public class  RecCMultiply\n{\n    ___\n}\n"
+            }
+          ]
+        },
+        "starter": {
+          "files": [
+            {
+              "content": "public int multiply(int x, int y) {\n    if <<Missing base case condition>> {\n      <<Missing base case action>>\n    } else {\n      return multiply(x - 1, y) + y;\n    }\n}\n"
+            }
+          ]
+        }
+      },
+      "test": {
+        "files": [
+          {
+            "format": "text/csv-unquoted",
+            "pattern": {
+              "actual": "subject.multiply({{x}}, {{y}})"
+            },
+            "content": "x,y,expected,description\n2,3,6,example\n4,4,16\n9,10,90\n7,15,105\n1,1,1,hidden\n"
+          }
+        ]
+      }
+    },
+    "parsed_tests": [
+      {
+        "language": "Java",
+        "test_class": "class Answer {   }\n"
+      }
+    ]
+  },
+  "diagnostics": [
+
+  ]
+}

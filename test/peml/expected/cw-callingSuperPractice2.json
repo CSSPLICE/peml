@@ -1,0 +1,57 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/840/practice?workout_id=1334",
+    "title": "CodeWorkout Calling Super Practice 2",
+    "external_id": "CS1114_Week2SyntaxDrill5",
+    "is_public": "true",
+    "experience": "50",
+    "language_list": "Java",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "admin@codeworkout.org",
+        "name": "codeworkout"
+      }
+    },
+    "tags": {
+      "topics": "CS1114, Parameters, Methods, java",
+      "style": "code-writing"
+    },
+    "instructions": "For this problem assume you have access to a Shape class. \nBelow, you'll see the start of a Square class that is a \nsubclass of Shape. Finish creating the constructor by calling \n`super`\n",
+    "systems": [
+      {
+        "language": "Java"
+      }
+    ],
+    "assets": {
+      "code": {
+        "wrapper": {
+          "files": [
+            {
+              "content": "public class syntax4to5 {\n    public static class Shape{\n        private boolean superWasCalled = false;\n        public Shape() {\n            superWasCalled = true;\n        }\n\n        public boolean getSuperWasCalled() {\n            return superWasCalled;\n        }\n\n    }\n    public static class Square extends Shape{\n        ___\n    }\n\n}\n"
+            }
+          ]
+        },
+        "starter": {
+          "files": [
+            {
+              "content": "public Square() {\n    ___\n}\n"
+            }
+          ]
+        }
+      },
+      "test": {
+        "files": [
+          {
+            "format": "java/junit",
+            "content": "import codeworkout.CodeWorkoutTest;\npublic class syntax4to5Test extends CodeWorkoutTest{\n\n    public void testSuperIsCalled() {\n        syntax4to5.Square testSquare = new syntax4to5.Square();\n\n        assertTrue(\"You must call super in the constructor!\", testSquare.getSuperWasCalled());\n    }\n}\n"
+          }
+        ]
+      }
+    },
+    "parsed_tests": "import codeworkout.CodeWorkoutTest;\npublic class syntax4to5Test extends CodeWorkoutTest{\n\n    public void testSuperIsCalled() {\n        syntax4to5.Square testSquare = new syntax4to5.Square();\n\n        assertTrue(\"You must call super in the constructor!\", testSquare.getSuperWasCalled());\n    }\n}\n"
+  },
+  "diagnostics": [
+
+  ]
+}

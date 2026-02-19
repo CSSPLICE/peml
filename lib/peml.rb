@@ -19,6 +19,9 @@ module Peml
       ensure
         file.close
       end
+    elsif params[:url]
+      require 'open-uri'
+      peml = URI.open(params[:url]).read
     else
       peml = params[:peml]
     end

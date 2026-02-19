@@ -1,0 +1,65 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/266/practice?workout_id=49",
+    "title": "Recursion Programming Exercise: Log",
+    "external_id": "RecC-Log",
+    "is_public": "true",
+    "experience": "10",
+    "language_list": "Java",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "sallyhamouda@gmail.com",
+        "name": "sallyhamouda"
+      }
+    },
+    "tags": {
+      "topics": "recursion",
+      "style": "code writing"
+    },
+    "instructions": "For function `log`, write the missing base case condition and\nthe recursive call. This function computes the log of `n` to\nthe base `b`. As an example: log 8 to the base 2 equals 3\nsince 8 = 2*2*2. We can find this by dividing 8 by 2 until\nwe reach 1, and we count the number of divisions we make.\nYou should assume that `n` is exactly `b` to some integer power.\n",
+    "systems": [
+      {
+        "language": "Java"
+      }
+    ],
+    "assets": {
+      "code": {
+        "wrapper": {
+          "files": [
+            {
+              "content": "public class  RecCLog\n{\n    ___\n}\n"
+            }
+          ]
+        },
+        "starter": {
+          "files": [
+            {
+              "content": "public int log(int b, int n ) {\n    if <<Missing base case condition>> {\n      return 0;\n    } else {\n      return <<Missing a Recursive case action>>\n    }\n}\n"
+            }
+          ]
+        }
+      },
+      "test": {
+        "files": [
+          {
+            "format": "text/csv-unquoted",
+            "pattern": {
+              "actual": "subject.log({{x}}, {{y}})"
+            },
+            "content": "x,y,expected,description\n2,4,2,example\n10,100,2,example\n3,27,3\n10,100000,5\n2,64,6\n10,1000,3,hidden\n10,1,0,hidden\n"
+          }
+        ]
+      }
+    },
+    "parsed_tests": [
+      {
+        "language": "Java",
+        "test_class": "class Answer {   }\n"
+      }
+    ]
+  },
+  "diagnostics": [
+
+  ]
+}

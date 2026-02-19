@@ -132,7 +132,13 @@ module Peml
     rule(balanced: { lb: simple(:lb),
                      body: subtree(:body),
                      rb: simple(:rb) }) do
-      lb.to_s + Utils::string_reduce(body) + rb.to_s
+      reduced = Utils::string_reduce(body)
+      if reduced.is_a?(Array)
+        reduced = reduced.map { |v|
+          v.is_a?(Hash) && v.key?(:text) ? v[:text] : v.to_s
+        }.join
+      end
+      lb.to_s + reduced + rb.to_s
     end
 
     rule(expr: subtree(:expr)) do
@@ -140,7 +146,7 @@ module Peml
     end
 
     rule(line: subtree(:expr)) do
-      expr
+      expr.is_a?(Array) ? expr : [expr]
     end
 
   end

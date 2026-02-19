@@ -1,0 +1,57 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/607/practice?workout_id=759",
+    "title": "Implement a Constructor",
+    "external_id": "ITSC1213_constructor_2",
+    "is_public": "false",
+    "experience": "10",
+    "language_list": "Java",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "smcleo12@uncc.edu",
+        "name": "smcleo12"
+      }
+    },
+    "tags": {
+      "topics": "constructors",
+      "style": "code writing"
+    },
+    "instructions": "Given the following constructor, set the fields to the corresponding parameters.\n",
+    "systems": [
+      {
+        "language": "Java"
+      }
+    ],
+    "assets": {
+      "code": {
+        "wrapper": {
+          "files": [
+            {
+              "content": "___ \n"
+            }
+          ]
+        },
+        "starter": {
+          "files": [
+            {
+              "content": "public class Course\n{\n   public int number;\n   public String title;\n   public String department;\n   public int capacity;\n\n   public Course(int num, String t, String dept, int cap)\n   {\n     ___\n   }\n}\n"
+            }
+          ]
+        }
+      },
+      "test": {
+        "files": [
+          {
+            "format": "java/junit",
+            "content": "import static org.junit.Assert.*;\nimport org.junit.*;\nimport codeworkout.*;\nimport java.lang.reflect.Constructor;\nimport java.lang.reflect.Type;\n\npublic class CourseTest extends CodeWorkoutTest\n{\n    @Before\n    public void setUp()\n    {\n    }\n\n   @Description(\"Checking that the fields are set correctly\")\n   @Test\n   public void testConstructorExercise()\n   {\n     boolean correctValues = false;\n     Course c = new Course(1213, \"Intro to CS II\", \"ITSC\", 72);\n     correctValues = (c.number == 1213 && \"Intro to CS II\".equals(c.title) && \"ITSC\".equals(c.department) && c.capacity == 72);\n     assertTrue(\"Fields were not set correctly\",correctValues);\n   }\n}\n"
+          }
+        ]
+      }
+    },
+    "parsed_tests": "import static org.junit.Assert.*;\nimport org.junit.*;\nimport codeworkout.*;\nimport java.lang.reflect.Constructor;\nimport java.lang.reflect.Type;\n\npublic class CourseTest extends CodeWorkoutTest\n{\n    @Before\n    public void setUp()\n    {\n    }\n\n   @Description(\"Checking that the fields are set correctly\")\n   @Test\n   public void testConstructorExercise()\n   {\n     boolean correctValues = false;\n     Course c = new Course(1213, \"Intro to CS II\", \"ITSC\", 72);\n     correctValues = (c.number == 1213 && \"Intro to CS II\".equals(c.title) && \"ITSC\".equals(c.department) && c.capacity == 72);\n     assertTrue(\"Fields were not set correctly\",correctValues);\n   }\n}\n"
+  },
+  "diagnostics": [
+
+  ]
+}

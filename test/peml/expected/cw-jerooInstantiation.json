@@ -1,0 +1,50 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/854/practice?workout_id=1342",
+    "title": "CodeWorkout Jeroo Instantiation",
+    "external_id": "edu.vt.cs.1114.jeroo_instantiation",
+    "is_public": "true",
+    "experience": "50",
+    "language_list": "Java",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "edwards@cs.vt.edu",
+        "name": "Stephen H. Edwards"
+      }
+    },
+    "tags": {
+      "topics": "Jeroo, constructors, syntax practice",
+      "style": "code writing"
+    },
+    "instructions": "The following declaration introduces a variable named `jessica`\nthat refers to a `Jeroo`, and also creates a new instance of the\n`Jeroo` class that starts off facing the default direction.\nAdd parameters\nto the constructor call so the Jeroo starts out facing south\nwith 2 flowers.\n",
+    "systems": [
+      {
+        "language": "Java"
+      }
+    ],
+    "assets": {
+      "code": {
+        "wrapper": {
+          "files": [
+            {
+              "content": "import student.micro.jeroo.CompassDirection;\nimport static student.micro.jeroo.CompassDirection.*;\npublic class Answer {\n  public static class Jeroo extends student.micro.jeroo.Jeroo {\n    private CompassDirection facing;\n    private int holdingFlowers;\n    public Jeroo() { this(EAST, 0); }\n    public Jeroo(int flowers) { this(EAST, flowers); }\n    public Jeroo(CompassDirection direction) { this(direction, 0); }\n    public Jeroo(CompassDirection direction, int flowers)\n    {\n      super(direction, flowers);\n      facing = direction;\n      holdingFlowers = flowers;\n    }\n    public int __getFlowers() { return holdingFlowers; }\n    public CompassDirection __getFacing() { return facing; }\n  }\n  public Jeroo run () {\n    ___\n    return jessica;\n  }\n}\n"
+            }
+          ]
+        },
+        "starter": {
+          "files": [
+            {
+              "format": "java/junit",
+              "content": "import codeworkout.*;\nimport student.micro.jeroo.CompassDirection;\n\npublic class AnswerTest extends CodeWorkoutTest {\n    private Answer.Jeroo answer;\n\n    public void setUp() {\n        answer = new Answer().run();\n    }\n\n    @Description(\"The Jeroo is facing south\")\n    public void test1() {\n      assertEquals(\"The Jeroo is not facing the correct direction\",\n        CompassDirection.SOUTH, answer.__getFacing());\n    }\n\n    @Description(\"The Jeroo is holding 2 flowers\")\n    public void test2() {\n      assertEquals(\"The Jeroo is not holding 2 flowers\",\n        2, answer.__getFlowers());\n    }\n}\n"
+            }
+          ]
+        }
+      }
+    },
+    "parsed_tests": "import codeworkout.*;\nimport student.micro.jeroo.CompassDirection;\n\npublic class AnswerTest extends CodeWorkoutTest {\n    private Answer.Jeroo answer;\n\n    public void setUp() {\n        answer = new Answer().run();\n    }\n\n    @Description(\"The Jeroo is facing south\")\n    public void test1() {\n      assertEquals(\"The Jeroo is not facing the correct direction\",\n        CompassDirection.SOUTH, answer.__getFacing());\n    }\n\n    @Description(\"The Jeroo is holding 2 flowers\")\n    public void test2() {\n      assertEquals(\"The Jeroo is not holding 2 flowers\",\n        2, answer.__getFlowers());\n    }\n}\n"
+  },
+  "diagnostics": [
+
+  ]
+}

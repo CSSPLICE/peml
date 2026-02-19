@@ -25,14 +25,12 @@ For full details on PEML, see:
 
 https://CSSPLICE.github.io/peml/
 
-
 ## Try PEML Live
 
 You can try out PEML in your browser using our live, interactive parser
 here:
 
 https://discovery.cs.vt.edu/peml-live
-
 
 ## REST API for Parsing PEML
 
@@ -43,7 +41,6 @@ the parser via our REST API from the **PEML Live!** website. Documentation
 is available at:
 
 https://discovery.cs.vt.edu/peml-live/api
-
 
 ## Installing the Gem
 
@@ -76,57 +73,80 @@ parsed result of the PEML input in nested hash form, and
 `diagnostics` contains an array of any diagnostic messages
 (errors or other validation messages) produced.
 
-The following additional arguments can be provided as named
+The following additional arguments can be provided to `Peml.parse()` as named
 parameters:
 
+**filename** (string)
+`<br/>`
+The name of a file containing a PEML description to be parsed.
+
+**peml** (string)
+`<br/>`
+A string containing a PEML description to be parsed. This is only
+used if `filename` and `url` are not provided.
+
+**url** (string)
+`<br/>`
+A URL pointing to a PEML description to be parsed. This is only used
+if `filename` is not provided.
+
 **result_only** (boolean)
-<br/>
+`<br/>`
 Indicate whether to return just the parse result (true), or (the default) a
 hash of the form `{ value: <parse_result>, diagnostics: [<messages>] }`.
 
-**interpolate** (boolean) (not yet implemented)
-<br/>
+**interpolate** (boolean)
+`<br/>`
 Indicate whether or not to interpolate variables embedded in
 PEML field values.
 
-**render_to_html** (boolean) (not yet implemented)
-<br/>
+**render_to_html** (boolean)
+`<br/>`
 Indicate whether PEML fields containing markdown/markup values
 should be rendered to HTML in the result.
 
 **inline** (boolean) (not yet implemented)
-<br/>
+`<br/>`
 Indicate whether to inline field contents in the PEML description when the
 value is specified as a URL.
 
 **format** (string)
-<br/>
+`<br/>`
 This parameter indicates the format requested for the response, which is
 one of (json, yaml, xml). This can be specified as an explicit parameter
 named "format" passed in the request, or can be specified directly in the
 request URL as a file name extension (e.g., requesting
-from <code>https://discovery.cs.vt.edu/peml-live/api/parse.yaml?...</code>).
+from `<code>`https://discovery.cs.vt.edu/peml-live/api/parse.yaml?...`</code>`).
 If not explicitly provided, it will be inferred through the "Accept:"
 headers provided in the request, or defaults to json if not specified
 anywhere else.
-See the <a href="https://github.com/ruby-grape/grape">grape</a>
-gem's <a href="https://github.com/ruby-grape/grape#api-formats">discussion
-of API formats</a> for more details about how the format of the
+See the `<a href="https://github.com/ruby-grape/grape">`grape`</a>`
+gem's `<a href="https://github.com/ruby-grape/grape#api-formats">`discussion
+of API formats`</a>` for more details about how the format of the
 response is determined.
 
-Eventually, we'll also add support for:
+### Other Methods
 
-```
-require 'peml'
+**Peml.validate(peml_hash)**
+`<br/>`
+Validate a PEML data structure (parsed PEML structured as a nested hash). Returns an array of diagnostic messages.
 
-Peml.to_peml(some_nested_hash)
-=> string containing exercise rendered in PEML format
+**Peml.pemltest_parse(pemltest_string, filename: nil)**
+`<br/>`
+Parse PEMLtest text input into a data structure.
 
-my_exercise.to_peml
-=> string containing exercise rendered in PEML format
-```
+**Peml.to_peml(value_hash)**
+`<br/>`
+Render (unparse) a PEML data structure (parsed PEML structured as a nested hash) into plain-text PEML notation (not fully implemented).
 
-... but these don't work yet.
+**Peml.pif_parse(pif_hash_or_filename)**
+`<br/>`
+Parse a Programming Instruction Format (PIF) description. Takes a hash with either `pif: "content"` or `filename: "./file.peml"`.
+
+**Peml.pif_to_runestone(parsed_pif, format: nil)**
+`<br/>`
+Convert a parsed PIF structure to Runestone format. `format` options are 'json' and 'yaml'. If nil, a Ruby hash is returned.
+
 
 ## Contributing
 

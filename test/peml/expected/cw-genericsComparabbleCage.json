@@ -1,0 +1,65 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/435/practice?workout_id=680",
+    "title": "Generics - Comparable Cage",
+    "external_id": "cw-x18",
+    "is_public": "true",
+    "experience": "40",
+    "language_list": "Java",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "edwards@cs.vt.edu",
+        "name": "Stephen Edwards"
+      }
+    },
+    "tags": {
+      "topics": "generics, Comparable, abstract classes",
+      "style": "coding problem"
+    },
+    "instructions": "Modify the `Cage` class to implement `Comparable`. The definition of the\n`Comparable` interface can be found [here](https://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html).\nRemember that Comparable has one abstract\nmethod, `int compareTo(T o)`. Two `Cages` can be compared based on their size\nobtained via `getSize()`.\nYou must (1) implement the interface, and (2) define the `compareTo` method.\n",
+    "systems": [
+      {
+        "language": "Java"
+      }
+    ],
+    "assets": {
+      "code": {
+        "wrapper": {
+          "files": [
+            {
+              "content": "public class Answer {\npublic abstract class Pet {\n    private int age;\n    private int size;\n    public Pet(int a, int s) {\n        age = a;\n        size = s;\n    }\n    public abstract String speak();\n    public int getSize() {\n        return size;\n    }\n}\npublic class Dog extends Pet {\n    private int age;\n    private int size;\n    public Dog(int a, int s) {\n        super(a, s);\n    }\n    public String speak() {\n        return \"woof\";\n    }\n}\n___\n\n    public int cageComparer(Cage<Dog> dogCage1, Cage<Dog> dogCage2) {\n        return dogCage1.compareTo(dogCage2);\n    }\n    public boolean greaterZero(int n) {\n        return n > 0;\n    }\n    public boolean lesserZero(int n) {\n        return n < 0;\n    }\n    public boolean equalZero(int n) {\n        return n == 0;\n    }\n    public boolean tester(int testNum) {\n        if (testNum == 1) {\n            Cage<Dog> cg1 = new Cage<>(new Dog(1, 1), 2);\n            Cage<Dog> cg2 = new Cage<>(new Dog(1, 1), 1);\n            return greaterZero(cageComparer(cg1, cg2));\n        } else if (testNum == 3) {\n            Cage<Dog> cg1 = new Cage<>(new Dog(1, 1), -3);\n            Cage<Dog> cg2 = new Cage<>(new Dog(1, 1), 0);\n            return lesserZero(cageComparer(cg1, cg2));\n        } else if (testNum == 5) {\n            Cage<Dog> cg1 = new Cage<>(new Dog(1, 1), 2);\n            Cage<Dog> cg2 = new Cage<>(new Dog(1, 1), 2);\n            return equalZero(cageComparer(cg1, cg2));\n        } else if (testNum == 2) {\n            Cage<Dog> cg1 = new Cage<>(new Dog(1, 1), 4);\n            Cage<Dog> cg2 = new Cage<>(new Dog(1, 1), 5);\n            return greaterZero(cageComparer(cg1, cg2));\n        } else if (testNum == 4) {\n            Cage<Dog> cg1 = new Cage<>(new Dog(1, 1), 2);\n            Cage<Dog> cg2 = new Cage<>(new Dog(1, 1), 1);\n            return lesserZero(cageComparer(cg1, cg2));\n        } else if (testNum == 6) {\n            Cage<Dog> cg1 = new Cage<>(new Dog(1, 1), 2);\n            Cage<Dog> cg2 = new Cage<>(new Dog(1, 1), 1);\n            return equalZero(cageComparer(cg1, cg2));\n        }\n        return false;\n    }\n}\n"
+            }
+          ]
+        },
+        "starter": {
+          "files": [
+            {
+              "content": "public class Cage <P extends Pet> ___{\n    private int size;\n    private P pet;\n    public Cage(P p, int s) {\n        size = s;\n        pet = p;\n    }\n    public boolean checkSize() {\n        if (pet.getSize() > size) {\n            return false;\n        }\n        return true;\n    }\n    public int getSize() {\n        return size;\n    }\n    public P getPet() {\n        return pet;\n    }\n    ___\n}\n"
+            }
+          ]
+        }
+      },
+      "test": {
+        "files": [
+          {
+            "format": "text/csv-unquoted",
+            "pattern": {
+              "actual": "subject.tester({{testNum}})"
+            },
+            "content": "testNum,expected,description\n1,true,\"size2Cage.compareTo(size1Cage) > 0 -> true\"\n2,false,\"size4Cage.compareTo(size5Cage) > 0 -> false\"\n3,true,\"sizeNeg3Cage.compareTo(size0Cage) < 0 -> true\"\n4,false,\"size2Cage.compareTo(size1Cage) < 0 -> false\"\n5,true,\"size2Cage.compareTo(otherSize2Cage) == 0 -> true\"\n6,false,\"size2Cage.compareTo(size1Cage) == 0 -> false\"\n"
+          }
+        ]
+      }
+    },
+    "parsed_tests": [
+      {
+        "language": "Java",
+        "test_class": "class Answer {   }\n"
+      }
+    ]
+  },
+  "diagnostics": [
+
+  ]
+}

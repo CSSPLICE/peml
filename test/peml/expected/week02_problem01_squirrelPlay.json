@@ -1,0 +1,88 @@
+{
+  "value": {
+    "exercise_id": "codingbat-squirrelPlay",
+    "title": "squirrelPlay",
+    "tag": {
+      "topics": "logic, conditionals, if",
+      "style": "code writing"
+    },
+    "version": {
+      "timestamp": "2020-01-15T20:18:53-04:00"
+    },
+    "author": "jw87@vt.edu",
+    "instructions": "Write a function in Python that implements the following logic: The squirrels\nin Palo Alto spend most of the day playing. In particular, they play if the\ntemperature is between 60 and 90 (inclusive). Unless it is summer, then the\nupper limit is 100 instead of 90. Given an integer temperature and a Boolean\nisSummer, return True if the squirrels play and False otherwise.\n",
+    "systems": [
+      {
+        "language": "Python",
+        "src": {
+          "files": [
+            {
+              "name": "answer.py",
+              "content": "def squirrelPlay(temp, isSummer):\n    pass\n"
+            }
+          ]
+        },
+        "suites": [
+          {
+            "template": "  self.assertEqual({{expected}}, subject.squirrelPlay({{temp}}, {{isSummer}}))",
+            "cases": [
+              {
+                "temp": "40",
+                "isSummer": "True",
+                "expected": "False"
+              },
+              {
+                "temp": "40",
+                "isSummer": "False",
+                "expected": "False"
+              },
+              {
+                "temp": "70",
+                "isSummer": "True",
+                "expected": "True"
+              },
+              {
+                "temp": "70",
+                "isSummer": "False",
+                "expected": "True"
+              },
+              {
+                "temp": "60",
+                "isSummer": "True",
+                "expected": "True"
+              },
+              {
+                "temp": "90",
+                "isSummer": "True",
+                "expected": "True"
+              },
+              {
+                "temp": "100",
+                "isSummer": "False",
+                "expected": "False"
+              },
+              {
+                "temp": "100",
+                "isSummer": "True",
+                "expected": "True"
+              },
+              {
+                "temp": "80",
+                "isSummer": "False",
+                "expected": "True"
+              },
+              {
+                "temp": "80",
+                "isSummer": "True",
+                "expected": "True"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "diagnostics": [
+
+  ]
+}

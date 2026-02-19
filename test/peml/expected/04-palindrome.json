@@ -1,0 +1,44 @@
+{
+  "value": {
+    "exercise_id": "edu.vt.cs.cs1114.palindromes",
+    "title": "Palindromes (A Simple PEML Example)",
+    "author": "edwards@cs.vt.edu",
+    "topics": "Strings, loops, conditions",
+    "prerequisites": "variables, assignment, boolean operators",
+    "instructions": "Write a program that reads a single string (in the form of one line\nof text) from its standard input, and determines whether the string is\na _palindrome_. A palindrome is a string that reads the same way\nbackward as it does forward, such as \"racecar\" or \"madam\". Your\nprogram does not need to prompt for its input, and should only generate\none line of output, in the following\nformat:\n\n```\n\"racecar\" is a palindrome.\n```\n\nOr:\n\n```\n\"Flintstone\" is not a palindrome.\n```\n",
+    "assets": {
+      "test_format": "stdin-stdout"
+    },
+    "systems": [
+      {
+        "language": "java",
+        "version": ">= 1.5"
+      }
+    ],
+    "suites": [
+      {
+        "cases": [
+          {
+            "stdin": "racecar",
+            "stdout": "\"racecar\" is a palindrome."
+          },
+          {
+            "stdin": "Flintstone",
+            "stdout": "\"Flintstone\" is not a palindrome."
+          },
+          {
+            "stdin": "url(some/local/input.txt)",
+            "stdout": "url(some/local/output.txt)"
+          },
+          {
+            "stdin": "url(http://my.school.edu/some/local/generator/input)",
+            "stdout": "url(http://my.school.edu/some/local/generator/output)"
+          }
+        ]
+      }
+    ]
+  },
+  "diagnostics": [
+
+  ]
+}

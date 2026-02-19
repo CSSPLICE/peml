@@ -1,0 +1,65 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/694/practice?workout_id=955",
+    "title": "Sorting - Simple C++ Primitives",
+    "external_id": "chico_primitives",
+    "is_public": "true",
+    "experience": "50",
+    "language_list": "C++",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "ayaan@vt.edu",
+        "name": "Ayaan"
+      }
+    },
+    "tags": {
+      "topics": "variables",
+      "style": "code writing"
+    },
+    "instructions": "Replace the `/*date type*/` comments with the appropriate data types for each variable.\n",
+    "systems": [
+      {
+        "language": "cpp"
+      }
+    ],
+    "assets": {
+      "code": {
+        "wrapper": {
+          "files": [
+            {
+              "content": "class Primitives\n{\n  public:\n    ___\n};\n"
+            }
+          ]
+        },
+        "starter": {
+          "files": [
+            {
+              "content": "int primitives()\n{\n    /* data type */ luckyNumber = 16;\n    /* data type */ percentage = 0.95;\n    /* data type */ letter = 'B';\n    /* data type */ truth = false;\n    return 0;\n}\n"
+            }
+          ]
+        }
+      },
+      "test": {
+        "files": [
+          {
+            "format": "text/csv-unquoted",
+            "pattern": {
+              "actual": "subject.primitives()"
+            },
+            "content": "expected,description\n0\n"
+          }
+        ]
+      }
+    },
+    "parsed_tests": [
+      {
+        "language": "cpp",
+        "test_class": "class Answer {  }; \n"
+      }
+    ]
+  },
+  "diagnostics": [
+
+  ]
+}

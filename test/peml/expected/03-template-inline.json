@@ -1,0 +1,98 @@
+{
+  "value": {
+    "exercise_id": "https://cssplice.github.io/peml/examples/03-template-inline.peml",
+    "title": "<Insert your title here>",
+    "license": {
+      "id": "cc-sa-4.0 <pick your license>",
+      "owner": {
+        "email": "",
+        "name": ""
+      }
+    },
+    "tags": {
+      "topics": "<topic(s) this exercise focuses on practicing>",
+      "prerequisites": "<should already know these, can specify: exposure, familiarity, mastery>",
+      "style": "code-writing <or other choice>",
+      "course": "<name your course, if relevant>",
+      "book": "<name your textbook, if relevant>",
+      "personal": "<optional personal/custom values that aren't topics>"
+    },
+    "instructions": "Write your instructions here (using markdown and/or html tags).\n\nInclude images or resources using relative links, which are resolved relative\nto the \"public_html\" key.\n\nmarkdown-style image: ![my picture](image1.png)\nor html: <img src=\"image2.png\" alt=\"my second picture\"/>\n\nUse fenced code blocks:\n\n```java\nif (something.hasProperty())\n{\n  System.out.println(\"ok!\");\n}\n```\n",
+    "public_html": "url(https://cssplice.github.io/peml/examples/images)",
+    "systems": [
+      {
+        "language": "Java",
+        "version": ">= 1.9",
+        "src": {
+          "files": [
+            {
+              "name": "Answer.java",
+              "content": "public class Answer\n{\n    // Insert your answer here\n}\n"
+            },
+            {
+              "name": "AnswerTest.java",
+              "content": "url(src/AnswerTest.java)"
+            }
+          ],
+          "solutions": [
+            {
+              "name": "reference solution",
+              "description": "an optional description",
+              "reference": "true",
+              "files": "url(src/solutions/reference)"
+            }
+          ]
+        },
+        "suites": [
+          {
+            "name": "peml_stdio_tests",
+            "visibility": "public",
+            "pattern": {
+              "description": "{{stdout}}"
+            },
+            "template": "  // Here, the code is based on a specific tool that generates JUnit-style\n  // tests using this as a template, and substituting variables based on\n  // the \"columns\" in the list of cases.\n\n  setSystemIn({{stdin}});\n  Answer.main();\n  assertEquals({{description}}, {{stdout}}, systemOut().getHistory());",
+            "cases": [
+              {
+                "stdin": "racecar",
+                "stdout": "\"racecar\" is a palindrome."
+              },
+              {
+                "stdin": "Flintstone",
+                "stdout": "\"Flintstone\" is not a palindrome."
+              }
+            ]
+          },
+          {
+            "name": "csv_stdio_tests",
+            "type": "text/x-unquoted-csv",
+            "pattern": {
+              "description": "sumNumbers({{str}}) -> {{expected}}",
+              "actual": "subject.sumNumbers({{str}})"
+            },
+            "template": "    assertEquals({{expected}}, {{actual}});",
+            "content": "str,expected,description\n\"abc123xyz\",123,example\n\"aa11b33\",44,example\n\"7 11\",18,example\n\"Chocolate\",0\n\"5hoco1a1e\",7\n\"5$$1;;1!!\",7\n\"a1234bb11\",1245\n\"\",0\n\"a22bbb3\",25\n\"FS3453g36fs25\",3514,hidden\n\"dfg64g21ge743\",828,hidden\n\"2sdf4523sdfsd7\",4532,hidden\n\"sdffherbwm\",0,hidden\n"
+          }
+        ]
+      }
+    ],
+    "environment": {
+      "build": {
+        "image": "cs1.vt.edu/java-1_9:1.1.0",
+        "registry": "https://hub.docker.com/"
+      },
+      "test": {
+        "files": [
+          {
+            "name": "some-file-available-during-testing.txt",
+            "content": "some data ...\n"
+          }
+        ]
+      }
+    }
+  },
+  "diagnostics": [
+    "Path '/license/owner' is not a string.",
+    "Path '/license/owner/email' is not long enough (min 1)",
+    "Path '/license/owner/name' is not long enough (min 1)"
+  ]
+}

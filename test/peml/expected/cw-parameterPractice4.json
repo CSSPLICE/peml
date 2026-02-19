@@ -1,0 +1,57 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/843/practice?workout_id=1334",
+    "title": "CodeWorkout Parameter Practice 4",
+    "external_id": "CS1114_Week2SyntaxDrill8",
+    "is_public": "true",
+    "experience": "50",
+    "language_list": "Java",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "admin@codeworkout.org",
+        "name": "codeworkout"
+      }
+    },
+    "tags": {
+      "topics": "CS1114, Parameters, Methods, java",
+      "style": "code-writing"
+    },
+    "instructions": "public int subtract(int a, int b){\n          return a - b;\n        }\n            \n\nUse the method defined above to subtract 10 from 100 (as in 100 - 10).\n",
+    "systems": [
+      {
+        "language": "Java"
+      }
+    ],
+    "assets": {
+      "code": {
+        "wrapper": {
+          "files": [
+            {
+              "content": "public class Syntax8to10 {\n    private int aVal;\n    private int bVal;\n\n    public int subtract(int a, int b){\n        aVal = a;\n        bVal = b;\n        return a - b;\n      }\n\n    public void run() {\n        ___\n    }\n\n    public int getA() {\n        return aVal;\n    }\n\n    public int getB() {\n        return bVal;\n    }\n\n}\n"
+            }
+          ]
+        },
+        "starter": {
+          "files": [
+            {
+              "content": "___\n"
+            }
+          ]
+        }
+      },
+      "test": {
+        "files": [
+          {
+            "format": "java/junit",
+            "content": "import codeworkout.CodeWorkoutTest;\npublic class Syntax8to10Test extends CodeWorkoutTest {\n\n    public Syntax8to10 test;\n    public void setUp() {\n        test = new Syntax8to10();\n    }\n\n    public void testParametersSetCorrectly() {\n        int aVal = 100;\n        int bVal = 10;\n\n        assertEquals(aVal + \" should be the first parameter passed!\", aVal, test.getA());\n        assertEquals(bVal + \" should be the second parameter passed!\", bVal, test.getB());\n\n    }\n}\n"
+          }
+        ]
+      }
+    },
+    "parsed_tests": "import codeworkout.CodeWorkoutTest;\npublic class Syntax8to10Test extends CodeWorkoutTest {\n\n    public Syntax8to10 test;\n    public void setUp() {\n        test = new Syntax8to10();\n    }\n\n    public void testParametersSetCorrectly() {\n        int aVal = 100;\n        int bVal = 10;\n\n        assertEquals(aVal + \" should be the first parameter passed!\", aVal, test.getA());\n        assertEquals(bVal + \" should be the second parameter passed!\", bVal, test.getB());\n\n    }\n}\n"
+  },
+  "diagnostics": [
+
+  ]
+}

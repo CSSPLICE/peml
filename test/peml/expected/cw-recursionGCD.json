@@ -1,0 +1,65 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/265/practice?workout_id=48",
+    "title": "Recursion Programming Exercise: GCD",
+    "external_id": "RecC-Gcd",
+    "is_public": "true",
+    "experience": "10",
+    "language_list": "Java",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "sallyhamouda@gmail.com",
+        "name": "sallyhamouda"
+      }
+    },
+    "tags": {
+      "topics": "recursion",
+      "style": "code writing"
+    },
+    "instructions": "The greatest common divisor (GCD) for a pair of numbers is\\nthe largest\npositive integer that divides both numbers\\nwithout remainder. \\nFor function\n`GCD`, write the missing base case condition and action.\\nThis function will\ncompute the greatest common divisor of `x` and `y`.\\nYou can assume that `x`\nand `y` are both positive integers and that\\n`x > y`. Greatest common divisor\nis computed as follows:<br>\\n`GCD(x, 0) = x` and `GCD(x, y) = GCD(y, x % y)`.\\n\n",
+    "systems": [
+      {
+        "language": "Java"
+      }
+    ],
+    "assets": {
+      "code": {
+        "wrapper": {
+          "files": [
+            {
+              "content": "public class RecCGcd\n{\n    ___\n}\n"
+            }
+          ]
+        },
+        "starter": {
+          "files": [
+            {
+              "content": "public int GCD(int x, int y) {\n    if <<Missing base case condition>> {\n      <<Missing base case action>>\n    } else {\n      return GCD(y, x % y);\n    }\n}\n"
+            }
+          ]
+        }
+      },
+      "test": {
+        "files": [
+          {
+            "format": "text/csv-unquoted",
+            "pattern": {
+              "actual": "subject.GCD({{x}}, {{y}})"
+            },
+            "content": "x,y,expected,description\n6,4,2,example\n27,9,9\n25,5,5\n128,6,2\n28,7,7,hidden\n240,8,8,hidden\n2,1,1,hidden\n"
+          }
+        ]
+      }
+    },
+    "parsed_tests": [
+      {
+        "language": "Java",
+        "test_class": "class Answer {   }\n"
+      }
+    ]
+  },
+  "diagnostics": [
+
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/841/practice?workout_id=1334",
+    "title": "CodeWorkout Using Parameters 1",
+    "external_id": "CS1114_Week2SyntaxDrill6",
+    "is_public": "true",
+    "experience": "50",
+    "language_list": "Java",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "admin@codeworkout.org",
+        "name": "codeworkout"
+      }
+    },
+    "tags": {
+      "topics": "CS1114, Parameters, Methods, java",
+      "style": "code-writing"
+    },
+    "instructions": "For this problem assume you have access to a Person class defined here:\n\n    \n            public class Person{\n              public String name;\n              private int age;\n    \n              public void setAge(int a){\n                age = a;\n              }\n    \n              public void setName(String n){\n                name = n;\n              }\n            }\n            \n\nBelow you've been given a method and a Person object has been created. \nUsing the methods defined above, set age to 42 and name to \"Peter\".\n",
+    "systems": [
+      {
+        "language": "Java"
+      }
+    ],
+    "assets": {
+      "code": {
+        "wrapper": {
+          "files": [
+            {
+              "content": "public class syntax6to7 {\n    public static class Person{\n        public String name;\n        private int age;\n\n        public void setAge(int a){\n          age = a;\n        }\n\n        public void setName(String n){\n          name = n;\n        }\n\n        public String getName() {\n            return name;\n        }\n\n        public int getAge() {\n            return age;\n        }\n\n\n    }\n\n    public static class Runner{\n        private Person peter;\n        ___\n\n        public Person run() {\n            peter = new Person();\n            setAgeAndName(peter);\n            return peter;\n        }\n\n    }\n\n}\n"
+            }
+          ]
+        },
+        "starter": {
+          "files": [
+            {
+              "content": "public void setAgeAndName(Person p) {\n   ___\n}\n"
+            }
+          ]
+        }
+      },
+      "test": {
+        "files": [
+          {
+            "format": "java/junit",
+            "content": "import codeworkout.CodeWorkoutTest;\npublic class syntax6to7Test extends CodeWorkoutTest {\n\n  public void testMethodsHaveBeenCalledCorrectly() {\n      syntax6to7.Runner runner = new syntax6to7.Runner();\n\n      syntax6to7.Person testPerson = runner.run();\n\n      String expectedName = \"Peter\";\n      int expectedAge = 42;\n\n      assertEquals(\"Name has not been set correctly\", expectedName, testPerson.getName());\n      assertEquals(\"Age has not been set correctly\", expectedAge, testPerson.getAge());\n\n  }\n}\n"
+          }
+        ]
+      }
+    },
+    "parsed_tests": "import codeworkout.CodeWorkoutTest;\npublic class syntax6to7Test extends CodeWorkoutTest {\n\n  public void testMethodsHaveBeenCalledCorrectly() {\n      syntax6to7.Runner runner = new syntax6to7.Runner();\n\n      syntax6to7.Person testPerson = runner.run();\n\n      String expectedName = \"Peter\";\n      int expectedAge = 42;\n\n      assertEquals(\"Name has not been set correctly\", expectedName, testPerson.getName());\n      assertEquals(\"Age has not been set correctly\", expectedAge, testPerson.getAge());\n\n  }\n}\n"
+  },
+  "diagnostics": [
+
+  ]
+}

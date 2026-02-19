@@ -6,17 +6,14 @@
 
   "definitions": {
     "nonempty_string": {
-      "$id": "nonempty_string",
       "type": "string",
       "minLength": 1
     },
     "string_no_whitespace": {
-      "$id": "string_no_whitespace",
       "$ref": "#/definitions/nonempty_string",
       "pattern": "^[^\\s]+$"
     },
     "boolean": {
-      "$id": "boolean",
       "oneOf": [
         { "type": "boolean" },
         { "type": "integer",  "minimum": "0", "maximum": "1" },
@@ -27,31 +24,26 @@
       ]
     },
     "id": {
-      "$id": "id",
       "description": "An id is a non-empty string containing no whitespace and no commas (which might be used as separators in strings denoting lists of ids).",
       "$ref": "#/definitions/nonempty_string",
       "pattern": "^[^\\s,]+$"
     },
     "id_list": {
-      "$id": "id_list",
       "description": "Either a single id (no spaces or commas) or a comma-separated (or space-separated) list of multiple ids.",
       "$ref": "#/definitions/nonempty_string",
       "pattern": "^[^\\s,]+(\\s*[, ]\\s*[^\\s,]+)*$"
     },
     "timestamp": {
-      "$id": "timestamp",
       "description": "A human-readable timestamp indicating the time at which this version of the exercise was last modified. For lack of a better option, at the moment this should be an RFC 3339/ISO 8601 UTC timestamp (if you know of something more user-friendly but equally unambiguous, let us know!). That format is: YYYY-MM-DDThh:mm:ss.nnn±hh:mm. See https://stackoverflow.com/questions/28020805/regex-validate-correct-iso8601-date-string-with-time for the regex info.",
       "$ref": "#/definitions/nonempty_string",
       "format": "date-time"
     },
     "email_address": {
-      "$id": "email_address",
       "description": "An email_address is a non-empty string conforming to the idn-email format.",
       "$ref": "#/definitions/nonempty_string",
       "format": "idn-email"
      },
     "person": {
-      "$id": "person",
       "description": "Represents an individual, including a unique email address and an optional name",
       "oneOf": [
         { "$ref": "#/definitions/email_address" },
@@ -66,7 +58,6 @@
       ]
     },
     "tag_list": {
-      "$id": "tag_list",
       "description": "Can be either a single string representing a list of semi-colon-delimited or comma-delimited tags/elements, or an array of strings representing the same content.",
       "oneOf": [
         { "$ref": "#/definitions/nonempty_string" },
@@ -78,17 +69,14 @@
       ]
     },
     "location": {
-      "$id": "location",
       "description": "A string that may also be a url(...) defining an addressable location.",
       "$ref": "#/definitions/nonempty_string"
     },
     "relative_location": {
-      "$id": "relative_location",
       "description": "A string that intended to define a relative location, probably using a url(...).",
       "$ref": "#/definitions/location"
     },
     "file": {
-      "$id": "file",
       "oneOf": [
         { "$ref": "#/definitions/location" },
         {
@@ -110,7 +98,6 @@
       ]
     },
     "file_list": {
-      "$id": "file_list",
       "oneOf": [
         { "$ref": "#/definitions/location" },
         {
@@ -121,7 +108,6 @@
       ]
     },
     "repository": {
-      "$id": "repository",
       "type": "object",
       "required": ["url"],
       "properties": {
@@ -132,7 +118,6 @@
       }
     },
     "suite": {
-      "$id": "suite",
       "oneOf": [
         { "$ref": "#/definitions/location" },
         {
@@ -161,7 +146,6 @@
       ]
     },
     "suite_list": {
-      "$id": "suite_list",
       "oneOf": [
         { "$ref": "#/definitions/location" },
         {
@@ -172,7 +156,6 @@
       ]
     },
     "environment": {
-      "$id": "environment",
       "type": "object",
       "properties": {
         "inherits": { "enum": ["start", "build", "run"] },
@@ -183,7 +166,6 @@
       }
     },
     "environment_list": {
-      "$id": "environment_list",
       "type": "object",
       "properties": {
         "start": { "$ref": "#/definitions/environment" },
@@ -193,7 +175,6 @@
       }
     },
     "solution": {
-      "$id": "solution",
       "oneOf": [
         { "$ref": "#/definitions/location" },
         {
@@ -210,7 +191,6 @@
       ]
     },
     "solution_list": {
-      "$id": "solution_list",
       "oneOf": [
         { "$ref": "#/definitions/location" },
         {
@@ -221,7 +201,6 @@
       ]
     },
     "system": {
-      "$id": "system",
       "type": "object",
       "properties": {
         "language": { "$ref": "#/definitions/nonempty_string" },
@@ -248,7 +227,6 @@
       }
     },
     "system_list": {
-      "$id": "system_list",
       "type": "array",
       "items": { "$ref": "#/definitions/system" },
       "minItems": 1
@@ -284,24 +262,24 @@
     "tag": {
       "type": "object",
       "properties": {
-        "topics": { "$ref": "tag_list" },
+        "topics": { "$ref": "#/definitions/tag_list" },
         "prerequisites": {
           "oneOf": [
-            { "$ref": "tag_list" },
+            { "$ref": "#/definitions/tag_list" },
             {
               "type": "object",
               "properties": {
-                "exposure": { "$ref": "tag_list" },
-                "familiarity": { "$ref": "tag_list" },
-                "mastery": { "$ref": "tag_list" }
+                "exposure": { "$ref": "#/definitions/tag_list" },
+                "familiarity": { "$ref": "#/definitions/tag_list" },
+                "mastery": { "$ref": "#/definitions/tag_list" }
               }
             }
           ]
          },
-        "style": { "$ref": "tag_list" },
-        "course": { "$ref": "tag_list" },
-        "book": { "$ref": "tag_list" },
-        "personal": { "$ref": "tag_list" }
+        "style": { "$ref": "#/definitions/tag_list" },
+        "course": { "$ref": "#/definitions/tag_list" },
+        "book": { "$ref": "#/definitions/tag_list" },
+        "personal": { "$ref": "#/definitions/tag_list" }
       }
     },
     "version": {

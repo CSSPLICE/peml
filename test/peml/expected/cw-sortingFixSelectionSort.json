@@ -1,0 +1,65 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/466/practice?workout_id=680",
+    "title": "Sorting - Fix Selection Sort",
+    "external_id": "cw-x49",
+    "is_public": "true",
+    "experience": "30",
+    "language_list": "Java",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "edwards@cs.vt.edu",
+        "name": "Stephen Edwards"
+      }
+    },
+    "tags": {
+      "topics": "sorting, array, int, selection sort",
+      "style": "coding problem"
+    },
+    "instructions": "The following method is a Selection Sort method. Within the method,\nthere is an error on one line. You job is to find that line and fix that one\nerror so that the method may work properly. You will need to understand exactly\nhow a selection sort method works.\n",
+    "systems": [
+      {
+        "language": "Java"
+      }
+    ],
+    "assets": {
+      "code": {
+        "wrapper": {
+          "files": [
+            {
+              "content": "public class Answer {\n    ___\n}\n"
+            }
+          ]
+        },
+        "starter": {
+          "files": [
+            {
+              "content": "public int[] selectionSort(int[] array) {\n    for (int i = 0; i < array.length - 1; i++) {\n     int min = array[i];\n     int minIndex = i;\n       for (int j = i + 1; j < array.length; j++) {\n         if (min > array[j]) {\n           min = array[j];\n           minIndex = j;\n           }\n        }\n       if (minIndex == i) {\n         array[minIndex] = array[i];\n         array[i] = min;\n       }\n      }\n    return array;\n}\n"
+            }
+          ]
+        }
+      },
+      "test": {
+        "files": [
+          {
+            "format": "text/csv-unquoted",
+            "pattern": {
+              "actual": "subject.selectionSort({{array}})"
+            },
+            "content": "aray,expected,description\n\"new int[]{4,7,1}\",\"new int[]{1,4,7}\",example\n\"new int[]{80,6,6,8,2}\",\"new int[]{2,6,6,8,80}\",example\n\"new int[]{77,104,33,5}\",\"new int[]{5,33,77,104}\"\n\"new int[]{2,4,6}\",\"new int[]{2,4,6}\"\n\"new int[]{5,2,0,8}\",\"new int[]{0,2,5,8}\"\n\"new int[]{10}\",\"new int[]{10}\"\n\"new int[]{4,10,4,0}\",\"new int[]{0,4,4,10}\",hidden\n"
+          }
+        ]
+      }
+    },
+    "parsed_tests": [
+      {
+        "language": "Java",
+        "test_class": "class Answer {   }\n"
+      }
+    ]
+  },
+  "diagnostics": [
+
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/562/practice?workout_id=759",
+    "title": "isUnique",
+    "external_id": "ITSC1213_is_unique",
+    "is_public": "true",
+    "experience": "20",
+    "language_list": "Java",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "lcao2@uncc.edu",
+        "name": "lcao2"
+      }
+    },
+    "tags": {
+      "topics": "array, loop",
+      "style": "coding problem"
+    },
+    "instructions": "This method takes an array of integers as a parameter. It returns\ntrue if the elements in the array are unique, false otherwise. For example,\nif the array passed stores {12, 7, -1, 25, 3}, your method should return true,\nif the array passed stores {5, 3, 5, 2}, your method should return false.\nAn array with 0 or 1 element should be considered unique.\n",
+    "systems": [
+      {
+        "language": "Java"
+      }
+    ],
+    "assets": {
+      "code": {
+        "wrapper": {
+          "files": [
+            {
+              "content": "public class ArrayProblem\n{\n   ___\n}\n"
+            }
+          ]
+        },
+        "starter": {
+          "files": [
+            {
+              "content": "public boolean isUnique(int[] nums)\n{\n   ___\n}\n"
+            }
+          ]
+        }
+      },
+      "test": {
+        "files": [
+          {
+            "format": "text/csv-unquoted",
+            "pattern": {
+              "actual": "subject.isUnique({{nums}})"
+            },
+            "content": "nums,expected,description\n\"new int[] {}\",true\n\"new int[] {12, 7, -1, 25, 3}\",true,example\n\"new int[] {5, 3, 5, 2}\",false,example\n\"new int[] {2}\",true\n\"new int[] {5, 5, 3, 2}\",false\n\"new int[] {5, 5, 5, 5}\",false\n\"new int[] {3, 2, 1, 1}\",false\n\"new int[] {1, 2, 2, 3}\",false\n\"new int[] {1, 2, 3, 1}\",false\n"
+          }
+        ]
+      }
+    },
+    "parsed_tests": [
+      {
+        "language": "Java",
+        "test_class": "class Answer {   }\n"
+      }
+    ]
+  },
+  "diagnostics": [
+
+  ]
+}

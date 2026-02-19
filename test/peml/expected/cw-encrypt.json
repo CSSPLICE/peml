@@ -1,0 +1,65 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/582/practice?workout_id=759",
+    "title": "encrypt",
+    "external_id": "ITSC1213_encrypt",
+    "is_public": "true",
+    "experience": "20",
+    "language_list": "Java",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "lcao2@uncc.edu",
+        "name": "lcao2"
+      }
+    },
+    "tags": {
+      "topics": "String, loop",
+      "style": "coding problem"
+    },
+    "instructions": "This methods takes a String object as a parameter and returns an\nencrypted version of the object. The encryption is done in two steps: First,\nthe first letter of the original string is moved to the end. Then, “ay” is\nappended at the end of the String. For example, if the String is “How”, the\nmethod should return “owHay”. If the length of the string is less than 1,\nit should not be changed. \\n\n",
+    "systems": [
+      {
+        "language": "Java"
+      }
+    ],
+    "assets": {
+      "code": {
+        "wrapper": {
+          "files": [
+            {
+              "content": "public class StringProblem\n{\n   ___\n}\n"
+            }
+          ]
+        },
+        "starter": {
+          "files": [
+            {
+              "content": "public String encrypt(String message)\n{\n   ___\n}\n"
+            }
+          ]
+        }
+      },
+      "test": {
+        "files": [
+          {
+            "format": "text/csv-unquoted",
+            "pattern": {
+              "actual": "subject.encrypt({{message}})"
+            },
+            "content": "message,expected,description\n\"\"\"How\"\"\",\"\"\"owHay\"\"\",example\n\"\"\"\"\"\",\"\"\"\"\"\"\n\"\"\"z\"\"\",\"\"\"zay\"\"\"\n\"\"\"CS\"\"\",\"\"\"SCay\"\"\"\n\"\"\"lambda\"\"\",\"\"\"ambdalzy\"\"\"\n"
+          }
+        ]
+      }
+    },
+    "parsed_tests": [
+      {
+        "language": "Java",
+        "test_class": "class Answer {   }\n"
+      }
+    ]
+  },
+  "diagnostics": [
+
+  ]
+}

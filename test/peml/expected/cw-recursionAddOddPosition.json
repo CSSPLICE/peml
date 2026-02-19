@@ -1,0 +1,65 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/268/practice?workout_id=52",
+    "title": "Recursion Programming Exercise: Add odd values",
+    "external_id": "RecC-Addodd",
+    "is_public": "true",
+    "experience": "10",
+    "language_list": "Java",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "sallyhamouda@gmail.com",
+        "name": "sallyhamouda"
+      }
+    },
+    "tags": {
+      "topics": "recursion",
+      "style": "code writing"
+    },
+    "instructions": "For function `addOdd(n)` write the missing recursive call.\nThis function should return the sum of all postive odd\nnumbers less than or equal to `n`.\n",
+    "systems": [
+      {
+        "language": "Java"
+      }
+    ],
+    "assets": {
+      "code": {
+        "wrapper": {
+          "files": [
+            {
+              "content": "public class RecCAddodd\n{\n    ___\n}\n"
+            }
+          ]
+        },
+        "starter": {
+          "files": [
+            {
+              "content": "public int addOdd(int n) {\n    if (n <= 0) {\n      return 0;\n    }\n    if (n % 2 != 0) { // Odd value\n      return <<Missing a Recursive call>>\n    } else { // Even value\n      return addOdd(n - 1);\n    }\n}\n"
+            }
+          ]
+        }
+      },
+      "test": {
+        "files": [
+          {
+            "format": "text/csv-unquoted",
+            "pattern": {
+              "actual": "subject.addOdd({{n}})"
+            },
+            "content": "n,expected,description\n1,1,example\n2,1,example\n3,4,example\n7,16,example\n8,16\n9,25\n10,25\n11,36\n12,36,hidden\n0,0,hidden\n"
+          }
+        ]
+      }
+    },
+    "parsed_tests": [
+      {
+        "language": "Java",
+        "test_class": "class Answer {   }\n"
+      }
+    ]
+  },
+  "diagnostics": [
+
+  ]
+}

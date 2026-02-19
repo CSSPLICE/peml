@@ -1,0 +1,65 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/573/practice?workout_id=759",
+    "title": "minDiff",
+    "external_id": "ITSC1213_min_diff",
+    "is_public": "true",
+    "experience": "20",
+    "language_list": "Java",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "lcao2@uncc.edu",
+        "name": "lcao2"
+      }
+    },
+    "tags": {
+      "topics": "array, loop",
+      "style": "coding problem"
+    },
+    "instructions": "This method takes an integer array as a parameter and returns the\nminimum difference between adjacent values in the array. The difference between\ntwo adjacent values in an array is defined as the second value minus the first\nvalue. For example, if array stores the following sequence of values: {3,\n5, 11, 4, 8}, the differences would be computed as 5 – 3 = 2, 11 - 5 = 6,\n4 - 11 = -7, 8 - 4 = 4. Of these values, -7 is the smallest, so it would be\nreturned. If an array has less than 2 elements, the method should return 0.\n",
+    "systems": [
+      {
+        "language": "Java"
+      }
+    ],
+    "assets": {
+      "code": {
+        "wrapper": {
+          "files": [
+            {
+              "content": "public class ArrayProblem\n{\n   ___\n}\n"
+            }
+          ]
+        },
+        "starter": {
+          "files": [
+            {
+              "content": "public int minDiff(int[] nums)\n{\n   ___\n}\n"
+            }
+          ]
+        }
+      },
+      "test": {
+        "files": [
+          {
+            "format": "text/csv-unquoted",
+            "pattern": {
+              "actual": "subject.minDiff({{nums}})"
+            },
+            "content": "nums,expected,description\n\"new int[] {3, 5, 11, 4, 8}\",-7,example\n\"new int[]{}\",0\n\"new int[]{17}\",0\n\"new int[]{1, 3, 6, 12, 7}\",-5\n\"new int[]{1, 2, 3, 5, 7}\",1\n\"new int[]{3, 5, 4, 8, 11, 14}\",-1\n"
+          }
+        ]
+      }
+    },
+    "parsed_tests": [
+      {
+        "language": "Java",
+        "test_class": "class Answer {   }\n"
+      }
+    ]
+  },
+  "diagnostics": [
+
+  ]
+}

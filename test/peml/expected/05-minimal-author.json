@@ -1,0 +1,14 @@
+{
+  "value": {
+    "exercise_id": "https://cssplice.github.io/peml/examples/01-minimal.peml",
+    "title": "A Minimal PEML Description",
+    "author": {
+      "email": "edwards@cs.vt.edu",
+      "name": "Stephen Edwards"
+    },
+    "instructions": "Write instructions for the the exercise here.\n"
+  },
+  "diagnostics": [
+
+  ]
+}

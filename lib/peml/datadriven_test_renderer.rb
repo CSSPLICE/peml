@@ -17,14 +17,14 @@ module Peml
             value = peml.dottie!
             languages = self.get_languages(value)
             tests = self.recurse_hash(value, {})
-            if(tests[:format].include?('csv'))
+            if tests && tests[:format] && tests[:format].include?('csv')
                 peml['parsed_tests']=[]
                 tests[:content] = hashify_test(tests)
                 languages.each do |language|
                     template_class = Liquid::Template.parse(File.open("#{@@template_path}#{language.downcase}_class.liquid").read, :error_mode => :strict)
                     peml['parsed_tests']<<{language: language, test_class: template_class.render('class_name' => 'Answer', 'methods' => generate_methods(tests, language))}
                 end
-            else
+            elsif tests && tests[:content]
                 peml['parsed_tests'] = tests[:content]
             end
             peml
@@ -34,8 +34,10 @@ module Peml
         # by test cases with tabular data for now.
         def get_languages(value)
             languages=[]
-            value['systems'].each do |system|
-                languages << system['language']
+            if value['systems']
+                value['systems'].each do |system|
+                    languages << system['language']
+                end
             end
             languages
         end
@@ -85,6 +87,7 @@ module Peml
         def generate_methods(tests, language)
             tests_arr = []
             id = 0
+            return tests_arr if tests[:pattern].nil?
             method_name = tests[:pattern][tests[:pattern].index('.')+1..tests[:pattern].index('(')-1]
             tests[:content].each do |test_case|
                 id += 1
