@@ -1,0 +1,4 @@
+{% if stdin %}
+self.stdin_backup = sys.stdin
+sys.stdin = StringIO({% include 'stdin_template' %})
+{% endif %}

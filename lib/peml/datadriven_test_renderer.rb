@@ -21,6 +21,9 @@ module Peml
             language = system['language']
             if language
                 language = language.downcase
+                if language == 'c++'
+                  language = 'cpp'
+                end
             end
             if system.key?('assets') &&
               system['assets'].key?('test') &&

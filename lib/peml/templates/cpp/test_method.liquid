@@ -1,0 +1,9 @@
+void test_{{for_idx}}()
+{
+  {% include 'test_method_annotations' %}
+  {% include 'stdin_setup' %}
+  {% include 'stdout_setup' %}
+  {% include 'test_case_actions' %}
+  {% include 'test_case_assertions' %}
+  {% include 'stdout_assertions' %}
+}

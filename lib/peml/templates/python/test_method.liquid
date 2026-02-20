@@ -1,2 +1,9 @@
-    def test{{id}}(self):
-        self.assertEqual({{expected_output}}, self.__{{method_name}}({{input}}))
+def test_{{for_idx}}(self):
+    {% include 'test_method_annotations' %}
+    {% include 'stdin_setup' %}
+    {% include 'stdout_setup' %}
+    {% include 'test_case_actions' %}
+    {% include 'test_case_assertions' %}
+    {% include 'stdout_assertions' %}
+    {% include 'stdin_teardown' %}
+    {% include 'stdout_teardown' %}

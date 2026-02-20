@@ -1,0 +1,58 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/695/practice?workout_id=955",
+    "title": "Sorting - Simple Remainder in C++",
+    "external_id": "chico_simpleRemainder",
+    "is_public": "true",
+    "experience": "50",
+    "language_list": "C++",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "ayaan@vt.edu",
+        "name": "Ayaan"
+      }
+    },
+    "tags": {
+      "topics": "arithmetic",
+      "style": "code writing"
+    },
+    "instructions": "With the variables given to you, calculate the remainder when the variable numerator\nis divided by the variable denominator and store the result in the variable remainder.\n",
+    "systems": [
+      {
+        "language": "cpp",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "class Remainder\n{\n  public:\n    ___\n};\n"
+                }
+              ]
+            },
+            "starter": {
+              "files": [
+                {
+                  "content": "int remainder()\n{\n    int numerator = 395;\n    int denominator = 13;\n    int remainder;\n    // In the space below, complete the necessary code.\n\n    ___\n\n    // Do not change the code below this\n    return remainder;\n}\n"
+                }
+              ]
+            }
+          },
+          "test": {
+            "files": [
+              {
+                "pattern": {
+                  "actual": "subject.remainder()"
+                },
+                "content": "#include <cxxtest/TestSuite.h>\n#include \".h\"\n\n\nclass Test : public CxxTest::TestSuite\n{\npublic:\n  \n  void setUp()\n{\n  // Set up test fixtures, if any.\n  subject = new ();\n}\n  void tearDown()\n{\n  delete subject;\n}\n  \n  void test_1()\n{\n  // \n// \n// \n// \n// \n  \n  \n  \n  \n\nTS_ASSERT_EQUALS(5, subject.remainder());\n\n  \n}\n  \nprivate:\n   *subject;\n};"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "diagnostics": [
+
+  ]
+}

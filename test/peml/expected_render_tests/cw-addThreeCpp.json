@@ -44,7 +44,7 @@
                 "pattern": {
                   "actual": "subject.addThree()"
                 },
-                "content": "class  {  }; "
+                "content": "#include <cxxtest/TestSuite.h>\n#include \".h\"\n\n\nclass Test : public CxxTest::TestSuite\n{\npublic:\n  \n  void setUp()\n{\n  // Set up test fixtures, if any.\n  subject = new ();\n}\n  void tearDown()\n{\n  delete subject;\n}\n  \n  void test_1()\n{\n  // \n// \n// \n// \n// \n  \n  \n  \n  \n\nTS_ASSERT_EQUALS(18, subject.addThree());\n\n  \n}\n  \nprivate:\n   *subject;\n};"
               }
             ]
           }

@@ -1,0 +1,3 @@
+{% if stdout %}
+self.assertEqual({% include 'stdout_template' %}, self.stdout_capture.getvalue(){% include 'opt_negative_feedback' %})
+{% endif %}

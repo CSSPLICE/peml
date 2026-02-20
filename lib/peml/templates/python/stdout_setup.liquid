@@ -1,0 +1,5 @@
+{% if stdout %}
+self.stdout_backup = sys.stdout
+self.stdout_capture = StringIO()
+sys.stdout = self.stdout_capture
+{% endif %}

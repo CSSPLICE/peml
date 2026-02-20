@@ -1,4 +1,10 @@
-class {{ class_name }}: {% for import in imports %} import {{ import }}
-{% endfor %} {% for method in methods %}
-{{ method }}
-{% endfor %}
+{% include 'stock_imports' %}
+{% include 'extra_imports' %}
+
+class {% include 'test_class_name' %}{% include 'test_class_extends' %}:
+    {% include 'extra_declarations' %}
+    {% include 'setup' %}
+    {% for test_case in test_cases %}
+    {% include 'test_method', flatten: test_case %}
+    {% endfor %}
+    {% include 'teardown' %}

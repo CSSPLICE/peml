@@ -1,0 +1,15 @@
+{% include 'stock_imports' %}
+{% include 'extra_imports' %}
+
+class {% include 'test_class_name' %} {% include 'test_class_extends' %}
+{
+public:
+  {% include 'extra_declarations' %}
+  {% include 'setup' %}
+  {% include 'teardown' %}
+  {% for test_case in test_cases %}
+  {% include 'test_method', flatten: test_case %}
+  {% endfor %}
+private:
+  {% include 'subject_declaration' %}
+};
