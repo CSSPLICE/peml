@@ -36,7 +36,7 @@ In the code below, remove the method call to `spin()`. Note, this does not mean 
 [systems]
 language: Java
 
-[assets.code.wrapper.files]
+[.assets.code.wrapper.files]
 content:----------
 import java.util.ArrayList;
 public class syntax10 {
@@ -77,10 +77,11 @@ public class syntax10 {
 
 }
 ----------
+[]
     
 
 
-[assets.code.starter.files]
+[.assets.code.starter.files]
 content:----------
 public void spin(SimpleLightBot andy)
 {
@@ -97,9 +98,10 @@ public void run(SimpleLightBot andy)
     andy.turnLeft();
 }
 ----------
+[]
 
-[assets.test.files]
-format: java/junit
+[.assets.test.files]
+type: java/junit
 content:----------
 import codeworkout.CodeWorkoutTest;
 public class syntax10Test extends CodeWorkoutTest {
@@ -131,4 +133,5 @@ public class syntax10Test extends CodeWorkoutTest {
         assertEquals(expected, testResult);
     }
 }
-----------
+----------[]
+[]

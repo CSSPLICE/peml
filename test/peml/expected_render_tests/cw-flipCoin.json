@@ -1,0 +1,56 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/583/practice?workout_id=759",
+    "title": "flipCoin",
+    "external_id": "ITSC1213_flip_coin",
+    "is_public": "true",
+    "experience": "10",
+    "language_list": "Java",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "lcao2@uncc.edu",
+        "name": "lcao2"
+      }
+    },
+    "tags": {
+      "topics": "array, loop",
+      "style": "coding problem"
+    },
+    "instructions": "This method simulates flipping a fair coin. It takes an integer parameter,\nwhich specifies the number of times that the coin is to be flipped. The method\nrecords the result of each flip and returns the results as a String. For example,\nif the argument is 10, the method may return “HHTHTTTHHT”\n",
+    "systems": [
+      {
+        "language": "Java",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "import java.util.Random;\npublic class RandomProblem\n{\n   ___\n}\n"
+                }
+              ]
+            },
+            "starter": {
+              "files": [
+                {
+                  "content": "public String flipCoin(int n)\n{\n   ___\n}\n"
+                }
+              ]
+            }
+          },
+          "test": {
+            "files": [
+              {
+                "type": "java/junit",
+                "content": "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n  private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject = new Answer();\n}\n  \n    Liquid error: internal\n  \n  \n}"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "diagnostics": [
+
+  ]
+}

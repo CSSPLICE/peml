@@ -1,0 +1,58 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/440/practice?workout_id=680",
+    "title": "Generics - Sorting - Create Bubble Sort",
+    "external_id": "cw-x23",
+    "is_public": "true",
+    "experience": "65",
+    "language_list": "Java",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "edwards@cs.vt.edu",
+        "name": "Stephen Edwards"
+      }
+    },
+    "tags": {
+      "topics": "bubble sort, sorting, array, int",
+      "style": "coding problem"
+    },
+    "instructions": "Write a function in Java that takes in the `int[] array`, sorts\nit using bubble sort, then returns back the sorted array.\n",
+    "systems": [
+      {
+        "language": "Java",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "public class Answer {\n    ___\n}\n"
+                }
+              ]
+            },
+            "starter": {
+              "files": [
+                {
+                  "content": "public int[] bubbleSort(int[] array) {\n    int n = array.length;\n    int temp = 0;\n    ___\n}\n"
+                }
+              ]
+            }
+          },
+          "test": {
+            "files": [
+              {
+                "pattern": {
+                  "actual": "subject.bubbleSort({{array}})"
+                },
+                "content": "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n  private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject = new Answer();\n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic void test_1()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"new int[]{1,4,7}\",\n    subject.bubbleSort());\n\n  \n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic void test_2()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"new int[]{2,6,6,8,80}\",\n    subject.bubbleSort());\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_3()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"new int[]{5,33,77,104}\",\n    subject.bubbleSort());\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_4()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"new int[]{2,4,6}\",\n    subject.bubbleSort());\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_5()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"new int[]{0,2,5,8}\",\n    subject.bubbleSort());\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_6()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"new int[]{10}\",\n    subject.bubbleSort());\n\n  \n}\n  \n    @Test\n@Description(hidden)\n\n\n\n\npublic void test_7()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"new int[]{0,4,4,10}\",\n    subject.bubbleSort());\n\n  \n}\n  \n  \n}"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "diagnostics": [
+
+  ]
+}

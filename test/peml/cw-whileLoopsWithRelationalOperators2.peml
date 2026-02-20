@@ -24,7 +24,7 @@ We want to change to change the condition for this loop so that the jeroo stops 
 [systems]
 language: Java
 
-[assets.code.wrapper.files]
+[.assets.code.wrapper.files]
 content:----------
 import student.micro.jeroo.Jeroo;
 import student.micro.jeroo.RelativeDirection;
@@ -83,8 +83,9 @@ public class syntax2 {
 
 }
 ----------
+[]
 
-[assets.code.starter.files]
+[.assets.code.starter.files]
 content:----------
 public void question2(CountingJeroo imani)
 {
@@ -95,10 +96,11 @@ public void question2(CountingJeroo imani)
     }
 }
 ----------
+[]
 
 
-[assets.test.files]
-format: java/junit
+[.assets.test.files]
+type: java/junit
 content:----------
 import codeworkout.CodeWorkoutTest;
 import codeworkout.Description;
@@ -137,4 +139,5 @@ public class syntax2Test extends CodeWorkoutTest  {
             + testJ.getFlowerCount(), 0, testJ.getFlowerCount());
     }
 }
-----------
+----------[]
+[]

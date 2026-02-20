@@ -1,0 +1,58 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/425/practice?workout_id=980",
+    "title": "Attendance Records",
+    "external_id": "cw-x8",
+    "is_public": "true",
+    "experience": "25",
+    "language_list": "Java",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "admin@codwworkout.com",
+        "name": "admin"
+      }
+    },
+    "tags": {
+      "topics": "arraylist, coding",
+      "style": "coding problem"
+    },
+    "instructions": "The Student Chapter for the Association for Computing Machinery (ACM)\\nrequested\nyour help. Throughout the semester, attendance \\nfor the weekly club meetings\nhas been very unpredictable. The club \\nkeeps track of attendance each week\nbut would like to have a\\nmaster attendance list for the semester. Given a\n``String`` array, \\ncreate an ``ArrayList`` of all members of the ACM club.\n",
+    "systems": [
+      {
+        "language": "Java",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "import java.util.ArrayList;\npublic class Answer {\n    ___\n}\n"
+                }
+              ]
+            },
+            "starter": {
+              "files": [
+                {
+                  "content": "public ArrayList processAttendance(String[] members)\n{\n  ___\n}\n"
+                }
+              ]
+            }
+          },
+          "test": {
+            "files": [
+              {
+                "pattern": {
+                  "actual": "subject.processAttendance({{members}})"
+                },
+                "content": "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n  private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject = new Answer();\n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic void test_1()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"new java.util.ArrayList<String>(){{add(\"\"Don\"\");add(\"\"Mike\"\");add(\"\"Phillip\"\");}}\",\n    subject.processAttendance(\"new String[]{\"\"Don\"\",\"\"Mike\"\",\"\"Phillip\"\"}\"));\n\n  \n}\n  \n    @Test\n@Description(hidden)\n\n\n\n\npublic void test_2()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"new java.util.ArrayList<String>(){{add(\"\"Demetri\"\");add(\"\"Ollie\"\");add(\"\"Tyler\"\");add(\"\"Holland\"\");}}\",\n    subject.processAttendance(\"new String[]{\"\"Demetri\"\",\"\"Ollie\"\",\"\"Tyler\"\",\"\"Holland\"\"}\"));\n\n  \n}\n  \n  \n}"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "diagnostics": [
+
+  ]
+}

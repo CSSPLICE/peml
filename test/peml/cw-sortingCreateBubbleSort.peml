@@ -21,14 +21,15 @@ it using bubble sort, then returns back the sorted array.
 [systems]
 language: Java
 
-[assets.code.wrapper.files]
+[.assets.code.wrapper.files]
 content:----------
 public class Answer {
     ___
 }
 ----------
+[]
 
-[assets.code.starter.files]
+[.assets.code.starter.files]
 content:----------
 public int[] bubbleSort(int[] array) {
     int n = array.length;
@@ -36,10 +37,11 @@ public int[] bubbleSort(int[] array) {
     ___
 }
 ----------
+[]
 
 
-[assets.test.files]
-format: text/csv-unquoted
+[.assets.test.files]
+type: text/csv-unquoted
 pattern.actual: subject.bubbleSort({{array}})
 content:----------
 aray,expected,description
@@ -51,4 +53,5 @@ aray,expected,description
 "new int[]{10}","new int[]{10}"
 "new int[]{4,10,4,0}","new int[]{0,4,4,10}",hidden
 ----------
+[]
 

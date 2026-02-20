@@ -24,7 +24,7 @@ on each half until only single values are left, which are then put back together
 [systems]
 language: Java
 
-[assets.code.wrapper.files]
+[.assets.code.wrapper.files]
 content:----------
 import java.util.*;
 public class Answer {
@@ -37,17 +37,19 @@ public class Answer {
     ___
 }
 ----------
+[]
 
-[assets.code.starter.files]
+[.assets.code.starter.files]
 content:----------
 public ArrayList<Integer> quickSort(ArrayList<Integer> list) {
     ___
 }
 ----------
+[]
 
 
-[assets.test.files]
-format: text/csv-unquoted
+[.assets.test.files]
+type: text/csv-unquoted
 pattern.actual: subject.quickSort({{list}})
 content:----------
 list,expected,description
@@ -55,4 +57,5 @@ Answer.test1,Answer.answ1,"(4, 6, 1, 2, 3, 5, 6, 8, 9, 8, 4, 2) -> (1, 2, 2, 3, 
 Answer.test2,Answer.answ2,"(47, 81, 30, 64, 78, 67, 58, 96, 47, 5) -> (5, 30, 47, 47, 58, 64, 67, 78, 81, 96)"
 Answer.test3,Answer.answ3,"(32, 23, 9, 17, 24, 18, 19) -> (9, 17, 18, 19, 23, 24, 32)"
 ----------
+[]
 

@@ -1,0 +1,58 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/439/practice?workout_id=680",
+    "title": "Generics - Binary Search (non-recursive)",
+    "external_id": "cw-x22",
+    "is_public": "true",
+    "experience": "40",
+    "language_list": "Java",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "edwards@cs.vt.edu",
+        "name": "Stephen Edwards"
+      }
+    },
+    "tags": {
+      "topics": "binary search, search, array, int",
+      "style": "coding problem"
+    },
+    "instructions": "Complete the following binary search method. Find the number `num`\nin the array `array`. Return -1 if the number is not found. You may\nassume the array is properly ordered.\n",
+    "systems": [
+      {
+        "language": "Java",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "public class Answer {\n    ___\n}\n"
+                }
+              ]
+            },
+            "starter": {
+              "files": [
+                {
+                  "content": "public int binarySearch(int[]array, int num) {\n  int low = 0; //low range\n  int high = array.length -1; //high range\n  int mid; //mid range\n  while ()  //while low is less than or equal to high\n  {\n    mid = ; //set middle range to be (low + high) /2\n    if () { //if the array in the middle range = input number\n    //return mid range\n    }\n    else\n        if () { //if the array in the middle range > input number\n            //set the high value to be the mid value minus 1\n        }\n        else {\n            //set low value to be mid value plus one\n        }\n  }\n  //return -1 here because that would mean that the number is not found in the loop\n}\n"
+                }
+              ]
+            }
+          },
+          "test": {
+            "files": [
+              {
+                "pattern": {
+                  "actual": "subject.binarySearch({{array}}, {{num}})"
+                },
+                "content": "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n  private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject = new Answer();\n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic void test_1()\n{\n  \n  \n  \n  assertEquals(\n    \n    2,\n    subject.binarySearch(, 7));\n\n  \n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic void test_2()\n{\n  \n  \n  \n  assertEquals(\n    \n    2,\n    subject.binarySearch(, 6));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_3()\n{\n  \n  \n  \n  assertEquals(\n    \n    3,\n    subject.binarySearch(, 104));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_4()\n{\n  \n  \n  \n  assertEquals(\n    \n    0,\n    subject.binarySearch(, 2));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_5()\n{\n  \n  \n  \n  assertEquals(\n    \n    1,\n    subject.binarySearch(, 2));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_6()\n{\n  \n  \n  \n  assertEquals(\n    \n    3,\n    subject.binarySearch(, 5));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_7()\n{\n  \n  \n  \n  assertEquals(\n    \n    -1,\n    subject.binarySearch(, 4));\n\n  \n}\n  \n    @Test\n@Description(hidden)\n\n\n\n\npublic void test_8()\n{\n  \n  \n  \n  assertEquals(\n    \n    1,\n    subject.binarySearch(, 4));\n\n  \n}\n  \n    @Test\n@Description(hidden)\n\n\n\n\npublic void test_9()\n{\n  \n  \n  \n  assertEquals(\n    \n    -1,\n    subject.binarySearch(, 2));\n\n  \n}\n  \n    @Test\n@Description(hidden)\n\n\n\n\npublic void test_10()\n{\n  \n  \n  \n  assertEquals(\n    \n    0,\n    subject.binarySearch(, 1));\n\n  \n}\n  \n    @Test\n@Description(hidden)\n\n\n\n\npublic void test_11()\n{\n  \n  \n  \n  assertEquals(\n    \n    4,\n    subject.binarySearch(, 6));\n\n  \n}\n  \n  \n}"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "diagnostics": [
+
+  ]
+}

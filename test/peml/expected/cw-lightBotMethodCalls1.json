@@ -20,35 +20,35 @@
     "instructions": "For the question below, assume we are working with a simplified LightBot that can perform the following actions\n\n*   Turn Left\n*   Turn Right\n*   Move Forward\n*   Jump\n\nEach of these actions is represented by a method call:\n\n*   Turn Left --> `turnLeft()`\n*   Turn Right --> `turnRight()`\n*   Move Forward --> `moveForward()`\n*   Jump --> `jump()`\n\nFor this problem, you'll be working with a LightBot object named `andy`.\n\nChange the code below so that instead of turning left three times and jumping, the LightBot turns right three times and then jumps.\n",
     "systems": [
       {
-        "language": "Java"
-      }
-    ],
-    "assets": {
-      "code": {
-        "wrapper": {
-          "files": [
-            {
-              "content": "import java.util.ArrayList;\npublic class syntax1 {\n    public static class SimpleLightBot {\n        private ArrayList<String> moveHistory;\n        public SimpleLightBot() {\n            moveHistory = new ArrayList<String>();\n        }\n        \n        public String[] getMoveHistory() {\n            String[] a = new String[moveHistory.size()];\n            return moveHistory.toArray(a);\n        }\n        \n        public void jump() {\n            moveHistory.add(\"jump\");\n        }\n        \n        public void turnLeft() {\n            moveHistory.add(\"turnLeft\");\n        }\n        \n        public void turnRight() {\n            moveHistory.add(\"turnRight\");\n        }\n        \n        public void moveForward() {\n            moveHistory.add(\"moveForward\");\n        }\n    }\n        \n    public static class Runner{\n        public void run(SimpleLightBot andy) {\n            ___\n        }\n    }\n}\n"
+        "language": "Java",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "import java.util.ArrayList;\npublic class syntax1 {\n    public static class SimpleLightBot {\n        private ArrayList<String> moveHistory;\n        public SimpleLightBot() {\n            moveHistory = new ArrayList<String>();\n        }\n        \n        public String[] getMoveHistory() {\n            String[] a = new String[moveHistory.size()];\n            return moveHistory.toArray(a);\n        }\n        \n        public void jump() {\n            moveHistory.add(\"jump\");\n        }\n        \n        public void turnLeft() {\n            moveHistory.add(\"turnLeft\");\n        }\n        \n        public void turnRight() {\n            moveHistory.add(\"turnRight\");\n        }\n        \n        public void moveForward() {\n            moveHistory.add(\"moveForward\");\n        }\n    }\n        \n    public static class Runner{\n        public void run(SimpleLightBot andy) {\n            ___\n        }\n    }\n}\n"
+                }
+              ]
+            },
+            "starter": {
+              "files": [
+                {
+                  "content": "andy.turnLeft();\nandy.turnLeft();\nandy.turnLeft();\nandy.jump();\n"
+                }
+              ]
             }
-          ]
-        },
-        "starter": {
-          "files": [
-            {
-              "content": "andy.turnLeft();\nandy.turnLeft();\nandy.turnLeft();\nandy.jump();\n"
-            }
-          ]
-        }
-      },
-      "test": {
-        "files": [
-          {
-            "format": "java/junit",
-            "content": "import codeworkout.CodeWorkoutTest;\npublic class syntax1Test extends CodeWorkoutTest {\n    private syntax1.SimpleLightBot testBot;\n    private syntax1.Runner runner;\n\n    public void setUp() {\n        testBot = new syntax1.SimpleLightBot();\n        runner = new syntax1.Runner();\n    }\n\n    public void testLightBotRun() {\n        String[] expected = {\"turnRight\", \"turnRight\", \"turnRight\", \"jump\"};\n        runner.run(testBot);\n\n        String[] testResult = testBot.getMoveHistory();\n\n        assertEquals(expected.length, testResult.length);\n        assertEquals(expected, testResult);\n    }\n\n}\n"
+          },
+          "test": {
+            "files": [
+              {
+                "type": "java/junit",
+                "content": "import codeworkout.CodeWorkoutTest;\npublic class syntax1Test extends CodeWorkoutTest {\n    private syntax1.SimpleLightBot testBot;\n    private syntax1.Runner runner;\n\n    public void setUp() {\n        testBot = new syntax1.SimpleLightBot();\n        runner = new syntax1.Runner();\n    }\n\n    public void testLightBotRun() {\n        String[] expected = {\"turnRight\", \"turnRight\", \"turnRight\", \"jump\"};\n        runner.run(testBot);\n\n        String[] testResult = testBot.getMoveHistory();\n\n        assertEquals(expected.length, testResult.length);\n        assertEquals(expected, testResult);\n    }\n\n}\n----------[]\n[]\n"
+              }
+            ]
           }
-        ]
+        }
       }
-    }
+    ]
   },
   "diagnostics": [
 

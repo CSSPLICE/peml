@@ -1,0 +1,56 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/829/practice?workout_id=1308",
+    "title": "CodeWorkout LightBot Method Calls 10",
+    "external_id": "CS1114_Week1SyntaxDrill10",
+    "is_public": "true",
+    "experience": "50",
+    "language_list": "Java",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "edwards@cs.vt.edu",
+        "name": "Stephen H. Edwards"
+      }
+    },
+    "tags": {
+      "topics": "CS1114, LightBot, Methods, java",
+      "style": "code-writing"
+    },
+    "instructions": "For the question below, assume we are working with a simplified LightBot that can perform the following actions\n\n*   Turn Left\n*   Turn Right\n*   Move Forward\n*   Jump\n\nEach of these actions is represented by a method call:\n\n*   Turn Left --> `turnLeft()`\n*   Turn Right --> `turnRight()`\n*   Move Forward --> `moveForward()`\n*   Jump --> `jump()`\n\nJust like in the LightBot puzzles, there is also a method called `spin()` that causes the LightBot to turn left four times.\n\nIn the code below, remove the method call to `spin()`. Note, this does not mean to delete the whole `spin()` method, just the call to the method.\n",
+    "systems": [
+      {
+        "language": "Java",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "import java.util.ArrayList;\npublic class syntax10 {\n    public static class SimpleLightBot {\n        private ArrayList<String> moveHistory;\n\n        public SimpleLightBot() {\n            moveHistory = new ArrayList<String>();\n        }\n\n        public String[] getMoveHistory() {\n            String[] a = new String[moveHistory.size()];\n            return moveHistory.toArray(a);\n        }\n\n        public void jump() {\n            moveHistory.add(\"jump\");\n        }\n\n        public void turnLeft() {\n            moveHistory.add(\"turnLeft\");\n        }\n\n        public void turnRight() {\n            moveHistory.add(\"turnRight\");\n        }\n\n        public void moveForward() {\n            moveHistory.add(\"moveForward\");\n        }\n\n\n    }\n\n    public static class Runner{\n        ___\n    }\n\n}\n"
+                }
+              ]
+            },
+            "starter": {
+              "files": [
+                {
+                  "content": "public void spin(SimpleLightBot andy)\n{\n    andy.turnLeft();\n    andy.turnLeft();\n    andy.turnLeft();\n    andy.turnLeft();\n}\n\npublic void run(SimpleLightBot andy)\n{\n    spin(andy);\n    andy.jump();\n    andy.turnLeft();\n}\n"
+                }
+              ]
+            }
+          },
+          "test": {
+            "files": [
+              {
+                "type": "java/junit",
+                "content": "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n  private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject = new Answer();\n}\n  \n    Liquid error: internal\n  \n  \n}"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "diagnostics": [
+
+  ]
+}

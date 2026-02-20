@@ -23,7 +23,7 @@ You must modify the given list.
 [systems]
 language: Java
 
-[assets.code.wrapper.files]
+[.assets.code.wrapper.files]
 content:----------
 import java.util.ArrayList;
 public class ArrayListProblem
@@ -31,18 +31,20 @@ public class ArrayListProblem
    ___
 }
 ----------
+[]
 
-[assets.code.starter.files]
+[.assets.code.starter.files]
 content:----------
 public void removeOdd(ArrayList list)
 {
    ___
 }
 ----------
+[]
 
 
-[assets.test.files]
-format: java/junit
+[.assets.test.files]
+type: java/junit
 content:----------
 // static tests:
 // keyword:new,prohibited,static:screening
@@ -116,4 +118,5 @@ public class ArrayListProblemTest extends CodeWorkoutTest{
     }
 }
 ----------
+[]
 

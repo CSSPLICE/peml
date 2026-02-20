@@ -23,7 +23,7 @@ should return 0. For example, if an ArrayList variable called list stores
 [systems]
 language: Java
 
-[assets.code.wrapper.files]
+[.assets.code.wrapper.files]
 content:----------
 import java.util.ArrayList;
 public class ArrayListProblem
@@ -31,18 +31,20 @@ public class ArrayListProblem
    ___
 }
 ----------
+[]
 
-[assets.code.starter.files]
+[.assets.code.starter.files]
 content:----------
 public int getMaxLength(ArrayList list)
 {
    ___
 }
 ----------
+[]
 
 
-[assets.test.files]
-format: text/csv-unquoted
+[.assets.test.files]
+type: text/csv-unquoted
 pattern.actual: subject.getMaxLength({{list}})
 content:----------
 list,expected,description
@@ -50,6 +52,6 @@ list,expected,description
 "new java.util.ArrayList()",0
 "new java.util.ArrayList(){{add(""once"");add(""upon"");add(""a"");add(""time"");}}",4
 "new java.util.ArrayList(){{add(""greetings"");add(""hello"");add(""welcome"");add(""byebye"");}}",8,hidden
-"new java.util.ArrayList(){{add(""
 ----------
+[]
 

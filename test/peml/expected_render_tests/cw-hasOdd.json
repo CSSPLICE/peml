@@ -1,0 +1,58 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/571/practice?workout_id=759",
+    "title": "hasOdd",
+    "external_id": "ITSC1213_has_odd",
+    "is_public": "true",
+    "experience": "10",
+    "language_list": "Java",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "lcao2@uncc.edu",
+        "name": "lcao2"
+      }
+    },
+    "tags": {
+      "topics": "array, loop",
+      "style": "coding problem"
+    },
+    "instructions": "This method takes an integer array as a parameter and returns true\nif the array includes an odd integer; otherwise, the method returns false.\nFor example, if the array passed stores {12, 7, 8, 25, 3}, the method returns\ntrue. If the array contains 0 element, the method returns false.\n",
+    "systems": [
+      {
+        "language": "Java",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "public class ArrayProblem\n{\n   ___\n}\n"
+                }
+              ]
+            },
+            "starter": {
+              "files": [
+                {
+                  "content": "public boolean hasOdd(int[] nums)\n{\n   ___\n}\n"
+                }
+              ]
+            }
+          },
+          "test": {
+            "files": [
+              {
+                "pattern": {
+                  "actual": "subject.hasOdd({{nums}})"
+                },
+                "content": "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n  private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject = new Answer();\n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic void test_1()\n{\n  \n  \n  \n  assertEquals(\n    \n    true,\n    subject.hasOdd(\"new int[] {12, 7, 8, 25, 3}\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_2()\n{\n  \n  \n  \n  assertEquals(\n    \n    true,\n    subject.hasOdd(\"new int[] {1}\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_3()\n{\n  \n  \n  \n  assertEquals(\n    \n    false,\n    subject.hasOdd(\"new int[] {}\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_4()\n{\n  \n  \n  \n  assertEquals(\n    \n    false,\n    subject.hasOdd(\"new int[] {2, 4, 6}\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_5()\n{\n  \n  \n  \n  assertEquals(\n    \n    true,\n    subject.hasOdd(\"new int[] {1, 3, 2, 7, 8, 9, 10}\"));\n\n  \n}\n  \n  \n}"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "diagnostics": [
+
+  ]
+}

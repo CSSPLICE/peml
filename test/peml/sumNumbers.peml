@@ -17,17 +17,18 @@ a string to an `int`.)
 [systems]
 language: Java
 
-[assets.code.starter.files]
+[.assets.code.starter.files]
 content:----------
 public int sumNumbers(String str)
 {
     /* ___ */
 }
 ----------
+[]
 
 
-[assets.test.files]
-format: text/csv-unquoted
+[.assets.test.files]
+type: text/csv-unquoted
 pattern.actual: subject.sumNumbers({{str}})
 content:----------
 str,expected,description
@@ -45,3 +46,4 @@ str,expected,description
 "2sdf4523sdfsd7",4532,hidden
 "sdffherbwm",0,hidden
 ----------
+[]

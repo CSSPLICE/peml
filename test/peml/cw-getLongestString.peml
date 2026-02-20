@@ -25,7 +25,7 @@ return “once”
 [systems]
 language: Java
 
-[assets.code.wrapper.files]
+[.assets.code.wrapper.files]
 content:----------
 import java.util.ArrayList;
 public class ArrayListProblem
@@ -33,18 +33,20 @@ public class ArrayListProblem
    ___
 }
 ----------
+[]
 
-[assets.code.starter.files]
+[.assets.code.starter.files]
 content:----------
 public String getLongestString(ArrayList list)
 {
    ___
 }
 ----------
+[]
 
 
-[assets.test.files]
-format: text/csv-unquoted
+[.assets.test.files]
+type: text/csv-unquoted
 pattern.actual: subject.getLongestString({{list}})
 content:----------
 list,expected,description
@@ -53,4 +55,5 @@ list,expected,description
 "new java.util.ArrayList(){{add(""greetings"");add(""hello"");add(""welcome"");add(""byebye"");}}","""greetings""",hidden
 "new java.util.ArrayList(){{add(""Mexico"");add(""Germany"");add(""France"");add(""Neitherland"");}}","""Neitherland""",hidden
 ----------
+[]
 

@@ -22,15 +22,16 @@ returns the sum of its digits.
 [systems]
 language: Java
 
-[assets.code.wrapper.files]
+[.assets.code.wrapper.files]
 content:----------
 public class  RecCSumOfDigits
 {
     ___
 }
 ----------
+[]
 
-[assets.code.starter.files]
+[.assets.code.starter.files]
 content:----------
 public int sumOfDigits(int number) {
     if (number < 10)
@@ -38,10 +39,11 @@ public int sumOfDigits(int number) {
     return <<Missing a Recursive case action>>
 }
 ----------
+[]
 
 
-[assets.test.files]
-format: text/csv-unquoted
+[.assets.test.files]
+type: text/csv-unquoted
 pattern.actual: subject.addOdd({{n}})
 content:----------
 n,expected,description
@@ -52,4 +54,5 @@ n,expected,description
 12,3,hidden
 100002,3,hidden
 ----------
+[]
 

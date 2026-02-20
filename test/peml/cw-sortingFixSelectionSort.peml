@@ -23,14 +23,15 @@ how a selection sort method works.
 [systems]
 language: Java
 
-[assets.code.wrapper.files]
+[.assets.code.wrapper.files]
 content:----------
 public class Answer {
     ___
 }
 ----------
+[]
 
-[assets.code.starter.files]
+[.assets.code.starter.files]
 content:----------
 public int[] selectionSort(int[] array) {
     for (int i = 0; i < array.length - 1; i++) {
@@ -50,10 +51,11 @@ public int[] selectionSort(int[] array) {
     return array;
 }
 ----------
+[]
 
 
-[assets.test.files]
-format: text/csv-unquoted
+[.assets.test.files]
+type: text/csv-unquoted
 pattern.actual: subject.selectionSort({{array}})
 content:----------
 aray,expected,description
@@ -65,4 +67,5 @@ aray,expected,description
 "new int[]{10}","new int[]{10}"
 "new int[]{4,10,4,0}","new int[]{0,4,4,10}",hidden
 ----------
+[]
 

@@ -22,15 +22,16 @@ numbers less than or equal to `n`.
 [systems]
 language: Java
 
-[assets.code.wrapper.files]
+[.assets.code.wrapper.files]
 content:----------
 public class RecCAddodd
 {
     ___
 }
 ----------
+[]
 
-[assets.code.starter.files]
+[.assets.code.starter.files]
 content:----------
 public int addOdd(int n) {
     if (n <= 0) {
@@ -43,10 +44,11 @@ public int addOdd(int n) {
     }
 }
 ----------
+[]
 
 
-[assets.test.files]
-format: text/csv-unquoted
+[.assets.test.files]
+type: text/csv-unquoted
 pattern.actual: subject.addOdd({{n}})
 content:----------
 n,expected,description
@@ -61,4 +63,5 @@ n,expected,description
 12,36,hidden
 0,0,hidden
 ----------
+[]
 

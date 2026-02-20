@@ -1,0 +1,56 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/919/practice?workout_id=1402",
+    "title": "CodeWorkout While Loops with Relational Operators 3",
+    "external_id": "CS1114_Week4SyntaxDrill_3",
+    "is_public": "true",
+    "experience": "50",
+    "language_list": "Java",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "edwards@cs.vt.edu",
+        "name": "Stephen H. Edwards"
+      }
+    },
+    "tags": {
+      "topics": "CS1114, Jeroo, loop, java, relational",
+      "style": "code writing"
+    },
+    "instructions": "For this question, we will be working with a subclass of Jeroo called CountingJeroo that tracks the number of hops it has peformed.\nYou can access the number of hops performed so far by running the `getHopCount()` method.\nBelow is a while loop with using a Jeroo named `imani`.\nThe condition in the while loop below has a bug in it.  Change the condition to fix the bug.\nThe while loop *should* stop once the jeroo has hopped at least once.\n\nNote: if the wheel just keeps on spinning when you check your answer, your loop may be infinite!\n",
+    "systems": [
+      {
+        "language": "Java",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "import student.micro.jeroo.Jeroo;\nimport student.micro.jeroo.RelativeDirection;\nimport static student.micro.jeroo.RelativeDirection.*;\nimport java.util.ArrayList;\n\npublic class syntax3 {\n\n    public static class CountingJeroo extends Jeroo {\n        public int hopCount;\n        public int flowerCount;\n\n        public CountingJeroo(int flowers) {\n\n            this.hopCount = 0;\n            flowerCount = flowers;\n        }\n\n\n        public int getFlowerCount() {\n            return flowerCount;\n        }\n\n        public int getHopCount() {\n            return hopCount;\n        }\n\n        @Override\n        public void toss() {\n            flowerCount--;\n        }\n\n        @Override\n        public void hop() {\n            hopCount++;\n        }\n\n        @Override\n        public void hop(int numHops) {\n            hopCount= hopCount + numHops;\n        }\n\n    }// end testJeroo\n\n\n    public static class Runner {\n        ___\n    }// end runner\n\n}\n"
+                }
+              ]
+            },
+            "starter": {
+              "files": [
+                {
+                  "content": "public void question3(CountingJeroo imani) {\n    while(imani.getFlowerCount() != 1) {\n        imani.toss();\n    }\n}\n"
+                }
+              ]
+            }
+          },
+          "test": {
+            "files": [
+              {
+                "type": "java/junit",
+                "content": "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n  private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject = new Answer();\n}\n  \n    Liquid error: internal\n  \n  \n}"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "diagnostics": [
+
+  ]
+}

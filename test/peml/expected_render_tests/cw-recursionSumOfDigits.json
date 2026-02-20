@@ -1,0 +1,58 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/269/practice?workout_id=53",
+    "title": "Recursion Programming Exercise: Sum of the Digits",
+    "external_id": "RecC-SumOfDigits",
+    "is_public": "true",
+    "experience": "10",
+    "language_list": "Java",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "sallyhamouda@gmail.com",
+        "name": "sallyhamouda"
+      }
+    },
+    "tags": {
+      "topics": "recursion",
+      "style": "code writing"
+    },
+    "instructions": "For function `sumOfDigits`, write the missing recursive\ncall. This function takes a non-negative integer and\nreturns the sum of its digits.\n",
+    "systems": [
+      {
+        "language": "Java",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "public class  RecCSumOfDigits\n{\n    ___\n}\n"
+                }
+              ]
+            },
+            "starter": {
+              "files": [
+                {
+                  "content": "public int sumOfDigits(int number) {\n    if (number < 10)\n      return number;\n    return <<Missing a Recursive case action>>\n}\n"
+                }
+              ]
+            }
+          },
+          "test": {
+            "files": [
+              {
+                "pattern": {
+                  "actual": "subject.addOdd({{n}})"
+                },
+                "content": "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n  private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject = new Answer();\n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic void test_1()\n{\n  \n  \n  \n  assertEquals(\n    \n    10,\n    subject.addOdd(1234));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_2()\n{\n  \n  \n  \n  assertEquals(\n    \n    26,\n    subject.addOdd(5678));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_3()\n{\n  \n  \n  \n  assertEquals(\n    \n    0,\n    subject.addOdd(0));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_4()\n{\n  \n  \n  \n  assertEquals(\n    \n    1,\n    subject.addOdd(10000));\n\n  \n}\n  \n    @Test\n@Description(hidden)\n\n\n\n\npublic void test_5()\n{\n  \n  \n  \n  assertEquals(\n    \n    3,\n    subject.addOdd(12));\n\n  \n}\n  \n    @Test\n@Description(hidden)\n\n\n\n\npublic void test_6()\n{\n  \n  \n  \n  assertEquals(\n    \n    3,\n    subject.addOdd(100002));\n\n  \n}\n  \n  \n}"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "diagnostics": [
+
+  ]
+}

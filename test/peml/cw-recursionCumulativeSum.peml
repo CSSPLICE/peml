@@ -23,15 +23,16 @@ k-2.... until it reaches 0.
 [systems]
 language: Java
 
-[assets.code.wrapper.files]
+[.assets.code.wrapper.files]
 content:----------
 public class  RecCSumtok
 {
     ___
 }
 ----------
+[]
 
-[assets.code.starter.files]
+[.assets.code.starter.files]
 content:----------
 public int sumtok(int k) {
     if (k <= 0) {
@@ -41,10 +42,11 @@ public int sumtok(int k) {
     }
 }
 ----------
+[]
 
 
-[assets.test.files]
-format: text/csv-unquoted
+[.assets.test.files]
+type: text/csv-unquoted
 pattern.actual: subject.sumtok({{k}})
 content:----------
 k,expected,description
@@ -57,4 +59,5 @@ k,expected,description
 4,10,hidden
 1,1,hidden
 ----------
+[]
 

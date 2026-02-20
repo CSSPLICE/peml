@@ -23,25 +23,27 @@ array is {1, 2, 3, 4}, the array should be {4, 1, 2, 3} after the method executi
 [systems]
 language: Java
 
-[assets.code.wrapper.files]
+[.assets.code.wrapper.files]
 content:----------
 public class ArrayProblem
 {
    ___
 }
 ----------
+[]
 
-[assets.code.starter.files]
+[.assets.code.starter.files]
 content:----------
 public void rotateRight(int[] nums)
 {
    ___
 }
 ----------
+[]
 
 
-[assets.test.files]
-format: java/junit
+[.assets.test.files]
+type: java/junit
 content:----------
 import static org.junit.Assert.*;
 import org.junit.*;
@@ -125,4 +127,5 @@ public class ArrayProblemTest extends CodeWorkoutTest {
     }
 }
 ----------
+[]
 

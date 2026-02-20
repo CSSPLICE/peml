@@ -20,38 +20,38 @@
     "instructions": "Write a method that reverses the contents of any given string array,\nthen return the reversed conents as an arraylist. If the given array list\nis empty, return an empty array list.\n",
     "systems": [
       {
-        "language": "Java"
-      }
-    ],
-    "assets": {
-      "code": {
-        "wrapper": {
-          "files": [
-            {
-              "content": "import java.util.*;\npublic class Answer {\n    ___\n}\n"
-            }
-          ]
-        },
-        "starter": {
-          "files": [
-            {
-              "content": "public ArrayList<Integer> reverseContents(int[] contents) {\n    ___\n}\n"
-            }
-          ]
-        }
-      },
-      "test": {
-        "files": [
-          {
-            "format": "text/csv-unquoted",
-            "pattern": {
-              "actual": "subject.reverseContents({{contents}})"
+        "language": "Java",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "import java.util.*;\npublic class Answer {\n  ___\n}\n"
+                }
+              ]
             },
-            "content": "contents,expected,description\n\"new int[]{1, 2, 3, 4}\",\"new java.util.ArrayList<Integer>(){{add(4);add(3);add(2);add(1);}}\",example\n"
+            "starter": {
+              "files": [
+                {
+                  "content": "public ArrayList<Integer> reverseContents(int[] contents) {\n    ___\n}\n"
+                }
+              ]
+            }
+          },
+          "test": {
+            "files": [
+              {
+                "type": "text/csv-unquoted",
+                "pattern": {
+                  "actual": "subject.reverseContents({{contents}})"
+                },
+                "content": "contents,expected,description\nnew int[]{1, 2, 3, 4}, new java.util.ArrayList<Integer>(){{add(4);add(3);add(2);add(1);}}, example\n"
+              }
+            ]
           }
-        ]
+        }
       }
-    }
+    ]
   },
   "diagnostics": [
 

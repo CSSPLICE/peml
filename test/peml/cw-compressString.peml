@@ -27,25 +27,27 @@ and lower case letters.
 [systems]
 language: Java
 
-[assets.code.wrapper.files]
+[.assets.code.wrapper.files]
 content:----------
 public class StringProblem
 {
    ___
 }
 ----------
+[]
 
-[assets.code.starter.files]
+[.assets.code.starter.files]
 content:----------
 public String compressString(String message)
 {
    ___
 }
 ----------
+[]
 
 
-[assets.test.files]
-format: text/csv-unquoted
+[.assets.test.files]
+type: text/csv-unquoted
 pattern.actual: subject.compressString({{message}})
 content:----------
 message,expected,description
@@ -56,4 +58,5 @@ message,expected,description
 """aaacdddaaa""","""a3c1d3a3"""
 """aabcbbbb""","""a2b1c1b4"""
 ----------
+[]
 

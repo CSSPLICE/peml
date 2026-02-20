@@ -22,7 +22,7 @@ adds it to the island at (1, 1). Change the code so the
 [systems]
 language: Java
 
-[assets.code.wrapper.files]
+[.assets.code.wrapper.files]
 content:----------
 import student.micro.jeroo.Flower;
 import student.micro.jeroo.Net;
@@ -52,10 +52,11 @@ public class Answer extends Island {
   ___
 }
 ----------
+[]
     
 
 
-[assets.code.starter.files]
+[.assets.code.starter.files]
 content:----------
 public void myProgram()
 {
@@ -63,9 +64,10 @@ public void myProgram()
     this.addObject(jose, 1, 1);
 }
 ----------
+[]
 
-[assets.test.files]
-format: java/junit
+[.assets.test.files]
+type: java/junit
 content:----------
 import codeworkout.*;
 import student.micro.jeroo.CompassDirection;
@@ -93,4 +95,5 @@ public class AnswerTest extends CodeWorkoutTest {
         CompassDirection.NORTH, jeroo.__getFacing());
     }
 }
-----------
+----------[]
+[]

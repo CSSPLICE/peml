@@ -1,0 +1,58 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/572/practice?workout_id=759",
+    "title": "Merging Two Integer Arrays",
+    "external_id": "ITSC1213_merging_two_integer_arrays",
+    "is_public": "true",
+    "experience": "10",
+    "language_list": "Java",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "lcao2@uncc.edu",
+        "name": "lcao2"
+      }
+    },
+    "tags": {
+      "topics": "array, loop",
+      "style": "coding problem"
+    },
+    "instructions": "This method accepts two integer arrays as its parameters and returns\na new array, which contains all of the elements of first parameter array followed\nby all of the elements of the second parameter array.  For example, if the\nfirst parameter is {-4, -5, -3, -6} and the second parameter is {5, 5, 5,\n5}, the method returns {-4, -5, -3, -6, 5, 5, 5, 5}.\n",
+    "systems": [
+      {
+        "language": "Java",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "public class ArrayProblem\n{\n   ___\n}\n"
+                }
+              ]
+            },
+            "starter": {
+              "files": [
+                {
+                  "content": "public int[] mergeIntArrays(int[] nums1, int[] nums2)\n{\n   ___\n}\n"
+                }
+              ]
+            }
+          },
+          "test": {
+            "files": [
+              {
+                "pattern": {
+                  "actual": "subject.mergeIntArrays({{nums1}}, {{nums2}})"
+                },
+                "content": "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n  private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject = new Answer();\n}\n  \n    @Test\n\n\n\n\n\npublic void test_1()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"new int[] {1, 2, 3, 4}\",\n    subject.mergeIntArrays(\"new int[] {}\", \"new int[] {1, 2, 3, 4}\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_2()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"new int[] {1, 2, 3, 4}\",\n    subject.mergeIntArrays(\"new int[] {1, 2, 3, 4}\", \"new int[] {}\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_3()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"new int[] {1, 2, 3, 4}\",\n    subject.mergeIntArrays(\"new int[] {1, 2, 3}\", \"new int[] {4}\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_4()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"new int[] {1, 1, 2, 3}\",\n    subject.mergeIntArrays(\"new int[] {1}\", \"new int[] {1, 2, 3}\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_5()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"new int[] {2, 2, 2, 2, 2, 4, 4}\",\n    subject.mergeIntArrays(\"new int[] {2, 2, 2, 2, 2}\", \"new int[]{4, 4}\"));\n\n  \n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic void test_6()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"new int[] {-4, -5, -3, -6, 5, 5, 5, 5}\",\n    subject.mergeIntArrays(\"new int[] {-4, -5, -3, -6}\", \"new int[] {5, 5, 5, 5} \"));\n\n  \n}\n  \n  \n}"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "diagnostics": [
+
+  ]
+}

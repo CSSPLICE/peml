@@ -26,7 +26,7 @@ Note: if the wheel just keeps on spinning when you check your answer, your loop 
 [systems]
 language: Java
 
-[assets.code.wrapper.files]
+[.assets.code.wrapper.files]
 content:----------
 import student.micro.jeroo.Jeroo;
 import student.micro.jeroo.RelativeDirection;
@@ -78,8 +78,9 @@ public class syntax3 {
 
 }
 ----------
+[]
 
-[assets.code.starter.files]
+[.assets.code.starter.files]
 content:----------
 public void question3(CountingJeroo imani) {
     while(imani.getFlowerCount() != 1) {
@@ -87,9 +88,10 @@ public void question3(CountingJeroo imani) {
     }
 }
 ----------
+[]
 
-[assets.test.files]
-format: java/junit
+[.assets.test.files]
+type: java/junit
 content:----------
 import codeworkout.CodeWorkoutTest;
 import codeworkout.Description;
@@ -112,4 +114,5 @@ public class syntax3Test extends CodeWorkoutTest  {
     }
 
 }
-----------
+----------[]
+[]

@@ -1,0 +1,56 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/607/practice?workout_id=759",
+    "title": "Implement a Constructor",
+    "external_id": "ITSC1213_constructor_2",
+    "is_public": "false",
+    "experience": "10",
+    "language_list": "Java",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "smcleo12@uncc.edu",
+        "name": "smcleo12"
+      }
+    },
+    "tags": {
+      "topics": "constructors",
+      "style": "code writing"
+    },
+    "instructions": "Given the following constructor, set the fields to the corresponding parameters.\n",
+    "systems": [
+      {
+        "language": "Java",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "___ \n"
+                }
+              ]
+            },
+            "starter": {
+              "files": [
+                {
+                  "content": "public class Course\n{\n   public int number;\n   public String title;\n   public String department;\n   public int capacity;\n\n   public Course(int num, String t, String dept, int cap)\n   {\n     ___\n   }\n}\n"
+                }
+              ]
+            }
+          },
+          "test": {
+            "files": [
+              {
+                "type": "java/junit",
+                "content": "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n  private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject = new Answer();\n}\n  \n    Liquid error: internal\n  \n  \n}"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "diagnostics": [
+
+  ]
+}

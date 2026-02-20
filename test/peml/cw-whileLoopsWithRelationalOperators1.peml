@@ -24,7 +24,7 @@ Change the conditon so that the jeroo will only hop five times instead.
 [systems]
 language: Java
 
-[assets.code.wrapper.files]
+[.assets.code.wrapper.files]
 content:----------
 import student.micro.jeroo.Jeroo;
 import student.micro.jeroo.RelativeDirection;
@@ -70,8 +70,9 @@ public class syntax1 {
 
 }
 ----------
+[]
 
-[assets.code.starter.files]
+[.assets.code.starter.files]
 content:----------
 public void question1(CountingJeroo imani)
 {
@@ -81,9 +82,10 @@ public void question1(CountingJeroo imani)
     }
 }
 ----------
+[]
 
-[assets.test.files]
-format: java/junit
+[.assets.test.files]
+type: java/junit
 content:----------
 import codeworkout.CodeWorkoutTest;
 import codeworkout.Description;
@@ -103,4 +105,5 @@ public class syntax1Test extends CodeWorkoutTest  {
 
     }
 }
-----------
+----------[]
+[]

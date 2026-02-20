@@ -23,7 +23,7 @@ correct methods fr a `Jeroo`.
 [systems]
 language: Java
 
-[assets.code.wrapper.files]
+[.assets.code.wrapper.files]
 content:----------
 import java.util.ArrayList;
 import student.micro.jeroo.*;
@@ -50,19 +50,21 @@ public class Answer extends Jeroo {
     }
 }
 ----------
+[]
     
 
 
-[assets.code.starter.files]
+[.assets.code.starter.files]
 content:----------
 jeroo.hop();
 jeroo.turnLeft();
 jeroo.hop();
 jeroo.turnRight();
 ----------
+[]
 
-[assets.test.files]
-format: java/junit
+[.assets.test.files]
+type: java/junit
 content:----------
 import codeworkout.*;
 public class AnswerTest extends CodeWorkoutTest {
@@ -93,4 +95,5 @@ public class AnswerTest extends CodeWorkoutTest {
     }
 }
 
-----------
+----------[]
+[]

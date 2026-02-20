@@ -25,7 +25,7 @@ with 2 flowers.
 [systems]
 language: Java
 
-[assets.code.wrapper.files]
+[.assets.code.wrapper.files]
 content:----------
 import student.micro.jeroo.CompassDirection;
 import static student.micro.jeroo.CompassDirection.*;
@@ -51,11 +51,12 @@ public class Answer {
   }
 }
 ----------
+[]
     
 
 
-[assets.code.starter.files]
-format: java/junit
+[.assets.code.starter.files]
+type: java/junit
 content:----------
 import codeworkout.*;
 import student.micro.jeroo.CompassDirection;
@@ -79,4 +80,5 @@ public class AnswerTest extends CodeWorkoutTest {
         2, answer.__getFlowers());
     }
 }
-----------
+----------[]
+[]

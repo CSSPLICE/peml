@@ -20,35 +20,35 @@
     "instructions": "For this question, we will be working with a subclass of Jeroo called CountingJeroo that tracks the number of hops it has peformed.\nYou can access the number of hops performed so far by running the `getHopCount()` method.\nBelow is a while loop with using a Jeroo named `imani`.\nThe condition in the while loop below has a bug in it.  Change the condition to fix the bug.\nThe while loop *should* stop once the jeroo has hopped at least once.\n\nNote: if the wheel just keeps on spinning when you check your answer, your loop may be infinite!\n",
     "systems": [
       {
-        "language": "Java"
-      }
-    ],
-    "assets": {
-      "code": {
-        "wrapper": {
-          "files": [
-            {
-              "content": "import student.micro.jeroo.Jeroo;\nimport student.micro.jeroo.RelativeDirection;\nimport static student.micro.jeroo.RelativeDirection.*;\nimport java.util.ArrayList;\n\npublic class syntax3 {\n\n    public static class CountingJeroo extends Jeroo {\n        public int hopCount;\n        public int flowerCount;\n\n        public CountingJeroo(int flowers) {\n\n            this.hopCount = 0;\n            flowerCount = flowers;\n        }\n\n\n        public int getFlowerCount() {\n            return flowerCount;\n        }\n\n        public int getHopCount() {\n            return hopCount;\n        }\n\n        @Override\n        public void toss() {\n            flowerCount--;\n        }\n\n        @Override\n        public void hop() {\n            hopCount++;\n        }\n\n        @Override\n        public void hop(int numHops) {\n            hopCount= hopCount + numHops;\n        }\n\n    }// end testJeroo\n\n\n    public static class Runner {\n        ___\n    }// end runner\n\n}\n"
+        "language": "Java",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "import student.micro.jeroo.Jeroo;\nimport student.micro.jeroo.RelativeDirection;\nimport static student.micro.jeroo.RelativeDirection.*;\nimport java.util.ArrayList;\n\npublic class syntax3 {\n\n    public static class CountingJeroo extends Jeroo {\n        public int hopCount;\n        public int flowerCount;\n\n        public CountingJeroo(int flowers) {\n\n            this.hopCount = 0;\n            flowerCount = flowers;\n        }\n\n\n        public int getFlowerCount() {\n            return flowerCount;\n        }\n\n        public int getHopCount() {\n            return hopCount;\n        }\n\n        @Override\n        public void toss() {\n            flowerCount--;\n        }\n\n        @Override\n        public void hop() {\n            hopCount++;\n        }\n\n        @Override\n        public void hop(int numHops) {\n            hopCount= hopCount + numHops;\n        }\n\n    }// end testJeroo\n\n\n    public static class Runner {\n        ___\n    }// end runner\n\n}\n"
+                }
+              ]
+            },
+            "starter": {
+              "files": [
+                {
+                  "content": "public void question3(CountingJeroo imani) {\n    while(imani.getFlowerCount() != 1) {\n        imani.toss();\n    }\n}\n"
+                }
+              ]
             }
-          ]
-        },
-        "starter": {
-          "files": [
-            {
-              "content": "public void question3(CountingJeroo imani) {\n    while(imani.getFlowerCount() != 1) {\n        imani.toss();\n    }\n}\n"
-            }
-          ]
-        }
-      },
-      "test": {
-        "files": [
-          {
-            "format": "java/junit",
-            "content": "import codeworkout.CodeWorkoutTest;\nimport codeworkout.Description;\nimport codeworkout.Hint;\nimport java.util.Random;\npublic class syntax3Test extends CodeWorkoutTest  {\n\n    @Description(\"Checks loop stops when jeroo has 1 flower left\")\n    public void test1() {\n        Random r = new Random();\n        int startingFlowers = r.nextInt(10)+1;\n        syntax3.CountingJeroo testJ = new syntax3.CountingJeroo(startingFlowers);\n        syntax3.Runner run = new syntax3.Runner();\n\n        run.question3(testJ);\n\n        assertEquals(\"Jeroo should have \"+1 +\" flower but has\"\n            + testJ.getFlowerCount(), 1, testJ.getFlowerCount());\n\n    }\n\n}\n"
+          },
+          "test": {
+            "files": [
+              {
+                "type": "java/junit",
+                "content": "import codeworkout.CodeWorkoutTest;\nimport codeworkout.Description;\nimport codeworkout.Hint;\nimport java.util.Random;\npublic class syntax3Test extends CodeWorkoutTest  {\n\n    @Description(\"Checks loop stops when jeroo has 1 flower left\")\n    public void test1() {\n        Random r = new Random();\n        int startingFlowers = r.nextInt(10)+1;\n        syntax3.CountingJeroo testJ = new syntax3.CountingJeroo(startingFlowers);\n        syntax3.Runner run = new syntax3.Runner();\n\n        run.question3(testJ);\n\n        assertEquals(\"Jeroo should have \"+1 +\" flower but has\"\n            + testJ.getFlowerCount(), 1, testJ.getFlowerCount());\n\n    }\n\n}\n----------[]\n[]\n"
+              }
+            ]
           }
-        ]
+        }
       }
-    }
+    ]
   },
   "diagnostics": [
 

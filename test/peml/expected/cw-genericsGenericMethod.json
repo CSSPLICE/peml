@@ -20,38 +20,38 @@
     "instructions": "Given a class ``Answer<E>``, write a method that converts argument\n``e`` into String and returns that value. If the value is a primitve,\n(``int`` or ``char``), then you must do the conversion. If the value\nis an object, then just call ``toString()``.\n",
     "systems": [
       {
-        "language": "Java"
-      }
-    ],
-    "assets": {
-      "code": {
-        "wrapper": {
-          "files": [
-            {
-              "content": "public class Answer <E>\n{\n ___\n}\n"
-            }
-          ]
-        },
-        "starter": {
-          "files": [
-            {
-              "content": "public String allString(E e)\n{\n    ___\n}\n"
-            }
-          ]
-        }
-      },
-      "test": {
-        "files": [
-          {
-            "format": "text/csv-unquoted",
-            "pattern": {
-              "actual": "subject.allString({{e}})"
+        "language": "Java",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "public class Answer <E>\n{\n ___\n}\n"
+                }
+              ]
             },
-            "content": "e,expected,description\n\"'c'\",\"\"c\"\",example\n\"1\",\"\"1\"\",example\n\"'z'\",\"\"z\"\"\n\"2\",\"\"2\"\"\n\"'o'\",\"\"o\"\",hidden\n\"10\",\"\"10\"\",hidden\n"
+            "starter": {
+              "files": [
+                {
+                  "content": "public String allString(E e)\n{\n    ___\n}\n"
+                }
+              ]
+            }
+          },
+          "test": {
+            "files": [
+              {
+                "type": "text/csv-unquoted",
+                "pattern": {
+                  "actual": "subject.allString({{e}})"
+                },
+                "content": "e,expected,description\n\"'c'\",\"\"c\"\",example\n\"1\",\"\"1\"\",example\n\"'z'\",\"\"z\"\"\n\"2\",\"\"2\"\"\n\"'o'\",\"\"o\"\",hidden\n\"10\",\"\"10\"\",hidden\n"
+              }
+            ]
           }
-        ]
+        }
       }
-    }
+    ]
   },
   "diagnostics": [
 

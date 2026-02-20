@@ -1,0 +1,58 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/562/practice?workout_id=759",
+    "title": "isUnique",
+    "external_id": "ITSC1213_is_unique",
+    "is_public": "true",
+    "experience": "20",
+    "language_list": "Java",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "lcao2@uncc.edu",
+        "name": "lcao2"
+      }
+    },
+    "tags": {
+      "topics": "array, loop",
+      "style": "coding problem"
+    },
+    "instructions": "This method takes an array of integers as a parameter. It returns\ntrue if the elements in the array are unique, false otherwise. For example,\nif the array passed stores {12, 7, -1, 25, 3}, your method should return true,\nif the array passed stores {5, 3, 5, 2}, your method should return false.\nAn array with 0 or 1 element should be considered unique.\n",
+    "systems": [
+      {
+        "language": "Java",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "public class ArrayProblem\n{\n   ___\n}\n"
+                }
+              ]
+            },
+            "starter": {
+              "files": [
+                {
+                  "content": "public boolean isUnique(int[] nums)\n{\n   ___\n}\n"
+                }
+              ]
+            }
+          },
+          "test": {
+            "files": [
+              {
+                "pattern": {
+                  "actual": "subject.isUnique({{nums}})"
+                },
+                "content": "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n  private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject = new Answer();\n}\n  \n    @Test\n\n\n\n\n\npublic void test_1()\n{\n  \n  \n  \n  assertEquals(\n    \n    true,\n    subject.isUnique(\"new int[] {}\"));\n\n  \n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic void test_2()\n{\n  \n  \n  \n  assertEquals(\n    \n    true,\n    subject.isUnique(\"new int[] {12, 7, -1, 25, 3}\"));\n\n  \n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic void test_3()\n{\n  \n  \n  \n  assertEquals(\n    \n    false,\n    subject.isUnique(\"new int[] {5, 3, 5, 2}\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_4()\n{\n  \n  \n  \n  assertEquals(\n    \n    true,\n    subject.isUnique(\"new int[] {2}\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_5()\n{\n  \n  \n  \n  assertEquals(\n    \n    false,\n    subject.isUnique(\"new int[] {5, 5, 3, 2}\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_6()\n{\n  \n  \n  \n  assertEquals(\n    \n    false,\n    subject.isUnique(\"new int[] {5, 5, 5, 5}\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_7()\n{\n  \n  \n  \n  assertEquals(\n    \n    false,\n    subject.isUnique(\"new int[] {3, 2, 1, 1}\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_8()\n{\n  \n  \n  \n  assertEquals(\n    \n    false,\n    subject.isUnique(\"new int[] {1, 2, 2, 3}\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_9()\n{\n  \n  \n  \n  assertEquals(\n    \n    false,\n    subject.isUnique(\"new int[] {1, 2, 3, 1}\"));\n\n  \n}\n  \n  \n}"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "diagnostics": [
+
+  ]
+}

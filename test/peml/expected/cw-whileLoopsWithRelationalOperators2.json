@@ -20,35 +20,35 @@
     "instructions": "For this question, we will be working with a subclass of Jeroo called CountingJeroo that tracks the number of hops it has peformed.\nYou can get the number of hops performed so far by calling the `getHopCount()` method.\nBelow is a while loop with using a Jeroo named `imani`.\nCurrently, this loop will cause the jeroo to hop and toss a flower 10 times.\nWe want to change to change the condition for this loop so that the jeroo stops if it has hopped 10 times OR it is out of flowers.\n",
     "systems": [
       {
-        "language": "Java"
-      }
-    ],
-    "assets": {
-      "code": {
-        "wrapper": {
-          "files": [
-            {
-              "content": "import student.micro.jeroo.Jeroo;\nimport student.micro.jeroo.RelativeDirection;\nimport static student.micro.jeroo.RelativeDirection.*;\nimport java.util.ArrayList;\n\npublic class syntax2 {\n\n    public static class CountingJeroo extends Jeroo {\n        public int hopCount;\n        public int flowerCount;\n\n        public CountingJeroo(int flowers) {\n\n            this.hopCount = 0;\n            flowerCount = flowers;\n        }\n\n\n        public int getFlowerCount() {\n            return flowerCount;\n        }\n\n        @Override\n        public boolean hasFlower() {\n            return flowerCount !=0;\n        }\n\n        public int getHopCount() {\n            return hopCount;\n        }\n\n        @Override\n        public void toss() {\n            flowerCount--;\n        }\n\n        @Override\n        public void hop() {\n            hopCount++;\n        }\n\n        @Override\n        public void hop(int numHops) {\n            hopCount= hopCount + numHops;\n        }\n\n\n    }// end testJeroo\n\n\n    public static class Runner {\n\n        ___\n    }// end runner\n\n}\n"
+        "language": "Java",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "import student.micro.jeroo.Jeroo;\nimport student.micro.jeroo.RelativeDirection;\nimport static student.micro.jeroo.RelativeDirection.*;\nimport java.util.ArrayList;\n\npublic class syntax2 {\n\n    public static class CountingJeroo extends Jeroo {\n        public int hopCount;\n        public int flowerCount;\n\n        public CountingJeroo(int flowers) {\n\n            this.hopCount = 0;\n            flowerCount = flowers;\n        }\n\n\n        public int getFlowerCount() {\n            return flowerCount;\n        }\n\n        @Override\n        public boolean hasFlower() {\n            return flowerCount !=0;\n        }\n\n        public int getHopCount() {\n            return hopCount;\n        }\n\n        @Override\n        public void toss() {\n            flowerCount--;\n        }\n\n        @Override\n        public void hop() {\n            hopCount++;\n        }\n\n        @Override\n        public void hop(int numHops) {\n            hopCount= hopCount + numHops;\n        }\n\n\n    }// end testJeroo\n\n\n    public static class Runner {\n\n        ___\n    }// end runner\n\n}\n"
+                }
+              ]
+            },
+            "starter": {
+              "files": [
+                {
+                  "content": "public void question2(CountingJeroo imani)\n{\n    while(imani.getHopCount() < 10)\n    {\n        imani.hop();\n        imani.toss();\n    }\n}\n"
+                }
+              ]
             }
-          ]
-        },
-        "starter": {
-          "files": [
-            {
-              "content": "public void question2(CountingJeroo imani)\n{\n    while(imani.getHopCount() < 10)\n    {\n        imani.hop();\n        imani.toss();\n    }\n}\n"
-            }
-          ]
-        }
-      },
-      "test": {
-        "files": [
-          {
-            "format": "java/junit",
-            "content": "import codeworkout.CodeWorkoutTest;\nimport codeworkout.Description;\nimport codeworkout.Hint;\nimport java.util.Random;\npublic class syntax2Test extends CodeWorkoutTest  {\n\n    @Description(\"Checks jeroo stops after 10 hops if it has 10 flowers\")\n    @Hint(\"You don't need to change the condition that's already there, just add a new one!\")\n    public void test1() {\n        syntax2.CountingJeroo testJ = new syntax2.CountingJeroo(10);\n        int expectedHops = 10;\n        syntax2.Runner run = new syntax2.Runner();\n\n        run.question2(testJ);\n\n        assertEquals(\"Jeroo should hop \"+expectedHops+\" times.  \"\n            + \"Hopped: \"+testJ.getHopCount()+\" times\", expectedHops, testJ.getHopCount());\n    }\n\n    @Description(\"Checks jeroo stops after less than 5 hops if it has less than 5 flowers\")\n    @Hint(\"You don't need to change the condition that's already there, just add a new one!\")\n    public void test2() {\n        Random r = new Random();\n        int flowers = r.nextInt(4)+1;\n        syntax2.CountingJeroo testJ = new syntax2.CountingJeroo(flowers);\n        int expectedHops = flowers;\n        syntax2.Runner run = new syntax2.Runner();\n\n        run.question2(testJ);\n\n        assertEquals(\"Jeroo should hop \" + expectedHops + \" times.  \"\n            + \"Hopped: \"+testJ.getHopCount()+\" times\", expectedHops, testJ.getHopCount());\n\n        assertEquals(\"Jeroo should have gotten rid of all of its flowers but has: \"\n            + testJ.getFlowerCount(), 0, testJ.getFlowerCount());\n    }\n}\n"
+          },
+          "test": {
+            "files": [
+              {
+                "type": "java/junit",
+                "content": "import codeworkout.CodeWorkoutTest;\nimport codeworkout.Description;\nimport codeworkout.Hint;\nimport java.util.Random;\npublic class syntax2Test extends CodeWorkoutTest  {\n\n    @Description(\"Checks jeroo stops after 10 hops if it has 10 flowers\")\n    @Hint(\"You don't need to change the condition that's already there, just add a new one!\")\n    public void test1() {\n        syntax2.CountingJeroo testJ = new syntax2.CountingJeroo(10);\n        int expectedHops = 10;\n        syntax2.Runner run = new syntax2.Runner();\n\n        run.question2(testJ);\n\n        assertEquals(\"Jeroo should hop \"+expectedHops+\" times.  \"\n            + \"Hopped: \"+testJ.getHopCount()+\" times\", expectedHops, testJ.getHopCount());\n    }\n\n    @Description(\"Checks jeroo stops after less than 5 hops if it has less than 5 flowers\")\n    @Hint(\"You don't need to change the condition that's already there, just add a new one!\")\n    public void test2() {\n        Random r = new Random();\n        int flowers = r.nextInt(4)+1;\n        syntax2.CountingJeroo testJ = new syntax2.CountingJeroo(flowers);\n        int expectedHops = flowers;\n        syntax2.Runner run = new syntax2.Runner();\n\n        run.question2(testJ);\n\n        assertEquals(\"Jeroo should hop \" + expectedHops + \" times.  \"\n            + \"Hopped: \"+testJ.getHopCount()+\" times\", expectedHops, testJ.getHopCount());\n\n        assertEquals(\"Jeroo should have gotten rid of all of its flowers but has: \"\n            + testJ.getFlowerCount(), 0, testJ.getFlowerCount());\n    }\n}\n----------[]\n[]\n"
+              }
+            ]
           }
-        ]
+        }
       }
-    }
+    ]
   },
   "diagnostics": [
 

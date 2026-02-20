@@ -1,0 +1,58 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/468/practice?workout_id=680",
+    "title": "Generics - Generic Method 2",
+    "external_id": "cw-x51",
+    "is_public": "true",
+    "experience": "10",
+    "language_list": "Java",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "edwards@cs.vt.edu",
+        "name": "Stephen Edwards"
+      }
+    },
+    "tags": {
+      "topics": "generic, char, int, String",
+      "style": "coding problem"
+    },
+    "instructions": "You have been handed a mysterious piece of data by an unknown person. Judging\nby his shifty eyes and maniacal laughter you don't think he can be trusted.\nComplete the below method to tell you the type for this unknown data.\n\nThe example already implemented can be adapted for other wrapper classes as well.\nComplete the method to analyze String, Character, and Double.\n",
+    "systems": [
+      {
+        "language": "Java",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "public class Answer <E>\n{\n ___\n}\n"
+                }
+              ]
+            },
+            "starter": {
+              "files": [
+                {
+                  "content": "public String whatAmI(E e){\n    //.getClass() returns the\n        runtime class of an object\n    //.equals() determines whether two objects\n        are equivalent\n    //by calling a new static instance of a wrapper object\n        we can analyze\n    //it's class type and compare it to the variable passed\n        in\n    if(e.getClass().equals(new Integer(1).getClass())){\n        return\n        \"Integer\";\n    }else{\n        return \"Who knows!\";\n    }\n}\n"
+                }
+              ]
+            }
+          },
+          "test": {
+            "files": [
+              {
+                "pattern": {
+                  "actual": "subject.whatAmI({{e}})"
+                },
+                "content": "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n  private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject = new Answer();\n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic void test_1()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"\"Integer\"\",\n    subject.whatAmI(\"1\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_2()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"\"String\"\",\n    subject.whatAmI(\"\"(╯°□°）╯︵ ┻━┻)\"\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_3()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"\"String\"\",\n    subject.whatAmI(\"\"┬─┬ノ( º _ ºノ)\"\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_4()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"\"String\"\",\n    subject.whatAmI(\"\"Boring String Example\"\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_5()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"\"Character\"\",\n    subject.whatAmI(\"'c'\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_6()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"\"Double\"\",\n    subject.whatAmI(\"2.2\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_7()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"\"Who knows!\"\",\n    subject.whatAmI(\"new Object()\"));\n\n  \n}\n  \n  \n}"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "diagnostics": [
+
+  ]
+}

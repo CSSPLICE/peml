@@ -20,38 +20,38 @@
     "instructions": "The following method takes an integer array as a parameter. Write code\nthat loops through the array to find the value 1. If 1 is found, increment\na `counter` variable. Once the loop finishes, return the value of the `counter`,\nwhich is the number of 1's found. If the array is empty, return 0.\n",
     "systems": [
       {
-        "language": "Java"
-      }
-    ],
-    "assets": {
-      "code": {
-        "wrapper": {
-          "files": [
-            {
-              "content": "public class Answer {\n    ___\n}\n"
-            }
-          ]
-        },
-        "starter": {
-          "files": [
-            {
-              "content": "public int oneFinder(int[] nums)\n{\n    ___\n}\n"
-            }
-          ]
-        }
-      },
-      "test": {
-        "files": [
-          {
-            "format": "text/csv-unquoted",
-            "pattern": {
-              "actual": "subject.oneFinder({{nums}})"
+        "language": "Java",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "public class Answer {\n    ___\n}\n"
+                }
+              ]
             },
-            "content": "nums,expected,description\n\"new int[]{1,1,1}\",3,example\n\"new int[]{4,1,4,0,0,0,2,4,4,1,4}\",2,example\n\"new int[]{2}\",0,example\n\"new int[]{}\",0\n\"new int[]{1,2,1,5,4,2,1,6,4}\",3\n\"new int[]{5,7,4,7,3}\",0\n\"new int[]{1,1,1,1,1,1,1,1,1}\",9,hidden\n\"new int[]{1,1,2,3,4,1,3,4,9,7,10,1}\",4,hidden\n\"new int[]{0,0,0,0,0,1}\",1,hidden\n"
+            "starter": {
+              "files": [
+                {
+                  "content": "public int oneFinder(int[] nums)\n{\n    ___\n}\n"
+                }
+              ]
+            }
+          },
+          "test": {
+            "files": [
+              {
+                "type": "text/csv-unquoted",
+                "pattern": {
+                  "actual": "subject.oneFinder({{nums}})"
+                },
+                "content": "nums,expected,description\n\"new int[]{1,1,1}\",3,example\n\"new int[]{4,1,4,0,0,0,2,4,4,1,4}\",2,example\n\"new int[]{2}\",0,example\n\"new int[]{}\",0\n\"new int[]{1,2,1,5,4,2,1,6,4}\",3\n\"new int[]{5,7,4,7,3}\",0\n\"new int[]{1,1,1,1,1,1,1,1,1}\",9,hidden\n\"new int[]{1,1,2,3,4,1,3,4,9,7,10,1}\",4,hidden\n\"new int[]{0,0,0,0,0,1}\",1,hidden\n"
+              }
+            ]
           }
-        ]
+        }
       }
-    }
+    ]
   },
   "diagnostics": [
 

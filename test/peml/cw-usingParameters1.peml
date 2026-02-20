@@ -38,7 +38,7 @@ Using the methods defined above, set age to 42 and name to "Peter".
 [systems]
 language: Java
 
-[assets.code.wrapper.files]
+[.assets.code.wrapper.files]
 content:----------
 public class syntax6to7 {
     public static class Person{
@@ -78,17 +78,19 @@ public class syntax6to7 {
 
 }
 ----------
+[]
 
-[assets.code.starter.files]
+[.assets.code.starter.files]
 content:----------
 public void setAgeAndName(Person p) {
    ___
 }
 ----------
+[]
 
 
-[assets.test.files]
-format: java/junit
+[.assets.test.files]
+type: java/junit
 content:----------
 import codeworkout.CodeWorkoutTest;
 public class syntax6to7Test extends CodeWorkoutTest {
@@ -107,4 +109,5 @@ public class syntax6to7Test extends CodeWorkoutTest {
   }
 }
 ----------
+[]
 

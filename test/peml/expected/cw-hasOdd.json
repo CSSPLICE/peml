@@ -20,38 +20,38 @@
     "instructions": "This method takes an integer array as a parameter and returns true\nif the array includes an odd integer; otherwise, the method returns false.\nFor example, if the array passed stores {12, 7, 8, 25, 3}, the method returns\ntrue. If the array contains 0 element, the method returns false.\n",
     "systems": [
       {
-        "language": "Java"
-      }
-    ],
-    "assets": {
-      "code": {
-        "wrapper": {
-          "files": [
-            {
-              "content": "public class ArrayProblem\n{\n   ___\n}\n"
-            }
-          ]
-        },
-        "starter": {
-          "files": [
-            {
-              "content": "public boolean hasOdd(int[] nums)\n{\n   ___\n}\n"
-            }
-          ]
-        }
-      },
-      "test": {
-        "files": [
-          {
-            "format": "text/csv-unquoted",
-            "pattern": {
-              "actual": "subject.hasOdd({{nums}})"
+        "language": "Java",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "public class ArrayProblem\n{\n   ___\n}\n"
+                }
+              ]
             },
-            "content": "nums,expected,description\n\"new int[] {12, 7, 8, 25, 3}\",true,example\n\"new int[] {1}\",true\n\"new int[] {}\",false\n\"new int[] {2, 4, 6}\",false\n\"new int[] {1, 3, 2, 7, 8, 9, 10}\",true\n"
+            "starter": {
+              "files": [
+                {
+                  "content": "public boolean hasOdd(int[] nums)\n{\n   ___\n}\n"
+                }
+              ]
+            }
+          },
+          "test": {
+            "files": [
+              {
+                "type": "text/csv-unquoted",
+                "pattern": {
+                  "actual": "subject.hasOdd({{nums}})"
+                },
+                "content": "nums,expected,description\n\"new int[] {12, 7, 8, 25, 3}\",true,example\n\"new int[] {1}\",true\n\"new int[] {}\",false\n\"new int[] {2, 4, 6}\",false\n\"new int[] {1, 3, 2, 7, 8, 9, 10}\",true\n"
+              }
+            ]
           }
-        ]
+        }
       }
-    }
+    ]
   },
   "diagnostics": [
 

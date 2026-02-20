@@ -25,7 +25,7 @@ You must (1) implement the interface, and (2) define the `compareTo` method.
 [systems]
 language: Java
 
-[assets.code.wrapper.files]
+[.assets.code.wrapper.files]
 content:----------
 public class Answer {
 public abstract class Pet {
@@ -94,8 +94,9 @@ ___
     }
 }
 ----------
+[]
 
-[assets.code.starter.files]
+[.assets.code.starter.files]
 content:----------
 public class Cage <P extends Pet> ___{
     private int size;
@@ -119,10 +120,11 @@ public class Cage <P extends Pet> ___{
     ___
 }
 ----------
+[]
 
 
-[assets.test.files]
-format: text/csv-unquoted
+[.assets.test.files]
+type: text/csv-unquoted
 pattern.actual: subject.tester({{testNum}})
 content:----------
 testNum,expected,description
@@ -133,4 +135,5 @@ testNum,expected,description
 5,true,"size2Cage.compareTo(otherSize2Cage) == 0 -> true"
 6,false,"size2Cage.compareTo(size1Cage) == 0 -> false"
 ----------
+[]
 

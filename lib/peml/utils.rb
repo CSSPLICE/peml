@@ -16,7 +16,7 @@ module Peml
     def self.gem_libdir
       ["#{File.dirname(File.expand_path(__FILE__))}",
            "#{Gem.dir}/gems/#{NAME}-#{VERSION}/lib/#{NAME}"].each do |i|
-        puts "checking #{i}"
+        # puts "checking #{i}"
         return i if File.readable?(i)
       end
       raise "unable to locate gem lib dir for gem: #{NAME}"
@@ -109,6 +109,7 @@ module Peml
           end
         end
       end
+      peml
     end
 
   # -------------------------------------------------------------
@@ -131,6 +132,7 @@ module Peml
         peml[key] = method(operation).call(value, default_peml)
       end
     end
+    peml
   end
 
   #kramdown parser has changed to add \n idky why, needs fixing
@@ -176,14 +178,19 @@ module Peml
         case type
         when 'text/yaml'
           value['content'] = YAML.load(content)
+          value.delete('type')
         when 'application/json'
           value['content'] = JSON.parse(content)
+          value.delete('type')
         when 'text/csv'
           value['content'] = tabular_to_hashes(CSV.parse(content))
+          value.delete('type')
         when 'application/xml', 'text/xml'
           value['content'] = xml_to_hash(REXML::Document.new(content).root)
+          value.delete('type')
         when 'text/x-unquoted-csv'
           value['content'] = tabular_to_hashes(Peml::CsvUnquotedParser.new.parse(content))
+          value.delete('type')
         end
       end
     end

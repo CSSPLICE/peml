@@ -1,0 +1,56 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/917/practice?workout_id=1402",
+    "title": "CodeWorkout While Loops with Relational Operators 1",
+    "external_id": "CS1114_Week4SyntaxDrill_1",
+    "is_public": "true",
+    "experience": "50",
+    "language_list": "Java",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "edwards@cs.vt.edu",
+        "name": "Stephen H. Edwards"
+      }
+    },
+    "tags": {
+      "topics": "CS1114, Jeroo, loop, java, relational",
+      "style": "code writing"
+    },
+    "instructions": "For this question, we will be working with a subclass of Jeroo called CountingJeroo that tracks the number of hops it has peformed.\nYou can get the number of hops performed so far by calling the `getHopCount()` method.\nBelow is a while loop with using a Jeroo named `imani`.\nCurrently, this loop will cause the jeroo to hop 10 times.\nChange the conditon so that the jeroo will only hop five times instead.\n",
+    "systems": [
+      {
+        "language": "Java",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "import student.micro.jeroo.Jeroo;\nimport student.micro.jeroo.RelativeDirection;\nimport static student.micro.jeroo.RelativeDirection.*;\nimport java.util.ArrayList;\n\npublic class syntax1 {\n\n    public static class CountingJeroo extends Jeroo {\n        public int hopCount;\n\n        public CountingJeroo() {\n            this.hopCount = 0;\n        }\n\n\n\n        public int getHopCount() {\n            return hopCount;\n        }\n\n        public boolean willHop() {\n            return hopCount < 10;\n        }\n\n        @Override\n        public void hop() {\n            hopCount++;\n        }\n\n        @Override\n        public void hop(int numHops) {\n            hopCount= hopCount + numHops;\n        }\n\n\n    }// end testJeroo\n\n\n    public static class Runner {\n        ___\n    }// end runner\n\n}\n"
+                }
+              ]
+            },
+            "starter": {
+              "files": [
+                {
+                  "content": "public void question1(CountingJeroo imani)\n{\n    while (imani.getHopCount() < 10)\n    {\n        imani.hop();\n    }\n}\n"
+                }
+              ]
+            }
+          },
+          "test": {
+            "files": [
+              {
+                "type": "java/junit",
+                "content": "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n  private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject = new Answer();\n}\n  \n    Liquid error: internal\n  \n  \n}"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "diagnostics": [
+
+  ]
+}

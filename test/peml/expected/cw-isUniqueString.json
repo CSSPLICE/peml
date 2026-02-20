@@ -20,38 +20,38 @@
     "instructions": "This method accepts a String object as a parameter. It returns true\nif the String has all unique characters, false otherwise. For example, if\nthe String is \"coding\", the method returns true; if the String is \"Lambda\",\nthe method returns false. The method should return true if the the length\nof the String is less than 1.\n",
     "systems": [
       {
-        "language": "Java"
-      }
-    ],
-    "assets": {
-      "code": {
-        "wrapper": {
-          "files": [
-            {
-              "content": "public class StringProblem\n{\n   ___\n}\n"
-            }
-          ]
-        },
-        "starter": {
-          "files": [
-            {
-              "content": "public boolean isUniqueString(String message)\n{\n   ___\n}\n"
-            }
-          ]
-        }
-      },
-      "test": {
-        "files": [
-          {
-            "format": "text/csv-unquoted",
-            "pattern": {
-              "actual": "subject.isUniqueString({{message}})"
+        "language": "Java",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "public class StringProblem\n{\n   ___\n}\n"
+                }
+              ]
             },
-            "content": "message,expected,description\n\"\"\"coding\"\"\",true,example\n\"\"\"Lambda\"\"\",false,example\n\"\"\"Hlamnh\"\"\",true\n\"\"\"ab cd ef\"\"\",false\n\"\"\"\"\"\",true\n\"\"\"hello world\"\"\",false,hidden\n"
+            "starter": {
+              "files": [
+                {
+                  "content": "public boolean isUniqueString(String message)\n{\n   ___\n}\n"
+                }
+              ]
+            }
+          },
+          "test": {
+            "files": [
+              {
+                "type": "text/csv-unquoted",
+                "pattern": {
+                  "actual": "subject.isUniqueString({{message}})"
+                },
+                "content": "message,expected,description\n\"\"\"coding\"\"\",true,example\n\"\"\"Lambda\"\"\",false,example\n\"\"\"Hlamnh\"\"\",true\n\"\"\"ab cd ef\"\"\",false\n\"\"\"\"\"\",true\n\"\"\"hello world\"\"\",false,hidden\n"
+              }
+            ]
           }
-        ]
+        }
       }
-    }
+    ]
   },
   "diagnostics": [
 

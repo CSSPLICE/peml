@@ -20,38 +20,38 @@
     "instructions": "Write a function in Java that takes in the `int[] array`, sorts\nit using bubble sort, then returns back the sorted array.\n",
     "systems": [
       {
-        "language": "Java"
-      }
-    ],
-    "assets": {
-      "code": {
-        "wrapper": {
-          "files": [
-            {
-              "content": "public class Answer {\n    ___\n}\n"
-            }
-          ]
-        },
-        "starter": {
-          "files": [
-            {
-              "content": "public int[] bubbleSort(int[] array) {\n    int n = array.length;\n    int temp = 0;\n    ___\n}\n"
-            }
-          ]
-        }
-      },
-      "test": {
-        "files": [
-          {
-            "format": "text/csv-unquoted",
-            "pattern": {
-              "actual": "subject.bubbleSort({{array}})"
+        "language": "Java",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "public class Answer {\n    ___\n}\n"
+                }
+              ]
             },
-            "content": "aray,expected,description\n\"new int[]{4,7,1}\",\"new int[]{1,4,7}\",example\n\"new int[]{80,6,6,8,2}\",\"new int[]{2,6,6,8,80}\",example\n\"new int[]{77,104,33,5}\",\"new int[]{5,33,77,104}\"\n\"new int[]{2,4,6}\",\"new int[]{2,4,6}\"\n\"new int[]{5,2,0,8}\",\"new int[]{0,2,5,8}\"\n\"new int[]{10}\",\"new int[]{10}\"\n\"new int[]{4,10,4,0}\",\"new int[]{0,4,4,10}\",hidden\n"
+            "starter": {
+              "files": [
+                {
+                  "content": "public int[] bubbleSort(int[] array) {\n    int n = array.length;\n    int temp = 0;\n    ___\n}\n"
+                }
+              ]
+            }
+          },
+          "test": {
+            "files": [
+              {
+                "type": "text/csv-unquoted",
+                "pattern": {
+                  "actual": "subject.bubbleSort({{array}})"
+                },
+                "content": "aray,expected,description\n\"new int[]{4,7,1}\",\"new int[]{1,4,7}\",example\n\"new int[]{80,6,6,8,2}\",\"new int[]{2,6,6,8,80}\",example\n\"new int[]{77,104,33,5}\",\"new int[]{5,33,77,104}\"\n\"new int[]{2,4,6}\",\"new int[]{2,4,6}\"\n\"new int[]{5,2,0,8}\",\"new int[]{0,2,5,8}\"\n\"new int[]{10}\",\"new int[]{10}\"\n\"new int[]{4,10,4,0}\",\"new int[]{0,4,4,10}\",hidden\n"
+              }
+            ]
           }
-        ]
+        }
       }
-    }
+    ]
   },
   "diagnostics": [
 

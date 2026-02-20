@@ -1,0 +1,58 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/267/practice?workout_id=51",
+    "title": "Recursion Programming Exercise: Cumulative Sum",
+    "external_id": "RecC-Sumtok",
+    "is_public": "true",
+    "experience": "10",
+    "language_list": "Java",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "sallyhamouda@gmail.com",
+        "name": "sallyhamouda"
+      }
+    },
+    "tags": {
+      "topics": "recursion",
+      "style": "code writing"
+    },
+    "instructions": "For function `sumtok`, write the missing recursive call.\nThis function returns the sum of the values from 1 to\n`k`. The recursive case action should add k to k-1 to\nk-2.... until it reaches 0.\n",
+    "systems": [
+      {
+        "language": "Java",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "public class  RecCSumtok\n{\n    ___\n}\n"
+                }
+              ]
+            },
+            "starter": {
+              "files": [
+                {
+                  "content": "public int sumtok(int k) {\n    if (k <= 0) {\n      return 0;\n    } else {\n      return <<Missing Recursive case action>>\n    }\n}\n"
+                }
+              ]
+            }
+          },
+          "test": {
+            "files": [
+              {
+                "pattern": {
+                  "actual": "subject.sumtok({{k}})"
+                },
+                "content": "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n  private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject = new Answer();\n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic void test_1()\n{\n  \n  \n  \n  assertEquals(\n    \n    15,\n    subject.sumtok(5));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_2()\n{\n  \n  \n  \n  assertEquals(\n    \n    3,\n    subject.sumtok(2));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_3()\n{\n  \n  \n  \n  assertEquals(\n    \n    0,\n    subject.sumtok(0));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_4()\n{\n  \n  \n  \n  assertEquals(\n    \n    55,\n    subject.sumtok(10));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_5()\n{\n  \n  \n  \n  assertEquals(\n    \n    66,\n    subject.sumtok(11));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_6()\n{\n  \n  \n  \n  assertEquals(\n    \n    5050,\n    subject.sumtok(100));\n\n  \n}\n  \n    @Test\n@Description(hidden)\n\n\n\n\npublic void test_7()\n{\n  \n  \n  \n  assertEquals(\n    \n    10,\n    subject.sumtok(4));\n\n  \n}\n  \n    @Test\n@Description(hidden)\n\n\n\n\npublic void test_8()\n{\n  \n  \n  \n  assertEquals(\n    \n    1,\n    subject.sumtok(1));\n\n  \n}\n  \n  \n}"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "diagnostics": [
+
+  ]
+}

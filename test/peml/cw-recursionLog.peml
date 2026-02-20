@@ -25,15 +25,16 @@ You should assume that `n` is exactly `b` to some integer power.
 [systems]
 language: Java
 
-[assets.code.wrapper.files]
+[.assets.code.wrapper.files]
 content:----------
 public class  RecCLog
 {
     ___
 }
 ----------
+[]
 
-[assets.code.starter.files]
+[.assets.code.starter.files]
 content:----------
 public int log(int b, int n ) {
     if <<Missing base case condition>> {
@@ -43,10 +44,11 @@ public int log(int b, int n ) {
     }
 }
 ----------
+[]
 
 
-[assets.test.files]
-format: text/csv-unquoted
+[.assets.test.files]
+type: text/csv-unquoted
 pattern.actual: subject.log({{x}}, {{y}})
 content:----------
 x,y,expected,description
@@ -58,4 +60,5 @@ x,y,expected,description
 10,1000,3,hidden
 10,1,0,hidden
 ----------
+[]
 

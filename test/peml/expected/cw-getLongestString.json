@@ -20,38 +20,38 @@
     "instructions": "This method takes an ArrayList of Strings as a parameter and returns\nthe longest String in the list. If the list is empty, it should return an\nempty String. If there are more than one Strings with the max length, it should\nreturn the first one with the longest length. For example, if an ArrayList\nvariable called list stores: {\"once\", \"upon\", \"a\", \"time\"}, the method should\nreturn “once”\n",
     "systems": [
       {
-        "language": "Java"
-      }
-    ],
-    "assets": {
-      "code": {
-        "wrapper": {
-          "files": [
-            {
-              "content": "import java.util.ArrayList;\npublic class ArrayListProblem\n{\n   ___\n}\n"
-            }
-          ]
-        },
-        "starter": {
-          "files": [
-            {
-              "content": "public String getLongestString(ArrayList list)\n{\n   ___\n}\n"
-            }
-          ]
-        }
-      },
-      "test": {
-        "files": [
-          {
-            "format": "text/csv-unquoted",
-            "pattern": {
-              "actual": "subject.getLongestString({{list}})"
+        "language": "Java",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "import java.util.ArrayList;\npublic class ArrayListProblem\n{\n   ___\n}\n"
+                }
+              ]
             },
-            "content": "list,expected,description\n\"new java.util.ArrayList(){{add(\"\"once\"\");add(\"\"upon\"\");add(\"\"a\"\");add(\"\"time\"\");}}\",\"\"\"once\"\"\",example\n\"new java.util.ArrayList(){{add(\"\"four\"\");add(\"\"and\"\");add(\"\"years\"\");add(\"\"ago\"\");}}\",\"\"\"years\"\"\"\n\"new java.util.ArrayList(){{add(\"\"greetings\"\");add(\"\"hello\"\");add(\"\"welcome\"\");add(\"\"byebye\"\");}}\",\"\"\"greetings\"\"\",hidden\n\"new java.util.ArrayList(){{add(\"\"Mexico\"\");add(\"\"Germany\"\");add(\"\"France\"\");add(\"\"Neitherland\"\");}}\",\"\"\"Neitherland\"\"\",hidden\n"
+            "starter": {
+              "files": [
+                {
+                  "content": "public String getLongestString(ArrayList list)\n{\n   ___\n}\n"
+                }
+              ]
+            }
+          },
+          "test": {
+            "files": [
+              {
+                "type": "text/csv-unquoted",
+                "pattern": {
+                  "actual": "subject.getLongestString({{list}})"
+                },
+                "content": "list,expected,description\n\"new java.util.ArrayList(){{add(\"\"once\"\");add(\"\"upon\"\");add(\"\"a\"\");add(\"\"time\"\");}}\",\"\"\"once\"\"\",example\n\"new java.util.ArrayList(){{add(\"\"four\"\");add(\"\"and\"\");add(\"\"years\"\");add(\"\"ago\"\");}}\",\"\"\"years\"\"\"\n\"new java.util.ArrayList(){{add(\"\"greetings\"\");add(\"\"hello\"\");add(\"\"welcome\"\");add(\"\"byebye\"\");}}\",\"\"\"greetings\"\"\",hidden\n\"new java.util.ArrayList(){{add(\"\"Mexico\"\");add(\"\"Germany\"\");add(\"\"France\"\");add(\"\"Neitherland\"\");}}\",\"\"\"Neitherland\"\"\",hidden\n"
+              }
+            ]
           }
-        ]
+        }
       }
-    }
+    ]
   },
   "diagnostics": [
 

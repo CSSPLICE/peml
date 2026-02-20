@@ -20,38 +20,38 @@
     "instructions": "Finish the code to complete the **insertion sort** method. Each comment\ndenoted with //_________________ is a single line that needs to be filled\nout.\n",
     "systems": [
       {
-        "language": "Java"
-      }
-    ],
-    "assets": {
-      "code": {
-        "wrapper": {
-          "files": [
-            {
-              "content": "public class Answer\n{\n ___\n}\n"
-            }
-          ]
-        },
-        "starter": {
-          "files": [
-            {
-              "content": "public int[] insertionSort(int[] arr)\n{\n    //Iterate through each index of the array\n    for (int i=1; i<arr.length; ++i)\n    {\n        //Key value is set to the current index of the outer loop\n        int key = arr[i];\n\n        //Index to begin comparisons to key value\n        int j = i-1;\n\n        //Iterate backwards through the array\n        //Search for a value larger than the key\n        while (j>=0 && arr[j] > key)\n        {\n            //Shift values that do not fit the condition\n            //This will make room for the key once we find a place\n            //____________________________\n\n            //Decrement j\n            //___________________________\n        }\n\n        //Using the current value of j, place the key in it's new position\n        //______________________________\n    }\n    return arr;\n}\n"
-            }
-          ]
-        }
-      },
-      "test": {
-        "files": [
-          {
-            "format": "text/csv-unquoted",
-            "pattern": {
-              "actual": "subject.insertionSort({{array}})"
+        "language": "Java",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "public class Answer\n{\n ___\n}\n"
+                }
+              ]
             },
-            "content": "aray,expected,description\n\"new int[]{2, 0, 3, 4, 8, 10, 1}\",\"new int[]{0, 1, 2, 3, 4, 8, 10}\",example\n\"new int[]{4, 3, 0, 10, 33, 2}\",\"new int[]{0, 2, 3, 4, 10, 33}\"\n\"new int[]{99, 6, 10, 7}\",\"new int[]{6, 7, 10, 99}\",hidden\n"
+            "starter": {
+              "files": [
+                {
+                  "content": "public int[] insertionSort(int[] arr)\n{\n    //Iterate through each index of the array\n    for (int i=1; i<arr.length; ++i)\n    {\n        //Key value is set to the current index of the outer loop\n        int key = arr[i];\n\n        //Index to begin comparisons to key value\n        int j = i-1;\n\n        //Iterate backwards through the array\n        //Search for a value larger than the key\n        while (j>=0 && arr[j] > key)\n        {\n            //Shift values that do not fit the condition\n            //This will make room for the key once we find a place\n            //____________________________\n\n            //Decrement j\n            //___________________________\n        }\n\n        //Using the current value of j, place the key in it's new position\n        //______________________________\n    }\n    return arr;\n}\n"
+                }
+              ]
+            }
+          },
+          "test": {
+            "files": [
+              {
+                "type": "text/csv-unquoted",
+                "pattern": {
+                  "actual": "subject.insertionSort({{array}})"
+                },
+                "content": "aray,expected,description\n\"new int[]{2, 0, 3, 4, 8, 10, 1}\",\"new int[]{0, 1, 2, 3, 4, 8, 10}\",example\n\"new int[]{4, 3, 0, 10, 33, 2}\",\"new int[]{0, 2, 3, 4, 10, 33}\"\n\"new int[]{99, 6, 10, 7}\",\"new int[]{6, 7, 10, 99}\",hidden\n"
+              }
+            ]
           }
-        ]
+        }
       }
-    }
+    ]
   },
   "diagnostics": [
 

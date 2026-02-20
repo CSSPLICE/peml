@@ -13,11 +13,11 @@ module Peml
   # Ordered pipeline of optional transformation steps.
   # Each entry maps a params key to the method that performs it.
   TRANSFORMS = {
-    inline:             -> (v) { Peml.inline(v) },
-    inline_data_files:  -> (v) { Peml.inline_data_files(v) },
-    test_renderer:      -> (v) { Peml::DatadrivenTestRenderer.new.generate_tests(v) },
-    interpolate:        -> (v) { Peml.interpolate(v) },
-    render_to_html:     -> (v) { Peml.render_to_html(v) },
+    inline:            -> (v) { Peml.inline(v) },
+    inline_data_files: -> (v) { Peml.inline_data_files(v) },
+    render_tests:      -> (v) { Peml::DatadrivenTestRenderer.new.render_datadriven_tests!(v) },
+    interpolate:       -> (v) { Peml.interpolate(v) },
+    render_to_html:    -> (v) { Peml.render_to_html(v) },
   }.freeze
 
 
@@ -42,7 +42,7 @@ module Peml
     value = Peml::Loader.new.load(peml)
 
     # test renderer requires inline data files
-    if params[:test_renderer]
+    if params[:render_tests]
       params[:inline_data_files] = true 
     end
 
@@ -126,6 +126,7 @@ module Peml
     Peml::Emitter.new.emit(value)
   end
 
+
   # Pif Methods------------------------------------------------------
   def self.pif_parse(pif)
     # pif  = {}, Takes string as {pif:"content"}
@@ -134,6 +135,7 @@ module Peml
   end
 
 
+  # -------------------------------------------------------------
   # parsed_pif should be a product of pif.parse
   # format options are 'json' and 'yaml'.
   #   If nil a ruby has is returned.

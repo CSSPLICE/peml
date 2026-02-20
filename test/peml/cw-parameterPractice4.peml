@@ -25,7 +25,7 @@ Use the method defined above to subtract 10 from 100 (as in 100 - 10).
 [systems]
 language: Java
 
-[assets.code.wrapper.files]
+[.assets.code.wrapper.files]
 content:----------
 public class Syntax8to10 {
     private int aVal;
@@ -51,15 +51,17 @@ public class Syntax8to10 {
 
 }
 ----------
+[]
 
-[assets.code.starter.files]
+[.assets.code.starter.files]
 content:----------
 ___
 ----------
+[]
 
 
-[assets.test.files]
-format: java/junit
+[.assets.test.files]
+type: java/junit
 content:----------
 import codeworkout.CodeWorkoutTest;
 public class Syntax8to10Test extends CodeWorkoutTest {
@@ -79,4 +81,5 @@ public class Syntax8to10Test extends CodeWorkoutTest {
     }
 }
 ----------
+[]
 

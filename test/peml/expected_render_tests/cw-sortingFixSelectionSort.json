@@ -1,0 +1,58 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/466/practice?workout_id=680",
+    "title": "Sorting - Fix Selection Sort",
+    "external_id": "cw-x49",
+    "is_public": "true",
+    "experience": "30",
+    "language_list": "Java",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "edwards@cs.vt.edu",
+        "name": "Stephen Edwards"
+      }
+    },
+    "tags": {
+      "topics": "sorting, array, int, selection sort",
+      "style": "coding problem"
+    },
+    "instructions": "The following method is a Selection Sort method. Within the method,\nthere is an error on one line. You job is to find that line and fix that one\nerror so that the method may work properly. You will need to understand exactly\nhow a selection sort method works.\n",
+    "systems": [
+      {
+        "language": "Java",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "public class Answer {\n    ___\n}\n"
+                }
+              ]
+            },
+            "starter": {
+              "files": [
+                {
+                  "content": "public int[] selectionSort(int[] array) {\n    for (int i = 0; i < array.length - 1; i++) {\n     int min = array[i];\n     int minIndex = i;\n       for (int j = i + 1; j < array.length; j++) {\n         if (min > array[j]) {\n           min = array[j];\n           minIndex = j;\n           }\n        }\n       if (minIndex == i) {\n         array[minIndex] = array[i];\n         array[i] = min;\n       }\n      }\n    return array;\n}\n"
+                }
+              ]
+            }
+          },
+          "test": {
+            "files": [
+              {
+                "pattern": {
+                  "actual": "subject.selectionSort({{array}})"
+                },
+                "content": "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n  private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject = new Answer();\n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic void test_1()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"new int[]{1,4,7}\",\n    subject.selectionSort());\n\n  \n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic void test_2()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"new int[]{2,6,6,8,80}\",\n    subject.selectionSort());\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_3()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"new int[]{5,33,77,104}\",\n    subject.selectionSort());\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_4()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"new int[]{2,4,6}\",\n    subject.selectionSort());\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_5()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"new int[]{0,2,5,8}\",\n    subject.selectionSort());\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_6()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"new int[]{10}\",\n    subject.selectionSort());\n\n  \n}\n  \n    @Test\n@Description(hidden)\n\n\n\n\npublic void test_7()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"new int[]{0,4,4,10}\",\n    subject.selectionSort());\n\n  \n}\n  \n  \n}"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "diagnostics": [
+
+  ]
+}

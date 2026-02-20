@@ -1,0 +1,58 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/581/practice?workout_id=759",
+    "title": "compressString",
+    "external_id": "ITSC1213_compress_string",
+    "is_public": "true",
+    "experience": "40",
+    "language_list": "Java",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "lcao2@uncc.edu",
+        "name": "lcao2"
+      }
+    },
+    "tags": {
+      "topics": "String, loop",
+      "style": "coding problem"
+    },
+    "instructions": "This method takes a String object as a parameter and returns a compressed\nversion of the object. The method compresses the String by replacing repeated\ncharacters with the number of such characters. However, if the length of the\ncompressed version is not smaller than the parameter, the method returns the\noriginal String. For example, if the parameter String is \"bbbaaccccd\", the\nmethod returns\"b3a2c4d1\"; if the parameter String is \"abccdeff\", the method\nreturns \"abccdeff\". You can assume that the String only contains uppercase\nand lower case letters.\n",
+    "systems": [
+      {
+        "language": "Java",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "public class StringProblem\n{\n   ___\n}\n"
+                }
+              ]
+            },
+            "starter": {
+              "files": [
+                {
+                  "content": "public String compressString(String message)\n{\n   ___\n}\n"
+                }
+              ]
+            }
+          },
+          "test": {
+            "files": [
+              {
+                "pattern": {
+                  "actual": "subject.compressString({{message}})"
+                },
+                "content": "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n  private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject = new Answer();\n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic void test_1()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"\"\"b3a2c4d1\"\"\",\n    subject.compressString(\"\"\"bbbaaccccd\"\"\"));\n\n  \n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic void test_2()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"\"\"abccdeff\"\"\",\n    subject.compressString(\"\"\"abccdeff\"\"\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_3()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"\"\"a\"\"\",\n    subject.compressString(\"\"\"a\"\"\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_4()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"\"\"abb\"\"\",\n    subject.compressString(\"\"\"abb\"\"\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_5()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"\"\"a3c1d3a3\"\"\",\n    subject.compressString(\"\"\"aaacdddaaa\"\"\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_6()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"\"\"a2b1c1b4\"\"\",\n    subject.compressString(\"\"\"aabcbbbb\"\"\"));\n\n  \n}\n  \n  \n}"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "diagnostics": [
+
+  ]
+}

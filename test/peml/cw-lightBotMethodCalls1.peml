@@ -36,7 +36,7 @@ Change the code below so that instead of turning left three times and jumping, t
 [systems]
 language: Java
 
-[assets.code.wrapper.files]
+[.assets.code.wrapper.files]
 content:----------
 import java.util.ArrayList;
 public class syntax1 {
@@ -75,19 +75,21 @@ public class syntax1 {
     }
 }
 ----------
+[]
     
 
 
-[assets.code.starter.files]
+[.assets.code.starter.files]
 content:----------
 andy.turnLeft();
 andy.turnLeft();
 andy.turnLeft();
 andy.jump();
 ----------
+[]
 
-[assets.test.files]
-format: java/junit
+[.assets.test.files]
+type: java/junit
 content:----------
 import codeworkout.CodeWorkoutTest;
 public class syntax1Test extends CodeWorkoutTest {
@@ -110,4 +112,5 @@ public class syntax1Test extends CodeWorkoutTest {
     }
 
 }
-----------
+----------[]
+[]

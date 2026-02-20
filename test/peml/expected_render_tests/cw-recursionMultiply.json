@@ -1,0 +1,58 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/264/practice?workout_id=47",
+    "title": "Recursion Programming Exercise: Multiply",
+    "external_id": "RecC-Multiply",
+    "is_public": "true",
+    "experience": "10",
+    "language_list": "Java",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "sallyhamouda@gmail.com",
+        "name": "sallyhamouda"
+      }
+    },
+    "tags": {
+      "topics": "recursion",
+      "style": "code writing"
+    },
+    "instructions": "For function `multiply`, write the missing base case\ncondition and action. This function will multiply two\nnumbers `x` and `y`. You can assume that both `x` and\n`y` are positive.\n\nIf `x` equals one then there is only one `y`.\n",
+    "systems": [
+      {
+        "language": "Java",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "public class  RecCMultiply\n{\n    ___\n}\n"
+                }
+              ]
+            },
+            "starter": {
+              "files": [
+                {
+                  "content": "public int multiply(int x, int y) {\n    if <<Missing base case condition>> {\n      <<Missing base case action>>\n    } else {\n      return multiply(x - 1, y) + y;\n    }\n}\n"
+                }
+              ]
+            }
+          },
+          "test": {
+            "files": [
+              {
+                "pattern": {
+                  "actual": "subject.multiply({{x}}, {{y}})"
+                },
+                "content": "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n  private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject = new Answer();\n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic void test_1()\n{\n  \n  \n  \n  assertEquals(\n    \n    6,\n    subject.multiply(2, 3));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_2()\n{\n  \n  \n  \n  assertEquals(\n    \n    16,\n    subject.multiply(4, 4));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_3()\n{\n  \n  \n  \n  assertEquals(\n    \n    90,\n    subject.multiply(9, 10));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_4()\n{\n  \n  \n  \n  assertEquals(\n    \n    105,\n    subject.multiply(7, 15));\n\n  \n}\n  \n    @Test\n@Description(hidden)\n\n\n\n\npublic void test_5()\n{\n  \n  \n  \n  assertEquals(\n    \n    1,\n    subject.multiply(1, 1));\n\n  \n}\n  \n  \n}"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "diagnostics": [
+
+  ]
+}

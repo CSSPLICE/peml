@@ -20,38 +20,38 @@
     "instructions": "The Student Chapter for the Association for Computing Machinery (ACM)\\nrequested\nyour help. Throughout the semester, attendance \\nfor the weekly club meetings\nhas been very unpredictable. The club \\nkeeps track of attendance each week\nbut would like to have a\\nmaster attendance list for the semester. Given a\n``String`` array, \\ncreate an ``ArrayList`` of all members of the ACM club.\n",
     "systems": [
       {
-        "language": "Java"
-      }
-    ],
-    "assets": {
-      "code": {
-        "wrapper": {
-          "files": [
-            {
-              "content": "import java.util.ArrayList;\npublic class Answer {\n    ___\n}\n"
-            }
-          ]
-        },
-        "starter": {
-          "files": [
-            {
-              "content": "public ArrayList processAttendance(String[] members)\n{\n  ___\n}\n"
-            }
-          ]
-        }
-      },
-      "test": {
-        "files": [
-          {
-            "format": "text/csv-unquoted",
-            "pattern": {
-              "actual": "subject.processAttendance({{members}})"
+        "language": "Java",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "import java.util.ArrayList;\npublic class Answer {\n    ___\n}\n"
+                }
+              ]
             },
-            "content": "members,expected,description\n\"new String[]{\"\"Don\"\",\"\"Mike\"\",\"\"Phillip\"\"}\",\"new java.util.ArrayList<String>(){{add(\"\"Don\"\");add(\"\"Mike\"\");add(\"\"Phillip\"\");}}\",example\n\"new String[]{\"\"Demetri\"\",\"\"Ollie\"\",\"\"Tyler\"\",\"\"Holland\"\"}\",\"new java.util.ArrayList<String>(){{add(\"\"Demetri\"\");add(\"\"Ollie\"\");add(\"\"Tyler\"\");add(\"\"Holland\"\");}}\",hidden\n"
+            "starter": {
+              "files": [
+                {
+                  "content": "public ArrayList processAttendance(String[] members)\n{\n  ___\n}\n"
+                }
+              ]
+            }
+          },
+          "test": {
+            "files": [
+              {
+                "type": "text/csv-unquoted",
+                "pattern": {
+                  "actual": "subject.processAttendance({{members}})"
+                },
+                "content": "members,expected,description\n\"new String[]{\"\"Don\"\",\"\"Mike\"\",\"\"Phillip\"\"}\",\"new java.util.ArrayList<String>(){{add(\"\"Don\"\");add(\"\"Mike\"\");add(\"\"Phillip\"\");}}\",example\n\"new String[]{\"\"Demetri\"\",\"\"Ollie\"\",\"\"Tyler\"\",\"\"Holland\"\"}\",\"new java.util.ArrayList<String>(){{add(\"\"Demetri\"\");add(\"\"Ollie\"\");add(\"\"Tyler\"\");add(\"\"Holland\"\");}}\",hidden\n"
+              }
+            ]
           }
-        ]
+        }
       }
-    }
+    ]
   },
   "diagnostics": [
 

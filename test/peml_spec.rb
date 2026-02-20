@@ -44,4 +44,31 @@ describe Peml do
     end
   end
 
+  describe "#load_file with render_tests: true" do
+    expected_dir = File.expand_path('../peml/expected_render_tests', __FILE__)
+    Dir.mkdir(expected_dir) unless Dir.exist?(expected_dir)
+
+    Dir.glob(File.expand_path('../peml/*.peml', __FILE__)).each do |f|
+      slug = File.basename(f)
+
+      it "parses #{slug} and renders tests" do
+        begin
+          ex = Peml::parse({filename: f, render_tests: true})
+          _(ex).wont_be_nil
+
+          golden = File.join(expected_dir, slug.sub('.peml', '.json'))
+          actual_json = JSON.pretty_generate(ex)
+
+          if ENV['UPDATE_SNAPSHOTS'] || !File.exist?(golden)
+            File.write(golden, actual_json + "\n")
+          end
+
+          _(actual_json).must_equal File.read(golden).chomp
+        rescue Liquid::FileSystemError => e
+          skip "Ignoring missing rendered templates for #{slug}: #{e.message}"
+        end
+      end
+    end
+  end
+
 end

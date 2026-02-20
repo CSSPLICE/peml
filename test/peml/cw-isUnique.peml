@@ -24,25 +24,27 @@ An array with 0 or 1 element should be considered unique.
 [systems]
 language: Java
 
-[assets.code.wrapper.files]
+[.assets.code.wrapper.files]
 content:----------
 public class ArrayProblem
 {
    ___
 }
 ----------
+[]
 
-[assets.code.starter.files]
+[.assets.code.starter.files]
 content:----------
 public boolean isUnique(int[] nums)
 {
    ___
 }
 ----------
+[]
 
 
-[assets.test.files]
-format: text/csv-unquoted
+[.assets.test.files]
+type: text/csv-unquoted
 pattern.actual: subject.isUnique({{nums}})
 content:----------
 nums,expected,description
@@ -56,4 +58,5 @@ nums,expected,description
 "new int[] {1, 2, 2, 3}",false
 "new int[] {1, 2, 3, 1}",false
 ----------
+[]
 

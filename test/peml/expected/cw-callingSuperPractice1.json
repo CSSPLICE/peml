@@ -20,35 +20,35 @@
     "instructions": "For this problem assume you have access to a Person class. \nBelow, you'll see the start of a Student class that is a \nsubclass of Person. Finish creating the constructor by calling \n`super`.\n",
     "systems": [
       {
-        "language": "Java"
-      }
-    ],
-    "assets": {
-      "code": {
-        "wrapper": {
-          "files": [
-            {
-              "content": "public class syntax4to5 {\n    public static class Person{\n        private boolean superWasCalled = false;\n        public Person() {\n            superWasCalled = true;\n        }\n\n        public boolean getSuperWasCalled() {\n            return superWasCalled;\n        }\n\n    }\n    public static class Student extends Person{\n        ___\n    }\n\n}\n"
+        "language": "Java",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "public class syntax4to5 {\n    public static class Person{\n        private boolean superWasCalled = false;\n        public Person() {\n            superWasCalled = true;\n        }\n\n        public boolean getSuperWasCalled() {\n            return superWasCalled;\n        }\n\n    }\n    public static class Student extends Person{\n        ___\n    }\n\n}\n"
+                }
+              ]
+            },
+            "starter": {
+              "files": [
+                {
+                  "content": "public Student() {\n    ___\n}\n"
+                }
+              ]
             }
-          ]
-        },
-        "starter": {
-          "files": [
-            {
-              "content": "public Student() {\n    ___\n}\n"
-            }
-          ]
-        }
-      },
-      "test": {
-        "files": [
-          {
-            "format": "java/junit",
-            "content": "import codeworkout.CodeWorkoutTest;\npublic class syntax4to5Test extends CodeWorkoutTest{\n\n    public void testSuperIsCalled() {\n        syntax4to5.Student testStudent = new syntax4to5.Student();\n\n        assertTrue(\"You must call super in the constructor!\", testStudent.getSuperWasCalled());\n    }\n}\n"
+          },
+          "test": {
+            "files": [
+              {
+                "type": "java/junit",
+                "content": "import codeworkout.CodeWorkoutTest;\npublic class syntax4to5Test extends CodeWorkoutTest{\n\n    public void testSuperIsCalled() {\n        syntax4to5.Student testStudent = new syntax4to5.Student();\n\n        assertTrue(\"You must call super in the constructor!\", testStudent.getSuperWasCalled());\n    }\n}\n"
+              }
+            ]
           }
-        ]
+        }
       }
-    }
+    ]
   },
   "diagnostics": [
 

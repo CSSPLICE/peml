@@ -25,15 +25,16 @@ Complete the method to analyze String, Character, and Double.
 [systems]
 language: Java
 
-[assets.code.wrapper.files]
+[.assets.code.wrapper.files]
 content:----------
 public class Answer <E>
 {
  ___
 }
 ----------
+[]
 
-[assets.code.starter.files]
+[.assets.code.starter.files]
 content:----------
 public String whatAmI(E e){
     //.getClass() returns the
@@ -52,10 +53,11 @@ public String whatAmI(E e){
     }
 }
 ----------
+[]
 
 
-[assets.test.files]
-format: text/csv-unquoted
+[.assets.test.files]
+type: text/csv-unquoted
 pattern.actual: subject.whatAmI({{e}})
 content:----------
 e,expected,description
@@ -67,4 +69,5 @@ e,expected,description
 "2.2",""Double""
 "new Object()",""Who knows!""
 ----------
+[]
 

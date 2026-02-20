@@ -13,31 +13,31 @@
     "instructions": "Given a string, return the sum of the numbers appearing in the string,\nignoring all other characters. A number is a series of 1 or more digit\n`char`s in a row. (Note: `Character.isDigit(char)` tests if a `char` is\none of the `char`s '0', '1', .. '9'. `Integer.parseInt(string)` converts\na string to an `int`.)\n",
     "systems": [
       {
-        "language": "Java"
-      }
-    ],
-    "assets": {
-      "code": {
-        "starter": {
-          "files": [
-            {
-              "content": "public int sumNumbers(String str)\n{\n    /* ___ */\n}\n"
+        "language": "Java",
+        "assets": {
+          "code": {
+            "starter": {
+              "files": [
+                {
+                  "content": "public int sumNumbers(String str)\n{\n    /* ___ */\n}\n"
+                }
+              ]
             }
-          ]
-        }
-      },
-      "test": {
-        "files": [
-          {
-            "format": "text/csv-unquoted",
-            "pattern": {
-              "actual": "subject.sumNumbers({{str}})"
-            },
-            "content": "str,expected,description\n\"abc123xyz\",123,example\n\"aa11b33\",44,example\n\"7 11\",18,example\n\"Chocolate\",0\n\"5hoco1a1e\",7\n\"5$$1;;1!!\",7\n\"a1234bb11\",1245\n\"\",0\n\"a22bbb3\",25\n\"FS3453g36fs25\",3514,hidden\n\"dfg64g21ge743\",828,hidden\n\"2sdf4523sdfsd7\",4532,hidden\n\"sdffherbwm\",0,hidden\n"
+          },
+          "test": {
+            "files": [
+              {
+                "type": "text/csv-unquoted",
+                "pattern": {
+                  "actual": "subject.sumNumbers({{str}})"
+                },
+                "content": "str,expected,description\n\"abc123xyz\",123,example\n\"aa11b33\",44,example\n\"7 11\",18,example\n\"Chocolate\",0\n\"5hoco1a1e\",7\n\"5$$1;;1!!\",7\n\"a1234bb11\",1245\n\"\",0\n\"a22bbb3\",25\n\"FS3453g36fs25\",3514,hidden\n\"dfg64g21ge743\",828,hidden\n\"2sdf4523sdfsd7\",4532,hidden\n\"sdffherbwm\",0,hidden\n"
+              }
+            ]
           }
-        ]
+        }
       }
-    }
+    ]
   },
   "diagnostics": [
 

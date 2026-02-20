@@ -27,7 +27,7 @@ Call `add3Ints` and pass the numbers 4, 10, and 9 as parameters.
 [systems]
 language: Java
 
-[assets.code.wrapper.files]
+[.assets.code.wrapper.files]
 content:----------
 public class Syntax1to3 {
     private int aVal;
@@ -59,15 +59,17 @@ public class Syntax1to3 {
 
 }
 ----------
+[]
 
-[assets.code.starter.files]
+[.assets.code.starter.files]
 content:----------
 ___
 ----------
+[]
 
 
-[assets.test.files]
-format: java/junit
+[.assets.test.files]
+type: java/junit
 content:----------
 import codeworkout.CodeWorkoutTest;
 public class Syntax1to3Test extends CodeWorkoutTest {
@@ -90,4 +92,5 @@ public class Syntax1to3Test extends CodeWorkoutTest {
   }
 }
 ----------
+[]
 

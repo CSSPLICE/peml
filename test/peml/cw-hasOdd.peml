@@ -23,25 +23,27 @@ true. If the array contains 0 element, the method returns false.
 [systems]
 language: Java
 
-[assets.code.wrapper.files]
+[.assets.code.wrapper.files]
 content:----------
 public class ArrayProblem
 {
    ___
 }
 ----------
+[]
 
-[assets.code.starter.files]
+[.assets.code.starter.files]
 content:----------
 public boolean hasOdd(int[] nums)
 {
    ___
 }
 ----------
+[]
 
 
-[assets.test.files]
-format: text/csv-unquoted
+[.assets.test.files]
+type: text/csv-unquoted
 pattern.actual: subject.hasOdd({{nums}})
 content:----------
 nums,expected,description
@@ -51,4 +53,5 @@ nums,expected,description
 "new int[] {2, 4, 6}",false
 "new int[] {1, 3, 2, 7, 8, 9, 10}",true
 ----------
+[]
 

@@ -23,25 +23,27 @@ is an object, then just call ``toString()``.
 [systems]
 language: Java
 
-[assets.code.wrapper.files]
+[.assets.code.wrapper.files]
 content:----------
 public class Answer <E>
 {
  ___
 }
 ----------
+[]
 
-[assets.code.starter.files]
+[.assets.code.starter.files]
 content:----------
 public String allString(E e)
 {
     ___
 }
 ----------
+[]
 
 
-[assets.test.files]
-format: text/csv-unquoted
+[.assets.test.files]
+type: text/csv-unquoted
 pattern.actual: subject.allString({{e}})
 content:----------
 e,expected,description
@@ -52,4 +54,5 @@ e,expected,description
 "'o'",""o"",hidden
 "10",""10"",hidden
 ----------
+[]
 

@@ -1,0 +1,56 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/851/practice?workout_id=1342",
+    "title": "CodeWorkout Jeroo turn() method",
+    "external_id": "edu.vt.cs.1114.jeroo_turn_method",
+    "is_public": "true",
+    "experience": "50",
+    "language_list": "Java",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "edwards@cs.vt.edu",
+        "name": "Stephen H. Edwards"
+      }
+    },
+    "tags": {
+      "topics": "Jeroo, methods, syntax practice",
+      "style": "code writing"
+    },
+    "instructions": "Your TA was helping you with a problem a suggested the following lines\nof code for controlling a `Jeroo`. However, the TA accidentally used\nthe turn methods for a `LightBot`. Fix the turn methods to use the\ncorrect methods fr a `Jeroo`.\n",
+    "systems": [
+      {
+        "language": "Java",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "import java.util.ArrayList;\nimport student.micro.jeroo.*;\n\npublic class Answer extends Jeroo {\n  private ArrayList<String> moveHistory = new ArrayList<String>();\n\n    public ArrayList<String> getMoveHistory() {\n      return moveHistory;\n    }\n    public void pick() { moveHistory.add(\"pick\"); }\n    public void plant() { moveHistory.add(\"plant\"); }\n    public void toss() { moveHistory.add(\"toss\"); }\n    public void jump() { moveHistory.add(\"jump\"); }\n    public void turn(RelativeDirection dir)\n      { moveHistory.add(\"turn(\" + dir + \")\"); }\n    public void give(RelativeDirection dir)\n      { moveHistory.add(\"give(\" + dir + \")\"); }\n    public void hop() { moveHistory.add(\"hop\"); }\n    public void move() { hop(); }\n    public void move(int n) { hop(n); }\n    public void run (Answer jeroo) {\n      ___\n    }\n}\n"
+                }
+              ]
+            },
+            "starter": {
+              "files": [
+                {
+                  "content": "jeroo.hop();\njeroo.turnLeft();\njeroo.hop();\njeroo.turnRight();\n"
+                }
+              ]
+            }
+          },
+          "test": {
+            "files": [
+              {
+                "type": "java/junit",
+                "content": "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n  private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject = new Answer();\n}\n  \n    Liquid error: internal\n  \n  \n}"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "diagnostics": [
+
+  ]
+}

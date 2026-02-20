@@ -20,38 +20,38 @@
     "instructions": "This method takes an ArrayList of Strings as a parameter and returns\nthe length of the longest String in the list. If the list is empty, the method\nshould return 0. For example, if an ArrayList variable called list stores\n{\"four\", \"and\", \"years\", \"ago\"}, findMaxLength(list) should return 5.\n",
     "systems": [
       {
-        "language": "Java"
-      }
-    ],
-    "assets": {
-      "code": {
-        "wrapper": {
-          "files": [
-            {
-              "content": "import java.util.ArrayList;\npublic class ArrayListProblem\n{\n   ___\n}\n"
-            }
-          ]
-        },
-        "starter": {
-          "files": [
-            {
-              "content": "public int getMaxLength(ArrayList list)\n{\n   ___\n}\n"
-            }
-          ]
-        }
-      },
-      "test": {
-        "files": [
-          {
-            "format": "text/csv-unquoted",
-            "pattern": {
-              "actual": "subject.getMaxLength({{list}})"
+        "language": "Java",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "import java.util.ArrayList;\npublic class ArrayListProblem\n{\n   ___\n}\n"
+                }
+              ]
             },
-            "content": "list,expected,description\n\"new java.util.ArrayList(){{add(\"\"four\"\");add(\"\"and\"\");add(\"\"years\"\");add(\"\"ago\"\");}}\",5,example\n\"new java.util.ArrayList()\",0\n\"new java.util.ArrayList(){{add(\"\"once\"\");add(\"\"upon\"\");add(\"\"a\"\");add(\"\"time\"\");}}\",4\n\"new java.util.ArrayList(){{add(\"\"greetings\"\");add(\"\"hello\"\");add(\"\"welcome\"\");add(\"\"byebye\"\");}}\",8,hidden\n\"new java.util.ArrayList(){{add(\"\"\n"
+            "starter": {
+              "files": [
+                {
+                  "content": "public int getMaxLength(ArrayList list)\n{\n   ___\n}\n"
+                }
+              ]
+            }
+          },
+          "test": {
+            "files": [
+              {
+                "type": "text/csv-unquoted",
+                "pattern": {
+                  "actual": "subject.getMaxLength({{list}})"
+                },
+                "content": "list,expected,description\n\"new java.util.ArrayList(){{add(\"\"four\"\");add(\"\"and\"\");add(\"\"years\"\");add(\"\"ago\"\");}}\",5,example\n\"new java.util.ArrayList()\",0\n\"new java.util.ArrayList(){{add(\"\"once\"\");add(\"\"upon\"\");add(\"\"a\"\");add(\"\"time\"\");}}\",4\n\"new java.util.ArrayList(){{add(\"\"greetings\"\");add(\"\"hello\"\");add(\"\"welcome\"\");add(\"\"byebye\"\");}}\",8,hidden\n"
+              }
+            ]
           }
-        ]
+        }
       }
-    }
+    ]
   },
   "diagnostics": [
 

@@ -20,38 +20,38 @@
     "instructions": "With the variables given to you, calculate the remainder when the variable numerator\nis divided by the variable denominator and store the result in the variable remainder.\n",
     "systems": [
       {
-        "language": "cpp"
-      }
-    ],
-    "assets": {
-      "code": {
-        "wrapper": {
-          "files": [
-            {
-              "content": "class Remainder\n{\n  public:\n    ___\n};\n"
-            }
-          ]
-        },
-        "starter": {
-          "files": [
-            {
-              "content": "int remainder()\n{\n    int numerator = 395;\n    int denominator = 13;\n    int remainder;\n    // In the space below, complete the necessary code.\n\n    ___\n\n    // Do not change the code below this\n    return remainder;\n}\n"
-            }
-          ]
-        }
-      },
-      "test": {
-        "files": [
-          {
-            "format": "text/csv-unquoted",
-            "pattern": {
-              "actual": "subject.remainder()"
+        "language": "cpp",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "class Remainder\n{\n  public:\n    ___\n};\n"
+                }
+              ]
             },
-            "content": "expected,description\n5\n"
+            "starter": {
+              "files": [
+                {
+                  "content": "int remainder()\n{\n    int numerator = 395;\n    int denominator = 13;\n    int remainder;\n    // In the space below, complete the necessary code.\n\n    ___\n\n    // Do not change the code below this\n    return remainder;\n}\n"
+                }
+              ]
+            }
+          },
+          "test": {
+            "files": [
+              {
+                "type": "text/csv-unquoted",
+                "pattern": {
+                  "actual": "subject.remainder()"
+                },
+                "content": "expected,description\n5\n"
+              }
+            ]
           }
-        ]
+        }
       }
-    }
+    ]
   },
   "diagnostics": [
 

@@ -20,38 +20,38 @@
     "instructions": "Write the missing base case for function `largest`. Function\n`largest` should find the largest number in array\n`numbers`. When `largest` is first called, `index` will\nequal `numbers.length-1`.\n\nNotice that the index variable is incremented every time the\\nrecursive\ncall is executed. The base case should be executed\\non the last element of\nthe array. The index for this element\\nis one less than the length of the\narray. \\n\n",
     "systems": [
       {
-        "language": "Java"
-      }
-    ],
-    "assets": {
-      "code": {
-        "wrapper": {
-          "files": [
-            {
-              "content": "public class  RecCLargest\n{\n    ___\n}\n"
-            }
-          ]
-        },
-        "starter": {
-          "files": [
-            {
-              "content": "public int largest(int[] numbers, int index) {\n    if <<Missing base case>>\n      return numbers[0];\n    return Math.max(numbers[index], largest(numbers, index-1));\n}\n"
-            }
-          ]
-        }
-      },
-      "test": {
-        "files": [
-          {
-            "format": "text/csv-unquoted",
-            "pattern": {
-              "actual": "subject.largest({{nums}}, {{index}})"
+        "language": "Java",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "public class  RecCLargest\n{\n    ___\n}\n"
+                }
+              ]
             },
-            "content": "nums,index,expected,description\n\"new int [] {2, 4, 8}\",2,8,example\n\"new int [] {7, 7, 7}\",2,7\n\"new int [] {5}\",0,5\n\"new int [] {10, 4, 8}\",2,10\n\"new int [] {6, 23, 5}\",2,23,hidden\n"
+            "starter": {
+              "files": [
+                {
+                  "content": "public int largest(int[] numbers, int index) {\n    if <<Missing base case>>\n      return numbers[0];\n    return Math.max(numbers[index], largest(numbers, index-1));\n}\n"
+                }
+              ]
+            }
+          },
+          "test": {
+            "files": [
+              {
+                "type": "text/csv-unquoted",
+                "pattern": {
+                  "actual": "subject.largest({{nums}}, {{index}})"
+                },
+                "content": "nums,index,expected,description\n\"new int [] {2, 4, 8}\",2,8,example\n\"new int [] {7, 7, 7}\",2,7\n\"new int [] {5}\",0,5\n\"new int [] {10, 4, 8}\",2,10\n\"new int [] {6, 23, 5}\",2,23,hidden\n"
+              }
+            ]
           }
-        ]
+        }
       }
-    }
+    ]
   },
   "diagnostics": [
 

@@ -24,25 +24,27 @@ first parameter is {-4, -5, -3, -6} and the second parameter is {5, 5, 5,
 [systems]
 language: Java
 
-[assets.code.wrapper.files]
+[.assets.code.wrapper.files]
 content:----------
 public class ArrayProblem
 {
    ___
 }
 ----------
+[]
 
-[assets.code.starter.files]
+[.assets.code.starter.files]
 content:----------
 public int[] mergeIntArrays(int[] nums1, int[] nums2)
 {
    ___
 }
 ----------
+[]
 
 
-[assets.test.files]
-format: text/csv-unquoted
+[.assets.test.files]
+type: text/csv-unquoted
 pattern.actual: subject.mergeIntArrays({{nums1}}, {{nums2}})
 content:----------
 nums1,nums2,expected,description
@@ -53,4 +55,5 @@ nums1,nums2,expected,description
 "new int[] {2, 2, 2, 2, 2}","new int[]{4, 4}","new int[] {2, 2, 2, 2, 2, 4, 4}"
 "new int[] {-4, -5, -3, -6}","new int[] {5, 5, 5, 5} ","new int[] {-4, -5, -3, -6, 5, 5, 5, 5}",example
 ----------
+[]
 

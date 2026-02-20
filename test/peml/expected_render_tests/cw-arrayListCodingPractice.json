@@ -1,0 +1,58 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/424/practice?workout_id=980",
+    "title": "ArrayList Coding Practice",
+    "external_id": "cw-x7",
+    "is_public": "true",
+    "experience": "25",
+    "language_list": "Java",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "admin@codwworkout.com",
+        "name": "admin"
+      }
+    },
+    "tags": {
+      "topics": "arraylist, coding",
+      "style": "coding problem"
+    },
+    "instructions": "Write a method that reverses the contents of any given string array,\nthen return the reversed conents as an arraylist. If the given array list\nis empty, return an empty array list.\n",
+    "systems": [
+      {
+        "language": "Java",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "import java.util.*;\npublic class Answer {\n  ___\n}\n"
+                }
+              ]
+            },
+            "starter": {
+              "files": [
+                {
+                  "content": "public ArrayList<Integer> reverseContents(int[] contents) {\n    ___\n}\n"
+                }
+              ]
+            }
+          },
+          "test": {
+            "files": [
+              {
+                "pattern": {
+                  "actual": "subject.reverseContents({{contents}})"
+                },
+                "content": "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n  private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject = new Answer();\n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic void test_1()\n{\n  \n  \n  \n  assertEquals(\n    \n    new java.util.ArrayList<Integer>(){{add(4);add(3);add(2);add(1);}},\n    subject.reverseContents(new int[]{1, 2, 3, 4}));\n\n  \n}\n  \n  \n}"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "diagnostics": [
+
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/839/practice?workout_id=1334",
+    "title": "CodeWorkout Calling Super Practice 1",
+    "external_id": "CS1114_Week2SyntaxDrill4",
+    "is_public": "true",
+    "experience": "50",
+    "language_list": "Java",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "admin@codeworkout.org",
+        "name": "codeworkout"
+      }
+    },
+    "tags": {
+      "topics": "CS1114, Parameters, Methods, java",
+      "style": "code-writing"
+    },
+    "instructions": "For this problem assume you have access to a Person class. \nBelow, you'll see the start of a Student class that is a \nsubclass of Person. Finish creating the constructor by calling \n`super`.\n",
+    "systems": [
+      {
+        "language": "Java",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "public class syntax4to5 {\n    public static class Person{\n        private boolean superWasCalled = false;\n        public Person() {\n            superWasCalled = true;\n        }\n\n        public boolean getSuperWasCalled() {\n            return superWasCalled;\n        }\n\n    }\n    public static class Student extends Person{\n        ___\n    }\n\n}\n"
+                }
+              ]
+            },
+            "starter": {
+              "files": [
+                {
+                  "content": "public Student() {\n    ___\n}\n"
+                }
+              ]
+            }
+          },
+          "test": {
+            "files": [
+              {
+                "type": "java/junit",
+                "content": "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n  private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject = new Answer();\n}\n  \n    Liquid error: internal\n  \n  \n}"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "diagnostics": [
+
+  ]
+}

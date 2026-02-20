@@ -20,38 +20,38 @@
     "instructions": "Return an array with the same contents, but double the size of the array\npassed in. The new slots will be filled with zeros. Use the built in array\nfunctionality that is provided by Java.\n",
     "systems": [
       {
-        "language": "Java"
-      }
-    ],
-    "assets": {
-      "code": {
-        "wrapper": {
-          "files": [
-            {
-              "content": "import java.util.Arrays;\npublic class Answer {\n  ___\n}\n"
-            }
-          ]
-        },
-        "starter": {
-          "files": [
-            {
-              "content": "public int[] expandCapacity(int[] arr) {\n  ___\n}\n"
-            }
-          ]
-        }
-      },
-      "test": {
-        "files": [
-          {
-            "format": "text/csv-unquoted",
-            "pattern": {
-              "actual": "subject.expandCapacity({{array}})"
+        "language": "Java",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "import java.util.Arrays;\npublic class Answer {\n  ___\n}\n"
+                }
+              ]
             },
-            "content": "aray,expected,description\n\"new int[]{2,3,0}\",\"new int[]{2,3,0,0,0,0}\",example\n\"new int[]{}\",\"new int[]{}\",example\n\"new int[]{6}\",\"new int[]{6,0}\",example\n\"new int[]{9,9,1}\",\"new int[]{9,9,1,0,0,0}\"\n\"new int[]{5,5}\",\"new int[]{5,5,0,0}\"\n\"new int[]{10,1,1,1,1}\",\"new int[]{10,1,1,1,1,0,0,0,0,0}\",hidden\n\"new int[]{7,8}\",\"new int[]{7,8,0,0}\",hidden\n"
+            "starter": {
+              "files": [
+                {
+                  "content": "public int[] expandCapacity(int[] arr) {\n  ___\n}\n"
+                }
+              ]
+            }
+          },
+          "test": {
+            "files": [
+              {
+                "type": "text/csv-unquoted",
+                "pattern": {
+                  "actual": "subject.expandCapacity({{array}})"
+                },
+                "content": "aray,expected,description\n\"new int[]{2,3,0}\",\"new int[]{2,3,0,0,0,0}\",example\n\"new int[]{}\",\"new int[]{}\",example\n\"new int[]{6}\",\"new int[]{6,0}\",example\n\"new int[]{9,9,1}\",\"new int[]{9,9,1,0,0,0}\"\n\"new int[]{5,5}\",\"new int[]{5,5,0,0}\"\n\"new int[]{10,1,1,1,1}\",\"new int[]{10,1,1,1,1,0,0,0,0,0}\",hidden\n\"new int[]{7,8}\",\"new int[]{7,8,0,0}\",hidden\n"
+              }
+            ]
           }
-        ]
+        }
       }
-    }
+    ]
   },
   "diagnostics": [
 

@@ -25,15 +25,16 @@ is computed as follows:<br>\n`GCD(x, 0) = x` and `GCD(x, y) = GCD(y, x % y)`.\n
 [systems]
 language: Java
 
-[assets.code.wrapper.files]
+[.assets.code.wrapper.files]
 content:----------
 public class RecCGcd
 {
     ___
 }
 ----------
+[]
 
-[assets.code.starter.files]
+[.assets.code.starter.files]
 content:----------
 public int GCD(int x, int y) {
     if <<Missing base case condition>> {
@@ -43,10 +44,11 @@ public int GCD(int x, int y) {
     }
 }
 ----------
+[]
 
 
-[assets.test.files]
-format: text/csv-unquoted
+[.assets.test.files]
+type: text/csv-unquoted
 pattern.actual: subject.GCD({{x}}, {{y}})
 content:----------
 x,y,expected,description
@@ -58,4 +60,5 @@ x,y,expected,description
 240,8,8,hidden
 2,1,1,hidden
 ----------
+[]
 

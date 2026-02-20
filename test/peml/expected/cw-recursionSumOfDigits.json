@@ -20,38 +20,38 @@
     "instructions": "For function `sumOfDigits`, write the missing recursive\ncall. This function takes a non-negative integer and\nreturns the sum of its digits.\n",
     "systems": [
       {
-        "language": "Java"
-      }
-    ],
-    "assets": {
-      "code": {
-        "wrapper": {
-          "files": [
-            {
-              "content": "public class  RecCSumOfDigits\n{\n    ___\n}\n"
-            }
-          ]
-        },
-        "starter": {
-          "files": [
-            {
-              "content": "public int sumOfDigits(int number) {\n    if (number < 10)\n      return number;\n    return <<Missing a Recursive case action>>\n}\n"
-            }
-          ]
-        }
-      },
-      "test": {
-        "files": [
-          {
-            "format": "text/csv-unquoted",
-            "pattern": {
-              "actual": "subject.addOdd({{n}})"
+        "language": "Java",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "public class  RecCSumOfDigits\n{\n    ___\n}\n"
+                }
+              ]
             },
-            "content": "n,expected,description\n1234,10,example\n5678,26\n0,0\n10000,1\n12,3,hidden\n100002,3,hidden\n"
+            "starter": {
+              "files": [
+                {
+                  "content": "public int sumOfDigits(int number) {\n    if (number < 10)\n      return number;\n    return <<Missing a Recursive case action>>\n}\n"
+                }
+              ]
+            }
+          },
+          "test": {
+            "files": [
+              {
+                "type": "text/csv-unquoted",
+                "pattern": {
+                  "actual": "subject.addOdd({{n}})"
+                },
+                "content": "n,expected,description\n1234,10,example\n5678,26\n0,0\n10000,1\n12,3,hidden\n100002,3,hidden\n"
+              }
+            ]
           }
-        ]
+        }
       }
-    }
+    ]
   },
   "diagnostics": [
 

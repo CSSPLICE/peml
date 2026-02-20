@@ -17,7 +17,7 @@ a _palindrome_. A palindrome is a string that reads the same way
 backward as it does forward, such as "racecar" or "madam". Your
 program does not need to prompt for its input, and should only generate
 one line of output, in the following
-format:
+type:
 
 ```
 "racecar" is a palindrome.

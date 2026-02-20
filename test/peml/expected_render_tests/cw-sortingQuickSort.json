@@ -1,0 +1,58 @@
+{
+  "value": {
+    "exercise_id": "https://codeworkout.cs.vt.edu/gym/exercises/488/practice?workout_id=680",
+    "title": "Sorting - Quick Sort",
+    "external_id": "cw-x58",
+    "is_public": "true",
+    "experience": "70",
+    "language_list": "Java",
+    "license": {
+      "id": "cc-sa-4.0",
+      "owner": {
+        "email": "edwards@cs.vt.edu",
+        "name": "Stephen Edwards"
+      }
+    },
+    "tags": {
+      "topics": "recursion, sorting, quicksort",
+      "style": "coding problem"
+    },
+    "instructions": "Write a method quicksort that takes in an ArrayList of integers and\nreturns them in ascending order, using a quicksort style of sorting. Remember\nthat this style relies on choosing a pivot integer and breaking the set into\nvalues less than the pivot and more than the pivot, then repeating this process\non each half until only single values are left, which are then put back together.\n",
+    "systems": [
+      {
+        "language": "Java",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "import java.util.*;\npublic class Answer {\n    public static ArrayList<Integer> test1 = new ArrayList<>(Arrays.asList(4, 6, 1, 2, 3, 5, 6, 8, 9, 8, 4, 2));\n    public static ArrayList<Integer> answ1 = new ArrayList<>(Arrays.asList(1, 2, 2, 3, 4, 4, 5, 6, 6, 8, 8, 9));\n    public static ArrayList<Integer> test2 = new ArrayList<>(Arrays.asList(47, 81, 30, 64, 78, 67, 58, 96, 47, 5));\n    public static ArrayList<Integer> answ2 = new ArrayList<>(Arrays.asList(5, 30, 47, 47, 58, 64, 67, 78, 81, 96));\n    public static ArrayList<Integer> test3 = new ArrayList<>(Arrays.asList(32, 23, 9, 17, 24, 18, 19));\n    public static ArrayList<Integer> answ3 = new ArrayList<>(Arrays.asList(9, 17, 18, 19, 23, 24, 32));\n    ___\n}\n"
+                }
+              ]
+            },
+            "starter": {
+              "files": [
+                {
+                  "content": "public ArrayList<Integer> quickSort(ArrayList<Integer> list) {\n    ___\n}\n"
+                }
+              ]
+            }
+          },
+          "test": {
+            "files": [
+              {
+                "pattern": {
+                  "actual": "subject.quickSort({{list}})"
+                },
+                "content": "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n  private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject = new Answer();\n}\n  \n    @Test\n@Description(\"(4, 6, 1, 2, 3, 5, 6, 8, 9, 8, 4, 2) -> (1, 2, 2, 3, 4, 4, 5, 6, 6, 8, 8, 9)\")\n\n\n\n\npublic void test_1()\n{\n  \n  \n  \n  assertEquals(\n    \n    Answer.answ1,\n    subject.quickSort(Answer.test1));\n\n  \n}\n  \n    @Test\n@Description(\"(47, 81, 30, 64, 78, 67, 58, 96, 47, 5) -> (5, 30, 47, 47, 58, 64, 67, 78, 81, 96)\")\n\n\n\n\npublic void test_2()\n{\n  \n  \n  \n  assertEquals(\n    \n    Answer.answ2,\n    subject.quickSort(Answer.test2));\n\n  \n}\n  \n    @Test\n@Description(\"(32, 23, 9, 17, 24, 18, 19) -> (9, 17, 18, 19, 23, 24, 32)\")\n\n\n\n\npublic void test_3()\n{\n  \n  \n  \n  assertEquals(\n    \n    Answer.answ3,\n    subject.quickSort(Answer.test3));\n\n  \n}\n  \n  \n}"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "diagnostics": [
+
+  ]
+}

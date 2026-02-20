@@ -3,196 +3,94 @@ require_relative 'csv_unquoted_parser'
 require 'dottie/ext'
 require 'csv'
 require 'liquid'
+require 'pp'
 
 # need to fix pattern.actual
 module Peml
-    class DatadrivenTestRenderer
+  class DatadrivenTestRenderer
 
-        # points to the directory where the liquid templates are saved
-        @@template_path = File.expand_path('templates/', __dir__) + "/"
+    # points to the directory where the liquid templates are saved
+    @@template_path = File.expand_path('templates/', __dir__) + "/"
 
-        # This is the entry function for data-driven test generation
-        # We fetch languages and then generate tests for each using
-        # the helper function written below.
-        def generate_tests(peml)
-            value = peml.dottie!
-            languages = self.get_languages(value)
-            tests = self.extract_test_metadata(value, {})
-            if tests && tests[:format] && tests[:format].include?('csv')
-                peml['parsed_tests']=[]
-                tests[:content] = hashify_test(tests)
-                languages.each do |language|
-                    template_source = File.read("#{@@template_path}#{language.downcase}_class.liquid")
-                    template_class = Liquid::Template.parse(template_source, :error_mode => :strict)
-                    resolver = PemlTemplateResolver.new(value, language)
-                    peml['parsed_tests'] << {
-                        language: language,
-                        test_class: template_class.render(
-                            { 'class_name' => 'Answer', 'methods' => generate_methods(tests, language) },
-                            registers: { file_system: resolver }
-                        )
-                    }
-                end
-            elsif tests && tests[:content]
-                peml['parsed_tests'] = tests[:content]
+
+    # -------------------------------------------------------------
+    def render_datadriven_tests!(peml)
+      if (peml.key?('systems'))
+        peml['systems'].each do |system|
+          if (system.key?('language'))
+            language = system['language']
+            if language
+                language = language.downcase
             end
-            peml
+            if system.key?('assets') &&
+              system['assets'].key?('test') &&
+              system['assets']['test'].key?('files')
+              system['assets']['test']['files'].each do |file|
+                patterns = file['pattern'] || {}
+                test_cases = { 'test_cases' => file['content'] }
+                resolver = PemlTemplateResolver.new(patterns, language)
+                template_source = resolver.read_template_file('test_class')
+                template_class = Liquid::Template.parse(template_source, :error_mode => :strict)
+                file['content'] = template_class.render(
+                  test_cases,
+                  registers: { file_system: resolver }
+                )
+              end
+            end
+          end
         end
+      end
+      peml
+    end
+end
 
-        # Gets list of language we need test cases for. Only used
-        # by test cases with tabular data for now.
-        def get_languages(value)
-            languages=[]
-            if value['systems']
-                value['systems'].each do |system|
-                    languages << system['language']
-                end
-            end
-            languages
-        end
 
-        # Converts the csv file parsed by the csv unquoted parser into
-        # a hash of test cases example header => test_variable
-        def hashify_test(tests)
-            content_arr = []
-            if(tests[:format].include?('text/csv-unquoted'))
-                tests[:content] = Peml::CsvUnquotedParser.new.parse(tests[:content])
-            else
-                tests[:content] = CSV.new(tests[:content]).read
-            end
-            (1..tests[:content].length-2).each do |i|
-                test_hash = Hash[tests[:content][0].map(&:to_sym).zip(tests[:content][i])]
-                content_arr << test_hash
-            end
-            content_arr
-        end
-
-        # A recursive walker that walks through the hash and returns files
-        # that will most likely have testcases in them (identified by form
-        # and content keys)
-        def extract_test_metadata(peml, test_hash)
-            peml.each do |key, value|
-                if value.is_a?(Hash)
-                    if value.key?('content') && value.key?('format')
-                        test_hash = {content: value['content'], format: value['format'], pattern: value.key?('pattern_actual')?value['pattern_actual']: nil}
-                    else
-                        test_hash = extract_test_metadata(value, test_hash)
-                    end
-                elsif value.is_a?(Array)
-                    value.each do |element|
-                        if element.key?('content') && element.key?('format')
-                            test_hash = {content: element['content'], format: element['format'], pattern: element.key?('pattern_actual')?element['pattern_actual']: nil}
-                        else
-                            test_hash = extract_test_metadata(element, test_hash)
-                        end
-                    end
-                end
-            end
-            test_hash
-        end
-
-        # This function returns an array of test functions which are then
-        # interpolated into a class before being written into the peml hash
-        def generate_methods(tests, language)
-            tests_arr = []
-            id = 0
-            return tests_arr if tests[:pattern].nil?
-            method_name = tests[:pattern][tests[:pattern].index('.')+1..tests[:pattern].index('(')-1]
-            tests[:content].each do |test_case|
-                id += 1
-                intput = tests[:pattern][tests[:pattern].index('(')+1..tests[:pattern].index(')')-1].gsub(/\{\{(.*?)\}\}/) { |x|  test_case[x[2..-3].to_sym]  }
-                expected_output = test_case[:expected]
-                class_name = "Test"
-                negative_feedback= 'you should do better'
-                tests_arr << (TEST_METHOD_TEMPLATES[language]%{
-                        id: id,
-                        expected_output: expected_output,
-                        method_name: method_name,
-                        class_name: class_name,
-                        input: intput,
-                        negative_feedback: negative_feedback
-                })
-            end
-            tests_arr
-        end
+# -------------------------------------------------------------
+  class PemlInclude < Liquid::Include
+    def initialize(tag_name, markup, options)
+      @mysig = "#{tag_name} #{markup}"
+      @for_idx = 0
+      super
     end
 
-#List of templates that have been utilized for generating tests.
-TEST_METHOD_TEMPLATES = {
-      'Ruby' => <<RUBY_TEST,
-  def test%{id}
-    assert_equal(%{expected_output}, @@subject.%{method_name}(%{input}), "%{negative_feedback}")
+    def render_to_output_buffer(context, output)
+      @for_idx += 1
+      extra_scope = { 'for_idx' => @for_idx }
+      # puts "render_to_output_buffer: #{@mysig} #{@for_id}"
+      if @attributes.key?('flatten')
+        extra_scope.merge!(@attributes['flatten'].evaluate(context))
+      end
+      context.stack(extra_scope) do
+        super
+      end
+    end
   end
-RUBY_TEST
-      'Python' => <<PYTHON_TEST,
-    def test%{id}(self):
-        self.assertEqual(%{expected_output}, self.__%{method_name}(%{input}))
-PYTHON_TEST
-      'Java' => <<JAVA_TEST,
-    @Test
-    public void test%{id}()
-    {
-        assertEquals(
-          "%{negative_feedback}",
-          %{expected_output},
-          subject.%{method_name}(%{input}));
-    }
-JAVA_TEST
-      'C++' => <<CPP_TEST
-    void test%{id}()
-    {
-        TSM_ASSERT_EQUALS(
-          "%{negative_feedback}",
-          %{expected_output},
-          subject.%{method_name}(%{input}));
-    }
-CPP_TEST
-    }
 
-    class PemlInclude < Liquid::Include
-      def initialize(tag_name, markup, options)
-          @mysig = "#{tag_name} #{markup}"
-          @for_idx = 0
-          super
-      end
 
-      def render_to_output_buffer(context, output)
-          @for_idx += 1
-          extra_scope = { 'for_idx' => @for_idx }
-          # puts "render_to_output_buffer: #{@mysig} #{@for_id}"
-          if @attributes.key?('flatten')
-              extra_scope.merge!(@attributes['flatten'].evaluate(context))
-          end
-          context.stack(extra_scope) do
-              super
-          end
-      end
+  # -------------------------------------------------------------
+  class PemlTemplateResolver
+    def initialize(programmatic_definitions, language)
+      @overrides = programmatic_definitions
+      @base_path = File.expand_path("templates/", __dir__)
+      @base_lang_path = File.expand_path("templates/#{language.downcase}/", __dir__)
     end
 
+    def read_template_file(template_path)
+      # 1. Check programmatic overrides first (precedence)
+      return @overrides[template_path].strip if @overrides.key?(template_path)
 
-    class PemlTemplateResolver
-      def initialize(programmatic_definitions, language)
-          @overrides = programmatic_definitions
-          @base_path = File.expand_path("templates/", __dir__)
-          @base_lang_path = File.expand_path("templates/#{language.downcase}/", __dir__)
-      end
+      # 2. Fall back to language specific base templates on disk
+      file_path = File.join(@base_lang_path, "#{template_path}.liquid")
+      return File.read(file_path).strip if File.exist?(file_path)
 
-      def read_template_file(template_path)
-          # 1. Check programmatic overrides first (precedence)
-          return @overrides[template_path].strip if @overrides.key?(template_path)
+      # 3. Fall back to standard base templates on disk
+      file_path = File.join(@base_path, "#{template_path}.liquid")
+      return File.read(file_path).strip if File.exist?(file_path)
 
-          # 2. Fall back to language specific base templates on disk
-          file_path = File.join(@base_lang_path, "#{template_path}.liquid")
-          return File.read(file_path).strip if File.exist?(file_path)
-
-          # 3. Fall back to standard base templates on disk
-          file_path = File.join(@base_path, "#{template_path}.liquid")
-          return File.read(file_path).strip if File.exist?(file_path)
-
-          raise Liquid::FileSystemError, "No such template '#{template_path}'"
-      end
+      raise Liquid::FileSystemError, "No such template '#{template_path}'"
     end
+  end
 
-    Liquid::Template.register_tag('include', PemlInclude)
+  Liquid::Template.register_tag('include', PemlInclude)
 end
 

@@ -26,25 +26,27 @@ returned. If an array has less than 2 elements, the method should return 0.
 [systems]
 language: Java
 
-[assets.code.wrapper.files]
+[.assets.code.wrapper.files]
 content:----------
 public class ArrayProblem
 {
    ___
 }
 ----------
+[]
 
-[assets.code.starter.files]
+[.assets.code.starter.files]
 content:----------
 public int minDiff(int[] nums)
 {
    ___
 }
 ----------
+[]
 
 
-[assets.test.files]
-format: text/csv-unquoted
+[.assets.test.files]
+type: text/csv-unquoted
 pattern.actual: subject.minDiff({{nums}})
 content:----------
 nums,expected,description
@@ -55,4 +57,5 @@ nums,expected,description
 "new int[]{1, 2, 3, 5, 7}",1
 "new int[]{3, 5, 4, 8, 11, 14}",-1
 ----------
+[]
 

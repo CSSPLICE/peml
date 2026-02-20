@@ -28,15 +28,16 @@ array. \n
 [systems]
 language: Java
 
-[assets.code.wrapper.files]
+[.assets.code.wrapper.files]
 content:----------
 public class  RecCLargest
 {
     ___
 }
 ----------
+[]
 
-[assets.code.starter.files]
+[.assets.code.starter.files]
 content:----------
 public int largest(int[] numbers, int index) {
     if <<Missing base case>>
@@ -44,10 +45,11 @@ public int largest(int[] numbers, int index) {
     return Math.max(numbers[index], largest(numbers, index-1));
 }
 ----------
+[]
 
 
-[assets.test.files]
-format: text/csv-unquoted
+[.assets.test.files]
+type: text/csv-unquoted
 pattern.actual: subject.largest({{nums}}, {{index}})
 content:----------
 nums,index,expected,description
@@ -57,4 +59,5 @@ nums,index,expected,description
 "new int [] {10, 4, 8}",2,10
 "new int [] {6, 23, 5}",2,23,hidden
 ----------
+[]
 

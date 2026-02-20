@@ -23,7 +23,7 @@ if the argument is 10, the method may return “HHTHTTTHHT”
 [systems]
 language: Java
 
-[assets.code.wrapper.files]
+[.assets.code.wrapper.files]
 content:----------
 import java.util.Random;
 public class RandomProblem
@@ -31,18 +31,20 @@ public class RandomProblem
    ___
 }
 ----------
+[]
 
-[assets.code.starter.files]
+[.assets.code.starter.files]
 content:----------
 public String flipCoin(int n)
 {
    ___
 }
 ----------
+[]
 
 
-[assets.test.files]
-format: java/junit
+[.assets.test.files]
+type: java/junit
 content:----------
 import static org.junit.Assert.*;
 import org.junit.*;
@@ -108,4 +110,5 @@ public class RandomProblemTest extends CodeWorkoutTest{
   }
 }
 ----------
+[]
 

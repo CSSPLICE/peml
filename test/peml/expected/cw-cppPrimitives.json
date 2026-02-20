@@ -20,38 +20,38 @@
     "instructions": "Replace the `/*date type*/` comments with the appropriate data types for each variable.\n",
     "systems": [
       {
-        "language": "cpp"
-      }
-    ],
-    "assets": {
-      "code": {
-        "wrapper": {
-          "files": [
-            {
-              "content": "class Primitives\n{\n  public:\n    ___\n};\n"
-            }
-          ]
-        },
-        "starter": {
-          "files": [
-            {
-              "content": "int primitives()\n{\n    /* data type */ luckyNumber = 16;\n    /* data type */ percentage = 0.95;\n    /* data type */ letter = 'B';\n    /* data type */ truth = false;\n    return 0;\n}\n"
-            }
-          ]
-        }
-      },
-      "test": {
-        "files": [
-          {
-            "format": "text/csv-unquoted",
-            "pattern": {
-              "actual": "subject.primitives()"
+        "language": "cpp",
+        "assets": {
+          "code": {
+            "wrapper": {
+              "files": [
+                {
+                  "content": "class Primitives\n{\n  public:\n    ___\n};\n"
+                }
+              ]
             },
-            "content": "expected,description\n0\n"
+            "starter": {
+              "files": [
+                {
+                  "content": "int primitives()\n{\n    /* data type */ luckyNumber = 16;\n    /* data type */ percentage = 0.95;\n    /* data type */ letter = 'B';\n    /* data type */ truth = false;\n    return 0;\n}\n"
+                }
+              ]
+            }
+          },
+          "test": {
+            "files": [
+              {
+                "type": "text/csv-unquoted",
+                "pattern": {
+                  "actual": "subject.primitives()"
+                },
+                "content": "expected,description\n0\n"
+              }
+            ]
           }
-        ]
+        }
       }
-    }
+    ]
   },
   "diagnostics": [
 

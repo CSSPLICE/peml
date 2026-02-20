@@ -24,25 +24,27 @@ of the String is less than 1.
 [systems]
 language: Java
 
-[assets.code.wrapper.files]
+[.assets.code.wrapper.files]
 content:----------
 public class StringProblem
 {
    ___
 }
 ----------
+[]
 
-[assets.code.starter.files]
+[.assets.code.starter.files]
 content:----------
 public boolean isUniqueString(String message)
 {
    ___
 }
 ----------
+[]
 
 
-[assets.test.files]
-format: text/csv-unquoted
+[.assets.test.files]
+type: text/csv-unquoted
 pattern.actual: subject.isUniqueString({{message}})
 content:----------
 message,expected,description
@@ -53,4 +55,5 @@ message,expected,description
 """""",true
 """hello world""",false,hidden
 ----------
+[]
 

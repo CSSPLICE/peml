@@ -20,12 +20,13 @@ Given the following constructor, set the fields to the corresponding parameters.
 [systems]
 language: Java
 
-[assets.code.wrapper.files]
+[.assets.code.wrapper.files]
 content:----------
 ___ 
 ----------
+[]
 
-[assets.code.starter.files]
+[.assets.code.starter.files]
 content:----------
 public class Course
 {
@@ -40,10 +41,11 @@ public class Course
    }
 }
 ----------
+[]
 
 
-[assets.test.files]
-format: java/junit
+[.assets.test.files]
+type: java/junit
 content:----------
 import static org.junit.Assert.*;
 import org.junit.*;
@@ -69,4 +71,5 @@ public class CourseTest extends CodeWorkoutTest
    }
 }
 ----------
+[]
 
