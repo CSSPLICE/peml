@@ -1,0 +1,5 @@
+{% if stdout %}
+@stdout_backup = $stdout
+@stdout_capture = StringIO.new
+$stdout = @stdout_capture
+{% endif %}

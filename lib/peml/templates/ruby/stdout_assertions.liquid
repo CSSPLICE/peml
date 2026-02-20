@@ -1,0 +1,3 @@
+{% if stdout %}
+assert_equal({% include 'stdout_template' %}, @stdout_capture.string{% include 'opt_negative_feedback' %})
+{% endif %}

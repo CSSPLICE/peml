@@ -1,0 +1,4 @@
+{% if stdin %}
+@stdin_backup = $stdin
+$stdin = StringIO.new({% include 'stdin_template' %})
+{% endif %}

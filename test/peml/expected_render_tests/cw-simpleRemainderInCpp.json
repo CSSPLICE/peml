@@ -44,7 +44,7 @@
                 "pattern": {
                   "actual": "subject.remainder()"
                 },
-                "content": "#include <cxxtest/TestSuite.h>\n#include \".h\"\n\n\nclass Test : public CxxTest::TestSuite\n{\npublic:\n  \n  void setUp()\n{\n  // Set up test fixtures, if any.\n  subject = new ();\n}\n  void tearDown()\n{\n  delete subject;\n}\n  \n  void test_1()\n{\n  // \n// \n// \n// \n// \n  \n  \n  \n  \n\nTS_ASSERT_EQUALS(5, subject.remainder());\n\n  \n}\n  \nprivate:\n   *subject;\n};"
+                "content": "#include <cxxtest/TestSuite.h>\n#include \".h\"\n\n\nclass TestAnswer : public CxxTest::TestSuite\n{\npublic:\n  \n  void setUp()\n{\n  // Set up test fixtures, if any.\n  subject = new ();\n}\n  void tearDown()\n{\n  delete subject;\n}\n  \n  void test_1()\n{\n  // \n// \n// \n// \n// \n  \n  \n  \n  \n\nTS_ASSERT_EQUALS(5, subject.remainder());\n\n  \n}\n  \nprivate:\n   *subject;\n};"
               }
             ]
           }

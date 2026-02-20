@@ -1,0 +1,3 @@
+{% if expected %}
+assert_equal({% include 'expected_template' %}, {% include 'actual' %}{% include 'opt_negative_feedback' %})
+{% endif %}
