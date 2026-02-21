@@ -14,7 +14,7 @@ module Peml
 
 
     # -------------------------------------------------------------
-    def render_datadriven_tests!(peml)
+    def render_datadriven_tests!(peml, options = {})
       if (peml.key?('systems'))
         peml['systems'].each do |system|
           if (system.key?('language'))
@@ -25,11 +25,18 @@ module Peml
                   language = 'cpp'
                 end
             end
+            default_patterns = {}
+            if options.key?('pattern')
+              default_patterns = options['pattern']
+            end
+            if options.key?(language) && options[language].key?('pattern')
+              default_patterns = default_patterns.merge(options[language]['pattern'])
+            end
             if system.key?('assets') &&
               system['assets'].key?('test') &&
               system['assets']['test'].key?('files')
               system['assets']['test']['files'].each do |file|
-                patterns = file['pattern'] || {}
+                patterns = default_patterns.merge(file['pattern'] || {})
                 test_cases = { 'test_cases' => file['content'] }
                 resolver = PemlTemplateResolver.new(patterns, language)
                 template_source = resolver.read_template_file('test_class')

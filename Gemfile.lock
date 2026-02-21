@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    peml (0.1.1)
+    peml (0.1.2)
       dottie (~> 0.0.3)
       json_schemer (>= 0.2)
       kramdown (~> 2.3.1)

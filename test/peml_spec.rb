@@ -29,7 +29,7 @@ describe Peml do
       slug = File.basename(f)
 
       it "parses #{slug}" do
-        ex = Peml::parse({filename: f})
+        ex = Peml::parse(filename: f)
         _(ex).wont_be_nil
 
         golden = File.join(expected_dir, slug.sub('.peml', '.json'))
@@ -53,7 +53,7 @@ describe Peml do
 
       it "parses #{slug} and renders tests" do
         begin
-          ex = Peml::parse({filename: f, render_tests: true})
+          ex = Peml::parse(filename: f, render_tests: true)
           _(ex).wont_be_nil
 
           golden = File.join(expected_dir, slug.sub('.peml', '.json'))

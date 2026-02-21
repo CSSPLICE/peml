@@ -13,19 +13,18 @@ module Peml
   # Ordered pipeline of optional transformation steps.
   # Each entry maps a params key to the method that performs it.
   TRANSFORMS = {
-    inline:            -> (v) { Peml.inline(v) },
-    inline_data_files: -> (v) { Peml.inline_data_files(v) },
-    render_tests:      -> (v) { Peml::DatadrivenTestRenderer.new.render_datadriven_tests!(v) },
-    interpolate:       -> (v) { Peml.interpolate(v) },
-    render_to_html:    -> (v) { Peml.render_to_html(v) },
+    inline:            -> (v, opts) { Peml.inline(v, opts) },
+    inline_data_files: -> (v, opts) { Peml.inline_data_files(v, opts) },
+    render_tests:      -> (v, opts) { Peml::DatadrivenTestRenderer.new.render_datadriven_tests!(v, opts) },
+    interpolate:       -> (v, opts) { Peml.interpolate(v, opts) },
+    render_to_html:    -> (v, opts) { Peml.render_to_html(v, opts) },
   }.freeze
 
 
   #~ Class methods ..........................................................
 
   # -------------------------------------------------------------
-  def self.parse(params = {}, more_params = {})
-    params = params.merge(more_params)
+  def self.parse(params = {})
     if params[:filename]
       file = File.open(params[:filename])
       begin
@@ -48,7 +47,10 @@ module Peml
 
     # Apply requested transformation steps in pipeline order
     TRANSFORMS.each do |key, transform|
-      value = transform.call(value) if params[key]
+      if params[key]
+        opts = params[:"#{key}_params"] || {}
+        value = transform.call(value, opts)
+      end
     end
 
     if params[:result_only]
@@ -70,7 +72,7 @@ module Peml
   # inline external file contents in fields inside
   # a PEML data structure (parsed PEML structured as a nested hash)
   # currently, not implemented
-  def self.inline(peml)
+  def self.inline(peml, options = {})
     peml
   end
 
@@ -78,7 +80,7 @@ module Peml
   # -------------------------------------------------------------
   # inline structured data file contents into native PEML structured
   # data
-  def self.inline_data_files(peml)
+  def self.inline_data_files(peml, options = {})
     Utils.deep_transform_files!(peml, :inline_data_file)
   end
 
@@ -87,7 +89,7 @@ module Peml
   # handle mustache variable interpolation in fields inside
   # a PEML data structure (parsed PEML structured as a nested hash)
   # currently, not implemented
-  def self.interpolate(peml)
+  def self.interpolate(peml, options = {})
     default_peml = Marshal.load(Marshal.dump(peml)).dottie!
     Utils.handle_exclusion(
       default_peml,
@@ -99,7 +101,7 @@ module Peml
   # convert markdown or other markup formats to html in fields inside
   # a PEML data structure (parsed PEML structured as a nested hash)
   # currently, not implemented
-  def self.render_to_html(peml)
+  def self.render_to_html(peml, options = {})
     Utils.deep_transform_values!(peml, :render_helper)
   end
 
