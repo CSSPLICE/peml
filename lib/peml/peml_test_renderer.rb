@@ -9,7 +9,7 @@ module Peml
     class PemlTestRenderer
 
         #This path points to the directory where the liquid templates are saved
-        @@template_path = File.expand_path('templates/', __dir__) + "/"
+        @@template_path = File.expand_path('templates/PEMLtest', __dir__) + "/"
 
         #This variable is used to pick the xunit parser based on the language
         @xunit_parser = Peml::XUnitParser.new()
