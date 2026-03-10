@@ -57,7 +57,7 @@ And then execute:
 Or install it using the gem command (may require you to clone the repository
 and build your own local copy of the gem to install).
 
-## Usage
+## Ruby API Usage
 
 ```
 require 'peml'
@@ -120,12 +120,13 @@ from `<code>`https://discovery.cs.vt.edu/peml-live/api/parse.yaml?...`</code>`).
 If not explicitly provided, it will be inferred through the "Accept:"
 headers provided in the request, or defaults to json if not specified
 anywhere else.
-See the `<a href="https://github.com/ruby-grape/grape">`grape`</a>`
+See the `<a href="https://github.com/ruby-grape/grape">`grape `</a>`
 gem's `<a href="https://github.com/ruby-grape/grape#api-formats">`discussion
-of API formats`</a>` for more details about how the format of the
+of API formats `</a>` for more details about how the format of the
 response is determined.
 
-### Other Methods
+
+## Other Provided Methods
 
 **Peml.validate(peml_hash)**
 `<br/>`
@@ -146,7 +147,6 @@ Parse a Programming Instruction Format (PIF) description. Takes a hash with eith
 **Peml.pif_to_runestone(parsed_pif, format: nil)**
 `<br/>`
 Convert a parsed PIF structure to Runestone format. `format` options are 'json' and 'yaml'. If nil, a Ruby hash is returned.
-
 
 ## Contributing
 

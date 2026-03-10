@@ -178,19 +178,19 @@ module Peml
         case type
         when 'text/yaml'
           value['content'] = YAML.load(content)
-          value.delete('type')
+          value['type'] = 'inline'
         when 'application/json'
           value['content'] = JSON.parse(content)
-          value.delete('type')
+          value['type'] = 'inline'
         when 'text/csv'
           value['content'] = tabular_to_hashes(CSV.parse(content))
-          value.delete('type')
+          value['type'] = 'inline'
         when 'application/xml', 'text/xml'
           value['content'] = xml_to_hash(REXML::Document.new(content).root)
-          value.delete('type')
+          value['type'] = 'inline'
         when 'text/x-unquoted-csv'
           value['content'] = tabular_to_hashes(Peml::CsvUnquotedParser.new.parse(content))
-          value.delete('type')
+          value['type'] = 'inline'
         end
       end
     end
@@ -347,6 +347,7 @@ module Peml
     result = nil
     if file_hash.is_a?(Hash)
       result = file_hash['type'] if file_hash['type']
+      result = file_hash['format'] if file_hash['format'] && result.nil?
       result = mime_type_from_filename(file_hash['name']) if file_hash['name'] && result.nil?
     elsif file_hash.is_a?(String)
       if (match = file_hash.match(/\Aurl\((.*)\)\z/))

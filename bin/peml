@@ -3,14 +3,64 @@
 lib = File.expand_path("../../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
-require 'pp'
+require 'optparse'
+require 'json'
+require 'yaml'
 require 'peml'
-#require 'simple-tracer'
 
-ARGV.each do |f|
-  begin
-    pp Peml::load_file(filename: f)
-  rescue Parslet::ParseFailed => e
-    puts e.parse_failure_cause.ascii_tree
+options = {
+  format: :yaml,
+  parse_opts: {}
+}
+
+OptionParser.new do |opts|
+  opts.banner = "Usage: pemlparse [options] <filename>"
+
+  Peml::TRANSFORMS.keys.each do |transform|
+    opts.on("--#{transform.to_s.gsub('_', '-')}", "Enable #{transform} transform") do
+      options[:parse_opts][transform] = true
+    end
   end
+
+  opts.on("--result-only", "Return only the parsed result") do
+    options[:parse_opts][:result_only] = true
+  end
+
+  opts.on("--json", "Output in JSON format") do
+    options[:format] = :json
+  end
+
+  opts.on("--yaml", "Output in YAML format (default)") do
+    options[:format] = :yaml
+  end
+
+  opts.on("-h", "--help", "Prints this help") do
+    puts opts
+    exit
+  end
+end.parse!
+
+if ARGV.empty?
+  puts "Error: You must provide a filename."
+  exit 1
+end
+
+filename = ARGV.first
+options[:parse_opts][:filename] = filename
+
+begin
+  result = Peml.parse(options[:parse_opts])
+  
+  if options[:format] == :json
+    puts JSON.pretty_generate(result)
+  else
+    puts result.to_yaml
+  end
+rescue => e
+  if defined?(Parslet::ParseFailed) && e.is_a?(Parslet::ParseFailed)
+    STDERR.puts e.parse_failure_cause.ascii_tree
+  else
+    STDERR.puts "Error parsing file: #{e.message}"
+  end
+  exit 1
 end
