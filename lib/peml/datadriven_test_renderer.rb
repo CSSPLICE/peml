@@ -36,16 +36,18 @@ module Peml
               system['assets'].key?('test') &&
               system['assets']['test'].key?('files')
               system['assets']['test']['files'].each do |file|
-                patterns = default_patterns.merge(file['pattern'] || {})
-                test_cases = { 'test_cases' => file['content'] }
-                resolver = PemlTemplateResolver.new(patterns, language)
-                template_source = resolver.read_template_file('test_class')
-                template_class = Liquid::Template.parse(template_source, :error_mode => :strict)
-                file['content'] = template_class.render(
-                  test_cases,
-                  registers: { file_system: resolver }
-                )
-                
+                if file['type'] == 'inline'
+                  patterns = default_patterns.merge(file['pattern'] || {})
+                  test_cases = { 'test_cases' => file['content'] }
+                  resolver = PemlTemplateResolver.new(patterns, language)
+                  template_source = resolver.read_template_file('test_class')
+                  template_class = Liquid::Template.parse(template_source, :error_mode => :strict)
+                  file['content'] = template_class.render(
+                    test_cases,
+                    registers: { file_system: resolver }
+                  )
+                  file['type'] = "text/x-#{language}"
+                end
               end
             end
           end
