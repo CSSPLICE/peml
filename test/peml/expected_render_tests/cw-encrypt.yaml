@@ -1,0 +1,61 @@
+---
+:value:
+  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/582/practice?workout_id=759
+  title: encrypt
+  external_id: ITSC1213_encrypt
+  is_public: 'true'
+  experience: '20'
+  language_list: Java
+  license:
+    id: cc-sa-4.0
+    owner:
+      email: lcao2@uncc.edu
+      name: lcao2
+  tags:
+    topics: String, loop
+    style: coding problem
+  instructions: |
+    This methods takes a String object as a parameter and returns an
+    encrypted version of the object. The encryption is done in two steps: First,
+    the first letter of the original string is moved to the end. Then, “ay” is
+    appended at the end of the String. For example, if the String is “How”, the
+    method should return “owHay”. If the length of the string is less than 1,
+    it should not be changed. \n
+  systems:
+  - language: Java
+    assets:
+      code:
+        wrapper:
+          files:
+          - content: |
+              public class StringProblem
+              {
+                 ___
+              }
+        starter:
+          files:
+          - content: |
+              public String encrypt(String message)
+              {
+                 ___
+              }
+      test:
+        files:
+        - type: text/x-java
+          pattern:
+            actual: subject.encrypt({{message}})
+          content: "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport
+            java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n
+            \ private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject
+            = new Answer();\n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic
+            void test_1()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"\"\"owHay\"\"\",\n
+            \   subject.encrypt(\"\"\"How\"\"\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic
+            void test_2()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"\"\"\"\"\",\n
+            \   subject.encrypt(\"\"\"\"\"\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic
+            void test_3()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"\"\"zay\"\"\",\n
+            \   subject.encrypt(\"\"\"z\"\"\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic
+            void test_4()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"\"\"SCay\"\"\",\n
+            \   subject.encrypt(\"\"\"CS\"\"\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic
+            void test_5()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"\"\"ambdalzy\"\"\",\n
+            \   subject.encrypt(\"\"\"lambda\"\"\"));\n\n  \n}\n  \n  \n}"
+:diagnostics: []

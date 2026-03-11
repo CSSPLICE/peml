@@ -1,0 +1,186 @@
+#!/usr/bin/env ruby
+require 'csv'
+
+if ARGV.length != 1
+  abort "Usage: #{$0} <file>"
+end
+
+filename = ARGV[0]
+
+unless File.exist?(filename)
+  abort "Error: File '#{filename}' not found."
+end
+
+content = File.read(filename)
+
+# Split by lines to process blocks
+lines = content.lines
+
+exercise_id_idx = nil
+external_id_val = nil
+external_id_idx = nil
+
+lines.each_with_index do |line, idx|
+  if line.match(/^exercise_id:/)
+    exercise_id_idx = idx
+  elsif m = line.match(/^external_id:\s*(.*)/)
+    external_id_idx = idx
+    external_id_val = m[1].rstrip
+  elsif line.match(/^language_list:/)
+    lines[idx] = nil
+  elsif line.match(/^experience:/)
+    lines[idx] = line.sub(/^experience:/, "difficulty:")
+  elsif line.match(/^is_public:/)
+    lines[idx] = line.sub(/^is_public:/, "vendor.codeworkout.is_public:")
+  end
+end
+
+if exercise_id_idx && external_id_idx
+  lines[exercise_id_idx] = "exercise_id: #{external_id_val}\n"
+  lines[external_id_idx] = nil
+  exercise_id_val_to_check = external_id_val
+elsif exercise_id_idx
+  exercise_id_val_to_check = lines[exercise_id_idx].match(/^exercise_id:\s*(.*)/)[1].rstrip
+elsif external_id_idx
+  exercise_id_val_to_check = external_id_val
+end
+
+lines.compact!
+
+is_match = File.basename(filename).match?(/^(?:codingbat|BigJava)/) || (exercise_id_val_to_check && exercise_id_val_to_check.match?(/^(?:codingbat|BigJava)/))
+
+if is_match
+  lines.each_with_index do |line, idx|
+    if line.match(/^license\.id:/)
+      lines[idx] = "license.id: all-rights-reserved\n"
+    elsif line.match(/^license\.owner\.email:/)
+      lines[idx] = line.sub(/^license\.owner\.email:/, "author:")
+    elsif line.match(/^license\.owner\.name:/)
+      lines[idx] = nil
+    end
+  end
+  lines.compact!
+end
+
+in_assets_block = false
+in_csv_unquoted_block = false
+in_content_sub_block = false
+current_delimiter = nil
+
+processed_lines = []
+blank_lines_buffer = []
+
+lines.each do |line|
+  if line.strip == "[]"
+    next
+  end
+
+  if line.match(/^\[\.?assets/)
+    if in_assets_block
+      processed_lines << "[]\n"
+    end
+    
+    processed_lines.concat(blank_lines_buffer)
+    blank_lines_buffer.clear
+    
+    in_assets_block = true
+    in_csv_unquoted_block = !!line.match(/^\[\.?assets\.test\.files\]/)
+    in_content_sub_block = false
+    processed_lines << line.sub(/^\[assets/, '[.assets')
+  elsif line.match(/^\[systems\]/) || line.match(/^\[[^\]]+\]$/) && !line.match(/^\[\.?assets/)
+    if in_assets_block
+      processed_lines << "[]\n"
+      in_assets_block = false
+      in_csv_unquoted_block = false
+      in_content_sub_block = false
+      current_delimiter = nil
+    end
+    
+    processed_lines.concat(blank_lines_buffer)
+    blank_lines_buffer.clear
+    
+    processed_lines << line
+  elsif in_assets_block
+    if line.strip.empty?
+      blank_lines_buffer << line
+    else
+      processed_lines.concat(blank_lines_buffer)
+      blank_lines_buffer.clear
+      
+      # Skip empty template: lines
+      if line.strip == "template:"
+        next
+      end
+      
+      # Track content blocks
+      if !in_content_sub_block && line.match(/^content:([^\s])\1{2,}\s*$/)
+        in_content_sub_block = true
+        current_delimiter = line.match(/^content:(([^\s])\2{2,})\s*$/)[1]
+      elsif in_content_sub_block && current_delimiter && line.strip == current_delimiter
+        in_content_sub_block = false
+        current_delimiter = nil
+      end
+      
+      # Track type to assert text/csv-unquoted processing
+      if line.match(/^type:\s*text\/csv-unquoted/i) || line.match(/^format:\s*text\/csv-unquoted/i)
+        in_csv_unquoted_block = true
+      end
+      
+      # Process line formats
+      line_to_add = line.sub(/^format:/, 'type:')
+      
+      if line_to_add.match(/^pattern(?:_|\.)actual:\s*subject\./) || line_to_add.match(/^pattern\.method_invocation:/)
+        line_to_add = line_to_add.sub(/^pattern(?:_|\.)actual:\s*subject\./, 'pattern.method_invocation: ')
+        
+        # Replace {{x, y, z}} with {{x}}, {{y}}, {{z}}
+        line_to_add = line_to_add.gsub(/\{\{([^}]+)\}\}/) do |match|
+          inner = $1
+          if inner.include?(',')
+            inner.split(',').map { |item| "{{#{item.strip}}}" }.join(', ')
+          else
+            match
+          end
+        end
+      end
+      
+      # Process inside the CSV content body if unquoted block
+      # Except for the `content:----` start and end separators
+      if in_csv_unquoted_block && in_content_sub_block && !(line_to_add.match(/^content:([^\s])\1{2,}\s*$/)) && !line_to_add.strip.empty?
+        if line_to_add.include?(',')
+          begin
+            parsed = CSV.parse_line(line_to_add)
+            if parsed
+              line_to_add = parsed.map { |f| f ? f.strip : '' }.join(', ') + "\n"
+            end
+          rescue CSV::MalformedCSVError
+            # fallback: just remove simple quotes and space commas
+            line_to_add = line_to_add.gsub('"', '').gsub(/,\s*/, ', ')
+          end
+        end
+      end
+      
+      processed_lines << line_to_add
+    end
+  else
+    processed_lines.concat(blank_lines_buffer)
+    blank_lines_buffer.clear
+    processed_lines << line
+  end
+end
+
+# If the file ends while in an assets block
+if in_assets_block
+  processed_lines << "[]\n"
+end
+
+# Append any trailing blank lines
+processed_lines.concat(blank_lines_buffer)
+
+new_content = processed_lines.join
+
+if content != new_content
+  File.write(filename, new_content)
+  puts "Updated #{filename}"
+else
+  puts "No changes made to #{filename}"
+end

@@ -1,0 +1,10 @@
+---
+:value: {}
+:diagnostics:
+- 'The document is missing key: instructions'
+- 'The document is missing key: suites'
+- 'The document is missing key: systems'
+- 'The document is missing key: author'
+- 'The document is missing key: authors'
+- 'The document is missing key: license'
+- 'The document is missing keys: exercise_id, title'

@@ -242,7 +242,7 @@ module Peml
 
     # -------------------------------------------------------------
     def parse_text(text)
-      if @stack_scope && @stack_scope[:flags].match(/\+/) && text.match(/[^\n\r\s]/)
+      if @stack_scope && @stack_scope[:flags].match(/\+/) && text.match(/[^\s]/)
         @stack_scope[:array] << { "type" => "text", "value" => text.gsub(/(^\s*)|(\s*$)/, '') }
       else
         @buffer_string += text

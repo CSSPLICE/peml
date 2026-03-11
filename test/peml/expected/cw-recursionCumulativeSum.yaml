@@ -1,0 +1,58 @@
+---
+:value:
+  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/267/practice?workout_id=51
+  title: 'Recursion Programming Exercise: Cumulative Sum'
+  external_id: RecC-Sumtok
+  is_public: 'true'
+  experience: '10'
+  language_list: Java
+  license:
+    id: cc-sa-4.0
+    owner:
+      email: sallyhamouda@gmail.com
+      name: sallyhamouda
+  tags:
+    topics: recursion
+    style: code writing
+  instructions: |
+    For function `sumtok`, write the missing recursive call.
+    This function returns the sum of the values from 1 to
+    `k`. The recursive case action should add k to k-1 to
+    k-2.... until it reaches 0.
+  systems:
+  - language: Java
+    assets:
+      code:
+        wrapper:
+          files:
+          - content: |
+              public class  RecCSumtok
+              {
+                  ___
+              }
+        starter:
+          files:
+          - content: |
+              public int sumtok(int k) {
+                  if (k <= 0) {
+                    return 0;
+                  } else {
+                    return <<Missing Recursive case action>>
+                  }
+              }
+      test:
+        files:
+        - type: text/csv-unquoted
+          pattern:
+            actual: subject.sumtok({{k}})
+          content: |
+            k,expected,description
+            5,15,example
+            2,3
+            0,0
+            10,55
+            11,66
+            100,5050
+            4,10,hidden
+            1,1,hidden
+:diagnostics: []

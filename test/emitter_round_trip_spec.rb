@@ -1,11 +1,11 @@
 require 'test_helper'
 require 'peml'
-require 'json'
+require 'yaml'
 
 # Round-trip tests for the PEML emitter (to_peml).
 #
 # For each golden file in test/peml/expected/, this test:
-# 1. Loads the golden JSON and extracts the "value" (parsed PEML hash)
+# 1. Loads the golden YAML and extracts the :value (parsed PEML hash)
 # 2. Emits it back to PEML text via Peml.to_peml()
 # 3. Re-parses the emitted PEML text via Peml.parse()
 # 4. Compares the re-parsed value to the original golden value
@@ -15,10 +15,10 @@ require 'json'
 
 describe "Emitter round-trip" do
   golden_dir = File.expand_path('../peml/expected', __FILE__)
-  golden_files = Dir.glob(File.join(golden_dir, '*.json')).sort
+  golden_files = Dir.glob(File.join(golden_dir, '*.yaml')).sort
 
   # Deep-stringify all keys in a nested structure.
-  # Golden files go through JSON (all string keys), but
+  # Golden files go through YAML, but
   # DatadrivenTestRenderer produces symbol keys in parsed_tests.
   def self.deep_stringify(obj)
     case obj
@@ -34,12 +34,12 @@ describe "Emitter round-trip" do
   end
 
   golden_files.each do |golden_path|
-    basename = File.basename(golden_path, '.json')
+    basename = File.basename(golden_path, '.yaml')
 
     it "round-trips #{basename} through to_peml and back through parse" do
       # 1. Load the golden file and extract just the value (no diagnostics)
-      golden = JSON.parse(File.read(golden_path))
-      original_value = golden['value']
+      golden = YAML.load_file(golden_path)
+      original_value = golden[:value] || golden['value']
 
       # 2. Emit the value to PEML text
       peml_text = Peml.to_peml(original_value)
@@ -50,7 +50,7 @@ describe "Emitter round-trip" do
       # 3. Re-parse the emitted PEML text (result_only to get just the hash)
       reparsed_value = Peml.parse(peml: peml_text, result_only: true)
 
-      # 4. Deep-stringify for comparison (JSON keys are always strings)
+      # 4. Deep-stringify for comparison
       reparsed_value = self.class.deep_stringify(reparsed_value)
 
       # 5. Compare the re-parsed value to the original

@@ -55,10 +55,10 @@ module Peml
       end
       peml
     end
-end
+  end
 
 
-# -------------------------------------------------------------
+  # -------------------------------------------------------------
   class PemlInclude < Liquid::Include
     def initialize(tag_name, markup, options)
       @mysig = "#{tag_name} #{markup}"
@@ -106,4 +106,3 @@ end
 
   Liquid::Template.register_tag('include', PemlInclude)
 end
-

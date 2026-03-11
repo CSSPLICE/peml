@@ -1,10 +1,8 @@
-exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/457/practice?workout_id=680
+exercise_id: cw-x40
 
 title: Arrays - Expand Capacity
-external_id: cw-x40
-is_public: true
-experience: 10
-language_list: Java
+vendor.codeworkout.is_public: true
+difficulty: 10
 
 license.id: cc-sa-4.0
 license.owner.email: edwards@cs.vt.edu
@@ -25,7 +23,8 @@ language: Java
 [.assets.code.wrapper.files]
 content:----------
 import java.util.Arrays;
-public class Answer {
+public class Answer
+{
   ___
 }
 ----------
@@ -33,25 +32,25 @@ public class Answer {
 
 [.assets.code.starter.files]
 content:----------
-public int[] expandCapacity(int[] arr) {
-  ___
+public int[] expandCapacity(int[] arr)
+{
+    ___
 }
 ----------
 []
 
-
 [.assets.test.files]
 type: text/csv-unquoted
-pattern.actual: subject.expandCapacity({{array}})
+pattern.method_invocation: expandCapacity({{array}})
 content:----------
-aray,expected,description
-"new int[]{2,3,0}","new int[]{2,3,0,0,0,0}",example
-"new int[]{}","new int[]{}",example
-"new int[]{6}","new int[]{6,0}",example
-"new int[]{9,9,1}","new int[]{9,9,1,0,0,0}"
-"new int[]{5,5}","new int[]{5,5,0,0}"
-"new int[]{10,1,1,1,1}","new int[]{10,1,1,1,1,0,0,0,0,0}",hidden
-"new int[]{7,8}","new int[]{7,8,0,0}",hidden
+aray, expected, description
+new int[]{2, 3, 0}, new int[]{2, 3, 0, 0, 0, 0}, example
+new int[]{}, new int[]{}, example
+new int[]{6}, new int[]{6, 0}, example
+new int[]{9, 9, 1}, new int[]{9, 9, 1, 0, 0, 0}
+new int[]{5, 5}, new int[]{5, 5, 0, 0}
+new int[]{10, 1, 1, 1, 1}, new int[]{10, 1, 1, 1, 1, 0, 0, 0, 0, 0}, hidden
+new int[]{7, 8}, new int[]{7, 8, 0, 0}, hidden
 ----------
 []
 

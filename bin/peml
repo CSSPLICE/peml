@@ -26,6 +26,14 @@ OptionParser.new do |opts|
     options[:parse_opts][:result_only] = true
   end
 
+  opts.on("--file-name", "Include the name of the file being parsed on a line before the output") do
+    options[:file_name] = true
+  end
+
+  opts.on("--check-only", "Return only diagnostic messages") do
+    options[:check_only] = true
+  end
+
   opts.on("--json", "Output in JSON format") do
     options[:format] = :json
   end
@@ -50,11 +58,23 @@ options[:parse_opts][:filename] = filename
 
 begin
   result = Peml.parse(options[:parse_opts])
+  diagnostics = result[:diagnostics] || []
   
+  if options[:check_only]
+    if diagnostics.empty?
+      exit 0
+    else
+      result = diagnostics
+    end
+  end
+  puts filename if options[:file_name]
   if options[:format] == :json
     puts JSON.pretty_generate(result)
   else
     puts result.to_yaml
+  end
+  if !diagnostics.empty?
+    exit 1
   end
 rescue => e
   if defined?(Parslet::ParseFailed) && e.is_a?(Parslet::ParseFailed)

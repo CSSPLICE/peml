@@ -1,0 +1,52 @@
+---
+:value:
+  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/571/practice?workout_id=759
+  title: hasOdd
+  external_id: ITSC1213_has_odd
+  is_public: 'true'
+  experience: '10'
+  language_list: Java
+  license:
+    id: cc-sa-4.0
+    owner:
+      email: lcao2@uncc.edu
+      name: lcao2
+  tags:
+    topics: array, loop
+    style: coding problem
+  instructions: |
+    This method takes an integer array as a parameter and returns true
+    if the array includes an odd integer; otherwise, the method returns false.
+    For example, if the array passed stores {12, 7, 8, 25, 3}, the method returns
+    true. If the array contains 0 element, the method returns false.
+  systems:
+  - language: Java
+    assets:
+      code:
+        wrapper:
+          files:
+          - content: |
+              public class ArrayProblem
+              {
+                 ___
+              }
+        starter:
+          files:
+          - content: |
+              public boolean hasOdd(int[] nums)
+              {
+                 ___
+              }
+      test:
+        files:
+        - type: text/csv-unquoted
+          pattern:
+            actual: subject.hasOdd({{nums}})
+          content: |
+            nums,expected,description
+            "new int[] {12, 7, 8, 25, 3}",true,example
+            "new int[] {1}",true
+            "new int[] {}",false
+            "new int[] {2, 4, 6}",false
+            "new int[] {1, 3, 2, 7, 8, 9, 10}",true
+:diagnostics: []

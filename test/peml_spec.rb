@@ -3,7 +3,7 @@ require 'test_helper'
 # Golden File (Snapshot) Testing for the PEML Parser
 #
 # This test uses a "golden file" approach to verify functional correctness
-# of the parser. For each .peml input in test/peml/, a corresponding .json
+# of the parser. For each .peml input in test/peml/, a corresponding .yaml
 # file in test/peml/expected/ holds the expected output (both the parsed
 # value and any diagnostics).
 #
@@ -13,7 +13,7 @@ require 'test_helper'
 #
 #   UPDATE_SNAPSHOTS=1 bundle exec rake test
 #     Regenerates all golden files from the current parser output.
-#     Review the generated JSON before committing to confirm correctness.
+#     Review the generated YAML before committing to confirm correctness.
 #
 # Adding new test cases:
 #   Drop a new .peml file in test/peml/, run with UPDATE_SNAPSHOTS=1 to
@@ -32,14 +32,14 @@ describe Peml do
         ex = Peml::parse(filename: f)
         _(ex).wont_be_nil
 
-        golden = File.join(expected_dir, slug.sub('.peml', '.json'))
-        actual_json = JSON.pretty_generate(ex)
+        golden = File.join(expected_dir, slug.sub('.peml', '.yaml'))
+        actual_yaml = ex.to_yaml
 
         if ENV['UPDATE_SNAPSHOTS'] || !File.exist?(golden)
-          File.write(golden, actual_json + "\n")
+          File.write(golden, actual_yaml)
         end
 
-        _(actual_json).must_equal File.read(golden).chomp
+        _(actual_yaml).must_equal File.read(golden)
       end
     end
   end
@@ -56,14 +56,14 @@ describe Peml do
           ex = Peml::parse(filename: f, render_tests: true)
           _(ex).wont_be_nil
 
-          golden = File.join(expected_dir, slug.sub('.peml', '.json'))
-          actual_json = JSON.pretty_generate(ex)
+          golden = File.join(expected_dir, slug.sub('.peml', '.yaml'))
+          actual_yaml = ex.to_yaml
 
           if ENV['UPDATE_SNAPSHOTS'] || !File.exist?(golden)
-            File.write(golden, actual_json + "\n")
+            File.write(golden, actual_yaml)
           end
 
-          _(actual_json).must_equal File.read(golden).chomp
+          _(actual_yaml).must_equal File.read(golden)
         rescue Liquid::FileSystemError => e
           skip "Ignoring missing rendered templates for #{slug}: #{e.message}"
         end
