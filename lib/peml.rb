@@ -25,6 +25,7 @@ module Peml
 
   # -------------------------------------------------------------
   def self.parse(params = {})
+    params = params.transform_keys(&:to_sym) rescue params
     if params[:filename]
       file = File.open(params[:filename])
       begin

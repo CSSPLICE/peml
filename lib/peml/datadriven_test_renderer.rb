@@ -39,6 +39,16 @@ module Peml
                 if file['type'] == 'inline'
                   patterns = default_patterns.merge(file['pattern'] || {})
                   test_cases = { 'test_cases' => file['content'] }
+                  if options['parse_descriptions']
+                    test_cases['test_cases'].each do |test_case|
+                      while (description = test_case['description']) &&
+                            (match = description.match(/^\s*(example|hidden|screening)\s*(?::\s*(.*)|$)\s*$/i))
+                        test_case[match[1].downcase] = true
+                        test_case['description'] = (match[2] || "").strip
+                      end
+                      test_case.delete('description') if test_case['description'].to_s.empty?
+                    end
+                  end
                   resolver = PemlTemplateResolver.new(patterns, language)
                   template_source = resolver.read_template_file('test_class')
                   template_class = Liquid::Template.parse(template_source, :error_mode => :strict)
