@@ -1,11 +1,11 @@
 ---
 :value:
-  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/581/practice?workout_id=759
+  exercise_id: ITSC1213_compress_string
   title: compressString
-  external_id: ITSC1213_compress_string
-  is_public: 'true'
-  experience: '40'
-  language_list: Java
+  vendor:
+    codeworkout:
+      is_public: 'true'
+  difficulty: '40'
   license:
     id: cc-sa-4.0
     owner:
@@ -45,21 +45,22 @@
         files:
         - type: text/x-java
           pattern:
-            actual: subject.compressString({{message}})
+            method_invocation: compressString({{message}})
           content: "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport
             java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n
             \ private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject
             = new Answer();\n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic
-            void test_1()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"\"\"b3a2c4d1\"\"\",\n
-            \   subject.compressString(\"\"\"bbbaaccccd\"\"\"));\n\n  \n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic
-            void test_2()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"\"\"abccdeff\"\"\",\n
-            \   subject.compressString(\"\"\"abccdeff\"\"\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic
-            void test_3()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"\"\"a\"\"\",\n
-            \   subject.compressString(\"\"\"a\"\"\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic
-            void test_4()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"\"\"abb\"\"\",\n
-            \   subject.compressString(\"\"\"abb\"\"\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic
-            void test_5()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"\"\"a3c1d3a3\"\"\",\n
-            \   subject.compressString(\"\"\"aaacdddaaa\"\"\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic
-            void test_6()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"\"\"a2b1c1b4\"\"\",\n
-            \   subject.compressString(\"\"\"aabcbbbb\"\"\"));\n\n  \n}\n  \n  \n}"
-:diagnostics: []
+            void test_1()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"b3a2c4d1\",\n
+            \   subject.compressString(\"bbbaaccccd\"));\n\n  \n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic
+            void test_2()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"abccdeff\",\n
+            \   subject.compressString(\"abccdeff\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic
+            void test_3()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"a\",\n    subject.compressString(\"a\"));\n\n
+            \ \n}\n  \n    @Test\n\n\n\n\n\npublic void test_4()\n{\n  \n  \n  \n
+            \ assertEquals(\n    \n    \"abb\",\n    subject.compressString(\"abb\"));\n\n
+            \ \n}\n  \n    @Test\n\n\n\n\n\npublic void test_5()\n{\n  \n  \n  \n
+            \ assertEquals(\n    \n    \"a3c1d3a3\",\n    subject.compressString(\"aaacdddaaa\"));\n\n
+            \ \n}\n  \n    @Test\n\n\n\n\n\npublic void test_6()\n{\n  \n  \n  \n
+            \ assertEquals(\n    \n    \"a2b1c1b4\",\n    subject.compressString(\"aabcbbbb\"));\n\n
+            \ \n}\n  \n  \n}"
+:diagnostics:
+- Path '/difficulty' is not an integer.

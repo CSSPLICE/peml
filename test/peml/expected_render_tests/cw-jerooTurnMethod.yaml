@@ -1,11 +1,11 @@
 ---
 :value:
-  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/851/practice?workout_id=1342
+  exercise_id: edu.vt.cs.1114.jeroo_turn_method
   title: CodeWorkout Jeroo turn() method
-  external_id: edu.vt.cs.1114.jeroo_turn_method
-  is_public: 'true'
-  experience: '50'
-  language_list: Java
+  vendor:
+    codeworkout:
+      is_public: 'true'
+  difficulty: '50'
   license:
     id: cc-sa-4.0
     owner:
@@ -60,7 +60,7 @@
       test:
         files:
         - type: java/junit
-          content: |
+          content: |+
             import codeworkout.*;
             public class AnswerTest extends CodeWorkoutTest {
                 private Answer testJeroo;
@@ -75,10 +75,8 @@
                 @Description("Both turn method calls are fixed")
                 public void testBothTurnMethodCallsAreFixed() {
                   assertEquals("extra method calls have been added", 4, calls.size());
-                  assertEquals("hop() calls should not be modified",
-                    "hop", calls.get(0));
-                  assertEquals("hop() calls should not be modified",
-                    "hop", calls.get(2));
+                  assertEquals("hop() calls should not be modified", "hop", calls.get(0));
+                  assertEquals("hop() calls should not be modified", "hop", calls.get(2));
                   if (!"turn(LEFT)".equals(calls.get(1)))
                   {
                     fail("first turn method call was not revised properly");
@@ -90,6 +88,6 @@
                 }
             }
 
-            ----------[]
-            []
-:diagnostics: []
+:diagnostics:
+- Path '/difficulty' is not an integer.
+...

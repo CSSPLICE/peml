@@ -1,11 +1,11 @@
 ---
 :value:
-  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/917/practice?workout_id=1402
+  exercise_id: CS1114_Week4SyntaxDrill_1
   title: CodeWorkout While Loops with Relational Operators 1
-  external_id: CS1114_Week4SyntaxDrill_1
-  is_public: 'true'
-  experience: '50'
-  language_list: Java
+  vendor:
+    codeworkout:
+      is_public: 'true'
+  difficulty: '50'
   license:
     id: cc-sa-4.0
     owner:
@@ -102,6 +102,5 @@
 
                 }
             }
-            ----------[]
-            []
-:diagnostics: []
+:diagnostics:
+- Path '/difficulty' is not an integer.

@@ -1,11 +1,11 @@
 ---
 :value:
-  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/562/practice?workout_id=759
+  exercise_id: ITSC1213_is_unique
   title: isUnique
-  external_id: ITSC1213_is_unique
-  is_public: 'true'
-  experience: '20'
-  language_list: Java
+  vendor:
+    codeworkout:
+      is_public: 'true'
+  difficulty: '20'
   license:
     id: cc-sa-4.0
     owner:
@@ -42,27 +42,28 @@
         files:
         - type: text/x-java
           pattern:
-            actual: subject.isUnique({{nums}})
+            method_invocation: isUnique({{nums}})
           content: "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport
             java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n
             \ private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject
             = new Answer();\n}\n  \n    @Test\n\n\n\n\n\npublic void test_1()\n{\n
-            \ \n  \n  \n  assertEquals(\n    \n    true,\n    subject.isUnique(\"new
-            int[] {}\"));\n\n  \n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic
-            void test_2()\n{\n  \n  \n  \n  assertEquals(\n    \n    true,\n    subject.isUnique(\"new
-            int[] {12, 7, -1, 25, 3}\"));\n\n  \n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic
-            void test_3()\n{\n  \n  \n  \n  assertEquals(\n    \n    false,\n    subject.isUnique(\"new
-            int[] {5, 3, 5, 2}\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void
-            test_4()\n{\n  \n  \n  \n  assertEquals(\n    \n    true,\n    subject.isUnique(\"new
-            int[] {2}\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_5()\n{\n
-            \ \n  \n  \n  assertEquals(\n    \n    false,\n    subject.isUnique(\"new
-            int[] {5, 5, 3, 2}\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void
-            test_6()\n{\n  \n  \n  \n  assertEquals(\n    \n    false,\n    subject.isUnique(\"new
-            int[] {5, 5, 5, 5}\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void
-            test_7()\n{\n  \n  \n  \n  assertEquals(\n    \n    false,\n    subject.isUnique(\"new
-            int[] {3, 2, 1, 1}\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void
-            test_8()\n{\n  \n  \n  \n  assertEquals(\n    \n    false,\n    subject.isUnique(\"new
-            int[] {1, 2, 2, 3}\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void
-            test_9()\n{\n  \n  \n  \n  assertEquals(\n    \n    false,\n    subject.isUnique(\"new
-            int[] {1, 2, 3, 1}\"));\n\n  \n}\n  \n  \n}"
-:diagnostics: []
+            \ \n  \n  \n  assertEquals(\n    \n    true,\n    subject.isUnique(new
+            int[] {}));\n\n  \n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic
+            void test_2()\n{\n  \n  \n  \n  assertEquals(\n    \n    true,\n    subject.isUnique(new
+            int[] {12, 7, -1, 25, 3}));\n\n  \n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic
+            void test_3()\n{\n  \n  \n  \n  assertEquals(\n    \n    false,\n    subject.isUnique(new
+            int[] {5, 3, 5, 2}));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_4()\n{\n
+            \ \n  \n  \n  assertEquals(\n    \n    true,\n    subject.isUnique(new
+            int[] {2}));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_5()\n{\n
+            \ \n  \n  \n  assertEquals(\n    \n    false,\n    subject.isUnique(new
+            int[] {5, 5, 3, 2}));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_6()\n{\n
+            \ \n  \n  \n  assertEquals(\n    \n    false,\n    subject.isUnique(new
+            int[] {5, 5, 5, 5}));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_7()\n{\n
+            \ \n  \n  \n  assertEquals(\n    \n    false,\n    subject.isUnique(new
+            int[] {3, 2, 1, 1}));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_8()\n{\n
+            \ \n  \n  \n  assertEquals(\n    \n    false,\n    subject.isUnique(new
+            int[] {1, 2, 2, 3}));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_9()\n{\n
+            \ \n  \n  \n  assertEquals(\n    \n    false,\n    subject.isUnique(new
+            int[] {1, 2, 3, 1}));\n\n  \n}\n  \n  \n}"
+:diagnostics:
+- Path '/difficulty' is not an integer.

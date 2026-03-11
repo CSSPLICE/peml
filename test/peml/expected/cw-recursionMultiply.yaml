@@ -1,11 +1,11 @@
 ---
 :value:
-  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/264/practice?workout_id=47
+  exercise_id: RecC-Multiply
   title: 'Recursion Programming Exercise: Multiply'
-  external_id: RecC-Multiply
-  is_public: 'true'
-  experience: '10'
-  language_list: Java
+  vendor:
+    codeworkout:
+      is_public: 'true'
+  difficulty: '10'
   license:
     id: cc-sa-4.0
     owner:
@@ -46,12 +46,13 @@
         files:
         - type: text/csv-unquoted
           pattern:
-            actual: subject.multiply({{x}}, {{y}})
+            method_invocation: multiply({{x}}, {{y}})
           content: |
-            x,y,expected,description
-            2,3,6,example
-            4,4,16
-            9,10,90
-            7,15,105
-            1,1,1,hidden
-:diagnostics: []
+            x, y, expected, description
+            2, 3, 6, example
+            4, 4, 16
+            9, 10, 90
+            7, 15, 105
+            1, 1, 1, hidden
+:diagnostics:
+- Path '/difficulty' is not an integer.

@@ -8,6 +8,8 @@
   version:
     timestamp: '2016-04-01T20:18:53-04:00'
   author: metarus208@gmail.com
+  license:
+    id: all-rights-reserved
   instructions: |
     Given a string, return the sum of the numbers appearing in the string,
     ignoring all other characters. A number is a series of 1 or more digit
@@ -29,7 +31,7 @@
         files:
         - type: text/x-java
           pattern:
-            actual: subject.sumNumbers({{str}})
+            method_invocation: sumNumbers({{str}})
           content: "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport
             java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n
             \ private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject
@@ -59,4 +61,5 @@
             \ \n}\n  \n    @Test\n@Description(hidden)\n\n\n\n\npublic void test_13()\n{\n
             \ \n  \n  \n  assertEquals(\n    \n    0,\n    subject.sumNumbers(\"sdffherbwm\"));\n\n
             \ \n}\n  \n  \n}"
-:diagnostics: []
+:diagnostics:
+- 'Path ''/license'' is missing key: owner'

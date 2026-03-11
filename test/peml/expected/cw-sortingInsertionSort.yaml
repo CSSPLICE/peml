@@ -1,11 +1,11 @@
 ---
 :value:
-  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/475/practice?workout_id=680
+  exercise_id: cw-x58
   title: Sorting - Insertion Sort
-  external_id: cw-x58
-  is_public: 'true'
-  experience: '30'
-  language_list: Java
+  vendor:
+    codeworkout:
+      is_public: 'true'
+  difficulty: '30'
   license:
     id: cc-sa-4.0
     owner:
@@ -64,10 +64,11 @@
         files:
         - type: text/csv-unquoted
           pattern:
-            actual: subject.insertionSort({{array}})
+            method_invocation: insertionSort({{array}})
           content: |
-            aray,expected,description
-            "new int[]{2, 0, 3, 4, 8, 10, 1}","new int[]{0, 1, 2, 3, 4, 8, 10}",example
-            "new int[]{4, 3, 0, 10, 33, 2}","new int[]{0, 2, 3, 4, 10, 33}"
-            "new int[]{99, 6, 10, 7}","new int[]{6, 7, 10, 99}",hidden
-:diagnostics: []
+            array, expected, description
+            new int[]{2, 0, 3, 4, 8, 10, 1}, new int[]{0, 1, 2, 3, 4, 8, 10}, example
+            new int[]{4, 3, 0, 10, 33, 2}, new int[]{0, 2, 3, 4, 10, 33}
+            new int[]{99, 6, 10, 7}, new int[]{6, 7, 10, 99}, hidden
+:diagnostics:
+- Path '/difficulty' is not an integer.

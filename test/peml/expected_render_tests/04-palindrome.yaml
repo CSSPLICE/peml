@@ -3,8 +3,9 @@
   exercise_id: edu.vt.cs.cs1114.palindromes
   title: Palindromes (A Simple PEML Example)
   author: edwards@cs.vt.edu
-  topics: Strings, loops, conditions
-  prerequisites: variables, assignment, boolean operators
+  tag:
+    topics: Strings, loops, conditions
+    prerequisites: variables, assignment, boolean operators
   instructions: |
     Write a program that reads a single string (in the form of one line
     of text) from its standard input, and determines whether the string is
@@ -23,19 +24,20 @@
     ```
     "Flintstone" is not a palindrome.
     ```
-  assets:
-    test_format: stdin-stdout
   systems:
   - language: java
     version: ">= 1.5"
-  suites:
-  - cases:
-    - stdin: racecar
-      stdout: '"racecar" is a palindrome.'
-    - stdin: Flintstone
-      stdout: '"Flintstone" is not a palindrome.'
-    - stdin: url(some/local/input.txt)
-      stdout: url(some/local/output.txt)
-    - stdin: url(http://my.school.edu/some/local/generator/input)
-      stdout: url(http://my.school.edu/some/local/generator/output)
+    assets:
+      tests:
+        files:
+        - type: inline
+          content:
+          - stdin: racecar
+            stdout: '"racecar" is a palindrome.'
+          - stdin: Flintstone
+            stdout: '"Flintstone" is not a palindrome.'
+          - stdin: url(some/local/input.txt)
+            stdout: url(some/local/output.txt)
+          - stdin: url(http://my.school.edu/some/local/generator/input)
+            stdout: url(http://my.school.edu/some/local/generator/output)
 :diagnostics: []

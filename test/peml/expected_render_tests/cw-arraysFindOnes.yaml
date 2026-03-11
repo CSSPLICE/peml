@@ -1,11 +1,11 @@
 ---
 :value:
-  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/463/practice?workout_id=680
+  exercise_id: cw-x46
   title: CodeWorkout Arrays - Find Ones
-  external_id: cw-x46
-  is_public: 'true'
-  experience: '10'
-  language_list: Java
+  vendor:
+    codeworkout:
+      is_public: 'true'
+  difficulty: '10'
   license:
     id: cc-sa-4.0
     owner:
@@ -40,27 +40,28 @@
         files:
         - type: text/x-java
           pattern:
-            actual: subject.oneFinder({{nums}})
+            method_invocation: oneFinder({{nums}})
           content: "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport
             java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n
             \ private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject
             = new Answer();\n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic
-            void test_1()\n{\n  \n  \n  \n  assertEquals(\n    \n    3,\n    subject.oneFinder(\"new
-            int[]{1,1,1}\"));\n\n  \n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic
-            void test_2()\n{\n  \n  \n  \n  assertEquals(\n    \n    2,\n    subject.oneFinder(\"new
-            int[]{4,1,4,0,0,0,2,4,4,1,4}\"));\n\n  \n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic
-            void test_3()\n{\n  \n  \n  \n  assertEquals(\n    \n    0,\n    subject.oneFinder(\"new
-            int[]{2}\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_4()\n{\n
-            \ \n  \n  \n  assertEquals(\n    \n    0,\n    subject.oneFinder(\"new
-            int[]{}\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_5()\n{\n
-            \ \n  \n  \n  assertEquals(\n    \n    3,\n    subject.oneFinder(\"new
-            int[]{1,2,1,5,4,2,1,6,4}\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic
-            void test_6()\n{\n  \n  \n  \n  assertEquals(\n    \n    0,\n    subject.oneFinder(\"new
-            int[]{5,7,4,7,3}\"));\n\n  \n}\n  \n    @Test\n@Description(hidden)\n\n\n\n\npublic
-            void test_7()\n{\n  \n  \n  \n  assertEquals(\n    \n    9,\n    subject.oneFinder(\"new
-            int[]{1,1,1,1,1,1,1,1,1}\"));\n\n  \n}\n  \n    @Test\n@Description(hidden)\n\n\n\n\npublic
-            void test_8()\n{\n  \n  \n  \n  assertEquals(\n    \n    4,\n    subject.oneFinder(\"new
-            int[]{1,1,2,3,4,1,3,4,9,7,10,1}\"));\n\n  \n}\n  \n    @Test\n@Description(hidden)\n\n\n\n\npublic
-            void test_9()\n{\n  \n  \n  \n  assertEquals(\n    \n    1,\n    subject.oneFinder(\"new
-            int[]{0,0,0,0,0,1}\"));\n\n  \n}\n  \n  \n}"
-:diagnostics: []
+            void test_1()\n{\n  \n  \n  \n  assertEquals(\n    \n    3,\n    subject.oneFinder(new
+            int[]{1,1,1}));\n\n  \n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic
+            void test_2()\n{\n  \n  \n  \n  assertEquals(\n    \n    2,\n    subject.oneFinder(new
+            int[]{4,1,4,0,0,0,2,4,4,1,4}));\n\n  \n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic
+            void test_3()\n{\n  \n  \n  \n  assertEquals(\n    \n    0,\n    subject.oneFinder(new
+            int[]{2}));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_4()\n{\n
+            \ \n  \n  \n  assertEquals(\n    \n    0,\n    subject.oneFinder(new int[]{}));\n\n
+            \ \n}\n  \n    @Test\n\n\n\n\n\npublic void test_5()\n{\n  \n  \n  \n
+            \ assertEquals(\n    \n    3,\n    subject.oneFinder(new int[]{1,2,1,5,4,2,1,6,4}));\n\n
+            \ \n}\n  \n    @Test\n\n\n\n\n\npublic void test_6()\n{\n  \n  \n  \n
+            \ assertEquals(\n    \n    0,\n    subject.oneFinder(new int[]{5,7,4,7,3}));\n\n
+            \ \n}\n  \n    @Test\n@Description(hidden)\n\n\n\n\npublic void test_7()\n{\n
+            \ \n  \n  \n  assertEquals(\n    \n    9,\n    subject.oneFinder(new int[]{1,1,1,1,1,1,1,1,1}));\n\n
+            \ \n}\n  \n    @Test\n@Description(hidden)\n\n\n\n\npublic void test_8()\n{\n
+            \ \n  \n  \n  assertEquals(\n    \n    4,\n    subject.oneFinder(new int[]{1,1,2,3,4,1,3,4,9,7,10,1}));\n\n
+            \ \n}\n  \n    @Test\n@Description(hidden)\n\n\n\n\npublic void test_9()\n{\n
+            \ \n  \n  \n  assertEquals(\n    \n    1,\n    subject.oneFinder(new int[]{0,0,0,0,0,1}));\n\n
+            \ \n}\n  \n  \n}"
+:diagnostics:
+- Path '/difficulty' is not an integer.

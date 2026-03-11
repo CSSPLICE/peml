@@ -1,11 +1,11 @@
 ---
 :value:
-  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/435/practice?workout_id=680
+  exercise_id: cw-x18
   title: Generics - Comparable Cage
-  external_id: cw-x18
-  is_public: 'true'
-  experience: '40'
-  language_list: Java
+  vendor:
+    codeworkout:
+      is_public: 'true'
+  difficulty: '40'
   license:
     id: cc-sa-4.0
     owner:
@@ -122,21 +122,22 @@
         files:
         - type: text/x-java
           pattern:
-            actual: subject.tester({{testNum}})
+            method_invocation: tester({{testNum}})
           content: "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport
             java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n
             \ private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject
-            = new Answer();\n}\n  \n    @Test\n@Description(\"size2Cage.compareTo(size1Cage)
-            > 0 -> true\")\n\n\n\n\npublic void test_1()\n{\n  \n  \n  \n  assertEquals(\n
-            \   \n    true,\n    subject.tester(1));\n\n  \n}\n  \n    @Test\n@Description(\"size4Cage.compareTo(size5Cage)
-            > 0 -> false\")\n\n\n\n\npublic void test_2()\n{\n  \n  \n  \n  assertEquals(\n
-            \   \n    false,\n    subject.tester(2));\n\n  \n}\n  \n    @Test\n@Description(\"sizeNeg3Cage.compareTo(size0Cage)
-            < 0 -> true\")\n\n\n\n\npublic void test_3()\n{\n  \n  \n  \n  assertEquals(\n
-            \   \n    true,\n    subject.tester(3));\n\n  \n}\n  \n    @Test\n@Description(\"size2Cage.compareTo(size1Cage)
-            < 0 -> false\")\n\n\n\n\npublic void test_4()\n{\n  \n  \n  \n  assertEquals(\n
-            \   \n    false,\n    subject.tester(4));\n\n  \n}\n  \n    @Test\n@Description(\"size2Cage.compareTo(otherSize2Cage)
-            == 0 -> true\")\n\n\n\n\npublic void test_5()\n{\n  \n  \n  \n  assertEquals(\n
-            \   \n    true,\n    subject.tester(5));\n\n  \n}\n  \n    @Test\n@Description(\"size2Cage.compareTo(size1Cage)
-            == 0 -> false\")\n\n\n\n\npublic void test_6()\n{\n  \n  \n  \n  assertEquals(\n
+            = new Answer();\n}\n  \n    @Test\n@Description(size2Cage.compareTo(size1Cage)
+            > 0 -> true)\n\n\n\n\npublic void test_1()\n{\n  \n  \n  \n  assertEquals(\n
+            \   \n    true,\n    subject.tester(1));\n\n  \n}\n  \n    @Test\n@Description(size4Cage.compareTo(size5Cage)
+            > 0 -> false)\n\n\n\n\npublic void test_2()\n{\n  \n  \n  \n  assertEquals(\n
+            \   \n    false,\n    subject.tester(2));\n\n  \n}\n  \n    @Test\n@Description(sizeNeg3Cage.compareTo(size0Cage)
+            < 0 -> true)\n\n\n\n\npublic void test_3()\n{\n  \n  \n  \n  assertEquals(\n
+            \   \n    true,\n    subject.tester(3));\n\n  \n}\n  \n    @Test\n@Description(size2Cage.compareTo(size1Cage)
+            < 0 -> false)\n\n\n\n\npublic void test_4()\n{\n  \n  \n  \n  assertEquals(\n
+            \   \n    false,\n    subject.tester(4));\n\n  \n}\n  \n    @Test\n@Description(size2Cage.compareTo(otherSize2Cage)
+            == 0 -> true)\n\n\n\n\npublic void test_5()\n{\n  \n  \n  \n  assertEquals(\n
+            \   \n    true,\n    subject.tester(5));\n\n  \n}\n  \n    @Test\n@Description(size2Cage.compareTo(size1Cage)
+            == 0 -> false)\n\n\n\n\npublic void test_6()\n{\n  \n  \n  \n  assertEquals(\n
             \   \n    false,\n    subject.tester(6));\n\n  \n}\n  \n  \n}"
-:diagnostics: []
+:diagnostics:
+- Path '/difficulty' is not an integer.

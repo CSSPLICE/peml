@@ -1,11 +1,11 @@
 ---
 :value:
-  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/582/practice?workout_id=759
+  exercise_id: ITSC1213_encrypt
   title: encrypt
-  external_id: ITSC1213_encrypt
-  is_public: 'true'
-  experience: '20'
-  language_list: Java
+  vendor:
+    codeworkout:
+      is_public: 'true'
+  difficulty: '20'
   license:
     id: cc-sa-4.0
     owner:
@@ -43,12 +43,13 @@
         files:
         - type: text/csv-unquoted
           pattern:
-            actual: subject.encrypt({{message}})
+            method_invocation: encrypt({{message}})
           content: |
-            message,expected,description
-            """How""","""owHay""",example
-            """""",""""""
-            """z""","""zay"""
-            """CS""","""SCay"""
-            """lambda""","""ambdalzy"""
-:diagnostics: []
+            message, expected, description
+            "How", "owHay", example
+            "", ""
+            "z", "zay"
+            "CS", "SCay"
+            "lambda", "ambdalzy"
+:diagnostics:
+- Path '/difficulty' is not an integer.

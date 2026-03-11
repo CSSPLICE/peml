@@ -1,10 +1,8 @@
-exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/435/practice?workout_id=680
+exercise_id: cw-x18
 
 title: Generics - Comparable Cage
-external_id: cw-x18
-is_public: true
-experience: 40
-language_list: Java
+vendor.codeworkout.is_public: true
+difficulty: 40
 
 license.id: cc-sa-4.0
 license.owner.email: edwards@cs.vt.edu
@@ -125,15 +123,15 @@ public class Cage <P extends Pet> ___{
 
 [.assets.test.files]
 type: text/csv-unquoted
-pattern.actual: subject.tester({{testNum}})
+pattern.method_invocation: tester({{testNum}})
 content:----------
-testNum,expected,description
-1,true,"size2Cage.compareTo(size1Cage) > 0 -> true"
-2,false,"size4Cage.compareTo(size5Cage) > 0 -> false"
-3,true,"sizeNeg3Cage.compareTo(size0Cage) < 0 -> true"
-4,false,"size2Cage.compareTo(size1Cage) < 0 -> false"
-5,true,"size2Cage.compareTo(otherSize2Cage) == 0 -> true"
-6,false,"size2Cage.compareTo(size1Cage) == 0 -> false"
+testNum, expected, description
+1, true, size2Cage.compareTo(size1Cage) > 0 -> true
+2, false, size4Cage.compareTo(size5Cage) > 0 -> false
+3, true, sizeNeg3Cage.compareTo(size0Cage) < 0 -> true
+4, false, size2Cage.compareTo(size1Cage) < 0 -> false
+5, true, size2Cage.compareTo(otherSize2Cage) == 0 -> true
+6, false, size2Cage.compareTo(size1Cage) == 0 -> false
 ----------
 []
 

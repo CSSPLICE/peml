@@ -1,11 +1,11 @@
 ---
 :value:
-  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/607/practice?workout_id=759
+  exercise_id: ITSC1213_constructor_2
   title: Implement a Constructor
-  external_id: ITSC1213_constructor_2
-  is_public: 'false'
-  experience: '10'
-  language_list: Java
+  vendor:
+    codeworkout:
+      is_public: 'false'
+  difficulty: '10'
   license:
     id: cc-sa-4.0
     owner:
@@ -62,9 +62,10 @@
                public void testConstructorExercise()
                {
                  boolean correctValues = false;
-                 Course c = new Course(1213, "Intro to CS II", "ITSC", 72);
+                 Course c = new Course(1213, Intro to CS II, ITSC, 72);
                  correctValues = (c.number == 1213 && "Intro to CS II".equals(c.title) && "ITSC".equals(c.department) && c.capacity == 72);
-                 assertTrue("Fields were not set correctly",correctValues);
+                 assertTrue("Fields were not set correctly", correctValues);
                }
             }
-:diagnostics: []
+:diagnostics:
+- Path '/difficulty' is not an integer.

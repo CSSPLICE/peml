@@ -1,10 +1,8 @@
-exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/839/practice?workout_id=1334
+exercise_id: CS1114_Week2SyntaxDrill4
 
 title: CodeWorkout Calling Super Practice 1
-external_id: CS1114_Week2SyntaxDrill4
-is_public: true
-experience: 50
-language_list: Java
+vendor.codeworkout.is_public: true
+difficulty: 50
 
 license.id: cc-sa-4.0
 license.owner.email: admin@codeworkout.org

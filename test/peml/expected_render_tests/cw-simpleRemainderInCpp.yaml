@@ -1,11 +1,11 @@
 ---
 :value:
-  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/695/practice?workout_id=955
+  exercise_id: chico_simpleRemainder
   title: Sorting - Simple Remainder in C++
-  external_id: chico_simpleRemainder
-  is_public: 'true'
-  experience: '50'
-  language_list: C++
+  vendor:
+    codeworkout:
+      is_public: 'true'
+  difficulty: '50'
   license:
     id: cc-sa-4.0
     owner:
@@ -48,11 +48,12 @@
         files:
         - type: text/x-cpp
           pattern:
-            actual: subject.remainder()
+            method_invocation: remainder()
           content: "#include <cxxtest/TestSuite.h>\n#include \".h\"\n\n\nclass TestAnswer
             : public CxxTest::TestSuite\n{\npublic:\n  \n  void setUp()\n{\n  // Set
             up test fixtures, if any.\n  subject = new ();\n}\n  void tearDown()\n{\n
             \ delete subject;\n}\n  \n  void test_1()\n{\n  // \n// \n// \n// \n//
-            \n  \n  \n  \n  \n\nTS_ASSERT_EQUALS(5, subject.remainder());\n\n  \n}\n
+            \n  \n  \n  \n  \n\nTS_ASSERT_EQUALS(5, subject->remainder());\n\n  \n}\n
             \ \nprivate:\n   *subject;\n};"
-:diagnostics: []
+:diagnostics:
+- Path '/difficulty' is not an integer.

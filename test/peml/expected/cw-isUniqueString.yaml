@@ -1,11 +1,11 @@
 ---
 :value:
-  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/586/practice?workout_id=759
+  exercise_id: ITSC1213_is_unique_string
   title: isUniqueString
-  external_id: ITSC1213_is_unique_string
-  is_public: 'true'
-  experience: '10'
-  language_list: Java
+  vendor:
+    codeworkout:
+      is_public: 'true'
+  difficulty: '10'
   license:
     id: cc-sa-4.0
     owner:
@@ -42,13 +42,14 @@
         files:
         - type: text/csv-unquoted
           pattern:
-            actual: subject.isUniqueString({{message}})
+            method_invocation: isUniqueString({{message}})
           content: |
-            message,expected,description
-            """coding""",true,example
-            """Lambda""",false,example
-            """Hlamnh""",true
-            """ab cd ef""",false
-            """""",true
-            """hello world""",false,hidden
-:diagnostics: []
+            message, expected, description
+            "coding", true, example
+            "Lambda", false, example
+            "Hlamnh", true
+            "ab cd ef", false
+            "", true
+            "hello world", false, hidden
+:diagnostics:
+- Path '/difficulty' is not an integer.

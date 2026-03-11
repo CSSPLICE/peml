@@ -1,11 +1,11 @@
 ---
 :value:
-  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/263/practice?workout_id=46
+  exercise_id: RecC-Largest
   title: 'Recursion Programming Exercise: Largest'
-  external_id: RecC-Largest
-  is_public: 'true'
-  experience: '10'
-  language_list: Java
+  vendor:
+    codeworkout:
+      is_public: 'true'
+  difficulty: '10'
   license:
     id: cc-sa-4.0
     owner:
@@ -47,19 +47,20 @@
         files:
         - type: text/x-java
           pattern:
-            actual: subject.largest({{nums}}, {{index}})
+            method_invocation: largest({{nums}}, {{index}})
           content: "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport
             java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n
             \ private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject
             = new Answer();\n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic
-            void test_1()\n{\n  \n  \n  \n  assertEquals(\n    \n    8,\n    subject.largest(\"new
-            int [] {2, 4, 8}\", 2));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void
-            test_2()\n{\n  \n  \n  \n  assertEquals(\n    \n    7,\n    subject.largest(\"new
-            int [] {7, 7, 7}\", 2));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void
-            test_3()\n{\n  \n  \n  \n  assertEquals(\n    \n    5,\n    subject.largest(\"new
-            int [] {5}\", 0));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_4()\n{\n
-            \ \n  \n  \n  assertEquals(\n    \n    10,\n    subject.largest(\"new
-            int [] {10, 4, 8}\", 2));\n\n  \n}\n  \n    @Test\n@Description(hidden)\n\n\n\n\npublic
-            void test_5()\n{\n  \n  \n  \n  assertEquals(\n    \n    23,\n    subject.largest(\"new
-            int [] {6, 23, 5}\", 2));\n\n  \n}\n  \n  \n}"
-:diagnostics: []
+            void test_1()\n{\n  \n  \n  \n  assertEquals(\n    \n    8,\n    subject.largest(new
+            int [] {2, 4, 8}, 2));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void
+            test_2()\n{\n  \n  \n  \n  assertEquals(\n    \n    7,\n    subject.largest(new
+            int [] {7, 7, 7}, 2));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void
+            test_3()\n{\n  \n  \n  \n  assertEquals(\n    \n    5,\n    subject.largest(new
+            int [] {5}, 0));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_4()\n{\n
+            \ \n  \n  \n  assertEquals(\n    \n    10,\n    subject.largest(new int
+            [] {10, 4, 8}, 2));\n\n  \n}\n  \n    @Test\n@Description(hidden)\n\n\n\n\npublic
+            void test_5()\n{\n  \n  \n  \n  assertEquals(\n    \n    23,\n    subject.largest(new
+            int [] {6, 23, 5}, 2));\n\n  \n}\n  \n  \n}"
+:diagnostics:
+- Path '/difficulty' is not an integer.

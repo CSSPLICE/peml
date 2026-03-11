@@ -1,11 +1,11 @@
 ---
 :value:
-  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/593/practice?workout_id=759
+  exercise_id: ITSC1213_get_maxlength
   title: getMaxLength
-  external_id: ITSC1213_get_maxlength
-  is_public: 'true'
-  experience: '10'
-  language_list: Java
+  vendor:
+    codeworkout:
+      is_public: 'true'
+  difficulty: '10'
   license:
     id: cc-sa-4.0
     owner:
@@ -42,11 +42,12 @@
         files:
         - type: text/csv-unquoted
           pattern:
-            actual: subject.getMaxLength({{list}})
+            method_invocation: getMaxLength({{list}})
           content: |
-            list,expected,description
-            "new java.util.ArrayList(){{add(""four"");add(""and"");add(""years"");add(""ago"");}}",5,example
-            "new java.util.ArrayList()",0
-            "new java.util.ArrayList(){{add(""once"");add(""upon"");add(""a"");add(""time"");}}",4
-            "new java.util.ArrayList(){{add(""greetings"");add(""hello"");add(""welcome"");add(""byebye"");}}",8,hidden
-:diagnostics: []
+            list, expected, description
+            new java.util.ArrayList(){{add("four");add("and");add("years");add("ago");}}, 5, example
+            new java.util.ArrayList(), 0
+            new java.util.ArrayList(){{add("once");add("upon");add("a");add("time");}}, 4
+            new java.util.ArrayList(){{add("greetings");add("hello");add("welcome");add("byebye");}}, 8, hidden
+:diagnostics:
+- Path '/difficulty' is not an integer.

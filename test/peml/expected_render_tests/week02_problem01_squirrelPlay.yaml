@@ -8,6 +8,8 @@
   version:
     timestamp: '2020-01-15T20:18:53-04:00'
   author: jw87@vt.edu
+  license:
+    id: all-rights-reserved
   instructions: |
     Write a function in Python that implements the following logic: The squirrels
     in Palo Alto spend most of the day playing. In particular, they play if the
@@ -16,43 +18,50 @@
     isSummer, return True if the squirrels play and False otherwise.
   systems:
   - language: Python
-    src:
+    assets:
+      code:
+        starter:
+          files:
+          - name: answer.py
+            content: |
+              def squirrelPlay(temp, isSummer):
+                  pass
+  assets:
+    test:
       files:
-      - name: answer.py
-        content: |
-          def squirrelPlay(temp, isSummer):
-              pass
-    suites:
-    - template: self.assertEqual({{expected}}, subject.squirrelPlay({{temp}}, {{isSummer}}))
-      cases:
-      - temp: '40'
-        isSummer: 'True'
-        expected: 'False'
-      - temp: '40'
-        isSummer: 'False'
-        expected: 'False'
-      - temp: '70'
-        isSummer: 'True'
-        expected: 'True'
-      - temp: '70'
-        isSummer: 'False'
-        expected: 'True'
-      - temp: '60'
-        isSummer: 'True'
-        expected: 'True'
-      - temp: '90'
-        isSummer: 'True'
-        expected: 'True'
-      - temp: '100'
-        isSummer: 'False'
-        expected: 'False'
-      - temp: '100'
-        isSummer: 'True'
-        expected: 'True'
-      - temp: '80'
-        isSummer: 'False'
-        expected: 'True'
-      - temp: '80'
-        isSummer: 'True'
-        expected: 'True'
-:diagnostics: []
+      - pattern:
+          assertEquals: self.assertEqual({{expected}}, subject.squirrelPlay({{temp}},
+            {{isSummer}}))
+        content:
+        - temp: '40'
+          isSummer: 'True'
+          expected: 'False'
+        - temp: '40'
+          isSummer: 'False'
+          expected: 'False'
+        - temp: '70'
+          isSummer: 'True'
+          expected: 'True'
+        - temp: '70'
+          isSummer: 'False'
+          expected: 'True'
+        - temp: '60'
+          isSummer: 'True'
+          expected: 'True'
+        - temp: '90'
+          isSummer: 'True'
+          expected: 'True'
+        - temp: '100'
+          isSummer: 'False'
+          expected: 'False'
+        - temp: '100'
+          isSummer: 'True'
+          expected: 'True'
+        - temp: '80'
+          isSummer: 'False'
+          expected: 'True'
+        - temp: '80'
+          isSummer: 'True'
+          expected: 'True'
+:diagnostics:
+- 'Path ''/license'' is missing key: owner'

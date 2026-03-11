@@ -1,11 +1,11 @@
 ---
 :value:
-  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/688/practice?workout_id=955
+  exercise_id: addThree
   title: Sorting - AddThree C++
-  external_id: addThree
-  is_public: 'true'
-  experience: '50'
-  language_list: C++
+  vendor:
+    codeworkout:
+      is_public: 'true'
+  difficulty: '50'
   license:
     id: cc-sa-4.0
     owner:
@@ -50,11 +50,12 @@
         files:
         - type: text/x-cpp
           pattern:
-            actual: subject.addThree()
+            method_invocation: addThree()
           content: "#include <cxxtest/TestSuite.h>\n#include \".h\"\n\n\nclass TestAnswer
             : public CxxTest::TestSuite\n{\npublic:\n  \n  void setUp()\n{\n  // Set
             up test fixtures, if any.\n  subject = new ();\n}\n  void tearDown()\n{\n
             \ delete subject;\n}\n  \n  void test_1()\n{\n  // \n// \n// \n// \n//
-            \n  \n  \n  \n  \n\nTS_ASSERT_EQUALS(18, subject.addThree());\n\n  \n}\n
+            \n  \n  \n  \n  \n\nTS_ASSERT_EQUALS(18, subject->addThree());\n\n  \n}\n
             \ \nprivate:\n   *subject;\n};"
-:diagnostics: []
+:diagnostics:
+- Path '/difficulty' is not an integer.

@@ -42,27 +42,21 @@ language: java
 version: >= 1.5
 [.src.files]
 name: starter1.txt
-[]
 [.src.starter.files]
 name: starter1.txt
-[]
 [.src.frame.files]
 name: wrapper1.txt
-[]
 [.src.solutions]
 name: reference
 summary: an optional description
 correct: true
 [.files]
 name: solution_file_1.java
-[]
-[]
 
 environment.start.image: docker stuff
 environment.start.repository: xxx
 environment.start.repository_path: xxx
 [.environment.start.files]
-[]
 
 environment.build.image: docker stuff
 environment.build.repository: xxx
@@ -70,7 +64,6 @@ environment.build.repository_path: xxx
 [.environment.build.files]
 name: name1
 name: name2
-[]
 
 environment.run.image: docker stuff
 environment.run.repository: xxx
@@ -79,7 +72,6 @@ environment.run.repository_path: xxx
 [.environment.run.files]
 name: name3
 name: name4
-[]
 
 environment.test.image: docker stuff
 environment.test.repository: xxx
@@ -87,7 +79,6 @@ environment.test.repository_path: xxx
 [.environment.test.files]
 name: name5
 name: name6
-[]
 
 [.suites]
 name: foo
@@ -107,10 +98,9 @@ stdout: url(some/local/output.txt)
 
 stdin: url(http://my.school.edu/some/local/generator/input)
 stdout: url(http://my.school.edu/some/local/generator/output)
-[]
 name: bar
 type: text/x-unquoted-csv
-patterns.actual: subject.sumNumbers({{str}})
+pattern.actual: subject.sumNumbers({{str}})
 content:----------
 str,expected,description
 "abc123xyz",123,example
@@ -127,5 +117,3 @@ str,expected,description
 "2sdf4523sdfsd7",4532,hidden
 "sdffherbwm",0,hidden
 ----------
-[]
-[]

@@ -1,11 +1,11 @@
 ---
 :value:
-  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/583/practice?workout_id=759
+  exercise_id: ITSC1213_flip_coin
   title: flipCoin
-  external_id: ITSC1213_flip_coin
-  is_public: 'true'
-  experience: '10'
-  language_list: Java
+  vendor:
+    codeworkout:
+      is_public: 'true'
+  difficulty: '10'
   license:
     id: cc-sa-4.0
     owner:
@@ -50,21 +50,22 @@
             false;\n            }\n      }\n      return true;\n    }\n\n    @Test\n
             \   @Description(\"test 1000 flips\")\n    public void testOutputLength()\n
             \   {\n        int n = 1000;\n        String result = rp.flipCoin(n);\n
-            \       assertEquals(\"After\" + n + \" coin flips, result was wrong length.\",
-            n, result.length());\n        assertTrue(\"Result should only contain
-            H and T.\", onlyHT(result));\n    }\n  \n    @Test\n    @Description(\"test
+            \       assertEquals(\"After \" + n +  \" coin flips, result was wrong
+            length.\", n, result.length());\n        assertTrue(\"Result should only
+            contain H and T.\", onlyHT(result));\n    }\n  \n    @Test\n    @Description(\"test
             200 flips\")\n    public void testOutputLength1()\n    {\n        int
-            n = 200;\n        String result = rp.flipCoin(n);\n        assertEquals(\"After\"
-            + n + \" coin flips, result was wrong length.\", n, result.length());\n
+            n = 200;\n        String result = rp.flipCoin(n);\n        assertEquals(\"After
+            \" + n +  \" coin flips, result was wrong length.\", n, result.length());\n
             \       assertTrue(\"Result should only contain H and T.\", onlyHT(result));\n
             \   }\n\n    @Test\n    @Description(\"test 1500 flips\")\n    public
             void testOutputLength1()\n    {\n        int n = 1500;\n        String
-            result = rp.flipCoin(n);\n        assertEquals(\"After\" + n + \" coin
+            result = rp.flipCoin(n);\n        assertEquals(\"After \" + n +  \" coin
             flips, result was wrong length.\", n, result.length());\n        assertTrue(\"Result
             should only contain H and T.\", onlyHT(result));\n    }\n\n    @Test\n
             \   @Hidden\n    @Description(\"test 999 flips\")\n    public void testOutputLength1()
             {\n        int n = 999;\n        String result = rp.flipCoin(n);\n        assertEquals(\"After
-            \" + n + \" coin flips, result was wrong length.\", n, result.length());\n
+            \" + n +  \" coin flips, result was wrong length.\", n, result.length());\n
             \       assertTrue(\"Result should only contain H and T.\", onlyHT(result));\n
             \ }\n}\n"
-:diagnostics: []
+:diagnostics:
+- Path '/difficulty' is not an integer.

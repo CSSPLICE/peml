@@ -1,11 +1,11 @@
 ---
 :value:
-  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/561/practice?workout_id=759
+  exercise_id: ITSC1213_rotate_right
   title: rotateRight
-  external_id: ITSC1213_rotate_right
-  is_public: 'true'
-  experience: '10'
-  language_list: Java
+  vendor:
+    codeworkout:
+      is_public: 'true'
+  difficulty: '10'
   license:
     id: cc-sa-4.0
     owner:
@@ -44,34 +44,34 @@
             codeworkout.*;\nimport java.util.Arrays;\npublic class ArrayProblemTest
             extends CodeWorkoutTest {\n    private ArrayProblem a;\n\n    @Before\n
             \   public void setUp() {\n        a = new ArrayProblem();\n    }\n\n
-            \   @Test\n    @Example\n    @Description(\"rotateRight({1, 2, 3, 4})\")\n
-            \   public void testRotateRight1() {\n        int[] nums = {1, 2, 3, 4};\n
-            \       a.rotateRight(nums);\n        assertArrayEquals(\"Expected:\n
-            \       [4, 1, 2, 3] but was: \" + Arrays.toString(nums), new int[]{4,
-            1, 2, 3}, nums);\n\n    }\n\n    @Test\n    @Description(\"rotateRight({})\")\n
+            \   @Test\n    @Example\n    @Description(rotateRight({1, 2, 3, 4}))\n
+            \   public void testRotateRight1() {\nint[] nums = {1, 2, 3, 4};\n        a.rotateRight(nums);\n
+            \       assertArrayEquals(\"Expected: [4, 1, 2, 3] but was: \" + Arrays.toString(nums),
+            new int[]{4, 1, 2, 3}, nums);\n\n    }\n\n    @Test\n    @Description(\"rotateRight({})\")\n
             \   public void testRotateRight2() {\n        int[] nums = {};\n        a.rotateRight(nums);\n
             \       assertArrayEquals(\"Expected: [] but was: \" + Arrays.toString(nums),
             new int[]{}, nums);\n    }\n\n    @Test\n    @Description(\"rotateRight({1})\")\n
             \   public void testRotateRight3() {\n        int[] nums = {1};\n        a.rotateRight(nums);\n
             \       assertArrayEquals(\"Expected: [1] but was: \" + Arrays.toString(nums),
-            new int[]{1}, nums);\n    }\n\n    @Test\n    @Description(\"rotateRight({1,
-            1, 1})\")\n    public void testRotateRight4() {\n        int[] nums =
-            {1, 1, 1};\n        a.rotateRight(nums);\n        assertArrayEquals(\"Expected:
-            [1, 1, 1] but was: \" + Arrays.toString(nums), new int[]{1, 1, 1}, nums);\n\n
-            \   }\n    \n    @Test\n    @Description(\"rotateRight({1, 1, 3, 3, 4})\")\n
-            \   public void testRotateRight5() {\n        int[] nums = {1, 1, 3, 3,
-            4};\n        a.rotateRight(nums);\n        assertArrayEquals(\"Expected:
-            [4, 1, 1, 3, 3] but was: \" + Arrays.toString(nums), new int[]{4, 1, 1,
-            3, 3}, nums);\n    }\n\n    @Test\n    @Description(\"rotateRight({3,
-            4})\")\n    public\n        void testRotateRight6() {\n        int[] nums
-            = {3, 4};\n        a.rotateRight(nums);\n               assertArrayEquals(\"Expected:
+            new int[]{1}, nums);\n    }\n\n    @Test\n    @Description(rotateRight({1,
+            1, 1}))\n    public void testRotateRight4() {\nint[] nums = {1, 1, 1};\n
+            \       a.rotateRight(nums);\n        assertArrayEquals(\"Expected: [1,
+            1, 1] but was: \" + Arrays.toString(nums), new int[]{1, 1, 1}, nums);\n\n
+            \   }\n    \n    @Test\n    @Description(rotateRight({1, 1, 3, 3, 4}))\n
+            \   public void testRotateRight5() {\nint[] nums = {1, 1, 3, 3, 4};\n
+            \       a.rotateRight(nums);\n        assertArrayEquals(\"Expected: [4,
+            1, 1, 3, 3] but was: \" + Arrays.toString(nums), new int[]{4, 1, 1, 3,
+            3}, nums);\n    }\n\n    @Test\n    @Description(rotateRight({3, 4}))\n
+            \   public\n        void testRotateRight6() {\nint[] nums = {3, 4};\n
+            \       a.rotateRight(nums);\n               assertArrayEquals(\"Expected:
             [4, 3] but was: \" + Arrays.toString(nums), new int[]{4, 3}, nums);\n
-            \   }\n\n    @Test\n    @Description(\"rotateRight({3, 4, 5})\")\n    public
-            void testRotateRight7() {\n        int[] nums = {3, 4, 5};\n        a.rotateRight(nums);\n
+            \   }\n\n    @Test\n    @Description(rotateRight({3, 4, 5}))\n    public
+            void testRotateRight7() {\nint[] nums = {3, 4, 5};\n        a.rotateRight(nums);\n
             \       assertArrayEquals(\"Expected: [5, 3, 4] but was: \" + Arrays.toString(nums),
-            new int[]{5, 3, 4}, nums);\n     }\n    \n    @Test\n    @Description(\"rotateRight({1,
-            2, 2, 3, 3})\")\n    public void testRotateRight8() {\n        int[] nums
-            = {1, 2, 2, 3, 3};\n        a.rotateRight(nums);\n        assertArrayEquals(\"Expected:
+            new int[]{5, 3, 4}, nums);\n     }\n    \n    @Test\n    @Description(rotateRight({1,
+            2, 2, 3, 3}))\n    public void testRotateRight8() {\nint[] nums = {1,
+            2, 2, 3, 3};\n        a.rotateRight(nums);\n        assertArrayEquals(\"Expected:
             [3, 1, 2, 2, 3] but was: \" + Arrays.toString(nums), new int[]{3, 1, 2,
-            2, 3},nums);\n    }\n}\n"
-:diagnostics: []
+            2, 3}, nums);\n    }\n}\n"
+:diagnostics:
+- Path '/difficulty' is not an integer.

@@ -1,10 +1,8 @@
-exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/855/practice?workout_id=1342
+exercise_id: edu.vt.cs.1114.jeroo_create_and_place
 
 title: CodeWorkout Jeroo Create and Place 
-external_id: edu.vt.cs.1114.jeroo_create_and_place
-is_public: true
-experience: 50
-language_list: Java
+vendor.codeworkout.is_public: true
+difficulty: 50
 
 license.id: cc-sa-4.0
 license.owner.email: edwards@cs.vt.edu
@@ -53,8 +51,6 @@ public class Answer extends Island {
 }
 ----------
 []
-    
-
 
 [.assets.code.starter.files]
 content:----------
@@ -78,22 +74,19 @@ public class AnswerTest extends CodeWorkoutTest {
     public void setUp() {
         answer = new Answer();
         answer.myProgram();
-        jeroo = answer.getOneObjectAt(2, 3, Answer.Jeroo.class);
+jeroo = answer.getOneObjectAt(2, 3, Answer.Jeroo.class);
     }
 
     @Description("Correct position")
     public void test1() {
-      assertNotNull("The Jeroo was not added at the correct position",
-        jeroo);
+      assertNotNull("The Jeroo was not added at the correct position",         jeroo);
     }
 
     @Description("Facing north")
     public void test2() {
-      assertNotNull("The Jeroo was not added at the correct position",
-        jeroo);
-      assertEquals("The Jeroo is not facing the correct direction",
-        CompassDirection.NORTH, jeroo.__getFacing());
+      assertNotNull("The Jeroo was not added at the correct position",         jeroo);
+      assertEquals("The Jeroo is not facing the correct direction", CompassDirection.NORTH, jeroo.__getFacing());
     }
 }
-----------[]
+----------
 []

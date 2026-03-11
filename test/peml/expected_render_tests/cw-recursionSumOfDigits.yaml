@@ -1,11 +1,11 @@
 ---
 :value:
-  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/269/practice?workout_id=53
+  exercise_id: RecC-SumOfDigits
   title: 'Recursion Programming Exercise: Sum of the Digits'
-  external_id: RecC-SumOfDigits
-  is_public: 'true'
-  experience: '10'
-  language_list: Java
+  vendor:
+    codeworkout:
+      is_public: 'true'
+  difficulty: '10'
   license:
     id: cc-sa-4.0
     owner:
@@ -41,7 +41,7 @@
         files:
         - type: text/x-java
           pattern:
-            actual: subject.addOdd({{n}})
+            method_invocation: addOdd({{n}})
           content: "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport
             java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n
             \ private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject
@@ -57,4 +57,5 @@
             \ \n}\n  \n    @Test\n@Description(hidden)\n\n\n\n\npublic void test_6()\n{\n
             \ \n  \n  \n  assertEquals(\n    \n    3,\n    subject.addOdd(100002));\n\n
             \ \n}\n  \n  \n}"
-:diagnostics: []
+:diagnostics:
+- Path '/difficulty' is not an integer.

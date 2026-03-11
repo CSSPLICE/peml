@@ -1,10 +1,8 @@
-exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/583/practice?workout_id=759
+exercise_id: ITSC1213_flip_coin
 
 title: flipCoin
-external_id: ITSC1213_flip_coin
-is_public: true
-experience: 10
-language_list: Java
+vendor.codeworkout.is_public: true
+difficulty: 10
 
 license.id: cc-sa-4.0
 license.owner.email: lcao2@uncc.edu
@@ -75,7 +73,7 @@ public class RandomProblemTest extends CodeWorkoutTest{
     {
         int n = 1000;
         String result = rp.flipCoin(n);
-        assertEquals("After" + n + " coin flips, result was wrong length.", n, result.length());
+        assertEquals("After " + n +  " coin flips, result was wrong length.", n, result.length());
         assertTrue("Result should only contain H and T.", onlyHT(result));
     }
   
@@ -85,7 +83,7 @@ public class RandomProblemTest extends CodeWorkoutTest{
     {
         int n = 200;
         String result = rp.flipCoin(n);
-        assertEquals("After" + n + " coin flips, result was wrong length.", n, result.length());
+        assertEquals("After " + n +  " coin flips, result was wrong length.", n, result.length());
         assertTrue("Result should only contain H and T.", onlyHT(result));
     }
 
@@ -95,7 +93,7 @@ public class RandomProblemTest extends CodeWorkoutTest{
     {
         int n = 1500;
         String result = rp.flipCoin(n);
-        assertEquals("After" + n + " coin flips, result was wrong length.", n, result.length());
+        assertEquals("After " + n +  " coin flips, result was wrong length.", n, result.length());
         assertTrue("Result should only contain H and T.", onlyHT(result));
     }
 
@@ -105,7 +103,7 @@ public class RandomProblemTest extends CodeWorkoutTest{
     public void testOutputLength1() {
         int n = 999;
         String result = rp.flipCoin(n);
-        assertEquals("After " + n + " coin flips, result was wrong length.", n, result.length());
+        assertEquals("After " + n +  " coin flips, result was wrong length.", n, result.length());
         assertTrue("Result should only contain H and T.", onlyHT(result));
   }
 }

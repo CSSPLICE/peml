@@ -22,15 +22,14 @@ instructions:----------
 
 [systems]
 language: Python
-[]
 
-[assets.code.wrapper.files]
+[.assets.code.wrapper.files]
 content:----------
     ___
 ----------
 []
 
-[assets.code.blocks.content]
+[.assets.code.blocks.content]
 blockid: one
 display: print('Hello')
 
@@ -41,8 +40,8 @@ blockid: three
 display: print('Problems!')
 []
 
-[assets.test.files]
-format: text/csv-unquoted
+[.assets.test.files]
+type: text/csv-unquoted
 content:----------
 expected
 Hello\nParsons\nProblems!

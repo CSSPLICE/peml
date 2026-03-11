@@ -1,11 +1,11 @@
 ---
 :value:
-  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/265/practice?workout_id=48
+  exercise_id: RecC-Gcd
   title: 'Recursion Programming Exercise: GCD'
-  external_id: RecC-Gcd
-  is_public: 'true'
-  experience: '10'
-  language_list: Java
+  vendor:
+    codeworkout:
+      is_public: 'true'
+  difficulty: '10'
   license:
     id: cc-sa-4.0
     owner:
@@ -46,14 +46,15 @@
         files:
         - type: text/csv-unquoted
           pattern:
-            actual: subject.GCD({{x}}, {{y}})
+            method_invocation: GCD({{x}}, {{y}})
           content: |
-            x,y,expected,description
-            6,4,2,example
-            27,9,9
-            25,5,5
-            128,6,2
-            28,7,7,hidden
-            240,8,8,hidden
-            2,1,1,hidden
-:diagnostics: []
+            x, y, expected, description
+            6, 4, 2, example
+            27, 9, 9
+            25, 5, 5
+            128, 6, 2
+            28, 7, 7, hidden
+            240, 8, 8, hidden
+            2, 1, 1, hidden
+:diagnostics:
+- Path '/difficulty' is not an integer.

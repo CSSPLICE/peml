@@ -1,11 +1,11 @@
 ---
 :value:
-  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/592/practice?workout_id=759
+  exercise_id: ITSC1213_get_longest_string
   title: getLongestString
-  external_id: ITSC1213_get_longest_string
-  is_public: 'true'
-  experience: '10'
-  language_list: Java
+  vendor:
+    codeworkout:
+      is_public: 'true'
+  difficulty: '10'
   license:
     id: cc-sa-4.0
     owner:
@@ -44,21 +44,22 @@
         files:
         - type: text/x-java
           pattern:
-            actual: subject.getLongestString({{list}})
+            method_invocation: getLongestString({{list}})
           content: "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport
             java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n
             \ private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject
             = new Answer();\n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic
-            void test_1()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"\"\"once\"\"\",\n
-            \   subject.getLongestString(\"new java.util.ArrayList(){{add(\"\"once\"\");add(\"\"upon\"\");add(\"\"a\"\");add(\"\"time\"\");}}\"));\n\n
+            void test_1()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"once\",\n    subject.getLongestString(new
+            java.util.ArrayList(){{add(\"once\");add(\"upon\");add(\"a\");add(\"time\");}}));\n\n
             \ \n}\n  \n    @Test\n\n\n\n\n\npublic void test_2()\n{\n  \n  \n  \n
-            \ assertEquals(\n    \n    \"\"\"years\"\"\",\n    subject.getLongestString(\"new
-            java.util.ArrayList(){{add(\"\"four\"\");add(\"\"and\"\");add(\"\"years\"\");add(\"\"ago\"\");}}\"));\n\n
+            \ assertEquals(\n    \n    \"years\",\n    subject.getLongestString(new
+            java.util.ArrayList(){{add(\"four\");add(\"and\");add(\"years\");add(\"ago\");}}));\n\n
             \ \n}\n  \n    @Test\n@Description(hidden)\n\n\n\n\npublic void test_3()\n{\n
-            \ \n  \n  \n  assertEquals(\n    \n    \"\"\"greetings\"\"\",\n    subject.getLongestString(\"new
-            java.util.ArrayList(){{add(\"\"greetings\"\");add(\"\"hello\"\");add(\"\"welcome\"\");add(\"\"byebye\"\");}}\"));\n\n
+            \ \n  \n  \n  assertEquals(\n    \n    \"greetings\",\n    subject.getLongestString(new
+            java.util.ArrayList(){{add(\"greetings\");add(\"hello\");add(\"welcome\");add(\"byebye\");}}));\n\n
             \ \n}\n  \n    @Test\n@Description(hidden)\n\n\n\n\npublic void test_4()\n{\n
-            \ \n  \n  \n  assertEquals(\n    \n    \"\"\"Neitherland\"\"\",\n    subject.getLongestString(\"new
-            java.util.ArrayList(){{add(\"\"Mexico\"\");add(\"\"Germany\"\");add(\"\"France\"\");add(\"\"Neitherland\"\");}}\"));\n\n
+            \ \n  \n  \n  assertEquals(\n    \n    \"Neitherland\",\n    subject.getLongestString(new
+            java.util.ArrayList(){{add(\"Mexico\");add(\"Germany\");add(\"France\");add(\"Neitherland\");}}));\n\n
             \ \n}\n  \n  \n}"
-:diagnostics: []
+:diagnostics:
+- Path '/difficulty' is not an integer.

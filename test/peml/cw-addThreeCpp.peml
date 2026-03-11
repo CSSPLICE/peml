@@ -1,10 +1,8 @@
-exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/688/practice?workout_id=955
+exercise_id: addThree
 
 title: Sorting - AddThree C++
-external_id: addThree
-is_public: true
-experience: 50
-language_list: C++
+vendor.codeworkout.is_public: true
+difficulty: 50
 
 license.id: cc-sa-4.0
 license.owner.email: ayaan@vt.edu
@@ -51,9 +49,9 @@ int addThree()
 
 [.assets.test.files]
 type: text/csv-unquoted
-pattern.actual: subject.addThree()
+pattern.method_invocation: addThree()
 content:----------
-expected,description
+expected, description
 18
 ----------
 []

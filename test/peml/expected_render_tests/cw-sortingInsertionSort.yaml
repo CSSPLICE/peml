@@ -1,11 +1,11 @@
 ---
 :value:
-  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/475/practice?workout_id=680
+  exercise_id: cw-x58
   title: Sorting - Insertion Sort
-  external_id: cw-x58
-  is_public: 'true'
-  experience: '30'
-  language_list: Java
+  vendor:
+    codeworkout:
+      is_public: 'true'
+  difficulty: '30'
   license:
     id: cc-sa-4.0
     owner:
@@ -64,15 +64,18 @@
         files:
         - type: text/x-java
           pattern:
-            actual: subject.insertionSort({{array}})
+            method_invocation: insertionSort({{array}})
           content: "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport
             java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n
             \ private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject
             = new Answer();\n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic
-            void test_1()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"new int[]{0,
-            1, 2, 3, 4, 8, 10}\",\n    subject.insertionSort());\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic
-            void test_2()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"new int[]{0,
-            2, 3, 4, 10, 33}\",\n    subject.insertionSort());\n\n  \n}\n  \n    @Test\n@Description(hidden)\n\n\n\n\npublic
-            void test_3()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"new int[]{6,
-            7, 10, 99}\",\n    subject.insertionSort());\n\n  \n}\n  \n  \n}"
-:diagnostics: []
+            void test_1()\n{\n  \n  \n  \n  assertEquals(\n    \n    new int[]{0,
+            1, 2, 3, 4, 8, 10},\n    subject.insertionSort(new int[]{2, 0, 3, 4, 8,
+            10, 1}));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_2()\n{\n
+            \ \n  \n  \n  assertEquals(\n    \n    new int[]{0, 2, 3, 4, 10, 33},\n
+            \   subject.insertionSort(new int[]{4, 3, 0, 10, 33, 2}));\n\n  \n}\n
+            \ \n    @Test\n@Description(hidden)\n\n\n\n\npublic void test_3()\n{\n
+            \ \n  \n  \n  assertEquals(\n    \n    new int[]{6, 7, 10, 99},\n    subject.insertionSort(new
+            int[]{99, 6, 10, 7}));\n\n  \n}\n  \n  \n}"
+:diagnostics:
+- Path '/difficulty' is not an integer.

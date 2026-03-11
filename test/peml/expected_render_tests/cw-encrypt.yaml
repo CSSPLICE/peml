@@ -1,11 +1,11 @@
 ---
 :value:
-  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/582/practice?workout_id=759
+  exercise_id: ITSC1213_encrypt
   title: encrypt
-  external_id: ITSC1213_encrypt
-  is_public: 'true'
-  experience: '20'
-  language_list: Java
+  vendor:
+    codeworkout:
+      is_public: 'true'
+  difficulty: '20'
   license:
     id: cc-sa-4.0
     owner:
@@ -43,19 +43,20 @@
         files:
         - type: text/x-java
           pattern:
-            actual: subject.encrypt({{message}})
+            method_invocation: encrypt({{message}})
           content: "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport
             java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n
             \ private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject
             = new Answer();\n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic
-            void test_1()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"\"\"owHay\"\"\",\n
-            \   subject.encrypt(\"\"\"How\"\"\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic
-            void test_2()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"\"\"\"\"\",\n
-            \   subject.encrypt(\"\"\"\"\"\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic
-            void test_3()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"\"\"zay\"\"\",\n
-            \   subject.encrypt(\"\"\"z\"\"\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic
-            void test_4()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"\"\"SCay\"\"\",\n
-            \   subject.encrypt(\"\"\"CS\"\"\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic
-            void test_5()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"\"\"ambdalzy\"\"\",\n
-            \   subject.encrypt(\"\"\"lambda\"\"\"));\n\n  \n}\n  \n  \n}"
-:diagnostics: []
+            void test_1()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"owHay\",\n
+            \   subject.encrypt(\"How\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic
+            void test_2()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"\",\n    subject.encrypt(\"\"));\n\n
+            \ \n}\n  \n    @Test\n\n\n\n\n\npublic void test_3()\n{\n  \n  \n  \n
+            \ assertEquals(\n    \n    \"zay\",\n    subject.encrypt(\"z\"));\n\n
+            \ \n}\n  \n    @Test\n\n\n\n\n\npublic void test_4()\n{\n  \n  \n  \n
+            \ assertEquals(\n    \n    \"SCay\",\n    subject.encrypt(\"CS\"));\n\n
+            \ \n}\n  \n    @Test\n\n\n\n\n\npublic void test_5()\n{\n  \n  \n  \n
+            \ assertEquals(\n    \n    \"ambdalzy\",\n    subject.encrypt(\"lambda\"));\n\n
+            \ \n}\n  \n  \n}"
+:diagnostics:
+- Path '/difficulty' is not an integer.

@@ -15,7 +15,7 @@ instructions:----------
 Show the steps to prove that the SORTING problem can be reduced to the PAIRING problem.
 ----------
 
-[assets.code.blocks.content]
+[.assets.code.blocks.content]
 blockid: start
 display: Start with an input instance to SORTING (an array of records).
 depends:

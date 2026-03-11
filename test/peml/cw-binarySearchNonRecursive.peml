@@ -1,10 +1,8 @@
-exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/439/practice?workout_id=680
+exercise_id: cw-x22
 
 title: Generics - Binary Search (non-recursive)
-external_id: cw-x22
-is_public: true
-experience: 40
-language_list: Java
+vendor.codeworkout.is_public: true
+difficulty: 40
 
 license.id: cc-sa-4.0
 license.owner.email: edwards@cs.vt.edu
@@ -58,20 +56,20 @@ public int binarySearch(int[]array, int num) {
 
 [.assets.test.files]
 type: text/csv-unquoted
-pattern.actual: subject.binarySearch({{array}}, {{num}})
+pattern.method_invocation: binarySearch({{array}}, {{num}})
 content:----------
-aray,num,expected,description
-"new int[]{1,4,7}",7,2,example
-"new int[]{2,6,6,8,80}",6,2,example
-"new int[]{5,33,77,104}",104,3
-"new int[]{2,4,6}",2,0
-"new int[]{0,2,5,8}",2,1
-"new int[]{0,1,5,5,5,10,13}",5,3
-"new int[]{10}",4,-1
-"new int[]{0,4,4,10}",4,1,hidden
-"new int[]{0,4,4,10}",2,-1,hidden
-"new int[]{1,5,6,9}",1,0,hidden
-"new int[]{1,5,6,6,6,9,10,11,11}",6,4,hidden
+aray, num, expected, description
+new int[]{1,4,7}, 7, 2, example
+new int[]{2,6,6,8,80}, 6, 2, example
+new int[]{5,33,77,104}, 104, 3
+new int[]{2,4,6}, 2, 0
+new int[]{0,2,5,8}, 2, 1
+new int[]{0,1,5,5,5,10,13}, 5, 3
+new int[]{10}, 4, -1
+new int[]{0,4,4,10}, 4, 1, hidden
+new int[]{0,4,4,10}, 2, -1, hidden
+new int[]{1,5,6,9}, 1, 0, hidden
+new int[]{1,5,6,6,6,9,10,11,11}, 6, 4, hidden
 ----------
 []
 

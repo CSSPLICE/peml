@@ -1,10 +1,8 @@
-exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/268/practice?workout_id=52
+exercise_id: RecC-Addodd
 
 title: Recursion Programming Exercise: Add odd values
-external_id: RecC-Addodd
-is_public: true
-experience: 10
-language_list: Java
+vendor.codeworkout.is_public: true
+difficulty: 10
 
 license.id: cc-sa-4.0
 license.owner.email: sallyhamouda@gmail.com
@@ -49,19 +47,19 @@ public int addOdd(int n) {
 
 [.assets.test.files]
 type: text/csv-unquoted
-pattern.actual: subject.addOdd({{n}})
+pattern.method_invocation: addOdd({{n}})
 content:----------
-n,expected,description
-1,1,example
-2,1,example
-3,4,example
-7,16,example
-8,16
-9,25
-10,25
-11,36
-12,36,hidden
-0,0,hidden
+n, expected, description
+1, 1, example
+2, 1, example
+3, 4, example
+7, 16, example
+8, 16
+9, 25
+10, 25
+11, 36
+12, 36, hidden
+0, 0, hidden
 ----------
 []
 

@@ -28,9 +28,8 @@ lines. Your function should return the array.
 
 [systems]
 language: Java
-[]
 
-[assets.code.wrapper.files]
+[.assets.code.wrapper.files]
 content:----------
 public class Answer
 {
@@ -39,7 +38,7 @@ public class Answer
 ----------
 []
 
-[assets.code.starter.files]
+[.assets.code.starter.files]
 content:----------
 public int[] Swap(int[] arr, int i, int j)
 {
@@ -47,9 +46,10 @@ public int[] Swap(int[] arr, int i, int j)
     return arr;
 }
 ----------
+[]
 
 
-[assets.code.blocks.content]
+[.assets.code.blocks.content]
 blockid: one
 display: int temp = arr[i];
 
@@ -71,13 +71,12 @@ blockid: four
 display: int temp = arr[j];
 []
 
-[assets.test.files]
-format: text/csv-unquoted
-template:
-pattern_actual: subject.Swap({{arr,i,j}})
+[.assets.test.files]
+type: text/csv-unquoted
+pattern.method_invocation: Swap({{arr}}, {{i}}, {{j}})
 content:----------
-arr,i,j,expected,description
-"new int[]{1, 2, 3, 4}", 2, 3,"new int[]{1,2,4,3}",example
-"new int[]{1, 2, 3, 4}", 0, 3,"new int[]{4,2,3,1}",hidden
+arr, i, j, expected, description
+new int[]{1, 2, 3, 4}, 2, 3, new int[]{1,2,4,3}, example
+new int[]{1, 2, 3, 4}, 0, 3, new int[]{4,2,3,1}, hidden
 ----------
 []

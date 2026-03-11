@@ -1,11 +1,11 @@
 ---
 :value:
-  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/562/practice?workout_id=759
+  exercise_id: ITSC1213_is_unique
   title: isUnique
-  external_id: ITSC1213_is_unique
-  is_public: 'true'
-  experience: '20'
-  language_list: Java
+  vendor:
+    codeworkout:
+      is_public: 'true'
+  difficulty: '20'
   license:
     id: cc-sa-4.0
     owner:
@@ -42,16 +42,17 @@
         files:
         - type: text/csv-unquoted
           pattern:
-            actual: subject.isUnique({{nums}})
+            method_invocation: isUnique({{nums}})
           content: |
-            nums,expected,description
-            "new int[] {}",true
-            "new int[] {12, 7, -1, 25, 3}",true,example
-            "new int[] {5, 3, 5, 2}",false,example
-            "new int[] {2}",true
-            "new int[] {5, 5, 3, 2}",false
-            "new int[] {5, 5, 5, 5}",false
-            "new int[] {3, 2, 1, 1}",false
-            "new int[] {1, 2, 2, 3}",false
-            "new int[] {1, 2, 3, 1}",false
-:diagnostics: []
+            nums, expected, description
+            new int[] {}, true
+            new int[] {12, 7, -1, 25, 3}, true, example
+            new int[] {5, 3, 5, 2}, false, example
+            new int[] {2}, true
+            new int[] {5, 5, 3, 2}, false
+            new int[] {5, 5, 5, 5}, false
+            new int[] {3, 2, 1, 1}, false
+            new int[] {1, 2, 2, 3}, false
+            new int[] {1, 2, 3, 1}, false
+:diagnostics:
+- Path '/difficulty' is not an integer.

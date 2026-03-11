@@ -1,11 +1,11 @@
 ---
 :value:
-  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/592/practice?workout_id=759
+  exercise_id: ITSC1213_get_longest_string
   title: getLongestString
-  external_id: ITSC1213_get_longest_string
-  is_public: 'true'
-  experience: '10'
-  language_list: Java
+  vendor:
+    codeworkout:
+      is_public: 'true'
+  difficulty: '10'
   license:
     id: cc-sa-4.0
     owner:
@@ -44,11 +44,12 @@
         files:
         - type: text/csv-unquoted
           pattern:
-            actual: subject.getLongestString({{list}})
+            method_invocation: getLongestString({{list}})
           content: |
-            list,expected,description
-            "new java.util.ArrayList(){{add(""once"");add(""upon"");add(""a"");add(""time"");}}","""once""",example
-            "new java.util.ArrayList(){{add(""four"");add(""and"");add(""years"");add(""ago"");}}","""years"""
-            "new java.util.ArrayList(){{add(""greetings"");add(""hello"");add(""welcome"");add(""byebye"");}}","""greetings""",hidden
-            "new java.util.ArrayList(){{add(""Mexico"");add(""Germany"");add(""France"");add(""Neitherland"");}}","""Neitherland""",hidden
-:diagnostics: []
+            list, expected, description
+            new java.util.ArrayList(){{add("once");add("upon");add("a");add("time");}}, "once", example
+            new java.util.ArrayList(){{add("four");add("and");add("years");add("ago");}}, "years"
+            new java.util.ArrayList(){{add("greetings");add("hello");add("welcome");add("byebye");}}, "greetings", hidden
+            new java.util.ArrayList(){{add("Mexico");add("Germany");add("France");add("Neitherland");}}, "Neitherland", hidden
+:diagnostics:
+- Path '/difficulty' is not an integer.

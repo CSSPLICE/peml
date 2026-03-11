@@ -1,11 +1,11 @@
 ---
 :value:
-  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/469/practice?workout_id=680
+  exercise_id: cw-x52
   title: Generics - Generic Method
-  external_id: cw-x52
-  is_public: 'true'
-  experience: '10'
-  language_list: Java
+  vendor:
+    codeworkout:
+      is_public: 'true'
+  difficulty: '10'
   license:
     id: cc-sa-4.0
     owner:
@@ -41,13 +41,14 @@
         files:
         - type: text/csv-unquoted
           pattern:
-            actual: subject.allString({{e}})
+            method_invocation: allString({{e}})
           content: |
-            e,expected,description
-            "'c'",""c"",example
-            "1",""1"",example
-            "'z'",""z""
-            "2",""2""
-            "'o'",""o"",hidden
-            "10",""10"",hidden
-:diagnostics: []
+            e, expected, description
+            'c', "c", example
+            1, "1", example
+            'z', "z"
+            2, "2"
+            'o', "o", hidden
+            10, "10", hidden
+:diagnostics:
+- Path '/difficulty' is not an integer.

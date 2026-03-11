@@ -1,11 +1,11 @@
 ---
 :value:
-  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/852/practice?workout_id=1342
+  exercise_id: edu.vt.cs.1114.jeroo_turnAround
   title: CodeWorkout Jeroo turnAround()
-  external_id: edu.vt.cs.1114.jeroo_turnAround
-  is_public: 'true'
-  experience: '50'
-  language_list: Java
+  vendor:
+    codeworkout:
+      is_public: 'true'
+  difficulty: '50'
   license:
     id: cc-sa-4.0
     owner:
@@ -71,11 +71,12 @@
 
               @Description("turnAround() implemented to turn right twice")
               public void testTurnAround() {
-                assertEquals("extra method calls have been added", 2, calls.size());
+                assertEquals(extra method calls have been added, 2, calls.size());
                 if (!"turn(RIGHT)".equals(calls.get(0)) || !"turn(RIGHT)".equals(calls.get(1)))
                 {
                   fail("turnAround() is not implemented using two right turns");
                 }
               }
             }
-:diagnostics: []
+:diagnostics:
+- Path '/difficulty' is not an integer.

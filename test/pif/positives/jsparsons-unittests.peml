@@ -1,10 +1,9 @@
 # Basic example of using unit tests to grade.
 # Python exercise, indentation, execute.
 
-exercise_id: https://github.com/CSSPLICE/peml-feasibility-examples/blob/main/parsons/jsparsons-unittests.peml
+exercise_id: JSParsons Unittests
 
 title: JSParsons Unittests
-external_id: JSParsons Unittests
 
 license.id: MIT
 license.owner.name: Cliff Shaffer
@@ -19,15 +18,14 @@ Your task is to construct a function which returns the index of the largest elem
 
 [systems]
 language: Python
-[]
 
-[assets.code.wrapper.files]
+[.assets.code.wrapper.files]
 content:----------
     ___
 ----------
 []
 
-[assets.code.blocks.content]
+[.assets.code.blocks.content]
 blockid: one
 display: def maxindex(arg):
 indent: 0
@@ -53,12 +51,11 @@ display: return ans
 indent: 1
 []
 
-[assets.test.files]
-format: text/csv-unquoted
-template:
+[.assets.test.files]
+type: text/csv-unquoted
   maxindex(arr)
 content:----------
-arr,expected,description
+arr, expected, description
 [0, 2, 4], 2, example
 [7, 2, 4], 0, hidden
 [7, 8, 4], 1, example

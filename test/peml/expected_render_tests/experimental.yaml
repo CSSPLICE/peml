@@ -33,130 +33,90 @@
     src:
       files:
       - name: starter1.txt
-      starter:
-        files:
-        - name: starter1.txt
-      frame:
-        files:
-        - name: wrapper1.txt
-      solutions:
-      - name: reference
-        summary: an optional description
-        correct: 'true'
-        files:
-        - name: solution_file_1.java
-    environment:
-      start:
-        image: docker stuff
-        repository: xxx
-        repository_path: xxx
-        files: []
-      build:
-        image: docker stuff
-        repository: xxx
-        repository_path: xxx
-        files:
-        - name: name1
-        - name: name2
-      run:
-        image: docker stuff
-        repository: xxx
-        repository_branch: xxx
-        repository_path: xxx
-        files:
-        - name: name3
-        - name: name4
-      test:
-        image: docker stuff
-        repository: xxx
-        repository_path: xxx
-        files:
-        - name: name5
-        - name: name6
-    suites:
-    - name: foo
-      visibility: public | private | ...
-      type: mime type or tag or whatever
-      template: self.assertEqual({{expected}}, subject.squirrelPlay({{temp}}, {{isSummer}}))
-      cases:
-      - stdin: racecar
-        stdout: '"racecar" is a palindrome.'
-      - stdin: Flintstone
-        stdout: '"Flintstone" is not a palindrome.'
-      - stdin: url(some/local/input.txt)
-        stdout: url(some/local/output.txt)
-      - stdin: url(http://my.school.edu/some/local/generator/input)
-        stdout: url(http://my.school.edu/some/local/generator/output)
-    - name: bar
-      type: text/x-unquoted-csv
-      patterns:
-        actual: subject.sumNumbers({{str}})
-      content: |
-        str,expected,description
-        "abc123xyz",123,example
-        "aa11b33",44,example
-        "7 11",18,example
-        "Chocolate",0
-        "5hoco1a1e",7
-        "5$$1;;1!!",7
-        "a1234bb11",1245
-        "",0
-        "a22bbb3",25
-        "FS3453g36fs25",3514,hidden
-        "dfg64g21ge743",828,hidden
-        "2sdf4523sdfsd7",4532,hidden
-        "sdffherbwm",0,hidden
+        src:
+          starter:
+            files:
+            - name: starter1.txt
+              src:
+                frame:
+                  files:
+                  - name: wrapper1.txt
+                    src:
+                      solutions:
+                      - name: reference
+                        summary: an optional description
+                        correct: 'true'
+                        files:
+                        - name: solution_file_1.java
+                          environment:
+                            start:
+                              image: docker stuff
+                              repository: xxx
+                              repository_path: xxx
+                              files:
+                              - environment:
+                                  build:
+                                    image: docker stuff
+                                    repository: xxx
+                                    repository_path: xxx
+                                    files:
+                                    - name: name1
+                                    - name: name2
+                                      environment:
+                                        run:
+                                          image: docker stuff
+                                          repository: xxx
+                                          repository_branch: xxx
+                                          repository_path: xxx
+                                          files:
+                                          - name: name3
+                                          - name: name4
+                                            environment:
+                                              test:
+                                                image: docker stuff
+                                                repository: xxx
+                                                repository_path: xxx
+                                                files:
+                                                - name: name5
+                                                - name: name6
+                                                  suites:
+                                                  - name: foo
+                                                    visibility: public | private |
+                                                      ...
+                                                    type: mime type or tag or whatever
+                                                    template: self.assertEqual({{expected}},
+                                                      subject.squirrelPlay({{temp}},
+                                                      {{isSummer}}))
+                                                    cases:
+                                                    - stdin: racecar
+                                                      stdout: '"racecar" is a palindrome.'
+                                                    - stdin: Flintstone
+                                                      stdout: '"Flintstone" is not
+                                                        a palindrome.'
+                                                    - stdin: url(some/local/input.txt)
+                                                      stdout: url(some/local/output.txt)
+                                                    - stdin: url(http://my.school.edu/some/local/generator/input)
+                                                      stdout: url(http://my.school.edu/some/local/generator/output)
+                                                      name: bar
+                                                      type: text/x-unquoted-csv
+                                                      pattern:
+                                                        actual: subject.sumNumbers({{str}})
+                                                      content: |
+                                                        str,expected,description
+                                                        "abc123xyz",123,example
+                                                        "aa11b33",44,example
+                                                        "7 11",18,example
+                                                        "Chocolate",0
+                                                        "5hoco1a1e",7
+                                                        "5$$1;;1!!",7
+                                                        "a1234bb11",1245
+                                                        "",0
+                                                        "a22bbb3",25
+                                                        "FS3453g36fs25",3514,hidden
+                                                        "dfg64g21ge743",828,hidden
+                                                        "2sdf4523sdfsd7",4532,hidden
+                                                        "sdffherbwm",0,hidden
 :diagnostics:
-- Path '/systems/0/environment/start/files' is not a string.
-- |-
-  Path '/systems/0/environment/start/files' has a problem. Please check your input.
-  {
-    "data_pointer": "/systems/0/environment/start/files",
-    "schema": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/file"
-      },
-      "minItems": 1
-    },
-    "schema_pointer": "/definitions/file_list/oneOf/1",
-    "type": "minItems",
-    "error": "array size at `/systems/0/environment/start/files` is less than: 1"
-  }
-- Path '/systems/0/environment/start/repository' does not have sub-keys (has the wrong
-  structure).
-- Path '/systems/0/environment/build/files' is not a string.
-- Path '/systems/0/environment/build/files/0' is not a string.
-- 'Path ''/systems/0/environment/build/files/0'' is missing key: content'
-- Path '/systems/0/environment/build/files/1' is not a string.
-- 'Path ''/systems/0/environment/build/files/1'' is missing key: content'
-- Path '/systems/0/environment/build/repository' does not have sub-keys (has the wrong
-  structure).
-- Path '/systems/0/environment/run/files' is not a string.
-- Path '/systems/0/environment/run/files/0' is not a string.
-- 'Path ''/systems/0/environment/run/files/0'' is missing key: content'
-- Path '/systems/0/environment/run/files/1' is not a string.
-- 'Path ''/systems/0/environment/run/files/1'' is missing key: content'
-- Path '/systems/0/environment/run/repository' does not have sub-keys (has the wrong
-  structure).
-- Path '/systems/0/environment/test/files' is not a string.
-- Path '/systems/0/environment/test/files/0' is not a string.
-- 'Path ''/systems/0/environment/test/files/0'' is missing key: content'
-- Path '/systems/0/environment/test/files/1' is not a string.
-- 'Path ''/systems/0/environment/test/files/1'' is missing key: content'
-- Path '/systems/0/environment/test/repository' does not have sub-keys (has the wrong
-  structure).
 - Path '/systems/0/src/files' is not a string.
 - Path '/systems/0/src/files/0' is not a string.
 - 'Path ''/systems/0/src/files/0'' is missing key: content'
-- Path '/systems/0/src/starter/files' is not a string.
-- Path '/systems/0/src/starter/files/0' is not a string.
-- 'Path ''/systems/0/src/starter/files/0'' is missing key: content'
-- Path '/systems/0/src/frame/files' is not a string.
-- Path '/systems/0/src/frame/files/0' is not a string.
-- 'Path ''/systems/0/src/frame/files/0'' is missing key: content'
-- Path '/systems/0/src/solutions' is not a string.
-- Path '/systems/0/src/solutions/0' is not a string.
-- Path '/systems/0/src/solutions/0/files' is not a string.
-- Path '/systems/0/src/solutions/0/files/0' is not a string.
-- 'Path ''/systems/0/src/solutions/0/files/0'' is missing key: content'

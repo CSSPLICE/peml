@@ -15,7 +15,7 @@ instructions:----------
 Show the general process for reducing one problem to another.
 ----------
 
-[assets.code.blocks.content]
+[.assets.code.blocks.content]
 blockid: start
 display: Consider any two problems for which a suitable reduction from one to the other can be found.
 depends:

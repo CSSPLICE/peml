@@ -74,7 +74,6 @@ public class Answer
 name: AnswerTest.java
 content: url(src/AnswerTest.java)
 
-[]
 # Empty square brackets above marks end of list of [.src.files]
 
 
@@ -85,7 +84,6 @@ description: an optional description
 reference: true
 # "files" is a file set, and can be provided inline if needed
 files: url(src/solutions/reference)
-[]
 # Empty square brackets above marks end of list of [.src.solutions]
 
 [.suites]
@@ -107,7 +105,6 @@ stdout: "racecar" is a palindrome.
 
 stdin: Flintstone
 stdout: "Flintstone" is not a palindrome.
-[]
 
 name: csv_stdio_tests
 type: text/x-unquoted-csv
@@ -136,8 +133,6 @@ str,expected,description
 "2sdf4523sdfsd7",4532,hidden
 "sdffherbwm",0,hidden
 ----------
-[]
-[]
 
 # environments can be specified through containers
 environment.build.image: cs1.vt.edu/java-1_9:1.1.0

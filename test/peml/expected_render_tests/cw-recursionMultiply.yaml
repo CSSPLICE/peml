@@ -1,11 +1,11 @@
 ---
 :value:
-  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/264/practice?workout_id=47
+  exercise_id: RecC-Multiply
   title: 'Recursion Programming Exercise: Multiply'
-  external_id: RecC-Multiply
-  is_public: 'true'
-  experience: '10'
-  language_list: Java
+  vendor:
+    codeworkout:
+      is_public: 'true'
+  difficulty: '10'
   license:
     id: cc-sa-4.0
     owner:
@@ -46,7 +46,7 @@
         files:
         - type: text/x-java
           pattern:
-            actual: subject.multiply({{x}}, {{y}})
+            method_invocation: multiply({{x}}, {{y}})
           content: "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport
             java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n
             \ private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject
@@ -60,4 +60,5 @@
             \   \n    105,\n    subject.multiply(7, 15));\n\n  \n}\n  \n    @Test\n@Description(hidden)\n\n\n\n\npublic
             void test_5()\n{\n  \n  \n  \n  assertEquals(\n    \n    1,\n    subject.multiply(1,
             1));\n\n  \n}\n  \n  \n}"
-:diagnostics: []
+:diagnostics:
+- Path '/difficulty' is not an integer.

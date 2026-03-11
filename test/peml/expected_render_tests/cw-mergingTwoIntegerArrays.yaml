@@ -1,11 +1,11 @@
 ---
 :value:
-  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/572/practice?workout_id=759
+  exercise_id: ITSC1213_merging_two_integer_arrays
   title: Merging Two Integer Arrays
-  external_id: ITSC1213_merging_two_integer_arrays
-  is_public: 'true'
-  experience: '10'
-  language_list: Java
+  vendor:
+    codeworkout:
+      is_public: 'true'
+  difficulty: '10'
   license:
     id: cc-sa-4.0
     owner:
@@ -42,25 +42,26 @@
         files:
         - type: text/x-java
           pattern:
-            actual: subject.mergeIntArrays({{nums1}}, {{nums2}})
+            method_invocation: mergeIntArrays({{nums1}}, {{nums2}})
           content: "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport
             java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n
             \ private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject
             = new Answer();\n}\n  \n    @Test\n\n\n\n\n\npublic void test_1()\n{\n
-            \ \n  \n  \n  assertEquals(\n    \n    \"new int[] {1, 2, 3, 4}\",\n    subject.mergeIntArrays(\"new
-            int[] {}\", \"new int[] {1, 2, 3, 4}\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic
-            void test_2()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"new int[] {1,
-            2, 3, 4}\",\n    subject.mergeIntArrays(\"new int[] {1, 2, 3, 4}\", \"new
-            int[] {}\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_3()\n{\n
-            \ \n  \n  \n  assertEquals(\n    \n    \"new int[] {1, 2, 3, 4}\",\n    subject.mergeIntArrays(\"new
-            int[] {1, 2, 3}\", \"new int[] {4}\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic
-            void test_4()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"new int[] {1,
-            1, 2, 3}\",\n    subject.mergeIntArrays(\"new int[] {1}\", \"new int[]
-            {1, 2, 3}\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_5()\n{\n
-            \ \n  \n  \n  assertEquals(\n    \n    \"new int[] {2, 2, 2, 2, 2, 4,
-            4}\",\n    subject.mergeIntArrays(\"new int[] {2, 2, 2, 2, 2}\", \"new
-            int[]{4, 4}\"));\n\n  \n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic
-            void test_6()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"new int[] {-4,
-            -5, -3, -6, 5, 5, 5, 5}\",\n    subject.mergeIntArrays(\"new int[] {-4,
-            -5, -3, -6}\", \"new int[] {5, 5, 5, 5} \"));\n\n  \n}\n  \n  \n}"
-:diagnostics: []
+            \ \n  \n  \n  assertEquals(\n    \n    new int[] {1, 2, 3, 4},\n    subject.mergeIntArrays(new
+            int[] {}, new int[] {1, 2, 3, 4}));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic
+            void test_2()\n{\n  \n  \n  \n  assertEquals(\n    \n    new int[] {1,
+            2, 3, 4},\n    subject.mergeIntArrays(new int[] {1, 2, 3, 4}, new int[]
+            {}));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_3()\n{\n  \n
+            \ \n  \n  assertEquals(\n    \n    new int[] {1, 2, 3, 4},\n    subject.mergeIntArrays(new
+            int[] {1, 2, 3}, new int[] {4}));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic
+            void test_4()\n{\n  \n  \n  \n  assertEquals(\n    \n    new int[] {1,
+            1, 2, 3},\n    subject.mergeIntArrays(new int[] {1}, new int[] {1, 2,
+            3}));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_5()\n{\n  \n
+            \ \n  \n  assertEquals(\n    \n    new int[] {2, 2, 2, 2, 2, 4, 4},\n
+            \   subject.mergeIntArrays(new int[] {2, 2, 2, 2, 2}, new int[]{4, 4}));\n\n
+            \ \n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic void test_6()\n{\n
+            \ \n  \n  \n  assertEquals(\n    \n    new int[] {-4, -5, -3, -6, 5, 5,
+            5, 5},\n    subject.mergeIntArrays(new int[] {-4, -5, -3, -6}, new int[]
+            {5, 5, 5, 5}));\n\n  \n}\n  \n  \n}"
+:diagnostics:
+- Path '/difficulty' is not an integer.

@@ -1,11 +1,11 @@
 ---
 :value:
-  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/267/practice?workout_id=51
+  exercise_id: RecC-Sumtok
   title: 'Recursion Programming Exercise: Cumulative Sum'
-  external_id: RecC-Sumtok
-  is_public: 'true'
-  experience: '10'
-  language_list: Java
+  vendor:
+    codeworkout:
+      is_public: 'true'
+  difficulty: '10'
   license:
     id: cc-sa-4.0
     owner:
@@ -44,15 +44,16 @@
         files:
         - type: text/csv-unquoted
           pattern:
-            actual: subject.sumtok({{k}})
+            method_invocation: sumtok({{k}})
           content: |
-            k,expected,description
-            5,15,example
-            2,3
-            0,0
-            10,55
-            11,66
-            100,5050
-            4,10,hidden
-            1,1,hidden
-:diagnostics: []
+            k, expected, description
+            5, 15, example
+            2, 3
+            0, 0
+            10, 55
+            11, 66
+            100, 5050
+            4, 10, hidden
+            1, 1, hidden
+:diagnostics:
+- Path '/difficulty' is not an integer.

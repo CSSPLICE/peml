@@ -1,11 +1,11 @@
 ---
 :value:
-  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/488/practice?workout_id=680
+  exercise_id: cw-x58
   title: Sorting - Quick Sort
-  external_id: cw-x58
-  is_public: 'true'
-  experience: '70'
-  language_list: Java
+  vendor:
+    codeworkout:
+      is_public: 'true'
+  difficulty: '70'
   license:
     id: cc-sa-4.0
     owner:
@@ -47,19 +47,20 @@
         files:
         - type: text/x-java
           pattern:
-            actual: subject.quickSort({{list}})
+            method_invocation: quickSort({{list}})
           content: "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport
             java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n
             \ private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject
-            = new Answer();\n}\n  \n    @Test\n@Description(\"(4, 6, 1, 2, 3, 5, 6,
-            8, 9, 8, 4, 2) -> (1, 2, 2, 3, 4, 4, 5, 6, 6, 8, 8, 9)\")\n\n\n\n\npublic
+            = new Answer();\n}\n  \n    @Test\n@Description((4, 6, 1, 2, 3, 5, 6,
+            8, 9, 8, 4, 2) -> (1, 2, 2, 3, 4, 4, 5, 6, 6, 8, 8, 9))\n\n@Example\n\n\npublic
             void test_1()\n{\n  \n  \n  \n  assertEquals(\n    \n    Answer.answ1,\n
-            \   subject.quickSort(Answer.test1));\n\n  \n}\n  \n    @Test\n@Description(\"(47,
+            \   subject.quickSort(Answer.test1));\n\n  \n}\n  \n    @Test\n@Description((47,
             81, 30, 64, 78, 67, 58, 96, 47, 5) -> (5, 30, 47, 47, 58, 64, 67, 78,
-            81, 96)\")\n\n\n\n\npublic void test_2()\n{\n  \n  \n  \n  assertEquals(\n
+            81, 96))\n\n\n\n\npublic void test_2()\n{\n  \n  \n  \n  assertEquals(\n
             \   \n    Answer.answ2,\n    subject.quickSort(Answer.test2));\n\n  \n}\n
-            \ \n    @Test\n@Description(\"(32, 23, 9, 17, 24, 18, 19) -> (9, 17, 18,
-            19, 23, 24, 32)\")\n\n\n\n\npublic void test_3()\n{\n  \n  \n  \n  assertEquals(\n
+            \ \n    @Test\n@Description((32, 23, 9, 17, 24, 18, 19) -> (9, 17, 18,
+            19, 23, 24, 32))\n\n\n\n\npublic void test_3()\n{\n  \n  \n  \n  assertEquals(\n
             \   \n    Answer.answ3,\n    subject.quickSort(Answer.test3));\n\n  \n}\n
             \ \n  \n}"
-:diagnostics: []
+:diagnostics:
+- Path '/difficulty' is not an integer.

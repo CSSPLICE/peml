@@ -1,11 +1,11 @@
 ---
 :value:
-  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/466/practice?workout_id=680
+  exercise_id: cw-x49
   title: Sorting - Fix Selection Sort
-  external_id: cw-x49
-  is_public: 'true'
-  experience: '30'
-  language_list: Java
+  vendor:
+    codeworkout:
+      is_public: 'true'
+  difficulty: '30'
   license:
     id: cc-sa-4.0
     owner:
@@ -53,14 +53,15 @@
         files:
         - type: text/csv-unquoted
           pattern:
-            actual: subject.selectionSort({{array}})
+            method_invocation: selectionSort({{array}})
           content: |
-            aray,expected,description
-            "new int[]{4,7,1}","new int[]{1,4,7}",example
-            "new int[]{80,6,6,8,2}","new int[]{2,6,6,8,80}",example
-            "new int[]{77,104,33,5}","new int[]{5,33,77,104}"
-            "new int[]{2,4,6}","new int[]{2,4,6}"
-            "new int[]{5,2,0,8}","new int[]{0,2,5,8}"
-            "new int[]{10}","new int[]{10}"
-            "new int[]{4,10,4,0}","new int[]{0,4,4,10}",hidden
-:diagnostics: []
+            array, expected, description
+            new int[]{4,7,1}, new int[]{1,4,7}, example
+            new int[]{80,6,6,8,2}, new int[]{2,6,6,8,80}, example
+            new int[]{77,104,33,5}, new int[]{5,33,77,104}
+            new int[]{2,4,6}, new int[]{2,4,6}
+            new int[]{5,2,0,8}, new int[]{0,2,5,8}
+            new int[]{10}, new int[]{10}
+            new int[]{4,10,4,0}, new int[]{0,4,4,10}, hidden
+:diagnostics:
+- Path '/difficulty' is not an integer.

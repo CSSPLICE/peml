@@ -1,10 +1,8 @@
-exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/572/practice?workout_id=759
+exercise_id: ITSC1213_merging_two_integer_arrays
 
 title: Merging Two Integer Arrays
-external_id: ITSC1213_merging_two_integer_arrays
-is_public: true
-experience: 10
-language_list: Java
+vendor.codeworkout.is_public: true
+difficulty: 10
 
 license.id: cc-sa-4.0
 license.owner.email: lcao2@uncc.edu
@@ -45,15 +43,15 @@ public int[] mergeIntArrays(int[] nums1, int[] nums2)
 
 [.assets.test.files]
 type: text/csv-unquoted
-pattern.actual: subject.mergeIntArrays({{nums1}}, {{nums2}})
+pattern.method_invocation: mergeIntArrays({{nums1}}, {{nums2}})
 content:----------
-nums1,nums2,expected,description
-"new int[] {}","new int[] {1, 2, 3, 4}","new int[] {1, 2, 3, 4}"
-"new int[] {1, 2, 3, 4}","new int[] {}","new int[] {1, 2, 3, 4}"
-"new int[] {1, 2, 3}","new int[] {4}","new int[] {1, 2, 3, 4}"
-"new int[] {1}","new int[] {1, 2, 3}","new int[] {1, 1, 2, 3}"
-"new int[] {2, 2, 2, 2, 2}","new int[]{4, 4}","new int[] {2, 2, 2, 2, 2, 4, 4}"
-"new int[] {-4, -5, -3, -6}","new int[] {5, 5, 5, 5} ","new int[] {-4, -5, -3, -6, 5, 5, 5, 5}",example
+nums1, nums2, expected, description
+new int[] {}, new int[] {1, 2, 3, 4}, new int[] {1, 2, 3, 4}
+new int[] {1, 2, 3, 4}, new int[] {}, new int[] {1, 2, 3, 4}
+new int[] {1, 2, 3}, new int[] {4}, new int[] {1, 2, 3, 4}
+new int[] {1}, new int[] {1, 2, 3}, new int[] {1, 1, 2, 3}
+new int[] {2, 2, 2, 2, 2}, new int[]{4, 4}, new int[] {2, 2, 2, 2, 2, 4, 4}
+new int[] {-4, -5, -3, -6}, new int[] {5, 5, 5, 5}, new int[] {-4, -5, -3, -6, 5, 5, 5, 5}, example
 ----------
 []
 

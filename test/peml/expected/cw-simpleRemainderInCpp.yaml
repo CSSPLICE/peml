@@ -1,11 +1,11 @@
 ---
 :value:
-  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/695/practice?workout_id=955
+  exercise_id: chico_simpleRemainder
   title: Sorting - Simple Remainder in C++
-  external_id: chico_simpleRemainder
-  is_public: 'true'
-  experience: '50'
-  language_list: C++
+  vendor:
+    codeworkout:
+      is_public: 'true'
+  difficulty: '50'
   license:
     id: cc-sa-4.0
     owner:
@@ -48,8 +48,9 @@
         files:
         - type: text/csv-unquoted
           pattern:
-            actual: subject.remainder()
+            method_invocation: remainder()
           content: |
-            expected,description
+            expected
             5
-:diagnostics: []
+:diagnostics:
+- Path '/difficulty' is not an integer.

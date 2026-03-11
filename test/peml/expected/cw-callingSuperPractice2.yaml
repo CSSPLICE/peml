@@ -1,11 +1,11 @@
 ---
 :value:
-  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/840/practice?workout_id=1334
+  exercise_id: CS1114_Week2SyntaxDrill5
   title: CodeWorkout Calling Super Practice 2
-  external_id: CS1114_Week2SyntaxDrill5
-  is_public: 'true'
-  experience: '50'
-  language_list: Java
+  vendor:
+    codeworkout:
+      is_public: 'true'
+  difficulty: '50'
   license:
     id: cc-sa-4.0
     owner:
@@ -60,4 +60,5 @@
                     assertTrue("You must call super in the constructor!", testSquare.getSuperWasCalled());
                 }
             }
-:diagnostics: []
+:diagnostics:
+- Path '/difficulty' is not an integer.

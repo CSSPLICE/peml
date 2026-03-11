@@ -21,9 +21,8 @@ The constructed code should print the minimum of variables a and b.
 
 [systems]
 language: Python
-[]
 
-[assets.code.wrapper.files]
+[.assets.code.wrapper.files]
 content:----------
 a = 4
 b = 2
@@ -31,7 +30,7 @@ ___
 ----------
 []
 
-[assets.code.blocks.content]
+[.assets.code.blocks.content]
 blockid: one1
 delimiter: \
 display: if \\a\b\c\\ \\<\>\>=\ b
@@ -50,8 +49,8 @@ display: print(b)
 indent: 0
 []
 
-[assets.test.files]
-format: text/csv-unquoted
+[.assets.test.files]
+type: text/csv-unquoted
 content:----------
 expected
 2

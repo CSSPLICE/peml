@@ -1,10 +1,8 @@
-exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/830/practice?workout_id=1307
+exercise_id: CS1114_Week1SyntaxDrill9
 
 title: CodeWorkout LightBot Method Calls 9
-external_id: CS1114_Week1SyntaxDrill9
-is_public: true
-experience: 50
-language_list: Java
+vendor.codeworkout.is_public: true
+difficulty: 50
 
 license.id: cc-sa-4.0
 license.owner.email: edwards@cs.vt.edu
@@ -114,15 +112,15 @@ public class syntax9Test extends CodeWorkoutTest {
     }
 
     public void testLightBotRun() {
-        String[] expected = { "turnRight", "turnRight","turnRight","turnRight","jump", "turnRight"};
+        String[] expected = {"turnRight", "turnRight", "turnRight", "turnRight", "jump", "turnRight"};
         runner.run(testBot);
 
         String[] testResult = testBot.getMoveHistory();
 
-        assertEquals(expected.length, testResult.length);
-        assertEquals(expected, testResult);
+assertEquals(expected.length, testResult.length);
+assertEquals(expected, testResult);
     }
 
 }
-----------[]
+----------
 []

@@ -7,8 +7,8 @@ title: Palindromes (A Simple PEML Example)
 
 author: edwards@cs.vt.edu
 
-topics: Strings, loops, conditions
-prerequisites: variables, assignment, boolean operators
+tag.topics: Strings, loops, conditions
+tag.prerequisites: variables, assignment, boolean operators
 
 instructions:----------
 Write a program that reads a single string (in the form of one line
@@ -30,15 +30,13 @@ Or:
 ```
 ----------
 
-assets.test_format: stdin-stdout
-
 [systems]
 language: java
 version: >= 1.5
-[]
 
-[suites]
-[.cases]
+[.assets.tests.files]
+type: inline
+[.content]
 
 stdin: racecar
 stdout: "racecar" is a palindrome.
@@ -55,5 +53,3 @@ stdout: url(some/local/output.txt)
 stdin: url(http://my.school.edu/some/local/generator/input)
 stdout: url(http://my.school.edu/some/local/generator/output)
 
-[]
-[]

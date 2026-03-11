@@ -1,10 +1,8 @@
-exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/919/practice?workout_id=1402
+exercise_id: CS1114_Week4SyntaxDrill_3
 
 title: CodeWorkout While Loops with Relational Operators 3
-external_id: CS1114_Week4SyntaxDrill_3
-is_public: true
-experience: 50
-language_list: Java
+vendor.codeworkout.is_public: true
+difficulty: 50
 
 license.id: cc-sa-4.0
 license.owner.email: edwards@cs.vt.edu
@@ -109,10 +107,10 @@ public class syntax3Test extends CodeWorkoutTest  {
         run.question3(testJ);
 
         assertEquals("Jeroo should have "+1 +" flower but has"
-            + testJ.getFlowerCount(), 1, testJ.getFlowerCount());
++ testJ.getFlowerCount(), 1, testJ.getFlowerCount());
 
     }
 
 }
-----------[]
+----------
 []

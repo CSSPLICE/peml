@@ -46,60 +46,61 @@
           }
       - name: AnswerTest.java
         content: url(src/AnswerTest.java)
-      solutions:
-      - name: reference solution
-        description: an optional description
-        reference: 'true'
-        files: url(src/solutions/reference)
-    suites:
-    - name: peml_stdio_tests
-      visibility: public
-      pattern:
-        description: "{{stdout}}"
-      template: |
-        // Here, the code is based on a specific tool that generates JUnit-style
-          // tests using this as a template, and substituting variables based on
-          // the "columns" in the list of cases.
+        src:
+          solutions:
+          - name: reference solution
+            description: an optional description
+            reference: 'true'
+            files: url(src/solutions/reference)
+            suites:
+            - name: peml_stdio_tests
+              visibility: public
+              pattern:
+                description: "{{stdout}}"
+              template: |
+                // Here, the code is based on a specific tool that generates JUnit-style
+                  // tests using this as a template, and substituting variables based on
+                  // the "columns" in the list of cases.
 
-          setSystemIn({{stdin}});
-          Answer.main();
-          assertEquals({{description}}, {{stdout}}, systemOut().getHistory());
-      cases:
-      - stdin: racecar
-        stdout: '"racecar" is a palindrome.'
-      - stdin: Flintstone
-        stdout: '"Flintstone" is not a palindrome.'
-    - name: csv_stdio_tests
-      type: text/x-unquoted-csv
-      pattern:
-        description: sumNumbers({{str}}) -> {{expected}}
-        actual: subject.sumNumbers({{str}})
-      template: assertEquals({{expected}}, {{actual}});
-      content: |
-        str,expected,description
-        "abc123xyz",123,example
-        "aa11b33",44,example
-        "7 11",18,example
-        "Chocolate",0
-        "5hoco1a1e",7
-        "5$$1;;1!!",7
-        "a1234bb11",1245
-        "",0
-        "a22bbb3",25
-        "FS3453g36fs25",3514,hidden
-        "dfg64g21ge743",828,hidden
-        "2sdf4523sdfsd7",4532,hidden
-        "sdffherbwm",0,hidden
-  environment:
-    build:
-      image: cs1.vt.edu/java-1_9:1.1.0
-      registry: https://hub.docker.com/
-    test:
-      files:
-      - name: some-file-available-during-testing.txt
-        content: 'some data ...
+                  setSystemIn({{stdin}});
+                  Answer.main();
+                  assertEquals({{description}}, {{stdout}}, systemOut().getHistory());
+              cases:
+              - stdin: racecar
+                stdout: '"racecar" is a palindrome.'
+              - stdin: Flintstone
+                stdout: '"Flintstone" is not a palindrome.'
+                name: csv_stdio_tests
+                type: text/x-unquoted-csv
+                pattern:
+                  description: sumNumbers({{str}}) -> {{expected}}
+                  actual: subject.sumNumbers({{str}})
+                template: assertEquals({{expected}}, {{actual}});
+                content: |
+                  str,expected,description
+                  "abc123xyz",123,example
+                  "aa11b33",44,example
+                  "7 11",18,example
+                  "Chocolate",0
+                  "5hoco1a1e",7
+                  "5$$1;;1!!",7
+                  "a1234bb11",1245
+                  "",0
+                  "a22bbb3",25
+                  "FS3453g36fs25",3514,hidden
+                  "dfg64g21ge743",828,hidden
+                  "2sdf4523sdfsd7",4532,hidden
+                  "sdffherbwm",0,hidden
+                environment:
+                  build:
+                    image: cs1.vt.edu/java-1_9:1.1.0
+                    registry: https://hub.docker.com/
+                  test:
+                    files:
+                    - name: some-file-available-during-testing.txt
+                      content: 'some data ...
 
-          '
+                        '
 :diagnostics:
 - Path '/license/owner' is not a string.
 - Path '/license/owner/email' is not long enough (min 1)

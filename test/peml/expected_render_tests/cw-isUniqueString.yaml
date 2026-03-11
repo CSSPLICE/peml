@@ -1,11 +1,11 @@
 ---
 :value:
-  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/586/practice?workout_id=759
+  exercise_id: ITSC1213_is_unique_string
   title: isUniqueString
-  external_id: ITSC1213_is_unique_string
-  is_public: 'true'
-  experience: '10'
-  language_list: Java
+  vendor:
+    codeworkout:
+      is_public: 'true'
+  difficulty: '10'
   license:
     id: cc-sa-4.0
     owner:
@@ -42,21 +42,22 @@
         files:
         - type: text/x-java
           pattern:
-            actual: subject.isUniqueString({{message}})
+            method_invocation: isUniqueString({{message}})
           content: "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport
             java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n
             \ private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject
             = new Answer();\n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic
-            void test_1()\n{\n  \n  \n  \n  assertEquals(\n    \n    true,\n    subject.isUniqueString(\"\"\"coding\"\"\"));\n\n
+            void test_1()\n{\n  \n  \n  \n  assertEquals(\n    \n    true,\n    subject.isUniqueString(\"coding\"));\n\n
             \ \n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic void test_2()\n{\n
-            \ \n  \n  \n  assertEquals(\n    \n    false,\n    subject.isUniqueString(\"\"\"Lambda\"\"\"));\n\n
+            \ \n  \n  \n  assertEquals(\n    \n    false,\n    subject.isUniqueString(\"Lambda\"));\n\n
             \ \n}\n  \n    @Test\n\n\n\n\n\npublic void test_3()\n{\n  \n  \n  \n
-            \ assertEquals(\n    \n    true,\n    subject.isUniqueString(\"\"\"Hlamnh\"\"\"));\n\n
+            \ assertEquals(\n    \n    true,\n    subject.isUniqueString(\"Hlamnh\"));\n\n
             \ \n}\n  \n    @Test\n\n\n\n\n\npublic void test_4()\n{\n  \n  \n  \n
-            \ assertEquals(\n    \n    false,\n    subject.isUniqueString(\"\"\"ab
-            cd ef\"\"\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_5()\n{\n
-            \ \n  \n  \n  assertEquals(\n    \n    true,\n    subject.isUniqueString(\"\"\"\"\"\"));\n\n
+            \ assertEquals(\n    \n    false,\n    subject.isUniqueString(\"ab cd
+            ef\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_5()\n{\n  \n
+            \ \n  \n  assertEquals(\n    \n    true,\n    subject.isUniqueString(\"\"));\n\n
             \ \n}\n  \n    @Test\n@Description(hidden)\n\n\n\n\npublic void test_6()\n{\n
-            \ \n  \n  \n  assertEquals(\n    \n    false,\n    subject.isUniqueString(\"\"\"hello
-            world\"\"\"));\n\n  \n}\n  \n  \n}"
-:diagnostics: []
+            \ \n  \n  \n  assertEquals(\n    \n    false,\n    subject.isUniqueString(\"hello
+            world\"));\n\n  \n}\n  \n  \n}"
+:diagnostics:
+- Path '/difficulty' is not an integer.

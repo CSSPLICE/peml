@@ -1,10 +1,8 @@
-exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/266/practice?workout_id=49
+exercise_id: RecC-Log
 
 title: Recursion Programming Exercise: Log
-external_id: RecC-Log
-is_public: true
-experience: 10
-language_list: Java
+vendor.codeworkout.is_public: true
+difficulty: 10
 
 license.id: cc-sa-4.0
 license.owner.email: sallyhamouda@gmail.com
@@ -49,16 +47,16 @@ public int log(int b, int n ) {
 
 [.assets.test.files]
 type: text/csv-unquoted
-pattern.actual: subject.log({{x}}, {{y}})
+pattern.method_invocation: log({{x}}, {{y}})
 content:----------
-x,y,expected,description
-2,4,2,example
-10,100,2,example
-3,27,3
-10,100000,5
-2,64,6
-10,1000,3,hidden
-10,1,0,hidden
+x, y, expected, description
+2, 4, 2, example
+10, 100, 2, example
+3, 27, 3
+10, 100000, 5
+2, 64, 6
+10, 1000, 3, hidden
+10, 1, 0, hidden
 ----------
 []
 

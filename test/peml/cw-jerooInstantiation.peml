@@ -1,10 +1,8 @@
-exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/854/practice?workout_id=1342
+exercise_id: edu.vt.cs.1114.jeroo_instantiation
 
 title: CodeWorkout Jeroo Instantiation 
-external_id: edu.vt.cs.1114.jeroo_instantiation
-is_public: true
-experience: 50
-language_list: Java
+vendor.codeworkout.is_public: true
+difficulty: 50
 
 license.id: cc-sa-4.0
 license.owner.email: edwards@cs.vt.edu
@@ -52,8 +50,6 @@ public class Answer {
 }
 ----------
 []
-    
-
 
 [.assets.code.starter.files]
 type: java/junit
@@ -80,5 +76,5 @@ public class AnswerTest extends CodeWorkoutTest {
         2, answer.__getFlowers());
     }
 }
-----------[]
+----------
 []

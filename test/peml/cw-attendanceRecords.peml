@@ -1,10 +1,8 @@
-exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/425/practice?workout_id=980
+exercise_id: cw-x8
 
 title: Attendance Records
-external_id: cw-x8
-is_public: true
-experience: 25
-language_list: Java
+vendor.codeworkout.is_public: true
+difficulty: 25
 
 license.id: cc-sa-4.0
 license.owner.email: admin@codwworkout.com
@@ -45,10 +43,10 @@ public ArrayList processAttendance(String[] members)
 
 [.assets.test.files]
 type: text/csv-unquoted
-pattern.actual: subject.processAttendance({{members}})
+pattern.method_invocation: processAttendance({{members}})
 content:----------
-members,expected,description
-"new String[]{""Don"",""Mike"",""Phillip""}","new java.util.ArrayList<String>(){{add(""Don"");add(""Mike"");add(""Phillip"");}}",example
-"new String[]{""Demetri"",""Ollie"",""Tyler"",""Holland""}","new java.util.ArrayList<String>(){{add(""Demetri"");add(""Ollie"");add(""Tyler"");add(""Holland"");}}",hidden
+members, expected, description
+new String[]{"Don","Mike","Phillip"}, new java.util.ArrayList<String>(){{add("Don");add("Mike");add("Phillip");}}, example
+new String[]{"Demetri","Ollie","Tyler","Holland"}, new java.util.ArrayList<String>(){{add("Demetri");add("Ollie");add("Tyler");add("Holland");}}, hidden
 ----------
 []

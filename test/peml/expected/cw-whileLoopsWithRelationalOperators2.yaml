@@ -1,11 +1,11 @@
 ---
 :value:
-  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/918/practice?workout_id=1402
+  exercise_id: CS1114_Week4SyntaxDrill_2
   title: CodeWorkout While Loops with Relational Operators 2
-  external_id: CS1114_Week4SyntaxDrill_2
-  is_public: 'true'
-  experience: '50'
-  language_list: Java
+  vendor:
+    codeworkout:
+      is_public: 'true'
+  difficulty: '50'
   license:
     id: cc-sa-4.0
     owner:
@@ -114,11 +114,11 @@
                     run.question2(testJ);
 
                     assertEquals("Jeroo should hop "+expectedHops+" times.  "
-                        + "Hopped: "+testJ.getHopCount()+" times", expectedHops, testJ.getHopCount());
+                        + Hopped: +testJ.getHopCount()+ times, expectedHops, testJ.getHopCount());
                 }
 
                 @Description("Checks jeroo stops after less than 5 hops if it has less than 5 flowers")
-                @Hint("You don't need to change the condition that's already there, just add a new one!")
+                @Hint(You don't need to change the condition that's already there, just add a new one!)
                 public void test2() {
                     Random r = new Random();
                     int flowers = r.nextInt(4)+1;
@@ -132,9 +132,8 @@
                         + "Hopped: "+testJ.getHopCount()+" times", expectedHops, testJ.getHopCount());
 
                     assertEquals("Jeroo should have gotten rid of all of its flowers but has: "
-                        + testJ.getFlowerCount(), 0, testJ.getFlowerCount());
+            + testJ.getFlowerCount(), 0, testJ.getFlowerCount());
                 }
             }
-            ----------[]
-            []
-:diagnostics: []
+:diagnostics:
+- Path '/difficulty' is not an integer.

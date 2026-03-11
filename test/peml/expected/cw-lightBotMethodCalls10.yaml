@@ -1,11 +1,11 @@
 ---
 :value:
-  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/829/practice?workout_id=1308
+  exercise_id: CS1114_Week1SyntaxDrill10
   title: CodeWorkout LightBot Method Calls 10
-  external_id: CS1114_Week1SyntaxDrill10
-  is_public: 'true'
-  experience: '50'
-  language_list: Java
+  vendor:
+    codeworkout:
+      is_public: 'true'
+  difficulty: '50'
   license:
     id: cc-sa-4.0
     owner:
@@ -114,8 +114,8 @@
 
                     String[] testResult = testBot.getMoveHistory();
 
-                    assertEquals(expected.length, testResult.length);
-                    assertEquals(expected, testResult);
+            assertEquals(expected.length, testResult.length);
+            assertEquals(expected, testResult);
                 }
 
                 public void testSpinStillExists() {
@@ -124,10 +124,9 @@
 
                     String[] testResult = testBot.getMoveHistory();
 
-                    assertEquals(expected.length, testResult.length);
-                    assertEquals(expected, testResult);
+            assertEquals(expected.length, testResult.length);
+            assertEquals(expected, testResult);
                 }
             }
-            ----------[]
-            []
-:diagnostics: []
+:diagnostics:
+- Path '/difficulty' is not an integer.

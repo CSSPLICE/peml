@@ -1,10 +1,8 @@
-exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/468/practice?workout_id=680
+exercise_id: cw-x51
 
 title: Generics - Generic Method 2
-external_id: cw-x51
-is_public: true
-experience: 10
-language_list: Java
+vendor.codeworkout.is_public: true
+difficulty: 10
 
 license.id: cc-sa-4.0
 license.owner.email: edwards@cs.vt.edu
@@ -36,19 +34,19 @@ public class Answer <E>
 
 [.assets.code.starter.files]
 content:----------
-public String whatAmI(E e){
-    //.getClass() returns the
-        runtime class of an object
-    //.equals() determines whether two objects
-        are equivalent
-    //by calling a new static instance of a wrapper object
-        we can analyze
-    //it's class type and compare it to the variable passed
-        in
-    if(e.getClass().equals(new Integer(1).getClass())){
+public String whatAmI(E e)
+{
+    // .getClass() returns the runtime class of an object
+    // .equals() determines whether two objects are equivalent
+    // by calling a new static instance of a wrapper object we can analyze
+    // it's class type and compare it to the variable passed in
+    if (e.getClass().equals(new Integer(1).getClass()))
+    {
         return
         "Integer";
-    }else{
+    }
+    else
+    {
         return "Who knows!";
     }
 }
@@ -58,16 +56,16 @@ public String whatAmI(E e){
 
 [.assets.test.files]
 type: text/csv-unquoted
-pattern.actual: subject.whatAmI({{e}})
+pattern.method_invocation: whatAmI({{e}})
 content:----------
-e,expected,description
-"1",""Integer"",example
-""(╯°□°）╯︵ ┻━┻)"",""String""
-""┬─┬ノ( º _ ºノ)"",""String""
-""Boring String Example"",""String""
-"'c'",""Character""
-"2.2",""Double""
-"new Object()",""Who knows!""
+e, expected, description
+1, "Integer", example
+"(╯°□°）╯︵ ┻━┻)", "String"
+"┬─┬ノ( º _ ºノ)", "String"
+"Boring String Example", "String"
+'c', "Character"
+2.2, "Double"
+new Object(), "Who knows!"
 ----------
 []
 

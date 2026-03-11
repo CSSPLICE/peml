@@ -1,10 +1,8 @@
-exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/424/practice?workout_id=980
+exercise_id: cw-x7
 
 title: ArrayList Coding Practice
-external_id: cw-x7
-is_public: true
-experience: 25
-language_list: Java
+vendor.codeworkout.is_public: true
+difficulty: 25
 
 license.id: cc-sa-4.0
 license.owner.email: admin@codwworkout.com
@@ -41,9 +39,9 @@ public ArrayList<Integer> reverseContents(int[] contents) {
 
 [.assets.test.files]
 type: text/csv-unquoted
-pattern.actual: subject.reverseContents({{contents}})
+pattern.method_invocation: reverseContents({{contents}})
 content:----------
-contents,expected,description
+contents, expected, description
 new int[]{1, 2, 3, 4}, new java.util.ArrayList<Integer>(){{add(4);add(3);add(2);add(1);}}, example
 ----------
 []

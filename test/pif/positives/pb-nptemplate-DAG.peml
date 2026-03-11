@@ -17,7 +17,7 @@ instructions:----------
 Show the general process for an NP-Completeness Proof.
 ----------
 
-[assets.code.blocks.content]
+[.assets.code.blocks.content]
 blockid: starter
 display: To prove that a problem X is NP-complete do this:
 depends:

@@ -1,11 +1,11 @@
 ---
 :value:
-  exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/269/practice?workout_id=53
+  exercise_id: RecC-SumOfDigits
   title: 'Recursion Programming Exercise: Sum of the Digits'
-  external_id: RecC-SumOfDigits
-  is_public: 'true'
-  experience: '10'
-  language_list: Java
+  vendor:
+    codeworkout:
+      is_public: 'true'
+  difficulty: '10'
   license:
     id: cc-sa-4.0
     owner:
@@ -41,13 +41,14 @@
         files:
         - type: text/csv-unquoted
           pattern:
-            actual: subject.addOdd({{n}})
+            method_invocation: addOdd({{n}})
           content: |
-            n,expected,description
-            1234,10,example
-            5678,26
-            0,0
-            10000,1
-            12,3,hidden
-            100002,3,hidden
-:diagnostics: []
+            n, expected, description
+            1234, 10, example
+            5678, 26
+            0, 0
+            10000, 1
+            12, 3, hidden
+            100002, 3, hidden
+:diagnostics:
+- Path '/difficulty' is not an integer.

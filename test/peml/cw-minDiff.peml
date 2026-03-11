@@ -1,10 +1,8 @@
-exercise_id: https://codeworkout.cs.vt.edu/gym/exercises/573/practice?workout_id=759
+exercise_id: ITSC1213_min_diff
 
 title: minDiff
-external_id: ITSC1213_min_diff
-is_public: true
-experience: 20
-language_list: Java
+vendor.codeworkout.is_public: true
+difficulty: 20
 
 license.id: cc-sa-4.0
 license.owner.email: lcao2@uncc.edu
@@ -47,15 +45,15 @@ public int minDiff(int[] nums)
 
 [.assets.test.files]
 type: text/csv-unquoted
-pattern.actual: subject.minDiff({{nums}})
+pattern.method_invocation: minDiff({{nums}})
 content:----------
-nums,expected,description
-"new int[] {3, 5, 11, 4, 8}",-7,example
-"new int[]{}",0
-"new int[]{17}",0
-"new int[]{1, 3, 6, 12, 7}",-5
-"new int[]{1, 2, 3, 5, 7}",1
-"new int[]{3, 5, 4, 8, 11, 14}",-1
+nums, expected, description
+new int[] {3, 5, 11, 4, 8}, -7, example
+new int[]{}, 0
+new int[]{17}, 0
+new int[]{1, 3, 6, 12, 7}, -5
+new int[]{1, 2, 3, 5, 7}, 1
+new int[]{3, 5, 4, 8, 11, 14}, -1
 ----------
 []
 
