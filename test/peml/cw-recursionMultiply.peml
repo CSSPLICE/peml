@@ -47,7 +47,7 @@ public int multiply(int x, int y) {
 
 [.assets.test.files]
 type: text/csv-unquoted
-pattern.method_invocation: multiply({{x}}, {{y}})
+pattern.method_call: multiply({{x}}, {{y}})
 content:----------
 x, y, expected, description
 2, 3, 6, example

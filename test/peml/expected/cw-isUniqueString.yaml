@@ -42,7 +42,7 @@ value:
         files:
         - type: text/csv-unquoted
           pattern:
-            method_invocation: isUniqueString({{message}})
+            method_call: isUniqueString({{message}})
           content: |
             message, expected, description
             "coding", true, example

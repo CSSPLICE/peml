@@ -41,7 +41,7 @@ value:
         files:
         - type: text/csv-unquoted
           pattern:
-            method_invocation: addOdd({{n}})
+            method_call: addOdd({{n}})
           content: |
             n, expected, description
             1234, 10, example

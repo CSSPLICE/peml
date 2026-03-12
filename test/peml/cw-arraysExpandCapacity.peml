@@ -41,7 +41,7 @@ public int[] expandCapacity(int[] arr)
 
 [.assets.test.files]
 type: text/csv-unquoted
-pattern.method_invocation: expandCapacity({{array}})
+pattern.method_call: expandCapacity({{array}})
 content:----------
 array, expected, description
 new int[]{2, 3, 0}, new int[]{2, 3, 0, 0, 0, 0}, example

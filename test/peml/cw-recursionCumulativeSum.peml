@@ -45,7 +45,7 @@ public int sumtok(int k) {
 
 [.assets.test.files]
 type: text/csv-unquoted
-pattern.method_invocation: sumtok({{k}})
+pattern.method_call: sumtok({{k}})
 content:----------
 k, expected, description
 5, 15, example

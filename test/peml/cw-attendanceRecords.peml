@@ -43,7 +43,7 @@ public ArrayList processAttendance(String[] members)
 
 [.assets.test.files]
 type: text/csv-unquoted
-pattern.method_invocation: processAttendance({{members}})
+pattern.method_call: processAttendance({{members}})
 content:----------
 members, expected, description
 new String[]{"Don","Mike","Phillip"}, new java.util.ArrayList<String>(){{add("Don");add("Mike");add("Phillip");}}, example

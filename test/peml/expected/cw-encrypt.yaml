@@ -43,7 +43,7 @@ value:
         files:
         - type: text/csv-unquoted
           pattern:
-            method_invocation: encrypt({{message}})
+            method_call: encrypt({{message}})
           content: |
             message, expected, description
             "How", "owHay", example

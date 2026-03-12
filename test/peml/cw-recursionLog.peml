@@ -47,7 +47,7 @@ public int log(int b, int n ) {
 
 [.assets.test.files]
 type: text/csv-unquoted
-pattern.method_invocation: log({{x}}, {{y}})
+pattern.method_call: log({{x}}, {{y}})
 content:----------
 x, y, expected, description
 2, 4, 2, example

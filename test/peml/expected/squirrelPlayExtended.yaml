@@ -40,7 +40,7 @@ value:
     test:
       files:
       - pattern:
-          method_invocation: squirrelPlay({{temp}}, {{isSummer}})
+          method_call: squirrelPlay({{temp}}, {{isSummer}})
         content:
         - temp: '40'
           isSummer: 'True'

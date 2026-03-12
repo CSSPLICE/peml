@@ -41,7 +41,7 @@ public int[] expandCapacity(int[] arr)
 
 [.assets.test.files]
 type: text/yaml
-pattern.method_invocation: expandCapacity({{array}})
+pattern.method_call: expandCapacity({{array}})
 content:----------
 - array: "new int[]{2, 3, 0}"
   expected: "new int[]{2, 3, 0, 0, 0, 0}"

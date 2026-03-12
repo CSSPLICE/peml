@@ -55,7 +55,7 @@ value:
         files:
         - type: text/csv-unquoted
           pattern:
-            method_invocation: binarySearch({{array}}, {{num}})
+            method_call: binarySearch({{array}}, {{num}})
           content: |
             array, num, expected, description
             new int[]{1,4,7}, 7, 2, example

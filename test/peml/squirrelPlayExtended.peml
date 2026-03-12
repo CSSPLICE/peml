@@ -38,7 +38,7 @@ public void squirrelPlay(int temp, boolean isSummer)
 []
 
 [assets.test.files]
-pattern.method_invocation: squirrelPlay({{temp}}, {{isSummer}})
+pattern.method_call: squirrelPlay({{temp}}, {{isSummer}})
 [.content]
 temp:     40
 isSummer: True

@@ -44,7 +44,7 @@ value:
         files:
         - type: text/csv-unquoted
           pattern:
-            method_invocation: getLongestString({{list}})
+            method_call: getLongestString({{list}})
           content: |
             list, expected, description
             new java.util.ArrayList(){{add("once");add("upon");add("a");add("time");}}, "once", example

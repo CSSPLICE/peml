@@ -42,7 +42,7 @@ value:
         files:
         - type: text/csv-unquoted
           pattern:
-            method_invocation: mergeIntArrays({{nums1}}, {{nums2}})
+            method_call: mergeIntArrays({{nums1}}, {{nums2}})
           content: |
             nums1, nums2, expected, description
             new int[] {}, new int[] {1, 2, 3, 4}, new int[] {1, 2, 3, 4}

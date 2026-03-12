@@ -31,7 +31,7 @@ value:
         files:
         - type: text/csv-unquoted
           pattern:
-            method_invocation: sumNumbers({{str}})
+            method_call: sumNumbers({{str}})
           content: |
             str, expected, description
             "abc123xyz", 123, example

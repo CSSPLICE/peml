@@ -47,7 +47,7 @@ value:
         files:
         - type: text/csv-unquoted
           pattern:
-            method_invocation: quickSort({{list}})
+            method_call: quickSort({{list}})
           content: |
             list, expected, description,example
             Answer.test1, Answer.answ1, (4, 6, 1, 2, 3, 5, 6, 8, 9, 8, 4, 2) -> (1, 2, 2, 3, 4, 4, 5, 6, 6, 8, 8, 9), true

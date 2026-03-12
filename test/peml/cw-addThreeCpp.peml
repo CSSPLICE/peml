@@ -49,7 +49,7 @@ int addThree()
 
 [.assets.test.files]
 type: text/csv-unquoted
-pattern.method_invocation: addThree()
+pattern.method_call: addThree()
 content:----------
 expected
 18

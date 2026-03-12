@@ -42,7 +42,7 @@ public int sumOfDigits(int number) {
 
 [.assets.test.files]
 type: text/csv-unquoted
-pattern.method_invocation: addOdd({{n}})
+pattern.method_call: addOdd({{n}})
 content:----------
 n, expected, description
 1234, 10, example

@@ -55,7 +55,7 @@ value:
         files:
         - type: text/csv-unquoted
           pattern:
-            method_invocation: whatAmI({{e}})
+            method_call: whatAmI({{e}})
           content: |
             e, expected, description
             1, "Integer", example

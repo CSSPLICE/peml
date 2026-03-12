@@ -65,7 +65,7 @@ public int[] insertionSort(int[] arr)
 
 [.assets.test.files]
 type: text/csv-unquoted
-pattern.method_invocation: insertionSort({{array}})
+pattern.method_call: insertionSort({{array}})
 content:----------
 array, expected, description
 new int[]{2, 0, 3, 4, 8, 10, 1}, new int[]{0, 1, 2, 3, 4, 8, 10}, example

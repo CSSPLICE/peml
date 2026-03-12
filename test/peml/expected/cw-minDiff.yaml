@@ -44,7 +44,7 @@ value:
         files:
         - type: text/csv-unquoted
           pattern:
-            method_invocation: minDiff({{nums}})
+            method_call: minDiff({{nums}})
           content: |
             nums, expected, description
             new int[] {3, 5, 11, 4, 8}, -7, example

@@ -46,7 +46,7 @@ value:
         files:
         - type: text/csv-unquoted
           pattern:
-            method_invocation: GCD({{x}}, {{y}})
+            method_call: GCD({{x}}, {{y}})
           content: |
             x, y, expected, description
             6, 4, 2, example

@@ -45,7 +45,7 @@ value:
         files:
         - type: text/csv-unquoted
           pattern:
-            method_invocation: compressString({{message}})
+            method_call: compressString({{message}})
           content: |
             message, expected, description
             "bbbaaccccd", "b3a2c4d1", example

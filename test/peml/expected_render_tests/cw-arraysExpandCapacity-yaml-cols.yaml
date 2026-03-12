@@ -41,7 +41,7 @@ value:
         files:
         - type: text/x-java
           pattern:
-            method_invocation: expandCapacity({{array}})
+            method_call: expandCapacity({{array}})
           columns:
             array:
               type: int[]

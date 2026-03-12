@@ -44,7 +44,7 @@ public String encrypt(String message)
 
 [.assets.test.files]
 type: text/csv-unquoted
-pattern.method_invocation: encrypt({{message}})
+pattern.method_call: encrypt({{message}})
 content:----------
 message, expected, description
 "How", "owHay", example

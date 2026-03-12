@@ -50,7 +50,7 @@ value:
         files:
         - type: text/x-cpp
           pattern:
-            method_invocation: addThree()
+            method_call: addThree()
           content: "#include <cxxtest/TestSuite.h>\n#include \".h\"\n\n\nclass TestAnswer
             : public CxxTest::TestSuite\n{\npublic:\n  \n  void setUp()\n{\n  // Set
             up test fixtures, if any.\n  subject = new ();\n}\n  void tearDown()\n{\n

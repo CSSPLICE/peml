@@ -43,7 +43,7 @@ public boolean isUnique(int[] nums)
 
 [.assets.test.files]
 type: text/csv-unquoted
-pattern.method_invocation: isUnique({{nums}})
+pattern.method_call: isUnique({{nums}})
 content:----------
 nums, expected, description
 new int[] {}, true

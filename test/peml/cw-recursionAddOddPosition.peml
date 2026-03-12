@@ -47,7 +47,7 @@ public int addOdd(int n) {
 
 [.assets.test.files]
 type: text/csv-unquoted
-pattern.method_invocation: addOdd({{n}})
+pattern.method_call: addOdd({{n}})
 content:----------
 n, expected, description
 1, 1, example

@@ -39,7 +39,7 @@ value:
         files:
         - type: text/csv-unquoted
           pattern:
-            method_invocation: bubbleSort({{array}})
+            method_call: bubbleSort({{array}})
           content: |
             array, expected, description
             new int[]{4,7,1}, new int[]{1,4,7}, example

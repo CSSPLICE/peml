@@ -41,7 +41,7 @@ value:
         files:
         - type: text/csv-unquoted
           pattern:
-            method_invocation: hasOdd({{nums}})
+            method_call: hasOdd({{nums}})
           content: |
             nums, expected, description
             new int[] {12, 7, 8, 25, 3}, true, example

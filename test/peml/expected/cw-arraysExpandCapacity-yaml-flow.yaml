@@ -41,7 +41,7 @@ value:
         files:
         - type: text/yaml
           pattern:
-            method_invocation: expandCapacity({{array}})
+            method_call: expandCapacity({{array}})
           content: |
             [{ array: "new int[]{2, 3, 0}", expected: "new int[]{2, 3, 0, 0, 0, 0}", description: example },
             { array: "new int[]{}", expected: "new int[]{}", description: example },

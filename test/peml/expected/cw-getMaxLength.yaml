@@ -42,7 +42,7 @@ value:
         files:
         - type: text/csv-unquoted
           pattern:
-            method_invocation: getMaxLength({{list}})
+            method_call: getMaxLength({{list}})
           content: |
             list, expected, description
             new java.util.ArrayList(){{add("four");add("and");add("years");add("ago");}}, 5, example

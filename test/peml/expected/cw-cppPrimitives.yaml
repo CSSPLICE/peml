@@ -45,7 +45,7 @@ value:
         files:
         - type: text/csv-unquoted
           pattern:
-            method_invocation: primitives()
+            method_call: primitives()
           content: |
             expected, description
             0

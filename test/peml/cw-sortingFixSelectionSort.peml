@@ -54,7 +54,7 @@ public int[] selectionSort(int[] array) {
 
 [.assets.test.files]
 type: text/csv-unquoted
-pattern.method_invocation: selectionSort({{array}})
+pattern.method_call: selectionSort({{array}})
 content:----------
 array, expected, description
 new int[]{4,7,1}, new int[]{1,4,7}, example

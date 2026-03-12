@@ -40,7 +40,7 @@ value:
         files:
         - type: text/csv-unquoted
           pattern:
-            method_invocation: oneFinder({{nums}})
+            method_call: oneFinder({{nums}})
           content: |
             nums, expected, description
             new int[]{1,1,1}, 3, example

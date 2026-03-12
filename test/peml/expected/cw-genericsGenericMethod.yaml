@@ -41,7 +41,7 @@ value:
         files:
         - type: text/csv-unquoted
           pattern:
-            method_invocation: allString({{e}})
+            method_call: allString({{e}})
           content: |
             e, expected, description
             'c', "c", example

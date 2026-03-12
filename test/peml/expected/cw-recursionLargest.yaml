@@ -47,7 +47,7 @@ value:
         files:
         - type: text/csv-unquoted
           pattern:
-            method_invocation: largest({{nums}}, {{index}})
+            method_call: largest({{nums}}, {{index}})
           content: |
             nums, index, expected, description
             new int [] {2, 4, 8}, 2, 8, example

@@ -41,7 +41,7 @@ public int[] expandCapacity(int[] arr)
 
 [.assets.test.files]
 type: text/csv-unquoted
-pattern.method_invocation: expandCapacity({{array}})
+pattern.method_call: expandCapacity({{array}})
 columns.array.type: int[]
 columns.array.format: yaml
 columns.expected.type: int[]

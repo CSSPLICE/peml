@@ -44,7 +44,7 @@ int primitives()
 
 [.assets.test.files]
 type: text/csv-unquoted
-pattern.method_invocation: primitives()
+pattern.method_call: primitives()
 content:----------
 expected, description
 0

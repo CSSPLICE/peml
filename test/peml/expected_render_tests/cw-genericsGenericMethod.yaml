@@ -41,7 +41,7 @@ value:
         files:
         - type: text/x-java
           pattern:
-            method_invocation: allString({{e}})
+            method_call: allString({{e}})
           content: "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport
             java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n
             \ private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject
