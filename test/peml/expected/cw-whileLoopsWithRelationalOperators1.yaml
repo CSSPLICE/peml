@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: CS1114_Week4SyntaxDrill_1
   title: CodeWorkout While Loops with Relational Operators 1
   vendor:
@@ -102,5 +102,5 @@
 
                 }
             }
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.

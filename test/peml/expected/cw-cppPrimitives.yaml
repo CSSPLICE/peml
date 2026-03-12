@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: chico_primitives
   title: Sorting - Simple C++ Primitives
   vendor:
@@ -49,5 +49,5 @@
           content: |
             expected, description
             0
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.

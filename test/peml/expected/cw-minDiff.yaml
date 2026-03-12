@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: ITSC1213_min_diff
   title: minDiff
   vendor:
@@ -53,5 +53,5 @@
             new int[]{1, 3, 6, 12, 7}, -5
             new int[]{1, 2, 3, 5, 7}, 1
             new int[]{3, 5, 4, 8, 11, 14}, -1
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.

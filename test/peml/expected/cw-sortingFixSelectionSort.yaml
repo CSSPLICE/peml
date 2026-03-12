@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: cw-x49
   title: Sorting - Fix Selection Sort
   vendor:
@@ -63,5 +63,5 @@
             new int[]{5,2,0,8}, new int[]{0,2,5,8}
             new int[]{10}, new int[]{10}
             new int[]{4,10,4,0}, new int[]{0,4,4,10}, hidden
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.

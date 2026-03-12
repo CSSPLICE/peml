@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: cw-x18
   title: Generics - Comparable Cage
   vendor:
@@ -131,5 +131,5 @@
             4, false, size2Cage.compareTo(size1Cage) < 0 -> false
             5, true, size2Cage.compareTo(otherSize2Cage) == 0 -> true
             6, false, size2Cage.compareTo(size1Cage) == 0 -> false
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.

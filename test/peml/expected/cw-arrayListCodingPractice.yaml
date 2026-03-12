@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: cw-x7
   title: ArrayList Coding Practice
   vendor:
@@ -43,5 +43,5 @@
           content: |
             contents, expected, description
             new int[]{1, 2, 3, 4}, new java.util.ArrayList<Integer>(){{add(4);add(3);add(2);add(1);}}, example
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.

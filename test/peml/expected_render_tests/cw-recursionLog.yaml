@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: RecC-Log
   title: 'Recursion Programming Exercise: Log'
   vendor:
@@ -50,19 +50,19 @@
           content: "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport
             java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n
             \ private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject
-            = new Answer();\n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic
-            void test_1()\n{\n  \n  \n  \n  assertEquals(\n    \n    2,\n    subject.log(2,
-            4));\n\n  \n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic void
-            test_2()\n{\n  \n  \n  \n  assertEquals(\n    \n    2,\n    subject.log(10,
-            100));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_3()\n{\n  \n
-            \ \n  \n  assertEquals(\n    \n    3,\n    subject.log(3, 27));\n\n  \n}\n
-            \ \n    @Test\n\n\n\n\n\npublic void test_4()\n{\n  \n  \n  \n  assertEquals(\n
+            = new Answer();\n}\n  \n    @Test\n\n\n@Example\n\n\npublic void test_1()\n{\n
+            \ \n  \n  \n  assertEquals(\n    \n    2,\n    subject.log(2, 4));\n\n
+            \ \n}\n  \n    @Test\n\n\n@Example\n\n\npublic void test_2()\n{\n  \n
+            \ \n  \n  assertEquals(\n    \n    2,\n    subject.log(10, 100));\n\n
+            \ \n}\n  \n    @Test\n\n\n\n\n\npublic void test_3()\n{\n  \n  \n  \n
+            \ assertEquals(\n    \n    3,\n    subject.log(3, 27));\n\n  \n}\n  \n
+            \   @Test\n\n\n\n\n\npublic void test_4()\n{\n  \n  \n  \n  assertEquals(\n
             \   \n    5,\n    subject.log(10, 100000));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic
             void test_5()\n{\n  \n  \n  \n  assertEquals(\n    \n    6,\n    subject.log(2,
-            64));\n\n  \n}\n  \n    @Test\n@Description(hidden)\n\n\n\n\npublic void
-            test_6()\n{\n  \n  \n  \n  assertEquals(\n    \n    3,\n    subject.log(10,
-            1000));\n\n  \n}\n  \n    @Test\n@Description(hidden)\n\n\n\n\npublic
-            void test_7()\n{\n  \n  \n  \n  assertEquals(\n    \n    0,\n    subject.log(10,
-            1));\n\n  \n}\n  \n  \n}"
-:diagnostics:
+            64));\n\n  \n}\n  \n    @Test\n\n\n\n@Hidden\n\npublic void test_6()\n{\n
+            \ \n  \n  \n  assertEquals(\n    \n    3,\n    subject.log(10, 1000));\n\n
+            \ \n}\n  \n    @Test\n\n\n\n@Hidden\n\npublic void test_7()\n{\n  \n  \n
+            \ \n  assertEquals(\n    \n    0,\n    subject.log(10, 1));\n\n  \n}\n
+            \ \n  \n}"
+diagnostics:
 - Path '/difficulty' is not an integer.

@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: cw-x40
   title: Arrays - Expand Capacity
   vendor:
@@ -50,5 +50,5 @@
             { array: "new int[]{5, 5}", expected: "new int[]{5, 5, 0, 0}" },
             { array: "new int[]{10, 1, 1, 1, 1}", expected: "new int[]{10, 1, 1, 1, 1, 0, 0, 0, 0, 0}", description: hidden },
             { array: "new int[]{7, 8}", expected: "new int[]{7, 8, 0, 0}", description: hidden }]
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.

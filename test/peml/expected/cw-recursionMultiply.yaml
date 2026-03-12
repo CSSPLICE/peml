@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: RecC-Multiply
   title: 'Recursion Programming Exercise: Multiply'
   vendor:
@@ -54,5 +54,5 @@
             9, 10, 90
             7, 15, 105
             1, 1, 1, hidden
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.

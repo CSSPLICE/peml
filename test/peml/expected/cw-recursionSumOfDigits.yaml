@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: RecC-SumOfDigits
   title: 'Recursion Programming Exercise: Sum of the Digits'
   vendor:
@@ -50,5 +50,5 @@
             10000, 1
             12, 3, hidden
             100002, 3, hidden
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.

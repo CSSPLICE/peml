@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: edu.vt.cs.cs1114.sp2018.simple-PEML-example
   title: Palindromes (A Simple PEML Example)
   author: edwards@cs.vt.edu
@@ -116,7 +116,7 @@
                                                         "dfg64g21ge743",828,hidden
                                                         "2sdf4523sdfsd7",4532,hidden
                                                         "sdffherbwm",0,hidden
-:diagnostics:
+diagnostics:
 - Path '/systems/0/src/files' is not a string.
 - Path '/systems/0/src/files/0' is not a string.
 - 'Path ''/systems/0/src/files/0'' is missing key: content'

@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: ITSC1213_is_unique_string
   title: isUniqueString
   vendor:
@@ -51,5 +51,5 @@
             "ab cd ef", false
             "", true
             "hello world", false, hidden
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.

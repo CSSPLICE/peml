@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: CS1114_Week2SyntaxDrill8
   title: CodeWorkout Parameter Practice 4
   vendor:
@@ -73,5 +73,5 @@
 
                 }
             }
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.

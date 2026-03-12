@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: CS1114_Week2SyntaxDrill5
   title: CodeWorkout Calling Super Practice 2
   vendor:
@@ -60,5 +60,5 @@
                     assertTrue("You must call super in the constructor!", testSquare.getSuperWasCalled());
                 }
             }
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.

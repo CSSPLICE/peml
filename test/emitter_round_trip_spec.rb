@@ -1,6 +1,4 @@
 require 'test_helper'
-require 'peml'
-require 'yaml'
 
 # Round-trip tests for the PEML emitter (to_peml).
 #
@@ -38,7 +36,7 @@ describe "Emitter round-trip" do
 
     it "round-trips #{basename} through to_peml and back through parse" do
       # 1. Load the golden file and extract just the value (no diagnostics)
-      golden = YAML.load_file(golden_path)
+      golden = YAML.safe_load(File.read(golden_path))
       original_value = golden[:value] || golden['value']
 
       # 2. Emit the value to PEML text

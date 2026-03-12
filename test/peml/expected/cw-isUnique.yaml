@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: ITSC1213_is_unique
   title: isUnique
   vendor:
@@ -54,5 +54,5 @@
             new int[] {3, 2, 1, 1}, false
             new int[] {1, 2, 2, 3}, false
             new int[] {1, 2, 3, 1}, false
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.

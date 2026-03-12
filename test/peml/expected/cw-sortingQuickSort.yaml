@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: cw-x58
   title: Sorting - Quick Sort
   vendor:
@@ -53,5 +53,5 @@
             Answer.test1, Answer.answ1, (4, 6, 1, 2, 3, 5, 6, 8, 9, 8, 4, 2) -> (1, 2, 2, 3, 4, 4, 5, 6, 6, 8, 8, 9), true
             Answer.test2, Answer.answ2, (47, 81, 30, 64, 78, 67, 58, 96, 47, 5) -> (5, 30, 47, 47, 58, 64, 67, 78, 81, 96)
             Answer.test3, Answer.answ3, (32, 23, 9, 17, 24, 18, 19) -> (9, 17, 18, 19, 23, 24, 32)
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.

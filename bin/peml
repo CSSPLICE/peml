@@ -71,7 +71,7 @@ options[:parse_opts][:filename] = filename
 
 begin
   result = Peml.parse(options[:parse_opts])
-  diagnostics = result[:diagnostics] || []
+  diagnostics = result['diagnostics'] || []
   
   if options[:check_only]
     if diagnostics.empty?
@@ -82,7 +82,7 @@ begin
   end
   expected_different = false
   if options[:expected]
-    expected = YAML.load_file(options[:expected])
+    expected = YAML.safe_load(File.read(options[:expected]))
     # Normalize result for comparison (Dottie hashes or symbols might differ)
     # We'll use a simple comparison of YAML representations or deep merge check
     expected_different = (result != expected)
@@ -114,6 +114,7 @@ rescue => e
     STDERR.puts e.parse_failure_cause.ascii_tree
   else
     STDERR.puts "Error parsing file: #{e.message}"
+    STDERR.puts e.backtrace
   end
   exit 1
 end

@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: ITSC1213_get_maxlength
   title: getMaxLength
   vendor:
@@ -49,5 +49,5 @@
             new java.util.ArrayList(), 0
             new java.util.ArrayList(){{add("once");add("upon");add("a");add("time");}}, 4
             new java.util.ArrayList(){{add("greetings");add("hello");add("welcome");add("byebye");}}, 8, hidden
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.

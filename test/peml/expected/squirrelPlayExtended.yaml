@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: codingbat-squirrelPlay
   title: squirrelPlay
   tag:
@@ -72,5 +72,5 @@
         - temp: '80'
           isSummer: 'True'
           expected: 'True'
-:diagnostics:
+diagnostics:
 - 'Path ''/license'' is missing key: owner'

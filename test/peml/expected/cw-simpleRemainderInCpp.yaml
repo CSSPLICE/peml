@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: chico_simpleRemainder
   title: Sorting - Simple Remainder in C++
   vendor:
@@ -52,5 +52,5 @@
           content: |
             expected
             5
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.

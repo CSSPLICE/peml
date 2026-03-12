@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: edu.vt.cs.cs1114.palindromes
   title: Palindromes (A Simple PEML Example)
   author: edwards@cs.vt.edu
@@ -40,4 +40,4 @@
             stdout: url(some/local/output.txt)
           - stdin: url(http://my.school.edu/some/local/generator/input)
             stdout: url(http://my.school.edu/some/local/generator/output)
-:diagnostics: []
+diagnostics: []

@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: https://cssplice.github.io/peml/examples/02-template.peml
   title: "<Insert your title here>"
   license:
@@ -35,7 +35,7 @@
   systems:
   - language: Java
     version: ">= 1.9"
-:diagnostics:
+diagnostics:
 - Path '/license/owner' is not a string.
 - Path '/license/owner/email' is not long enough (min 1)
 - Path '/license/owner/name' is not long enough (min 1)

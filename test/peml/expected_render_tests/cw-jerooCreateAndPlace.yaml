@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: edu.vt.cs.1114.jeroo_create_and_place
   title: CodeWorkout Jeroo Create and Place
   vendor:
@@ -87,5 +87,5 @@
                   assertEquals("The Jeroo is not facing the correct direction", CompassDirection.NORTH, jeroo.__getFacing());
                 }
             }
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.

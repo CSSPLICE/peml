@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: cw-x22
   title: Generics - Binary Search (non-recursive)
   vendor:
@@ -69,5 +69,5 @@
             new int[]{0,4,4,10}, 2, -1, hidden
             new int[]{1,5,6,9}, 1, 0, hidden
             new int[]{1,5,6,6,6,9,10,11,11}, 6, 4, hidden
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.

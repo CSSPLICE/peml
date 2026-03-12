@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: ITSC1213_merging_two_integer_arrays
   title: Merging Two Integer Arrays
   vendor:
@@ -59,9 +59,9 @@
             3}));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_5()\n{\n  \n
             \ \n  \n  assertEquals(\n    \n    new int[] {2, 2, 2, 2, 2, 4, 4},\n
             \   subject.mergeIntArrays(new int[] {2, 2, 2, 2, 2}, new int[]{4, 4}));\n\n
-            \ \n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic void test_6()\n{\n
-            \ \n  \n  \n  assertEquals(\n    \n    new int[] {-4, -5, -3, -6, 5, 5,
-            5, 5},\n    subject.mergeIntArrays(new int[] {-4, -5, -3, -6}, new int[]
+            \ \n}\n  \n    @Test\n\n\n@Example\n\n\npublic void test_6()\n{\n  \n
+            \ \n  \n  assertEquals(\n    \n    new int[] {-4, -5, -3, -6, 5, 5, 5,
+            5},\n    subject.mergeIntArrays(new int[] {-4, -5, -3, -6}, new int[]
             {5, 5, 5, 5}));\n\n  \n}\n  \n  \n}"
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.

@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: CS1114_Week1SyntaxDrill1
   title: CodeWorkout LightBot Method Calls 1
   vendor:
@@ -81,5 +81,5 @@
                 }
 
             }
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.

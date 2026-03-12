@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: ITSC1213_rotate_right
   title: rotateRight
   vendor:
@@ -73,5 +73,5 @@
             2, 2, 3, 3};\n        a.rotateRight(nums);\n        assertArrayEquals(\"Expected:
             [3, 1, 2, 2, 3] but was: \" + Arrays.toString(nums), new int[]{3, 1, 2,
             2, 3}, nums);\n    }\n}\n"
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.

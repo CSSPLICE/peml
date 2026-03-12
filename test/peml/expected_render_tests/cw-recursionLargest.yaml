@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: RecC-Largest
   title: 'Recursion Programming Exercise: Largest'
   vendor:
@@ -51,16 +51,16 @@
           content: "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport
             java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n
             \ private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject
-            = new Answer();\n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic
-            void test_1()\n{\n  \n  \n  \n  assertEquals(\n    \n    8,\n    subject.largest(new
-            int [] {2, 4, 8}, 2));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void
-            test_2()\n{\n  \n  \n  \n  assertEquals(\n    \n    7,\n    subject.largest(new
-            int [] {7, 7, 7}, 2));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void
-            test_3()\n{\n  \n  \n  \n  assertEquals(\n    \n    5,\n    subject.largest(new
-            int [] {5}, 0));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_4()\n{\n
+            = new Answer();\n}\n  \n    @Test\n\n\n@Example\n\n\npublic void test_1()\n{\n
+            \ \n  \n  \n  assertEquals(\n    \n    8,\n    subject.largest(new int
+            [] {2, 4, 8}, 2));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_2()\n{\n
+            \ \n  \n  \n  assertEquals(\n    \n    7,\n    subject.largest(new int
+            [] {7, 7, 7}, 2));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_3()\n{\n
+            \ \n  \n  \n  assertEquals(\n    \n    5,\n    subject.largest(new int
+            [] {5}, 0));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_4()\n{\n
             \ \n  \n  \n  assertEquals(\n    \n    10,\n    subject.largest(new int
-            [] {10, 4, 8}, 2));\n\n  \n}\n  \n    @Test\n@Description(hidden)\n\n\n\n\npublic
-            void test_5()\n{\n  \n  \n  \n  assertEquals(\n    \n    23,\n    subject.largest(new
+            [] {10, 4, 8}, 2));\n\n  \n}\n  \n    @Test\n\n\n\n@Hidden\n\npublic void
+            test_5()\n{\n  \n  \n  \n  assertEquals(\n    \n    23,\n    subject.largest(new
             int [] {6, 23, 5}, 2));\n\n  \n}\n  \n  \n}"
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.

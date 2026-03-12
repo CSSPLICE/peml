@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: RecC-Multiply
   title: 'Recursion Programming Exercise: Multiply'
   vendor:
@@ -50,15 +50,15 @@
           content: "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport
             java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n
             \ private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject
-            = new Answer();\n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic
-            void test_1()\n{\n  \n  \n  \n  assertEquals(\n    \n    6,\n    subject.multiply(2,
-            3));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_2()\n{\n  \n
-            \ \n  \n  assertEquals(\n    \n    16,\n    subject.multiply(4, 4));\n\n
-            \ \n}\n  \n    @Test\n\n\n\n\n\npublic void test_3()\n{\n  \n  \n  \n
-            \ assertEquals(\n    \n    90,\n    subject.multiply(9, 10));\n\n  \n}\n
-            \ \n    @Test\n\n\n\n\n\npublic void test_4()\n{\n  \n  \n  \n  assertEquals(\n
-            \   \n    105,\n    subject.multiply(7, 15));\n\n  \n}\n  \n    @Test\n@Description(hidden)\n\n\n\n\npublic
-            void test_5()\n{\n  \n  \n  \n  assertEquals(\n    \n    1,\n    subject.multiply(1,
-            1));\n\n  \n}\n  \n  \n}"
-:diagnostics:
+            = new Answer();\n}\n  \n    @Test\n\n\n@Example\n\n\npublic void test_1()\n{\n
+            \ \n  \n  \n  assertEquals(\n    \n    6,\n    subject.multiply(2, 3));\n\n
+            \ \n}\n  \n    @Test\n\n\n\n\n\npublic void test_2()\n{\n  \n  \n  \n
+            \ assertEquals(\n    \n    16,\n    subject.multiply(4, 4));\n\n  \n}\n
+            \ \n    @Test\n\n\n\n\n\npublic void test_3()\n{\n  \n  \n  \n  assertEquals(\n
+            \   \n    90,\n    subject.multiply(9, 10));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic
+            void test_4()\n{\n  \n  \n  \n  assertEquals(\n    \n    105,\n    subject.multiply(7,
+            15));\n\n  \n}\n  \n    @Test\n\n\n\n@Hidden\n\npublic void test_5()\n{\n
+            \ \n  \n  \n  assertEquals(\n    \n    1,\n    subject.multiply(1, 1));\n\n
+            \ \n}\n  \n  \n}"
+diagnostics:
 - Path '/difficulty' is not an integer.

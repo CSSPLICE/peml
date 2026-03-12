@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: ITSC1213_get_longest_string
   title: getLongestString
   vendor:
@@ -51,5 +51,5 @@
             new java.util.ArrayList(){{add("four");add("and");add("years");add("ago");}}, "years"
             new java.util.ArrayList(){{add("greetings");add("hello");add("welcome");add("byebye");}}, "greetings", hidden
             new java.util.ArrayList(){{add("Mexico");add("Germany");add("France");add("Neitherland");}}, "Neitherland", hidden
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.

@@ -42,6 +42,13 @@ value:
         - type: text/x-java
           pattern:
             method_invocation: expandCapacity({{array}})
+          columns:
+            array:
+              type: int[]
+              format: yaml
+            expected:
+              type: int[]
+              format: yaml
           content: "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport
             java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n
             \ private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject

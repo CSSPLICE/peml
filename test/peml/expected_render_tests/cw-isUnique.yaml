@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: ITSC1213_is_unique
   title: isUnique
   vendor:
@@ -48,9 +48,9 @@
             \ private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject
             = new Answer();\n}\n  \n    @Test\n\n\n\n\n\npublic void test_1()\n{\n
             \ \n  \n  \n  assertEquals(\n    \n    true,\n    subject.isUnique(new
-            int[] {}));\n\n  \n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic
-            void test_2()\n{\n  \n  \n  \n  assertEquals(\n    \n    true,\n    subject.isUnique(new
-            int[] {12, 7, -1, 25, 3}));\n\n  \n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic
+            int[] {}));\n\n  \n}\n  \n    @Test\n\n\n@Example\n\n\npublic void test_2()\n{\n
+            \ \n  \n  \n  assertEquals(\n    \n    true,\n    subject.isUnique(new
+            int[] {12, 7, -1, 25, 3}));\n\n  \n}\n  \n    @Test\n\n\n@Example\n\n\npublic
             void test_3()\n{\n  \n  \n  \n  assertEquals(\n    \n    false,\n    subject.isUnique(new
             int[] {5, 3, 5, 2}));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_4()\n{\n
             \ \n  \n  \n  assertEquals(\n    \n    true,\n    subject.isUnique(new
@@ -65,5 +65,5 @@
             int[] {1, 2, 2, 3}));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_9()\n{\n
             \ \n  \n  \n  assertEquals(\n    \n    false,\n    subject.isUnique(new
             int[] {1, 2, 3, 1}));\n\n  \n}\n  \n  \n}"
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.

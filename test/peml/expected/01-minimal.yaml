@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: https://cssplice.github.io/peml/examples/01-minimal.peml
   title: A Minimal PEML Description
   license:
@@ -10,4 +10,4 @@
   instructions: 'Write instructions for your exercise here.
 
     '
-:diagnostics: []
+diagnostics: []

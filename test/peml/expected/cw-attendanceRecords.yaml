@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: cw-x8
   title: Attendance Records
   vendor:
@@ -47,5 +47,5 @@
             members, expected, description
             new String[]{"Don","Mike","Phillip"}, new java.util.ArrayList<String>(){{add("Don");add("Mike");add("Phillip");}}, example
             new String[]{"Demetri","Ollie","Tyler","Holland"}, new java.util.ArrayList<String>(){{add("Demetri");add("Ollie");add("Tyler");add("Holland");}}, hidden
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.

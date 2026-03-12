@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: ITSC1213_compress_string
   title: compressString
   vendor:
@@ -54,5 +54,5 @@
             "abb", "abb"
             "aaacdddaaa", "a3c1d3a3"
             "aabcbbbb", "a2b1c1b4"
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.

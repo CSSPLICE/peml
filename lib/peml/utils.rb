@@ -112,285 +112,397 @@ module Peml
       peml
     end
 
-  # -------------------------------------------------------------
-  # deep transform values in a nested hash/array structure
-  # Traversal and operations are loosely coupled to support
-  # future changes and updates
-  def self.deep_transform_values!(peml, operation, default_peml = {})
-    peml.each do |key, value|
+    # -------------------------------------------------------------
+    # deep transform values in a nested hash/array structure
+    # Traversal and operations are loosely coupled to support
+    # future changes and updates
+    def self.deep_transform_values!(peml, operation, default_peml = {})
+      peml.each do |key, value|
+        if value.is_a?(Hash)
+          Utils.deep_transform_values!(value, operation, default_peml)
+        elsif value.is_a?(Array)
+          value.length.times do |i|
+            if value[i].is_a?(Hash)
+              Utils.deep_transform_values!(value[i], operation, default_peml)
+            elsif value[i].respond_to?(:to_s) || value[i].respond_to?(:to_i)
+              peml[key][i] = method(operation).call(value[i], default_peml)
+            end
+          end
+        elsif value.respond_to?(:to_s) || value.respond_to?(:to_i)
+          peml[key] = method(operation).call(value, default_peml)
+        end
+      end
+      peml
+    end
+
+    #kramdown parser has changed to add \n idky why, needs fixing
+    def self.render_helper(value, default_peml)
+      Kramdown::Document.new(value,
+        :auto_ids => false,
+        input: 'GFM',
+        hard_wrap: ["false"]).to_html
+    end
+
+
+    def self.interpolate_helper(value, default_peml)
+      if value.match(/\{\{(.*?)\}\}/)
+        substitute_values = Utils.substitute_variables(
+          value.scan(/\{\{(.*?)\}\}/).flatten, default_peml)
+        value = value.gsub(/\{\{(.*?)\}\}/) { |x| substitute_values[x] }
+      end
+      value
+    end
+
+
+    def self.substitute_variables(arr, default_peml)
+      substitute_values={}
+      arr.length.times do |i|
+        substitute_values["{{"+arr[i]++"}}"] = default_peml[arr[i]]
+      end
+      substitute_values
+    end
+
+
+    def self.handle_exclusion(unchanged_peml, peml)
+      if unchanged_peml.key?("exclude")
+        peml["exclude"].each do |element|
+          peml[element]=unchanged_peml[element]
+        end
+      end
+      peml
+    end
+
+
+    # -------------------------------------------------------------
+    def self.inline_data_file(value)
       if value.is_a?(Hash)
-        Utils.deep_transform_values!(value, operation, default_peml)
-      elsif value.is_a?(Array)
-        value.length.times do |i|
-          if value[i].is_a?(Hash)
-            Utils.deep_transform_values!(value[i], operation, default_peml)
-          elsif value[i].respond_to?(:to_s) || value[i].respond_to?(:to_i)
-            peml[key][i] = method(operation).call(value[i], default_peml)
+        content = value['content']
+        if content.is_a?(String) # Only parse if it's a string
+          type = mime_type(value)
+          case type
+          when 'text/yaml'
+            value['content'] = YAML.safe_load(content)
+            value['type'] = 'inline'
+          when 'application/json'
+            value['content'] = JSON.parse(content)
+            value['type'] = 'inline'
+          when 'text/csv'
+            value['content'] = tabular_to_hashes(CSV.parse(content))
+            value['type'] = 'inline'
+          when 'application/xml', 'text/xml'
+            value['content'] = xml_to_hash(REXML::Document.new(content).root)
+            value['type'] = 'inline'
+          when 'text/x-unquoted-csv'
+            value['content'] = tabular_to_hashes(Peml::CsvUnquotedParser.new.parse(content))
+            value['type'] = 'inline'
+          when 'text/x-gherkin-table'
+            value['content'] = parse_gherkin_table(content)
+            value['type'] = 'inline'
           end
         end
-      elsif value.respond_to?(:to_s) || value.respond_to?(:to_i)
-        peml[key] = method(operation).call(value, default_peml)
       end
+      value
     end
-    peml
-  end
-
-  #kramdown parser has changed to add \n idky why, needs fixing
-  def self.render_helper(value, default_peml)
-    Kramdown::Document.new(value, :auto_ids => false, input: 'GFM', hard_wrap: ["false"]).to_html
-  end
 
 
-  def self.interpolate_helper(value, default_peml)
-    if value.match(/\{\{(.*?)\}\}/)
-      substitute_values = Utils.substitute_variables(value.scan(/\{\{(.*?)\}\}/).flatten, default_peml)
-      value = value.gsub(/\{\{(.*?)\}\}/) { |x| substitute_values[x] }
-    end
-    value
-  end
-
-
-  def self.substitute_variables(arr, default_peml)
-    substitute_values={}
-    arr.length.times do |i|
-      substitute_values["{{"+arr[i]++"}}"] = default_peml[arr[i]]
-    end
-    substitute_values
-  end
-
-
-  def self.handle_exclusion(unchanged_peml, peml)
-    if unchanged_peml.key?("exclude")
-      peml["exclude"].each do |element|
-        peml[element]=unchanged_peml[element]
-      end
-    end
-    peml
-  end
-
-
-  # -------------------------------------------------------------
-  def self.inline_data_file(value)
-    if value.is_a?(Hash)
-      content = value['content']
-      if content.is_a?(String) # Only parse if it's a string
-        type = mime_type(value)
-        case type
-        when 'text/yaml'
-          value['content'] = YAML.load(content)
-          value['type'] = 'inline'
-        when 'application/json'
-          value['content'] = JSON.parse(content)
-          value['type'] = 'inline'
-        when 'text/csv'
-          value['content'] = tabular_to_hashes(CSV.parse(content))
-          value['type'] = 'inline'
-        when 'application/xml', 'text/xml'
-          value['content'] = xml_to_hash(REXML::Document.new(content).root)
-          value['type'] = 'inline'
-        when 'text/x-unquoted-csv'
-          value['content'] = tabular_to_hashes(Peml::CsvUnquotedParser.new.parse(content))
-          value['type'] = 'inline'
-        when 'text/x-gherkin-table'
-          value['content'] = parse_gherkin_table(content)
-          value['type'] = 'inline'
+    # -------------------------------------------------------------
+    # convert an array of arrays representing CSV-style row-based data
+    # where the first row represents column headings.
+    # Returns a new data structure consisting of an array of hashes,
+    # one per row, where each hash is a key/value mapping column names
+    # to cell values for that row.
+    def self.tabular_to_hashes(data)
+      result = []
+      if data && data.is_a?(Array) && data.length > 0
+        headers = data[0]
+        (1...data.length).each do |i|
+          row = data[i]
+          hash = {}
+          headers.each_with_index do |header, j|
+            break if j >= row.length
+            hash[header] = row[j]
+          end
+          result << hash
         end
       end
+      result
     end
-    value
-  end
 
 
-  # -------------------------------------------------------------
-  # convert an array of arrays representing CSV-style row-based data
-  # where the first row represents column headings.
-  # Returns a new data structure consisting of an array of hashes,
-  # one per row, where each hash is a key/value mapping column names
-  # to cell values for that row.
-  def self.tabular_to_hashes(data)
-    result = []
-    if data && data.is_a?(Array) && data.length > 0
-      headers = data[0]
-      (1...data.length).each do |i|
-        row = data[i]
-        hash = {}
-        headers.each_with_index do |header, j|
-          break if j >= row.length
-          hash[header] = row[j]
+    # -------------------------------------------------------------
+    # parses a gherkin-style data table into a list of hashes.
+    # Assume the data table always has an initial row of column names.
+    def self.parse_gherkin_table(content)
+      return [] if content.nil? || content.empty?
+      rows = []
+      content.each_line do |line|
+        line = line.strip
+        if line.start_with?('|') && line.end_with?('|')
+          cells = line[1...-1].split('|').map(&:strip)
+          rows << cells
         end
-        result << hash
       end
+      tabular_to_hashes(rows)
     end
-    result
-  end
 
 
-  # -------------------------------------------------------------
-  # parses a gherkin-style data table into a list of hashes.
-  # Assume the data table always has an initial row of column names.
-  def self.parse_gherkin_table(content)
-    return [] if content.nil? || content.empty?
-    rows = []
-    content.each_line do |line|
-      line = line.strip
-      if line.start_with?('|') && line.end_with?('|')
-        cells = line[1...-1].split('|').map(&:strip)
-        rows << cells
+    # -------------------------------------------------------------
+    # Recursively convert a REXML element into a nested hash/array structure.
+    def self.xml_to_hash(element)
+      return nil if element.nil?
+      result = {}
+      element.attributes.each do |name, value|
+        result["@#{name}"] = value
       end
-    end
-    tabular_to_hashes(rows)
-  end
-
-
-  # -------------------------------------------------------------
-  # Recursively convert a REXML element into a nested hash/array structure.
-  def self.xml_to_hash(element)
-    return nil if element.nil?
-    result = {}
-    element.attributes.each do |name, value|
-      result["@#{name}"] = value
-    end
-    element.elements.each do |child|
-      child_result = xml_to_hash(child)
-      if result[child.name]
-        if result[child.name].is_a?(Array)
-          result[child.name] << child_result
+      element.elements.each do |child|
+        child_result = xml_to_hash(child)
+        if result[child.name]
+          if result[child.name].is_a?(Array)
+            result[child.name] << child_result
+          else
+            result[child.name] = [result[child.name], child_result]
+          end
         else
-          result[child.name] = [result[child.name], child_result]
+          result[child.name] = child_result
         end
+      end
+      if result.empty?
+        return element.text
       else
-        result[child.name] = child_result
+        text = element.text ? element.text.strip : nil
+        result['content'] = text if text && !text.empty?
+        return result
       end
     end
-    if result.empty?
-      return element.text
-    else
-      text = element.text ? element.text.strip : nil
-      result['content'] = text if text && !text.empty?
-      return result
-    end
-  end
 
 
-  # -------------------------------------------------------------
-  # Used in AST cleanup transforms for parslet parsers to "clean up"
-  # nested hashes/arrays of nodes by simplifying values to text strings
-  # where possible.
-  def self.string_reduce(tree)
-    # puts "string_reduce: #{tree.inspect}"
-    if tree.is_a? Hash
-      result = Hash.new
-      tree.each do |k, v|
-        result[k] = Utils.string_reduce(v)
-      end
-    elsif tree.is_a? Array
-      result = Array.new
-      text = nil
-      tree.each do |v|
-        if v.is_a?(Hash) && v.has_key?(:text)
-          if text.nil?
-            text = v[:text].to_s
-          else
-            text += v[:text].to_s
-          end
-        elsif v.is_a?(String)
-          if text.nil?
-            text = v
-          else
-            text += v
-          end
-        else
-          if !text.nil?
-            result.push({text: text})
-            text = nil
-          end
-          result.push(v)
+    # -------------------------------------------------------------
+    # Used in AST cleanup transforms for parslet parsers to "clean up"
+    # nested hashes/arrays of nodes by simplifying values to text strings
+    # where possible.
+    def self.string_reduce(tree)
+      # puts "string_reduce: #{tree.inspect}"
+      if tree.is_a? Hash
+        result = Hash.new
+        tree.each do |k, v|
+          result[k] = Utils.string_reduce(v)
         end
-      end
-      if !text.nil?
-        result.push({text: text})
+      elsif tree.is_a? Array
+        result = Array.new
         text = nil
-      end
-      if result.length == 1 &&
-         result[0].is_a?(Hash) &&
-         result[0].has_key?(:text)
-        result = result[0][:text]
-      end
-    else
-      result = tree
-    end
-    result
-  end
-
-
-  # -------------------------------------------------------------
-  # Infer the MIME type from a file hash or URL string.
-  #
-  # If file_hash is a Hash:
-  #   - returns the "type" value if present
-  #   - otherwise infers from the extension of the "name" value
-  # If file_hash is a String matching "url(...)":
-  #   - infers from the file extension at the end of the URL path
-  # Returns nil if the type cannot be determined.
-  MIME_TYPES = {
-    '.rb'    => 'text/x-ruby',
-    '.py'    => 'text/x-python',
-    '.java'  => 'text/x-java',
-    '.c'     => 'text/x-csrc',
-    '.cpp'   => 'text/x-c++src',
-    '.h'     => 'text/x-chdr',
-    '.js'    => 'text/javascript',
-    '.ts'    => 'text/typescript',
-    '.json'  => 'application/json',
-    '.xml'   => 'application/xml',
-    '.yaml'  => 'text/yaml',
-    '.yml'   => 'text/yaml',
-    '.md'    => 'text/markdown',
-    '.txt'   => 'text/plain',
-    '.csv'   => 'text/csv',
-    '.csvu'   => 'text/x-unquoted-csv',
-    '.csvuq'  => 'text/x-unquoted-csv',
-    '.ucsv'   => 'text/x-unquoted-csv',
-    '.html'   => 'text/html',
-    '.htm'    => 'text/html',
-    '.css'    => 'text/css',
-    '.csv-unquoted'   => 'text/x-unquoted-csv',
-    '.png'   => 'image/png',
-    '.jpg'   => 'image/jpeg',
-    '.jpeg'  => 'image/jpeg',
-    '.gif'   => 'image/gif',
-    '.pdf'   => 'application/pdf',
-    '.zip'   => 'application/zip',
-    '.svg'   => 'image/svg+xml',
-    '.gherkin' => 'text/x-gherkin-table',
-    '.feature' => 'text/x-gherkin-table'
-  }.freeze
-
-  def self.mime_type(file_hash)
-    result = nil
-    if file_hash.is_a?(Hash)
-      result = file_hash['type'] if file_hash['type']
-      result = file_hash['format'] if file_hash['format'] && result.nil?
-      result = mime_type_from_filename(file_hash['name']) if file_hash['name'] && result.nil?
-    elsif file_hash.is_a?(String)
-      if (match = file_hash.match(/\Aurl\((.*)\)\z/))
-        url = match[1]
-        path = URI.parse(url).path rescue url
-        result = mime_type_from_filename(path)
+        tree.each do |v|
+          if v.is_a?(Hash) && v.has_key?(:text)
+            if text.nil?
+              text = v[:text].to_s
+            else
+              text += v[:text].to_s
+            end
+          elsif v.is_a?(String)
+            if text.nil?
+              text = v
+            else
+              text += v
+            end
+          else
+            if !text.nil?
+              result.push({text: text})
+              text = nil
+            end
+            result.push(v)
+          end
+        end
+        if !text.nil?
+          result.push({text: text})
+          text = nil
+        end
+        if result.length == 1 &&
+          result[0].is_a?(Hash) &&
+          result[0].has_key?(:text)
+          result = result[0][:text]
+        end
       else
-        result = mime_type_from_filename(file_hash)
+        result = tree
+      end
+      result
+    end
+
+
+    # -------------------------------------------------------------
+    def self.render_prog_literal(value, language, options)
+      format = options['format']
+      type = options['type']
+      if options.key?(language)
+        format = options[language]['format'] || format
+        type = options[language]['type'] || type
+      end
+
+      case format
+      when 'yaml'
+        rvalue = YAML.safe_load(value)
+        case language
+        when 'python'
+          value = to_python_literal(rvalue)
+        when 'ruby'
+          value = rvalue.inspect
+        when 'java'
+          value = to_java_literal(rvalue, type)
+        end
+      when 'String'
+        if !value.is_a?(String)
+          value = value.to_s
+        end
+        if !value.start_with?('"')
+          value = value.inspect
+        end
+      end
+      value
+    end
+
+
+    # -------------------------------------------------------------
+    def self.to_python_literal(obj)
+      case obj
+      when Hash
+        # Python dicts use {key: value}
+        pairs = obj.map { |k, v| "#{to_python_literal(k)}: #{to_python_literal(v)}" }
+        "{#{pairs.join(', ')}}"
+      when Array
+        # Python lists use [value1, value2]
+        items = obj.map { |v| to_python_literal(v) }
+        "[#{items.join(', ')}]"
+      when String
+        # Python strings (using double quotes for consistency)
+        obj.inspect
+      when TrueClass
+        "True"
+      when FalseClass
+        "False"
+      when NilClass
+        "None"
+      when Numeric
+        obj.to_s
+      else
+        obj.to_s.inspect
       end
     end
-    if result == 'text/csv-unquoted' || result == 'csv-unquoted'
-      result = 'text/x-unquoted-csv'
-    end
-    result
-  end
 
-  def self.mime_type_from_filename(filename)
-    ext = File.extname(filename).downcase
-    MIME_TYPES[ext]
-  end
+
+    # -------------------------------------------------------------
+    def self.to_java_literal(obj, type)
+      type = type.gsub(/\s+/, "") # Strip whitespace for easier parsing
+
+      case
+      when type.end_with?("[]") # Multi-dimensional or Single-dimensional Arrays
+        inner_type = type[0...-2]
+        elements = Array(obj).map { |v| to_java_literal(v, inner_type) }
+        "new #{type}{#{elements.join(', ')}}"
+
+      when type.start_with?("List<") # Java Lists
+        inner_type = type[/List<(.*)>/, 1]
+        elements = Array(obj).map { |v| to_java_literal(v, inner_type) }
+        "new ArrayList<>(List.of(#{elements.join(', ')}))"
+
+      when type.start_with?("Map<") # Java Maps
+        # Regex splits on commas NOT inside nested <> brackets
+        content = type[/Map<(.*)>/, 1]
+        k_type, v_type = content.split(/,(?![^<>]*>)/).map(&:strip)
+    
+        # We use a HashMap double-brace or Stream approach for unlimited size/nulls
+        # For a literal-like string, Map.ofEntries is the cleanest "large" syntax
+        entries = obj.map do |k, v| 
+          "Map.entry(#{to_java_literal(k, k_type)}, #{to_java_literal(v, v_type)})"
+        end
+        "new HashMap<>(Map.ofEntries(#{entries.join(', ')}))"
+
+      else # Base Types (String, int, double, etc.)
+        format_base_java_type(obj, type)
+      end
+    end
+
+
+    # -------------------------------------------------------------
+    def self.format_base_java_type(obj, type)
+      return "null" if obj.nil?
+
+      case type
+      when "String" then obj.inspect
+      when "long", "Long" then "#{obj}L" # Java requires 'L' suffix for longs
+      when "float", "Float" then "#{obj}f" # Java requires 'f' suffix for floats
+      when "boolean", "Boolean" then obj.to_s
+      when "int", "Integer", "double", "Double" then obj.to_s
+      else obj.to_s.inspect
+      end
+    end
+
+
+    # -------------------------------------------------------------
+    # Infer the MIME type from a file hash or URL string.
+    #
+    # If file_hash is a Hash:
+    #   - returns the "type" value if present
+    #   - otherwise infers from the extension of the "name" value
+    # If file_hash is a String matching "url(...)":
+    #   - infers from the file extension at the end of the URL path
+    # Returns nil if the type cannot be determined.
+    MIME_TYPES = {
+      '.rb'      => 'text/x-ruby',
+      '.py'      => 'text/x-python',
+      '.java'    => 'text/x-java',
+      '.c'       => 'text/x-csrc',
+      '.cpp'     => 'text/x-c++src',
+      '.h'       => 'text/x-chdr',
+      '.js'      => 'text/javascript',
+      '.ts'      => 'text/typescript',
+      '.json'    => 'application/json',
+      '.xml'     => 'application/xml',
+      '.yaml'    => 'text/yaml',
+      '.yml'     => 'text/yaml',
+      '.md'      => 'text/markdown',
+      '.txt'     => 'text/plain',
+      '.csv'     => 'text/csv',
+      '.csvu'    => 'text/x-unquoted-csv',
+      '.csvuq'   => 'text/x-unquoted-csv',
+      '.ucsv'    => 'text/x-unquoted-csv',
+      '.html'    => 'text/html',
+      '.htm'     => 'text/html',
+      '.css'     => 'text/css',
+      '.csv-unquoted'   => 'text/x-unquoted-csv',
+      '.png'     => 'image/png',
+      '.jpg'     => 'image/jpeg',
+      '.jpeg'    => 'image/jpeg',
+      '.gif'     => 'image/gif',
+      '.pdf'     => 'application/pdf',
+      '.zip'     => 'application/zip',
+      '.svg'     => 'image/svg+xml',
+      '.gherkin' => 'text/x-gherkin-table',
+      '.feature' => 'text/x-gherkin-table'
+    }.freeze
+
+    def self.mime_type(file_hash)
+      result = nil
+      if file_hash.is_a?(Hash)
+        result = file_hash['type'] if file_hash['type']
+        result = file_hash['format'] if file_hash['format'] && result.nil?
+        result = mime_type_from_filename(file_hash['name']) if file_hash['name'] && result.nil?
+      elsif file_hash.is_a?(String)
+        if (match = file_hash.match(/\Aurl\((.*)\)\z/))
+          url = match[1]
+          path = URI.parse(url).path rescue url
+          result = mime_type_from_filename(path)
+        else
+          result = mime_type_from_filename(file_hash)
+        end
+      end
+      if result == 'text/csv-unquoted' || result == 'csv-unquoted'
+        result = 'text/x-unquoted-csv'
+      end
+      result
+    end
+
+    def self.mime_type_from_filename(filename)
+      ext = File.extname(filename).downcase
+      MIME_TYPES[ext]
+    end
 
   end
 end

@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: CS1114_Week2SyntaxDrill1
   title: CodeWorkout Parameter Practice 1
   vendor:
@@ -82,5 +82,5 @@
                   assertEquals(cVal + "should be the third parameter passed!", cVal, test.getC());
               }
             }
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.

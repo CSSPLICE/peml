@@ -57,7 +57,7 @@ module Peml
     if params[:result_only]
       value
     else
-      { value: value, diagnostics: validate(value) }
+      { 'value' => value, 'diagnostics' => validate(value) }
     end
   end
 

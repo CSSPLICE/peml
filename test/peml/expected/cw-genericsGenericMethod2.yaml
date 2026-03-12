@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: cw-x51
   title: Generics - Generic Method 2
   vendor:
@@ -65,5 +65,5 @@
             'c', "Character"
             2.2, "Double"
             new Object(), "Who knows!"
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.

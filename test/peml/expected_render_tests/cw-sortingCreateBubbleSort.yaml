@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: cw-x23
   title: Generics - Sorting - Create Bubble Sort
   vendor:
@@ -43,10 +43,10 @@
           content: "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport
             java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n
             \ private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject
-            = new Answer();\n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic
-            void test_1()\n{\n  \n  \n  \n  assertEquals(\n    \n    new int[]{1,4,7},\n
-            \   subject.bubbleSort(new int[]{4,7,1}));\n\n  \n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic
-            void test_2()\n{\n  \n  \n  \n  assertEquals(\n    \n    new int[]{2,6,6,8,80},\n
+            = new Answer();\n}\n  \n    @Test\n\n\n@Example\n\n\npublic void test_1()\n{\n
+            \ \n  \n  \n  assertEquals(\n    \n    new int[]{1,4,7},\n    subject.bubbleSort(new
+            int[]{4,7,1}));\n\n  \n}\n  \n    @Test\n\n\n@Example\n\n\npublic void
+            test_2()\n{\n  \n  \n  \n  assertEquals(\n    \n    new int[]{2,6,6,8,80},\n
             \   subject.bubbleSort(new int[]{80,6,6,8,2}));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic
             void test_3()\n{\n  \n  \n  \n  assertEquals(\n    \n    new int[]{5,33,77,104},\n
             \   subject.bubbleSort(new int[]{77,104,33,5}));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic
@@ -55,8 +55,8 @@
             void test_5()\n{\n  \n  \n  \n  assertEquals(\n    \n    new int[]{0,2,5,8},\n
             \   subject.bubbleSort(new int[]{5,2,0,8}));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic
             void test_6()\n{\n  \n  \n  \n  assertEquals(\n    \n    new int[]{10},\n
-            \   subject.bubbleSort(new int[]{10}));\n\n  \n}\n  \n    @Test\n@Description(hidden)\n\n\n\n\npublic
+            \   subject.bubbleSort(new int[]{10}));\n\n  \n}\n  \n    @Test\n\n\n\n@Hidden\n\npublic
             void test_7()\n{\n  \n  \n  \n  assertEquals(\n    \n    new int[]{0,4,4,10},\n
             \   subject.bubbleSort(new int[]{4,10,4,0}));\n\n  \n}\n  \n  \n}"
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.

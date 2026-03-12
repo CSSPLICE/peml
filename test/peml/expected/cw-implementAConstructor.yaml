@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: ITSC1213_constructor_2
   title: Implement a Constructor
   vendor:
@@ -67,5 +67,5 @@
                  assertTrue("Fields were not set correctly", correctValues);
                }
             }
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.

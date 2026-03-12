@@ -39,17 +39,24 @@ value:
               }
       test:
         files:
-        - type: text/x-gherkin-table
+        - type: text/csv-unquoted
           pattern:
             method_invocation: expandCapacity({{array}})
+          columns:
+            array:
+              type: int[]
+              format: yaml
+            expected:
+              type: int[]
+              format: yaml
           content: |
-            | array                     | expected                                 | description |
-            | new int[]{2, 3, 0}        | new int[]{2, 3, 0, 0, 0, 0}              | example     |
-            | new int[]{}               | new int[]{}                              | example     |
-            | new int[]{6}              | new int[]{6, 0}                          | example     |
-            | new int[]{9, 9, 1}        | new int[]{9, 9, 1, 0, 0, 0}              |
-            | new int[]{5, 5}           | new int[]{5, 5, 0, 0}                    |
-            | new int[]{10, 1, 1, 1, 1} | new int[]{10, 1, 1, 1, 1, 0, 0, 0, 0, 0} | hidden      |
-            | new int[]{7, 8}           | new int[]{7, 8, 0, 0}                    | hidden      |
+            array, expected, description
+            [2, 3, 0], [2, 3, 0, 0, 0, 0], example
+            [], [], example
+            [6], [6, 0], example
+            [9, 9, 1], [9, 9, 1, 0, 0, 0]
+            [5, 5], [5, 5, 0, 0]
+            [10, 1, 1, 1, 1], [10, 1, 1, 1, 1, 0, 0, 0, 0, 0], hidden
+            [7, 8], [7, 8, 0, 0], hidden
 diagnostics:
 - Path '/difficulty' is not an integer.

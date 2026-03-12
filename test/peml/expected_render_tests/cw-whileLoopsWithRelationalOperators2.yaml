@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: CS1114_Week4SyntaxDrill_2
   title: CodeWorkout While Loops with Relational Operators 2
   vendor:
@@ -135,5 +135,5 @@
             + testJ.getFlowerCount(), 0, testJ.getFlowerCount());
                 }
             }
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.

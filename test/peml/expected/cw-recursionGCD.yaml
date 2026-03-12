@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: RecC-Gcd
   title: 'Recursion Programming Exercise: GCD'
   vendor:
@@ -56,5 +56,5 @@
             28, 7, 7, hidden
             240, 8, 8, hidden
             2, 1, 1, hidden
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.

@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: addThree
   title: Sorting - AddThree C++
   vendor:
@@ -54,5 +54,5 @@
           content: |
             expected
             18
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.

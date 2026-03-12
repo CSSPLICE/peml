@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: ITSC1213_get_maxlength
   title: getMaxLength
   vendor:
@@ -46,16 +46,15 @@
           content: "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport
             java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n
             \ private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject
-            = new Answer();\n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic
-            void test_1()\n{\n  \n  \n  \n  assertEquals(\n    \n    5,\n    subject.getMaxLength(new
+            = new Answer();\n}\n  \n    @Test\n\n\n@Example\n\n\npublic void test_1()\n{\n
+            \ \n  \n  \n  assertEquals(\n    \n    5,\n    subject.getMaxLength(new
             java.util.ArrayList(){{add(\"four\");add(\"and\");add(\"years\");add(\"ago\");}}));\n\n
             \ \n}\n  \n    @Test\n\n\n\n\n\npublic void test_2()\n{\n  \n  \n  \n
             \ assertEquals(\n    \n    0,\n    subject.getMaxLength(new java.util.ArrayList()));\n\n
             \ \n}\n  \n    @Test\n\n\n\n\n\npublic void test_3()\n{\n  \n  \n  \n
             \ assertEquals(\n    \n    4,\n    subject.getMaxLength(new java.util.ArrayList(){{add(\"once\");add(\"upon\");add(\"a\");add(\"time\");}}));\n\n
-            \ \n}\n  \n    @Test\n@Description(hidden)\n\n\n\n\npublic void test_4()\n{\n
-            \ \n  \n  \n  assertEquals(\n    \n    8,\n    subject.getMaxLength(new
-            java.util.ArrayList(){{add(\"greetings\");add(\"hello\");add(\"welcome\");add(\"byebye\");}}));\n\n
+            \ \n}\n  \n    @Test\n\n\n\n@Hidden\n\npublic void test_4()\n{\n  \n  \n
+            \ \n  assertEquals(\n    \n    8,\n    subject.getMaxLength(new java.util.ArrayList(){{add(\"greetings\");add(\"hello\");add(\"welcome\");add(\"byebye\");}}));\n\n
             \ \n}\n  \n  \n}"
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.

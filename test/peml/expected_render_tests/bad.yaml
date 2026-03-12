@@ -1,6 +1,6 @@
 ---
-:value: {}
-:diagnostics:
+value: {}
+diagnostics:
 - 'The document is missing key: instructions'
 - 'The document is missing key: suites'
 - 'The document is missing key: systems'

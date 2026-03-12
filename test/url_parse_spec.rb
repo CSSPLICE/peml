@@ -12,7 +12,7 @@ describe 'URL Parse Test' do
     
     URI.stub :open, mock_io do
       result = Peml.parse(url: url)
-      _(result[:value]["title"]).must_equal "Test Exercise"
+      _(result['value']["title"]).must_equal "Test Exercise"
     end
     
     mock_io.verify
@@ -27,7 +27,7 @@ describe 'URL Parse Test' do
     
     URI.stub :open, bad_open do
       result = Peml.parse(filename: filename, url: url)
-      _(result[:value]["title"]).must_equal "A Minimal PEML Description"
+      _(result['value']["title"]).must_equal "A Minimal PEML Description"
     end
   end
 
@@ -41,7 +41,7 @@ describe 'URL Parse Test' do
     
     URI.stub :open, mock_io do
       result = Peml.parse(url: url, peml: peml_param)
-      _(result[:value]["title"]).must_equal "URL Content"
+      _(result['value']["title"]).must_equal "URL Content"
     end
     
     mock_io.verify

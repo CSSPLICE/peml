@@ -39,6 +39,14 @@ module Peml
                 if file['type'] == 'inline'
                   patterns = default_patterns.merge(file['pattern'] || {})
                   test_cases = { 'test_cases' => file['content'] }
+                  columns = {
+                    'description' => { 'format' => 'String' },
+                    'stdin' => { 'format' => 'String' },
+                    'stdout' => { 'format' => 'String' }
+                  }
+                  if file.key?('columns')
+                    columns = columns.merge(file['columns'])
+                  end
                   if options['parse_descriptions']
                     test_cases['test_cases'].each do |test_case|
                       while (description = test_case['description']) &&
@@ -47,6 +55,14 @@ module Peml
                         test_case['description'] = (match[2] || "").strip
                       end
                       test_case.delete('description') if test_case['description'].to_s.empty?
+                    end
+                  end
+                  # convert column values where needed
+                  test_cases['test_cases'].each do |test_case|
+                    test_case.each do |key, value|
+                      if columns.key?(key)
+                        test_case[key] = Utils.render_prog_literal(value, language, columns[key])
+                      end
                     end
                   end
                   resolver = PemlTemplateResolver.new(patterns, language)

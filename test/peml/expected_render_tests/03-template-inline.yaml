@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: https://cssplice.github.io/peml/examples/03-template-inline.peml
   title: "<Insert your title here>"
   license:
@@ -101,7 +101,7 @@
                       content: 'some data ...
 
                         '
-:diagnostics:
+diagnostics:
 - Path '/license/owner' is not a string.
 - Path '/license/owner/email' is not long enough (min 1)
 - Path '/license/owner/name' is not long enough (min 1)

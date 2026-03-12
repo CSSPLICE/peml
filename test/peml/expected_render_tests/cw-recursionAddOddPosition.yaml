@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: RecC-Addodd
   title: 'Recursion Programming Exercise: Add odd values'
   vendor:
@@ -50,25 +50,24 @@
           content: "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport
             java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n
             \ private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject
-            = new Answer();\n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic
-            void test_1()\n{\n  \n  \n  \n  assertEquals(\n    \n    1,\n    subject.addOdd(1));\n\n
-            \ \n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic void test_2()\n{\n
-            \ \n  \n  \n  assertEquals(\n    \n    1,\n    subject.addOdd(2));\n\n
-            \ \n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic void test_3()\n{\n
-            \ \n  \n  \n  assertEquals(\n    \n    4,\n    subject.addOdd(3));\n\n
-            \ \n}\n  \n    @Test\n@Description(example)\n\n\n\n\npublic void test_4()\n{\n
-            \ \n  \n  \n  assertEquals(\n    \n    16,\n    subject.addOdd(7));\n\n
-            \ \n}\n  \n    @Test\n\n\n\n\n\npublic void test_5()\n{\n  \n  \n  \n
-            \ assertEquals(\n    \n    16,\n    subject.addOdd(8));\n\n  \n}\n  \n
-            \   @Test\n\n\n\n\n\npublic void test_6()\n{\n  \n  \n  \n  assertEquals(\n
-            \   \n    25,\n    subject.addOdd(9));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic
-            void test_7()\n{\n  \n  \n  \n  assertEquals(\n    \n    25,\n    subject.addOdd(10));\n\n
-            \ \n}\n  \n    @Test\n\n\n\n\n\npublic void test_8()\n{\n  \n  \n  \n
-            \ assertEquals(\n    \n    36,\n    subject.addOdd(11));\n\n  \n}\n  \n
-            \   @Test\n@Description(hidden)\n\n\n\n\npublic void test_9()\n{\n  \n
-            \ \n  \n  assertEquals(\n    \n    36,\n    subject.addOdd(12));\n\n  \n}\n
-            \ \n    @Test\n@Description(hidden)\n\n\n\n\npublic void test_10()\n{\n
-            \ \n  \n  \n  assertEquals(\n    \n    0,\n    subject.addOdd(0));\n\n
-            \ \n}\n  \n  \n}"
-:diagnostics:
+            = new Answer();\n}\n  \n    @Test\n\n\n@Example\n\n\npublic void test_1()\n{\n
+            \ \n  \n  \n  assertEquals(\n    \n    1,\n    subject.addOdd(1));\n\n
+            \ \n}\n  \n    @Test\n\n\n@Example\n\n\npublic void test_2()\n{\n  \n
+            \ \n  \n  assertEquals(\n    \n    1,\n    subject.addOdd(2));\n\n  \n}\n
+            \ \n    @Test\n\n\n@Example\n\n\npublic void test_3()\n{\n  \n  \n  \n
+            \ assertEquals(\n    \n    4,\n    subject.addOdd(3));\n\n  \n}\n  \n
+            \   @Test\n\n\n@Example\n\n\npublic void test_4()\n{\n  \n  \n  \n  assertEquals(\n
+            \   \n    16,\n    subject.addOdd(7));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic
+            void test_5()\n{\n  \n  \n  \n  assertEquals(\n    \n    16,\n    subject.addOdd(8));\n\n
+            \ \n}\n  \n    @Test\n\n\n\n\n\npublic void test_6()\n{\n  \n  \n  \n
+            \ assertEquals(\n    \n    25,\n    subject.addOdd(9));\n\n  \n}\n  \n
+            \   @Test\n\n\n\n\n\npublic void test_7()\n{\n  \n  \n  \n  assertEquals(\n
+            \   \n    25,\n    subject.addOdd(10));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic
+            void test_8()\n{\n  \n  \n  \n  assertEquals(\n    \n    36,\n    subject.addOdd(11));\n\n
+            \ \n}\n  \n    @Test\n\n\n\n@Hidden\n\npublic void test_9()\n{\n  \n  \n
+            \ \n  assertEquals(\n    \n    36,\n    subject.addOdd(12));\n\n  \n}\n
+            \ \n    @Test\n\n\n\n@Hidden\n\npublic void test_10()\n{\n  \n  \n  \n
+            \ assertEquals(\n    \n    0,\n    subject.addOdd(0));\n\n  \n}\n  \n
+            \ \n}"
+diagnostics:
 - Path '/difficulty' is not an integer.

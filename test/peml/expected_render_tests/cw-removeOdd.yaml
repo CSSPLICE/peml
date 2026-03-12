@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: ITSC1213_removeOdd
   title: removeOdd
   vendor:
@@ -68,5 +68,5 @@
             list = new ArrayList<>(Arrays.asList(new Integer[] {2, 4, 6}));\nArrayList<Integer>
             expResult = new ArrayList<>(Arrays.asList(new Integer[] {2, 4, 6}));\n
             \       ap.removeOdd(list);\nassertEquals(expResult, list);\n    }\n}\n"
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.

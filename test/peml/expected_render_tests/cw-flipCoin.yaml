@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: ITSC1213_flip_coin
   title: flipCoin
   vendor:
@@ -67,5 +67,5 @@
             \" + n +  \" coin flips, result was wrong length.\", n, result.length());\n
             \       assertTrue(\"Result should only contain H and T.\", onlyHT(result));\n
             \ }\n}\n"
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.

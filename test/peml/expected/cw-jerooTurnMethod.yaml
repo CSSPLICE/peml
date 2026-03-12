@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: edu.vt.cs.1114.jeroo_turn_method
   title: CodeWorkout Jeroo turn() method
   vendor:
@@ -88,6 +88,6 @@
                 }
             }
 
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.
 ...

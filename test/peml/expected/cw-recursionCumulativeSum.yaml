@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: RecC-Sumtok
   title: 'Recursion Programming Exercise: Cumulative Sum'
   vendor:
@@ -55,5 +55,5 @@
             100, 5050
             4, 10, hidden
             1, 1, hidden
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.

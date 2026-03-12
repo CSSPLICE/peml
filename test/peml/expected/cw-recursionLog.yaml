@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: RecC-Log
   title: 'Recursion Programming Exercise: Log'
   vendor:
@@ -56,5 +56,5 @@
             2, 64, 6
             10, 1000, 3, hidden
             10, 1, 0, hidden
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.

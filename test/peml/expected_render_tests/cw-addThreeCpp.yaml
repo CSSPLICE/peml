@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: addThree
   title: Sorting - AddThree C++
   vendor:
@@ -57,5 +57,5 @@
             \ delete subject;\n}\n  \n  void test_1()\n{\n  // \n// \n// \n// \n//
             \n  \n  \n  \n  \n\nTS_ASSERT_EQUALS(18, subject->addThree());\n\n  \n}\n
             \ \nprivate:\n   *subject;\n};"
-:diagnostics:
+diagnostics:
 - Path '/difficulty' is not an integer.

@@ -1,5 +1,5 @@
 ---
-:value:
+value:
   exercise_id: codingbat-sumNumbers
   title: sumNumbers
   tag:
@@ -47,5 +47,5 @@
             "dfg64g21ge743", 828, hidden
             "2sdf4523sdfsd7", 4532, hidden
             "sdffherbwm", 0, hidden
-:diagnostics:
+diagnostics:
 - 'Path ''/license'' is missing key: owner'

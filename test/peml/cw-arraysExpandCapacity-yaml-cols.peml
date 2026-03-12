@@ -1,0 +1,60 @@
+exercise_id: cw-x40
+
+title: Arrays - Expand Capacity
+vendor.codeworkout.is_public: true
+difficulty: 10
+
+license.id: cc-sa-4.0
+license.owner.email: edwards@cs.vt.edu
+license.owner.name: Stephen Edwards
+
+tags.topics: array, int
+tags.style: coding problem
+
+instructions:----------
+Return an array with the same contents, but double the size of the array
+passed in. The new slots will be filled with zeros. Use the built in array
+functionality that is provided by Java.
+----------
+
+[systems]
+language: Java
+
+[.assets.code.wrapper.files]
+content:----------
+import java.util.Arrays;
+public class Answer
+{
+  ___
+}
+----------
+[]
+
+[.assets.code.starter.files]
+content:----------
+public int[] expandCapacity(int[] arr)
+{
+    ___
+}
+----------
+[]
+
+[.assets.test.files]
+type: text/csv-unquoted
+pattern.method_invocation: expandCapacity({{array}})
+columns.array.type: int[]
+columns.array.format: yaml
+columns.expected.type: int[]
+columns.expected.format: yaml
+content:----------
+array, expected, description
+[2, 3, 0], [2, 3, 0, 0, 0, 0], example
+[], [], example
+[6], [6, 0], example
+[9, 9, 1], [9, 9, 1, 0, 0, 0]
+[5, 5], [5, 5, 0, 0]
+[10, 1, 1, 1, 1], [10, 1, 1, 1, 1, 0, 0, 0, 0, 0], hidden
+[7, 8], [7, 8, 0, 0], hidden
+----------
+[]
+
