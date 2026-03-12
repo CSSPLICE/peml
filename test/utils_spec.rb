@@ -45,6 +45,14 @@ describe Peml::Utils do
         _(Peml::Utils.mime_type({'name' => 'Image.PNG'})).must_equal 'image/png'
       end
 
+      it "infers type from a .gherkin extension" do
+        _(Peml::Utils.mime_type({'name' => 'table.gherkin'})).must_equal 'text/x-gherkin-table'
+      end
+
+      it "infers type from a .feature extension" do
+        _(Peml::Utils.mime_type({'name' => 'table.feature'})).must_equal 'text/x-gherkin-table'
+      end
+
       it "returns nil for an unknown extension" do
         _(Peml::Utils.mime_type({'name' => 'file.xyz'})).must_be_nil
       end
@@ -122,7 +130,7 @@ describe Peml::Utils do
         ['name', 'age'],
         ['Alice']
       ]
-      expected = [{ 'name' => 'Alice', 'age' => nil }]
+      expected = [{ 'name' => 'Alice' }]
       _(Peml::Utils.tabular_to_hashes(data)).must_equal expected
     end
 
@@ -137,6 +145,29 @@ describe Peml::Utils do
 
     it "returns an empty array for nil input" do
       _(Peml::Utils.tabular_to_hashes(nil)).must_equal []
+    end
+  end
+
+  describe ".inline_data_file" do
+    it "inlines a Gherkin table" do
+      value = {
+        'type' => 'text/x-gherkin-table',
+        'content' => "| name | age |\n| Alice | 30 |"
+      }
+      expected_content = [{ 'name' => 'Alice', 'age' => '30' }]
+      result = Peml::Utils.inline_data_file(value)
+      _(result['content']).must_equal expected_content
+      _(result['type']).must_equal 'inline'
+    end
+
+    it "inlines a YAML file" do
+      value = {
+        'type' => 'text/yaml',
+        'content' => "name: Alice\nage: 30"
+      }
+      result = Peml::Utils.inline_data_file(value)
+      _(result['content']).must_equal({ 'name' => 'Alice', 'age' => 30 })
+      _(result['type']).must_equal 'inline'
     end
   end
 

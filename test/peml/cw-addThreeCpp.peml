@@ -51,7 +51,7 @@ int addThree()
 type: text/csv-unquoted
 pattern.method_invocation: addThree()
 content:----------
-expected, description
+expected
 18
 ----------
 []

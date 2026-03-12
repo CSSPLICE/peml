@@ -40,7 +40,7 @@ or you prefer to use a different programming language, you can use
 the parser via our REST API from the **PEML Live!** website. Documentation
 is available at:
 
-https://discovery.cs.vt.edu/peml-live/api
+https://endeavour.cs.vt.edu/peml-live/api
 
 ## Installing the Gem
 
@@ -74,7 +74,7 @@ parsed result of the PEML input in nested hash form, and
 (errors or other validation messages) produced.
 
 The following additional arguments can be provided to `Peml.parse()` as named
-parameters:
+parameters (or all parameters can be provided as a hash):
 
 **filename** (string)
 `<br/>`
@@ -125,7 +125,6 @@ gem's `<a href="https://github.com/ruby-grape/grape#api-formats">`discussion
 of API formats `</a>` for more details about how the format of the
 response is determined.
 
-
 ## Other Provided Methods
 
 **Peml.validate(peml_hash)**
@@ -147,6 +146,74 @@ Parse a Programming Instruction Format (PIF) description. Takes a hash with eith
 **Peml.pif_to_runestone(parsed_pif, format: nil)**
 `<br/>`
 Convert a parsed PIF structure to Runestone format. `format` options are 'json' and 'yaml'. If nil, a Ruby hash is returned.
+
+## Command Line Interface (CLI)
+
+The `peml` gem includes a command-line script for parsing PEML files directly from your terminal.
+
+### Usage
+
+```bash
+bundle exec bin/peml [options] <filename>
+```
+
+### Options
+
+**--inline**
+`<br/>`
+Enable the `inline` transform.
+
+**--inline-data-files**
+`<br/>`
+Enable the `inline-data-files` transform.
+
+**--render-tests**
+`<br/>`
+Enable the `render-tests` transform.
+
+**--interpolate**
+`<br/>`
+Enable the `interpolate` transform.
+
+**--render-to-html**
+`<br/>`
+Enable the `render-to-html` transform.
+
+**--parse-descriptions**
+`<br/>`
+Enable the parsing of tags (`example`, `hidden`, `screening`) in test case descriptions during the `render-tests` transform.
+
+**--result-only**
+`<br/>`
+Return only the parsed result in the output.
+
+**--file-name**
+`<br/>`
+Include the name of the file being parsed on a line before the output.
+
+**--check-only**
+`<br/>`
+Return only diagnostic messages. If no diagnostics are found, it exits with code 0. Otherwise, it prints the diagnostics and exits with code 1.
+
+**--expected FILENAME**
+`<br/>`
+If provided, instead of printing the parser's output, the result is compared to the contents of the specified expected YAML file. If they are different, a diff-style description of differences is printed and the script exits with code 1.
+
+**--json**
+`<br/>`
+Output the result in JSON format.
+
+**-o, --output FILE**
+`<br/>`
+Write the parse result to the specified FILE instead of printing it to stdout.
+
+**--yaml**
+`<br/>`
+Output the result in YAML format (default).
+
+**-h, --help**
+`<br/>`
+Prints the help message.
 
 ## Contributing
 

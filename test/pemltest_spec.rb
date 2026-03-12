@@ -9,7 +9,7 @@ describe Peml do
       actual = Peml::PemlTestAstCleaner.new.apply(
         parser.public_send(nt).parse(text)
       )
-      actual.must_equal expected
+      _(actual).must_equal expected
     rescue Parslet::ParseFailed => e
       fail e.parse_failure_cause.ascii_tree
     end

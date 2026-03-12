@@ -53,7 +53,9 @@ describe Peml do
 
       it "parses #{slug} and renders tests" do
         begin
-          ex = Peml::parse(filename: f, render_tests: true)
+          ex = Peml::parse(filename: f,
+            render_tests: true,
+            render_tests_params: { 'parse_descriptions' => true})
           _(ex).wont_be_nil
 
           golden = File.join(expected_dir, slug.sub('.peml', '.yaml'))

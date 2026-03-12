@@ -26,6 +26,11 @@ OptionParser.new do |opts|
     options[:parse_opts][:result_only] = true
   end
 
+  opts.on("--parse-descriptions", "Enable parsing of tags in test case descriptions") do
+    options[:parse_opts][:render_tests_params] ||= {}
+    options[:parse_opts][:render_tests_params]['parse_descriptions'] = true
+  end
+
   opts.on("--file-name", "Include the name of the file being parsed on a line before the output") do
     options[:file_name] = true
   end
@@ -40,6 +45,14 @@ OptionParser.new do |opts|
 
   opts.on("--yaml", "Output in YAML format (default)") do
     options[:format] = :yaml
+  end
+
+  opts.on("--expected FILENAME", "Compare output to expected YAML file") do |file|
+    options[:expected] = file
+  end
+
+  opts.on("-o", "--output FILE", "Write result to FILE instead of stdout") do |file|
+    options[:output] = file
   end
 
   opts.on("-h", "--help", "Prints this help") do
@@ -67,13 +80,33 @@ begin
       result = diagnostics
     end
   end
-  puts filename if options[:file_name]
-  if options[:format] == :json
-    puts JSON.pretty_generate(result)
+  expected_different = false
+  if options[:expected]
+    expected = YAML.load_file(options[:expected])
+    # Normalize result for comparison (Dottie hashes or symbols might differ)
+    # We'll use a simple comparison of YAML representations or deep merge check
+    expected_different = (result != expected)
+    if expected_different
+      puts "Differences found in #{filename}:"
+      # Using a simple way to show differences if they are not equal
+      # We could use a more sophisticated diffing library but let's keep it simple for now
+      require 'tempfile'
+      actual_temp = Tempfile.new(['actual', '.yaml'])
+      actual_temp.write(result.to_yaml)
+      actual_temp.close
+      system("diff -u #{options[:expected]} #{actual_temp.path}")
+      actual_temp.unlink
+    end
   else
-    puts result.to_yaml
+    output = options[:format] == :json ? JSON.pretty_generate(result) : result.to_yaml
+    if options[:output]
+      File.write(options[:output], output)
+    elsif !options[:expected]
+      puts filename if options[:file_name]
+      puts output
+    end
   end
-  if !diagnostics.empty?
+  if !diagnostics.empty? || expected_different
     exit 1
   end
 rescue => e

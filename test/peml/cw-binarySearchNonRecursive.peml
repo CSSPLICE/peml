@@ -58,7 +58,7 @@ public int binarySearch(int[]array, int num) {
 type: text/csv-unquoted
 pattern.method_invocation: binarySearch({{array}}, {{num}})
 content:----------
-aray, num, expected, description
+array, num, expected, description
 new int[]{1,4,7}, 7, 2, example
 new int[]{2,6,6,8,80}, 6, 2, example
 new int[]{5,33,77,104}, 104, 3

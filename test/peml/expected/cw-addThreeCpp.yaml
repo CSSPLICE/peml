@@ -52,7 +52,7 @@
           pattern:
             method_invocation: addThree()
           content: |
-            expected, description
+            expected
             18
 :diagnostics:
 - Path '/difficulty' is not an integer.

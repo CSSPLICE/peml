@@ -191,6 +191,9 @@ module Peml
         when 'text/x-unquoted-csv'
           value['content'] = tabular_to_hashes(Peml::CsvUnquotedParser.new.parse(content))
           value['type'] = 'inline'
+        when 'text/x-gherkin-table'
+          value['content'] = parse_gherkin_table(content)
+          value['type'] = 'inline'
         end
       end
     end
@@ -212,12 +215,30 @@ module Peml
         row = data[i]
         hash = {}
         headers.each_with_index do |header, j|
+          break if j >= row.length
           hash[header] = row[j]
         end
         result << hash
       end
     end
     result
+  end
+
+
+  # -------------------------------------------------------------
+  # parses a gherkin-style data table into a list of hashes.
+  # Assume the data table always has an initial row of column names.
+  def self.parse_gherkin_table(content)
+    return [] if content.nil? || content.empty?
+    rows = []
+    content.each_line do |line|
+      line = line.strip
+      if line.start_with?('|') && line.end_with?('|')
+        cells = line[1...-1].split('|').map(&:strip)
+        rows << cells
+      end
+    end
+    tabular_to_hashes(rows)
   end
 
 
@@ -340,7 +361,9 @@ module Peml
     '.gif'   => 'image/gif',
     '.pdf'   => 'application/pdf',
     '.zip'   => 'application/zip',
-    '.svg'   => 'image/svg+xml'
+    '.svg'   => 'image/svg+xml',
+    '.gherkin' => 'text/x-gherkin-table',
+    '.feature' => 'text/x-gherkin-table'
   }.freeze
 
   def self.mime_type(file_hash)
