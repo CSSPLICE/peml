@@ -46,17 +46,20 @@ value:
           content: "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport
             java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n
             \ private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject
-            = new Answer();\n}\n  \n    @Test\n\n\n@Example\n\n\npublic void test_1()\n{\n
-            \ \n  \n  \n  assertEquals(\n    \n    true,\n    subject.isUniqueString(\"coding\"));\n\n
-            \ \n}\n  \n    @Test\n\n\n@Example\n\n\npublic void test_2()\n{\n  \n
-            \ \n  \n  assertEquals(\n    \n    false,\n    subject.isUniqueString(\"Lambda\"));\n\n
-            \ \n}\n  \n    @Test\n\n\n\n\n\npublic void test_3()\n{\n  \n  \n  \n
-            \ assertEquals(\n    \n    true,\n    subject.isUniqueString(\"Hlamnh\"));\n\n
-            \ \n}\n  \n    @Test\n\n\n\n\n\npublic void test_4()\n{\n  \n  \n  \n
-            \ assertEquals(\n    \n    false,\n    subject.isUniqueString(\"ab cd
-            ef\"));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_5()\n{\n  \n
-            \ \n  \n  assertEquals(\n    \n    true,\n    subject.isUniqueString(\"\"));\n\n
-            \ \n}\n  \n    @Test\n\n\n\n@Hidden\n\npublic void test_6()\n{\n  \n  \n
+            = new Answer();\n}\n  \n    @Test\n@Description(\"isUniqueString(\\\"coding\\\")
+            -> true\")\n\n@Example\n\n\npublic void test_1()\n{\n  \n  \n  \n  assertEquals(\n
+            \   \n    true,\n    subject.isUniqueString(\"coding\"));\n\n  \n}\n  \n
+            \   @Test\n@Description(\"isUniqueString(\\\"Lambda\\\") -> false\")\n\n@Example\n\n\npublic
+            void test_2()\n{\n  \n  \n  \n  assertEquals(\n    \n    false,\n    subject.isUniqueString(\"Lambda\"));\n\n
+            \ \n}\n  \n    @Test\n@Description(\"isUniqueString(\\\"Hlamnh\\\") ->
+            true\")\n\n\n\n\npublic void test_3()\n{\n  \n  \n  \n  assertEquals(\n
+            \   \n    true,\n    subject.isUniqueString(\"Hlamnh\"));\n\n  \n}\n  \n
+            \   @Test\n@Description(\"isUniqueString(\\\"ab cd ef\\\") -> false\")\n\n\n\n\npublic
+            void test_4()\n{\n  \n  \n  \n  assertEquals(\n    \n    false,\n    subject.isUniqueString(\"ab
+            cd ef\"));\n\n  \n}\n  \n    @Test\n@Description(\"isUniqueString(\\\"\\\")
+            -> true\")\n\n\n\n\npublic void test_5()\n{\n  \n  \n  \n  assertEquals(\n
+            \   \n    true,\n    subject.isUniqueString(\"\"));\n\n  \n}\n  \n    @Test\n@Description(\"isUniqueString(\\\"hello
+            world\\\") -> false\")\n\n\n@Hidden\n\npublic void test_6()\n{\n  \n  \n
             \ \n  assertEquals(\n    \n    false,\n    subject.isUniqueString(\"hello
             world\"));\n\n  \n}\n  \n  \n}"
 diagnostics:

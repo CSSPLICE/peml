@@ -39,11 +39,7 @@ module Peml
                 if file['type'] == 'inline'
                   patterns = default_patterns.merge(file['pattern'] || {})
                   test_cases = { 'test_cases' => file['content'] }
-                  columns = {
-                    'description' => { 'format' => 'String' },
-                    'stdin' => { 'format' => 'String' },
-                    'stdout' => { 'format' => 'String' }
-                  }
+                  columns = {}
                   if file.key?('columns')
                     columns = columns.merge(file['columns'])
                   end
@@ -59,19 +55,26 @@ module Peml
                   end
                   # convert column values where needed
                   test_cases['test_cases'].each do |test_case|
+                    new_keys = {}
                     test_case.each do |key, value|
                       if columns.key?(key)
+                        if columns[key].key?('format') && columns[key]['format'] == 'yaml'
+                          new_keys[key + '__as_yaml'] = value
+                        end
                         test_case[key] = Utils.render_prog_literal(value, language, columns[key])
                       end
                     end
+                    test_case.merge!(new_keys)
                   end
                   resolver = PemlTemplateResolver.new(patterns, language)
                   template_source = resolver.read_template_file('test_class')
                   template_class = Liquid::Template.parse(template_source, :error_mode => :strict)
-                  file['content'] = template_class.render(
+                  context = PemlContext.new(
                     test_cases,
-                    registers: { file_system: resolver }
-                  )
+                    {},
+                    { file_system: resolver, use_raw_yaml: 0 },
+                    true)
+                  file['content'] = template_class.render(context)
                   file['type'] = "text/x-#{language}"
                 end
               end
@@ -107,6 +110,30 @@ module Peml
 
 
   # -------------------------------------------------------------
+  class ShowYaml < Liquid::Block
+    def render(context)
+      context.registers[:use_raw_yaml] = context.registers[:use_raw_yaml].to_i + 1
+      result = super
+      context.registers[:use_raw_yaml] = context.registers[:use_raw_yaml].to_i - 1
+      result
+    end
+  end
+
+
+  # -------------------------------------------------------------
+  class PemlContext < Liquid::Context
+    def find_variable(key, *args)
+      if registers[:use_raw_yaml].to_i > 0 && key.is_a?(String) && !key.end_with?('__as_yaml')
+        yaml_key = "#{key}__as_yaml"
+        val = super(yaml_key, *args)
+        return val unless val.nil?
+      end
+      super
+    end
+  end
+
+
+  # -------------------------------------------------------------
   class PemlTemplateResolver
     def initialize(programmatic_definitions, language)
       @overrides = programmatic_definitions
@@ -130,5 +157,21 @@ module Peml
     end
   end
 
+  # -------------------------------------------------------------
+  module PemlFilters
+    def string_literal(input)
+      val = input.to_s
+      return val if val.start_with?('"')
+
+      # Escape any embedded backslashes and double-quotes
+      escaped = val.gsub('\\', '\\\\\\\\').gsub('"', '\\"')
+      "\"#{escaped}\""
+    end
+  end
+
+
+  # -------------------------------------------------------------
   Liquid::Template.register_tag('include', PemlInclude)
+  Liquid::Template.register_tag('show_yaml', ShowYaml)
+  Liquid::Template.register_filter(PemlFilters)
 end

@@ -48,20 +48,22 @@ value:
           content: "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport
             java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n
             \ private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject
-            = new Answer();\n}\n  \n    @Test\n\n\n@Example\n\n\npublic void test_1()\n{\n
-            \ \n  \n  \n  assertEquals(\n    \n    15,\n    subject.sumtok(5));\n\n
-            \ \n}\n  \n    @Test\n\n\n\n\n\npublic void test_2()\n{\n  \n  \n  \n
-            \ assertEquals(\n    \n    3,\n    subject.sumtok(2));\n\n  \n}\n  \n
-            \   @Test\n\n\n\n\n\npublic void test_3()\n{\n  \n  \n  \n  assertEquals(\n
-            \   \n    0,\n    subject.sumtok(0));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic
+            = new Answer();\n}\n  \n    @Test\n@Description(\"sumtok(5) -> 15\")\n\n@Example\n\n\npublic
+            void test_1()\n{\n  \n  \n  \n  assertEquals(\n    \n    15,\n    subject.sumtok(5));\n\n
+            \ \n}\n  \n    @Test\n@Description(\"sumtok(2) -> 3\")\n\n\n\n\npublic
+            void test_2()\n{\n  \n  \n  \n  assertEquals(\n    \n    3,\n    subject.sumtok(2));\n\n
+            \ \n}\n  \n    @Test\n@Description(\"sumtok(0) -> 0\")\n\n\n\n\npublic
+            void test_3()\n{\n  \n  \n  \n  assertEquals(\n    \n    0,\n    subject.sumtok(0));\n\n
+            \ \n}\n  \n    @Test\n@Description(\"sumtok(10) -> 55\")\n\n\n\n\npublic
             void test_4()\n{\n  \n  \n  \n  assertEquals(\n    \n    55,\n    subject.sumtok(10));\n\n
-            \ \n}\n  \n    @Test\n\n\n\n\n\npublic void test_5()\n{\n  \n  \n  \n
-            \ assertEquals(\n    \n    66,\n    subject.sumtok(11));\n\n  \n}\n  \n
-            \   @Test\n\n\n\n\n\npublic void test_6()\n{\n  \n  \n  \n  assertEquals(\n
-            \   \n    5050,\n    subject.sumtok(100));\n\n  \n}\n  \n    @Test\n\n\n\n@Hidden\n\npublic
+            \ \n}\n  \n    @Test\n@Description(\"sumtok(11) -> 66\")\n\n\n\n\npublic
+            void test_5()\n{\n  \n  \n  \n  assertEquals(\n    \n    66,\n    subject.sumtok(11));\n\n
+            \ \n}\n  \n    @Test\n@Description(\"sumtok(100) -> 5050\")\n\n\n\n\npublic
+            void test_6()\n{\n  \n  \n  \n  assertEquals(\n    \n    5050,\n    subject.sumtok(100));\n\n
+            \ \n}\n  \n    @Test\n@Description(\"sumtok(4) -> 10\")\n\n\n@Hidden\n\npublic
             void test_7()\n{\n  \n  \n  \n  assertEquals(\n    \n    10,\n    subject.sumtok(4));\n\n
-            \ \n}\n  \n    @Test\n\n\n\n@Hidden\n\npublic void test_8()\n{\n  \n  \n
-            \ \n  assertEquals(\n    \n    1,\n    subject.sumtok(1));\n\n  \n}\n
-            \ \n  \n}"
+            \ \n}\n  \n    @Test\n@Description(\"sumtok(1) -> 1\")\n\n\n@Hidden\n\npublic
+            void test_8()\n{\n  \n  \n  \n  assertEquals(\n    \n    1,\n    subject.sumtok(1));\n\n
+            \ \n}\n  \n  \n}"
 diagnostics:
 - Path '/difficulty' is not an integer.

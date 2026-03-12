@@ -28,7 +28,22 @@ OptionParser.new do |opts|
 
   opts.on("--parse-descriptions", "Enable parsing of tags in test case descriptions") do
     options[:parse_opts][:render_tests_params] ||= {}
-    options[:parse_opts][:render_tests_params]['parse_descriptions'] = true
+    options[:parse_opts][:render_tests_params].merge!({
+      'parse_descriptions' => true,
+      'pattern' => {
+        'description' => '{% include "method_call" %} -> {% include "expected_template" %}',
+        'description_annotation' => <<~DESCRIPTION_ANNOTATION
+        {% show_yaml %}Description: {% include 'description' %}{% endshow_yaml %}
+        DESCRIPTION_ANNOTATION
+      },
+      'java' => {
+        'pattern' => {
+          'description_annotation' => <<~JAVA_DESCRIPTION_ANNOTATION
+          {% show_yaml %}@Description({% capture desc_out %}{% include 'description' %}{% endcapture %}{{ desc_out | string_literal }}){% endshow_yaml %}
+          JAVA_DESCRIPTION_ANNOTATION
+        }
+      }
+    })
   end
 
   opts.on("--file-name", "Include the name of the file being parsed on a line before the output") do

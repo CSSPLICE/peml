@@ -43,8 +43,9 @@ value:
           content: "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport
             java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n
             \ private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject
-            = new Answer();\n}\n  \n    @Test\n\n\n@Example\n\n\npublic void test_1()\n{\n
-            \ \n  \n  \n  assertEquals(\n    \n    new java.util.ArrayList<Integer>(){{add(4);add(3);add(2);add(1);}},\n
+            = new Answer();\n}\n  \n    @Test\n@Description(\"reverseContents(new
+            int[]{1, 2, 3, 4}) -> new java.util.ArrayList<Integer>(){{add(4);add(3);add(2);add(1);}}\")\n\n@Example\n\n\npublic
+            void test_1()\n{\n  \n  \n  \n  assertEquals(\n    \n    new java.util.ArrayList<Integer>(){{add(4);add(3);add(2);add(1);}},\n
             \   subject.reverseContents(new int[]{1, 2, 3, 4}));\n\n  \n}\n  \n  \n}"
 diagnostics:
 - Path '/difficulty' is not an integer.

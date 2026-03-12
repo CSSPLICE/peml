@@ -55,11 +55,28 @@ describe Peml do
         begin
           ex = Peml::parse(filename: f,
             render_tests: true,
-            render_tests_params: { 'parse_descriptions' => true})
+            render_tests_params: {
+              'parse_descriptions' => true,
+              'pattern' => {
+                'description' => '{% include "method_call" %} -> {% include "expected_template" %}',
+                'description_annotation' => <<~DESCRIPTION_ANNOTATION
+                  {% show_yaml %}Description: {% include 'description' %}{% endshow_yaml %}
+                  DESCRIPTION_ANNOTATION
+                },
+                'java' => {
+                  'pattern' => {
+                    'description_annotation' => <<~JAVA_DESCRIPTION_ANNOTATION
+                      {% show_yaml %}@Description({% capture desc_out %}{% include 'description' %}{% endcapture %}{{ desc_out | string_literal }}){% endshow_yaml %}
+                      JAVA_DESCRIPTION_ANNOTATION
+                    }
+                  }
+                })
+
           _(ex).wont_be_nil
 
           golden = File.join(expected_dir, slug.sub('.peml', '.yaml'))
           actual_yaml = ex.to_yaml
+          _(actual_yaml).wont_match /Liquid.*error/i
 
           if ENV['UPDATE_SNAPSHOTS'] || !File.exist?(golden)
             File.write(golden, actual_yaml)

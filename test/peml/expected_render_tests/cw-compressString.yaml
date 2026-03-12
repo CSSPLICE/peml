@@ -49,17 +49,21 @@ value:
           content: "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport
             java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n
             \ private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject
-            = new Answer();\n}\n  \n    @Test\n\n\n@Example\n\n\npublic void test_1()\n{\n
-            \ \n  \n  \n  assertEquals(\n    \n    \"b3a2c4d1\",\n    subject.compressString(\"bbbaaccccd\"));\n\n
-            \ \n}\n  \n    @Test\n\n\n@Example\n\n\npublic void test_2()\n{\n  \n
+            = new Answer();\n}\n  \n    @Test\n@Description(\"compressString(\\\"bbbaaccccd\\\")
+            -> \\\"b3a2c4d1\\\"\")\n\n@Example\n\n\npublic void test_1()\n{\n  \n
+            \ \n  \n  assertEquals(\n    \n    \"b3a2c4d1\",\n    subject.compressString(\"bbbaaccccd\"));\n\n
+            \ \n}\n  \n    @Test\n@Description(\"compressString(\\\"abccdeff\\\")
+            -> \\\"abccdeff\\\"\")\n\n@Example\n\n\npublic void test_2()\n{\n  \n
             \ \n  \n  assertEquals(\n    \n    \"abccdeff\",\n    subject.compressString(\"abccdeff\"));\n\n
-            \ \n}\n  \n    @Test\n\n\n\n\n\npublic void test_3()\n{\n  \n  \n  \n
-            \ assertEquals(\n    \n    \"a\",\n    subject.compressString(\"a\"));\n\n
-            \ \n}\n  \n    @Test\n\n\n\n\n\npublic void test_4()\n{\n  \n  \n  \n
-            \ assertEquals(\n    \n    \"abb\",\n    subject.compressString(\"abb\"));\n\n
-            \ \n}\n  \n    @Test\n\n\n\n\n\npublic void test_5()\n{\n  \n  \n  \n
+            \ \n}\n  \n    @Test\n@Description(\"compressString(\\\"a\\\") -> \\\"a\\\"\")\n\n\n\n\npublic
+            void test_3()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"a\",\n    subject.compressString(\"a\"));\n\n
+            \ \n}\n  \n    @Test\n@Description(\"compressString(\\\"abb\\\") -> \\\"abb\\\"\")\n\n\n\n\npublic
+            void test_4()\n{\n  \n  \n  \n  assertEquals(\n    \n    \"abb\",\n    subject.compressString(\"abb\"));\n\n
+            \ \n}\n  \n    @Test\n@Description(\"compressString(\\\"aaacdddaaa\\\")
+            -> \\\"a3c1d3a3\\\"\")\n\n\n\n\npublic void test_5()\n{\n  \n  \n  \n
             \ assertEquals(\n    \n    \"a3c1d3a3\",\n    subject.compressString(\"aaacdddaaa\"));\n\n
-            \ \n}\n  \n    @Test\n\n\n\n\n\npublic void test_6()\n{\n  \n  \n  \n
+            \ \n}\n  \n    @Test\n@Description(\"compressString(\\\"aabcbbbb\\\")
+            -> \\\"a2b1c1b4\\\"\")\n\n\n\n\npublic void test_6()\n{\n  \n  \n  \n
             \ assertEquals(\n    \n    \"a2b1c1b4\",\n    subject.compressString(\"aabcbbbb\"));\n\n
             \ \n}\n  \n  \n}"
 diagnostics:

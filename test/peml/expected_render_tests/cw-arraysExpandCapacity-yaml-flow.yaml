@@ -45,22 +45,29 @@ value:
           content: "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport
             java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n
             \ private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject
-            = new Answer();\n}\n  \n    @Test\n\n\n@Example\n\n\npublic void test_1()\n{\n
-            \ \n  \n  \n  assertEquals(\n    \n    new int[]{2, 3, 0, 0, 0, 0},\n
-            \   subject.expandCapacity(new int[]{2, 3, 0}));\n\n  \n}\n  \n    @Test\n\n\n@Example\n\n\npublic
+            = new Answer();\n}\n  \n    @Test\n@Description(\"expandCapacity(new int[]{2,
+            3, 0}) -> new int[]{2, 3, 0, 0, 0, 0}\")\n\n@Example\n\n\npublic void
+            test_1()\n{\n  \n  \n  \n  assertEquals(\n    \n    new int[]{2, 3, 0,
+            0, 0, 0},\n    subject.expandCapacity(new int[]{2, 3, 0}));\n\n  \n}\n
+            \ \n    @Test\n@Description(\"expandCapacity(new int[]{}) -> new int[]{}\")\n\n@Example\n\n\npublic
             void test_2()\n{\n  \n  \n  \n  assertEquals(\n    \n    new int[]{},\n
-            \   subject.expandCapacity(new int[]{}));\n\n  \n}\n  \n    @Test\n\n\n@Example\n\n\npublic
-            void test_3()\n{\n  \n  \n  \n  assertEquals(\n    \n    new int[]{6,
-            0},\n    subject.expandCapacity(new int[]{6}));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic
-            void test_4()\n{\n  \n  \n  \n  assertEquals(\n    \n    new int[]{9,
-            9, 1, 0, 0, 0},\n    subject.expandCapacity(new int[]{9, 9, 1}));\n\n
-            \ \n}\n  \n    @Test\n\n\n\n\n\npublic void test_5()\n{\n  \n  \n  \n
-            \ assertEquals(\n    \n    new int[]{5, 5, 0, 0},\n    subject.expandCapacity(new
-            int[]{5, 5}));\n\n  \n}\n  \n    @Test\n\n\n\n@Hidden\n\npublic void test_6()\n{\n
-            \ \n  \n  \n  assertEquals(\n    \n    new int[]{10, 1, 1, 1, 1, 0, 0,
-            0, 0, 0},\n    subject.expandCapacity(new int[]{10, 1, 1, 1, 1}));\n\n
-            \ \n}\n  \n    @Test\n\n\n\n@Hidden\n\npublic void test_7()\n{\n  \n  \n
-            \ \n  assertEquals(\n    \n    new int[]{7, 8, 0, 0},\n    subject.expandCapacity(new
+            \   subject.expandCapacity(new int[]{}));\n\n  \n}\n  \n    @Test\n@Description(\"expandCapacity(new
+            int[]{6}) -> new int[]{6, 0}\")\n\n@Example\n\n\npublic void test_3()\n{\n
+            \ \n  \n  \n  assertEquals(\n    \n    new int[]{6, 0},\n    subject.expandCapacity(new
+            int[]{6}));\n\n  \n}\n  \n    @Test\n@Description(\"expandCapacity(new
+            int[]{9, 9, 1}) -> new int[]{9, 9, 1, 0, 0, 0}\")\n\n\n\n\npublic void
+            test_4()\n{\n  \n  \n  \n  assertEquals(\n    \n    new int[]{9, 9, 1,
+            0, 0, 0},\n    subject.expandCapacity(new int[]{9, 9, 1}));\n\n  \n}\n
+            \ \n    @Test\n@Description(\"expandCapacity(new int[]{5, 5}) -> new int[]{5,
+            5, 0, 0}\")\n\n\n\n\npublic void test_5()\n{\n  \n  \n  \n  assertEquals(\n
+            \   \n    new int[]{5, 5, 0, 0},\n    subject.expandCapacity(new int[]{5,
+            5}));\n\n  \n}\n  \n    @Test\n@Description(\"expandCapacity(new int[]{10,
+            1, 1, 1, 1}) -> new int[]{10, 1, 1, 1, 1, 0, 0, 0, 0, 0}\")\n\n\n@Hidden\n\npublic
+            void test_6()\n{\n  \n  \n  \n  assertEquals(\n    \n    new int[]{10,
+            1, 1, 1, 1, 0, 0, 0, 0, 0},\n    subject.expandCapacity(new int[]{10,
+            1, 1, 1, 1}));\n\n  \n}\n  \n    @Test\n@Description(\"expandCapacity(new
+            int[]{7, 8}) -> new int[]{7, 8, 0, 0}\")\n\n\n@Hidden\n\npublic void test_7()\n{\n
+            \ \n  \n  \n  assertEquals(\n    \n    new int[]{7, 8, 0, 0},\n    subject.expandCapacity(new
             int[]{7, 8}));\n\n  \n}\n  \n  \n}"
 diagnostics:
 - Path '/difficulty' is not an integer.

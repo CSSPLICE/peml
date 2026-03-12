@@ -59,28 +59,38 @@ value:
           content: "import junit.framework.TestCase;\nimport static org.junit.Assert.*;\nimport
             java.io.*;\nimport org.junit.*;\n\npublic class AnswerTest\n  \n{\n  \n
             \ private Answer subject;\n  @Before\npublic void setUp()\n{\n  subject
-            = new Answer();\n}\n  \n    @Test\n\n\n@Example\n\n\npublic void test_1()\n{\n
-            \ \n  \n  \n  assertEquals(\n    \n    2,\n    subject.binarySearch(new
-            int[]{1,4,7}, 7));\n\n  \n}\n  \n    @Test\n\n\n@Example\n\n\npublic void
-            test_2()\n{\n  \n  \n  \n  assertEquals(\n    \n    2,\n    subject.binarySearch(new
-            int[]{2,6,6,8,80}, 6));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void
-            test_3()\n{\n  \n  \n  \n  assertEquals(\n    \n    3,\n    subject.binarySearch(new
-            int[]{5,33,77,104}, 104));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void
-            test_4()\n{\n  \n  \n  \n  assertEquals(\n    \n    0,\n    subject.binarySearch(new
-            int[]{2,4,6}, 2));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_5()\n{\n
-            \ \n  \n  \n  assertEquals(\n    \n    1,\n    subject.binarySearch(new
-            int[]{0,2,5,8}, 2));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic void test_6()\n{\n
+            = new Answer();\n}\n  \n    @Test\n@Description(\"binarySearch(new int[]{1,4,7},
+            7) -> 2\")\n\n@Example\n\n\npublic void test_1()\n{\n  \n  \n  \n  assertEquals(\n
+            \   \n    2,\n    subject.binarySearch(new int[]{1,4,7}, 7));\n\n  \n}\n
+            \ \n    @Test\n@Description(\"binarySearch(new int[]{2,6,6,8,80}, 6) ->
+            2\")\n\n@Example\n\n\npublic void test_2()\n{\n  \n  \n  \n  assertEquals(\n
+            \   \n    2,\n    subject.binarySearch(new int[]{2,6,6,8,80}, 6));\n\n
+            \ \n}\n  \n    @Test\n@Description(\"binarySearch(new int[]{5,33,77,104},
+            104) -> 3\")\n\n\n\n\npublic void test_3()\n{\n  \n  \n  \n  assertEquals(\n
+            \   \n    3,\n    subject.binarySearch(new int[]{5,33,77,104}, 104));\n\n
+            \ \n}\n  \n    @Test\n@Description(\"binarySearch(new int[]{2,4,6}, 2)
+            -> 0\")\n\n\n\n\npublic void test_4()\n{\n  \n  \n  \n  assertEquals(\n
+            \   \n    0,\n    subject.binarySearch(new int[]{2,4,6}, 2));\n\n  \n}\n
+            \ \n    @Test\n@Description(\"binarySearch(new int[]{0,2,5,8}, 2) -> 1\")\n\n\n\n\npublic
+            void test_5()\n{\n  \n  \n  \n  assertEquals(\n    \n    1,\n    subject.binarySearch(new
+            int[]{0,2,5,8}, 2));\n\n  \n}\n  \n    @Test\n@Description(\"binarySearch(new
+            int[]{0,1,5,5,5,10,13}, 5) -> 3\")\n\n\n\n\npublic void test_6()\n{\n
             \ \n  \n  \n  assertEquals(\n    \n    3,\n    subject.binarySearch(new
-            int[]{0,1,5,5,5,10,13}, 5));\n\n  \n}\n  \n    @Test\n\n\n\n\n\npublic
-            void test_7()\n{\n  \n  \n  \n  assertEquals(\n    \n    -1,\n    subject.binarySearch(new
-            int[]{10}, 4));\n\n  \n}\n  \n    @Test\n\n\n\n@Hidden\n\npublic void
-            test_8()\n{\n  \n  \n  \n  assertEquals(\n    \n    1,\n    subject.binarySearch(new
-            int[]{0,4,4,10}, 4));\n\n  \n}\n  \n    @Test\n\n\n\n@Hidden\n\npublic
-            void test_9()\n{\n  \n  \n  \n  assertEquals(\n    \n    -1,\n    subject.binarySearch(new
-            int[]{0,4,4,10}, 2));\n\n  \n}\n  \n    @Test\n\n\n\n@Hidden\n\npublic
-            void test_10()\n{\n  \n  \n  \n  assertEquals(\n    \n    0,\n    subject.binarySearch(new
-            int[]{1,5,6,9}, 1));\n\n  \n}\n  \n    @Test\n\n\n\n@Hidden\n\npublic
-            void test_11()\n{\n  \n  \n  \n  assertEquals(\n    \n    4,\n    subject.binarySearch(new
-            int[]{1,5,6,6,6,9,10,11,11}, 6));\n\n  \n}\n  \n  \n}"
+            int[]{0,1,5,5,5,10,13}, 5));\n\n  \n}\n  \n    @Test\n@Description(\"binarySearch(new
+            int[]{10}, 4) -> -1\")\n\n\n\n\npublic void test_7()\n{\n  \n  \n  \n
+            \ assertEquals(\n    \n    -1,\n    subject.binarySearch(new int[]{10},
+            4));\n\n  \n}\n  \n    @Test\n@Description(\"binarySearch(new int[]{0,4,4,10},
+            4) -> 1\")\n\n\n@Hidden\n\npublic void test_8()\n{\n  \n  \n  \n  assertEquals(\n
+            \   \n    1,\n    subject.binarySearch(new int[]{0,4,4,10}, 4));\n\n  \n}\n
+            \ \n    @Test\n@Description(\"binarySearch(new int[]{0,4,4,10}, 2) ->
+            -1\")\n\n\n@Hidden\n\npublic void test_9()\n{\n  \n  \n  \n  assertEquals(\n
+            \   \n    -1,\n    subject.binarySearch(new int[]{0,4,4,10}, 2));\n\n
+            \ \n}\n  \n    @Test\n@Description(\"binarySearch(new int[]{1,5,6,9},
+            1) -> 0\")\n\n\n@Hidden\n\npublic void test_10()\n{\n  \n  \n  \n  assertEquals(\n
+            \   \n    0,\n    subject.binarySearch(new int[]{1,5,6,9}, 1));\n\n  \n}\n
+            \ \n    @Test\n@Description(\"binarySearch(new int[]{1,5,6,6,6,9,10,11,11},
+            6) -> 4\")\n\n\n@Hidden\n\npublic void test_11()\n{\n  \n  \n  \n  assertEquals(\n
+            \   \n    4,\n    subject.binarySearch(new int[]{1,5,6,6,6,9,10,11,11},
+            6));\n\n  \n}\n  \n  \n}"
 diagnostics:
 - Path '/difficulty' is not an integer.
