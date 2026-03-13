@@ -105,10 +105,20 @@ PEML field values.
 Indicate whether PEML fields containing markdown/markup values
 should be rendered to HTML in the result.
 
-**inline** (boolean) (not yet implemented)
+**inline_data_files** (boolean)
 `<br/>`
-Indicate whether to inline field contents in the PEML description when the
-value is specified as a URL.
+Indicate whether to inline structured data file contents into native PEML
+structured data.
+
+**render_tests** (boolean)
+`<br/>`
+Indicate whether to render language-specific test code from tabular data
+in the PEML description.
+
+**render_tests_params** (hash)
+`<br/>`
+A hash containing optional parameters for the `render_tests` transform.
+Supported parameters include `parse_descriptions` (boolean).
 
 **format** (string)
 `<br/>`

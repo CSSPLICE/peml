@@ -13,7 +13,6 @@ module Peml
   # Ordered pipeline of optional transformation steps.
   # Each entry maps a params key to the method that performs it.
   TRANSFORMS = {
-    inline:            -> (v, opts) { Peml.inline(v, opts) },
     inline_data_files: -> (v, opts) { Peml.inline_data_files(v, opts) },
     render_tests:      -> (v, opts) { Peml::DatadrivenTestRenderer.new.render_datadriven_tests!(v, opts) },
     interpolate:       -> (v, opts) { Peml.interpolate(v, opts) },
@@ -66,15 +65,6 @@ module Peml
   # Validate a PEML data structure (parsed PEML structured as a nested hash)
   def self.validate(peml)
     Utils.unpack_schema_diagnostics(Utils.schema.validate(peml))
-  end
-
-
-  # -------------------------------------------------------------
-  # inline external file contents in fields inside
-  # a PEML data structure (parsed PEML structured as a nested hash)
-  # currently, not implemented
-  def self.inline(peml, options = {})
-    peml
   end
 
 
