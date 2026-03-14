@@ -110,6 +110,11 @@ should be rendered to HTML in the result.
 Indicate whether to inline structured data file contents into native PEML
 structured data.
 
+**inline_urls** (boolean)
+<br/>
+Indicate whether to inline external file contents in fields inside 
+the PEML data structure where the value is of the form `url(...)`.
+
 **render_tests** (boolean)
 `<br/>`
 Indicate whether to render language-specific test code from tabular data
@@ -169,9 +174,9 @@ bundle exec bin/peml [options] <filename>
 
 ### Options
 
-**--inline**
-`<br/>`
-Enable the `inline` transform.
+**--inline-urls**
+<br/>
+Enable the `inline-urls` transform.
 
 **--inline-data-files**
 `<br/>`
