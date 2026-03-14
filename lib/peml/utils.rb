@@ -6,12 +6,13 @@ require 'kramdown-parser-gfm'
 require 'yaml'
 require 'json'
 require 'csv'
-require 'uri'
+require 'open-uri'
 require_relative 'version'
 
 module Peml
   module Utils
 
+    # -------------------------------------------------------------
     # Return a directory with the project libraries.
     def self.gem_libdir
       ["#{File.dirname(File.expand_path(__FILE__))}",
@@ -22,6 +23,8 @@ module Peml
       raise "unable to locate gem lib dir for gem: #{NAME}"
     end
 
+
+    # -------------------------------------------------------------
     # Return the JSON Schema for PEML, loaded from the internal definition file
     def self.schema
       if !defined?(@@schema) || @@schema.nil?
@@ -32,6 +35,8 @@ module Peml
       @@schema
     end
 
+
+    # -------------------------------------------------------------
     # extract schema validation info from validator return results
     def self.unpack_schema_diagnostics(diags)
       if diags
@@ -87,8 +92,8 @@ module Peml
       end
     end
 
-    # -------------------------------------------------------------
 
+    # -------------------------------------------------------------
     # A recursive walker that walks through the hash and transforms files
     # that map to structured data formats (YAML, JSON, CSV, etc.)
     def self.deep_transform_files!(peml, operation)
@@ -111,6 +116,7 @@ module Peml
       end
       peml
     end
+
 
     # -------------------------------------------------------------
     # deep transform values in a nested hash/array structure
@@ -135,6 +141,8 @@ module Peml
       peml
     end
 
+
+    # -------------------------------------------------------------
     #kramdown parser has changed to add \n idky why, needs fixing
     def self.render_helper(value, default_peml)
       Kramdown::Document.new(value,
@@ -144,6 +152,25 @@ module Peml
     end
 
 
+    # -------------------------------------------------------------
+    def self.inline_url_helper(value, default_peml)
+      if value.is_a?(String) && (match = value.match(/\Aurl\(\s*(.*\S)\s*\)\z/))
+        url = match[1]
+        begin
+          URI.open(url).read
+        rescue => e
+          # If opening the URL fails, return the original value or handle as needed
+          # For now, we'll return the original value to avoid breaking the structure
+          # and maybe we should log this if there's a logger.
+          value
+        end
+      else
+        value
+      end
+    end
+
+
+    # -------------------------------------------------------------
     def self.interpolate_helper(value, default_peml)
       if value.match(/\{\{(.*?)\}\}/)
         substitute_values = Utils.substitute_variables(
@@ -154,6 +181,7 @@ module Peml
     end
 
 
+    # -------------------------------------------------------------
     def self.substitute_variables(arr, default_peml)
       substitute_values={}
       arr.length.times do |i|
@@ -163,10 +191,11 @@ module Peml
     end
 
 
+    # -------------------------------------------------------------
     def self.handle_exclusion(unchanged_peml, peml)
       if unchanged_peml.key?("exclude")
         peml["exclude"].each do |element|
-          peml[element]=unchanged_peml[element]
+          peml[element] = unchanged_peml[element]
         end
       end
       peml
@@ -499,6 +528,8 @@ module Peml
       result
     end
 
+
+    # -------------------------------------------------------------
     def self.mime_type_from_filename(filename)
       ext = File.extname(filename).downcase
       MIME_TYPES[ext]
