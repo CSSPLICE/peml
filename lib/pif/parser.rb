@@ -200,22 +200,28 @@ module PifParser
   # Searches for toggle options within 2 delimiter groups
   def self.get_toggles(block, delimiter)
     toggles = []
-    # Scans for groups of 2 or greater delimiters
-    toggleMatches = block["display"].split(/#{Regexp.escape(delimiter)}{2}/)
+    escaped_delim = Regexp.escape(delimiter)
+    
+    # This regex looks for two delimiters on both ends and at least one character inside
+    pattern = /#{escaped_delim}{2}(.+?)#{escaped_delim}{2}/m
 
-    endOfDelimiterGroup = 0
-    toggleMatches.each_with_index do |str, index| # Loop through each toggle match
-      next if index.even? # skip text outside of toggle group delimiters
+    block["display"].scan(pattern) do |match|
+      # content inside
+      inner_content = match[0]
+      
+      # Use Regexp.last_match to get the precise indices
+      match_data = Regexp.last_match
+      start_idx = match_data.begin(0)
+      end_idx = match_data.end(0)
 
-      # Search from end of last delimiter group or start of string
-      startOfDelimiterGroup = block["display"].index(/#{Regexp.escape(delimiter)}{2}/, endOfDelimiterGroup)
-      endOfDelimiterGroup = block["display"].index(/#{Regexp.escape(delimiter)}{2}/, startOfDelimiterGroup + 2) + 2 # Search for ending delimiter from end of starting delimiter
-
-      toggle_options = str.split(delimiter) # All toggle options within toggle group
-      toggles << {start_index: startOfDelimiterGroup, end_index: endOfDelimiterGroup, values: toggle_options}
+      toggle_options = inner_content.split(delimiter)
+      toggles << { 
+        start_index: start_idx, 
+        end_index: end_idx, 
+        values: toggle_options 
+      }
     end
-
-    return toggles
+    return toggles  
   end
 
   # ------------------------------------------------------------------------------
