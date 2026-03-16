@@ -63,8 +63,6 @@ module PifConverter
       parsons_block = {
         "text" => "",
         "type" => "",
-        "toggle_options" => [],
-        "text_options" => [],
         "tag" => "",
         "depends" => "",
         "indent" => 0,
@@ -126,8 +124,12 @@ module PifConverter
         # Case: Single Block Entity
       else
         parsons_block["text"] = block["display"]
-        parsons_block["toggle_options"] = block["toggle_options"]
-        parsons_block["text_options"] = block["text_options"]
+        if(block["toggle_options"])
+          parsons_block["toggle_options"] = block["toggle_options"]
+        end
+        if(block["text_options"])
+          parsons_block["text_options"] = block["text_options"]
+        end
 
         # Case: Distractor
         if block["depends"] == -1 ||

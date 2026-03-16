@@ -44,6 +44,7 @@ module PifParser
       if (diags.empty?)
         style_tag = value["tags.style"] # Structurally required
         block_content = value['assets.code.blocks.content'] # Structurally required
+        puts block_content
         delimiter = value['assets.code.blocks.delimiter'] || "`" #Optional
         test_content = value['assets.test.files[0].content'] # Optional
         test_format = value['assets.test.files[0].format'] # Optional
@@ -180,18 +181,19 @@ module PifParser
     if(blocklist)
       blocklist.each do |child|
         get_toggles_and_text_input_helper(child, delimiter)
-        return
       end
     end
 
     text_options = get_text_input(block, delimiter)
     toggle_options = get_toggles(block, delimiter)
 
-    puts text_options
-    puts toggle_options
+    if !(toggle_options.empty?)
+      block["toggle_options"] = toggle_options
+    end
 
-    block["toggle_options"] = toggle_options
-    block["text_options"] = text_options
+    if !(text_options.empty?)
+      block["text_options"] = text_options
+    end
   end
 
   # ------------------------------------------------------------------------------
@@ -205,13 +207,9 @@ module PifParser
     toggleMatches.each_with_index do |str, index| # Loop through each toggle match
       next if index.even? # skip text outside of toggle group delimiters
 
-      puts block["display"]
-
       # Search from end of last delimiter group or start of string
       startOfDelimiterGroup = block["display"].index(/#{Regexp.escape(delimiter)}{2}/, endOfDelimiterGroup)
-      puts startOfDelimiterGroup
       endOfDelimiterGroup = block["display"].index(/#{Regexp.escape(delimiter)}{2}/, startOfDelimiterGroup + 2) + 2 # Search for ending delimiter from end of starting delimiter
-      puts endOfDelimiterGroup
 
       toggle_options = str.split(delimiter) # All toggle options within toggle group
       toggles << {start_index: startOfDelimiterGroup, end_index: endOfDelimiterGroup, values: toggle_options}
