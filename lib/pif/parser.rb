@@ -44,7 +44,6 @@ module PifParser
       if (diags.empty?)
         style_tag = value["tags.style"] # Structurally required
         block_content = value['assets.code.blocks.content'] # Structurally required
-        puts block_content
         delimiter = value['assets.code.blocks.delimiter'] || "`" #Optional
         test_content = value['assets.test.files[0].content'] # Optional
         test_format = value['assets.test.files[0].format'] # Optional
@@ -184,8 +183,37 @@ module PifParser
       end
     end
 
-    text_options = get_text_input(block, delimiter)
-    toggle_options = get_toggles(block, delimiter)
+    text_options = []
+    toggle_options = []
+
+    if(block["delimiter"])
+      delimiter = block["delimiter"]
+    end
+
+    d = Regexp.escape(delimiter)
+    # this pattern finds: two delimiters + anything + two delimiters
+    pattern = /(?<!#{d})#{d}{2}(.*?)#{d}{2}(?!#{d})/m
+
+    block["display"].scan(pattern) do |match|
+      m = Regexp.last_match
+      inner_content = match[0]
+      
+      # if it contains the delimiter inside then it is a toggle
+      # otherwise its a text input
+      if inner_content.include?(delimiter)
+        toggle_options << {
+          start_index: m.begin(0),
+          end_index: m.end(0),
+          values: inner_content.split(delimiter)
+        }
+      else
+        text_options << {
+          start_index: m.begin(0),
+          end_index: m.end(0),
+          inner_content: inner_content
+        }
+      end
+    end
 
     if !(toggle_options.empty?)
       block["toggle_options"] = toggle_options
@@ -194,46 +222,6 @@ module PifParser
     if !(text_options.empty?)
       block["text_options"] = text_options
     end
-  end
-
-  # ------------------------------------------------------------------------------
-  # Searches for toggle options within 2 delimiter groups
-  def self.get_toggles(block, delimiter)
-    toggles = []
-    escaped_delim = Regexp.escape(delimiter)
-    
-    # This regex looks for two delimiters on both ends and at least one character inside
-    pattern = /#{escaped_delim}{2}(.+?)#{escaped_delim}{2}/m
-
-    block["display"].scan(pattern) do |match|
-      # content inside
-      inner_content = match[0]
-      
-      # Use Regexp.last_match to get the precise indices
-      match_data = Regexp.last_match
-      start_idx = match_data.begin(0)
-      end_idx = match_data.end(0)
-
-      toggle_options = inner_content.split(delimiter)
-      toggles << { 
-        start_index: start_idx, 
-        end_index: end_idx, 
-        values: toggle_options 
-      }
-    end
-    return toggles  
-  end
-
-  # ------------------------------------------------------------------------------
-  # Searches for groups of 4 delimiter
-  def self.get_text_input(block, delimiter)
-    text_inputs = []
-    match_end = 0 # Variable to store the index after the last matched group
-    while match = block["display"].index(/#{Regexp.escape(delimiter)}{4}/, match_end)
-      match_end = match + 4
-      text_inputs << {start_index: match, end_index: match_end}
-    end
-    return text_inputs
   end
 
   # Gets all blockids for non-distractor elements
