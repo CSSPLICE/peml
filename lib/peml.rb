@@ -13,11 +13,11 @@ module Peml
   # Ordered pipeline of optional transformation steps.
   # Each entry maps a params key to the method that performs it.
   TRANSFORMS = {
-    inline_urls:       -> (v, opts) { Peml.inline_urls(v, opts) },
-    inline_data_files: -> (v, opts) { Peml.inline_data_files(v, opts) },
-    render_tests:      -> (v, opts) { Peml::DatadrivenTestRenderer.new.render_datadriven_tests!(v, opts) },
-    interpolate:       -> (v, opts) { Peml.interpolate(v, opts) },
-    render_to_html:    -> (v, opts) { Peml.render_to_html(v, opts) },
+    inline_urls:       -> (state, opts) { Peml.inline_urls(state, opts) },
+    inline_data_files: -> (state, opts) { Peml.inline_data_files(state, opts) },
+    render_tests:      -> (state, opts) { Peml::DatadrivenTestRenderer.new.render_datadriven_tests!(state, opts) },
+    interpolate:       -> (state, opts) { Peml.interpolate(state, opts) },
+    render_to_html:    -> (state, opts) { Peml.render_to_html(state, opts) },
   }.freeze
 
 
@@ -46,18 +46,21 @@ module Peml
       params[:inline_data_files] = true 
     end
 
+    diags = params[:result_only] ? nil : validate(value)
+    state = { 'value' => value, 'diagnostics' => diags }
+
     # Apply requested transformation steps in pipeline order
     TRANSFORMS.each do |key, transform|
       if params[key]
         opts = params[:"#{key}_params"] || {}
-        value = transform.call(value, opts)
+        state = transform.call(state, opts)
       end
     end
 
     if params[:result_only]
-      value
+      state['value']
     else
-      { 'value' => value, 'diagnostics' => validate(value) }
+      state
     end
   end
 
@@ -72,16 +75,18 @@ module Peml
   # -------------------------------------------------------------
   # inline external file contents in fields inside
   # a PEML data structure (parsed PEML structured as a nested hash)
-  def self.inline_urls(peml, options = {})
-    Utils.deep_transform_values!(peml, :inline_url_helper)
+  def self.inline_urls(state, options = {})
+    Utils.deep_transform_values!(state, :inline_url_helper)
+    state
   end
 
 
   # -------------------------------------------------------------
   # inline structured data file contents into native PEML structured
   # data
-  def self.inline_data_files(peml, options = {})
-    Utils.deep_transform_files!(peml, :inline_data_file)
+  def self.inline_data_files(state, options = {})
+    Utils.deep_transform_files!(state, :inline_data_file)
+    state
   end
 
 
@@ -89,11 +94,13 @@ module Peml
   # handle mustache variable interpolation in fields inside
   # a PEML data structure (parsed PEML structured as a nested hash)
   # currently, not implemented
-  def self.interpolate(peml, options = {})
-    default_peml = Marshal.load(Marshal.dump(peml)).dottie!
+  def self.interpolate(state, options = {})
+    default_peml = Marshal.load(Marshal.dump(state['value'])).dottie!
+    Utils.deep_transform_values!(state, :interpolate_helper, default_peml)
     Utils.handle_exclusion(
       default_peml,
-      Utils.deep_transform_values!(peml, :interpolate_helper, default_peml).dottie!)
+      state['value'].dottie!)
+    state
   end
 
 
@@ -101,8 +108,9 @@ module Peml
   # convert markdown or other markup formats to html in fields inside
   # a PEML data structure (parsed PEML structured as a nested hash)
   # currently, not implemented
-  def self.render_to_html(peml, options = {})
-    Utils.deep_transform_values!(peml, :render_helper)
+  def self.render_to_html(state, options = {})
+    Utils.deep_transform_values!(state, :render_helper)
+    state
   end
 
 

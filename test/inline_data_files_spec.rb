@@ -14,7 +14,7 @@ describe 'Peml.inline_data_files' do
         'content' => "key: value\nlist:\n  - 1\n  - 2"
       }
     }
-    result = Peml.inline_data_files(peml)
+    result = Peml.inline_data_files({ 'value' => peml, 'diagnostics' => [] })['value']
     _(result['file']['content']).must_equal({ 'key' => 'value', 'list' => [1, 2] })
   end
 
@@ -25,7 +25,7 @@ describe 'Peml.inline_data_files' do
         'content' => '{"foo": "bar", "num": 123}'
       }
     }
-    result = Peml.inline_data_files(peml)
+    result = Peml.inline_data_files({ 'value' => peml, 'diagnostics' => [] })['value']
     _(result['file']['content']).must_equal({ 'foo' => 'bar', 'num' => 123 })
   end
 
@@ -36,7 +36,7 @@ describe 'Peml.inline_data_files' do
         'content' => "a,b,c\n1,2,3"
       }
     }
-    result = Peml.inline_data_files(peml)
+    result = Peml.inline_data_files({ 'value' => peml, 'diagnostics' => [] })['value']
     _(result['file']['content']).must_equal([{ 'a' => '1', 'b' => '2', 'c' => '3' }])
   end
 
@@ -47,7 +47,7 @@ describe 'Peml.inline_data_files' do
         'content' => '<root><item id="1">Text</item></root>'
       }
     }
-    result = Peml.inline_data_files(peml)
+    result = Peml.inline_data_files({ 'value' => peml, 'diagnostics' => [] })['value']
     _(result['file']['content']).must_equal({ 'item' => { '@id' => '1', 'content' => 'Text' } })
   end
 
@@ -58,7 +58,7 @@ describe 'Peml.inline_data_files' do
         { 'name' => 'b.yaml', 'content' => 'id: 2' }
       ]
     }
-    result = Peml.inline_data_files(peml)
+    result = Peml.inline_data_files({ 'value' => peml, 'diagnostics' => [] })['value']
     _(result['files'][0]['content']).must_equal({ 'id' => 1 })
     _(result['files'][1]['content']).must_equal({ 'id' => 2 })
   end
@@ -77,7 +77,7 @@ describe 'Peml.inline_data_files' do
         'file' => { 'name' => 'suite.json', 'content' => '[{"test": "ok"}]' }
       }
     }
-    result = Peml.inline_data_files(peml)
+    result = Peml.inline_data_files({ 'value' => peml, 'diagnostics' => [] })['value']
     _(result['systems'][0]['files'][0]['content']).must_equal({ 'port' => 8080 })
     _(result['assessment']['file']['content']).must_equal([{ 'test' => 'ok' }])
   end
@@ -86,9 +86,9 @@ describe 'Peml.inline_data_files' do
     peml = {
       'file' => { 'name' => 'data.json', 'content' => '{"a": 1}' }
     }
-    result = Peml.inline_data_files(peml)
+    result = Peml.inline_data_files({ 'value' => peml, 'diagnostics' => [] })['value']
     # Ensure second call doesn't crash (content is already a hash)
-    result2 = Peml.inline_data_files(result)
+    result2 = Peml.inline_data_files({ 'value' => result, 'diagnostics' => [] })['value']
     _(result2['file']['content']).must_equal({ 'a' => 1 })
   end
 
@@ -96,7 +96,7 @@ describe 'Peml.inline_data_files' do
     peml = {
       'file' => { 'name' => 'data.txt', 'content' => 'Plain text' }
     }
-    result = Peml.inline_data_files(peml)
+    result = Peml.inline_data_files({ 'value' => peml, 'diagnostics' => [] })['value']
     _(result['file']['content']).must_equal 'Plain text'
   end
 
@@ -107,7 +107,7 @@ describe 'Peml.inline_data_files' do
         'content' => "a, b, c\nx, y, z"
       }
     }
-    result = Peml.inline_data_files(peml)
+    result = Peml.inline_data_files({ 'value' => peml, 'diagnostics' => [] })['value']
     # CsvUnquotedParser returns an array of arrays (lines of cells),
     # which tabular_to_hashes converts to an array of hashes.
     _(result['file']['content']).must_equal [{ 'a' => 'x', 'b' => 'y', 'c' => 'z' }]

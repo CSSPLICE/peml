@@ -96,25 +96,26 @@ module Peml
     # -------------------------------------------------------------
     # A recursive walker that walks through the hash and transforms files
     # that map to structured data formats (YAML, JSON, CSV, etc.)
-    def self.deep_transform_files!(peml, operation)
-      peml.each do |key, value|
+    def self.deep_transform_files!(state, operation, current_node = nil)
+      current_node ||= state['value']
+      current_node.each do |key, value|
         if key == 'file' && value.is_a?(Hash)
-          peml[key] = method(operation).call(value)
+          current_node[key] = method(operation).call(value, state)
         elsif key == 'files' && value.is_a?(Array)
           value.length.times do |i|
             if value[i].is_a?(Hash)
-              peml[key][i] = method(operation).call(value[i])
+              current_node[key][i] = method(operation).call(value[i], state)
             end
           end
         elsif value.is_a?(Hash)
-          Utils.deep_transform_files!(value, operation)
+          Utils.deep_transform_files!(state, operation, value)
         elsif value.is_a?(Array)
           value.each do |element|
-            Utils.deep_transform_files!(element, operation) if element.is_a?(Hash)
+            Utils.deep_transform_files!(state, operation, element) if element.is_a?(Hash)
           end
         end
       end
-      peml
+      state
     end
 
 
@@ -122,29 +123,30 @@ module Peml
     # deep transform values in a nested hash/array structure
     # Traversal and operations are loosely coupled to support
     # future changes and updates
-    def self.deep_transform_values!(peml, operation, default_peml = {})
-      peml.each do |key, value|
+    def self.deep_transform_values!(state, operation, default_peml = {}, current_node = nil)
+      current_node ||= state['value']
+      current_node.each do |key, value|
         if value.is_a?(Hash)
-          Utils.deep_transform_values!(value, operation, default_peml)
+          Utils.deep_transform_values!(state, operation, default_peml, value)
         elsif value.is_a?(Array)
           value.length.times do |i|
             if value[i].is_a?(Hash)
-              Utils.deep_transform_values!(value[i], operation, default_peml)
+              Utils.deep_transform_values!(state, operation, default_peml, value[i])
             elsif value[i].respond_to?(:to_s) || value[i].respond_to?(:to_i)
-              peml[key][i] = method(operation).call(value[i], default_peml)
+              current_node[key][i] = method(operation).call(value[i], state, default_peml)
             end
           end
         elsif value.respond_to?(:to_s) || value.respond_to?(:to_i)
-          peml[key] = method(operation).call(value, default_peml)
+          current_node[key] = method(operation).call(value, state, default_peml)
         end
       end
-      peml
+      state
     end
 
 
     # -------------------------------------------------------------
     #kramdown parser has changed to add \n idky why, needs fixing
-    def self.render_helper(value, default_peml)
+    def self.render_helper(value, state, default_peml)
       Kramdown::Document.new(value,
         :auto_ids => false,
         input: 'GFM',
@@ -153,15 +155,13 @@ module Peml
 
 
     # -------------------------------------------------------------
-    def self.inline_url_helper(value, default_peml)
+    def self.inline_url_helper(value, state, default_peml)
       if value.is_a?(String) && (match = value.match(/\Aurl\(\s*(.*\S)\s*\)\z/))
         url = match[1]
         begin
           URI.open(url).read
         rescue => e
-          # If opening the URL fails, return the original value or handle as needed
-          # For now, we'll return the original value to avoid breaking the structure
-          # and maybe we should log this if there's a logger.
+          state['diagnostics'] << "Failed to inline URL: #{url} (#{e.message})" if state['diagnostics']
           value
         end
       else
@@ -171,7 +171,7 @@ module Peml
 
 
     # -------------------------------------------------------------
-    def self.interpolate_helper(value, default_peml)
+    def self.interpolate_helper(value, state, default_peml)
       if value.match(/\{\{(.*?)\}\}/)
         substitute_values = Utils.substitute_variables(
           value.scan(/\{\{(.*?)\}\}/).flatten, default_peml)
@@ -203,7 +203,7 @@ module Peml
 
 
     # -------------------------------------------------------------
-    def self.inline_data_file(value)
+    def self.inline_data_file(value, state)
       if value.is_a?(Hash)
         content = value['content']
         if content.is_a?(String) # Only parse if it's a string

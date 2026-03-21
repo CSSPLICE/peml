@@ -14,7 +14,7 @@ options = {
 }
 
 OptionParser.new do |opts|
-  opts.banner = "Usage: pemlparse [options] <filename>"
+  opts.banner = "Usage: peml [options] <filename>"
 
   Peml::TRANSFORMS.keys.each do |transform|
     opts.on("--#{transform.to_s.gsub('_', '-')}", "Enable #{transform} transform") do

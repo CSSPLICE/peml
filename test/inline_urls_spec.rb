@@ -12,7 +12,7 @@ describe 'Inline URLs Test' do
     mock_io.expect(:read, content)
     
     URI.stub :open, mock_io do
-      result = Peml.inline_urls(peml)
+      result = Peml.inline_urls({ 'value' => peml, 'diagnostics' => [] })['value']
       _(result["description"]).must_equal content
     end
     
@@ -21,7 +21,7 @@ describe 'Inline URLs Test' do
 
   it 'ignores strings that are not url(...) headers' do
     peml = { "description" => "Just a normal string", "other" => "Not a url(http://test.com) either" }
-    result = Peml.inline_urls(peml)
+    result = Peml.inline_urls({ 'value' => peml, 'diagnostics' => [] })['value']
     _(result["description"]).must_equal "Just a normal string"
     _(result["other"]).must_equal "Not a url(http://test.com) either"
   end
@@ -31,7 +31,7 @@ describe 'Inline URLs Test' do
     peml = { "description" => "url(#{url})" }
     
     URI.stub :open, ->(u) { raise "Connection failed" } do
-      result = Peml.inline_urls(peml)
+      result = Peml.inline_urls({ 'value' => peml, 'diagnostics' => [] })['value']
       _(result["description"]).must_equal "url(#{url})"
     end
   end
@@ -70,7 +70,7 @@ describe 'Inline URLs Test' do
     end
     
     URI.stub :open, stub_open do
-      result = Peml.inline_urls(peml)
+      result = Peml.inline_urls({ 'value' => peml, 'diagnostics' => [] })['value']
       _(result["level1"]["item1"]).must_equal content1
       _(result["level1"]["level2"][0]["item2"]).must_equal content2
       _(result["level1"]["level2"][1]).must_equal "plain text"

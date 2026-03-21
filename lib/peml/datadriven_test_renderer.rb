@@ -14,7 +14,8 @@ module Peml
 
 
     # -------------------------------------------------------------
-    def render_datadriven_tests!(peml, options = {})
+    def render_datadriven_tests!(state, options = {})
+      peml = state['value']
       if (peml.key?('systems'))
         peml['systems'].each do |system|
           if (system.key?('language'))
@@ -75,6 +76,11 @@ module Peml
                     { file_system: resolver, use_raw_yaml: 0 },
                     true)
                   file['content'] = template_class.render(context)
+                  if !template_class.errors.empty? && state['diagnostics']
+                    template_class.errors.each do |err|
+                      state['diagnostics'] << "Template error: #{err.message}"
+                    end
+                  end
                   file['type'] = "text/x-#{language}"
                 end
               end
@@ -82,7 +88,7 @@ module Peml
           end
         end
       end
-      peml
+      state
     end
   end
 

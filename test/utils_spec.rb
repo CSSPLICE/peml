@@ -155,7 +155,8 @@ describe Peml::Utils do
         'content' => "| name | age |\n| Alice | 30 |"
       }
       expected_content = [{ 'name' => 'Alice', 'age' => '30' }]
-      result = Peml::Utils.inline_data_file(value)
+      state = { 'value' => value, 'diagnostics' => [] }
+      result = Peml::Utils.inline_data_file(value, state)
       _(result['content']).must_equal expected_content
       _(result['type']).must_equal 'inline'
     end
@@ -165,7 +166,8 @@ describe Peml::Utils do
         'type' => 'text/yaml',
         'content' => "name: Alice\nage: 30"
       }
-      result = Peml::Utils.inline_data_file(value)
+      state = { 'value' => value, 'diagnostics' => [] }
+      result = Peml::Utils.inline_data_file(value, state)
       _(result['content']).must_equal({ 'name' => 'Alice', 'age' => 30 })
       _(result['type']).must_equal 'inline'
     end
