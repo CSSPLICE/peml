@@ -111,8 +111,8 @@ Indicate whether to inline structured data file contents into native PEML
 structured data.
 
 **inline_urls** (boolean)
-<br/>
-Indicate whether to inline external file contents in fields inside 
+`<br/>`
+Indicate whether to inline external file contents in fields inside
 the PEML data structure where the value is of the form `url(...)`.
 
 **render_tests** (boolean)
@@ -146,9 +146,9 @@ response is determined.
 `<br/>`
 Validate a PEML data structure (parsed PEML structured as a nested hash). Returns an array of diagnostic messages.
 
-**Peml.pemltest_parse(pemltest_string, filename: nil)**
+**Peml.pemltest_parse(params)**
 `<br/>`
-Parse PEMLtest text input into a data structure.
+Parse PEMLtest text input into a data structure. Takes a hash of parameter values similar to #parse(), including `pemltest` and `filename`.
 
 **Peml.to_peml(value_hash)**
 `<br/>`
@@ -175,7 +175,7 @@ bundle exec bin/peml [options] <filename>
 ### Options
 
 **--inline-urls**
-<br/>
+`<br/>`
 Enable the `inline-urls` transform.
 
 **--inline-data-files**

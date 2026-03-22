@@ -8,7 +8,7 @@ module PifConverter
     # PIF-to-Parsons directly mappable data
     tags = pif['tags']
     style = tags['style']
-    blocks = pif['assets.code.blocks.content']
+    blocks = pif['systems[0].assets.code.blocks.content'] || pif['assets.code.blocks.content']
     instructions = pif['instructions']
     grader = style.include?('execute') ?
                'exec' :

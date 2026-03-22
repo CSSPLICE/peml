@@ -21,7 +21,7 @@ instructions:----------
 Prove that $A \land B \land C) \rightarrow A \land C$.
 ----------
 
-[.assets.code.blocks.content]
+[assets.code.blocks.content]
 blockid: one
 display: Assume $A \land B \land C$.
 depends: 

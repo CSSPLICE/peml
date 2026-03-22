@@ -1,0 +1,74 @@
+---
+parsed:
+  :value:
+    exercise_id: https://github.com/CSSPLICE/peml-feasibility-examples/blob/main/parsons/hello-parson-simplified.peml
+    title: Your First Parsons Problem -- Simplified
+    author: Cliff Shaffer (from js-Parsons, converted to PEML)
+    license:
+      id: MIT
+      owner:
+        name: Cliff Shaffer
+        email: shaffer@vt.edu
+    tags:
+      topics: PEML Demo Parsons Problem
+      style: parsons, order
+    instructions: '**Your task**: Construct a Python program that prints strings "Hello",
+      "Parsons", and "Problems" on their own lines. You should construct your program
+      by dragging and dropping the lines to the solution area on the right.
+
+      '
+    assets:
+      code:
+        blocks:
+          content:
+          - display: print('Hello')
+          - display: print('Parsons')
+          - display: print('Oops!')
+            depends: "-1"
+          - display: print('Problems!')
+  :diagnostics: []
+runestone:
+  value:
+    question_text: '**Your task**: Construct a Python program that prints strings
+      "Hello", "Parsons", and "Problems" on their own lines. You should construct
+      your program by dragging and dropping the lines to the solution area on the
+      right.
+
+      '
+    options:
+      grader:
+        type: dag
+        showFeedback: true
+      maxdist: 0
+      order: ''
+      indent: false
+      adaptive: true
+      numbered: false
+      language: ''
+      runnable: true
+    blocks:
+    - text: print('Hello')
+      type: ''
+      tag: ''
+      depends: ''
+      indent: ''
+      displaymath: true
+    - text: print('Parsons')
+      type: ''
+      tag: ''
+      depends: ''
+      indent: ''
+      displaymath: true
+    - text: print('Oops!')
+      type: ''
+      tag: ''
+      depends: "-1"
+      indent: ''
+      displaymath: true
+    - text: print('Problems!')
+      type: ''
+      tag: ''
+      depends: ''
+      indent: ''
+      displaymath: true
+  diags: []

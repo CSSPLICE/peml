@@ -16,10 +16,9 @@ Associate each test with its corresponding work, but you can do the
 tests in any order.
 ----------
 
-[.assets.code.blocks.content]
+[assets.code.blocks.content]
 blockid: testAblock
 depends:
-[]
 [.blocklist]
 blockid: caseA
 display: if (testA) {

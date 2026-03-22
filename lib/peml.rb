@@ -4,6 +4,8 @@ require_relative 'peml/emitter'
 require_relative 'peml/utils'
 require_relative 'peml/peml_test_renderer'
 require_relative 'peml/datadriven_test_renderer'
+require_relative 'pif/parser'
+require_relative 'pif/converter'
 
 require 'dottie/ext'
 require 'open-uri'
@@ -24,7 +26,7 @@ module Peml
   #~ Class methods ..........................................................
 
   # -------------------------------------------------------------
-  def self.parse(params = {})
+  def self.parse(params)
     params = params.transform_keys(&:to_sym) rescue params
     if params[:filename]
       file = File.open(params[:filename])
@@ -116,14 +118,19 @@ module Peml
 
   # -------------------------------------------------------------
   # parse PEMLtest text input into a data structure
-  def self.pemltest_parse(pemltest, filename: nil)
-    if filename
-      file = File.open(filename)
+  def self.pemltest_parse(params)
+    params = params.transform_keys(&:to_sym) rescue params
+    if params[:filename]
+      file = File.open(params[:filename])
       begin
         pemltest = file.read
       ensure
         file.close
       end
+    elsif params[:url]
+      pemltest = URI.open(params[:url]).read
+    else
+      pemltest = params[:pemltest]
     end
     Peml::PemlTestParser.new.parse(pemltest)
   end

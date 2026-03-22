@@ -1,0 +1,144 @@
+---
+parsed:
+  :value:
+    exercise_id: https://github.com/CSSPLICE/peml-feasibility-examples/blob/main/parsons/pb-nptemplate.peml
+    title: NP-completeness proof template
+    author: Cliff Shaffer
+    license:
+      id: MIT
+      owner:
+        name: Cliff Shaffer
+        email: shaffer@vt.edu
+    tags:
+      topics: PEML NP-completeness
+      style: parsons, order
+    instructions: 'Show the general process for an NP-Completeness Proof.
+
+      '
+    assets:
+      code:
+        blocks:
+          content:
+          - blockid: starter
+            display: 'To prove that a problem X is NP-complete do this:'
+            depends: ''
+          - blockid: xinNP
+            display: 1. Show that X is in NP.
+            depends: starter
+          - blockid: algorithm
+            display: Create an algorithm to solve X (that might or might not use non-determinism)
+              that runs in polynomial time.
+            depends: xinNP
+          - blockid: starthard
+            display: 2. Show that X is NP-hard.
+            depends: algorithm
+          - blockid: choose
+            display: Choose a known NP-hard problem A.
+            depends: starthard
+          - blockid: trans
+            display: Define two transformations.
+            depends: choose
+          - blockid: t1
+            display: Describe a polynomial-time algorithm that takes an arbitrary
+              instance <b>I</b> of A to an instance <b>I′</b> of X.
+            depends: trans
+          - blockid: d1
+            display: Describe a polynomial-time algorithm that takes an arbitrary
+              instance <b>I</b> of X to an instance <b>I′</b> of A.
+            depends: "-1"
+          - blockid: t2
+            display: Describe a polynomial-time transformation from the solution for
+              <b>I’</b> in problem X (call it <b>SLN’</b>) to <b>SLN</b> such that
+              <b>SLN</b> is the solution for <b>I</b> in problem A.
+            depends: trans
+          - blockid: d2
+            display: Describe a polynomial-time transformation from the solution for
+              <b>I’</b> in problem A (call it <b>SLN’</b>) to <b>SLN</b> such that
+              <b>SLN</b> is the solution for <b>I</b> in problem X.
+            depends: "-1"
+  :diagnostics: []
+runestone:
+  value:
+    question_text: 'Show the general process for an NP-Completeness Proof.
+
+      '
+    options:
+      grader:
+        type: dag
+        showFeedback: true
+      maxdist: 0
+      order: ''
+      indent: false
+      adaptive: true
+      numbered: false
+      language: ''
+      runnable: true
+    blocks:
+    - text: 'To prove that a problem X is NP-complete do this:'
+      type: ''
+      tag: starter
+      depends: ''
+      indent: ''
+      displaymath: true
+    - text: 1. Show that X is in NP.
+      type: ''
+      tag: xinNP
+      depends: starter
+      indent: ''
+      displaymath: true
+    - text: Create an algorithm to solve X (that might or might not use non-determinism)
+        that runs in polynomial time.
+      type: ''
+      tag: algorithm
+      depends: xinNP
+      indent: ''
+      displaymath: true
+    - text: 2. Show that X is NP-hard.
+      type: ''
+      tag: starthard
+      depends: algorithm
+      indent: ''
+      displaymath: true
+    - text: Choose a known NP-hard problem A.
+      type: ''
+      tag: choose
+      depends: starthard
+      indent: ''
+      displaymath: true
+    - text: Define two transformations.
+      type: ''
+      tag: trans
+      depends: choose
+      indent: ''
+      displaymath: true
+    - text: Describe a polynomial-time algorithm that takes an arbitrary instance
+        <b>I</b> of A to an instance <b>I′</b> of X.
+      type: ''
+      tag: t1
+      depends: trans
+      indent: ''
+      displaymath: true
+    - text: Describe a polynomial-time algorithm that takes an arbitrary instance
+        <b>I</b> of X to an instance <b>I′</b> of A.
+      type: ''
+      tag: d1
+      depends: "-1"
+      indent: ''
+      displaymath: true
+    - text: Describe a polynomial-time transformation from the solution for <b>I’</b>
+        in problem X (call it <b>SLN’</b>) to <b>SLN</b> such that <b>SLN</b> is the
+        solution for <b>I</b> in problem A.
+      type: ''
+      tag: t2
+      depends: trans
+      indent: ''
+      displaymath: true
+    - text: Describe a polynomial-time transformation from the solution for <b>I’</b>
+        in problem A (call it <b>SLN’</b>) to <b>SLN</b> such that <b>SLN</b> is the
+        solution for <b>I</b> in problem X.
+      type: ''
+      tag: d2
+      depends: "-1"
+      indent: ''
+      displaymath: true
+  diags: []

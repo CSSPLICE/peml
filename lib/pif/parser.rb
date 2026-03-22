@@ -39,10 +39,10 @@ module PifParser
       # Extended validation
       if (diags.empty?)
         style_tag = value["tags.style"] # Structurally required
-        block_content = value['assets.code.blocks.content'] # Structurally required
-        test_content = value['assets.test.files[0].content'] # Optional
-        test_format = value['assets.test.files[0].format'] # Optional
         systems = value['systems'] # Optional
+        block_content = value['systems[0].assets.code.blocks.content'] || value['assets.code.blocks.content'] # Structurally required
+        test_content = value['systems[0].assets.test.files[0].content'] || value['assets.test.files[0].content'] # Optional
+        test_format = value['systems[0].assets.test.files[0].format'] || value['assets.test.files[0].format'] # Optional
 
         # Style tag indicators (case-sensitive)
         parsed_style_tag = style_tag.split(/\s*,\s*/)

@@ -1,0 +1,103 @@
+---
+parsed:
+  :value:
+    exercise_id: https://github.com/CSSPLICE/peml-feasibility-examples/blob/main/parsons/jsparsons-java-example-execute.peml
+    title: Simple js-parsons Java example assignment - execute
+    author: Cliff Shaffer (from js-Parsons, converted to PEML)
+    license:
+      id: MIT
+      owner:
+        name: Cliff Shaffer
+        email: shaffer@vt.edu
+    tags:
+      topics: PEML Demo Parsons Problem
+      style: parsons, execute, indent
+    instructions: 'Construct code by reordering and indenting the lines.
+
+      '
+    systems:
+    - language: Java
+      assets:
+        code:
+          wrapper:
+            files:
+            - content: |
+                public class Parsons {
+
+                    public static void main(String[] args) {
+                    ___
+                    }
+                }
+          blocks:
+            content:
+            - blockid: one
+              display: for (int i=0;i<3;i++) {
+              indent: '0'
+            - blockid: two
+              display: System.out.print("I ");
+              indent: '1'
+            - blockid: three
+              display: System.out.print("am ");
+              indent: '1'
+            - blockid: four
+              display: System.out.print("a Java program ");
+              indent: '1'
+            - blockid: five
+              display: "}"
+              indent: '0'
+        test:
+          files:
+          - type: text/csv-unquoted
+            content: |
+              expected
+              I am a Java program I am a Java program I am a Java program
+  :diagnostics:
+  - 'The document is missing key: assets'
+runestone:
+  value:
+    question_text: 'Construct code by reordering and indenting the lines.
+
+      '
+    options:
+      grader:
+        type: exec
+        showFeedback: true
+      maxdist: 0
+      order: ''
+      indent: true
+      adaptive: true
+      numbered: false
+      language: java
+      runnable: true
+    blocks:
+    - text: for (int i=0;i<3;i++) {
+      type: ''
+      tag: one
+      depends: ''
+      indent: '0'
+      displaymath: true
+    - text: System.out.print("I ");
+      type: ''
+      tag: two
+      depends: ''
+      indent: '1'
+      displaymath: true
+    - text: System.out.print("am ");
+      type: ''
+      tag: three
+      depends: ''
+      indent: '1'
+      displaymath: true
+    - text: System.out.print("a Java program ");
+      type: ''
+      tag: four
+      depends: ''
+      indent: '1'
+      displaymath: true
+    - text: "}"
+      type: ''
+      tag: five
+      depends: ''
+      indent: '0'
+      displaymath: true
+  diags: []

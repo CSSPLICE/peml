@@ -16,7 +16,7 @@ instructions:----------
 Show a proof that the decision form of Independent Set is NP-complete.
 ----------
 
-[.assets.code.blocks.content]
+[assets.code.blocks.content]
 
 blockid: inNPblock
 []

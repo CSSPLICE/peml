@@ -22,15 +22,16 @@ The constructed code should print the minimum of variables a and b.
 [systems]
 language: Python
 
+assets.code.blocks.delimiter: \
+
 [.assets.code.wrapper.files]
 content:----------
 a = 4
 b = 2
 ___
 ----------
-
-assets.code.blocks.delimiter: \
 []
+
 [.assets.code.blocks.content]
 blockid: one1
 display: if \\a\b\c\\ \\<\>\>=\ b

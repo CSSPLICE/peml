@@ -1,0 +1,112 @@
+---
+parsed:
+  :value:
+    exercise_id: JSParsons Unittests
+    title: JSParsons Unittests
+    license:
+      id: MIT
+      owner:
+        name: Cliff Shaffer
+        email: shaffer@vt.edu
+    tags:
+      topics: PEML Demo Parsons Problem
+      style: parsons, execute, indent
+    instructions: 'Your task is to construct a function which returns the index of
+      the largest element in the array.
+
+      '
+    systems:
+    - language: Python
+      assets:
+        code:
+          wrapper:
+            files:
+            - content: "    ___\n"
+          blocks:
+            content:
+            - blockid: one
+              display: 'def maxindex(arg):'
+              indent: '0'
+            - blockid: two
+              display: ans = 0
+              indent: '1'
+            - blockid: three
+              display: 'for i in range(len(arg)):'
+              indent: '1'
+            - blockid: four
+              display: 'if arg[i] > arg[ans]:'
+              indent: '2'
+            - blockid: five
+              display: ans = i
+              indent: '3'
+            - blockid: six
+              display: return ans
+              indent: '1'
+        test:
+          files:
+          - type: |
+              text/csv-unquoted
+                maxindex(arr)
+            content: |
+              arr, expected, description
+              [0, 2, 4], 2, example
+              [7, 2, 4], 0, hidden
+              [7, 8, 4], 1, example
+  :diagnostics:
+  - Path '/exercise_id' does not match the required pattern (^[^\s,]+$)
+  - 'The document is missing key: assets'
+runestone:
+  value:
+    question_text: 'Your task is to construct a function which returns the index of
+      the largest element in the array.
+
+      '
+    options:
+      grader:
+        type: exec
+        showFeedback: true
+      maxdist: 0
+      order: ''
+      indent: true
+      adaptive: true
+      numbered: false
+      language: python
+      runnable: true
+    blocks:
+    - text: 'def maxindex(arg):'
+      type: ''
+      tag: one
+      depends: ''
+      indent: '0'
+      displaymath: true
+    - text: ans = 0
+      type: ''
+      tag: two
+      depends: ''
+      indent: '1'
+      displaymath: true
+    - text: 'for i in range(len(arg)):'
+      type: ''
+      tag: three
+      depends: ''
+      indent: '1'
+      displaymath: true
+    - text: 'if arg[i] > arg[ans]:'
+      type: ''
+      tag: four
+      depends: ''
+      indent: '2'
+      displaymath: true
+    - text: ans = i
+      type: ''
+      tag: five
+      depends: ''
+      indent: '3'
+      displaymath: true
+    - text: return ans
+      type: ''
+      tag: six
+      depends: ''
+      indent: '1'
+      displaymath: true
+  diags: []
