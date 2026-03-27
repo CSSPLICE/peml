@@ -180,56 +180,48 @@ module PifParser
     if(blocklist)
       blocklist.each do |child|
         get_toggles_and_text_input_helper(child, delimiter)
-        return
       end
     end
 
-    text_options = get_text_input(block, delimiter)
-    toggle_options = get_toggles(block, delimiter)
+    text_options = []
+    toggle_options = []
 
-    puts text_options
-    puts toggle_options
-
-    block["toggle_options"] = toggle_options
-    block["text_options"] = text_options
-  end
-
-  # ------------------------------------------------------------------------------
-  # Searches for toggle options within 2 delimiter groups
-  def self.get_toggles(block, delimiter)
-    toggles = []
-    # Scans for groups of 2 or greater delimiters
-    toggleMatches = block["display"].split(/#{Regexp.escape(delimiter)}{2}/)
-
-    endOfDelimiterGroup = 0
-    toggleMatches.each_with_index do |str, index| # Loop through each toggle match
-      next if index.even? # skip text outside of toggle group delimiters
-
-      puts block["display"]
-
-      # Search from end of last delimiter group or start of string
-      startOfDelimiterGroup = block["display"].index(/#{Regexp.escape(delimiter)}{2}/, endOfDelimiterGroup)
-      puts startOfDelimiterGroup
-      endOfDelimiterGroup = block["display"].index(/#{Regexp.escape(delimiter)}{2}/, startOfDelimiterGroup + 2) + 2 # Search for ending delimiter from end of starting delimiter
-      puts endOfDelimiterGroup
-
-      toggle_options = str.split(delimiter) # All toggle options within toggle group
-      toggles << {start_index: startOfDelimiterGroup, end_index: endOfDelimiterGroup, values: toggle_options}
+    if(block["delimiter"])
+      delimiter = block["delimiter"]
     end
 
-    return toggles
-  end
+    d = Regexp.escape(delimiter)
+    # this pattern finds: two delimiters + anything + two delimiters
+    pattern = /(?<!#{d})#{d}{2}(.*?)#{d}{2}(?!#{d})/m
 
-  # ------------------------------------------------------------------------------
-  # Searches for groups of 4 delimiter
-  def self.get_text_input(block, delimiter)
-    text_inputs = []
-    match_end = 0 # Variable to store the index after the last matched group
-    while match = block["display"].index(/#{Regexp.escape(delimiter)}{4}/, match_end)
-      match_end = match + 4
-      text_inputs << {start_index: match, end_index: match_end}
+    block["display"].scan(pattern) do |match|
+      m = Regexp.last_match
+      inner_content = match[0]
+      
+      # if it contains the delimiter inside then it is a toggle
+      # otherwise its a text input
+      if inner_content.include?(delimiter)
+        toggle_options << {
+          start_index: m.begin(0),
+          end_index: m.end(0),
+          values: inner_content.split(delimiter)
+        }
+      else
+        text_options << {
+          start_index: m.begin(0),
+          end_index: m.end(0),
+          inner_content: inner_content
+        }
+      end
     end
-    return text_inputs
+
+    if !(toggle_options.empty?)
+      block["toggle_options"] = toggle_options
+    end
+
+    if !(text_options.empty?)
+      block["text_options"] = text_options
+    end
   end
 
   # Gets all blockids for non-distractor elements
