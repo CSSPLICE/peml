@@ -121,7 +121,7 @@ module Peml
   # parsed_pif should be a product of pif.parse
   # format options are 'json' and 'yaml'.
   #   If nil a ruby hash is returned.
-  def self.pif_to_runestone(parsed_pif, format = nil)
+  def self.pif_to_renderable_json(parsed_pif, format = nil)
     if !parsed_pif[:diagnostics].empty?
       # TODO handle this better and return a good error message
       result = parsed_pif[:diagnostics]
