@@ -4,7 +4,7 @@ require "yaml"
 module PifConverter
   # Assumes an already validated and parsed PIF hash is passed
   # - specifically the :value field.
-  def self.to_runestone(pif, format = nil)
+  def self.to_renderable_json(pif, format = nil)
     # puts "raw pif parse: #{pif['assets.code.blocks.content']}"
     # PIF-to-Parsons directly mappable data
     tags = pif['tags']
@@ -105,23 +105,7 @@ module PifConverter
             "feedback" => distractor["feedback"],
             "reusable" => block["reusable"].to_s.strip.downcase == "true",
           }
-          # if block["reusable"]
-          #   parsons_distractor["reusable"] = block["reusable"].to_s.strip.downcase == "true"
-          # end
-          # parsons_data_model["blocks"] << parsons_distractor
         end
-        # Adds the closest distractor
-        # if (block["blocklist"].length > 1)
-        #   distractor = block["blocklist[1]"]
-        #   parsons_distractor = {
-        #     "text" => distractor["display"],
-        #     "tag" => "paired",
-        #     "depends" => "",
-        #     "displaymath" => "",
-        #   }
-        #   parsons_data_model["blocks"] << parsons_distractor
-        # end
-        # Case: Single Block Entity
       else
         parsons_block["text"] = block["display"]
         if(block["toggle_options"])

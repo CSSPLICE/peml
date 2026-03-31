@@ -1,0 +1,57 @@
+{
+    "value": {
+        "question_text": "\u003cp\u003eProve that (A AND B AND C) implies (A AND C).\u003c/p\u003e\n",
+        "options": {
+            "grader": {
+                "type": "dag",
+                "showFeedback": true
+            },
+            "maxdist": 0,
+            "order": "",
+            "indent": false,
+            "adaptive": true,
+            "numbered": false,
+            "language": "math",
+            "runnable": true
+        },
+        "blocks": [
+            {
+                "text": "Assume A AND B AND C.",
+                "type": "",
+                "tag": "one",
+                "depends": "",
+                "indent": "",
+                "displaymath": true,
+                "feedback": ""
+            },
+            {
+                "text": "Then A is TRUE.",
+                "type": "",
+                "tag": "two",
+                "depends": "one",
+                "indent": "",
+                "displaymath": true,
+                "feedback": ""
+            },
+            {
+                "text": "Then C is TRUE.",
+                "type": "",
+                "tag": "three",
+                "depends": "one",
+                "indent": "",
+                "displaymath": true,
+                "feedback": ""
+            },
+            {
+                "text": "Since A and C are TRUE, we know (A AND C) is TRUE.",
+                "type": "",
+                "tag": "four",
+                "depends": "two, three",
+                "indent": "",
+                "displaymath": true,
+                "feedback": ""
+            }
+        ]
+    },
+    "diags": []
+}

@@ -1,0 +1,75 @@
+{
+    "value": {
+        "question_text": "\u003cp\u003eYour task is to construct a function which returns the index of the largest element in the array.\u003c/p\u003e\n",
+        "options": {
+            "grader": {
+                "type": "exec",
+                "showFeedback": true
+            },
+            "maxdist": 0,
+            "order": "",
+            "indent": true,
+            "adaptive": true,
+            "numbered": false,
+            "language": "python",
+            "runnable": true
+        },
+        "blocks": [
+            {
+                "text": "def maxindex(arg):",
+                "type": "",
+                "tag": "one",
+                "depends": "",
+                "indent": "0",
+                "displaymath": true,
+                "feedback": ""
+            },
+            {
+                "text": "ans = 0",
+                "type": "",
+                "tag": "two",
+                "depends": "",
+                "indent": "1",
+                "displaymath": true,
+                "feedback": ""
+            },
+            {
+                "text": "for i in range(len(arg)):",
+                "type": "",
+                "tag": "three",
+                "depends": "",
+                "indent": "1",
+                "displaymath": true,
+                "feedback": ""
+            },
+            {
+                "text": "if arg[i] \u003e arg[ans]:",
+                "type": "",
+                "tag": "four",
+                "depends": "",
+                "indent": "2",
+                "displaymath": true,
+                "feedback": ""
+            },
+            {
+                "text": "ans = i",
+                "type": "",
+                "tag": "five",
+                "depends": "",
+                "indent": "3",
+                "displaymath": true,
+                "feedback": ""
+            },
+            {
+                "text": "return ans",
+                "type": "",
+                "tag": "six",
+                "depends": "",
+                "indent": "1",
+                "displaymath": true,
+                "feedback": ""
+            }
+        ]
+    },
+    "diags": []
+}
