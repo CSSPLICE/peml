@@ -49,10 +49,10 @@ if input_file_path && output_dir
         file.puts(parsed.to_json)
       when "rs"
         puts "Converting to rs format..."
-        file.puts(PifConverter.to_runestone(parsed[:value], "json"))
+        file.puts(PifConverter.to_renderable_json(parsed[:value], "json"))
       else
         puts "Converting to rs format..."
-        file.puts(PifConverter.to_runestone(parsed[:value], "json"))
+        file.puts(PifConverter.to_renderable_json(parsed[:value], "json"))
       end
     end
   end

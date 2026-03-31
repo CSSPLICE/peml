@@ -1,55 +1,57 @@
 {
-    "value": {
-        "question_text": "\u003cp\u003eThe constructed code should print the minimum of variables a and b.\u003c/p\u003e\n",
-        "options": {
-            "grader": {
-                "type": "exec",
-                "showFeedback": true
-            },
-            "maxdist": 0,
-            "order": "",
-            "indent": true,
-            "adaptive": true,
-            "numbered": false,
-            "language": "python",
-            "runnable": true
-        },
-        "blocks": [
-            {
-                "text": "if a ```` b",
-                "type": "",
-                "tag": "one1",
-                "depends": "",
-                "indent": "0",
-                "displaymath": true,
-                "feedback": "",
-                "text_options": [
-                    {
-                        "start_index": 5,
-                        "end_index": 9,
-                        "inner_content": ""
-                    }
-                ]
-            },
-            {
-                "text": "print(a)",
-                "type": "",
-                "tag": "two",
-                "depends": "",
-                "indent": "1",
-                "displaymath": true,
-                "feedback": ""
-            },
-            {
-                "text": "print(b)",
-                "type": "",
-                "tag": "three",
-                "depends": "",
-                "indent": "1",
-                "displaymath": true,
-                "feedback": ""
-            }
-        ]
+  "value": {
+    "question_text": "<p>The constructed code should print the minimum of variables a and b.</p>\n",
+    "options": {
+      "grader": {
+        "type": "exec",
+        "showFeedback": true
+      },
+      "maxdist": 0,
+      "order": "",
+      "indent": true,
+      "adaptive": true,
+      "numbered": false,
+      "language": "python",
+      "runnable": true
     },
-    "diags": []
+    "blocks": [
+      {
+        "text": "if a ```` b",
+        "type": "",
+        "tag": "one1",
+        "depends": "",
+        "indent": "0",
+        "displaymath": true,
+        "feedback": "",
+        "text_options": [
+          {
+            "start_index": 5,
+            "end_index": 9,
+            "inner_content": ""
+          }
+        ]
+      },
+      {
+        "text": "print(a)",
+        "type": "",
+        "tag": "two",
+        "depends": "",
+        "indent": "1",
+        "displaymath": true,
+        "feedback": ""
+      },
+      {
+        "text": "print(b)",
+        "type": "",
+        "tag": "three",
+        "depends": "",
+        "indent": "1",
+        "displaymath": true,
+        "feedback": ""
+      }
+    ]
+  },
+  "diags": [
+
+  ]
 }

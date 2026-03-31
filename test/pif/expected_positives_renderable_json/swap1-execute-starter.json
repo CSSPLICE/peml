@@ -1,88 +1,98 @@
 {
-    "value": {
-        "question_text": "\u003cp\u003eWrite a function to swap two elements in the array by reordering the\u003cbr /\u003e\nlines. Your function should return the array.\u003c/p\u003e\n",
-        "options": {
-            "grader": {
-                "type": "exec",
-                "showFeedback": true
-            },
-            "maxdist": 0,
-            "order": "",
-            "indent": false,
-            "adaptive": true,
-            "numbered": false,
-            "language": "java",
-            "runnable": true
-        },
-        "blocks": [
-            {
-                "text": "int temp = arr[i];",
-                "type": "",
-                "tag": "one",
-                "depends": "",
-                "indent": "",
-                "displaymath": true,
-                "feedback": ""
-            },
-            {
-                "text": "int temp = arr[i];",
-                "type": "",
-                "tag": "onea",
-                "depends": "",
-                "indent": "",
-                "displaymath": true,
-                "feedback": ""
-            },
-            {
-                "text": "arr[i] = arr[j];",
-                "type": "",
-                "tag": "two",
-                "depends": "",
-                "indent": "",
-                "displaymath": true,
-                "feedback": ""
-            },
-            {
-                "text": "arr[j] = temp;",
-                "type": "",
-                "tag": "three",
-                "depends": "",
-                "indent": "",
-                "displaymath": true,
-                "feedback": ""
-            },
-            {
-                "text": "int temp = arr[j];",
-                "type": "",
-                "tag": "four",
-                "depends": "",
-                "indent": "",
-                "displaymath": true,
-                "feedback": ""
-            },
-            {
-                "text": "public int[] Swap(int[] arr, int i, int j)\n{",
-                "type": "",
-                "toggle_options": [],
-                "text_options": [],
-                "tag": "fixed",
-                "depends": "",
-                "indent": "",
-                "displaymath": true,
-                "feedback": ""
-            },
-            {
-                "text": "return arr;\n}",
-                "type": "",
-                "toggle_options": [],
-                "text_options": [],
-                "tag": "fixed",
-                "depends": "",
-                "indent": "",
-                "displaymath": true,
-                "feedback": ""
-            }
-        ]
+  "value": {
+    "question_text": "<p>Write a function to swap two elements in the array by reordering the<br />\nlines. Your function should return the array.</p>\n",
+    "options": {
+      "grader": {
+        "type": "exec",
+        "showFeedback": true
+      },
+      "maxdist": 0,
+      "order": "",
+      "indent": false,
+      "adaptive": true,
+      "numbered": false,
+      "language": "java",
+      "runnable": true
     },
-    "diags": []
+    "blocks": [
+      {
+        "text": "int temp = arr[i];",
+        "type": "",
+        "tag": "one",
+        "depends": "",
+        "indent": "",
+        "displaymath": true,
+        "feedback": ""
+      },
+      {
+        "text": "int temp = arr[i];",
+        "type": "",
+        "tag": "onea",
+        "depends": "",
+        "indent": "",
+        "displaymath": true,
+        "feedback": ""
+      },
+      {
+        "text": "arr[i] = arr[j];",
+        "type": "",
+        "tag": "two",
+        "depends": "",
+        "indent": "",
+        "displaymath": true,
+        "feedback": ""
+      },
+      {
+        "text": "arr[j] = temp;",
+        "type": "",
+        "tag": "three",
+        "depends": "",
+        "indent": "",
+        "displaymath": true,
+        "feedback": ""
+      },
+      {
+        "text": "int temp = arr[j];",
+        "type": "",
+        "tag": "four",
+        "depends": "",
+        "indent": "",
+        "displaymath": true,
+        "feedback": ""
+      },
+      {
+        "text": "public int[] Swap(int[] arr, int i, int j)\n{",
+        "type": "",
+        "toggle_options": [
+
+        ],
+        "text_options": [
+
+        ],
+        "tag": "fixed",
+        "depends": "",
+        "indent": "",
+        "displaymath": true,
+        "feedback": ""
+      },
+      {
+        "text": "return arr;\n}",
+        "type": "",
+        "toggle_options": [
+
+        ],
+        "text_options": [
+
+        ],
+        "tag": "fixed",
+        "depends": "",
+        "indent": "",
+        "displaymath": true,
+        "feedback": ""
+      }
+    ]
+  },
+  "diags": [
+
+  ]
 }

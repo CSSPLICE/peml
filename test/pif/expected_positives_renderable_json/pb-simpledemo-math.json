@@ -1,66 +1,68 @@
 {
-    "value": {
-        "question_text": "\u003cp\u003eThis sentence uses \u003ccode\u003e$\u003c/code\u003e delimiters to \u003cstrong\u003eshow\u003c/strong\u003e math inline: $\\sqrt{3x-1}+(1+x)^2$\u003c/p\u003e\n",
-        "options": {
-            "grader": {
-                "type": "dag",
-                "showFeedback": true
-            },
-            "maxdist": 0,
-            "order": "",
-            "indent": false,
-            "adaptive": true,
-            "numbered": false,
-            "language": "math",
-            "runnable": true
-        },
-        "blocks": [
-            {
-                "text": "Assume $A \\land B \\land C$.",
-                "type": "",
-                "tag": "one",
-                "depends": "",
-                "indent": "",
-                "displaymath": true,
-                "feedback": ""
-            },
-            {
-                "text": "Then $A$ is true.",
-                "type": "",
-                "tag": "two",
-                "depends": "one",
-                "indent": "",
-                "displaymath": true,
-                "feedback": ""
-            },
-            {
-                "text": "Then $C$ is true.",
-                "type": "",
-                "tag": "three",
-                "depends": "one",
-                "indent": "",
-                "displaymath": true,
-                "feedback": ""
-            },
-            {
-                "text": "Since $A$ and $C$, $\\textbf{we}$ know $A \\land C$.",
-                "type": "",
-                "tag": "four",
-                "depends": "two, three",
-                "indent": "",
-                "displaymath": true,
-                "feedback": ""
-            },
-            {
-                "text": "This sentence uses \\$ delimiters to show math inline: $\\sqrt{3x-1}+(1+x)^2$",
-                "type": "",
-                "tag": "five",
-                "depends": "two",
-                "indent": "",
-                "displaymath": true,
-                "feedback": ""
-            }
-        ]
+  "value": {
+    "question_text": "<p>This sentence uses <code>$</code> delimiters to <strong>show</strong> math inline: $\\sqrt{3x-1}+(1+x)^2$</p>\n",
+    "options": {
+      "grader": {
+        "type": "dag",
+        "showFeedback": true
+      },
+      "maxdist": 0,
+      "order": "",
+      "indent": false,
+      "adaptive": true,
+      "numbered": false,
+      "language": "math",
+      "runnable": true
     },
-    "diags": []
+    "blocks": [
+      {
+        "text": "Assume $A \\land B \\land C$.",
+        "type": "",
+        "tag": "one",
+        "depends": "",
+        "indent": "",
+        "displaymath": true,
+        "feedback": ""
+      },
+      {
+        "text": "Then $A$ is true.",
+        "type": "",
+        "tag": "two",
+        "depends": "one",
+        "indent": "",
+        "displaymath": true,
+        "feedback": ""
+      },
+      {
+        "text": "Then $C$ is true.",
+        "type": "",
+        "tag": "three",
+        "depends": "one",
+        "indent": "",
+        "displaymath": true,
+        "feedback": ""
+      },
+      {
+        "text": "Since $A$ and $C$, $\\textbf{we}$ know $A \\land C$.",
+        "type": "",
+        "tag": "four",
+        "depends": "two, three",
+        "indent": "",
+        "displaymath": true,
+        "feedback": ""
+      },
+      {
+        "text": "This sentence uses \\$ delimiters to show math inline: $\\sqrt{3x-1}+(1+x)^2$",
+        "type": "",
+        "tag": "five",
+        "depends": "two",
+        "indent": "",
+        "displaymath": true,
+        "feedback": ""
+      }
+    ]
+  },
+  "diags": [
+
+  ]
 }

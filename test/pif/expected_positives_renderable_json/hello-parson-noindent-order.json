@@ -1,48 +1,50 @@
 {
-    "value": {
-        "question_text": "\u003cp\u003e\u003cstrong\u003eYour task\u003c/strong\u003e: Construct a Python program that prints strings “Hello”, “Parsons”, and “Problems” on their own lines. You can get feedback on your current solution with the feedback button. You should construct your program by dragging and dropping the lines to the solution area on the right.\u003c/p\u003e\n",
-        "options": {
-            "grader": {
-                "type": "dag",
-                "showFeedback": true
-            },
-            "maxdist": 0,
-            "order": "",
-            "indent": false,
-            "adaptive": true,
-            "numbered": false,
-            "language": "math",
-            "runnable": true
-        },
-        "blocks": [
-            {
-                "text": "print(‘Hello’)",
-                "type": "",
-                "tag": "one",
-                "depends": "",
-                "indent": "",
-                "displaymath": true,
-                "feedback": ""
-            },
-            {
-                "text": "print(‘Parsons’)",
-                "type": "",
-                "tag": "two",
-                "depends": "",
-                "indent": "",
-                "displaymath": true,
-                "feedback": ""
-            },
-            {
-                "text": "print(‘Problems!’)",
-                "type": "",
-                "tag": "three",
-                "depends": "",
-                "indent": "",
-                "displaymath": true,
-                "feedback": ""
-            }
-        ]
+  "value": {
+    "question_text": "<p><strong>Your task</strong>: Construct a Python program that prints strings “Hello”, “Parsons”, and “Problems” on their own lines. You can get feedback on your current solution with the feedback button. You should construct your program by dragging and dropping the lines to the solution area on the right.</p>\n",
+    "options": {
+      "grader": {
+        "type": "dag",
+        "showFeedback": true
+      },
+      "maxdist": 0,
+      "order": "",
+      "indent": false,
+      "adaptive": true,
+      "numbered": false,
+      "language": "math",
+      "runnable": true
     },
-    "diags": []
+    "blocks": [
+      {
+        "text": "print(‘Hello’)",
+        "type": "",
+        "tag": "one",
+        "depends": "",
+        "indent": "",
+        "displaymath": true,
+        "feedback": ""
+      },
+      {
+        "text": "print(‘Parsons’)",
+        "type": "",
+        "tag": "two",
+        "depends": "",
+        "indent": "",
+        "displaymath": true,
+        "feedback": ""
+      },
+      {
+        "text": "print(‘Problems!’)",
+        "type": "",
+        "tag": "three",
+        "depends": "",
+        "indent": "",
+        "displaymath": true,
+        "feedback": ""
+      }
+    ]
+  },
+  "diags": [
+
+  ]
 }
