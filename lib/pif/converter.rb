@@ -15,7 +15,7 @@ module PifConverter
     grader = style.include?('execute') ?
                'exec' :
                'dag'
-    indent = style.include?('indent')
+    indent = style.include?('indent') || style.include?('execute')
     numbered = pif['numbered'] || false
     delimiter = pif['assets.code.blocks.delimiter'] || '`'
     language = pif['systems[0].language']&.downcase || 'math'
@@ -78,7 +78,7 @@ module PifConverter
         # Case: Pickone blocklist
       elsif
         # Adds the root of the blocklist
-      parsons_block["text"] = block["blocklist[0].display"]
+        parsons_block["text"] = block["blocklist[0].display"]
         parsons_block["picklimit"] = block["picklimit"].to_i || 0
         parsons_block["tag"] = "#{block["blockid"]}-#{block["blocklist[0].blockid"]}"
         parsons_block["depends"] = block["depends"] || ""
@@ -129,6 +129,11 @@ module PifConverter
 
         if block["reusable"]
           parsons_block["reusable"] = block["reusable"].to_s.strip.downcase == "true"
+        end
+
+        # turn on indentation for all blocks if execute or indent is in tags
+        if indent 
+          parsons_block["indent"] = indent
         end
 
         # Appends converted block
