@@ -4,18 +4,22 @@ require "yaml"
 module PifConverter
   # Assumes an already validated and parsed PIF hash is passed
   # - specifically the :value field.
-  def self.to_Runestone(pif, format = nil)
+  def self.to_renderable_json(pif, format = nil)
+    # puts "raw pif parse: #{pif['assets.code.blocks.content']}"
     # PIF-to-Parsons directly mappable data
     tags = pif['tags']
     style = tags['style']
-    blocks = pif['systems[0].assets.code.blocks.content'] || pif['assets.code.blocks.content']
+    # blocks = pif['systems[0].assets.code.blocks.content'] || pif['assets.code.blocks.content']
+    blocks = pif['assets.code.blocks.content']
+    starter = pif['assets.code.starter.files']
     instructions = pif['instructions']
     grader = style.include?('execute') ?
                'exec' :
                'dag'
-    indent = style.include?('indent')
+    indent = style.include?('indent') || style.include?('execute')
     numbered = pif['numbered'] || false
-    language = pif['systems[0].language']&.downcase || ''
+    delimiter = pif['assets.code.blocks.delimiter'] || '`'
+    language = pif['systems[0].language']&.downcase || 'math'
 
     # Parsons model
     parsons_data_model = {
@@ -49,7 +53,7 @@ module PifConverter
       "natural"
     ]
     if grader == "exec" &&
-      !supported_languages.include?(language)
+       !supported_languages.include?(language)
       diags << "#{language} is not a supported langauge."
     end
 
@@ -64,6 +68,7 @@ module PifConverter
         "depends" => "",
         "indent" => 0,
         "displaymath" => true,
+        "feedback" => "",
       }.dottie!
 
       has_blocklist = block["blocklist"]
@@ -74,30 +79,48 @@ module PifConverter
         # Case: Pickone blocklist
       elsif
         # Adds the root of the blocklist
-      parsons_block["text"] = block["blocklist[0].display"]
-        parsons_block["tag"] = block["blocklist[0].blockid"] || ""
+        parsons_block["text"] = block["blocklist[0].display"]
+        parsons_block["picklimit"] = block["picklimit"].to_i || 0
+        parsons_block["tag"] = "#{block["blockid"]}-#{block["blocklist[0].blockid"]}"
         parsons_block["depends"] = block["depends"] || ""
+        if block["reusable"]
+          parsons_block["reusable"] = block["reusable"].to_s.strip.downcase == "true"
+        end
         parsons_data_model["blocks"] << parsons_block
 
-        # Adds the closest distractor
-        if (block["blocklist"].length > 1)
-          distractor = block["blocklist[1]"]
-          parsons_distractor = {
+        # adds a picklimit number of distractors to the data model
+        grouped_distractors = block["blocklist"].drop(1)
+        puts "blocklist: #{block["blocklist"]}"
+        puts "grouped distractors: #{grouped_distractors}"
+        puts "picklimit: #{block["picklimit"]}"
+        selected_distractors =
+            block["picklimit"] ?
+            grouped_distractors.sample(block["picklimit"].to_i) :
+            grouped_distractors
+        selected_distractors.each do |distractor|
+          parsons_data_model["blocks"] << {
             "text" => distractor["display"],
-            "tag" => "paired",
-            "depends" => "",
-            "displaymath" => "",
+            "tag" => "#{block["blockid"]}-#{distractor["blockid"]}",
+            "depends" => "-1",
+            "displaymath" => true,
+            "feedback" => distractor["feedback"],
+            "reusable" => block["reusable"].to_s.strip.downcase == "true",
           }
-          parsons_data_model["blocks"] << parsons_distractor
         end
-        # Case: Single Block Entity
       else
         parsons_block["text"] = block["display"]
+        if(block["toggle_options"])
+          parsons_block["toggle_options"] = block["toggle_options"]
+        end
+        if(block["text_options"])
+          parsons_block["text_options"] = block["text_options"]
+        end
 
         # Case: Distractor
         if block["depends"] == -1 ||
-          block["feedback"]
+           block["feedback"]
           parsons_block["type"] = "distractor"
+          parsons_block["feedback"] = block["feedback"]
         else
           # Case: Normal Block
           parsons_block["tag"] = block["blockid"] || ""
@@ -105,7 +128,39 @@ module PifConverter
           parsons_block["indent"] = block["indent"] || ""
         end
 
+        if block["reusable"]
+          parsons_block["reusable"] = block["reusable"].to_s.strip.downcase == "true"
+        end
+
+        # turn on indentation for all blocks if execute or indent is in tags
+        if indent 
+          parsons_block["indent"] = indent
+        end
+
         # Appends converted block
+        parsons_data_model["blocks"] << parsons_block
+      end
+    end
+
+    if starter
+      starterLines = starter[0]["content"].split("___")
+      starterLines.each do |starterLine|
+        starterLine = starterLine.strip()
+
+        parsons_block = {
+          "text" => "",
+          "type" => "",
+          "toggle_options" => [],
+          "text_options" => [],
+          "tag" => "",
+          "depends" => "",
+          "indent" => "",
+          "displaymath" => true,
+          "feedback" => "",
+        }.dottie!
+
+        parsons_block["text"] = starterLine
+        parsons_block["tag"] = "fixed"
         parsons_data_model["blocks"] << parsons_block
       end
     end

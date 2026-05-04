@@ -1,0 +1,14 @@
+FROM ruby:3.0
+
+WORKDIR /peml
+
+RUN gem install bundler:2.3.7
+
+#RUN gem build peml.gemspec && gem install peml-0.1.1.gem
+
+
+CMD ["sleep", "infinity"]
+
+#NOTE Run with volume for active development
+#docker build -f Dockerfile-dev -t peml_dev .
+#docker run -v $(pwd):/peml -it peml_dev

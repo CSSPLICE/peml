@@ -46,7 +46,6 @@ module Peml
       end
     end
 
-
     # -------------------------------------------------------------
     def self.human_readable_message_from(verr)
       if verr['data_pointer'] && !verr['data_pointer'].empty?
@@ -113,11 +112,42 @@ module Peml
           value.each do |element|
             Utils.deep_transform_files!(state, operation, element) if element.is_a?(Hash)
           end
+        elsif value.respond_to?(:to_s) || value.respond_to(:to_i)
+          peml[key] = method(operation).call(value, default_peml)
         end
       end
       state
     end
 
+    # kramdown parser has changed to add \n idky why, needs fixing
+    def self.render_helper(value, default_peml)
+      Kramdown::Document.new(value, :auto_ids => false, input: 'GFM', hard_wrap: ["false"]).to_html
+    end
+
+    def self.interpolate_helper(value, default_peml)
+      if value.match(/\{\{(.*?)\}\}/)
+        substitute_values = Utils.substitute_variables(value.scan(/\{\{(.*?)\}\}/).flatten, default_peml)
+        value = value.gsub(/\{\{(.*?)\}\}/) { |x| substitute_values[x] }
+      end
+      value
+    end
+
+    def self.substitute_variables(arr, default_peml)
+      substitute_values = {}
+      arr.length.times do |i|
+        substitute_values["{{" + arr[i] + +"}}"] = default_peml[arr[i]]
+      end
+      substitute_values
+    end
+
+    def self.handle_exclusion(unchanged_peml, peml)
+      if unchanged_peml.key?("exclude")
+        peml["exclude"].each do |element|
+          peml[element] = unchanged_peml[element]
+        end
+      end
+      peml
+    end
 
     # -------------------------------------------------------------
     # deep transform values in a nested hash/array structure
@@ -334,14 +364,14 @@ module Peml
             end
           else
             if !text.nil?
-              result.push({text: text})
+              result.push({ text: text })
               text = nil
             end
             result.push(v)
           end
         end
         if !text.nil?
-          result.push({text: text})
+          result.push({ text: text })
           text = nil
         end
         if result.length == 1 &&

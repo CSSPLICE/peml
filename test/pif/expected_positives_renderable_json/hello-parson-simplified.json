@@ -1,0 +1,59 @@
+{
+  "value": {
+    "question_text": "<p><strong>Your task</strong>: Construct a Python program that prints strings “Hello”, “Parsons”, and “Problems” on their own lines. You should construct your program by dragging and dropping the lines to the solution area on the right.</p>\n",
+    "options": {
+      "grader": {
+        "type": "dag",
+        "showFeedback": true
+      },
+      "maxdist": 0,
+      "order": "",
+      "indent": false,
+      "adaptive": true,
+      "numbered": false,
+      "language": "math",
+      "runnable": true
+    },
+    "blocks": [
+      {
+        "text": "print(‘Hello’)",
+        "type": "",
+        "tag": "",
+        "depends": "",
+        "indent": "",
+        "displaymath": true,
+        "feedback": ""
+      },
+      {
+        "text": "print(‘Parsons’)",
+        "type": "",
+        "tag": "",
+        "depends": "",
+        "indent": "",
+        "displaymath": true,
+        "feedback": ""
+      },
+      {
+        "text": "print(‘Oops!’)",
+        "type": "",
+        "tag": "",
+        "depends": "-1",
+        "indent": "",
+        "displaymath": true,
+        "feedback": ""
+      },
+      {
+        "text": "print(‘Problems!’)",
+        "type": "",
+        "tag": "",
+        "depends": "",
+        "indent": "",
+        "displaymath": true,
+        "feedback": ""
+      }
+    ]
+  },
+  "diags": [
+
+  ]
+}

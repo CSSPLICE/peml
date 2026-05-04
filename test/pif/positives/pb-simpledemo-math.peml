@@ -18,8 +18,9 @@ tags.topics: PEML Demo Parsons Problem
 tags.style: parsons, order
 
 instructions:----------
-Prove that $A \land B \land C) \rightarrow A \land C$.
+This sentence uses `$` delimiters to **show** math inline: $\sqrt{3x-1}+(1+x)^2$
 ----------
+
 
 [assets.code.blocks.content]
 blockid: one
@@ -35,6 +36,15 @@ display: Then $C$ is true.
 depends: one
 
 blockid: four
-display: Since $A$ and $C$, we know $A \land C$.
+display: Since $A$ and $C$, **we** know $A \land C$.
 depends: two, three
+
+blockid: five
+display: This sentence uses \\$ delimiters to show math inline: $\sqrt{3x-1}+(1+x)^2$
+depends: two
+[]
+
+
+[systems]
+language: math
 []

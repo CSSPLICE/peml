@@ -1,0 +1,68 @@
+{
+  "value": {
+    "question_text": "<p>Construct code by reordering and indenting the lines.</p>\n",
+    "options": {
+      "grader": {
+        "type": "dag",
+        "showFeedback": true
+      },
+      "maxdist": 0,
+      "order": "",
+      "indent": true,
+      "adaptive": true,
+      "numbered": false,
+      "language": "math",
+      "runnable": true
+    },
+    "blocks": [
+      {
+        "text": "for (int i=0;i&lt;3;i++) {",
+        "type": "",
+        "tag": "one",
+        "depends": "",
+        "indent": "0",
+        "displaymath": true,
+        "feedback": ""
+      },
+      {
+        "text": "System.out.print(“I “);",
+        "type": "",
+        "tag": "two",
+        "depends": "",
+        "indent": "1",
+        "displaymath": true,
+        "feedback": ""
+      },
+      {
+        "text": "System.out.print(“am “);",
+        "type": "",
+        "tag": "three",
+        "depends": "",
+        "indent": "1",
+        "displaymath": true,
+        "feedback": ""
+      },
+      {
+        "text": "System.out.print(“a Java program “);",
+        "type": "",
+        "tag": "four",
+        "depends": "",
+        "indent": "1",
+        "displaymath": true,
+        "feedback": ""
+      },
+      {
+        "text": "}",
+        "type": "",
+        "tag": "five",
+        "depends": "",
+        "indent": "0",
+        "displaymath": true,
+        "feedback": ""
+      }
+    ]
+  },
+  "diags": [
+
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "value": {
+    "question_text": "<p>Construct code by reordering and indenting the lines.<br />\nYou MUST reuse the <code>}</code> block twice to complete the program.</p>\n",
+    "options": {
+      "grader": {
+        "type": "dag",
+        "showFeedback": true
+      },
+      "maxdist": 0,
+      "order": "",
+      "indent": true,
+      "adaptive": true,
+      "numbered": false,
+      "language": "math",
+      "runnable": true
+    },
+    "blocks": [
+      {
+        "text": "for (int i = 0; i &lt; 10; i++) {",
+        "type": "",
+        "tag": "one",
+        "depends": "",
+        "indent": "0",
+        "displaymath": true,
+        "feedback": ""
+      },
+      {
+        "text": "if (i % 2 == 0) {",
+        "type": "",
+        "tag": "two",
+        "depends": "",
+        "indent": "0",
+        "displaymath": true,
+        "feedback": ""
+      },
+      {
+        "text": "System.out.print(i);",
+        "type": "",
+        "tag": "three",
+        "depends": "",
+        "indent": "0",
+        "displaymath": true,
+        "feedback": ""
+      },
+      {
+        "text": "}",
+        "type": "",
+        "tag": "four",
+        "depends": "",
+        "indent": "0",
+        "displaymath": true,
+        "feedback": "",
+        "reusable": true
+      }
+    ]
+  },
+  "diags": [
+
+  ]
+}

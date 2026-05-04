@@ -4,8 +4,13 @@ require_relative 'peml/emitter'
 require_relative 'peml/utils'
 require_relative 'peml/peml_test_renderer'
 require_relative 'peml/datadriven_test_renderer'
+<<<<<<< HEAD
 require_relative 'pif/parser'
 require_relative 'pif/converter'
+=======
+require_relative 'pif/converter'
+require_relative 'pif/parser'
+>>>>>>> pif
 
 require 'dottie/ext'
 require 'open-uri'
@@ -26,8 +31,12 @@ module Peml
   #~ Class methods ..........................................................
 
   # -------------------------------------------------------------
+<<<<<<< HEAD
   def self.parse(params)
     params = params.transform_keys(&:to_sym) rescue params
+=======
+  def self.parse(language: nil, **params)
+>>>>>>> pif
     if params[:filename]
       file = File.open(params[:filename])
       begin
@@ -42,10 +51,17 @@ module Peml
     end
     raise ArgumentError, "peml cannot be empty or nil" if peml.nil? || peml.empty?
     value = Peml::Loader.new.load(peml)
+<<<<<<< HEAD
 
     # test renderer requires inline data files
     if params[:render_tests]
       params[:inline_data_files] = true 
+=======
+    # Should we provide a param to render test cases?
+    value = Peml::DatadrivenTestRenderer.new.generate_tests(value)
+    if !params[:result_only]
+      diags = validate(value)
+>>>>>>> pif
     end
 
     diags = params[:result_only] ? nil : validate(value)
@@ -66,13 +82,11 @@ module Peml
     end
   end
 
-
   # -------------------------------------------------------------
   # Validate a PEML data structure (parsed PEML structured as a nested hash)
   def self.validate(peml)
     Utils.unpack_schema_diagnostics(Utils.schema.validate(peml))
   end
-
 
   # -------------------------------------------------------------
   # inline external file contents in fields inside
@@ -91,7 +105,6 @@ module Peml
     state
   end
 
-
   # -------------------------------------------------------------
   # handle mustache variable interpolation in fields inside
   # a PEML data structure (parsed PEML structured as a nested hash)
@@ -105,7 +118,6 @@ module Peml
     state
   end
 
-
   # -------------------------------------------------------------
   # convert markdown or other markup formats to html in fields inside
   # a PEML data structure (parsed PEML structured as a nested hash)
@@ -114,7 +126,6 @@ module Peml
     Utils.deep_transform_values!(state, :render_helper)
     state
   end
-
 
   # -------------------------------------------------------------
   # parse PEMLtest text input into a data structure
@@ -135,7 +146,6 @@ module Peml
     Peml::PemlTestParser.new.parse(pemltest)
   end
 
-
   # -------------------------------------------------------------
   # render (unparse) a PEML data structure (parsed PEML structured as a
   # nested hash) into plain-text PEML notation
@@ -145,19 +155,40 @@ module Peml
 
 
   # Pif Methods------------------------------------------------------
-  def self.pif_parse(pif)
+  def self.pif_parse(params)
     # pif  = {}, Takes string as {pif:"content"}
     # or filename as {filename:"./file.peml"}
-    PifParser.parse(pif)
-  end
+    if params[:pif]
+      parsed_pif = PifParser.parse({ pif: params[:pif] })
+    else
+      return "Error: pif not parsed"
+    end
+    
+    parsed_pif[:value] = PifParser.markdown_renderer(parsed_pif[:value])
 
+    if params[:result_only]
+      parsed_pif[:value]
+    else
+      parsed_pif
+    end
+
+  end
 
   # -------------------------------------------------------------
   # parsed_pif should be a product of pif.parse
   # format options are 'json' and 'yaml'.
-  #   If nil a ruby has is returned.
-  def self.pif_to_runestone(parsed_pif, format: nil)
-    PifConverter.to_Runestone(parsed_pif, format: format)
+  #   If nil a ruby hash is returned.
+  def self.pif_to_renderable_json(parsed_pif, format = nil)
+    if !parsed_pif[:diagnostics].empty?
+      # TODO handle this better and return a good error message
+      result = parsed_pif[:diagnostics]
+      if format == 'json'
+        result = result.to_json
+      end
+    else
+      result = PifConverter.to_renderable_json(parsed_pif[:value], format)
+    end
+    result
   end
 
 end

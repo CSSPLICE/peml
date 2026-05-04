@@ -1,4 +1,3 @@
-
 require_relative 'csv_unquoted_parser'
 require 'dottie/ext'
 require 'csv'
@@ -7,6 +6,7 @@ require 'pp'
 
 # need to fix pattern.actual
 module Peml
+  class DatadrivenTestRenderer
   class DatadrivenTestRenderer
 
     # points to the directory where the liquid templates are saved
