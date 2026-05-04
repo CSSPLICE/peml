@@ -129,7 +129,7 @@ module Peml
         result = result.to_json
       end
     else
-      result = PifConverter.to_runestone(parsed_pif[:value], format: format)
+      result = PifConverter.to_renderable_json(parsed_pif[:value], format)
     end
     result
   end
