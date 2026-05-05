@@ -5,20 +5,19 @@ module PifConverter
   # Assumes an already validated and parsed PIF hash is passed
   # - specifically the :value field.
   def self.to_renderable_json(pif, format = nil)
-    # puts "raw pif parse: #{pif['assets.code.blocks.content']}"
+    # puts "raw pif parse: #{pif['systems[0].assets.code.blocks.content']}"
     # PIF-to-Parsons directly mappable data
     tags = pif['tags']
     style = tags['style']
-    # blocks = pif['systems[0].assets.code.blocks.content'] || pif['assets.code.blocks.content']
-    blocks = pif['assets.code.blocks.content']
-    starter = pif['assets.code.starter.files']
+    blocks = pif['systems[0].assets.code.blocks.content']
+    starter = pif['systems[0].assets.code.starter.files']
     instructions = pif['instructions']
     grader = style.include?('execute') ?
                'exec' :
                'dag'
     indent = style.include?('indent') || style.include?('execute')
     numbered = pif['numbered'] || false
-    delimiter = pif['assets.code.blocks.delimiter'] || '`'
+    delimiter = pif['systems[0].assets.code.blocks.delimiter'] || '`'
     language = pif['systems[0].language']&.downcase || 'math'
 
     # Parsons model

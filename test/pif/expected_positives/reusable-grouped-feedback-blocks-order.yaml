@@ -1,0 +1,104 @@
+---
+parsed:
+  :value:
+    exercise_id: java_example_order_reuse_negative
+    title: Simple js-parsons Java example assignment - order with reusable blocks
+    author: Sean Rothenberger
+    license:
+      id: MIT
+      owner:
+        name: Sean Rothenberger
+        email: seanr06@vt.edu
+    tags:
+      topics: order grading, reusable blocks
+      style: parsons, order, indent
+    instructions: |
+      <p>Construct code by reordering and indenting the lines.<br />
+      You MUST reuse the <code>}</code> block twice to complete the program.</p>
+    systems:
+    - language: java
+      assets:
+        code:
+          blocks:
+            content:
+            - blockid: myblocklist
+              pickone: 'true'
+              picklimit: '1'
+              blocklist:
+              - blockid: onea
+                display: for (int i = 0; i < 10; i++) {
+                indent: '0'
+              - blockid: oneb
+                display: for (int i = 0; i > 10; i++) {
+                feedback: The condition is false to start with, so the loop will not
+                  run at all
+                indent: '0'
+              - blockid: onec
+                display: for (int i = 0; i > 10; i+) {
+                feedback: The increment has invalid syntax
+                indent: '0'
+            - blockid: two
+              display: if (i % 2 == 0) {
+              indent: '0'
+            - blockid: three
+              display: System.out.print(i);
+              indent: '0'
+            - blockid: four
+              display: "}"
+              reusable: 'true'
+              indent: '0'
+  :diagnostics: []
+renderable:
+  value:
+    question_text: |
+      <p>Construct code by reordering and indenting the lines.<br />
+      You MUST reuse the <code>}</code> block twice to complete the program.</p>
+    options:
+      grader:
+        type: dag
+        showFeedback: true
+      maxdist: 0
+      order: ''
+      indent: true
+      adaptive: true
+      numbered: false
+      language: java
+      runnable: true
+    blocks:
+    - text: for (int i = 0; i < 10; i++) {
+      type: ''
+      tag: myblocklist-onea
+      depends: ''
+      indent: 0
+      displaymath: true
+      feedback: ''
+      picklimit: 1
+    - text: for (int i = 0; i > 10; i+) {
+      tag: myblocklist-onec
+      depends: "-1"
+      displaymath: true
+      feedback: The increment has invalid syntax
+      reusable: false
+    - text: if (i % 2 == 0) {
+      type: ''
+      tag: two
+      depends: ''
+      indent: true
+      displaymath: true
+      feedback: ''
+    - text: System.out.print(i);
+      type: ''
+      tag: three
+      depends: ''
+      indent: true
+      displaymath: true
+      feedback: ''
+    - text: "}"
+      type: ''
+      tag: four
+      depends: ''
+      indent: true
+      displaymath: true
+      feedback: ''
+      reusable: true
+  diags: []

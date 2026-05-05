@@ -1,0 +1,98 @@
+---
+parsed:
+  :value:
+    exercise_id: java_example_execute_reusable
+    title: Simple js-parsons Java example assignment - execute with reusable blocks
+    author: Sean Rothenberger (from js-Parsons, converted to PEML)
+    license:
+      id: MIT
+      owner:
+        name: Sean Rothenberger
+        email: seanr06@vt.edu
+    tags:
+      topics: execute grading, reusable blocks
+      style: parsons, execute, indent
+    instructions: |
+      <p>Construct code by reordering and indenting the lines.<br />
+      You MUST reuse the <code>}</code> block twice to complete the program.</p>
+    systems:
+    - language: Java
+      assets:
+        code:
+          wrapper:
+            files:
+            - content: |
+                public class Parsons {
+                    public static void main(String[] args) {
+                        ___
+                    }
+                }
+          blocks:
+            content:
+            - blockid: one
+              display: for (int i = 0; i < 10; i++) {
+              indent: '0'
+            - blockid: two
+              display: if (i % 2 == 0) {
+              indent: '0'
+            - blockid: three
+              display: System.out.print(i);
+              indent: '0'
+            - blockid: four
+              display: "}"
+              reusable: 'true'
+              indent: '0'
+        test:
+          files:
+          - format: text/csv-unquoted
+            content: |
+              expected
+              02468
+  :diagnostics: []
+renderable:
+  value:
+    question_text: |
+      <p>Construct code by reordering and indenting the lines.<br />
+      You MUST reuse the <code>}</code> block twice to complete the program.</p>
+    options:
+      grader:
+        type: exec
+        showFeedback: true
+      maxdist: 0
+      order: ''
+      indent: true
+      adaptive: true
+      numbered: false
+      language: java
+      runnable: true
+    blocks:
+    - text: for (int i = 0; i < 10; i++) {
+      type: ''
+      tag: one
+      depends: ''
+      indent: true
+      displaymath: true
+      feedback: ''
+    - text: if (i % 2 == 0) {
+      type: ''
+      tag: two
+      depends: ''
+      indent: true
+      displaymath: true
+      feedback: ''
+    - text: System.out.print(i);
+      type: ''
+      tag: three
+      depends: ''
+      indent: true
+      displaymath: true
+      feedback: ''
+    - text: "}"
+      type: ''
+      tag: four
+      depends: ''
+      indent: true
+      displaymath: true
+      feedback: ''
+      reusable: true
+  diags: []

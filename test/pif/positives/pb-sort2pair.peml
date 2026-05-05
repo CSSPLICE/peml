@@ -15,7 +15,10 @@ instructions:----------
 Show the steps to prove that the SORTING problem can be reduced to the PAIRING problem.
 ----------
 
-[assets.code.blocks.content]
+[systems]
+language: natural
+
+[.assets.code.blocks.content]
 blockid: start
 display: Start with an input instance to SORTING (an array of records).
 depends:
@@ -41,11 +44,11 @@ display: Feed to PAIRING the following two arrays: the input to SORTING (array A
 depends: t1
 
 block: pairing
-display: Compute PAIRING on its input. The result is <b>SLN’</b>, an array of paired records, where each such paired record is defined as (pos, pairedInput).
+display: Compute PAIRING on its input. The result is <b>SLN'</b>, an array of paired records, where each such paired record is defined as (pos, pairedInput).
 depends: pairingin
 
 block: t2
-display: Convert <b>SLN’</b> to array <b>SLN</b>, the solution to SORTING, by doing a binsort on A’. In particular, for each pair (pos, pairedInput) in <b>SLN’</b>, place pairedInput into position pos in array <b>SLN</b>.
+display: Convert <b>SLN'</b> to array <b>SLN</b>, the solution to SORTING, by doing a binsort on A'. In particular, for each pair (pos, pairedInput) in <b>SLN'</b>, place pairedInput into position pos in array <b>SLN</b>.
 depends: pairing
 
 block: finish
@@ -55,4 +58,5 @@ depends: t2
 block: d4
 display: Return SLN, the solution to PAIRING.
 depends: -1
+[]
 []

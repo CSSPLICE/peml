@@ -42,42 +42,6 @@ parsed:
             content: |
               expected
               2
-  :diagnostics:
-  - 'The document is missing key: assets'
-runestone:
-  value:
-    question_text: 'The constructed code should print the minimum of variables a and
-      b.
-
-      '
-    options:
-      grader:
-        type: exec
-        showFeedback: true
-      maxdist: 0
-      order: ''
-      indent: true
-      adaptive: true
-      numbered: false
-      language: python
-      runnable: true
-    blocks:
-    - text: if a ``<>`` b
-      type: ''
-      tag: one1
-      depends: ''
-      indent: '0'
-      displaymath: true
-    - text: print(a)
-      type: ''
-      tag: two
-      depends: ''
-      indent: '1'
-      displaymath: true
-    - text: print(b)
-      type: ''
-      tag: three
-      depends: ''
-      indent: '1'
-      displaymath: true
-  diags: []
+  :diagnostics: &1
+  - 'Path ''/systems/0/assets/test/files/0'' is missing key: format'
+renderable: *1

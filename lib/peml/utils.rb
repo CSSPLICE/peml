@@ -119,9 +119,13 @@ module Peml
       state
     end
 
+    # -------------------------------------------------------------
     # kramdown parser has changed to add \n idky why, needs fixing
-    def self.render_helper(value, default_peml)
-      Kramdown::Document.new(value, :auto_ids => false, input: 'GFM', hard_wrap: ["false"]).to_html
+    def self.render_helper(value)
+      Kramdown::Document.new(value,
+        :auto_ids => false,
+        input: 'GFM',
+        hard_wrap: ["false"]).to_html
     end
 
     def self.interpolate_helper(value, default_peml)
@@ -171,16 +175,6 @@ module Peml
         end
       end
       state
-    end
-
-
-    # -------------------------------------------------------------
-    #kramdown parser has changed to add \n idky why, needs fixing
-    def self.render_helper(value, state, default_peml)
-      Kramdown::Document.new(value,
-        :auto_ids => false,
-        input: 'GFM',
-        hard_wrap: ["false"]).to_html
     end
 
 

@@ -41,31 +41,6 @@ parsed:
               arr, i, j, expected, description
               new int[]{1, 2, 3, 4}, 2, 3, new int[]{1,2,4,3}, example
               new int[]{1, 2, 3, 4}, 0, 3, new int[]{4,2,3,1}, hidden
-  :diagnostics:
-  - 'The document is missing key: assets'
-runestone:
-  value:
-    question_text: |
-      Write a function to swap two elements in the array by reordering the
-      lines. Your function should return the array.
-    options:
-      grader:
-        type: exec
-        showFeedback: true
-      maxdist: 0
-      order: ''
-      indent: false
-      adaptive: true
-      numbered: false
-      language: java
-      runnable: true
-    blocks:
-    - text: |2
-            return arr;
-        }
-      type: ''
-      tag: fixed
-      depends: ''
-      indent: ''
-      displaymath: true
-  diags: []
+  :diagnostics: &1
+  - 'Path ''/systems/0/assets/test/files/0'' is missing key: format'
+renderable: *1

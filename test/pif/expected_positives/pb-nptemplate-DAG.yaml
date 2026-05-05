@@ -12,56 +12,62 @@ parsed:
     tags:
       topics: PEML NP-completeness
       style: parsons, order
-    instructions: 'Show the general process for an NP-Completeness Proof.
-
-      '
-    assets:
-      code:
-        blocks:
-          content:
-          - blockid: starter
-            display: 'To prove that a problem X is NP-complete do this:'
-            depends: ''
-          - blockid: xinNP
-            display: 1. Show that X is in NP.
-            depends: starter
-          - blockid: algorithm
-            display: Create an algorithm to solve X (that might or might not use non-determinism)
-              that runs in polynomial time.
-            depends: xinNP
-          - blockid: starthard
-            display: 2. Show that X is NP-hard.
-            depends: algorithm
-          - blockid: choose
-            display: Choose a known NP-hard problem A.
-            depends: starthard
-          - blockid: trans
-            display: Define two transformations.
-            depends: choose
-          - blockid: t1
-            display: Describe a polynomial-time algorithm that takes an arbitrary
-              instance <b>I</b> of A to an instance <b>I′</b> of X.
-            depends: trans
-          - blockid: d1
-            display: Describe a polynomial-time algorithm that takes an arbitrary
-              instance <b>I</b> of X to an instance <b>I′</b> of A.
-            depends: "-1"
-          - blockid: t2
-            display: Describe a polynomial-time transformation from the solution for
-              <b>I’</b> in problem X (call it <b>SLN’</b>) to <b>SLN</b> such that
-              <b>SLN</b> is the solution for <b>I</b> in problem A.
-            depends: trans
-          - blockid: d2
-            display: Describe a polynomial-time transformation from the solution for
-              <b>I’</b> in problem A (call it <b>SLN’</b>) to <b>SLN</b> such that
-              <b>SLN</b> is the solution for <b>I</b> in problem X.
-            depends: "-1"
+    instructions: "<p>Show the general process for an NP-Completeness Proof.</p>\n"
+    systems:
+    - language: natural
+      assets:
+        code:
+          blocks:
+            content:
+            - blockid: starter
+              display: 'To prove that a problem X is NP-complete do this:'
+              depends: ''
+            - blockid: xinNP
+              display: |-
+                <ol>
+                  <li>Show that X is in NP.</li>
+                </ol>
+              depends: starter
+            - blockid: algorithm
+              display: Create an algorithm to solve X (that might or might not use
+                non-determinism) that runs in polynomial time.
+              depends: xinNP
+            - blockid: starthard
+              display: |-
+                <ol>
+                  <li>Show that X is NP-hard.</li>
+                </ol>
+              depends: algorithm
+            - blockid: choose
+              display: Choose a known NP-hard problem A.
+              depends: starthard
+            - blockid: trans
+              display: Define two transformations.
+              depends: choose
+            - blockid: t1
+              display: Describe a polynomial-time algorithm that takes an arbitrary
+                instance $\textbf{I}$ of A to an instance $\textbf{I′}$ of X.
+              depends: trans
+            - blockid: d1
+              display: Describe a polynomial-time algorithm that takes an arbitrary
+                instance $\textbf{I}$ of X to an instance $\textbf{I′}$ of A.
+              depends: "-1"
+            - blockid: t2
+              display: Describe a polynomial-time transformation from the solution
+                for $\textbf{I’}$ in problem X (call it $\textbf{SLN’}$) to $\textbf{SLN}$
+                such that $\textbf{SLN}$ is the solution for $\textbf{I}$ in problem
+                A.
+              depends: trans
+            - blockid: d2
+              display: Describe a polynomial-time transformation from the solution
+                for $\textbf{I’}$ in problem A (call it $\textbf{SLN’}$) to $\textbf{SLN}$
+                such that $\textbf{SLN}$ is the solution for $\textbf{I}$ in problem
+                X.
+              depends: "-1"
   :diagnostics: []
-runestone:
+renderable:
   value:
-    question_text: 'Show the general process for an NP-Completeness Proof.
-
-      '
+    question_text: "<p>Show the general process for an NP-Completeness Proof.</p>\n"
     options:
       grader:
         type: dag
@@ -71,7 +77,7 @@ runestone:
       indent: false
       adaptive: true
       numbered: false
-      language: ''
+      language: natural
       runnable: true
     blocks:
     - text: 'To prove that a problem X is NP-complete do this:'
@@ -80,12 +86,17 @@ runestone:
       depends: ''
       indent: ''
       displaymath: true
-    - text: 1. Show that X is in NP.
+      feedback: ''
+    - text: |-
+        <ol>
+          <li>Show that X is in NP.</li>
+        </ol>
       type: ''
       tag: xinNP
       depends: starter
       indent: ''
       displaymath: true
+      feedback: ''
     - text: Create an algorithm to solve X (that might or might not use non-determinism)
         that runs in polynomial time.
       type: ''
@@ -93,52 +104,63 @@ runestone:
       depends: xinNP
       indent: ''
       displaymath: true
-    - text: 2. Show that X is NP-hard.
+      feedback: ''
+    - text: |-
+        <ol>
+          <li>Show that X is NP-hard.</li>
+        </ol>
       type: ''
       tag: starthard
       depends: algorithm
       indent: ''
       displaymath: true
+      feedback: ''
     - text: Choose a known NP-hard problem A.
       type: ''
       tag: choose
       depends: starthard
       indent: ''
       displaymath: true
+      feedback: ''
     - text: Define two transformations.
       type: ''
       tag: trans
       depends: choose
       indent: ''
       displaymath: true
+      feedback: ''
     - text: Describe a polynomial-time algorithm that takes an arbitrary instance
-        <b>I</b> of A to an instance <b>I′</b> of X.
+        $\textbf{I}$ of A to an instance $\textbf{I′}$ of X.
       type: ''
       tag: t1
       depends: trans
       indent: ''
       displaymath: true
+      feedback: ''
     - text: Describe a polynomial-time algorithm that takes an arbitrary instance
-        <b>I</b> of X to an instance <b>I′</b> of A.
+        $\textbf{I}$ of X to an instance $\textbf{I′}$ of A.
       type: ''
       tag: d1
       depends: "-1"
       indent: ''
       displaymath: true
-    - text: Describe a polynomial-time transformation from the solution for <b>I’</b>
-        in problem X (call it <b>SLN’</b>) to <b>SLN</b> such that <b>SLN</b> is the
-        solution for <b>I</b> in problem A.
+      feedback: ''
+    - text: Describe a polynomial-time transformation from the solution for $\textbf{I’}$
+        in problem X (call it $\textbf{SLN’}$) to $\textbf{SLN}$ such that $\textbf{SLN}$
+        is the solution for $\textbf{I}$ in problem A.
       type: ''
       tag: t2
       depends: trans
       indent: ''
       displaymath: true
-    - text: Describe a polynomial-time transformation from the solution for <b>I’</b>
-        in problem A (call it <b>SLN’</b>) to <b>SLN</b> such that <b>SLN</b> is the
-        solution for <b>I</b> in problem X.
+      feedback: ''
+    - text: Describe a polynomial-time transformation from the solution for $\textbf{I’}$
+        in problem A (call it $\textbf{SLN’}$) to $\textbf{SLN}$ such that $\textbf{SLN}$
+        is the solution for $\textbf{I}$ in problem X.
       type: ''
       tag: d2
       depends: "-1"
       indent: ''
       displaymath: true
+      feedback: ''
   diags: []

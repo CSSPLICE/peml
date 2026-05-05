@@ -52,61 +52,7 @@ parsed:
               [0, 2, 4], 2, example
               [7, 2, 4], 0, hidden
               [7, 8, 4], 1, example
-  :diagnostics:
+  :diagnostics: &1
   - Path '/exercise_id' does not match the required pattern (^[^\s,]+$)
-  - 'The document is missing key: assets'
-runestone:
-  value:
-    question_text: 'Your task is to construct a function which returns the index of
-      the largest element in the array.
-
-      '
-    options:
-      grader:
-        type: exec
-        showFeedback: true
-      maxdist: 0
-      order: ''
-      indent: true
-      adaptive: true
-      numbered: false
-      language: python
-      runnable: true
-    blocks:
-    - text: 'def maxindex(arg):'
-      type: ''
-      tag: one
-      depends: ''
-      indent: '0'
-      displaymath: true
-    - text: ans = 0
-      type: ''
-      tag: two
-      depends: ''
-      indent: '1'
-      displaymath: true
-    - text: 'for i in range(len(arg)):'
-      type: ''
-      tag: three
-      depends: ''
-      indent: '1'
-      displaymath: true
-    - text: 'if arg[i] > arg[ans]:'
-      type: ''
-      tag: four
-      depends: ''
-      indent: '2'
-      displaymath: true
-    - text: ans = i
-      type: ''
-      tag: five
-      depends: ''
-      indent: '3'
-      displaymath: true
-    - text: return ans
-      type: ''
-      tag: six
-      depends: ''
-      indent: '1'
-      displaymath: true
-  diags: []
+  - 'Path ''/systems/0/assets/test/files/0'' is missing key: format'
+renderable: *1

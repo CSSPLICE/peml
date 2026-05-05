@@ -17,7 +17,10 @@ Construct code by reordering and indenting the lines.
 You MUST reuse the `}` block twice to complete the program.
 ----------
 
-[assets.code.blocks.content]
+[systems]
+language: java
+
+[.assets.code.blocks.content]
 blockid: myblocklist
 pickone: true
 picklimit: 1
@@ -50,4 +53,5 @@ blockid: four
 display: }
 reusable: true
 indent: 0
+[]
 []

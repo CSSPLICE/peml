@@ -12,25 +12,26 @@ parsed:
     tags:
       topics: PEML Demo Parsons Problem
       style: parsons, order
-    instructions: 'Write a function to swap two array elements by reordering the lines.
-
-      '
-    assets:
-      code:
-        blocks:
-          content:
-          - blockid: fixed
-            display: |
-              public static void Swap(int[] arr, int i, int j)
-              {
-          - blockid: group1
-            depends: ''
-            pickone: 'true'
-            blocklist:
-            - blockid: one
-              display: int temp = arr[i];
-            - blockid: onea
-              display: int temp = arr[j];
+    instructions: "<p>Write a function to swap two array elements by reordering the
+      lines.</p>\n"
+    systems:
+    - language: java
+      assets:
+        code:
+          blocks:
+            content:
+            - blockid: fixed
+              display: |
+                public static void Swap(int[] arr, int i, int j)
+                {
+            - blockid: group1
+              depends: ''
+              pickone: 'true'
+              blocklist:
+              - blockid: one
+                display: int temp = arr[i];
+              - blockid: onea
+                display: int temp = arr[j];
             - blockid: two
               display: arr[i] = arr[j];
               depends: group1
@@ -42,15 +43,11 @@ parsed:
               depends: "-1"
             - blockid: fixed
               display: "}"
-  :diagnostics:
-  - Dependencies must refer to previously defined blocks within the same blocklist
-    scope.
-runestone:
+  :diagnostics: []
+renderable:
   value:
-    question_text: 'Write a function to swap two array elements by reordering the
-      lines.
-
-      '
+    question_text: "<p>Write a function to swap two array elements by reordering the
+      lines.</p>\n"
     options:
       grader:
         type: dag
@@ -60,7 +57,7 @@ runestone:
       indent: false
       adaptive: true
       numbered: false
-      language: ''
+      language: java
       runnable: true
     blocks:
     - text: |
@@ -71,14 +68,47 @@ runestone:
       depends: ''
       indent: ''
       displaymath: true
+      feedback: ''
     - text: int temp = arr[i];
       type: ''
-      tag: one
+      tag: group1-one
       depends: ''
       indent: 0
       displaymath: true
+      feedback: ''
+      picklimit: 0
     - text: int temp = arr[j];
-      tag: paired
+      tag: group1-onea
+      depends: "-1"
+      displaymath: true
+      feedback: 
+      reusable: false
+    - text: arr[i] = arr[j];
+      type: ''
+      tag: two
+      depends: group1
+      indent: ''
+      displaymath: true
+      feedback: ''
+    - text: arr[j] = temp;
+      type: ''
+      tag: three
+      depends: two
+      indent: ''
+      displaymath: true
+      feedback: ''
+    - text: int temp = arr[j];
+      type: ''
+      tag: four
+      depends: "-1"
+      indent: ''
+      displaymath: true
+      feedback: ''
+    - text: "}"
+      type: ''
+      tag: fixed
       depends: ''
-      displaymath: ''
+      indent: ''
+      displaymath: true
+      feedback: ''
   diags: []

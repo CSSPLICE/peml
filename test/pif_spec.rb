@@ -13,12 +13,12 @@ describe "Peml PIF Methods" do
       it "parses and converts #{slug}" do
         parsed_pif = Peml.pif_parse(filename: f)
         _(parsed_pif).wont_be_nil
-        # Also convert it to runestone to snapshot both parsing and converting
-        runestone_data = Peml.pif_to_runestone(parsed_pif[:value].dottie!)
-        
+        # Also convert to renderable JSON to snapshot both parsing and converting
+        renderable_data = Peml.pif_to_renderable_json(parsed_pif)
+
         snapshot_data = {
           'parsed' => parsed_pif,
-          'runestone' => runestone_data
+          'renderable' => renderable_data
         }
 
         golden = File.join(expected_dir, slug.sub('.peml', '.yaml'))

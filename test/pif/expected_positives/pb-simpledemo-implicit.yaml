@@ -12,31 +12,29 @@ parsed:
     tags:
       topics: PEML Demo Parsons Problem
       style: parsons, order
-    instructions: 'Prove that (A AND B AND C) implies (A AND C).
-
-      '
-    assets:
-      code:
-        blocks:
-          content:
-          - blockid: one
-            display: Assume A AND B AND C.
-            depends: ''
-          - blockid: two
-            display: Then A is TRUE.
-            depends: one
-          - blockid: three
-            display: Then C is TRUE.
-            depends: one
-          - blockid: four
-            display: Since A and C are TRUE, we know (A AND C) is TRUE.
-            depends: two, three
+    instructions: "<p>Prove that (A AND B AND C) implies (A AND C).</p>\n"
+    systems:
+    - language: natural
+      assets:
+        code:
+          blocks:
+            content:
+            - blockid: one
+              display: Assume A AND B AND C.
+              depends: ''
+            - blockid: two
+              display: Then A is TRUE.
+              depends: one
+            - blockid: three
+              display: Then C is TRUE.
+              depends: one
+            - blockid: four
+              display: Since A and C are TRUE, we know (A AND C) is TRUE.
+              depends: two, three
   :diagnostics: []
-runestone:
+renderable:
   value:
-    question_text: 'Prove that (A AND B AND C) implies (A AND C).
-
-      '
+    question_text: "<p>Prove that (A AND B AND C) implies (A AND C).</p>\n"
     options:
       grader:
         type: dag
@@ -46,7 +44,7 @@ runestone:
       indent: false
       adaptive: true
       numbered: false
-      language: ''
+      language: natural
       runnable: true
     blocks:
     - text: Assume A AND B AND C.
@@ -55,22 +53,26 @@ runestone:
       depends: ''
       indent: ''
       displaymath: true
+      feedback: ''
     - text: Then A is TRUE.
       type: ''
       tag: two
       depends: one
       indent: ''
       displaymath: true
+      feedback: ''
     - text: Then C is TRUE.
       type: ''
       tag: three
       depends: one
       indent: ''
       displaymath: true
+      feedback: ''
     - text: Since A and C are TRUE, we know (A AND C) is TRUE.
       type: ''
       tag: four
       depends: two, three
       indent: ''
       displaymath: true
+      feedback: ''
   diags: []

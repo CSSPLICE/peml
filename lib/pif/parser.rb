@@ -9,7 +9,7 @@ require 'kramdown-math-katex'
 module PifParser
   # ------------------------------------------------------------------------------
   # Parses and validates a PIF file/string
-  # Returns a hash structured, by default, as {value: , diags:}
+  # Returns a hash structured, by default, as {value: , diagnostics:}
   # or, if result-only is set to true, the equivalent of hash[:value].
   def self.parse(params = {})
     # Gets file contents
@@ -28,147 +28,143 @@ module PifParser
     # Parses content as PEML
     value = Peml::Loader.new.load(pif).dottie!
 
-    # Validates PEML as PIF
-    if !params[:result_only]
-      # Structural validation based on PIF schema
-      base_dir = File.dirname(File.expand_path(__FILE__))
-      schema_file = "#{base_dir}/schema/PIF.json"
-      schema_path = Pathname.new(schema_file)
-      schema = JSONSchemer.schema(schema_path);
+    if params[:result_only]
+      value
+    else
+      { value: value, diagnostics: validate(value) }
+    end
+  end
 
-      sv = schema.validate(value)
-      diags = Peml::Utils.unpack_schema_diagnostics(sv)
+  # ------------------------------------------------------------------------------
+  # Runs PIF-specific structural and extended validation on an already-loaded
+  # value hash. Returns an array of diagnostic strings (empty means valid).
+  def self.validate(value)
+    # Structural validation based on PIF schema
+    base_dir = File.dirname(File.expand_path(__FILE__))
+    schema_file = "#{base_dir}/schema/PIF.json"
+    schema_path = Pathname.new(schema_file)
+    schema = JSONSchemer.schema(schema_path)
 
+    sv = schema.validate(value)
+    diags = Peml::Utils.unpack_schema_diagnostics(sv)
 
-      # Extended validation
-      if (diags.empty?)
-        style_tag = value["tags.style"] # Structurally required
-<<<<<<< HEAD
-=======
-        block_content = value['assets.code.blocks.content'] # Structurally required
-        delimiter = value['assets.code.blocks.delimiter'] || "`" #Optional
-        test_content = value['assets.test.files[0].content'] # Optional
-        test_format = value['assets.test.files[0].format'] # Optional
->>>>>>> pif
-        systems = value['systems'] # Optional
-        block_content = value['systems[0].assets.code.blocks.content'] || value['assets.code.blocks.content'] # Structurally required
-        test_content = value['systems[0].assets.test.files[0].content'] || value['assets.test.files[0].content'] # Optional
-        test_format = value['systems[0].assets.test.files[0].format'] || value['assets.test.files[0].format'] # Optional
+    # Extended validation
+    if (diags.empty?)
+      style_tag     = value["tags.style"] # Structurally required
+      block_content = value['systems[0].assets.code.blocks.content'] # Structurally required
+      delimiter     = value['systems[0].assets.code.blocks.delimiter'] || "`" # Optional
+      test_content  = value['systems[0].assets.test.files[0].content'] # Optional
+      test_format   = value['systems[0].assets.test.files[0].format'] # Optional
 
-        # Style tag indicators (case-sensitive)
-        parsed_style_tag = style_tag.split(/\s*,\s*/)
-        has_parsons_tag = parsed_style_tag.include?("parsons")
-        has_execute_tag = parsed_style_tag.include?("execute")
-        has_order_tag = parsed_style_tag.include?("order")
-        has_indent_tag = parsed_style_tag.include?("indent")
+      # Style tag indicators (case-sensitive)
+      parsed_style_tag = style_tag.split(/\s*,\s*/)
+      has_parsons_tag  = parsed_style_tag.include?("parsons")
+      has_execute_tag  = parsed_style_tag.include?("execute")
+      has_order_tag    = parsed_style_tag.include?("order")
+      has_indent_tag   = parsed_style_tag.include?("indent")
 
-        # Checks that style tag contains "parsons" AND
-        # EITHER "order" or "execute" (in no specific order)
-        if (!has_parsons_tag ||
-          !(has_execute_tag ||
-            has_order_tag) ||
-          (has_execute_tag && has_order_tag)
-        )
-          diags << "Style tag requires 'parsons' and either 'order' or 'execute' keywords."
-        end
+      # Checks that style tag contains "parsons" AND
+      # EITHER "order" or "execute" (in no specific order)
+      if (!has_parsons_tag ||
+        !(has_execute_tag ||
+          has_order_tag) ||
+        (has_execute_tag && has_order_tag)
+      )
+        diags << "Style tag requires 'parsons' and either 'order' or 'execute' keywords."
+      end
 
-        # Checks that the required fields for execution-based grading
-        # are included
-        if (has_execute_tag && (!test_content || !test_format || !systems))
-          diags << "Missing required test content, test format, or language " \
-            "fields for execution-based grading."
-        end
+      # Checks that the required fields for execution-based grading
+      # are included. Language is now guaranteed by the PIF schema (systems[0].language required).
+      if (has_execute_tag && (!test_content || !test_format))
+        diags << "Missing required test content, test format, or language " \
+          "fields for execution-based grading."
+      end
 
-        # Separates blocks into normal blocks, blocklists, and distractors
-        # Separated blocks are given an addition "pos" field
-        s = separate_blocks(block_content)
-        normal_blocks = s[0]
-        blocklists = s[1]
-        distractors = s[2]
+      # Separates blocks into normal blocks, blocklists, and distractors
+      # Separated blocks are given an addition "pos" field
+      s = separate_blocks(block_content)
+      normal_blocks = s[0]
+      blocklists = s[1]
+      distractors = s[2]
 
-        if (deps_violation(block_content))
-          diags << "Dependencies must refer to previously defined blocks " \
-            "within the same blocklist scope."
-        end
+      if (deps_violation(block_content))
+        diags << "Dependencies must refer to previously defined blocks " \
+          "within the same blocklist scope."
+      end
 
-        if (picklimit_violation(blocklists))
-          diags << "Invalid pick limit, pick limit must be a positive int " \
-            "less than the number of blocks"
-        end
+      if (picklimit_violation(blocklists))
+        diags << "Invalid pick limit, pick limit must be a positive int " \
+          "less than the number of blocks"
+      end
 
-        # Checks if indentation is required and, if so,
-        # whether all normal blocks have an indent level
-        if (has_indent_tag &&
-          has_order_tag)
-          normal_blocks.each do |block|
-            indent = block["indent"]
-            pos = block["pos"]
+      # Checks if indentation is required and, if so,
+      # whether all normal blocks have an indent level
+      if (has_indent_tag &&
+        has_order_tag)
+        normal_blocks.each do |block|
+          indent = block["indent"]
+          pos = block["pos"]
 
-            if indent.nil?
-              diags << "Block at position #{pos} is missing the required " \
-                "indent field."
-            end
-
+          if indent.nil?
+            diags << "Block at position #{pos} is missing the required " \
+              "indent field."
           end
+
         end
+      end
 
-        # If indent style keyword is not used,
-        # then checks that no block contains an indent level.
-        if (!has_indent_tag)
-          # Could recursively process block_content -
-          # but previous operation has already separated
-          # them into easily workable form
+      # If indent style keyword is not used,
+      # then checks that no block contains an indent level.
+      if (!has_indent_tag)
+        # Could recursively process block_content -
+        # but previous operation has already separated
+        # them into easily workable form
 
-          catch(:illegal_indent) do
-            s.each do |block_group|
-              block_group.each do |block|
-                indent = block["indent"]
+        catch(:illegal_indent) do
+          s.each do |block_group|
+            block_group.each do |block|
+              indent = block["indent"]
 
-                if !indent.nil?
-                  diags << "Block(s) contain indent fields despite missing 'indent' style keyword."
-                  throw :illegal_indent
-                end
+              if !indent.nil?
+                diags << "Block(s) contain indent fields despite missing 'indent' style keyword."
+                throw :illegal_indent
               end
             end
           end
-
         end
 
-        # Checks that blockids are unique
-        blockids = get_blockids(block_content)
-                     .select { |id| id != "fixed" && id != "reusable" }
-        if (blockids.length != blockids.uniq.length)
-          diags << "Duplicate blockids used."
-        end
+      end
 
-        # Checks that all blockids are recognized references
-        diags += validate_blockdeps(block_content)
+      # Checks that blockids are unique
+      blockids = get_blockids(block_content)
+                   .select { |id| id != "fixed" && id != "reusable" }
+      if (blockids.length != blockids.uniq.length)
+        diags << "Duplicate blockids used."
+      end
 
-        get_toggles_and_text_input(block_content, delimiter)
+      # Checks that all blockids are recognized references
+      diags += validate_blockdeps(block_content)
 
-        # Checks that the CSV test content is correctly formatted,
-        # i.e., the header length matches all row lengths
-        if (has_execute_tag && test_content)
-          parsed_test_content = Peml::CsvUnquotedParser.new.parse(
-            test_content
-          )
-          header = parsed_test_content[0]
+      get_toggles_and_text_input(block_content, delimiter)
 
-          parsed_test_content[1..].each_with_index do |row, i|
-            if (row.length != header.length)
-              diags << "Row #{i} of the test content does not match " \
-                "its header length."
-            end
+      # Checks that the CSV test content is correctly formatted,
+      # i.e., the header length matches all row lengths
+      if (has_execute_tag && test_content)
+        parsed_test_content = Peml::CsvUnquotedParser.new.parse(
+          test_content
+        )
+        header = parsed_test_content[0]
+
+        parsed_test_content[1..].each_with_index do |row, i|
+          if (row.length != header.length)
+            diags << "Row #{i} of the test content does not match " \
+              "its header length."
           end
         end
       end
     end
 
-    if params[:result_only]
-      value
-    else
-      { value: value, diagnostics: diags }
-    end
+    diags
   end
 
   # ------------------------------------------------------------------------------
@@ -200,7 +196,7 @@ module PifParser
     # this pattern finds: two delimiters + anything + two delimiters
     pattern = /(?<!#{d})#{d}{2}(.*?)#{d}{2}(?!#{d})/m
 
-    block["display"].scan(pattern) do |match|
+    block["display"]&.scan(pattern) do |match|
       m = Regexp.last_match
       inner_content = match[0]
       
@@ -476,10 +472,16 @@ module PifParser
     # puts "instructions: #{hash["instructions"]}"
     instruction_text = PifParser.identify_inline_delimiters(hash["instructions"])
     hash["instructions"] = Peml::Utils.render_helper(
-      instruction_text,
-      math_engine: :katex,
-      math_engine_options: { output: 'mathml' }
+      instruction_text
     )
+    # option to include path parse
+    # hash["instructions"] = Kramdown::Document.new(
+    #   instruction_text,
+    #   :auto_ids => false,
+    #   input: 'GFM',
+    #   hard_wrap: ["false"],
+    #   math_engine: :mathjax
+    # ).to_html
     # puts "new instructions: #{hash["instructions"]}"
 
     if hash.has_key?("systems")
@@ -492,8 +494,8 @@ module PifParser
     # puts "is_git_flavored_markdown: #{is_git_flavored_markdown}"
 
     if is_git_flavored_markdown
-      # puts hash["assets"]["code"]["blocks"]["content"]
-      hash["assets"]["code"]["blocks"]["content"].each do |block|
+      # puts hash["systems"][0]["assets"]["code"]["blocks"]["content"]
+      hash["systems"][0]["assets"]["code"]["blocks"]["content"].each do |block|
         # puts "block: #{block["display"]}"
         if block["blocklist"] && !block["blocklist"].empty?
           block["blocklist"].each do |sub_block|
@@ -501,8 +503,7 @@ module PifParser
             parsed_to_html = Kramdown::Document.new(
               display_text,
               :auto_ids => false,
-              input: 'GFM',
-              math_engine: "katex"
+              input: 'GFM'
             ).to_html
 
             sub_block["display"] = PifParser.strip_tags_and_convert_to_latex(parsed_to_html)
@@ -513,8 +514,7 @@ module PifParser
           parsed_to_html = Kramdown::Document.new(
             display_text,
             :auto_ids => false,
-            input: 'GFM',
-            math_engine: "katex"
+            input: 'GFM'
           ).to_html
 
           block["display"] = PifParser.strip_tags_and_convert_to_latex(parsed_to_html)

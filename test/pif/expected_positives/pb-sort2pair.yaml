@@ -12,43 +12,41 @@ parsed:
     tags:
       topics: PEML reduction
       style: parsons, order
-    instructions: 'Show the steps to prove that the SORTING problem can be reduced
-      to the PAIRING problem.
-
-      '
-    assets:
-      code:
-        blocks:
-          content:
-          - blockid: start
-            display: Start with an input instance to SORTING (an array of records).
-            depends: ''
-          - blockid: d1
-            display: Start with an input instance to PAIRING (an array of records).
-            depends: "-1"
-          - blockid: d2
-            display: Start with an input instance to PAIRING (two arrays, one an array
-              of n arbitrary records, the other with the values 0 to n-1).
-            depends: "-1"
-          - blockid: t1
-            display: Define a transformation that converts an arbitrary instance of
-              SORTING to some instance of PAIRING.
-            depends: start
-          - blockid: d3
-            display: Define a transformation that converts an arbitrary instance of
-              PAIRING to some instance of SORTING.
-            depends: "-1"
-          - blockid: pairingin
-            display: Return SLN, the solution to PAIRING.
-            depends: "-1"
-            block: d4
+    instructions: "<p>Show the steps to prove that the SORTING problem can be reduced
+      to the PAIRING problem.</p>\n"
+    systems:
+    - language: natural
+      assets:
+        code:
+          blocks:
+            content:
+            - blockid: start
+              display: Start with an input instance to SORTING (an array of records).
+              depends: ''
+            - blockid: d1
+              display: Start with an input instance to PAIRING (an array of records).
+              depends: "-1"
+            - blockid: d2
+              display: Start with an input instance to PAIRING (two arrays, one an
+                array of n arbitrary records, the other with the values 0 to n-1).
+              depends: "-1"
+            - blockid: t1
+              display: Define a transformation that converts an arbitrary instance
+                of SORTING to some instance of PAIRING.
+              depends: start
+            - blockid: d3
+              display: Define a transformation that converts an arbitrary instance
+                of PAIRING to some instance of SORTING.
+              depends: "-1"
+            - blockid: pairingin
+              display: Return SLN, the solution to PAIRING.
+              depends: "-1"
+              block: d4
   :diagnostics: []
-runestone:
+renderable:
   value:
-    question_text: 'Show the steps to prove that the SORTING problem can be reduced
-      to the PAIRING problem.
-
-      '
+    question_text: "<p>Show the steps to prove that the SORTING problem can be reduced
+      to the PAIRING problem.</p>\n"
     options:
       grader:
         type: dag
@@ -58,7 +56,7 @@ runestone:
       indent: false
       adaptive: true
       numbered: false
-      language: ''
+      language: natural
       runnable: true
     blocks:
     - text: Start with an input instance to SORTING (an array of records).
@@ -67,12 +65,14 @@ runestone:
       depends: ''
       indent: ''
       displaymath: true
+      feedback: ''
     - text: Start with an input instance to PAIRING (an array of records).
       type: ''
       tag: d1
       depends: "-1"
       indent: ''
       displaymath: true
+      feedback: ''
     - text: Start with an input instance to PAIRING (two arrays, one an array of n
         arbitrary records, the other with the values 0 to n-1).
       type: ''
@@ -80,6 +80,7 @@ runestone:
       depends: "-1"
       indent: ''
       displaymath: true
+      feedback: ''
     - text: Define a transformation that converts an arbitrary instance of SORTING
         to some instance of PAIRING.
       type: ''
@@ -87,6 +88,7 @@ runestone:
       depends: start
       indent: ''
       displaymath: true
+      feedback: ''
     - text: Define a transformation that converts an arbitrary instance of PAIRING
         to some instance of SORTING.
       type: ''
@@ -94,10 +96,12 @@ runestone:
       depends: "-1"
       indent: ''
       displaymath: true
+      feedback: ''
     - text: Return SLN, the solution to PAIRING.
       type: ''
       tag: pairingin
       depends: "-1"
       indent: ''
       displaymath: true
+      feedback: ''
   diags: []

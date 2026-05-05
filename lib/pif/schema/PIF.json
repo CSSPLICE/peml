@@ -84,7 +84,7 @@
     "license",
     "tags",
     "instructions",
-    "assets"
+    "systems"
   ],
   "properties": {
     "exercise_id": { "$ref": "#/definitions/id" },
@@ -118,102 +118,98 @@
       }
     },
     "instructions": { "$ref": "#/definitions/nonempty_string" },
+    "numbered": { "$ref": "#/definitions/boolean" },
     "systems": {
       "type": "array",
       "minItems": 1,
       "maxItems": 1,
       "items": {
         "type": "object",
-        "required": ["language"],
+        "required": ["language", "assets"],
         "properties": {
-          "language": { "$ref": "#/definitions/nonempty_string" }
-        }
-      }
-    },
-    "numbered": { "$ref": "#/definitions/boolean" },
-    "assets": {
-      "type": "object",
-      "required": ["code"],
-      "properties": {
-        "code": {
-          "type": "object",
-          "required": ["blocks"],
-          "properties": {
-            "starter": {
-              "type": "object", 
-              "required": ["files"], 
-              "properties": {
-                "files": {
-                  "type": "array", 
-                  "minItems": 1,
-                  "maxItems": 1, 
-                  "items": {
-                    "type": "object", 
-                    "required": ["content"],
+          "language": { "$ref": "#/definitions/nonempty_string" },
+          "assets": {
+            "type": "object",
+            "required": ["code"],
+            "properties": {
+              "code": {
+                "type": "object",
+                "required": ["blocks"],
+                "properties": {
+                  "starter": {
+                    "type": "object",
+                    "required": ["files"],
                     "properties": {
-                      "content": {
-                        "pattern": ".*___.*"
+                      "files": {
+                        "type": "array",
+                        "minItems": 1,
+                        "maxItems": 1,
+                        "items": {
+                          "type": "object",
+                          "required": ["content"],
+                          "properties": {
+                            "content": { "pattern": ".*___.*" }
+                          }
+                        }
                       }
                     }
-                  }
-                }
-              }
-            },
-            "wrapper": {
-              "type": "object",
-              "required": ["files"],
-              "properties": {
-                "files": {
-                  "type": "array",
-                  "minItems": 1,
-                  "maxItems": 1,
-                  "items": {
+                  },
+                  "wrapper": {
+                    "type": "object",
+                    "required": ["files"],
+                    "properties": {
+                      "files": {
+                        "type": "array",
+                        "minItems": 1,
+                        "maxItems": 1,
+                        "items": {
+                          "type": "object",
+                          "required": ["content"],
+                          "properties": {
+                            "content": { "pattern": ".*___.*" }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "blocks": {
                     "type": "object",
                     "required": ["content"],
                     "properties": {
+                      "delimiter": { "$ref": "#/definitions/char" },
                       "content": {
-                        "pattern": ".*___.*"
+                        "type": "array",
+                        "minItems": 1,
+                        "items": {
+                          "if": { "required": ["blocklist"] },
+                          "then": { "$ref": "#/definitions/blocklist" },
+                          "else": { "$ref": "#/definitions/block" }
+                        }
                       }
                     }
                   }
                 }
-              }
-            },
-            "blocks": {
-              "type": "object",
-              "required": ["content"],
-              "properties": {
-                "delimiter": { "$ref": "#/definitions/char" },
-                "content": {
-                  "type": "array",
-                  "minItems": 1,
-                  "items": {
-                    "if": { "required": ["blocklist"] },
-                    "then": { "$ref": "#/definitions/blocklist" },
-                    "else": { "$ref": "#/definitions/block" }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "test": {
-          "type": "object",
-          "properties": {
-            "files": {
-              "type": "array",
-              "minItems": 1,
-              "maxItems": 1,
-              "items": {
+              },
+              "test": {
                 "type": "object",
-                "required": ["format", "content"],
                 "properties": {
-                  "format": {
-                    "type": "string",
-                    "pattern": "^(text/csv|text/csv-unquoted)$"
-                  },
-                  "pattern_actual": { "$ref": "#/definitions/nonempty_string" },
-                  "content": { "$ref": "#/definitions/nonempty_string" }
+                  "files": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 1,
+                    "items": {
+                      "type": "object",
+                      "required": ["format", "content"],
+                      "properties": {
+                        "format": {
+                          "type": "string",
+                          "pattern": "^(text/csv|text/csv-unquoted)$"
+                        },
+                        "pattern_actual": { "$ref": "#/definitions/nonempty_string" },
+                        "content": { "$ref": "#/definitions/nonempty_string" }
+                      }
+                    }
+                  }
                 }
               }
             }

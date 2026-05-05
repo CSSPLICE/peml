@@ -12,52 +12,73 @@ parsed:
     tags:
       topics: PEML NP-completeness
       style: parsons, order
-    instructions: 'Show the general process for an NP-Completeness Proof.
-
-      '
-    assets:
-      code:
-        blocks:
-          content:
-          - blockid: starter
-            display: 'To prove that a problem X is NP-complete do this:'
-            depends: ''
-          - blockid: inNP
-            depends: starter
-    blocklist:
-    - blockid: xinNP
-      display: Show that X is in NP.
-    - blockid: algorithm
-      display: Create an algorithm to solve X (that might or might not use non-determinism)
-        that runs in polynomial time.
-      depends: xinNP
-    - blockid: NPhard
-      depends: starter
-      blocklist:
-      - blockid: starthard
-        display: Show that X is NP-hard.
-      - blockid: choose
-        display: Choose a known NP-hard problem A.
-        depends: starthard
-      - blockid: trans
-        display: Define two transformations.
-        depends: choose
-      - blockid: t1
-        display: Describe a polynomial-time algorithm that takes an arbitrary instance
-          <b>I</b> of ``A`X`` to an instance <b>I′</b> of ``X`A``.
-        depends: trans
-      - blockid: t2
-        display: Describe a polynomial-time transformation from the solution for <b>I’</b>
-          in problem ``X`A`` (call it <b>SLN’</b>) to <b>SLN</b> such that <b>SLN</b>
-          is the solution for <b>I</b> in problem ``A`X``.
-        depends: trans
-  :diagnostics:
-  - 'Path ''/assets/code/blocks/content/1'' is missing key: display'
-runestone:
+    instructions: "<p>Show the general process for an NP-Completeness Proof.</p>\n"
+    systems:
+    - language: natural
+      assets:
+        code:
+          blocks:
+            content:
+            - blockid: starter
+              display: 'To prove that a problem X is NP-complete do this:'
+              depends: ''
+            - blockid: inNP
+              depends: starter
+              blocklist:
+              - blockid: xinNP
+                display: Show that X is in NP.
+              - blockid: algorithm
+                display: Create an algorithm to solve X (that might or might not use
+                  non-determinism) that runs in polynomial time.
+                depends: xinNP
+            - blockid: NPhard
+              depends: starter
+              blocklist:
+              - blockid: starthard
+                display: Show that X is NP-hard.
+              - blockid: choose
+                display: Choose a known NP-hard problem A.
+                depends: starthard
+              - blockid: trans
+                display: Define two transformations.
+                depends: choose
+              - blockid: t1
+                display: Describe a polynomial-time algorithm that takes an arbitrary
+                  instance $\textbf{I}$ of <code>A`X</code> to an instance $\textbf{I′}$
+                  of <code>X`A</code>.
+                depends: trans
+                toggle_options:
+                - :start_index: 82
+                  :end_index: 89
+                  :values:
+                  - A
+                  - X
+                - :start_index: 118
+                  :end_index: 125
+                  :values:
+                  - X
+                  - A
+              - blockid: t2
+                display: Describe a polynomial-time transformation from the solution
+                  for $\textbf{I’}$ in problem <code>X`A</code> (call it $\textbf{SLN’}$)
+                  to $\textbf{SLN}$ such that $\textbf{SLN}$ is the solution for $\textbf{I}$
+                  in problem <code>A`X</code>.
+                depends: trans
+                toggle_options:
+                - :start_index: 85
+                  :end_index: 92
+                  :values:
+                  - X
+                  - A
+                - :start_index: 190
+                  :end_index: 197
+                  :values:
+                  - A
+                  - X
+  :diagnostics: []
+renderable:
   value:
-    question_text: 'Show the general process for an NP-Completeness Proof.
-
-      '
+    question_text: "<p>Show the general process for an NP-Completeness Proof.</p>\n"
     options:
       grader:
         type: dag
@@ -67,7 +88,7 @@ runestone:
       indent: false
       adaptive: true
       numbered: false
-      language: ''
+      language: natural
       runnable: true
     blocks:
     - text: 'To prove that a problem X is NP-complete do this:'
@@ -76,10 +97,23 @@ runestone:
       depends: ''
       indent: ''
       displaymath: true
-    - text:
-      type: ''
-      tag: inNP
-      depends: starter
-      indent: ''
-      displaymath: true
-  diags: []
+      feedback: ''
+  diags:
+  - 'Parsons does not support nontrivial blocklists: {"blockid"=>"inNP", "depends"=>"starter",
+    "blocklist"=>[{"blockid"=>"xinNP", "display"=>"Show that X is in NP."}, {"blockid"=>"algorithm",
+    "display"=>"Create an algorithm to solve X (that might or might not use non-determinism)
+    that runs in polynomial time.", "depends"=>"xinNP"}]}.'
+  - 'Parsons does not support nontrivial blocklists: {"blockid"=>"NPhard", "depends"=>"starter",
+    "blocklist"=>[{"blockid"=>"starthard", "display"=>"Show that X is NP-hard."},
+    {"blockid"=>"choose", "display"=>"Choose a known NP-hard problem A.", "depends"=>"starthard"},
+    {"blockid"=>"trans", "display"=>"Define two transformations.", "depends"=>"choose"},
+    {"blockid"=>"t1", "display"=>"Describe a polynomial-time algorithm that takes
+    an arbitrary instance $\\textbf{I}$ of <code>A`X</code> to an instance $\\textbf{I′}$
+    of <code>X`A</code>.", "depends"=>"trans", "toggle_options"=>[{:start_index=>82,
+    :end_index=>89, :values=>["A", "X"]}, {:start_index=>118, :end_index=>125, :values=>["X",
+    "A"]}]}, {"blockid"=>"t2", "display"=>"Describe a polynomial-time transformation
+    from the solution for $\\textbf{I’}$ in problem <code>X`A</code> (call it $\\textbf{SLN’}$)
+    to $\\textbf{SLN}$ such that $\\textbf{SLN}$ is the solution for $\\textbf{I}$
+    in problem <code>A`X</code>.", "depends"=>"trans", "toggle_options"=>[{:start_index=>85,
+    :end_index=>92, :values=>["X", "A"]}, {:start_index=>190, :end_index=>197, :values=>["A",
+    "X"]}]}]}.'

@@ -12,90 +12,95 @@ parsed:
     tags:
       topics: PEML NP-completeness
       style: parsons, order
-    instructions: 'Show a proof that the decision form of Independent Set is NP-complete.
-
-      '
-    assets:
-      code:
-        blocks:
-          content:
-          - blockid: inNP
-            display: 1. Show that INDEPENDENT SET is in NP.
-            depends: ''
-          - blockid: algorithm
-            display: Nondeterministically guess some subset of the vertices. If this
-              set is at least of size k (k is the parameter to the decision problem),
-              and the vertices are all independent, then return YES. Otherwise return
-              NO.
-            depends: inNP
-          - blockid: d1
-            display: Nondeterministically guess some collection of vertices. If the
-              vertices are independent, and if it is the biggest such set, then return
-              YES. Otherwise return NO.
-            depends: "-1"
-          - blockid: NPhard
-            display: |
-              2. Show that INDEPENDENT SET is NP-hard by using a reduction
-              of known NP-complete problem CLIQUE to IS.
-            depends: algorithm
-          - blockid: d3
-            display: |
-              2. Show that INDEPENDENT SET is NP-hard by using a reduction
-              of IS to known NP-complete problem CLIQUE.
-            depends: "-1"
-          - blockid: starthard
-            display: Show transformations to reduce CLIQUE to IS.
-            depends: NPhard
-          - blockid: d2
-            display: Show transformations to reduce IS to CLIQUE.
-            depends: "-1"
-          - blockid: reduce
-            display: 'To reduce a CLIQUE input instance to an IS input instance for
-              a given graph $G = (V , E)$, construct a complementary graph $G'' =
-              (V'' , E’)$ such that:'
-            depends: starthard
-          - blockid: d4
-            display: 'To reduce an IS input instance to a CLIQUE input instance for
-              a given graph $G = (V , E)$, construct a complementary graph $G'' =
-              (V'' , E’)$ such that:'
-            depends: "-1"
-          - blockid: step1
-            display: a. $V = V'$. That is, the complement graph will have the same
-              vertices as the original graph.
-            depends: reduce
-          - blockid: step2
-            display: b. $E'$ is the complement of $E$ that is $G'$ has all the edges
-              that is <b>not</b> present in $G$.
-            depends: step1
-          - blockid: polynomial
-            display: Construction of the complementary graph can be done in polynomial
-              time.
-            depends: step2
-          - blockid: iff
-            display: We need to show that with this reduction, there is an independent
-              set of size k in the complement graph if and only iff there exists a
-              clique of size k in G.
-            depends: step2
-          - blockid: if
-            display: "<b>If there is an independent set of size $k$ in the complement
-              graph $G'$</b>, it implies no two vertices share an edge in $G'$, which
-              further implies all of those vertices share an edge with all others
-              in $G$ forming a clique. That is, <b>there exists a clique of size $k$
-              in $G$</b>."
-            depends: iff
-          - blockid: onlyif
-            display: "<b>If there is a clique of size $k$ in the graph $G$</b>, it
-              implies all vertices share an edge with all others in $G$, which further
-              implies no two of these vertices share an edge in $G'$ (thus forming
-              an Independent Set. That is, <b>there exists an independent set of size
-              $k$ in $G'$</b>."
-            depends: iff
+    instructions: "<p>Show a proof that the decision form of Independent Set is NP-complete.</p>\n"
+    systems:
+    - language: natural
+      assets:
+        code:
+          blocks:
+            content:
+            - blockid: inNP
+              display: |-
+                <ol>
+                  <li>Show that INDEPENDENT SET is in NP.</li>
+                </ol>
+              depends: ''
+            - blockid: algorithm
+              display: Nondeterministically guess some subset of the vertices. If
+                this set is at least of size k (k is the parameter to the decision
+                problem), and the vertices are all independent, then return YES. Otherwise
+                return NO.
+              depends: inNP
+            - blockid: d1
+              display: Nondeterministically guess some collection of vertices. If
+                the vertices are independent, and if it is the biggest such set, then
+                return YES. Otherwise return NO.
+              depends: "-1"
+            - blockid: NPhard
+              display: |-
+                <ol>
+                  <li>Show that INDEPENDENT SET is NP-hard by using a reduction $\$
+                of known NP-complete problem CLIQUE to IS.</li>
+                </ol>
+              depends: algorithm
+            - blockid: d3
+              display: |-
+                <ol>
+                  <li>Show that INDEPENDENT SET is NP-hard by using a reduction $\$
+                of IS to known NP-complete problem CLIQUE.</li>
+                </ol>
+              depends: "-1"
+            - blockid: starthard
+              display: Show transformations to reduce CLIQUE to IS.
+              depends: NPhard
+            - blockid: d2
+              display: Show transformations to reduce IS to CLIQUE.
+              depends: "-1"
+            - blockid: reduce
+              display: 'To reduce a CLIQUE input instance to an IS input instance
+                for a given graph $G = (V , E)$, construct a complementary graph $G’
+                = (V’ , E’)$ such that:'
+              depends: starthard
+            - blockid: d4
+              display: 'To reduce an IS input instance to a CLIQUE input instance
+                for a given graph $G = (V , E)$, construct a complementary graph $G’
+                = (V’ , E’)$ such that:'
+              depends: "-1"
+            - blockid: step1
+              display: a. $V = V’$. That is, the complement graph will have the same
+                vertices as the original graph.
+              depends: reduce
+            - blockid: step2
+              display: b. $E’$ is the complement of $E$ that is $G’$ has all the edges
+                that is $\textbf{not}$ present in $G$.
+              depends: step1
+            - blockid: polynomial
+              display: Construction of the complementary graph can be done in polynomial
+                time.
+              depends: step2
+            - blockid: iff
+              display: We need to show that with this reduction, there is an independent
+                set of size k in the complement graph if and only iff there exists
+                a clique of size k in G.
+              depends: step2
+            - blockid: if
+              display: "$\\textbf{If there is an independent set of size $k$ in the
+                complement graph $G’$}$, it implies no two vertices share an edge
+                in $G’$, which further implies all of those vertices share an edge
+                with all others in $G$ forming a clique. That is, $\\textbf{there
+                exists a clique of size $k$ in $G$}$."
+              depends: iff
+            - blockid: onlyif
+              display: "$\\textbf{If there is a clique of size $k$ in the graph $G$}$,
+                it implies all vertices share an edge with all others in $G$, which
+                further implies no two of these vertices share an edge in $G’$ (thus
+                forming an Independent Set. That is, $\\textbf{there exists an independent
+                set of size $k$ in $G’$}$."
+              depends: iff
   :diagnostics: []
-runestone:
+renderable:
   value:
-    question_text: 'Show a proof that the decision form of Independent Set is NP-complete.
-
-      '
+    question_text: "<p>Show a proof that the decision form of Independent Set is NP-complete.</p>\n"
     options:
       grader:
         type: dag
@@ -105,15 +110,19 @@ runestone:
       indent: false
       adaptive: true
       numbered: false
-      language: ''
+      language: natural
       runnable: true
     blocks:
-    - text: 1. Show that INDEPENDENT SET is in NP.
+    - text: |-
+        <ol>
+          <li>Show that INDEPENDENT SET is in NP.</li>
+        </ol>
       type: ''
       tag: inNP
       depends: ''
       indent: ''
       displaymath: true
+      feedback: ''
     - text: Nondeterministically guess some subset of the vertices. If this set is
         at least of size k (k is the parameter to the decision problem), and the vertices
         are all independent, then return YES. Otherwise return NO.
@@ -122,6 +131,7 @@ runestone:
       depends: inNP
       indent: ''
       displaymath: true
+      feedback: ''
     - text: Nondeterministically guess some collection of vertices. If the vertices
         are independent, and if it is the biggest such set, then return YES. Otherwise
         return NO.
@@ -130,70 +140,84 @@ runestone:
       depends: "-1"
       indent: ''
       displaymath: true
-    - text: |
-        2. Show that INDEPENDENT SET is NP-hard by using a reduction
-        of known NP-complete problem CLIQUE to IS.
+      feedback: ''
+    - text: |-
+        <ol>
+          <li>Show that INDEPENDENT SET is NP-hard by using a reduction $\$
+        of known NP-complete problem CLIQUE to IS.</li>
+        </ol>
       type: ''
       tag: NPhard
       depends: algorithm
       indent: ''
       displaymath: true
-    - text: |
-        2. Show that INDEPENDENT SET is NP-hard by using a reduction
-        of IS to known NP-complete problem CLIQUE.
+      feedback: ''
+    - text: |-
+        <ol>
+          <li>Show that INDEPENDENT SET is NP-hard by using a reduction $\$
+        of IS to known NP-complete problem CLIQUE.</li>
+        </ol>
       type: ''
       tag: d3
       depends: "-1"
       indent: ''
       displaymath: true
+      feedback: ''
     - text: Show transformations to reduce CLIQUE to IS.
       type: ''
       tag: starthard
       depends: NPhard
       indent: ''
       displaymath: true
+      feedback: ''
     - text: Show transformations to reduce IS to CLIQUE.
       type: ''
       tag: d2
       depends: "-1"
       indent: ''
       displaymath: true
+      feedback: ''
     - text: 'To reduce a CLIQUE input instance to an IS input instance for a given
-        graph $G = (V , E)$, construct a complementary graph $G'' = (V'' , E’)$ such
+        graph $G = (V , E)$, construct a complementary graph $G’ = (V’ , E’)$ such
         that:'
       type: ''
       tag: reduce
       depends: starthard
       indent: ''
       displaymath: true
+      feedback: ''
     - text: 'To reduce an IS input instance to a CLIQUE input instance for a given
-        graph $G = (V , E)$, construct a complementary graph $G'' = (V'' , E’)$ such
+        graph $G = (V , E)$, construct a complementary graph $G’ = (V’ , E’)$ such
         that:'
       type: ''
       tag: d4
       depends: "-1"
       indent: ''
       displaymath: true
-    - text: a. $V = V'$. That is, the complement graph will have the same vertices
+      feedback: ''
+    - text: a. $V = V’$. That is, the complement graph will have the same vertices
         as the original graph.
       type: ''
       tag: step1
       depends: reduce
       indent: ''
       displaymath: true
-    - text: b. $E'$ is the complement of $E$ that is $G'$ has all the edges that is
-        <b>not</b> present in $G$.
+      feedback: ''
+    - text: b. $E’$ is the complement of $E$ that is $G’$ has all the edges that is
+        $\textbf{not}$ present in $G$.
       type: ''
       tag: step2
       depends: step1
       indent: ''
       displaymath: true
+      feedback: ''
     - text: Construction of the complementary graph can be done in polynomial time.
       type: ''
       tag: polynomial
       depends: step2
       indent: ''
       displaymath: true
+      feedback: ''
     - text: We need to show that with this reduction, there is an independent set
         of size k in the complement graph if and only iff there exists a clique of
         size k in G.
@@ -202,22 +226,25 @@ runestone:
       depends: step2
       indent: ''
       displaymath: true
-    - text: "<b>If there is an independent set of size $k$ in the complement graph
-        $G'$</b>, it implies no two vertices share an edge in $G'$, which further
+      feedback: ''
+    - text: "$\\textbf{If there is an independent set of size $k$ in the complement
+        graph $G’$}$, it implies no two vertices share an edge in $G’$, which further
         implies all of those vertices share an edge with all others in $G$ forming
-        a clique. That is, <b>there exists a clique of size $k$ in $G$</b>."
+        a clique. That is, $\\textbf{there exists a clique of size $k$ in $G$}$."
       type: ''
       tag: if
       depends: iff
       indent: ''
       displaymath: true
-    - text: "<b>If there is a clique of size $k$ in the graph $G$</b>, it implies
+      feedback: ''
+    - text: "$\\textbf{If there is a clique of size $k$ in the graph $G$}$, it implies
         all vertices share an edge with all others in $G$, which further implies no
-        two of these vertices share an edge in $G'$ (thus forming an Independent Set.
-        That is, <b>there exists an independent set of size $k$ in $G'$</b>."
+        two of these vertices share an edge in $G’$ (thus forming an Independent Set.
+        That is, $\\textbf{there exists an independent set of size $k$ in $G’$}$."
       type: ''
       tag: onlyif
       depends: iff
       indent: ''
       displaymath: true
+      feedback: ''
   diags: []

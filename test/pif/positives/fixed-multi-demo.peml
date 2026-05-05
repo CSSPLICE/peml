@@ -23,7 +23,11 @@ Put the blocks in the proper order.
 # displayed with respect to the orderable blocks, and limiting where
 # the user can place an orderable block so that things appear in a
 # reasonable order.
-[assets.code.blocks.content]
+
+[systems]
+language: java
+
+[.assets.code.blocks.content]
 blockid: fixed
 display:----------
 Fixed Start
@@ -79,4 +83,5 @@ display:----------
 Fixed End
       This block appears at the end.
 ----------
+[]
 []

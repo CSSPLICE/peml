@@ -13,23 +13,25 @@ parsed:
       topics: PEML Demo Parsons Problem
       style: parsons, order
     instructions: |
-      Associate each test with its corresponding work, but you can do the
-      tests in any order.
-    assets:
-      code:
-        blocks:
-          content:
-          - blockid: testAblock
-            depends: ''
-            blocklist:
-            - blockid: caseA
-              display: if (testA) {
+      <p>Associate each test with its corresponding work, but you can do the<br />
+      tests in any order.</p>
+    systems:
+    - language: java
+      assets:
+        code:
+          blocks:
+            content:
+            - blockid: testAblock
               depends: ''
-            - blockid: stuffA
-              display: |2
-                  doAstuff();
-                }
-              depends: caseA
+              blocklist:
+              - blockid: caseA
+                display: if (testA) {
+                depends: ''
+              - blockid: stuffA
+                display: |2
+                    doAstuff();
+                  }
+                depends: caseA
             - blockid: testBblock
               depends: ''
               blocklist:
@@ -41,24 +43,23 @@ parsed:
                     doBstuff();
                   }
                 depends: caseB
-              - blockid: testCblock
+            - blockid: testCblock
+              depends: ''
+              blocklist:
+              - blockid: caseC
+                display: if (testC) {
                 depends: ''
-                blocklist:
-                - blockid: caseC
-                  display: if (testC) {
-                  depends: ''
-                - blockid: stuffC
-                  display: |2
-                      doCstuff();
-                    }
-                  depends: caseC
-  :diagnostics:
-  - 'Path ''/assets/code/blocks/content/0/blocklist/2'' is missing key: display'
-runestone:
+              - blockid: stuffC
+                display: |2
+                    doCstuff();
+                  }
+                depends: caseC
+  :diagnostics: []
+renderable:
   value:
     question_text: |
-      Associate each test with its corresponding work, but you can do the
-      tests in any order.
+      <p>Associate each test with its corresponding work, but you can do the<br />
+      tests in any order.</p>
     options:
       grader:
         type: dag
@@ -68,14 +69,16 @@ runestone:
       indent: false
       adaptive: true
       numbered: false
-      language: ''
+      language: java
       runnable: true
     blocks: []
   diags:
   - 'Parsons does not support nontrivial blocklists: {"blockid"=>"testAblock", "depends"=>"",
     "blocklist"=>[{"blockid"=>"caseA", "display"=>"if (testA) {", "depends"=>""},
-    {"blockid"=>"stuffA", "display"=>"  doAstuff();\n}\n", "depends"=>"caseA"}, {"blockid"=>"testBblock",
-    "depends"=>"", "blocklist"=>[{"blockid"=>"caseB", "display"=>"if (testB) {", "depends"=>""},
-    {"blockid"=>"stuffB", "display"=>"  doBstuff();\n}\n", "depends"=>"caseB"}, {"blockid"=>"testCblock",
-    "depends"=>"", "blocklist"=>[{"blockid"=>"caseC", "display"=>"if (testC) {", "depends"=>""},
-    {"blockid"=>"stuffC", "display"=>"  doCstuff();\n}\n", "depends"=>"caseC"}]}]}]}.'
+    {"blockid"=>"stuffA", "display"=>"  doAstuff();\n}\n", "depends"=>"caseA"}]}.'
+  - 'Parsons does not support nontrivial blocklists: {"blockid"=>"testBblock", "depends"=>"",
+    "blocklist"=>[{"blockid"=>"caseB", "display"=>"if (testB) {", "depends"=>""},
+    {"blockid"=>"stuffB", "display"=>"  doBstuff();\n}\n", "depends"=>"caseB"}]}.'
+  - 'Parsons does not support nontrivial blocklists: {"blockid"=>"testCblock", "depends"=>"",
+    "blocklist"=>[{"blockid"=>"caseC", "display"=>"if (testC) {", "depends"=>""},
+    {"blockid"=>"stuffC", "display"=>"  doCstuff();\n}\n", "depends"=>"caseC"}]}.'

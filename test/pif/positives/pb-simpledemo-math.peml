@@ -22,10 +22,13 @@ This sentence uses `$` delimiters to **show** math inline: $\sqrt{3x-1}+(1+x)^2$
 ----------
 
 
-[assets.code.blocks.content]
+[systems]
+language: math
+
+[.assets.code.blocks.content]
 blockid: one
 display: Assume $A \land B \land C$.
-depends: 
+depends:
 
 blockid: two
 display: Then $A$ is true.
@@ -43,8 +46,4 @@ blockid: five
 display: This sentence uses \\$ delimiters to show math inline: $\sqrt{3x-1}+(1+x)^2$
 depends: two
 []
-
-
-[systems]
-language: math
 []

@@ -16,10 +16,12 @@ instructions:----------
 Show a proof that the decision form of Independent Set is NP-complete.
 ----------
 
-[assets.code.blocks.content]
+[systems]
+language: natural
+
+[.assets.code.blocks.content]
 
 blockid: inNPblock
-[]
 [.blocklist]
 blockid: inNP
 display: Show that INDEPENDENT SET is in NP.
@@ -32,6 +34,7 @@ depends: inNP
 blockid: d1
 display: Nondeterministically guess some collection of vertices. If the vertices are independent, and if it is the biggest such set, then return YES. Otherwise return NO.
 depends: -1
+[]
 
 blockid: NPhardblock
 [.blocklist]
@@ -50,7 +53,7 @@ display: Show transformations to reduce ``CLIQUE`IS`` to ``IS`CLIQUE``.
 depends: NPhard
 
 blockid: reduce
-display: To reduce a [CLIQUE|IS] input instance to an [IS|CLIQUE] input instance for a given graph $G = (V , E)$, construct a complementary graph $G' = (V' , E’)$ such that:
+display: To reduce a [CLIQUE|IS] input instance to an [IS|CLIQUE] input instance for a given graph $G = (V , E)$, construct a complementary graph $G' = (V' , E')$ such that:
 depends: starthard
 
 blockid: step1
@@ -74,6 +77,9 @@ display: <b>If there is an independent set of size $k$ in the complement graph $
 depends: iff
 
 blockid: onlyif
-display: 
+display:
 <b>If there is a clique of size $k$ in the graph $G$</b>, it implies all vertices share an edge with all others in $G$, which further implies no two of these vertices share an edge in $G'$ (thus forming an Independent Set. That is, <b>there exists an independent set of size $k$ in $G'$</b>.
 depends: iff
+[]
+[]
+[]

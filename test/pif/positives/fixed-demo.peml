@@ -23,7 +23,10 @@ Put the blocks **in** the proper order.
 # the user can place an orderable block so that things appear in a
 # reasonable order.
 
-[assets.code.blocks.content]
+[systems]
+language: java
+
+[.assets.code.blocks.content]
 blockid: fixed
 display: Fixed Start
 
@@ -56,4 +59,5 @@ depends: randomg2b2
 
 blockid: fixed
 display: Fixed End
+[]
 []

@@ -49,53 +49,6 @@ parsed:
             content: |
               expected
               I am a Java program I am a Java program I am a Java program
-  :diagnostics:
-  - 'The document is missing key: assets'
-runestone:
-  value:
-    question_text: 'Construct code by reordering and indenting the lines.
-
-      '
-    options:
-      grader:
-        type: exec
-        showFeedback: true
-      maxdist: 0
-      order: ''
-      indent: true
-      adaptive: true
-      numbered: false
-      language: python
-      runnable: true
-    blocks:
-    - text: for (int i=0;i<3;i++) {
-      type: ''
-      tag: one
-      depends: ''
-      indent: '0'
-      displaymath: true
-    - text: System.out.print("I ");
-      type: ''
-      tag: two
-      depends: ''
-      indent: '1'
-      displaymath: true
-    - text: System.out.print("am ");
-      type: ''
-      tag: three
-      depends: ''
-      indent: '1'
-      displaymath: true
-    - text: System.out.print("a Java program ");
-      type: ''
-      tag: four
-      depends: ''
-      indent: '1'
-      displaymath: true
-    - text: "}"
-      type: ''
-      tag: five
-      depends: ''
-      indent: '0'
-      displaymath: true
-  diags: []
+  :diagnostics: &1
+  - 'Path ''/systems/0/assets/test/files/0'' is missing key: format'
+renderable: *1

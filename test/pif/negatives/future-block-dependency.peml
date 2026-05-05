@@ -1,6 +1,6 @@
-# Example of an almost valid PIF that correctly 
-# constructs a DAG, but contains a block that 
-# incorrectly references a non-previous one 
+# Example of an almost valid PIF that correctly
+# constructs a DAG, but contains a block that
+# incorrectly references a non-previous one
 # (which PIF flags to actively prevent cycles and simplify dependencies)
 
 exercise_id: future_block_dependency_error
@@ -17,7 +17,10 @@ instructions:----------
 Put the blocks in the proper order.
 ----------
 
-[assets.code.blocks.content]
+[systems]
+language: java
+
+[.assets.code.blocks.content]
 blockid: randomg1b1
 display: Random Group 1 Block 1
 depends:
@@ -41,4 +44,5 @@ depends: randomg2b1
 blockid: randomg2b3
 display: Random Group 2 Block 3
 depends: randomg2b2
+[]
 []

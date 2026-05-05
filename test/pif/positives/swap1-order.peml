@@ -24,7 +24,10 @@ instructions:----------
 Write a function to swap two array elements by reordering the lines.
 ----------
 
-[assets.code.blocks.content]
+[systems]
+language: java
+
+[.assets.code.blocks.content]
 blockid: fixed
 display:----------
 public static void Swap(int[] arr, int i, int j)
@@ -40,6 +43,7 @@ display: int temp = arr[i];
 
 blockid: onea
 display: int temp = arr[j];
+[]
 
 blockid: two
 display: arr[i] = arr[j];
@@ -55,3 +59,5 @@ depends: -1
 
 blockid: fixed
 display: }
+[]
+[]

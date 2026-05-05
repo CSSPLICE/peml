@@ -12,29 +12,28 @@ parsed:
     tags:
       topics: PEML Demo Parsons Problem
       style: parsons, order
-    instructions: '**Your task**: Construct a Python program that prints strings "Hello",
-      "Parsons", and "Problems" on their own lines. You should construct your program
-      by dragging and dropping the lines to the solution area on the right.
-
-      '
-    assets:
-      code:
-        blocks:
-          content:
-          - display: print('Hello')
-          - display: print('Parsons')
-          - display: print('Oops!')
-            depends: "-1"
-          - display: print('Problems!')
+    instructions: "<p><strong>Your task</strong>: Construct a Python program that
+      prints strings “Hello”, “Parsons”, and “Problems” on their own lines. You should
+      construct your program by dragging and dropping the lines to the solution area
+      on the right.</p>\n"
+    systems:
+    - language: python
+      assets:
+        code:
+          blocks:
+            content:
+            - display: print('Hello')
+            - display: print('Parsons')
+            - display: print('Oops!')
+              depends: "-1"
+            - display: print('Problems!')
   :diagnostics: []
-runestone:
+renderable:
   value:
-    question_text: '**Your task**: Construct a Python program that prints strings
-      "Hello", "Parsons", and "Problems" on their own lines. You should construct
-      your program by dragging and dropping the lines to the solution area on the
-      right.
-
-      '
+    question_text: "<p><strong>Your task</strong>: Construct a Python program that
+      prints strings “Hello”, “Parsons”, and “Problems” on their own lines. You should
+      construct your program by dragging and dropping the lines to the solution area
+      on the right.</p>\n"
     options:
       grader:
         type: dag
@@ -44,7 +43,7 @@ runestone:
       indent: false
       adaptive: true
       numbered: false
-      language: ''
+      language: python
       runnable: true
     blocks:
     - text: print('Hello')
@@ -53,22 +52,26 @@ runestone:
       depends: ''
       indent: ''
       displaymath: true
+      feedback: ''
     - text: print('Parsons')
       type: ''
       tag: ''
       depends: ''
       indent: ''
       displaymath: true
+      feedback: ''
     - text: print('Oops!')
       type: ''
       tag: ''
       depends: "-1"
       indent: ''
       displaymath: true
+      feedback: ''
     - text: print('Problems!')
       type: ''
       tag: ''
       depends: ''
       indent: ''
       displaymath: true
+      feedback: ''
   diags: []

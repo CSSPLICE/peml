@@ -4,13 +4,8 @@ require_relative 'peml/emitter'
 require_relative 'peml/utils'
 require_relative 'peml/peml_test_renderer'
 require_relative 'peml/datadriven_test_renderer'
-<<<<<<< HEAD
 require_relative 'pif/parser'
 require_relative 'pif/converter'
-=======
-require_relative 'pif/converter'
-require_relative 'pif/parser'
->>>>>>> pif
 
 require 'dottie/ext'
 require 'open-uri'
@@ -31,12 +26,8 @@ module Peml
   #~ Class methods ..........................................................
 
   # -------------------------------------------------------------
-<<<<<<< HEAD
   def self.parse(params)
     params = params.transform_keys(&:to_sym) rescue params
-=======
-  def self.parse(language: nil, **params)
->>>>>>> pif
     if params[:filename]
       file = File.open(params[:filename])
       begin
@@ -51,17 +42,10 @@ module Peml
     end
     raise ArgumentError, "peml cannot be empty or nil" if peml.nil? || peml.empty?
     value = Peml::Loader.new.load(peml)
-<<<<<<< HEAD
 
     # test renderer requires inline data files
     if params[:render_tests]
       params[:inline_data_files] = true 
-=======
-    # Should we provide a param to render test cases?
-    value = Peml::DatadrivenTestRenderer.new.generate_tests(value)
-    if !params[:result_only]
-      diags = validate(value)
->>>>>>> pif
     end
 
     diags = params[:result_only] ? nil : validate(value)
@@ -156,22 +140,31 @@ module Peml
 
   # Pif Methods------------------------------------------------------
   def self.pif_parse(params)
-    # pif  = {}, Takes string as {pif:"content"}
-    # or filename as {filename:"./file.peml"}
-    if params[:pif]
-      parsed_pif = PifParser.parse({ pif: params[:pif] })
-    else
-      return "Error: pif not parsed"
-    end
-    
-    parsed_pif[:value] = PifParser.markdown_renderer(parsed_pif[:value])
+    # Accepts string content as {pif: "..."} or a file path as {filename: "..."}
+    # Remap :pif to :peml so Peml.parse can accept it
+    input = {}
+    input[:peml]     = params[:pif]      if params[:pif]
+    input[:filename] = params[:filename] if params[:filename]
 
-    if params[:result_only]
-      parsed_pif[:value]
-    else
-      parsed_pif
+    # Step 1: Load via PEML parser and run PEML schema validation.
+    # result_only is never passed here so PEML diagnostics are always captured.
+    state = Peml.parse(input)
+    value = state['value'].dottie!
+    peml_diags = state['diagnostics'] || []
+
+    # Surface PEML errors immediately — no point running PIF validation
+    # on a document that already fails the base PEML structure.
+    if peml_diags.any?
+      return params[:result_only] ? value : { value: value, diagnostics: peml_diags }
     end
 
+    # Step 2: PIF-specific structural and extended validation
+    pif_diags = PifParser.validate(value)
+
+    # Step 3: PIF post-processing (only applied to valid documents)
+    PifParser.markdown_renderer(value) if pif_diags.empty?
+
+    params[:result_only] ? value : { value: value, diagnostics: pif_diags }
   end
 
   # -------------------------------------------------------------

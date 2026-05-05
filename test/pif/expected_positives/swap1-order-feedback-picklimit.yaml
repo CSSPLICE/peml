@@ -27,6 +27,7 @@ parsed:
             - blockid: group1
               depends: ''
               pickone: 'true'
+              picklimit: '1'
               blocklist:
               - blockid: one
                 display: int temp = arr[i];
@@ -78,7 +79,7 @@ renderable:
       indent: 0
       displaymath: true
       feedback: ''
-      picklimit: 0
+      picklimit: 1
     - text: int temp = arr[j];
       tag: group1-onea
       depends: "-1"

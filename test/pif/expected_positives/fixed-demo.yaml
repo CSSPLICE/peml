@@ -12,43 +12,41 @@ parsed:
     tags:
       topics: PEML Demo Parsons Problem
       style: parsons, order
-    instructions: 'Put the blocks in the proper order.
-
-      '
-    assets:
-      code:
-        blocks:
-          content:
-          - blockid: fixed
-            display: Fixed Start
-          - blockid: randomg1b1
-            display: Random Group 1 Block 1
-            depends: ''
-          - blockid: randomg1b2
-            display: Random Group 1 Block 2
-            depends: randomg1b1
-          - blockid: randomg1b3
-            display: Random Group 1 Block 3
-            depends: randomg1b2
-          - blockid: fixed
-            display: Fixed Middle
-          - blockid: randomg2b1
-            display: Random Group 2 Block 1
-            depends: randomg1b3
-          - blockid: randomg2b2
-            display: Random Group 2 Block 2
-            depends: randomg2b1
-          - blockid: randomg2b3
-            display: Random Group 2 Block 3
-            depends: randomg2b2
-          - blockid: fixed
-            display: Fixed End
+    instructions: "<p>Put the blocks <strong>in</strong> the proper order.</p>\n"
+    systems:
+    - language: java
+      assets:
+        code:
+          blocks:
+            content:
+            - blockid: fixed
+              display: Fixed Start
+            - blockid: randomg1b1
+              display: Random Group 1 Block 1
+              depends: ''
+            - blockid: randomg1b2
+              display: Random Group 1 Block 2
+              depends: randomg1b1
+            - blockid: randomg1b3
+              display: Random Group 1 **Block** 3
+              depends: randomg1b2
+            - blockid: fixed
+              display: Fixed **Middle**
+            - blockid: randomg2b1
+              display: Random Group 2 Block 1
+              depends: randomg1b3
+            - blockid: randomg2b2
+              display: Random Group 2 Block 2
+              depends: randomg2b1
+            - blockid: randomg2b3
+              display: Random Group 2 Block 3
+              depends: randomg2b2
+            - blockid: fixed
+              display: Fixed End
   :diagnostics: []
-runestone:
+renderable:
   value:
-    question_text: 'Put the blocks in the proper order.
-
-      '
+    question_text: "<p>Put the blocks <strong>in</strong> the proper order.</p>\n"
     options:
       grader:
         type: dag
@@ -58,7 +56,7 @@ runestone:
       indent: false
       adaptive: true
       numbered: false
-      language: ''
+      language: java
       runnable: true
     blocks:
     - text: Fixed Start
@@ -67,52 +65,61 @@ runestone:
       depends: ''
       indent: ''
       displaymath: true
+      feedback: ''
     - text: Random Group 1 Block 1
       type: ''
       tag: randomg1b1
       depends: ''
       indent: ''
       displaymath: true
+      feedback: ''
     - text: Random Group 1 Block 2
       type: ''
       tag: randomg1b2
       depends: randomg1b1
       indent: ''
       displaymath: true
-    - text: Random Group 1 Block 3
+      feedback: ''
+    - text: Random Group 1 **Block** 3
       type: ''
       tag: randomg1b3
       depends: randomg1b2
       indent: ''
       displaymath: true
-    - text: Fixed Middle
+      feedback: ''
+    - text: Fixed **Middle**
       type: ''
       tag: fixed
       depends: ''
       indent: ''
       displaymath: true
+      feedback: ''
     - text: Random Group 2 Block 1
       type: ''
       tag: randomg2b1
       depends: randomg1b3
       indent: ''
       displaymath: true
+      feedback: ''
     - text: Random Group 2 Block 2
       type: ''
       tag: randomg2b2
       depends: randomg2b1
       indent: ''
       displaymath: true
+      feedback: ''
     - text: Random Group 2 Block 3
       type: ''
       tag: randomg2b3
       depends: randomg2b2
       indent: ''
       displaymath: true
+      feedback: ''
     - text: Fixed End
       type: ''
       tag: fixed
       depends: ''
       indent: ''
       displaymath: true
+      feedback: ''
   diags: []

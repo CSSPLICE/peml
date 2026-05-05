@@ -12,48 +12,46 @@ parsed:
     tags:
       topics: PEML reduction
       style: parsons, order
-    instructions: 'Show the general process for reducing one problem to another.
-
-      '
-    assets:
-      code:
-        blocks:
-          content:
-          - blockid: start
-            display: Consider any two problems for which a suitable reduction from
-              one to the other can be found.
-            depends: ''
-          - blockid: first
-            display: The first problem takes an arbitrary instance of its input, which
-              we will call <b>I</b>, and transforms <b>I</b> to a solution, which
-              we will call <b>SLN</b>.
-            depends: start
-          - blockid: second
-            display: The second problem takes an arbitrary instance of its input,
-              which we will call <b>I’</b>, and transforms <b>I’</b> to a solution,
-              which we will call <b>SLN’</b>.
-            depends: first
-          - blockid: transform
-            display: Transform an arbitrary instance of the first problem to an instance
-              of the second problem. In other words, there must be a transformation
-              from any instance <b>I</b> of the first problem to an instance <b>I’</b>
-              of the second problem.
-            depends: second
-          - blockid: algorithm
-            display: Apply an algorithm for the second problem to the instance <b>I’</b>,
-              yielding a solution <b>SLN’</b>.
-            depends: transform
-          - blockid: finish
-            display: Transform <b>SLN’</b> to the solution of <b>I</b>, known as <b>SLN</b>.
-              Note that <b>SLN</b> must in fact be the correct solution for <b>I</b>
-              for the reduction to be acceptable.
-            depends: transform
+    instructions: "<p>Show the general process for reducing one problem to another.</p>\n"
+    systems:
+    - language: natural
+      assets:
+        code:
+          blocks:
+            content:
+            - blockid: start
+              display: Consider any two problems for which a suitable reduction from
+                one to the other can be found.
+              depends: ''
+            - blockid: first
+              display: The first problem takes an arbitrary instance of its input,
+                which we will call $\textbf{I}$, and transforms $\textbf{I}$ to a
+                solution, which we will call $\textbf{SLN}$.
+              depends: start
+            - blockid: second
+              display: The second problem takes an arbitrary instance of its input,
+                which we will call $\textbf{I’}$, and transforms $\textbf{I’}$ to
+                a solution, which we will call $\textbf{SLN’}$.
+              depends: first
+            - blockid: transform
+              display: Transform an arbitrary instance of the first problem to an
+                instance of the second problem. In other words, there must be a transformation
+                from any instance $\textbf{I}$ of the first problem to an instance
+                $\textbf{I’}$ of the second problem.
+              depends: second
+            - blockid: algorithm
+              display: Apply an algorithm for the second problem to the instance $\textbf{I’}$,
+                yielding a solution $\textbf{SLN’}$.
+              depends: transform
+            - blockid: finish
+              display: Transform $\textbf{SLN’}$ to the solution of $\textbf{I}$,
+                known as $\textbf{SLN}$. Note that $\textbf{SLN}$ must in fact be
+                the correct solution for $\textbf{I}$ for the reduction to be acceptable.
+              depends: transform
   :diagnostics: []
-runestone:
+renderable:
   value:
-    question_text: 'Show the general process for reducing one problem to another.
-
-      '
+    question_text: "<p>Show the general process for reducing one problem to another.</p>\n"
     options:
       grader:
         type: dag
@@ -63,7 +61,7 @@ runestone:
       indent: false
       adaptive: true
       numbered: false
-      language: ''
+      language: natural
       runnable: true
     blocks:
     - text: Consider any two problems for which a suitable reduction from one to the
@@ -73,43 +71,50 @@ runestone:
       depends: ''
       indent: ''
       displaymath: true
+      feedback: ''
     - text: The first problem takes an arbitrary instance of its input, which we will
-        call <b>I</b>, and transforms <b>I</b> to a solution, which we will call <b>SLN</b>.
+        call $\textbf{I}$, and transforms $\textbf{I}$ to a solution, which we will
+        call $\textbf{SLN}$.
       type: ''
       tag: first
       depends: start
       indent: ''
       displaymath: true
+      feedback: ''
     - text: The second problem takes an arbitrary instance of its input, which we
-        will call <b>I’</b>, and transforms <b>I’</b> to a solution, which we will
-        call <b>SLN’</b>.
+        will call $\textbf{I’}$, and transforms $\textbf{I’}$ to a solution, which
+        we will call $\textbf{SLN’}$.
       type: ''
       tag: second
       depends: first
       indent: ''
       displaymath: true
+      feedback: ''
     - text: Transform an arbitrary instance of the first problem to an instance of
         the second problem. In other words, there must be a transformation from any
-        instance <b>I</b> of the first problem to an instance <b>I’</b> of the second
-        problem.
+        instance $\textbf{I}$ of the first problem to an instance $\textbf{I’}$ of
+        the second problem.
       type: ''
       tag: transform
       depends: second
       indent: ''
       displaymath: true
-    - text: Apply an algorithm for the second problem to the instance <b>I’</b>, yielding
-        a solution <b>SLN’</b>.
+      feedback: ''
+    - text: Apply an algorithm for the second problem to the instance $\textbf{I’}$,
+        yielding a solution $\textbf{SLN’}$.
       type: ''
       tag: algorithm
       depends: transform
       indent: ''
       displaymath: true
-    - text: Transform <b>SLN’</b> to the solution of <b>I</b>, known as <b>SLN</b>.
-        Note that <b>SLN</b> must in fact be the correct solution for <b>I</b> for
-        the reduction to be acceptable.
+      feedback: ''
+    - text: Transform $\textbf{SLN’}$ to the solution of $\textbf{I}$, known as $\textbf{SLN}$.
+        Note that $\textbf{SLN}$ must in fact be the correct solution for $\textbf{I}$
+        for the reduction to be acceptable.
       type: ''
       tag: finish
       depends: transform
       indent: ''
       displaymath: true
+      feedback: ''
   diags: []

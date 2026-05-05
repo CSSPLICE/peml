@@ -1,4 +1,4 @@
-# Example of a nearly valid PIF that correctly forms a DAG, 
+# Example of a nearly valid PIF that correctly forms a DAG,
 # but has a block referencing a dependency outside its blocklist scope.
 # To fix this, remove 'randomg2b1's dependencies (making it a root),
 # and instead, add those dependencies to its parent blocklist.
@@ -17,7 +17,10 @@ instructions:----------
 Put the blocks in the proper order.
 ----------
 
-[assets.code.blocks.content]
+[systems]
+language: java
+
+[.assets.code.blocks.content]
 blockid: randomg1b1
 display: Random Group 1 Block 1
 depends:
@@ -30,8 +33,8 @@ blockid: randomg1b3
 display: Random Group 1 Block 3
 depends: randomg1b2
 
-blockid: list1 
-depends: 
+blockid: list1
+depends:
 [.blocklist]
 blockid: randomg2b1
 display: Random Group 2 Block 1
@@ -44,3 +47,6 @@ depends: randomg2b1
 blockid: randomg2b3
 display: Random Group 2 Block 3
 depends: randomg2b2
+[]
+[]
+[]

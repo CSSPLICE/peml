@@ -17,7 +17,10 @@ instructions:----------
 Show the general process for an NP-Completeness Proof.
 ----------
 
-[assets.code.blocks.content]
+[systems]
+language: natural
+
+[.assets.code.blocks.content]
 blockid: starter
 display: To prove that a problem X is NP-complete do this:
 depends:
@@ -51,10 +54,11 @@ display: Describe a polynomial-time algorithm that takes an arbitrary instance <
 depends: -1
 
 blockid: t2
-display: Describe a polynomial-time transformation from the solution for <b>I’</b> in problem X (call it <b>SLN’</b>) to <b>SLN</b> such that <b>SLN</b> is the solution for <b>I</b> in problem A.
+display: Describe a polynomial-time transformation from the solution for <b>I'</b> in problem X (call it <b>SLN'</b>) to <b>SLN</b> such that <b>SLN</b> is the solution for <b>I</b> in problem A.
 depends: trans
 
 blockid: d2
-display: Describe a polynomial-time transformation from the solution for <b>I’</b> in problem A (call it <b>SLN’</b>) to <b>SLN</b> such that <b>SLN</b> is the solution for <b>I</b> in problem X.
+display: Describe a polynomial-time transformation from the solution for <b>I'</b> in problem A (call it <b>SLN'</b>) to <b>SLN</b> such that <b>SLN</b> is the solution for <b>I</b> in problem X.
 depends: -1
+[]
 []

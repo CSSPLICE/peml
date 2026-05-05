@@ -11,18 +11,18 @@
   tags:
     topics: PIF Error Demo
     style: parsons, order
-  instructions: '**Your task**: Construct a Python program that prints strings "Good",
-    "Morning", "World!" on separate lines. You should construct your program by dragging
-    and dropping the lines to the solution area on the right.
-
-    '
-  assets:
-    code:
-      blocks:
-        content:
-        - display: print('Good')
-          blockid: id2
-        - display: print('Morning')
-          blockid: id3
-        - display: print('World!')
+  instructions: "<p><strong>Your task</strong>: Construct a Python program that prints
+    strings “Good”, “Morning”, “World!” on separate lines. You should construct your
+    program by dragging and dropping the lines to the solution area on the right.</p>\n"
+  systems:
+  - language: python
+    assets:
+      code:
+        blocks:
+          content:
+          - display: print('Good')
+            blockid: id2
+          - display: print('Morning')
+            blockid: id3
+          - display: print('World!')
 :diagnostics: []

@@ -12,31 +12,34 @@ parsed:
     tags:
       topics: PEML Demo Parsons Problem
       style: parsons, order
-    instructions: 'Prove that $A \land B \land C) \rightarrow A \land C$.
-
-      '
-    assets:
-      code:
-        blocks:
-          content:
-          - blockid: one
-            display: Assume $A \land B \land C$.
-            depends: ''
-          - blockid: two
-            display: Then $A$ is true.
-            depends: one
-          - blockid: three
-            display: Then $C$ is true.
-            depends: one
-          - blockid: four
-            display: Since $A$ and $C$, we know $A \land C$.
-            depends: two, three
+    instructions: "<p>This sentence uses <code>$</code> delimiters to <strong>show</strong>
+      math inline: $\\sqrt{3x-1}+(1+x)^2$</p>\n"
+    systems:
+    - language: math
+      assets:
+        code:
+          blocks:
+            content:
+            - blockid: one
+              display: Assume $A \land B \land C$.
+              depends: ''
+            - blockid: two
+              display: Then $A$ is true.
+              depends: one
+            - blockid: three
+              display: Then $C$ is true.
+              depends: one
+            - blockid: four
+              display: Since $A$ and $C$, $\textbf{we}$ know $A \land C$.
+              depends: two, three
+            - blockid: five
+              display: 'This sentence uses \$ delimiters to show math inline: $\sqrt{3x-1}+(1+x)^2$'
+              depends: two
   :diagnostics: []
-runestone:
+renderable:
   value:
-    question_text: 'Prove that $A \land B \land C) \rightarrow A \land C$.
-
-      '
+    question_text: "<p>This sentence uses <code>$</code> delimiters to <strong>show</strong>
+      math inline: $\\sqrt{3x-1}+(1+x)^2$</p>\n"
     options:
       grader:
         type: dag
@@ -46,7 +49,7 @@ runestone:
       indent: false
       adaptive: true
       numbered: false
-      language: ''
+      language: math
       runnable: true
     blocks:
     - text: Assume $A \land B \land C$.
@@ -55,22 +58,33 @@ runestone:
       depends: ''
       indent: ''
       displaymath: true
+      feedback: ''
     - text: Then $A$ is true.
       type: ''
       tag: two
       depends: one
       indent: ''
       displaymath: true
+      feedback: ''
     - text: Then $C$ is true.
       type: ''
       tag: three
       depends: one
       indent: ''
       displaymath: true
-    - text: Since $A$ and $C$, we know $A \land C$.
+      feedback: ''
+    - text: Since $A$ and $C$, $\textbf{we}$ know $A \land C$.
       type: ''
       tag: four
       depends: two, three
       indent: ''
       displaymath: true
+      feedback: ''
+    - text: 'This sentence uses \$ delimiters to show math inline: $\sqrt{3x-1}+(1+x)^2$'
+      type: ''
+      tag: five
+      depends: two
+      indent: ''
+      displaymath: true
+      feedback: ''
   diags: []

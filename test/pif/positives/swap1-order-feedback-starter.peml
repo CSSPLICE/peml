@@ -43,7 +43,6 @@ public static void Swap(int[] arr, int i, int j)
 blockid: group1
 depends:
 pickone: true
-[]
 [.blocklist]
 blockid: one
 display: int temp = arr[i];
@@ -51,6 +50,7 @@ display: int temp = arr[i];
 blockid: onea
 display: int temp = arr[j];
 feedback: This was the wrong choice.
+[]
 
 blockid: two
 display: arr[i] = arr[j];
@@ -64,3 +64,5 @@ blockid: four
 display: int temp = arr[j];
 feedback: This line should not appear in the answer.
 depends: -1
+[]
+[]

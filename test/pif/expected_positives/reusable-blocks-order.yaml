@@ -1,18 +1,20 @@
 ---
 parsed:
   :value:
-    exercise_id: https://github.com/CSSPLICE/peml-feasibility-examples/blob/main/parsons/jsparsons-java-example-order.peml
-    title: Simple js-parsons Java example assignment - order
-    author: Cliff Shaffer (from js-Parsons, converted to PEML)
+    exercise_id: java_example_order_reuse_negative
+    title: Simple js-parsons Java example assignment - order with reusable blocks
+    author: Sean Rothenberger
     license:
       id: MIT
       owner:
-        name: Cliff Shaffer
-        email: shaffer@vt.edu
+        name: Sean Rothenberger
+        email: seanr06@vt.edu
     tags:
-      topics: PEML Demo Parsons Problem
+      topics: order grading, reusable blocks
       style: parsons, order, indent
-    instructions: "<p>Construct code by reordering and indenting the lines.</p>\n"
+    instructions: |
+      <p>Construct code by reordering and indenting the lines.<br />
+      You MUST reuse the <code>}</code> block twice to complete the program.</p>
     systems:
     - language: java
       assets:
@@ -20,24 +22,24 @@ parsed:
           blocks:
             content:
             - blockid: one
-              display: for (int i=0;i<3;i++) {
+              display: for (int i = 0; i < 10; i++) {
               indent: '0'
             - blockid: two
-              display: System.out.print("I ");
-              indent: '1'
+              display: if (i % 2 == 0) {
+              indent: '0'
             - blockid: three
-              display: System.out.print("am ");
-              indent: '1'
+              display: System.out.print(i);
+              indent: '0'
             - blockid: four
-              display: System.out.print("a Java program ");
-              indent: '1'
-            - blockid: five
               display: "}"
+              reusable: 'true'
               indent: '0'
   :diagnostics: []
 renderable:
   value:
-    question_text: "<p>Construct code by reordering and indenting the lines.</p>\n"
+    question_text: |
+      <p>Construct code by reordering and indenting the lines.<br />
+      You MUST reuse the <code>}</code> block twice to complete the program.</p>
     options:
       grader:
         type: dag
@@ -50,39 +52,33 @@ renderable:
       language: java
       runnable: true
     blocks:
-    - text: for (int i=0;i<3;i++) {
+    - text: for (int i = 0; i < 10; i++) {
       type: ''
       tag: one
       depends: ''
       indent: true
       displaymath: true
       feedback: ''
-    - text: System.out.print("I ");
+    - text: if (i % 2 == 0) {
       type: ''
       tag: two
       depends: ''
       indent: true
       displaymath: true
       feedback: ''
-    - text: System.out.print("am ");
+    - text: System.out.print(i);
       type: ''
       tag: three
       depends: ''
       indent: true
       displaymath: true
       feedback: ''
-    - text: System.out.print("a Java program ");
+    - text: "}"
       type: ''
       tag: four
       depends: ''
       indent: true
       displaymath: true
       feedback: ''
-    - text: "}"
-      type: ''
-      tag: five
-      depends: ''
-      indent: true
-      displaymath: true
-      feedback: ''
+      reusable: true
   diags: []

@@ -12,59 +12,57 @@ parsed:
     tags:
       topics: PEML Demo Parsons Problem
       style: parsons, order
-    instructions: 'Put the blocks in the proper order.
-
-      '
-    assets:
-      code:
-        blocks:
-          content:
-          - blockid: fixed
-            display: |
-              Fixed Start
-                This block goes at the beginning
-                of the exercise.
-          - blockid: randomg1b1
-            display: |
-              Random Group 1 Block 1
-                This block is the first block after the "Fixed Start" block.
-            depends: ''
-          - blockid: randomg1b2
-            display: |
-              Random Group 1 Block 2
-                This block is the second block after the "Fixed Start" block.
-            depends: randomg1b1
-          - blockid: randomg1b3
-            display: 'Random Group 1 Block 3: the third block in the first group'
-            depends: randomg1b2
-          - blockid: fixed
-            display: 'Fixed Middle: Appears in the middle of the exercise'
-          - blockid: randomg2b1
-            display: |
-              Random Group 2 Block 1
-                This block is the first block after the "Fixed Middle" block.
-            depends: randomg1b3
-          - blockid: randomg2b2
-            display: |
-              Random Group 2 Block 2
-                This block is the second block
-              that comes after the "Fixed Start" block.
-            depends: randomg2b1
-          - blockid: randomg2b3
-            display: |
-              Random Group 2 Block 3
-              This is the final adjustable block.
-            depends: randomg2b2
-          - blockid: fixed
-            display: |
-              Fixed End
-                    This block appears at the end.
+    instructions: "<p>Put the blocks in the proper order.</p>\n"
+    systems:
+    - language: java
+      assets:
+        code:
+          blocks:
+            content:
+            - blockid: fixed
+              display: |
+                Fixed Start
+                  This block goes at the beginning
+                  of the exercise.
+            - blockid: randomg1b1
+              display: |
+                Random Group 1 Block 1
+                  This block is the first block after the "Fixed Start" block.
+              depends: ''
+            - blockid: randomg1b2
+              display: |
+                Random Group 1 Block 2
+                  This block is the second block after the "Fixed Start" block.
+              depends: randomg1b1
+            - blockid: randomg1b3
+              display: 'Random Group 1 Block 3: the third block in the first group'
+              depends: randomg1b2
+            - blockid: fixed
+              display: 'Fixed Middle: Appears in the middle of the exercise'
+            - blockid: randomg2b1
+              display: |
+                Random Group 2 Block 1
+                  This block is the first block after the "Fixed Middle" block.
+              depends: randomg1b3
+            - blockid: randomg2b2
+              display: |
+                Random Group 2 Block 2
+                  This block is the second block
+                that comes after the "Fixed Start" block.
+              depends: randomg2b1
+            - blockid: randomg2b3
+              display: |
+                Random Group 2 Block 3
+                This is the final adjustable block.
+              depends: randomg2b2
+            - blockid: fixed
+              display: |
+                Fixed End
+                      This block appears at the end.
   :diagnostics: []
-runestone:
+renderable:
   value:
-    question_text: 'Put the blocks in the proper order.
-
-      '
+    question_text: "<p>Put the blocks in the proper order.</p>\n"
     options:
       grader:
         type: dag
@@ -74,7 +72,7 @@ runestone:
       indent: false
       adaptive: true
       numbered: false
-      language: ''
+      language: java
       runnable: true
     blocks:
     - text: |
@@ -86,6 +84,7 @@ runestone:
       depends: ''
       indent: ''
       displaymath: true
+      feedback: ''
     - text: |
         Random Group 1 Block 1
           This block is the first block after the "Fixed Start" block.
@@ -94,6 +93,7 @@ runestone:
       depends: ''
       indent: ''
       displaymath: true
+      feedback: ''
     - text: |
         Random Group 1 Block 2
           This block is the second block after the "Fixed Start" block.
@@ -102,18 +102,21 @@ runestone:
       depends: randomg1b1
       indent: ''
       displaymath: true
+      feedback: ''
     - text: 'Random Group 1 Block 3: the third block in the first group'
       type: ''
       tag: randomg1b3
       depends: randomg1b2
       indent: ''
       displaymath: true
+      feedback: ''
     - text: 'Fixed Middle: Appears in the middle of the exercise'
       type: ''
       tag: fixed
       depends: ''
       indent: ''
       displaymath: true
+      feedback: ''
     - text: |
         Random Group 2 Block 1
           This block is the first block after the "Fixed Middle" block.
@@ -122,6 +125,7 @@ runestone:
       depends: randomg1b3
       indent: ''
       displaymath: true
+      feedback: ''
     - text: |
         Random Group 2 Block 2
           This block is the second block
@@ -131,6 +135,7 @@ runestone:
       depends: randomg2b1
       indent: ''
       displaymath: true
+      feedback: ''
     - text: |
         Random Group 2 Block 3
         This is the final adjustable block.
@@ -139,6 +144,7 @@ runestone:
       depends: randomg2b2
       indent: ''
       displaymath: true
+      feedback: ''
     - text: |
         Fixed End
               This block appears at the end.
@@ -147,4 +153,5 @@ runestone:
       depends: ''
       indent: ''
       displaymath: true
+      feedback: ''
   diags: []

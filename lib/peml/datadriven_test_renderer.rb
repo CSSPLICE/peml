@@ -7,7 +7,6 @@ require 'pp'
 # need to fix pattern.actual
 module Peml
   class DatadrivenTestRenderer
-  class DatadrivenTestRenderer
 
     # points to the directory where the liquid templates are saved
     @@template_path = File.expand_path('templates/', __dir__) + "/"

@@ -13,91 +13,87 @@ parsed:
       topics: PEML Demo Parsons Problem
       style: parsons, order
     instructions: |
-      Drag and drop the blocks below to create a proof by induction of the following statement.
+      <p>Drag and drop the blocks below to create a proof by induction of the following statement.</p>
 
-      Claim: for all natural numbers $n$,
-            $$
-            \sum_{j=0}^n 2(-7)^j = \frac{1-(-7)^{n+1}}{4}
-            $$
-    assets:
-      code:
-        blocks:
-          content:
-          - blockid: starter
-            display: Proof by induction on $n$.
-            depends: ''
-          - blockid: predicate
-            display: 'Inductive Predicate: $P(n): \sum_{j=0}^n 2(-7)^j = \frac{1-(-7)^{n+1}}{4}$">'
-            depends: starter
-          - blockid: basecase
-            depends: predicate
-            pickone: 'true'
-            blocklist:
-            - blockid: base1
-              display: 'Base case: At $n=0$, $\sum_{j=0}^n 2(-7)^j = 2$ and $\frac{1-(-7)^{n+1}}{4}
-                = \frac{1-(-7)}{4} = 2$, so the base case $P(0)$ holds.'
-            - blockid: base2
-              display: 'Base case: At $n=0$, $\sum_{j=0}^n 2(-7)^j = 2$. So the base
-                case $P(0)$ holds.'
-              feedback: Wrong choice
+      <p>Claim: for all natural numbers $n$,<br />
+            \(\sum_{j=0}^n 2(-7)^j = \frac{1-(-7)^{n+1}}{4}\)</p>
+    systems:
+    - language: natural
+      assets:
+        code:
+          blocks:
+            content:
+            - blockid: starter
+              display: Proof by induction on $n$.
+              depends: ''
+            - blockid: predicate
+              display: 'Inductive Predicate: $P(n): \sum_{j=0}^n 2(-7)^j = \frac{1-(-7)^{n+1}}{4}$”&gt;'
+              depends: starter
+            - blockid: basecase
+              depends: predicate
+              pickone: 'true'
+              blocklist:
+              - blockid: base1
+                display: 'Base case: At $n=0$, $\sum_{j=0}^n 2(-7)^j = 2$ and $\frac{1-(-7)^{n+1}}{4}
+                  = \frac{1-(-7)}{4} = 2$, so the base case $P(0)$ holds.'
+              - blockid: base2
+                display: 'Base case: At $n=0$, $\sum_{j=0}^n 2(-7)^j = 2$. So the
+                  base case $P(0)$ holds.'
+                feedback: Wrong choice
             - blockid: IH
               depends: basecase
               pickone: 'true'
               blocklist:
               - blockid: IH1
                 display: 'Inductive Hypothesis: Suppose that $P(n):$ $\sum_{j=0}^n
-                  2(-7)^j = \frac{1-(-7)^{n+1}}{4}$ holds for $n=0,1,...,k$.'
+                  2(-7)^j = \frac{1-(-7)^{n+1}}{4}$ holds for $n=0,1,…,k$.'
               - blockid: IH2
                 display: 'Inductive Hypothesis: Suppose that $P(n):$ $\sum_{j=0}^n
                   2(-7)^j = \frac{1-(-7)^{n+1}}{4}$ holds.'
                 feedback: Wrong choice.
-              - blockid: IS
-                depends: IH
-                pickone: 'true'
-                blocklist:
-                - blockid: IS1
-                  display: 'Inductive Step: We need to show that $P(k+1):$ $\sum_{j=0}^{k+1}
-                    2(-7)^j = \frac{1-(-7)^{k+2}}{4}$ holds.'
-                - blockid: IS2
-                  display: 'Inductive Step: We need to show that $P(k+1):$ $\sum_{j=0}^{k}
-                    2(-7)^j = \frac{1-(-7)^{k+2}}{4}$ holds.'
-                  feedback: Wrong choice
-                - blockid: left
-                  depends: IS
-                  display: The left hand side is $\sum_{j=0}^{k+1} 2(-7)^j = \sum_{j=0}^k
-                    2(-7)^j + 2(-7)^{k+1}$"> The left hand side is $\sum_{j=0}^{k+1}
-                    2(-7)^j = \sum_{j=0}^k 2(-7)^j + 2(-7)^{k+1}$.
-                - blockid: useIH
-                  depends: left
-                  pickone: 'true'
-                  blocklist:
-                  - blockid: useIH1
-                    display: By the inductive hypothesis we have $\sum_{j=0}^k 2(-7)^j
-                      = \frac{1-(-7)^{k+1}}{4}$. So then substituting we get $\frac{1-(-7)^{k+1}}{4}
-                      + 2(-7)^{k+1}$ $= \frac{1-(-7)^{k+1} + 8(-7)^{k+1}}{4}$ $= \frac{1+7(-7)^{k+1}}{4}$
-                      which simplifies to $= \frac{1-(-7)^{k+2}}{4}$
-                  - blockid: useIH2
-                    display: By the inductive hypothesis we have $\sum_{j=0}^{k+1}
-                      2(-7)^j = \sum_{j=0}^k 2(-7)^j + 2(-7)^{k+1}$. So then substituting
-                      we get $\frac{1-(-7)^{k+1}}{4} + 2(-7)^{k+1}$ $= \frac{1-(-7)^{k+1}
-                      + 8(-7)^{k+1}}{4}$ $= \frac{1+7(-7)^{k+1}}{4}$ which simplifies
-                      to $= \frac{1-(-7)^{k+2}}{4}$
-                    feedback: Wrong choice
-                  - blockid: final
-                    display: So $\sum_{j=0}^{k+1} 2(-7)^j = \frac{1-(-7)^{k+2}}{4}$,
-                      which was what we needed to show.
-                    depends: useIH
-  :diagnostics:
-  - 'Path ''/assets/code/blocks/content/2/blocklist/2'' is missing key: display'
-runestone:
+            - blockid: IS
+              depends: IH
+              pickone: 'true'
+              blocklist:
+              - blockid: IS1
+                display: 'Inductive Step: We need to show that $P(k+1):$ $\sum_{j=0}^{k+1}
+                  2(-7)^j = \frac{1-(-7)^{k+2}}{4}$ holds.'
+              - blockid: IS2
+                display: 'Inductive Step: We need to show that $P(k+1):$ $\sum_{j=0}^{k}
+                  2(-7)^j = \frac{1-(-7)^{k+2}}{4}$ holds.'
+                feedback: Wrong choice
+            - blockid: left
+              depends: IS
+              display: The left hand side is $\sum_{j=0}^{k+1} 2(-7)^j = \sum_{j=0}^k
+                2(-7)^j + 2(-7)^{k+1}$”&gt; The left hand side is $\sum_{j=0}^{k+1}
+                2(-7)^j = \sum_{j=0}^k 2(-7)^j + 2(-7)^{k+1}$.
+            - blockid: useIH
+              depends: left
+              pickone: 'true'
+              blocklist:
+              - blockid: useIH1
+                display: By the inductive hypothesis we have $\sum_{j=0}^k 2(-7)^j
+                  = \frac{1-(-7)^{k+1}}{4}$. So then substituting we get $\frac{1-(-7)^{k+1}}{4}
+                  + 2(-7)^{k+1}$ $= \frac{1-(-7)^{k+1} + 8(-7)^{k+1}}{4}$ $= \frac{1+7(-7)^{k+1}}{4}$
+                  which simplifies to $= \frac{1-(-7)^{k+2}}{4}$
+              - blockid: useIH2
+                display: By the inductive hypothesis we have $\sum_{j=0}^{k+1} 2(-7)^j
+                  = \sum_{j=0}^k 2(-7)^j + 2(-7)^{k+1}$. So then substituting we get
+                  $\frac{1-(-7)^{k+1}}{4} + 2(-7)^{k+1}$ $= \frac{1-(-7)^{k+1} + 8(-7)^{k+1}}{4}$
+                  $= \frac{1+7(-7)^{k+1}}{4}$ which simplifies to $= \frac{1-(-7)^{k+2}}{4}$
+                feedback: Wrong choice
+            - blockid: final
+              display: So $\sum_{j=0}^{k+1} 2(-7)^j = \frac{1-(-7)^{k+2}}{4}$, which
+                was what we needed to show.
+              depends: useIH
+  :diagnostics: []
+renderable:
   value:
     question_text: |
-      Drag and drop the blocks below to create a proof by induction of the following statement.
+      <p>Drag and drop the blocks below to create a proof by induction of the following statement.</p>
 
-      Claim: for all natural numbers $n$,
-            $$
-            \sum_{j=0}^n 2(-7)^j = \frac{1-(-7)^{n+1}}{4}
-            $$
+      <p>Claim: for all natural numbers $n$,<br />
+            \(\sum_{j=0}^n 2(-7)^j = \frac{1-(-7)^{n+1}}{4}\)</p>
     options:
       grader:
         type: dag
@@ -107,7 +103,7 @@ runestone:
       indent: false
       adaptive: true
       numbered: false
-      language: ''
+      language: natural
       runnable: true
     blocks:
     - text: Proof by induction on $n$.
@@ -116,22 +112,96 @@ runestone:
       depends: ''
       indent: ''
       displaymath: true
-    - text: 'Inductive Predicate: $P(n): \sum_{j=0}^n 2(-7)^j = \frac{1-(-7)^{n+1}}{4}$">'
+      feedback: ''
+    - text: 'Inductive Predicate: $P(n): \sum_{j=0}^n 2(-7)^j = \frac{1-(-7)^{n+1}}{4}$”&gt;'
       type: ''
       tag: predicate
       depends: starter
       indent: ''
       displaymath: true
+      feedback: ''
     - text: 'Base case: At $n=0$, $\sum_{j=0}^n 2(-7)^j = 2$ and $\frac{1-(-7)^{n+1}}{4}
         = \frac{1-(-7)}{4} = 2$, so the base case $P(0)$ holds.'
       type: ''
-      tag: base1
+      tag: basecase-base1
       depends: predicate
       indent: 0
       displaymath: true
+      feedback: ''
+      picklimit: 0
     - text: 'Base case: At $n=0$, $\sum_{j=0}^n 2(-7)^j = 2$. So the base case $P(0)$
         holds.'
-      tag: paired
-      depends: ''
-      displaymath: ''
+      tag: basecase-base2
+      depends: "-1"
+      displaymath: true
+      feedback: Wrong choice
+      reusable: false
+    - text: 'Inductive Hypothesis: Suppose that $P(n):$ $\sum_{j=0}^n 2(-7)^j = \frac{1-(-7)^{n+1}}{4}$
+        holds for $n=0,1,…,k$.'
+      type: ''
+      tag: IH-IH1
+      depends: basecase
+      indent: 0
+      displaymath: true
+      feedback: ''
+      picklimit: 0
+    - text: 'Inductive Hypothesis: Suppose that $P(n):$ $\sum_{j=0}^n 2(-7)^j = \frac{1-(-7)^{n+1}}{4}$
+        holds.'
+      tag: IH-IH2
+      depends: "-1"
+      displaymath: true
+      feedback: Wrong choice.
+      reusable: false
+    - text: 'Inductive Step: We need to show that $P(k+1):$ $\sum_{j=0}^{k+1} 2(-7)^j
+        = \frac{1-(-7)^{k+2}}{4}$ holds.'
+      type: ''
+      tag: IS-IS1
+      depends: IH
+      indent: 0
+      displaymath: true
+      feedback: ''
+      picklimit: 0
+    - text: 'Inductive Step: We need to show that $P(k+1):$ $\sum_{j=0}^{k} 2(-7)^j
+        = \frac{1-(-7)^{k+2}}{4}$ holds.'
+      tag: IS-IS2
+      depends: "-1"
+      displaymath: true
+      feedback: Wrong choice
+      reusable: false
+    - text: The left hand side is $\sum_{j=0}^{k+1} 2(-7)^j = \sum_{j=0}^k 2(-7)^j
+        + 2(-7)^{k+1}$”&gt; The left hand side is $\sum_{j=0}^{k+1} 2(-7)^j = \sum_{j=0}^k
+        2(-7)^j + 2(-7)^{k+1}$.
+      type: ''
+      tag: left
+      depends: IS
+      indent: ''
+      displaymath: true
+      feedback: ''
+    - text: By the inductive hypothesis we have $\sum_{j=0}^k 2(-7)^j = \frac{1-(-7)^{k+1}}{4}$.
+        So then substituting we get $\frac{1-(-7)^{k+1}}{4} + 2(-7)^{k+1}$ $= \frac{1-(-7)^{k+1}
+        + 8(-7)^{k+1}}{4}$ $= \frac{1+7(-7)^{k+1}}{4}$ which simplifies to $= \frac{1-(-7)^{k+2}}{4}$
+      type: ''
+      tag: useIH-useIH1
+      depends: left
+      indent: 0
+      displaymath: true
+      feedback: ''
+      picklimit: 0
+    - text: By the inductive hypothesis we have $\sum_{j=0}^{k+1} 2(-7)^j = \sum_{j=0}^k
+        2(-7)^j + 2(-7)^{k+1}$. So then substituting we get $\frac{1-(-7)^{k+1}}{4}
+        + 2(-7)^{k+1}$ $= \frac{1-(-7)^{k+1} + 8(-7)^{k+1}}{4}$ $= \frac{1+7(-7)^{k+1}}{4}$
+        which simplifies to $= \frac{1-(-7)^{k+2}}{4}$
+      tag: useIH-useIH2
+      depends: "-1"
+      displaymath: true
+      feedback: Wrong choice
+      reusable: false
+    - text: So $\sum_{j=0}^{k+1} 2(-7)^j = \frac{1-(-7)^{k+2}}{4}$, which was what
+        we needed to show.
+      type: ''
+      tag: final
+      depends: useIH
+      indent: ''
+      displaymath: true
+      feedback: ''
   diags: []
