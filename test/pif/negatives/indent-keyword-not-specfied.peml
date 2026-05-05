@@ -10,7 +10,10 @@ license.owner.name: Cliff Shaffer
 license.owner.email: shaffer@vt.edu
 
 tags.topics: PIF Error Demo
-tags.style: parsons, execute
+
+settings.grader.type: execute
+settings.indent.active: true
+settings.indent.mode: free
 
 instructions:----------
 Construct code by reordering and indenting the lines.
@@ -53,7 +56,7 @@ indent: 0
 []
 
 [.assets.test.files]
-type: text/csv-unquoted
+format: text/csv-unquoted
 content:----------
 expected
 I am a Java program I am a Java program I am a Java program

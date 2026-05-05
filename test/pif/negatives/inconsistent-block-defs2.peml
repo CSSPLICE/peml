@@ -16,7 +16,8 @@ license.owner.name: Cliff Shaffer
 license.owner.email: shaffer@vt.edu
 
 tags.topics: PIF Error Demo
-tags.style: parsons, order
+
+settings.grader.type: order
 
 instructions:----------
 **Your task**: Construct a Python program that prints strings "Good", "Morning", "World!" on separate lines. You should construct your program by dragging and dropping the lines to the solution area on the right.

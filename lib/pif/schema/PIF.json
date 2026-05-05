@@ -82,7 +82,7 @@
     "exercise_id",
     "title",
     "license",
-    "tags",
+    "settings",
     "instructions",
     "systems"
   ],
@@ -104,21 +104,61 @@
         }
       }
     },
+    "settings": {
+      "type": "object",
+      "required": ["grader"],
+      "description": "Exercise-level configuration for grading and rendering.",
+      "properties": {
+        "grader": {
+          "type": "object",
+          "required": ["type"],
+          "description": "Grading configuration.",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["order", "execute"],
+              "description": "Grading mode: 'order' for DAG-based ordering, 'execute' for execution-based grading."
+            },
+            "show_feedback": {
+              "$ref": "#/definitions/boolean",
+              "description": "Whether to show feedback to students after grading."
+            }
+          }
+        },
+        "indent": {
+          "type": "object",
+          "description": "Indentation configuration for blocks.",
+          "properties": {
+            "active": { "$ref": "#/definitions/boolean" },
+            "mode": {
+              "type": "string",
+              "enum": ["prescribed", "free"],
+              "description": "'prescribed' requires blocks to declare their indent level; 'free' lets students indent freely."
+            },
+            "max_indents": {
+              "$ref": "#/definitions/string_number",
+              "description": "Number of indent levels available to the student. Defaults to 3."
+            }
+          }
+        },
+        "adaptive": {
+          "$ref": "#/definitions/boolean",
+          "description": "Whether the problem uses adaptive (hint-based) mode. Defaults to true."
+        },
+        "numbered": {
+          "$ref": "#/definitions/boolean",
+          "description": "Whether blocks are displayed with position numbers."
+        }
+      }
+    },
     "tags": {
       "type": "object",
-      "required": ["style"],
       "properties": {
-        "style": {
-          "type": "string",
-          "pattern": "^[^,]+(?:\\s*,\\s*[^,]+)*$",
-          "description": "Defines the Parsons Problem style, including 'order', 'execute', and optionally 'indent'."
-        },
         "topics": { "$ref": "#/definitions/nonempty_string" },
         "interface_layout": { "enum": ["horizontal", "vertical"] }
       }
     },
     "instructions": { "$ref": "#/definitions/nonempty_string" },
-    "numbered": { "$ref": "#/definitions/boolean" },
     "systems": {
       "type": "array",
       "minItems": 1,

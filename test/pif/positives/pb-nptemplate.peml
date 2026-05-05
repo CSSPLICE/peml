@@ -9,7 +9,10 @@ license.owner.name: Cliff Shaffer
 license.owner.email: shaffer@vt.edu
 
 tags.topics: PEML NP-completeness
-tags.style: parsons, order
+
+settings.grader.type: order
+settings.indent.active: true
+settings.indent.mode: free
 
 instructions:----------
 Show the general process for an NP-Completeness Proof.
@@ -44,17 +47,17 @@ blockid: choose
 display: Choose a known NP-hard problem A.
 depends: starthard
 
-blockid: trans
+blockid: transfo
 display: Define two transformations.
 depends: choose
 
 blockid: t1
 display: Describe a polynomial-time algorithm that takes an arbitrary instance <b>I</b> of ``A`X`` to an instance <b>I′</b> of ``X`A``.
-depends: trans
+depends: transfo
 
 blockid: t2
 display: Describe a polynomial-time transformation from the solution for <b>I'</b> in problem ``X`A`` (call it <b>SLN'</b>) to <b>SLN</b> such that <b>SLN</b> is the solution for <b>I</b> in problem ``A`X``.
-depends: trans
+depends: transfo
 []
 []
 []

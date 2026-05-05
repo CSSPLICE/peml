@@ -13,7 +13,10 @@ license.owner.name: Cliff Shaffer
 license.owner.email: shaffer@vt.edu
 
 tags.topics: PEML Demo Parsons Problem
-tags.style: parsons, execute, indent
+
+settings.grader.type: execute
+settings.indent.active: true
+settings.indent.mode: prescribed
 
 instructions:----------
 The constructed code should print the minimum of variables a and b.

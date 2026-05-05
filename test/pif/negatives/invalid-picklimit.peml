@@ -19,7 +19,8 @@ license.owner.name: Cliff Shaffer
 license.owner.email: shaffer@vt.edu
 
 tags.topics: PEML Demo Parsons Problem
-tags.style: parsons, order
+
+settings.grader.type: order
 
 instructions:----------
 Write a function to swap two array elements by reordering the lines.

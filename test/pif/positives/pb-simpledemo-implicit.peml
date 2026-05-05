@@ -16,7 +16,8 @@ license.owner.name: Cliff Shaffer
 license.owner.email: shaffer@vt.edu
 
 tags.topics: PEML Demo Parsons Problem
-tags.style: parsons, order
+
+settings.grader.type: order
 
 instructions:----------
 Prove that (A AND B AND C) implies (A AND C).

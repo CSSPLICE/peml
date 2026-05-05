@@ -50,28 +50,16 @@ module PifParser
 
     # Extended validation
     if (diags.empty?)
-      style_tag     = value["tags.style"] # Structurally required
+      grader_type   = value["settings.grader.type"] # Structurally required
       block_content = value['systems[0].assets.code.blocks.content'] # Structurally required
       delimiter     = value['systems[0].assets.code.blocks.delimiter'] || "`" # Optional
       test_content  = value['systems[0].assets.test.files[0].content'] # Optional
       test_format   = value['systems[0].assets.test.files[0].format'] # Optional
 
-      # Style tag indicators (case-sensitive)
-      parsed_style_tag = style_tag.split(/\s*,\s*/)
-      has_parsons_tag  = parsed_style_tag.include?("parsons")
-      has_execute_tag  = parsed_style_tag.include?("execute")
-      has_order_tag    = parsed_style_tag.include?("order")
-      has_indent_tag   = parsed_style_tag.include?("indent")
-
-      # Checks that style tag contains "parsons" AND
-      # EITHER "order" or "execute" (in no specific order)
-      if (!has_parsons_tag ||
-        !(has_execute_tag ||
-          has_order_tag) ||
-        (has_execute_tag && has_order_tag)
-      )
-        diags << "Style tag requires 'parsons' and either 'order' or 'execute' keywords."
-      end
+      has_execute_tag  = grader_type == "execute"
+      has_order_tag    = grader_type == "order"
+      indent_active    = value["settings.indent.active"] == "true"
+      indent_mode      = value["settings.indent.mode"]
 
       # Checks that the required fields for execution-based grading
       # are included. Language is now guaranteed by the PIF schema (systems[0].language required).
@@ -97,10 +85,8 @@ module PifParser
           "less than the number of blocks"
       end
 
-      # Checks if indentation is required and, if so,
-      # whether all normal blocks have an indent level
-      if (has_indent_tag &&
-        has_order_tag)
+      # For prescribed indent mode with order grading, all normal blocks must declare an indent level
+      if (indent_mode == "prescribed" && has_order_tag)
         normal_blocks.each do |block|
           indent = block["indent"]
           pos = block["pos"]
@@ -109,30 +95,25 @@ module PifParser
             diags << "Block at position #{pos} is missing the required " \
               "indent field."
           end
-
         end
       end
 
-      # If indent style keyword is not used,
-      # then checks that no block contains an indent level.
-      if (!has_indent_tag)
-        # Could recursively process block_content -
-        # but previous operation has already separated
-        # them into easily workable form
+      # Blocks must not declare indent levels when indent is inactive or mode is free
+      if !indent_active || indent_mode == "free"
+        message = indent_mode == "free" \
+          ? "Block(s) contain indent fields but settings.indent.mode is 'free'." \
+          : "Block(s) contain indent fields but settings.indent.active is not true."
 
         catch(:illegal_indent) do
           s.each do |block_group|
             block_group.each do |block|
-              indent = block["indent"]
-
-              if !indent.nil?
-                diags << "Block(s) contain indent fields despite missing 'indent' style keyword."
+              if !block["indent"].nil?
+                diags << message
                 throw :illegal_indent
               end
             end
           end
         end
-
       end
 
       # Checks that blockids are unique
@@ -149,7 +130,7 @@ module PifParser
 
       # Checks that the CSV test content is correctly formatted,
       # i.e., the header length matches all row lengths
-      if (has_execute_tag && test_content)
+      if has_execute_tag && test_content
         parsed_test_content = Peml::CsvUnquotedParser.new.parse(
           test_content
         )

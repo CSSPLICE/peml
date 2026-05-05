@@ -7,35 +7,38 @@ module PifConverter
   def self.to_renderable_json(pif, format = nil)
     # puts "raw pif parse: #{pif['systems[0].assets.code.blocks.content']}"
     # PIF-to-Parsons directly mappable data
-    tags = pif['tags']
-    style = tags['style']
-    blocks = pif['systems[0].assets.code.blocks.content']
-    starter = pif['systems[0].assets.code.starter.files']
-    instructions = pif['instructions']
-    grader = style.include?('execute') ?
-               'exec' :
-               'dag'
-    indent = style.include?('indent') || style.include?('execute')
-    numbered = pif['numbered'] || false
-    delimiter = pif['systems[0].assets.code.blocks.delimiter'] || '`'
-    language = pif['systems[0].language']&.downcase || 'math'
-    displaymath = ["math", "natural", nil].include?(pif['systems[0].language']&.downcase)
+    settings        = pif['settings']
+    grader_type     = settings['grader']['type']
+    indent_settings = settings['indent']
+    blocks          = pif['systems[0].assets.code.blocks.content']
+    starter         = pif['systems[0].assets.code.starter.files']
+    instructions    = pif['instructions']
+    grader          = grader_type == 'execute' ? 'exec' : 'dag'
+    indent_active   = indent_settings && indent_settings['active'] == 'true'
+    indent_options  = {
+      "active"      => indent_active,
+      "mode"        => indent_settings&.[]('mode') || '',
+      "max_indents" => (indent_settings&.[]('max_indents') || '3').to_i,
+    }
+    show_feedback = settings['grader']['show_feedback'] != 'false'
+    numbered      = settings['numbered'] == 'true'
+    adaptive      = settings['adaptive'] != 'false'
+    delimiter     = pif['systems[0].assets.code.blocks.delimiter'] || '`'
+    language      = pif['systems[0].language']&.downcase || 'math'
+    displaymath   = ["math", "natural", nil].include?(pif['systems[0].language']&.downcase)
 
     # Parsons model
     parsons_data_model = {
       "question_text" => instructions,
       "options" => {
         "grader" => {
-          "type" => grader,
-          "showFeedback" => true,
+          "type"          => grader,
+          "show_feedback" => show_feedback,
         },
-        "maxdist" => 0,
-        "order" => "",
-        "indent" => indent,
-        "adaptive" => true,
+        "indent"   => indent_options,
+        "adaptive" => adaptive,
         "numbered" => numbered,
         "language" => language,
-        "runnable" => true,
       },
       "blocks" => [],
     }.dottie!
@@ -132,9 +135,13 @@ module PifConverter
           parsons_block["reusable"] = block["reusable"].to_s.strip.downcase == "true"
         end
 
-        # turn on indentation for all blocks if execute or indent is in tags
-        if indent 
-          parsons_block["indent"] = indent
+        # pass prescribed indent levels per block; for free mode just signal indentability
+        if indent_active
+          if indent_settings['mode'] == 'prescribed'
+            parsons_block["indent"] = block["indent"]&.to_i || 0
+          else
+            parsons_block["indent"] = true
+          end
         end
 
         # Appends converted block

@@ -10,7 +10,10 @@ license.owner.name: Cliff Shaffer
 license.owner.email: shaffer@vt.edu
 
 tags.topics: PIF Error Demo
-tags.style: parsons, order, indent
+
+settings.grader.type: order
+settings.indent.active: true
+settings.indent.mode: prescribed
 
 instructions:----------
 Construct code by reordering and indenting the lines.
