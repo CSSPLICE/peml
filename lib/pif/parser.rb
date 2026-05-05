@@ -486,7 +486,9 @@ module PifParser
 
     if hash.has_key?("systems")
       language = hash["systems"]&.first&.[]("language")
-      is_git_flavored_markdown = ["math", "natural"].include?(language&.downcase)
+      # Default to GFM rendering when no language is specified,
+      # skip rendering only when an explicit programming language is given
+      is_git_flavored_markdown = language.nil? || ["math", "natural"].include?(language.downcase)
     else
       is_git_flavored_markdown = true
     end

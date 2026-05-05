@@ -19,6 +19,7 @@ module PifConverter
     numbered = pif['numbered'] || false
     delimiter = pif['systems[0].assets.code.blocks.delimiter'] || '`'
     language = pif['systems[0].language']&.downcase || 'math'
+    displaymath = ["math", "natural", nil].include?(pif['systems[0].language']&.downcase)
 
     # Parsons model
     parsons_data_model = {
@@ -66,7 +67,7 @@ module PifConverter
         "tag" => "",
         "depends" => "",
         "indent" => 0,
-        "displaymath" => true,
+        "displaymath" => displaymath,
         "feedback" => "",
       }.dottie!
 
@@ -101,7 +102,7 @@ module PifConverter
             "text" => distractor["display"],
             "tag" => "#{block["blockid"]}-#{distractor["blockid"]}",
             "depends" => "-1",
-            "displaymath" => true,
+            "displaymath" => displaymath,
             "feedback" => distractor["feedback"],
             "reusable" => block["reusable"].to_s.strip.downcase == "true",
           }
@@ -154,7 +155,7 @@ module PifConverter
           "tag" => "",
           "depends" => "",
           "indent" => "",
-          "displaymath" => true,
+          "displaymath" => displaymath,
           "feedback" => "",
         }.dottie!
 
