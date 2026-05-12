@@ -173,15 +173,11 @@ module Peml
   #   If nil a ruby hash is returned.
   def self.pif_to_renderable_json(parsed_pif, format = nil)
     if !parsed_pif[:diagnostics].empty?
-      # TODO handle this better and return a good error message
-      result = parsed_pif[:diagnostics]
-      if format == 'json'
-        result = result.to_json
-      end
+      result = { diagnostics: parsed_pif[:diagnostics] }
+      format == 'json' ? result.to_json : result
     else
-      result = PifConverter.to_renderable_json(parsed_pif[:value], format)
+      PifConverter.to_renderable_json(parsed_pif[:value], format)
     end
-    result
   end
 
 end

@@ -5,23 +5,24 @@ lib = File.expand_path("../../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 # require 'pp'
-require_relative '../lib/pif/parser'
-require_relative '../lib/pif/converter'
+require_relative '../lib/peml'
+require 'fileutils'
 
 input_file_path = ARGV[0]
 output_dir = ARGV[1]
-flag = ARGV[2]
-output_format = ARGV[3]
+rest = ARGV[2..] || []
 
 valid_output_formats = ["rs", "pif"]
+show_fails  = rest.include?('--show-fails')
+f_index     = rest.index('-f')
+output_format = f_index ? rest[f_index + 1] : nil
+
+if f_index && (!output_format || !valid_output_formats.include?(output_format))
+  puts "Unknown flag or format used"
+  exit 1
+end
 
 if input_file_path && output_dir
-  # Check for calid flag and output_format
-  if flag && output_format
-    if flag != "-f" || !valid_output_formats.include?(output_format)
-      puts "Unknown flag or format used"
-    end
-  end
 
   filename = File.basename(input_file_path, File.extname(input_file_path))
 
@@ -39,7 +40,19 @@ if input_file_path && output_dir
     puts "This file has a blocklist but doesnt have a blocklist pickone value"
   end
 
+  if diagnostics.length > 0
+    puts "Diagnostics for #{filename}.peml:"
+    diagnostics.each { |d| puts "  - #{d}" }
+    if show_fails
+      FileUtils.mkdir_p(output_dir)
+      File.open("#{output_dir}/failed-#{filename}.json", 'w') do |file|
+        file.puts(Peml.pif_to_renderable_json(parsed, "json"))
+      end
+    end
+  end
+
   if (diagnostics.length == 0 && !has_nontrivial_blocklist)
+    FileUtils.mkdir_p(output_dir)
     File.open("#{output_dir}/#{filename}.json", 'w') do |file|
       # PIF File is parsed to fit runestone parsons as the default for now.
       # The option to select a specific parsons version
@@ -49,16 +62,16 @@ if input_file_path && output_dir
         file.puts(parsed.to_json)
       when "rs"
         puts "Converting to rs format..."
-        file.puts(PifConverter.to_renderable_json(parsed[:value], "json"))
+        file.puts(Peml.pif_to_renderable_json(parsed, "json"))
       else
         puts "Converting to rs format..."
-        file.puts(PifConverter.to_renderable_json(parsed[:value], "json"))
+        file.puts(Peml.pif_to_renderable_json(parsed, "json"))
       end
     end
   end
 
 else
-  puts "Usage: pif <filename> <output directory> \n flag -f : Output format"
+  puts "Usage: pif <filename> <output directory> [-f <rs|pif>] [--show-fails]"
   exit 1
 end
 

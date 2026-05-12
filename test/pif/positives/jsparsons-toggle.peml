@@ -51,7 +51,7 @@ indent: 1
 []
 
 [.assets.test.files]
-type: text/csv-unquoted
+format: text/csv-unquoted
 content:----------
 expected
 2

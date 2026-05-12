@@ -61,7 +61,7 @@ indent: 0
 []
 
 [.assets.test.files]
-type: text/csv-unquoted
+format: text/csv-unquoted
 content:----------
 expected
 I am a Java program I am a Java program I am a Java program
