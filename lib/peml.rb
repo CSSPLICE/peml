@@ -146,17 +146,11 @@ module Peml
     input[:peml]     = params[:pif]      if params[:pif]
     input[:filename] = params[:filename] if params[:filename]
 
-    # Step 1: Load via PEML parser and run PEML schema validation.
-    # result_only is never passed here so PEML diagnostics are always captured.
+    # PEML schema diagnostics are intentionally ignored — PIF has its own
+    # schema (PIF.json) validated in step 2. Consolidation of schemas to be 
+    # dicussed later
     state = Peml.parse(input)
     value = state['value'].dottie!
-    peml_diags = state['diagnostics'] || []
-
-    # Surface PEML errors immediately — no point running PIF validation
-    # on a document that already fails the base PEML structure.
-    if peml_diags.any?
-      return params[:result_only] ? value : { value: value, diagnostics: peml_diags }
-    end
 
     # Step 2: PIF-specific structural and extended validation
     pif_diags = PifParser.validate(value)
