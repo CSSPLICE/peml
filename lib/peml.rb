@@ -139,6 +139,16 @@ module Peml
 
 
   # Pif Methods------------------------------------------------------
+
+  # Returns true if the given content or parsed hash is a PIF document.
+  # Accepts either a raw PEML string or an already-parsed hash.
+  def self.pif?(input)
+    value = input.is_a?(String) \
+      ? Peml::Loader.new.load(input).dottie! \
+      : input.dottie!
+    !value['settings.grader.type'].nil?
+  end
+
   def self.pif_parse(params)
     # Accepts string content as {pif: "..."} or a file path as {filename: "..."}
     # Remap :pif to :peml so Peml.parse can accept it

@@ -239,9 +239,9 @@
                     "maxItems": 1,
                     "items": {
                       "type": "object",
-                      "required": ["format", "content"],
+                      "required": ["type", "content"],
                       "properties": {
-                        "format": {
+                        "type": {
                           "type": "string",
                           "pattern": "^(text/csv|text/csv-unquoted)$"
                         },
