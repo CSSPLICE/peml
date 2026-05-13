@@ -54,7 +54,7 @@ module PifParser
       block_content = value['systems[0].assets.code.blocks.content'] # Structurally required
       delimiter     = value['systems[0].assets.code.blocks.delimiter'] || "`" # Optional
       test_content  = value['systems[0].assets.test.files[0].content'] # Optional
-      test_format   = value['systems[0].assets.test.files[0].format'] # Optional
+      test_type     = value['systems[0].assets.test.files[0].type'] # Optional
 
       has_execute_tag  = grader_type == "execute"
       has_order_tag    = grader_type == "order"
@@ -63,8 +63,8 @@ module PifParser
 
       # Checks that the required fields for execution-based grading
       # are included. Language is now guaranteed by the PIF schema (systems[0].language required).
-      if (has_execute_tag && (!test_content || !test_format))
-        diags << "Missing required test content, test format, or language " \
+      if (has_execute_tag && (!test_content || !test_type))
+        diags << "Missing required test content, test type, or language " \
           "fields for execution-based grading."
       end
 
