@@ -142,7 +142,7 @@ module Peml
 
   # Returns true if the given content or parsed hash is a PIF document.
   # Accepts either a raw PEML string or an already-parsed hash.
-  def self.pif?(input)
+  def self.is_pif(input)
     value = input.is_a?(String) \
       ? Peml::Loader.new.load(input).dottie! \
       : input.dottie!
