@@ -11,7 +11,12 @@ parsed:
         email: shaffer@vt.edu
     tags:
       topics: PEML NP-completeness
-      style: parsons, order
+    settings:
+      grader:
+        type: order
+      indent:
+        active: 'true'
+        mode: free
     instructions: "<p>Show the general process for an NP-Completeness Proof.</p>\n"
     systems:
     - language: natural
@@ -39,14 +44,14 @@ parsed:
               - blockid: choose
                 display: Choose a known NP-hard problem A.
                 depends: starthard
-              - blockid: trans
+              - blockid: transfo
                 display: Define two transformations.
                 depends: choose
               - blockid: t1
                 display: Describe a polynomial-time algorithm that takes an arbitrary
                   instance $\textbf{I}$ of <code>A`X</code> to an instance $\textbf{I′}$
                   of <code>X`A</code>.
-                depends: trans
+                depends: transfo
                 toggle_options:
                 - :start_index: 82
                   :end_index: 89
@@ -63,7 +68,7 @@ parsed:
                   for $\textbf{I’}$ in problem <code>X`A</code> (call it $\textbf{SLN’}$)
                   to $\textbf{SLN}$ such that $\textbf{SLN}$ is the solution for $\textbf{I}$
                   in problem <code>A`X</code>.
-                depends: trans
+                depends: transfo
                 toggle_options:
                 - :start_index: 85
                   :end_index: 92
@@ -82,20 +87,20 @@ renderable:
     options:
       grader:
         type: dag
-        showFeedback: true
-      maxdist: 0
-      order: ''
-      indent: false
+        show_feedback: true
+      indent:
+        active: true
+        mode: free
+        max_indents: 3
       adaptive: true
       numbered: false
       language: natural
-      runnable: true
     blocks:
     - text: 'To prove that a problem X is NP-complete do this:'
       type: ''
       tag: starter
       depends: ''
-      indent: ''
+      indent: true
       displaymath: true
       feedback: ''
   diags:
@@ -106,14 +111,14 @@ renderable:
   - 'Parsons does not support nontrivial blocklists: {"blockid"=>"NPhard", "depends"=>"starter",
     "blocklist"=>[{"blockid"=>"starthard", "display"=>"Show that X is NP-hard."},
     {"blockid"=>"choose", "display"=>"Choose a known NP-hard problem A.", "depends"=>"starthard"},
-    {"blockid"=>"trans", "display"=>"Define two transformations.", "depends"=>"choose"},
+    {"blockid"=>"transfo", "display"=>"Define two transformations.", "depends"=>"choose"},
     {"blockid"=>"t1", "display"=>"Describe a polynomial-time algorithm that takes
     an arbitrary instance $\\textbf{I}$ of <code>A`X</code> to an instance $\\textbf{I′}$
-    of <code>X`A</code>.", "depends"=>"trans", "toggle_options"=>[{:start_index=>82,
+    of <code>X`A</code>.", "depends"=>"transfo", "toggle_options"=>[{:start_index=>82,
     :end_index=>89, :values=>["A", "X"]}, {:start_index=>118, :end_index=>125, :values=>["X",
     "A"]}]}, {"blockid"=>"t2", "display"=>"Describe a polynomial-time transformation
     from the solution for $\\textbf{I’}$ in problem <code>X`A</code> (call it $\\textbf{SLN’}$)
     to $\\textbf{SLN}$ such that $\\textbf{SLN}$ is the solution for $\\textbf{I}$
-    in problem <code>A`X</code>.", "depends"=>"trans", "toggle_options"=>[{:start_index=>85,
+    in problem <code>A`X</code>.", "depends"=>"transfo", "toggle_options"=>[{:start_index=>85,
     :end_index=>92, :values=>["X", "A"]}, {:start_index=>190, :end_index=>197, :values=>["A",
     "X"]}]}]}.'

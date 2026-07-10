@@ -11,7 +11,9 @@ parsed:
         email: shaffer@vt.edu
     tags:
       topics: PEML Demo Parsons Problem
-      style: parsons, order
+    settings:
+      grader:
+        type: order
     instructions: "<p>Prove that (A AND B AND C) implies (A AND C).</p>\n"
     systems:
     - language: natural
@@ -38,14 +40,14 @@ renderable:
     options:
       grader:
         type: dag
-        showFeedback: true
-      maxdist: 0
-      order: ''
-      indent: false
+        show_feedback: true
+      indent:
+        active:
+        mode: ''
+        max_indents: 3
       adaptive: true
       numbered: false
       language: natural
-      runnable: true
     blocks:
     - text: Assume A AND B AND C.
       type: ''

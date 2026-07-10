@@ -11,7 +11,12 @@ parsed:
         email: shaffer@vt.edu
     tags:
       topics: PEML Demo Parsons Problem
-      style: parsons, execute, indent
+    settings:
+      grader:
+        type: execute
+      indent:
+        active: 'true'
+        mode: prescribed
     instructions: 'Construct code by reordering and indenting the lines.
 
       '
@@ -47,10 +52,11 @@ parsed:
               indent: '0'
         test:
           files:
-          - type: text/csv-unquoted
+          - format: text/csv-unquoted
             content: |
               expected
               I am a Java program I am a Java program I am a Java program
   :diagnostics: &1
-  - 'Path ''/systems/0/assets/test/files/0'' is missing key: format'
-renderable: *1
+  - 'Path ''/systems/0/assets/test/files/0'' is missing key: type'
+renderable:
+  :diagnostics: *1

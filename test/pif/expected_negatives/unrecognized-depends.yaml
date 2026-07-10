@@ -10,7 +10,9 @@
       email: shaffer@vt.edu
   tags:
     topics: PIF Error Demo
-    style: parsons, order
+  settings:
+    grader:
+      type: order
   instructions: 'Put the blocks in the proper order.
 
     '

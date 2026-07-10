@@ -10,7 +10,12 @@
       email: shaffer@vt.edu
   tags:
     topics: PIF Error Demo
-    style: parsons, order, indent
+  settings:
+    grader:
+      type: order
+    indent:
+      active: 'true'
+      mode: prescribed
   instructions: 'Construct code by reordering and indenting the lines.
 
     '

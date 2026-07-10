@@ -4,15 +4,16 @@
     "options": {
       "grader": {
         "type": "dag",
-        "showFeedback": true
+        "show_feedback": true
       },
-      "maxdist": 0,
-      "order": "",
-      "indent": false,
+      "indent": {
+        "active": null,
+        "mode": "",
+        "max_indents": 3
+      },
       "adaptive": true,
       "numbered": false,
-      "language": "math",
-      "runnable": true
+      "language": "natural"
     },
     "blocks": [
       {

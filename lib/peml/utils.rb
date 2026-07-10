@@ -112,8 +112,6 @@ module Peml
           value.each do |element|
             Utils.deep_transform_files!(state, operation, element) if element.is_a?(Hash)
           end
-        elsif value.respond_to?(:to_s) || value.respond_to(:to_i)
-          peml[key] = method(operation).call(value, default_peml)
         end
       end
       state

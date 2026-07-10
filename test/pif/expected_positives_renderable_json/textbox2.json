@@ -4,15 +4,16 @@
     "options": {
       "grader": {
         "type": "exec",
-        "showFeedback": true
+        "show_feedback": true
       },
-      "maxdist": 0,
-      "order": "",
-      "indent": true,
+      "indent": {
+        "active": true,
+        "mode": "prescribed",
+        "max_indents": 3
+      },
       "adaptive": true,
       "numbered": false,
-      "language": "python",
-      "runnable": true
+      "language": "python"
     },
     "blocks": [
       {
@@ -20,8 +21,8 @@
         "type": "",
         "tag": "one1",
         "depends": "",
-        "indent": "0",
-        "displaymath": true,
+        "indent": 0,
+        "displaymath": false,
         "feedback": "",
         "text_options": [
           {
@@ -36,8 +37,8 @@
         "type": "",
         "tag": "two",
         "depends": "",
-        "indent": "1",
-        "displaymath": true,
+        "indent": 1,
+        "displaymath": false,
         "feedback": ""
       },
       {
@@ -45,8 +46,8 @@
         "type": "",
         "tag": "three",
         "depends": "",
-        "indent": "1",
-        "displaymath": true,
+        "indent": 1,
+        "displaymath": false,
         "feedback": ""
       }
     ]

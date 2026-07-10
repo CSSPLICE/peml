@@ -4,15 +4,16 @@
     "options": {
       "grader": {
         "type": "dag",
-        "showFeedback": true
+        "show_feedback": true
       },
-      "maxdist": 0,
-      "order": "",
-      "indent": false,
+      "indent": {
+        "active": true,
+        "mode": "free",
+        "max_indents": 1
+      },
       "adaptive": true,
       "numbered": false,
-      "language": "math",
-      "runnable": true
+      "language": "math"
     },
     "blocks": [
       {
@@ -20,7 +21,7 @@
         "type": "",
         "tag": "one",
         "depends": "",
-        "indent": "",
+        "indent": true,
         "displaymath": true,
         "feedback": ""
       },
@@ -29,7 +30,7 @@
         "type": "",
         "tag": "two",
         "depends": "one",
-        "indent": "",
+        "indent": true,
         "displaymath": true,
         "feedback": ""
       },
@@ -38,7 +39,7 @@
         "type": "",
         "tag": "three",
         "depends": "one",
-        "indent": "",
+        "indent": true,
         "displaymath": true,
         "feedback": ""
       },
@@ -47,7 +48,7 @@
         "type": "",
         "tag": "four",
         "depends": "two, three",
-        "indent": "",
+        "indent": true,
         "displaymath": true,
         "feedback": ""
       },
@@ -56,7 +57,7 @@
         "type": "",
         "tag": "five",
         "depends": "two",
-        "indent": "",
+        "indent": true,
         "displaymath": true,
         "feedback": ""
       }

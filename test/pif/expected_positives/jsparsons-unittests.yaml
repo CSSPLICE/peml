@@ -10,11 +10,14 @@ parsed:
         email: shaffer@vt.edu
     tags:
       topics: PEML Demo Parsons Problem
-      style: parsons, execute, indent
-    instructions: 'Your task is to construct a function which returns the index of
-      the largest element in the array.
-
-      '
+    settings:
+      grader:
+        type: execute
+      indent:
+        active: 'true'
+        mode: prescribed
+    instructions: "<p>Your task is to construct a function which returns the index
+      of the largest element in the array.</p>\n"
     systems:
     - language: Python
       assets:
@@ -52,7 +55,63 @@ parsed:
               [0, 2, 4], 2, example
               [7, 2, 4], 0, hidden
               [7, 8, 4], 1, example
-  :diagnostics: &1
-  - Path '/exercise_id' does not match the required pattern (^[^\s,]+$)
-  - 'Path ''/systems/0/assets/test/files/0'' is missing key: format'
-renderable: *1
+  :diagnostics: []
+renderable:
+  value:
+    question_text: "<p>Your task is to construct a function which returns the index
+      of the largest element in the array.</p>\n"
+    options:
+      grader:
+        type: exec
+        show_feedback: true
+      indent:
+        active: true
+        mode: prescribed
+        max_indents: 3
+      adaptive: true
+      numbered: false
+      language: python
+    blocks:
+    - text: 'def maxindex(arg):'
+      type: ''
+      tag: one
+      depends: ''
+      indent: 0
+      displaymath: false
+      feedback: ''
+    - text: ans = 0
+      type: ''
+      tag: two
+      depends: ''
+      indent: 1
+      displaymath: false
+      feedback: ''
+    - text: 'for i in range(len(arg)):'
+      type: ''
+      tag: three
+      depends: ''
+      indent: 1
+      displaymath: false
+      feedback: ''
+    - text: 'if arg[i] > arg[ans]:'
+      type: ''
+      tag: four
+      depends: ''
+      indent: 2
+      displaymath: false
+      feedback: ''
+    - text: ans = i
+      type: ''
+      tag: five
+      depends: ''
+      indent: 3
+      displaymath: false
+      feedback: ''
+    - text: return ans
+      type: ''
+      tag: six
+      depends: ''
+      indent: 1
+      displaymath: false
+      feedback: ''
+  diags: []

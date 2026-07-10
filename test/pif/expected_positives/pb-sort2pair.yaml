@@ -11,7 +11,13 @@ parsed:
         email: shaffer@vt.edu
     tags:
       topics: PEML reduction
-      style: parsons, order
+    settings:
+      grader:
+        type: order
+      indent:
+        active: 'true'
+        mode: free
+        max_indents: '1'
     instructions: "<p>Show the steps to prove that the SORTING problem can be reduced
       to the PAIRING problem.</p>\n"
     systems:
@@ -50,27 +56,27 @@ renderable:
     options:
       grader:
         type: dag
-        showFeedback: true
-      maxdist: 0
-      order: ''
-      indent: false
+        show_feedback: true
+      indent:
+        active: true
+        mode: free
+        max_indents: 1
       adaptive: true
       numbered: false
       language: natural
-      runnable: true
     blocks:
     - text: Start with an input instance to SORTING (an array of records).
       type: ''
       tag: start
       depends: ''
-      indent: ''
+      indent: true
       displaymath: true
       feedback: ''
     - text: Start with an input instance to PAIRING (an array of records).
       type: ''
       tag: d1
       depends: "-1"
-      indent: ''
+      indent: true
       displaymath: true
       feedback: ''
     - text: Start with an input instance to PAIRING (two arrays, one an array of n
@@ -78,7 +84,7 @@ renderable:
       type: ''
       tag: d2
       depends: "-1"
-      indent: ''
+      indent: true
       displaymath: true
       feedback: ''
     - text: Define a transformation that converts an arbitrary instance of SORTING
@@ -86,7 +92,7 @@ renderable:
       type: ''
       tag: t1
       depends: start
-      indent: ''
+      indent: true
       displaymath: true
       feedback: ''
     - text: Define a transformation that converts an arbitrary instance of PAIRING
@@ -94,14 +100,14 @@ renderable:
       type: ''
       tag: d3
       depends: "-1"
-      indent: ''
+      indent: true
       displaymath: true
       feedback: ''
     - text: Return SLN, the solution to PAIRING.
       type: ''
       tag: pairingin
       depends: "-1"
-      indent: ''
+      indent: true
       displaymath: true
       feedback: ''
   diags: []

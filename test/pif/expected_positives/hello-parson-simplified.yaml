@@ -11,7 +11,9 @@ parsed:
         email: shaffer@vt.edu
     tags:
       topics: PEML Demo Parsons Problem
-      style: parsons, order
+    settings:
+      grader:
+        type: order
     instructions: "<p><strong>Your task</strong>: Construct a Python program that
       prints strings “Hello”, “Parsons”, and “Problems” on their own lines. You should
       construct your program by dragging and dropping the lines to the solution area
@@ -37,41 +39,41 @@ renderable:
     options:
       grader:
         type: dag
-        showFeedback: true
-      maxdist: 0
-      order: ''
-      indent: false
+        show_feedback: true
+      indent:
+        active:
+        mode: ''
+        max_indents: 3
       adaptive: true
       numbered: false
       language: python
-      runnable: true
     blocks:
     - text: print('Hello')
       type: ''
       tag: ''
       depends: ''
       indent: ''
-      displaymath: true
+      displaymath: false
       feedback: ''
     - text: print('Parsons')
       type: ''
       tag: ''
       depends: ''
       indent: ''
-      displaymath: true
+      displaymath: false
       feedback: ''
     - text: print('Oops!')
       type: ''
       tag: ''
       depends: "-1"
       indent: ''
-      displaymath: true
+      displaymath: false
       feedback: ''
     - text: print('Problems!')
       type: ''
       tag: ''
       depends: ''
       indent: ''
-      displaymath: true
+      displaymath: false
       feedback: ''
   diags: []

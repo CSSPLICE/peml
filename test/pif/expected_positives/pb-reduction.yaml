@@ -11,7 +11,13 @@ parsed:
         email: shaffer@vt.edu
     tags:
       topics: PEML reduction
-      style: parsons, order
+    settings:
+      grader:
+        type: order
+      indent:
+        active: 'true'
+        mode: free
+        max_indents: '1'
     instructions: "<p>Show the general process for reducing one problem to another.</p>\n"
     systems:
     - language: natural
@@ -55,21 +61,21 @@ renderable:
     options:
       grader:
         type: dag
-        showFeedback: true
-      maxdist: 0
-      order: ''
-      indent: false
+        show_feedback: true
+      indent:
+        active: true
+        mode: free
+        max_indents: 1
       adaptive: true
       numbered: false
       language: natural
-      runnable: true
     blocks:
     - text: Consider any two problems for which a suitable reduction from one to the
         other can be found.
       type: ''
       tag: start
       depends: ''
-      indent: ''
+      indent: true
       displaymath: true
       feedback: ''
     - text: The first problem takes an arbitrary instance of its input, which we will
@@ -78,7 +84,7 @@ renderable:
       type: ''
       tag: first
       depends: start
-      indent: ''
+      indent: true
       displaymath: true
       feedback: ''
     - text: The second problem takes an arbitrary instance of its input, which we
@@ -87,7 +93,7 @@ renderable:
       type: ''
       tag: second
       depends: first
-      indent: ''
+      indent: true
       displaymath: true
       feedback: ''
     - text: Transform an arbitrary instance of the first problem to an instance of
@@ -97,7 +103,7 @@ renderable:
       type: ''
       tag: transform
       depends: second
-      indent: ''
+      indent: true
       displaymath: true
       feedback: ''
     - text: Apply an algorithm for the second problem to the instance $\textbf{I’}$,
@@ -105,7 +111,7 @@ renderable:
       type: ''
       tag: algorithm
       depends: transform
-      indent: ''
+      indent: true
       displaymath: true
       feedback: ''
     - text: Transform $\textbf{SLN’}$ to the solution of $\textbf{I}$, known as $\textbf{SLN}$.
@@ -114,7 +120,7 @@ renderable:
       type: ''
       tag: finish
       depends: transform
-      indent: ''
+      indent: true
       displaymath: true
       feedback: ''
   diags: []

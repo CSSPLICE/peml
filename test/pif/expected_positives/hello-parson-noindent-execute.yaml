@@ -10,7 +10,9 @@ parsed:
         email: shaffer@vt.edu
     tags:
       topics: PEML Demo Parsons Problem
-      style: parsons, execute
+    settings:
+      grader:
+        type: execute
     instructions: '**Your task**: Construct a Python program that prints strings "Hello",
       "Parsons", and "Problems" on their own lines. You can get feedback on your current
       solution with the feedback button. You should construct your program by dragging
@@ -34,10 +36,11 @@ parsed:
               display: print('Problems!')
         test:
           files:
-          - type: text/csv-unquoted
+          - format: text/csv-unquoted
             content: |
               expected
               Hello\nParsons\nProblems!
   :diagnostics: &1
-  - 'Path ''/systems/0/assets/test/files/0'' is missing key: format'
-renderable: *1
+  - 'Path ''/systems/0/assets/test/files/0'' is missing key: type'
+renderable:
+  :diagnostics: *1

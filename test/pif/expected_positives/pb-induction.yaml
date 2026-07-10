@@ -11,7 +11,13 @@ parsed:
         email: shaffer@vt.edu
     tags:
       topics: PEML Demo Parsons Problem
-      style: parsons, order
+    settings:
+      grader:
+        type: order
+      indent:
+        active: 'true'
+        mode: free
+        max_indents: '1'
     instructions: |
       <p>Drag and drop the blocks below to create a proof by induction of the following statement.</p>
 
@@ -97,27 +103,27 @@ renderable:
     options:
       grader:
         type: dag
-        showFeedback: true
-      maxdist: 0
-      order: ''
-      indent: false
+        show_feedback: true
+      indent:
+        active: true
+        mode: free
+        max_indents: 1
       adaptive: true
       numbered: false
       language: natural
-      runnable: true
     blocks:
     - text: Proof by induction on $n$.
       type: ''
       tag: starter
       depends: ''
-      indent: ''
+      indent: true
       displaymath: true
       feedback: ''
     - text: 'Inductive Predicate: $P(n): \sum_{j=0}^n 2(-7)^j = \frac{1-(-7)^{n+1}}{4}$”&gt;'
       type: ''
       tag: predicate
       depends: starter
-      indent: ''
+      indent: true
       displaymath: true
       feedback: ''
     - text: 'Base case: At $n=0$, $\sum_{j=0}^n 2(-7)^j = 2$ and $\frac{1-(-7)^{n+1}}{4}
@@ -174,7 +180,7 @@ renderable:
       type: ''
       tag: left
       depends: IS
-      indent: ''
+      indent: true
       displaymath: true
       feedback: ''
     - text: By the inductive hypothesis we have $\sum_{j=0}^k 2(-7)^j = \frac{1-(-7)^{k+1}}{4}$.
@@ -201,7 +207,7 @@ renderable:
       type: ''
       tag: final
       depends: useIH
-      indent: ''
+      indent: true
       displaymath: true
       feedback: ''
   diags: []

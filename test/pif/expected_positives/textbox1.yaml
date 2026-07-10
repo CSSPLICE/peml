@@ -10,11 +10,14 @@ parsed:
         email: shaffer@vt.edu
     tags:
       topics: PEML Demo Parsons Problem
-      style: parsons, execute, indent
-    instructions: 'The constructed code should print the minimum of variables a and
-      b.
-
-      '
+    settings:
+      grader:
+        type: execute
+      indent:
+        active: 'true'
+        mode: prescribed
+    instructions: "<p>The constructed code should print the minimum of variables a
+      and b.</p>\n"
     systems:
     - language: Python
       assets:
@@ -30,6 +33,10 @@ parsed:
             - blockid: one1
               display: if a ```` b
               indent: '0'
+              text_options: &1
+              - :start_index: 5
+                :end_index: 9
+                :inner_content: ''
             - blockid: two
               display: print(a)
               indent: '1'
@@ -42,6 +49,43 @@ parsed:
             content: |
               expected
               2
-  :diagnostics: &1
-  - 'Path ''/systems/0/assets/test/files/0'' is missing key: format'
-renderable: *1
+  :diagnostics: []
+renderable:
+  value:
+    question_text: "<p>The constructed code should print the minimum of variables
+      a and b.</p>\n"
+    options:
+      grader:
+        type: exec
+        show_feedback: true
+      indent:
+        active: true
+        mode: prescribed
+        max_indents: 3
+      adaptive: true
+      numbered: false
+      language: python
+    blocks:
+    - text: if a ```` b
+      type: ''
+      tag: one1
+      depends: ''
+      indent: 0
+      displaymath: false
+      feedback: ''
+      text_options: *1
+    - text: print(a)
+      type: ''
+      tag: two
+      depends: ''
+      indent: 1
+      displaymath: false
+      feedback: ''
+    - text: print(b)
+      type: ''
+      tag: three
+      depends: ''
+      indent: 1
+      displaymath: false
+      feedback: ''
+  diags: []

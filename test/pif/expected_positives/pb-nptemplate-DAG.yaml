@@ -11,7 +11,13 @@ parsed:
         email: shaffer@vt.edu
     tags:
       topics: PEML NP-completeness
-      style: parsons, order
+    settings:
+      grader:
+        type: order
+      indent:
+        active: 'true'
+        mode: free
+        max_indents: '1'
     instructions: "<p>Show the general process for an NP-Completeness Proof.</p>\n"
     systems:
     - language: natural
@@ -71,20 +77,20 @@ renderable:
     options:
       grader:
         type: dag
-        showFeedback: true
-      maxdist: 0
-      order: ''
-      indent: false
+        show_feedback: true
+      indent:
+        active: true
+        mode: free
+        max_indents: 1
       adaptive: true
       numbered: false
       language: natural
-      runnable: true
     blocks:
     - text: 'To prove that a problem X is NP-complete do this:'
       type: ''
       tag: starter
       depends: ''
-      indent: ''
+      indent: true
       displaymath: true
       feedback: ''
     - text: |-
@@ -94,7 +100,7 @@ renderable:
       type: ''
       tag: xinNP
       depends: starter
-      indent: ''
+      indent: true
       displaymath: true
       feedback: ''
     - text: Create an algorithm to solve X (that might or might not use non-determinism)
@@ -102,7 +108,7 @@ renderable:
       type: ''
       tag: algorithm
       depends: xinNP
-      indent: ''
+      indent: true
       displaymath: true
       feedback: ''
     - text: |-
@@ -112,21 +118,21 @@ renderable:
       type: ''
       tag: starthard
       depends: algorithm
-      indent: ''
+      indent: true
       displaymath: true
       feedback: ''
     - text: Choose a known NP-hard problem A.
       type: ''
       tag: choose
       depends: starthard
-      indent: ''
+      indent: true
       displaymath: true
       feedback: ''
     - text: Define two transformations.
       type: ''
       tag: trans
       depends: choose
-      indent: ''
+      indent: true
       displaymath: true
       feedback: ''
     - text: Describe a polynomial-time algorithm that takes an arbitrary instance
@@ -134,7 +140,7 @@ renderable:
       type: ''
       tag: t1
       depends: trans
-      indent: ''
+      indent: true
       displaymath: true
       feedback: ''
     - text: Describe a polynomial-time algorithm that takes an arbitrary instance
@@ -142,7 +148,7 @@ renderable:
       type: ''
       tag: d1
       depends: "-1"
-      indent: ''
+      indent: true
       displaymath: true
       feedback: ''
     - text: Describe a polynomial-time transformation from the solution for $\textbf{I’}$
@@ -151,7 +157,7 @@ renderable:
       type: ''
       tag: t2
       depends: trans
-      indent: ''
+      indent: true
       displaymath: true
       feedback: ''
     - text: Describe a polynomial-time transformation from the solution for $\textbf{I’}$
@@ -160,7 +166,7 @@ renderable:
       type: ''
       tag: d2
       depends: "-1"
-      indent: ''
+      indent: true
       displaymath: true
       feedback: ''
   diags: []

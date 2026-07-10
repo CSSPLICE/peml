@@ -4,15 +4,16 @@
     "options": {
       "grader": {
         "type": "dag",
-        "showFeedback": true
+        "show_feedback": true
       },
-      "maxdist": 0,
-      "order": "",
-      "indent": false,
+      "indent": {
+        "active": true,
+        "mode": "free",
+        "max_indents": 1
+      },
       "adaptive": true,
       "numbered": false,
-      "language": "math",
-      "runnable": true
+      "language": "java"
     },
     "blocks": [
       {
@@ -20,8 +21,8 @@
         "type": "",
         "tag": "fixed",
         "depends": "",
-        "indent": "",
-        "displaymath": true,
+        "indent": true,
+        "displaymath": false,
         "feedback": ""
       },
       {
@@ -29,8 +30,8 @@
         "type": "",
         "tag": "randomg1b1",
         "depends": "",
-        "indent": "",
-        "displaymath": true,
+        "indent": true,
+        "displaymath": false,
         "feedback": ""
       },
       {
@@ -38,26 +39,26 @@
         "type": "",
         "tag": "randomg1b2",
         "depends": "randomg1b1",
-        "indent": "",
-        "displaymath": true,
+        "indent": true,
+        "displaymath": false,
         "feedback": ""
       },
       {
-        "text": "Random Group 1 $\\textbf{Block}$ 3",
+        "text": "Random Group 1 **Block** 3",
         "type": "",
         "tag": "randomg1b3",
         "depends": "randomg1b2",
-        "indent": "",
-        "displaymath": true,
+        "indent": true,
+        "displaymath": false,
         "feedback": ""
       },
       {
-        "text": "Fixed $\\textbf{Middle}$",
+        "text": "Fixed **Middle**",
         "type": "",
         "tag": "fixed",
         "depends": "",
-        "indent": "",
-        "displaymath": true,
+        "indent": true,
+        "displaymath": false,
         "feedback": ""
       },
       {
@@ -65,8 +66,8 @@
         "type": "",
         "tag": "randomg2b1",
         "depends": "randomg1b3",
-        "indent": "",
-        "displaymath": true,
+        "indent": true,
+        "displaymath": false,
         "feedback": ""
       },
       {
@@ -74,8 +75,8 @@
         "type": "",
         "tag": "randomg2b2",
         "depends": "randomg2b1",
-        "indent": "",
-        "displaymath": true,
+        "indent": true,
+        "displaymath": false,
         "feedback": ""
       },
       {
@@ -83,8 +84,8 @@
         "type": "",
         "tag": "randomg2b3",
         "depends": "randomg2b2",
-        "indent": "",
-        "displaymath": true,
+        "indent": true,
+        "displaymath": false,
         "feedback": ""
       },
       {
@@ -92,8 +93,8 @@
         "type": "",
         "tag": "fixed",
         "depends": "",
-        "indent": "",
-        "displaymath": true,
+        "indent": true,
+        "displaymath": false,
         "feedback": ""
       }
     ]

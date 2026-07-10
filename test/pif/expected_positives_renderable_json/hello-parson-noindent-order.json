@@ -4,42 +4,43 @@
     "options": {
       "grader": {
         "type": "dag",
-        "showFeedback": true
+        "show_feedback": true
       },
-      "maxdist": 0,
-      "order": "",
-      "indent": false,
+      "indent": {
+        "active": null,
+        "mode": "",
+        "max_indents": 3
+      },
       "adaptive": true,
       "numbered": false,
-      "language": "math",
-      "runnable": true
+      "language": "python"
     },
     "blocks": [
       {
-        "text": "print(‘Hello’)",
+        "text": "print('Hello')",
         "type": "",
         "tag": "one",
         "depends": "",
         "indent": "",
-        "displaymath": true,
+        "displaymath": false,
         "feedback": ""
       },
       {
-        "text": "print(‘Parsons’)",
+        "text": "print('Parsons')",
         "type": "",
         "tag": "two",
         "depends": "",
         "indent": "",
-        "displaymath": true,
+        "displaymath": false,
         "feedback": ""
       },
       {
-        "text": "print(‘Problems!’)",
+        "text": "print('Problems!')",
         "type": "",
         "tag": "three",
         "depends": "",
         "indent": "",
-        "displaymath": true,
+        "displaymath": false,
         "feedback": ""
       }
     ]

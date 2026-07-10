@@ -10,7 +10,12 @@ parsed:
         email: shaffer@vt.edu
     tags:
       topics: PEML Demo Parsons Problem
-      style: parsons, execute, indent
+    settings:
+      grader:
+        type: execute
+      indent:
+        active: 'true'
+        mode: prescribed
     instructions: 'The constructed code should print the minimum of variables a and
       b.
 
@@ -24,16 +29,12 @@ parsed:
             content:
             - blockid: one1
               display: if \\a\b\c\\ \\<\>\>=\\ b
-              indent: '0'
             - blockid: two
               display: print(a)
-              indent: '1'
             - blockid: three
               display: else
-              indet: '0'
             - blockid: four
               display: print(b)
-              indent: '0'
           wrapper:
             files:
             - content: |
@@ -42,10 +43,11 @@ parsed:
                 ___
         test:
           files:
-          - type: text/csv-unquoted
+          - format: text/csv-unquoted
             content: |
               expected
               2
   :diagnostics: &1
-  - 'Path ''/systems/0/assets/test/files/0'' is missing key: format'
-renderable: *1
+  - 'Path ''/systems/0/assets/test/files/0'' is missing key: type'
+renderable:
+  :diagnostics: *1

@@ -11,10 +11,15 @@ parsed:
         email: seanr06@vt.edu
     tags:
       topics: execute grading, reusable blocks
-      style: parsons, execute, indent
+    settings:
+      grader:
+        type: execute
+      indent:
+        active: 'true'
+        mode: prescribed
     instructions: |
-      <p>Construct code by reordering and indenting the lines.<br />
-      You MUST reuse the <code>}</code> block twice to complete the program.</p>
+      Construct code by reordering and indenting the lines.
+      You MUST reuse the `}` block twice to complete the program.
     systems:
     - language: Java
       assets:
@@ -48,51 +53,7 @@ parsed:
             content: |
               expected
               02468
-  :diagnostics: []
+  :diagnostics: &1
+  - 'Path ''/systems/0/assets/test/files/0'' is missing key: type'
 renderable:
-  value:
-    question_text: |
-      <p>Construct code by reordering and indenting the lines.<br />
-      You MUST reuse the <code>}</code> block twice to complete the program.</p>
-    options:
-      grader:
-        type: exec
-        showFeedback: true
-      maxdist: 0
-      order: ''
-      indent: true
-      adaptive: true
-      numbered: false
-      language: java
-      runnable: true
-    blocks:
-    - text: for (int i = 0; i < 10; i++) {
-      type: ''
-      tag: one
-      depends: ''
-      indent: true
-      displaymath: true
-      feedback: ''
-    - text: if (i % 2 == 0) {
-      type: ''
-      tag: two
-      depends: ''
-      indent: true
-      displaymath: true
-      feedback: ''
-    - text: System.out.print(i);
-      type: ''
-      tag: three
-      depends: ''
-      indent: true
-      displaymath: true
-      feedback: ''
-    - text: "}"
-      type: ''
-      tag: four
-      depends: ''
-      indent: true
-      displaymath: true
-      feedback: ''
-      reusable: true
-  diags: []
+  :diagnostics: *1

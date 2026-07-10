@@ -38,19 +38,15 @@ ___
 [.assets.code.blocks.content]
 blockid: one1
 display: if \\a\b\c\\ \\<\>\>=\\ b
-indent: 0
 
 blockid: two
 display: print(a)
-indent: 1
 
 blockid: three
 display: else
-indet: 0
 
 blockid: four
 display: print(b)
-indent: 0
 []
 
 [.assets.test.files]

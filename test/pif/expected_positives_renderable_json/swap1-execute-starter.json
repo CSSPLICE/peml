@@ -4,15 +4,16 @@
     "options": {
       "grader": {
         "type": "exec",
-        "showFeedback": true
+        "show_feedback": true
       },
-      "maxdist": 0,
-      "order": "",
-      "indent": false,
+      "indent": {
+        "active": true,
+        "mode": "free",
+        "max_indents": 3
+      },
       "adaptive": true,
       "numbered": false,
-      "language": "java",
-      "runnable": true
+      "language": "java"
     },
     "blocks": [
       {
@@ -20,8 +21,8 @@
         "type": "",
         "tag": "one",
         "depends": "",
-        "indent": "",
-        "displaymath": true,
+        "indent": true,
+        "displaymath": false,
         "feedback": ""
       },
       {
@@ -29,8 +30,8 @@
         "type": "",
         "tag": "onea",
         "depends": "",
-        "indent": "",
-        "displaymath": true,
+        "indent": true,
+        "displaymath": false,
         "feedback": ""
       },
       {
@@ -38,8 +39,8 @@
         "type": "",
         "tag": "two",
         "depends": "",
-        "indent": "",
-        "displaymath": true,
+        "indent": true,
+        "displaymath": false,
         "feedback": ""
       },
       {
@@ -47,8 +48,8 @@
         "type": "",
         "tag": "three",
         "depends": "",
-        "indent": "",
-        "displaymath": true,
+        "indent": true,
+        "displaymath": false,
         "feedback": ""
       },
       {
@@ -56,8 +57,8 @@
         "type": "",
         "tag": "four",
         "depends": "",
-        "indent": "",
-        "displaymath": true,
+        "indent": true,
+        "displaymath": false,
         "feedback": ""
       },
       {
@@ -72,7 +73,7 @@
         "tag": "fixed",
         "depends": "",
         "indent": "",
-        "displaymath": true,
+        "displaymath": false,
         "feedback": ""
       },
       {
@@ -87,7 +88,7 @@
         "tag": "fixed",
         "depends": "",
         "indent": "",
-        "displaymath": true,
+        "displaymath": false,
         "feedback": ""
       }
     ]

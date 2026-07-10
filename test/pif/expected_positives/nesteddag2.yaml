@@ -11,7 +11,13 @@ parsed:
         email: shaffer@vt.edu
     tags:
       topics: PEML Demo Parsons Problem
-      style: parsons, order
+    settings:
+      grader:
+        type: order
+      indent:
+        active: 'true'
+        mode: free
+        max_indents: '1'
     instructions: |
       <p>Associate each test with its corresponding work, but you can do the<br />
       tests in any order.</p>
@@ -63,14 +69,14 @@ renderable:
     options:
       grader:
         type: dag
-        showFeedback: true
-      maxdist: 0
-      order: ''
-      indent: false
+        show_feedback: true
+      indent:
+        active: true
+        mode: free
+        max_indents: 1
       adaptive: true
       numbered: false
       language: java
-      runnable: true
     blocks: []
   diags:
   - 'Parsons does not support nontrivial blocklists: {"blockid"=>"testAblock", "depends"=>"",

@@ -11,7 +11,12 @@ parsed:
         email: seanr06@vt.edu
     tags:
       topics: order grading, reusable blocks
-      style: parsons, order, indent
+    settings:
+      grader:
+        type: order
+      indent:
+        active: 'true'
+        mode: prescribed
     instructions: |
       <p>Construct code by reordering and indenting the lines.<br />
       You MUST reuse the <code>}</code> block twice to complete the program.</p>
@@ -56,49 +61,49 @@ renderable:
     options:
       grader:
         type: dag
-        showFeedback: true
-      maxdist: 0
-      order: ''
-      indent: true
+        show_feedback: true
+      indent:
+        active: true
+        mode: prescribed
+        max_indents: 3
       adaptive: true
       numbered: false
       language: java
-      runnable: true
     blocks:
     - text: for (int i = 0; i < 10; i++) {
       type: ''
       tag: myblocklist-onea
       depends: ''
       indent: 0
-      displaymath: true
+      displaymath: false
       feedback: ''
       picklimit: 1
     - text: for (int i = 0; i > 10; i+) {
       tag: myblocklist-onec
       depends: "-1"
-      displaymath: true
+      displaymath: false
       feedback: The increment has invalid syntax
       reusable: false
     - text: if (i % 2 == 0) {
       type: ''
       tag: two
       depends: ''
-      indent: true
-      displaymath: true
+      indent: 0
+      displaymath: false
       feedback: ''
     - text: System.out.print(i);
       type: ''
       tag: three
       depends: ''
-      indent: true
-      displaymath: true
+      indent: 0
+      displaymath: false
       feedback: ''
     - text: "}"
       type: ''
       tag: four
       depends: ''
-      indent: true
-      displaymath: true
+      indent: 0
+      displaymath: false
       feedback: ''
       reusable: true
   diags: []
