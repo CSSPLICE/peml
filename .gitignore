@@ -11,3 +11,4 @@
 *.gem
 .qodo
 parsed
+*/.DS_Store
