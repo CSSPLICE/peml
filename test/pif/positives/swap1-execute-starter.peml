@@ -18,7 +18,7 @@ license.id: MIT
 license.owner.name: Cliff Shaffer
 license.owner.email: shaffer@vt.edu
 
-tags.topics: PEML Demo Parsons Problem: Swap
+tags.topics: PIF Demo Parsons Problem: Swap
 
 settings.grader.type: execute
 settings.indent.active: true

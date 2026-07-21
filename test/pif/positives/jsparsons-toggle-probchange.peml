@@ -50,7 +50,7 @@ display: print(b)
 []
 
 [.assets.test.files]
-format: text/csv-unquoted
+type: text/csv-unquoted
 content:----------
 expected
 2
