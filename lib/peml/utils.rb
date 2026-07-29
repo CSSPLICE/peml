@@ -211,22 +211,28 @@ module Peml
           case type
           when 'text/yaml'
             value['content'] = YAML.safe_load(content)
-            value['type'] = 'inline'
+            value['type'] = type + ':inline'
           when 'application/json'
             value['content'] = JSON.parse(content)
-            value['type'] = 'inline'
+            value['type'] = type + ':inline'
           when 'text/csv'
             value['content'] = tabular_to_hashes(CSV.parse(content))
-            value['type'] = 'inline'
-          when 'application/xml', 'text/xml'
+            value['type'] = type + ':inline'
+          when 'application/xml'
             value['content'] = xml_to_hash(REXML::Document.new(content).root)
-            value['type'] = 'inline'
+            value['type'] = type + ':inline'
           when 'text/x-unquoted-csv'
             value['content'] = tabular_to_hashes(Peml::CsvUnquotedParser.new.parse(content))
-            value['type'] = 'inline'
+            value['type'] = type + ':inline'
           when 'text/x-gherkin-table'
             value['content'] = parse_gherkin_table(content)
-            value['type'] = 'inline'
+            value['type'] = type + ':inline'
+          when 'text/x-peml'
+            value['content'] = Peml::PemlParser.new.parse(content)
+            value['type'] = type + ':inline'
+          when 'text/x-pemltest'
+            value['content'] = Peml::PemlTestParser.new.parse(content)
+            value['type'] = type + ':inline'
           end
         end
       end
@@ -364,8 +370,9 @@ module Peml
         format = options[language]['format'] || format
         type = options[language]['type'] || type
       end
+      type = type || format
 
-      case format
+      case type
       when 'yaml'
         rvalue = YAML.safe_load(value)
         case language
@@ -474,37 +481,32 @@ module Peml
     #   - infers from the file extension at the end of the URL path
     # Returns nil if the type cannot be determined.
     MIME_TYPES = {
-      '.rb'      => 'text/x-ruby',
-      '.py'      => 'text/x-python',
-      '.java'    => 'text/x-java',
-      '.c'       => 'text/x-csrc',
-      '.cpp'     => 'text/x-c++src',
-      '.h'       => 'text/x-chdr',
-      '.js'      => 'text/javascript',
-      '.ts'      => 'text/typescript',
-      '.json'    => 'application/json',
-      '.xml'     => 'application/xml',
-      '.yaml'    => 'text/yaml',
-      '.yml'     => 'text/yaml',
-      '.md'      => 'text/markdown',
-      '.txt'     => 'text/plain',
+      '.c'       => 'text/x-c',
+      '.cpp'     => 'text/x-cpp',
+      '.css'     => 'text/css',
       '.csv'     => 'text/csv',
       '.csvu'    => 'text/x-unquoted-csv',
       '.csvuq'   => 'text/x-unquoted-csv',
-      '.ucsv'    => 'text/x-unquoted-csv',
-      '.html'    => 'text/html',
-      '.htm'     => 'text/html',
-      '.css'     => 'text/css',
       '.csv-unquoted'   => 'text/x-unquoted-csv',
-      '.png'     => 'image/png',
-      '.jpg'     => 'image/jpeg',
-      '.jpeg'    => 'image/jpeg',
-      '.gif'     => 'image/gif',
-      '.pdf'     => 'application/pdf',
-      '.zip'     => 'application/zip',
-      '.svg'     => 'image/svg+xml',
+      '.feature' => 'text/x-gherkin-table',
       '.gherkin' => 'text/x-gherkin-table',
-      '.feature' => 'text/x-gherkin-table'
+      '.h'       => 'text/x-cpp',
+      '.htm'     => 'text/html',
+      '.html'    => 'text/html',
+      '.java'    => 'text/x-java',
+      '.js'      => 'text/javascript',
+      '.json'    => 'application/json',
+      '.md'      => 'text/markdown',
+      '.peml'    => 'text/x-peml',
+      '.pemltest' => 'text/x-pemltest',
+      '.py'      => 'text/x-python',
+      '.rb'      => 'text/x-ruby',
+      '.ts'      => 'text/typescript',
+      '.txt'     => 'text/plain',
+      '.ucsv'    => 'text/x-unquoted-csv',
+      '.xml'     => 'application/xml',
+      '.yaml'    => 'text/yaml',
+      '.yml'     => 'text/yaml',
     }.freeze
 
     def self.mime_type(file_hash)
@@ -524,6 +526,12 @@ module Peml
       end
       if result == 'text/csv-unquoted' || result == 'csv-unquoted'
         result = 'text/x-unquoted-csv'
+      elsif result == 'text/x-c++src' || result == 'text/x-chdr'
+        result = 'text/x-cpp'
+      elsif result == 'text/json' || result == 'text/x-json'
+        result = 'application/json'
+      elsif result == 'text/xml' || result == 'text/x-xml'
+        result = 'application/xml'
       end
       result
     end

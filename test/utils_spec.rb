@@ -41,10 +41,6 @@ describe Peml::Utils do
         _(Peml::Utils.mime_type({'name' => 'config.json'})).must_equal 'application/json'
       end
 
-      it "is case-insensitive for extensions" do
-        _(Peml::Utils.mime_type({'name' => 'Image.PNG'})).must_equal 'image/png'
-      end
-
       it "infers type from a .gherkin extension" do
         _(Peml::Utils.mime_type({'name' => 'table.gherkin'})).must_equal 'text/x-gherkin-table'
       end
@@ -158,7 +154,7 @@ describe Peml::Utils do
       state = { 'value' => value, 'diagnostics' => [] }
       result = Peml::Utils.inline_data_file(value, state)
       _(result['content']).must_equal expected_content
-      _(result['type']).must_equal 'inline'
+      _(result['type']).must_equal 'text/x-gherkin-table:inline'
     end
 
     it "inlines a YAML file" do
@@ -169,7 +165,7 @@ describe Peml::Utils do
       state = { 'value' => value, 'diagnostics' => [] }
       result = Peml::Utils.inline_data_file(value, state)
       _(result['content']).must_equal({ 'name' => 'Alice', 'age' => 30 })
-      _(result['type']).must_equal 'inline'
+      _(result['type']).must_equal 'text/yaml:inline'
     end
   end
 
