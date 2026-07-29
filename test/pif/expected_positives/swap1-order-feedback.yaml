@@ -26,27 +26,26 @@ parsed:
           - blockid: group1
             depends: ''
             pickone: 'true'
-            blocklist:
-            - blockid: one
-              display: int temp = arr[i];
-            - blockid: onea
-              display: int temp = arr[j];
-              feedback: This was the wrong choice.
-            - blockid: two
-              display: arr[i] = arr[j];
-              depends: group1
-            - blockid: three
-              display: arr[j] = temp;
-              depends: two
-            - blockid: four
-              display: int temp = arr[j];
-              feedback: This line should not appear in the answer.
-              depends: "-1"
-            - blockid: fixed
-              display: "}"
+    blocklist:
+    - blockid: one
+      display: int temp = arr[i];
+    - blockid: onea
+      display: int temp = arr[j];
+      feedback: This was the wrong choice.
+    - blockid: two
+      display: arr[i] = arr[j];
+      depends: group1
+    - blockid: three
+      display: arr[j] = temp;
+      depends: two
+    - blockid: four
+      display: int temp = arr[j];
+      feedback: This line should not appear in the answer.
+      depends: "-1"
+    - blockid: fixed
+      display: "}"
   :diagnostics:
-  - Dependencies must refer to previously defined blocks within the same blocklist
-    scope.
+  - 'Path ''/assets/code/blocks/content/1'' is missing key: display'
 runestone:
   value:
     question_text: 'Write a function to swap two array elements by reordering the
@@ -73,14 +72,10 @@ runestone:
       depends: ''
       indent: ''
       displaymath: true
-    - text: int temp = arr[i];
+    - text:
       type: ''
-      tag: one
+      tag: group1
       depends: ''
-      indent: 0
+      indent: ''
       displaymath: true
-    - text: int temp = arr[j];
-      tag: paired
-      depends: ''
-      displaymath: ''
   diags: []

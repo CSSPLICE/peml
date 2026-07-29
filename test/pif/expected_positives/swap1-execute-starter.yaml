@@ -47,9 +47,9 @@ parsed:
               display: int temp = arr[j];
         test:
           files:
-          - type: text/csv-unquoted
+          - type: text/x-unquoted-csv
             pattern:
-              method_invocation: Swap({{arr}}, {{i}}, {{j}})
+              method_call: Swap({{arr}}, {{i}}, {{j}})
             content: |
               arr, i, j, expected, description
               new int[]{1, 2, 3, 4}, 2, 3, new int[]{1,2,4,3}, example

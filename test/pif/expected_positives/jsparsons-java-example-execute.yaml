@@ -47,7 +47,7 @@ parsed:
               indent: '0'
         test:
           files:
-          - type: text/csv-unquoted
+          - type: text/x-unquoted-csv
             content: |
               expected
               I am a Java program I am a Java program I am a Java program

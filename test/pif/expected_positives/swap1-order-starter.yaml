@@ -29,23 +29,22 @@ parsed:
           - blockid: group1
             depends: ''
             pickone: 'true'
-            blocklist:
-            - blockid: one
-              display: int temp = arr[i];
-            - blockid: onea
-              display: int temp = arr[j];
-            - blockid: two
-              display: arr[i] = arr[j];
-              depends: group1
-            - blockid: three
-              display: arr[j] = temp;
-              depends: two
-            - blockid: four
-              display: int temp = arr[j];
-              depends: "-1"
+    blocklist:
+    - blockid: one
+      display: int temp = arr[i];
+    - blockid: onea
+      display: int temp = arr[j];
+    - blockid: two
+      display: arr[i] = arr[j];
+      depends: group1
+    - blockid: three
+      display: arr[j] = temp;
+      depends: two
+    - blockid: four
+      display: int temp = arr[j];
+      depends: "-1"
   :diagnostics:
-  - Dependencies must refer to previously defined blocks within the same blocklist
-    scope.
+  - 'Path ''/assets/code/blocks/content/0'' is missing key: display'
 runestone:
   value:
     question_text: 'Write a function to swap two array elements by reordering the
@@ -64,14 +63,10 @@ runestone:
       language: ''
       runnable: true
     blocks:
-    - text: int temp = arr[i];
+    - text:
       type: ''
-      tag: one
+      tag: group1
       depends: ''
-      indent: 0
+      indent: ''
       displaymath: true
-    - text: int temp = arr[j];
-      tag: paired
-      depends: ''
-      displaymath: ''
   diags: []

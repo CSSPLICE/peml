@@ -1,7 +1,7 @@
 ---
 :value:
-  exercise_id: missing_exec_required_fields_error
-  title: Missing Exec Required Fields Error
+  exercise_id: negative_indentation_error
+  title: Negative Indentation Error
   author: Cliff Shaffer
   license:
     id: MIT
@@ -46,9 +46,9 @@
             indent: '0'
       test:
         files:
-        - type: text/csv-unquoted
+        - type: text/x-unquoted-csv
           content: |
-            expected
+            expected, description
             I am a Java program I am a Java program I am a Java program
 :diagnostics:
 - 'The document is missing key: assets'

@@ -20,7 +20,7 @@ Put the blocks in the proper order.
 # Define bounding content (before and after the moveable blocks)
 # using [assets.code.starter.files].
 
-[assets.code.starter.files]
+[.assets.code.starter.files]
 content:---------
 Fixed Start
   This block goes at the beginning
@@ -38,7 +38,8 @@ Fixed End
 # displayed with respect to the orderable blocks, and limiting where
 # the user can place an orderable block so that things appear in a
 # reasonable order.
-[assets.code.blocks.content]
+[]
+[.assets.code.blocks.content]
 blockid: randomg1b1
 display:----------
 Random Group 1 Block 1

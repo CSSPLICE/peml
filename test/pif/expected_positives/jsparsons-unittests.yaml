@@ -45,7 +45,7 @@ parsed:
         test:
           files:
           - type: |
-              text/csv-unquoted
+              text/x-unquoted-csv
                 maxindex(arr)
             content: |
               arr, expected, description

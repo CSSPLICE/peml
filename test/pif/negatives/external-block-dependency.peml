@@ -17,7 +17,7 @@ instructions:----------
 Put the blocks in the proper order.
 ----------
 
-[assets.code.blocks.content]
+[.assets.code.blocks.content]
 blockid: randomg1b1
 display: Random Group 1 Block 1
 depends:
@@ -32,6 +32,7 @@ depends: randomg1b2
 
 blockid: list1 
 depends: 
+[]
 [.blocklist]
 blockid: randomg2b1
 display: Random Group 2 Block 1
@@ -44,5 +45,3 @@ depends: randomg2b1
 blockid: randomg2b3
 display: Random Group 2 Block 3
 depends: randomg2b2
-[]
-[]

@@ -1,4 +1,6 @@
-require_relative "../peml"
+require_relative '../peml/loader'
+require_relative '../peml/utils'
+require 'json_schemer'
 require 'dottie/ext'
 require 'csv'
 
@@ -70,10 +72,7 @@ module PifParser
 
         # Separates blocks into normal blocks, blocklists, and distractors
         # Separated blocks are given an addition "pos" field
-        s = separate_blocks(block_content)
-        normal_blocks = s[0]
-        blocklists = s[1]
-        distractors = s[2]
+        normal_blocks = separate_blocks(block_content)[0]
 
         if (deps_violation(block_content))
           diags << "Dependencies must refer to previously defined blocks "\
@@ -179,8 +178,8 @@ module PifParser
       end
       return blockids
       # Case: Normal block
-    else (blocklist)
-    return Array(curr_blockid)
+    else
+      return Array(curr_blockid)
     end
   end
 
@@ -222,7 +221,6 @@ module PifParser
     blockids = get_blockids(blocks)
 
     blocks.each do |block|
-      curr_blockid = block["blockid"]
       curr_deps = get_blockdeps_helper(block)
 
       if (!(curr_deps - blockids).empty?)
@@ -367,7 +365,6 @@ module PifParser
   # only reference blocks in the same list. Prevents cycles as a result.
   def self.deps_violation(blocks)
     previous_blocks = []
-    violation = false
 
     blocks.each_with_index do |block|
       blockid = block["blockid"]

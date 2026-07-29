@@ -21,7 +21,7 @@ instructions:----------
 Construct code by reordering and indenting the lines.
 ----------
 
-[assets.code.blocks.content]
+[.assets.code.blocks.content]
 blockid: one
 display: for (int i=0;i<3;i++) {
 indent: 0

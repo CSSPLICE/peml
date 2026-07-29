@@ -19,8 +19,17 @@ parsed:
     - language: Python
       assets:
         code:
+          wrapper:
+            files:
+            - content: |
+                a = 4
+                b = 2
+                ___
+              assets:
+                code:
+                  blocks:
+                    delimiter: "\\"
           blocks:
-            delimiter: "\\"
             content:
             - blockid: one1
               display: if \\a\b\c\\ \\<\>\>=\ b
@@ -35,15 +44,9 @@ parsed:
 
                 blockid four
               indent: '0'
-          wrapper:
-            files:
-            - content: |
-                a = 4
-                b = 2
-                ___
         test:
           files:
-          - type: text/csv-unquoted
+          - type: text/x-unquoted-csv
             content: |
               expected
               2

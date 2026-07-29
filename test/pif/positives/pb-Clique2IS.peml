@@ -16,9 +16,10 @@ instructions:----------
 Show a proof that the decision form of Independent Set is NP-complete.
 ----------
 
-[assets.code.blocks.content]
+[.assets.code.blocks.content]
 
 blockid: inNPblock
+[]
 [.blocklist]
 blockid: inNP
 display: Show that INDEPENDENT SET is in NP.
@@ -31,7 +32,6 @@ depends: inNP
 blockid: d1
 display: Nondeterministically guess some collection of vertices. If the vertices are independent, and if it is the biggest such set, then return YES. Otherwise return NO.
 depends: -1
-[]
 
 blockid: NPhardblock
 [.blocklist]
@@ -77,5 +77,3 @@ blockid: onlyif
 display: 
 <b>If there is a clique of size $k$ in the graph $G$</b>, it implies all vertices share an edge with all others in $G$, which further implies no two of these vertices share an edge in $G'$ (thus forming an Independent Set. That is, <b>there exists an independent set of size $k$ in $G'$</b>.
 depends: iff
-[]
-[]

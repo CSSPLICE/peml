@@ -15,40 +15,38 @@ parsed:
     instructions: 'Write a function to swap two array elements by reordering the lines.
 
       '
-    systems:
-    - language: Java
-      assets:
-        code:
-          starter:
-            files:
-            - content: |
-                public static void Swap(int[] arr, int i, int j)
-                {
-                    ___
-                }
-          blocks:
-            content:
-            - blockid: group1
-              depends: ''
-              pickone: 'true'
-      blocklist:
-      - blockid: one
-        display: int temp = arr[i];
-      - blockid: onea
-        display: int temp = arr[j];
-        feedback: This was the wrong choice.
-      - blockid: two
-        display: arr[i] = arr[j];
-        depends: group1
-      - blockid: three
-        display: arr[j] = temp;
-        depends: two
-      - blockid: four
-        display: int temp = arr[j];
-        feedback: This line should not appear in the answer.
-        depends: "-1"
+    assets:
+      code:
+        starter:
+          files:
+          - content: |
+              public static void Swap(int[] arr, int i, int j)
+              {
+                  ___
+              }
+        blocks:
+          content:
+          - blockid: group1
+            depends: ''
+            pickone: 'true'
+    blocklist:
+    - blockid: one
+      display: int temp = arr[i];
+    - blockid: onea
+      display: int temp = arr[j];
+      feedback: This was the wrong choice.
+    - blockid: two
+      display: arr[i] = arr[j];
+      depends: group1
+    - blockid: three
+      display: arr[j] = temp;
+      depends: two
+    - blockid: four
+      display: int temp = arr[j];
+      feedback: This line should not appear in the answer.
+      depends: "-1"
   :diagnostics:
-  - 'The document is missing key: assets'
+  - 'Path ''/assets/code/blocks/content/0'' is missing key: display'
 runestone:
   value:
     question_text: 'Write a function to swap two array elements by reordering the
@@ -64,7 +62,7 @@ runestone:
       indent: false
       adaptive: true
       numbered: false
-      language: java
+      language: ''
       runnable: true
     blocks:
     - text:
