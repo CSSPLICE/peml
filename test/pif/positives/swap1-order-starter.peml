@@ -32,9 +32,8 @@ public static void Swap(int[] arr, int i, int j)
     ___
 }
 ----------
-[]
 
-[.assets.code.blocks.content]
+[assets.code.blocks.content]
 blockid: group1
 depends:
 pickone: true
@@ -44,6 +43,7 @@ display: int temp = arr[i];
 
 blockid: onea
 display: int temp = arr[j];
+[]
 
 blockid: two
 display: arr[i] = arr[j];
@@ -56,3 +56,4 @@ depends: two
 blockid: four
 display: int temp = arr[j];
 depends: -1
+[]

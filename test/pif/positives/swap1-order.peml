@@ -40,6 +40,7 @@ display: int temp = arr[i];
 
 blockid: onea
 display: int temp = arr[j];
+[]
 
 blockid: two
 display: arr[i] = arr[j];
@@ -55,3 +56,4 @@ depends: -1
 
 blockid: fixed
 display: }
+[]

@@ -30,6 +30,7 @@ display:----------
 }
 ----------
 depends: caseA
+[]
 
 blockid: testBblock
 depends:
@@ -44,6 +45,7 @@ display:----------
 }
 ----------
 depends: caseB
+[]
 
 blockid: testCblock
 depends:
@@ -58,3 +60,5 @@ display:----------
 }
 ----------
 depends: caseC
+[]
+[]

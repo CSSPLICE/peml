@@ -42,6 +42,7 @@ display: int temp = arr[i];
 blockid: onea
 display: int temp = arr[j];
 feedback: This was the wrong choice.
+[]
 
 blockid: two
 display: arr[i] = arr[j];

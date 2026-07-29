@@ -22,7 +22,6 @@ depends:
 
 blockid: inNP
 depends: starter
-[]
 [.blocklist]
 blockid: xinNP
 display: Show that X is in NP.
@@ -30,6 +29,7 @@ display: Show that X is in NP.
 blockid: algorithm
 display: Create an algorithm to solve X (that might or might not use non-determinism) that runs in polynomial time.
 depends: xinNP
+[]
 
 blockid: NPhard
 depends: starter
@@ -52,3 +52,5 @@ depends: trans
 blockid: t2
 display: Describe a polynomial-time transformation from the solution for <b>I’</b> in problem ``X`A`` (call it <b>SLN’</b>) to <b>SLN</b> such that <b>SLN</b> is the solution for <b>I</b> in problem ``A`X``.
 depends: trans
+[]
+[]

@@ -1,11 +1,10 @@
 # Example of an almost valid, execution-based PIF that 
-# is missing a one of the required fields for 
-# execution-based grading, namely, the programming language 
-# (although a missing test content or test format 
-# field would also produce the same diagnostic message). 
+# incorrectly formats its CSV test content. Namely, 
+# not all CSV rows match the length of the defined 
+# header. 
 
-exercise_id: missing_exec_required_fields_error
-title: Missing Exec Required Fields Error 
+exercise_id: negative_indentation_error
+title: Negative Indentation Error
 author: Cliff Shaffer
 license.id: MIT
 license.owner.name: Cliff Shaffer
@@ -20,8 +19,9 @@ Construct code by reordering and indenting the lines.
 
 [systems]
 language: Java
+[]
 
-[.assets.code.wrapper.files]
+[assets.code.wrapper.files]
 content:----------
 public class Parsons {
 
@@ -32,7 +32,7 @@ public class Parsons {
 ----------
 []
 
-[.assets.code.blocks.content]
+[assets.code.blocks.content]
 blockid: one
 display: for (int i=0;i<3;i++) {
 indent: 0
@@ -54,10 +54,10 @@ display: }
 indent: 0
 []
 
-[.assets.test.files]
-type: text/csv-unquoted
+[assets.test.files]
+format: text/csv-unquoted
 content:----------
-expected
+expected, description
 I am a Java program I am a Java program I am a Java program
 ----------
 []
