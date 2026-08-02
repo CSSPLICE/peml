@@ -67,7 +67,7 @@ renderable:
       numbered: false
       language: java
     blocks:
-    - text: int temp = arr[i];
+    - text:
       type: ''
       tag: group1-one
       depends: ''

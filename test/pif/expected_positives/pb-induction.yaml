@@ -131,7 +131,7 @@ renderable:
       type: ''
       tag: basecase-base1
       depends: predicate
-      indent: 0
+      indent: ''
       displaymath: true
       feedback: ''
       picklimit: 0

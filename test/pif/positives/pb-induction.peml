@@ -42,6 +42,7 @@ depends: starter
 blockid: basecase
 depends: predicate
 pickone: true
+[]
 [.blocklist]
 blockid: base1
 display: Base case: At $n=0$, $\sum_{j=0}^n 2(-7)^j = 2$ and $\frac{1-(-7)^{n+1}}{4} = \frac{1-(-7)}{4} = 2$, so the base case $P(0)$ holds.

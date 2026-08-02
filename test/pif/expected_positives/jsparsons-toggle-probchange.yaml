@@ -24,8 +24,17 @@ parsed:
     - language: Python
       assets:
         code:
+          wrapper:
+            files:
+            - content: |
+                a = 4
+                b = 2
+                ___
+              assets:
+                code:
+                  blocks:
+                    delimiter: "\\"
           blocks:
-            delimiter: "\\"
             content:
             - blockid: one1
               display: if \\a\b\c\\ \\<\>\>=\\ b

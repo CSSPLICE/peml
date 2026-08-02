@@ -1,6 +1,25 @@
 require 'test_helper'
 
 # Golden File (Snapshot) Testing for the PEML PIF Methods
+#
+# This test uses a "golden file" approach to verify functional correctness
+# of PIF parsing and Runestone conversion. For each .peml input in
+# test/pif/positives/ or test/pif/negatives/, a corresponding .yaml file in
+# test/pif/expected_positives/ or test/pif/expected_negatives/ holds the
+# expected output (parsed values, converted Runestone structures, or diagnostics).
+#
+# Workflow:
+#   bundle exec rake test
+#     Compares PIF output against golden files. Fails if output differs.
+#
+#   UPDATE_SNAPSHOTS=1 bundle exec rake test
+#     Regenerates all golden files from current PIF parser and converter output.
+#     Review the generated YAML before committing to confirm correctness.
+#
+# Adding new test cases:
+#   Drop a new .peml file in test/pif/positives/ or test/pif/negatives/,
+#   run with UPDATE_SNAPSHOTS=1 to generate its golden file, review,
+#   and commit both files.
 describe "Peml PIF Methods" do
 
   describe "Valid Inputs (Positives)" do

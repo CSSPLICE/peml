@@ -38,6 +38,9 @@ blockid: four
 display: System.out.print("a Java program ");
 indent: 1
 
+blockid: four_b
+display: System.out.print("a Python program ");
+
 blockid: five
 display: }
 indent: 0

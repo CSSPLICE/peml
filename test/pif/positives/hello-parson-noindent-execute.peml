@@ -42,7 +42,7 @@ display: print('Problems!')
 []
 
 [.assets.test.files]
-type: text/csv-unquoted
+type: text/x-unquoted-csv
 content:----------
 expected
 Hello\nParsons\nProblems!

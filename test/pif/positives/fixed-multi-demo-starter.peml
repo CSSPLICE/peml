@@ -45,7 +45,6 @@ Fixed End
 # displayed with respect to the orderable blocks, and limiting where
 # the user can place an orderable block so that things appear in a
 # reasonable order.
-
 [.assets.code.blocks.content]
 blockid: randomg1b1
 display:----------

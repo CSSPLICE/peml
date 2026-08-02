@@ -36,7 +36,7 @@ module Peml
               system['assets'].key?('test') &&
               system['assets']['test'].key?('files')
               system['assets']['test']['files'].each do |file|
-                if file['type'] == 'inline'
+                if file.key?('type') && file['type'].end_with?(':inline')
                   patterns = default_patterns.merge(file['pattern'] || {})
                   test_cases = { 'test_cases' => file['content'] }
                   columns = {}

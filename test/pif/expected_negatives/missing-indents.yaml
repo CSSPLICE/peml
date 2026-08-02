@@ -40,4 +40,4 @@
             display: "}"
             indent: '0'
 :diagnostics:
-- Block at position 0 is missing the required indent field.
+- 'The document is missing key: assets'

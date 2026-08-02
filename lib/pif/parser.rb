@@ -1,4 +1,6 @@
-require_relative "../peml"
+require_relative '../peml/loader'
+require_relative '../peml/utils'
+require 'json_schemer'
 require 'dottie/ext'
 require 'csv'
 
@@ -276,7 +278,6 @@ module PifParser
     blockids = get_blockids(blocks)
 
     blocks.each do |block|
-      curr_blockid = block["blockid"]
       curr_deps = get_blockdeps_helper(block)
 
       if (!(curr_deps - blockids).empty?)
@@ -421,7 +422,6 @@ module PifParser
   # only reference blocks in the same list. Prevents cycles as a result.
   def self.deps_violation(blocks)
     previous_blocks = []
-    violation = false
 
     blocks.each_with_index do |block|
       blockid = block["blockid"]
