@@ -60,6 +60,12 @@ module PifConverter
       diags << "#{language} is not a supported langauge."
     end
 
+    # Maps each raw PIF blockid to the tag it ends up with in the converted
+    # output, so declared "depends" references (which name raw blockids) can
+    # be remapped afterward even when conversion rewrites the tag (e.g. a
+    # pickone blocklist's root becomes "group1-one", not "group1").
+    blockid_to_tag = {}
+
     # Converts each PIF block into a Parsons block
     blocks.each_with_index do |block, i|
       block = block.dottie!
@@ -78,13 +84,27 @@ module PifConverter
 
       # Parsons cannot support nontrivial blocklists
       if has_blocklist && !block["pickone"]
-        diags << "Parsons does not support nontrivial blocklists: #{block}."
+        # diags << "Parsons does not support nontrivial blocklists: #{block}."
+        block["blocklist"].each do |sub_block|
+          sub_tag = "#{block["blockid"]}-#{sub_block["blockid"]}"
+          blockid_to_tag[sub_block["blockid"]] = sub_tag
+          parsons_data_model["blocks"] << {
+            "text" => sub_block["display"],
+            "tag" => sub_tag,
+            "depends" => sub_block["depends"],
+            "displaymath" => displaymath,
+            "feedback" => sub_block["feedback"],
+            "reusable" => sub_block["reusable"].to_s.strip.downcase == "true",
+          }
+        end
+
         # Case: Pickone blocklist
       elsif
         # Adds the root of the blocklist
         parsons_block["text"] = block["blocklist[0].display"]
         parsons_block["picklimit"] = block["picklimit"].to_i || 0
         parsons_block["tag"] = "#{block["blockid"]}-#{block["blocklist[0].blockid"]}"
+        blockid_to_tag[block["blockid"]] = parsons_block["tag"]
         parsons_block["depends"] = block["depends"] || ""
         if block["reusable"]
           parsons_block["reusable"] = block["reusable"].to_s.strip.downcase == "true"
@@ -101,9 +121,11 @@ module PifConverter
             grouped_distractors.sample(block["picklimit"].to_i) :
             grouped_distractors
         selected_distractors.each do |distractor|
+          distractor_tag = "#{block["blockid"]}-#{distractor["blockid"]}"
+          blockid_to_tag[distractor["blockid"]] = distractor_tag
           parsons_data_model["blocks"] << {
             "text" => distractor["display"],
-            "tag" => "#{block["blockid"]}-#{distractor["blockid"]}",
+            "tag" => distractor_tag,
             "depends" => "-1",
             "displaymath" => displaymath,
             "feedback" => distractor["feedback"],
@@ -127,6 +149,7 @@ module PifConverter
         else
           # Case: Normal Block
           parsons_block["tag"] = block["blockid"] || ""
+          blockid_to_tag[block["blockid"]] = parsons_block["tag"] if block["blockid"]
           parsons_block["depends"] = block["depends"] || ""
           parsons_block["indent"] = block["indent"] || ""
         end
@@ -146,6 +169,31 @@ module PifConverter
 
         # Appends converted block
         parsons_data_model["blocks"] << parsons_block
+      end
+    end
+
+    if blocks.all? { |b| b["depends"].nil? || b["depends"].to_s.strip.empty? }
+      # When no block declares a depends value, the DAG shape defaults to the
+      # blocks' declared order: each answer block depends on the one
+      # immediately before it. This chains on each block's final tag (e.g.
+      # "group1-one" for a pickone blocklist) rather than its raw PIF
+      # blockid, and skips distractors when picking the "previous" block.
+      previous_tag = ""
+      parsons_data_model["blocks"].each do |pblock|
+        next if pblock["type"] == "distractor"
+        pblock["depends"] = previous_tag
+        previous_tag = pblock["tag"]
+      end
+    else
+      # Declared depends values name raw PIF blockids, which may not match
+      # the tag a referenced block ended up with (e.g. a pickone blocklist's
+      # root is tagged "group1-one", not "group1"). Remap each reference
+      # through blockid_to_tag now that every block's final tag is known.
+      parsons_data_model["blocks"].each do |pblock|
+        next if pblock["depends"].nil? || pblock["depends"].to_s.strip.empty? || pblock["depends"] == "-1"
+        pblock["depends"] = pblock["depends"].to_s.split(/\s*,\s*/)
+          .map { |id| blockid_to_tag[id] || id }
+          .join(", ")
       end
     end
 

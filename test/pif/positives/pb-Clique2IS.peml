@@ -25,12 +25,12 @@ language: natural
 
 [.assets.code.blocks.content]
 
-blockid: inNPblock
-[.blocklist]
 blockid: inNP
 display: Show that INDEPENDENT SET is in NP.
 depends:
 
+blockid: inNPblock
+[.blocklist]
 blockid: algorithm
 display: Nondeterministically guess some subset of the vertices. If this set is at least of size k (k is the parameter to the decision problem), and the vertices are all independent, then return YES. Otherwise return NO.
 depends: inNP
@@ -45,16 +45,17 @@ blockid: NPhardblock
 blockid:NPhard
 display: 2. Show that INDEPENDENT SET is NP-hard by using a reduction
 of known NP-comlete problem CLIQUE to IS.
-depends:
+depends:inNPblock
 
 blockid: d3
 display: 2. Show that INDEPENDENT SET is NP-hard by using a reduction
 of IS to known NP-complete problem CLIQUE.
 depends: -1
+[]
 
 blockid: starthard
 display: Show transformations to reduce ``CLIQUE`IS`` to ``IS`CLIQUE``.
-depends: NPhard
+depends: NPhardblock
 
 blockid: reduce
 display: To reduce a [CLIQUE|IS] input instance to an [IS|CLIQUE] input instance for a given graph $G = (V , E)$, construct a complementary graph $G' = (V' , E')$ such that:

@@ -205,10 +205,7 @@
                       "type": "object",
                       "required": ["type", "content"],
                       "properties": {
-                        "type": {
-                          "type": "string",
-                          "pattern": "^(text/csv|text/csv-unquoted)$"
-                        },
+                        "type": { "$ref": "#/definitions/nonempty_string" },
                         "pattern_actual": { "$ref": "#/definitions/nonempty_string" },
                         "content": { "$ref": "#/definitions/nonempty_string" }
                       }

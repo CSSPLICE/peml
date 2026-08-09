@@ -34,11 +34,11 @@ if input_file_path && output_dir
   diagnostics = parsed[:diagnostics];
   puts "Parsing complete..."
 
-  has_nontrivial_blocklist = value["assets.code.blocks.content"]
-                               &.any? { |block| block["blocklist"] && !block["pickone"] }
-  if has_nontrivial_blocklist
-    puts "This file has a blocklist but doesnt have a blocklist pickone value"
-  end
+  # has_nontrivial_blocklist = value["assets.code.blocks.content"]
+  #                              &.any? { |block| block["blocklist"] && !block["pickone"] }
+  # if has_nontrivial_blocklist
+  #   puts "This file has a blocklist but doesnt have a blocklist pickone value"
+  # end
 
   if diagnostics.length > 0
     puts "Diagnostics for #{filename}.peml:"
@@ -51,7 +51,8 @@ if input_file_path && output_dir
     end
   end
 
-  if (diagnostics.length == 0 && !has_nontrivial_blocklist)
+  # if (diagnostics.length == 0 && !has_nontrivial_blocklist)
+  if (diagnostics.length == 0)
     FileUtils.mkdir_p(output_dir)
     File.open("#{output_dir}/#{filename}.json", 'w') do |file|
       # PIF File is parsed to fit runestone parsons as the default for now.
@@ -60,9 +61,7 @@ if input_file_path && output_dir
       case output_format
       when "pif"
         file.puts(parsed.to_json)
-      when "rs"
-        puts "Converting to rs format..."
-        file.puts(Peml.pif_to_renderable_json(parsed, "json"))
+      # when "rs" todo 
       else
         puts "Converting to rs format..."
         file.puts(Peml.pif_to_renderable_json(parsed, "json"))

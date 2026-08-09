@@ -77,14 +77,14 @@ module PifParser
       blocklists = s[1]
       distractors = s[2]
 
-      if (deps_violation(block_content))
+      if (violating_blockid = deps_violation(block_content))
         diags << "Dependencies must refer to previously defined blocks " \
-          "within the same blocklist scope."
+          "within the same blocklist scope. Violating blockid: #{violating_blockid}"
       end
 
-      if (picklimit_violation(blocklists))
+      if (violating_blocklist_id = picklimit_violation(blocklists))
         diags << "Invalid pick limit, pick limit must be a positive int " \
-          "less than the number of blocks"
+          "less than the number of blocks. Violating blockid: #{violating_blocklist_id}"
       end
 
       # For prescribed indent mode with order grading, all normal blocks must declare an indent level
@@ -418,12 +418,16 @@ module PifParser
   end
 
   # ------------------------------------------------------------------------------
-  # Ensures that dependencies reference only prior blocks, and nested blocks
-  # only reference blocks in the same list. Prevents cycles as a result.
-  def self.deps_violation(blocks)
-    previous_blocks = []
+  # Ensures that dependencies reference only prior blocks, where a nested block's
+  # priors include both its enclosing scope's prior blocks and its own preceding
+  # siblings. Prevents cycles as a result.
+  # Returns the blockid of the first offending block, or nil if there is no violation.
+  # previous_blocks seeds the scope with blockids already defined by an enclosing
+  # list, so a nested block may depend on anything defined before its blocklist.
+  def self.deps_violation(blocks, previous_blocks = [])
+    previous_blocks = previous_blocks.dup
 
-    blocks.each_with_index do |block|
+    blocks.each do |block|
       blockid = block["blockid"]
       blocklist = block["blocklist"]
       parsed_depends = block["depends"]&.split(/\s*,\s*/) || []
@@ -433,11 +437,16 @@ module PifParser
         next
       end
 
-      # Case: Sublist fails recursive call or dependency not
-      # found among previous blocks
-      if ((blocklist && deps_violation(blocklist)) ||
-        (!(parsed_depends - previous_blocks).empty?))
-        return true
+      # Case: Sublist fails recursive call. The nested scope inherits blocks
+      # defined so far in this scope, but its own additions stay local to it.
+      if (blocklist)
+        nested_violation = deps_violation(blocklist, previous_blocks)
+        return nested_violation if nested_violation
+      end
+
+      # Case: Dependency not found among previous blocks
+      if (!(parsed_depends - previous_blocks).empty?)
+        return blockid
       end
 
       if (blockid && blockid != "fixed" && blockid != "reusable")
@@ -445,7 +454,7 @@ module PifParser
       end
     end
 
-    return false
+    return nil
   end
 
   def self.markdown_renderer(hash)
@@ -555,21 +564,22 @@ module PifParser
     html
   end
 
+  # Returns the blockid of the first offending blocklist, or nil if there is no violation.
   def self.picklimit_violation(blocklists)
-    blocklists.each_with_index do |blocklist|
+    blocklists.each do |blocklist|
       picklimit = 0
       begin
         picklimit = blocklist["picklimit"].to_i
       rescue StandardError
-        return true;
+        return blocklist["blockid"]
       end
 
       if (picklimit < 0 || \
         picklimit > blocklist["blocklist"].length)
-        return true
+        return blocklist["blockid"]
       end
     end
 
-    return false
+    return nil
   end
 end

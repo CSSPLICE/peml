@@ -30,7 +30,7 @@ display: To prove that a problem X is NP-complete do this:
 depends:
 
 blockid: xinNP
-display: 1. Show that X is in NP.
+display: 1\. Show that X is in NP.
 depends: starter
 
 blockid: algorithm
@@ -38,7 +38,7 @@ display: Create an algorithm to solve X (that might or might not use non-determi
 depends: xinNP
 
 blockid: starthard
-display: 2. Show that X is NP-hard.
+display: 2\. Show that X is NP-hard.
 depends: algorithm
 
 blockid: choose

@@ -10,5 +10,5 @@
 /.idea/
 *.gem
 .qodo
-parsed
+parsed-json
 */.DS_Store

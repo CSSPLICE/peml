@@ -1,0 +1,63 @@
+# NP-completeness proof template
+
+exercise_id: https://github.com/CSSPLICE/peml-feasibility-examples/blob/main/parsons/pb-nptemplate.peml
+
+title: NP-completeness proof template
+author: Cliff Shaffer
+license.id: MIT
+license.owner.name: Cliff Shaffer
+license.owner.email: shaffer@vt.edu
+
+tags.topics: PEML NP-completeness
+
+settings.grader.type: order
+settings.indent.active: true
+settings.indent.mode: free
+
+instructions:----------
+Show the general process for an NP-Completeness Proof.
+----------
+
+[systems]
+language: natural
+
+[.assets.code.blocks.content]
+blockid: starter
+display: To prove that a problem X is NP-complete do this:
+depends:
+
+blockid: inNP
+depends: starter
+[.blocklist]
+blockid: xinNP
+display: Show that X is in NP.
+
+blockid: algorithm
+display: Create an algorithm to solve X (that might or might not use non-determinism) that runs in polynomial time.
+depends: xinNP
+[]
+
+blockid: NPhard
+depends: starter
+[.blocklist]
+blockid: starthard
+display: Show that X is NP-hard.
+
+blockid: choose
+display: Choose a known NP-hard problem A.
+depends: starthard
+
+blockid: transfo
+display: Define two transformations.
+depends: choose
+
+blockid: t1
+display: Describe a polynomial-time algorithm that takes an arbitrary instance  **I** of ``A`X`` to an instance **I′** of ``X`A``.
+depends: transfo
+
+blockid: t2
+display: Describe a polynomial-time transformation from the solution for **I'** in problem ``X`A`` (call it **SLN'**) to **SLN** such that **SLN** is the solution for **I** in problem ``A`X``.
+depends: transfo
+[]
+[]
+[]
