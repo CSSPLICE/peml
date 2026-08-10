@@ -91,6 +91,7 @@ module PifConverter
           parsons_data_model["blocks"] << {
             "text" => sub_block["display"],
             "tag" => sub_tag,
+            "type" => sub_block["depends"] == -1 || sub_block["feedback"] ? "distractor" : "",
             "depends" => sub_block["depends"],
             "displaymath" => displaymath,
             "feedback" => sub_block["feedback"],
@@ -98,10 +99,11 @@ module PifConverter
           }
         end
 
-        # Case: Pickone blocklist
+      # Case: Pickone blocklist
       elsif
         # Adds the root of the blocklist
         parsons_block["text"] = block["blocklist[0].display"]
+        parsons_block["type"] = ""
         parsons_block["picklimit"] = block["picklimit"].to_i || 0
         parsons_block["tag"] = "#{block["blockid"]}-#{block["blocklist[0].blockid"]}"
         blockid_to_tag[block["blockid"]] = parsons_block["tag"]
@@ -126,6 +128,7 @@ module PifConverter
           parsons_data_model["blocks"] << {
             "text" => distractor["display"],
             "tag" => distractor_tag,
+            "type" => "distractor",
             "depends" => "-1",
             "displaymath" => displaymath,
             "feedback" => distractor["feedback"],
@@ -152,6 +155,7 @@ module PifConverter
           blockid_to_tag[block["blockid"]] = parsons_block["tag"] if block["blockid"]
           parsons_block["depends"] = block["depends"] || ""
           parsons_block["indent"] = block["indent"] || ""
+          parsons_block["type"] = ""
         end
 
         if block["reusable"]
