@@ -5,54 +5,72 @@ lib = File.expand_path("../../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 # require 'pp'
-require_relative '../lib/pif/parser'
-require_relative '../lib/pif/converter'
+require_relative '../lib/peml'
+require 'fileutils'
 
 input_file_path = ARGV[0]
 output_dir = ARGV[1]
-flag = ARGV[2]
-output_format = ARGV[3]
+rest = ARGV[2..] || []
 
-valid_output_formats = ["rs","pif"]
+valid_output_formats = ["rs", "pif"]
+show_fails  = rest.include?('--show-fails')
+f_index     = rest.index('-f')
+output_format = f_index ? rest[f_index + 1] : nil
+
+if f_index && (!output_format || !valid_output_formats.include?(output_format))
+  puts "Unknown flag or format used"
+  exit 1
+end
 
 if input_file_path && output_dir
-    #Check for calid flag and output_format
-    if flag && output_format
-        if flag != "-f" || !valid_output_formats.include?(output_format)
-            puts "Unknown flag or format used"
-        end
+
+  filename = File.basename(input_file_path, File.extname(input_file_path))
+
+  puts "Parsing #{filename}.peml ..."
+  file = File.open(input_file_path, "r:UTF-8")
+  content = file.read
+  parsed = Peml.pif_parse({ pif: content })
+  value = parsed[:value].dottie!
+  diagnostics = parsed[:diagnostics];
+  puts "Parsing complete..."
+
+  # has_nontrivial_blocklist = value["assets.code.blocks.content"]
+  #                              &.any? { |block| block["blocklist"] && !block["pickone"] }
+  # if has_nontrivial_blocklist
+  #   puts "This file has a blocklist but doesnt have a blocklist pickone value"
+  # end
+
+  if diagnostics.length > 0
+    puts "Diagnostics for #{filename}.peml:"
+    diagnostics.each { |d| puts "  - #{d}" }
+    if show_fails
+      FileUtils.mkdir_p(output_dir)
+      File.open("#{output_dir}/failed-#{filename}.json", 'w') do |file|
+        file.puts(Peml.pif_to_renderable_json(parsed, "json"))
+      end
     end
+  end
 
-
-    filename = File.basename(input_file_path, File.extname(input_file_path))
-
-    file = File.open(input_file_path,"r:UTF-8")
-    content = file.read
-    parsed = PifParser.parse({pif:content})
-    value = parsed[:value].dottie!
-    diagnostics = parsed[:diagnostics];
-
-    has_nontrivial_blocklist= value["assets.code.blocks.content"]
-                                &.any? {|block| block["blocklist"] && !block["pickone"]}
-
-    if (diagnostics.length == 0 && !has_nontrivial_blocklist)
-        File.open("#{output_dir}/#{filename}.json", 'w') do |file|
-            # PIF File is parsed to fit runestone parsons as the default for now.
-            # The option to select a specific parsons version
-            # or native PIF will be added soon
-            case output_format
-            when "pif"
-                file.puts(parsed[:value].to_json)
-            when "rs"
-                file.puts(PifConverter.to_Runestone(parsed[:value], "json"))
-            else
-                file.puts(PifConverter.to_Runestone(parsed[:value], "json"))
-            end
-        end
+  # if (diagnostics.length == 0 && !has_nontrivial_blocklist)
+  if (diagnostics.length == 0)
+    FileUtils.mkdir_p(output_dir)
+    File.open("#{output_dir}/#{filename}.json", 'w') do |file|
+      # PIF File is parsed to fit runestone parsons as the default for now.
+      # The option to select a specific parsons version
+      # or native PIF will be added soon
+      case output_format
+      when "pif"
+        file.puts(parsed.to_json)
+      # when "rs" todo 
+      else
+        puts "Converting to rs format..."
+        file.puts(Peml.pif_to_renderable_json(parsed, "json"))
+      end
     end
+  end
 
 else
-    puts "Usage: pif <filename> <output directory> \n flag -f : Output format"
-    exit 1
+  puts "Usage: pif <filename> <output directory> [-f <rs|pif>] [--show-fails]"
+  exit 1
 end
 

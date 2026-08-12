@@ -1,0 +1,105 @@
+{
+  "value": {
+    "question_text": "<p>Put the blocks <strong>in</strong> the proper order.</p>\n",
+    "options": {
+      "grader": {
+        "type": "dag",
+        "show_feedback": true
+      },
+      "indent": {
+        "active": true,
+        "mode": "free",
+        "max_indents": 1
+      },
+      "adaptive": true,
+      "numbered": false,
+      "language": "java"
+    },
+    "blocks": [
+      {
+        "text": "Fixed Start",
+        "type": "",
+        "tag": "fixed",
+        "depends": "",
+        "indent": true,
+        "displaymath": false,
+        "feedback": ""
+      },
+      {
+        "text": "Random Group 1 Block 1",
+        "type": "",
+        "tag": "randomg1b1",
+        "depends": "",
+        "indent": true,
+        "displaymath": false,
+        "feedback": ""
+      },
+      {
+        "text": "Random Group 1 Block 2",
+        "type": "",
+        "tag": "randomg1b2",
+        "depends": "randomg1b1",
+        "indent": true,
+        "displaymath": false,
+        "feedback": ""
+      },
+      {
+        "text": "Random Group 1 **Block** 3",
+        "type": "",
+        "tag": "randomg1b3",
+        "depends": "randomg1b2",
+        "indent": true,
+        "displaymath": false,
+        "feedback": ""
+      },
+      {
+        "text": "Fixed **Middle**",
+        "type": "",
+        "tag": "fixed",
+        "depends": "",
+        "indent": true,
+        "displaymath": false,
+        "feedback": ""
+      },
+      {
+        "text": "Random Group 2 Block 1",
+        "type": "",
+        "tag": "randomg2b1",
+        "depends": "randomg1b3",
+        "indent": true,
+        "displaymath": false,
+        "feedback": ""
+      },
+      {
+        "text": "Random Group 2 Block 2",
+        "type": "",
+        "tag": "randomg2b2",
+        "depends": "randomg2b1",
+        "indent": true,
+        "displaymath": false,
+        "feedback": ""
+      },
+      {
+        "text": "Random Group 2 Block 3",
+        "type": "",
+        "tag": "randomg2b3",
+        "depends": "randomg2b2",
+        "indent": true,
+        "displaymath": false,
+        "feedback": ""
+      },
+      {
+        "text": "Fixed End",
+        "type": "",
+        "tag": "fixed",
+        "depends": "",
+        "indent": true,
+        "displaymath": false,
+        "feedback": ""
+      }
+    ]
+  },
+  "diags": [
+
+  ]
+}

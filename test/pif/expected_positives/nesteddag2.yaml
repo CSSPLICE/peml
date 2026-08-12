@@ -11,70 +11,80 @@ parsed:
         email: shaffer@vt.edu
     tags:
       topics: PEML Demo Parsons Problem
-      style: parsons, order
+    settings:
+      grader:
+        type: order
+      indent:
+        active: 'true'
+        mode: free
+        max_indents: '1'
     instructions: |
-      Associate each test with its corresponding work, but you can do the
-      tests in any order.
-    assets:
-      code:
-        blocks:
-          content:
-          - blockid: testAblock
-            depends: ''
-    blocklist:
-    - blockid: caseA
-      display: if (testA) {
-      depends: ''
-    - blockid: stuffA
-      display: |2
-          doAstuff();
-        }
-      depends: caseA
-    - blockid: testBblock
-      depends: ''
-      blocklist:
-      - blockid: caseB
-        display: if (testB) {
-        depends: ''
-      - blockid: stuffB
-        display: |2
-            doBstuff();
-          }
-        depends: caseB
-      - blockid: testCblock
-        depends: ''
-        blocklist:
-        - blockid: caseC
-          display: if (testC) {
-          depends: ''
-        - blockid: stuffC
-          display: |2
-              doCstuff();
-            }
-          depends: caseC
-  :diagnostics:
-  - 'Path ''/assets/code/blocks/content/0'' is missing key: display'
-runestone:
+      <p>Associate each test with its corresponding work, but you can do the<br />
+      tests in any order.</p>
+    systems:
+    - language: java
+      assets:
+        code:
+          blocks:
+            content:
+            - blockid: testAblock
+              depends: ''
+              blocklist:
+              - blockid: caseA
+                display: if (testA) {
+                depends: ''
+              - blockid: stuffA
+                display: |2
+                    doAstuff();
+                  }
+                depends: caseA
+            - blockid: testBblock
+              depends: ''
+              blocklist:
+              - blockid: caseB
+                display: if (testB) {
+                depends: ''
+              - blockid: stuffB
+                display: |2
+                    doBstuff();
+                  }
+                depends: caseB
+            - blockid: testCblock
+              depends: ''
+              blocklist:
+              - blockid: caseC
+                display: if (testC) {
+                depends: ''
+              - blockid: stuffC
+                display: |2
+                    doCstuff();
+                  }
+                depends: caseC
+  :diagnostics: []
+renderable:
   value:
     question_text: |
-      Associate each test with its corresponding work, but you can do the
-      tests in any order.
+      <p>Associate each test with its corresponding work, but you can do the<br />
+      tests in any order.</p>
     options:
       grader:
         type: dag
-        showFeedback: true
-      maxdist: 0
-      order: ''
-      indent: false
+        show_feedback: true
+      indent:
+        active: true
+        mode: free
+        max_indents: 1
       adaptive: true
       numbered: false
-      language: ''
-      runnable: true
-    blocks:
-    - text:
-      type: ''
-      tag: testAblock
-      depends: ''
-      indent: ''
-      displaymath: true
-  diags: []
+      language: java
+    blocks: []
+  diags:
+  - 'Parsons does not support nontrivial blocklists: {"blockid"=>"testAblock", "depends"=>"",
+    "blocklist"=>[{"blockid"=>"caseA", "display"=>"if (testA) {", "depends"=>""},
+    {"blockid"=>"stuffA", "display"=>"  doAstuff();\n}\n", "depends"=>"caseA"}]}.'
+  - 'Parsons does not support nontrivial blocklists: {"blockid"=>"testBblock", "depends"=>"",
+    "blocklist"=>[{"blockid"=>"caseB", "display"=>"if (testB) {", "depends"=>""},
+    {"blockid"=>"stuffB", "display"=>"  doBstuff();\n}\n", "depends"=>"caseB"}]}.'
+  - 'Parsons does not support nontrivial blocklists: {"blockid"=>"testCblock", "depends"=>"",
+    "blocklist"=>[{"blockid"=>"caseC", "display"=>"if (testC) {", "depends"=>""},
+    {"blockid"=>"stuffC", "display"=>"  doCstuff();\n}\n", "depends"=>"caseC"}]}.'

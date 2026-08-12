@@ -10,7 +10,12 @@
       email: shaffer@vt.edu
   tags:
     topics: PIF Error Demo
-    style: parsons, execute
+  settings:
+    grader:
+      type: execute
+    indent:
+      active: 'true'
+      mode: free
   instructions: 'Construct code by reordering and indenting the lines.
 
     '
@@ -46,9 +51,9 @@
             indent: '0'
       test:
         files:
-        - type: text/x-unquoted-csv
+        - format: text/csv-unquoted
           content: |
             expected
             I am a Java program I am a Java program I am a Java program
 :diagnostics:
-- 'The document is missing key: assets'
+- 'Path ''/systems/0/assets/test/files/0'' is missing key: type'

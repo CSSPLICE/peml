@@ -11,7 +11,11 @@ license.owner.name: Cliff Shaffer
 license.owner.email: shaffer@vt.edu
 
 tags.topics: PEML Demo Parsons Problem
-tags.style: parsons, order
+
+settings.grader.type: order
+settings.indent.active: true
+settings.indent.mode: free
+settings.indent.max_indents: 1
 
 instructions:----------
 Put the blocks in the proper order.
@@ -19,6 +23,9 @@ Put the blocks in the proper order.
 
 # Define bounding content (before and after the moveable blocks)
 # using [assets.code.starter.files].
+
+[systems]
+language: java
 
 [.assets.code.starter.files]
 content:---------
@@ -29,7 +36,7 @@ Fixed Start
 Fixed End
       This block appears at the end.
 ---------
-
+[]
 
 # Note that the DAG implied by the depends tags
 # only indicates the relative positioning of the
@@ -38,7 +45,6 @@ Fixed End
 # displayed with respect to the orderable blocks, and limiting where
 # the user can place an orderable block so that things appear in a
 # reasonable order.
-[]
 [.assets.code.blocks.content]
 blockid: randomg1b1
 display:----------
@@ -82,4 +88,5 @@ Random Group 2 Block 3
 This is the final adjustable block.
 ----------
 depends: randomg2b2
+[]
 []

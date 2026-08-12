@@ -9,12 +9,19 @@ license.owner.name: Cliff Shaffer
 license.owner.email: shaffer@vt.edu
 
 tags.topics: PEML Demo Parsons Problem
-tags.style: parsons, order
+
+settings.grader.type: order
+settings.indent.active: true
+settings.indent.mode: free
+settings.indent.max_indents: 1
 
 instructions:----------
 Associate each test with its corresponding work, but you can do the
 tests in any order.
 ----------
+
+[systems]
+language: java
 
 [.assets.code.blocks.content]
 blockid: testAblock
@@ -31,6 +38,7 @@ display:----------
 }
 ----------
 depends: caseA
+[]
 
 blockid: testBblock
 depends:
@@ -45,6 +53,7 @@ display:----------
 }
 ----------
 depends: caseB
+[]
 
 blockid: testCblock
 depends:
@@ -59,3 +68,6 @@ display:----------
 }
 ----------
 depends: caseC
+[]
+[]
+[]

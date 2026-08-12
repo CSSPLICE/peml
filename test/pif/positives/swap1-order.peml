@@ -18,11 +18,15 @@ license.owner.name: Cliff Shaffer
 license.owner.email: shaffer@vt.edu
 
 tags.topics: PEML Demo Parsons Problem
-tags.style: parsons, order
+
+settings.grader.type: order
 
 instructions:----------
 Write a function to swap two array elements by reordering the lines.
 ----------
+
+[systems]
+language: java
 
 [.assets.code.blocks.content]
 blockid: fixed
@@ -34,13 +38,13 @@ public static void Swap(int[] arr, int i, int j)
 blockid: group1
 depends:
 pickone: true
-[]
 [.blocklist]
 blockid: one
 display: int temp = arr[i];
 
 blockid: onea
 display: int temp = arr[j];
+[]
 
 blockid: two
 display: arr[i] = arr[j];
@@ -56,3 +60,5 @@ depends: -1
 
 blockid: fixed
 display: }
+[]
+[]

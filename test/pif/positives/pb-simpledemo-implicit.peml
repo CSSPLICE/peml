@@ -16,11 +16,15 @@ license.owner.name: Cliff Shaffer
 license.owner.email: shaffer@vt.edu
 
 tags.topics: PEML Demo Parsons Problem
-tags.style: parsons, order
+
+settings.grader.type: order
 
 instructions:----------
 Prove that (A AND B AND C) implies (A AND C).
 ----------
+
+[systems]
+language: natural
 
 [.assets.code.blocks.content]
 blockid: one
@@ -38,4 +42,5 @@ depends: one
 blockid: four
 display: Since A and C are TRUE, we know (A AND C) is TRUE.
 depends: two, three
+[]
 []

@@ -1,0 +1,114 @@
+{
+  "value": {
+    "question_text": "<p>Show the general process for an NP-Completeness Proof.</p>\n",
+    "options": {
+      "grader": {
+        "type": "dag",
+        "show_feedback": true
+      },
+      "indent": {
+        "active": true,
+        "mode": "free",
+        "max_indents": 1
+      },
+      "adaptive": true,
+      "numbered": false,
+      "language": "natural"
+    },
+    "blocks": [
+      {
+        "text": "To prove that a problem X is NP-complete do this:",
+        "type": "",
+        "tag": "starter",
+        "depends": "",
+        "indent": true,
+        "displaymath": true,
+        "feedback": ""
+      },
+      {
+        "text": "<ol>\n  <li>Show that X is in NP.</li>\n</ol>",
+        "type": "",
+        "tag": "xinNP",
+        "depends": "starter",
+        "indent": true,
+        "displaymath": true,
+        "feedback": ""
+      },
+      {
+        "text": "Create an algorithm to solve X (that might or might not use non-determinism) that runs in polynomial time.",
+        "type": "",
+        "tag": "algorithm",
+        "depends": "xinNP",
+        "indent": true,
+        "displaymath": true,
+        "feedback": ""
+      },
+      {
+        "text": "<ol>\n  <li>Show that X is NP-hard.</li>\n</ol>",
+        "type": "",
+        "tag": "starthard",
+        "depends": "algorithm",
+        "indent": true,
+        "displaymath": true,
+        "feedback": ""
+      },
+      {
+        "text": "Choose a known NP-hard problem A.",
+        "type": "",
+        "tag": "choose",
+        "depends": "starthard",
+        "indent": true,
+        "displaymath": true,
+        "feedback": ""
+      },
+      {
+        "text": "Define two transformations.",
+        "type": "",
+        "tag": "trans",
+        "depends": "choose",
+        "indent": true,
+        "displaymath": true,
+        "feedback": ""
+      },
+      {
+        "text": "Describe a polynomial-time algorithm that takes an arbitrary instance $\\textbf{I}$ of A to an instance $\\textbf{I′}$ of X.",
+        "type": "",
+        "tag": "t1",
+        "depends": "trans",
+        "indent": true,
+        "displaymath": true,
+        "feedback": ""
+      },
+      {
+        "text": "Describe a polynomial-time algorithm that takes an arbitrary instance $\\textbf{I}$ of X to an instance $\\textbf{I′}$ of A.",
+        "type": "",
+        "tag": "d1",
+        "depends": "-1",
+        "indent": true,
+        "displaymath": true,
+        "feedback": ""
+      },
+      {
+        "text": "Describe a polynomial-time transformation from the solution for $\\textbf{I’}$ in problem X (call it $\\textbf{SLN’}$) to $\\textbf{SLN}$ such that $\\textbf{SLN}$ is the solution for $\\textbf{I}$ in problem A.",
+        "type": "",
+        "tag": "t2",
+        "depends": "trans",
+        "indent": true,
+        "displaymath": true,
+        "feedback": ""
+      },
+      {
+        "text": "Describe a polynomial-time transformation from the solution for $\\textbf{I’}$ in problem A (call it $\\textbf{SLN’}$) to $\\textbf{SLN}$ such that $\\textbf{SLN}$ is the solution for $\\textbf{I}$ in problem X.",
+        "type": "",
+        "tag": "d2",
+        "depends": "-1",
+        "indent": true,
+        "displaymath": true,
+        "feedback": ""
+      }
+    ]
+  },
+  "diags": [
+
+  ]
+}

@@ -10,23 +10,19 @@
       email: shaffer@vt.edu
   tags:
     topics: PIF Error Demo
-    style: parsons, execute, indent
+  settings:
+    grader:
+      type: order
+    indent:
+      active: 'true'
+      mode: prescribed
   instructions: 'Construct code by reordering and indenting the lines.
 
     '
   systems:
-  - language: Java
+  - language: java
     assets:
       code:
-        wrapper:
-          files:
-          - content: |
-              public class Parsons {
-
-                  public static void main(String[] args) {
-                  ___
-                  }
-              }
         blocks:
           content:
           - blockid: one
@@ -40,16 +36,8 @@
           - blockid: four
             display: System.out.print("a Java program ");
             indent: '1'
-          - blockid: four_b
-            display: System.out.print("a Python program ");
           - blockid: five
             display: "}"
             indent: '0'
-      test:
-        files:
-        - type: text/x-unquoted-csv
-          content: |
-            expected
-            I am a Java program I am a Java program I am a Java program
 :diagnostics:
 - 'The document is missing key: assets'

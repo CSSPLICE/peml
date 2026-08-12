@@ -1,0 +1,117 @@
+{
+  "value": {
+    "question_text": "<p>Put the blocks in the proper order.</p>\n",
+    "options": {
+      "grader": {
+        "type": "dag",
+        "show_feedback": true
+      },
+      "indent": {
+        "active": true,
+        "mode": "free",
+        "max_indents": 1
+      },
+      "adaptive": true,
+      "numbered": false,
+      "language": "java"
+    },
+    "blocks": [
+      {
+        "text": "Random Group 1 Block 1\n  This block is the first block after the \"Fixed Start\" block.\n",
+        "type": "",
+        "tag": "randomg1b1",
+        "depends": "",
+        "indent": true,
+        "displaymath": false,
+        "feedback": ""
+      },
+      {
+        "text": "Random Group 1 Block 2\n  This block is the second block after the \"Fixed Start\" block.\n",
+        "type": "",
+        "tag": "randomg1b2",
+        "depends": "randomg1b1",
+        "indent": true,
+        "displaymath": false,
+        "feedback": ""
+      },
+      {
+        "text": "Random Group 1 Block 3: the third block in the first group",
+        "type": "",
+        "tag": "randomg1b3",
+        "depends": "randomg1b2",
+        "indent": true,
+        "displaymath": false,
+        "feedback": ""
+      },
+      {
+        "text": "Fixed Middle: Appears in the middle of the exercise",
+        "type": "",
+        "tag": "fixed",
+        "depends": "",
+        "indent": true,
+        "displaymath": false,
+        "feedback": ""
+      },
+      {
+        "text": "Random Group 2 Block 1\n  This block is the first block after the \"Fixed Middle\" block.\n",
+        "type": "",
+        "tag": "randomg2b1",
+        "depends": "randomg1b3",
+        "indent": true,
+        "displaymath": false,
+        "feedback": ""
+      },
+      {
+        "text": "Random Group 2 Block 2\n  This block is the second block\nthat comes after the \"Fixed Start\" block.\n",
+        "type": "",
+        "tag": "randomg2b2",
+        "depends": "randomg2b1",
+        "indent": true,
+        "displaymath": false,
+        "feedback": ""
+      },
+      {
+        "text": "Random Group 2 Block 3\nThis is the final adjustable block.\n",
+        "type": "",
+        "tag": "randomg2b3",
+        "depends": "randomg2b2",
+        "indent": true,
+        "displaymath": false,
+        "feedback": ""
+      },
+      {
+        "text": "Fixed Start\n  This block goes at the beginning\n  of the exercise.",
+        "type": "",
+        "toggle_options": [
+
+        ],
+        "text_options": [
+
+        ],
+        "tag": "fixed",
+        "depends": "",
+        "indent": "",
+        "displaymath": false,
+        "feedback": ""
+      },
+      {
+        "text": "Fixed End\n      This block appears at the end.",
+        "type": "",
+        "toggle_options": [
+
+        ],
+        "text_options": [
+
+        ],
+        "tag": "fixed",
+        "depends": "",
+        "indent": "",
+        "displaymath": false,
+        "feedback": ""
+      }
+    ]
+  },
+  "diags": [
+
+  ]
+}

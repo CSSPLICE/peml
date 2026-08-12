@@ -9,11 +9,18 @@ license.owner.name: Cliff Shaffer
 license.owner.email: shaffer@vt.edu
 
 tags.topics: PEML reduction
-tags.style: parsons, order
+
+settings.grader.type: order
+settings.indent.active: true
+settings.indent.mode: free
+settings.indent.max_indents: 1
 
 instructions:----------
 Show the steps to prove that the SORTING problem can be reduced to the PAIRING problem.
 ----------
+
+[systems]
+language: natural
 
 [.assets.code.blocks.content]
 blockid: start
@@ -41,11 +48,11 @@ display: Feed to PAIRING the following two arrays: the input to SORTING (array A
 depends: t1
 
 block: pairing
-display: Compute PAIRING on its input. The result is <b>SLN’</b>, an array of paired records, where each such paired record is defined as (pos, pairedInput).
+display: Compute PAIRING on its input. The result is <b>SLN'</b>, an array of paired records, where each such paired record is defined as (pos, pairedInput).
 depends: pairingin
 
 block: t2
-display: Convert <b>SLN’</b> to array <b>SLN</b>, the solution to SORTING, by doing a binsort on A’. In particular, for each pair (pos, pairedInput) in <b>SLN’</b>, place pairedInput into position pos in array <b>SLN</b>.
+display: Convert <b>SLN'</b> to array <b>SLN</b>, the solution to SORTING, by doing a binsort on A'. In particular, for each pair (pos, pairedInput) in <b>SLN'</b>, place pairedInput into position pos in array <b>SLN</b>.
 depends: pairing
 
 block: finish
@@ -55,4 +62,5 @@ depends: t2
 block: d4
 display: Return SLN, the solution to PAIRING.
 depends: -1
+[]
 []
