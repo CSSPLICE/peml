@@ -1,0 +1,69 @@
+{
+  "value": {
+    "question_text": "<p>This sentence uses <code>$</code> delimiters to <strong>show</strong> math inline: $\\sqrt{3x-1}+(1+x)^2$</p>\n",
+    "options": {
+      "grader": {
+        "type": "dag",
+        "show_feedback": true
+      },
+      "indent": {
+        "active": true,
+        "mode": "free",
+        "max_indents": 1
+      },
+      "adaptive": true,
+      "numbered": false,
+      "language": "math"
+    },
+    "blocks": [
+      {
+        "text": "Assume $A \\land B \\land C$.",
+        "type": "",
+        "tag": "one",
+        "depends": "",
+        "indent": true,
+        "displaymath": true,
+        "feedback": ""
+      },
+      {
+        "text": "Then $A$ is true.",
+        "type": "",
+        "tag": "two",
+        "depends": "one",
+        "indent": true,
+        "displaymath": true,
+        "feedback": ""
+      },
+      {
+        "text": "Then $C$ is true.",
+        "type": "",
+        "tag": "three",
+        "depends": "one",
+        "indent": true,
+        "displaymath": true,
+        "feedback": ""
+      },
+      {
+        "text": "Since $A$ and $C$, $\\textbf{we}$ know $A \\land C$.",
+        "type": "",
+        "tag": "four",
+        "depends": "two, three",
+        "indent": true,
+        "displaymath": true,
+        "feedback": ""
+      },
+      {
+        "text": "This sentence uses \\$ delimiters to show math inline: $\\sqrt{3x-1}+(1+x)^2$",
+        "type": "",
+        "tag": "five",
+        "depends": "two",
+        "indent": true,
+        "displaymath": true,
+        "feedback": ""
+      }
+    ]
+  },
+  "diags": [
+
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "value": {
+    "question_text": "<p>Your task is to construct a function which returns the index of the largest element in the array.</p>\n",
+    "options": {
+      "grader": {
+        "type": "exec",
+        "show_feedback": true
+      },
+      "indent": {
+        "active": true,
+        "mode": "prescribed",
+        "max_indents": 3
+      },
+      "adaptive": true,
+      "numbered": false,
+      "language": "python"
+    },
+    "blocks": [
+      {
+        "text": "def maxindex(arg):",
+        "type": "",
+        "tag": "one",
+        "depends": "",
+        "indent": 0,
+        "displaymath": false,
+        "feedback": ""
+      },
+      {
+        "text": "ans = 0",
+        "type": "",
+        "tag": "two",
+        "depends": "",
+        "indent": 1,
+        "displaymath": false,
+        "feedback": ""
+      },
+      {
+        "text": "for i in range(len(arg)):",
+        "type": "",
+        "tag": "three",
+        "depends": "",
+        "indent": 1,
+        "displaymath": false,
+        "feedback": ""
+      },
+      {
+        "text": "if arg[i] > arg[ans]:",
+        "type": "",
+        "tag": "four",
+        "depends": "",
+        "indent": 2,
+        "displaymath": false,
+        "feedback": ""
+      },
+      {
+        "text": "ans = i",
+        "type": "",
+        "tag": "five",
+        "depends": "",
+        "indent": 3,
+        "displaymath": false,
+        "feedback": ""
+      },
+      {
+        "text": "return ans",
+        "type": "",
+        "tag": "six",
+        "depends": "",
+        "indent": 1,
+        "displaymath": false,
+        "feedback": ""
+      }
+    ]
+  },
+  "diags": [
+
+  ]
+}

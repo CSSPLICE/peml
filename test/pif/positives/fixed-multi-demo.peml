@@ -10,7 +10,10 @@ license.owner.name: Cliff Shaffer
 license.owner.email: shaffer@vt.edu
 
 tags.topics: PEML Demo Parsons Problem
-tags.style: parsons, order
+
+settings.grader.type: order
+settings.indent.active: true
+settings.indent.mode: free
 
 instructions:----------
 Put the blocks in the proper order.
@@ -23,6 +26,10 @@ Put the blocks in the proper order.
 # displayed with respect to the orderable blocks, and limiting where
 # the user can place an orderable block so that things appear in a
 # reasonable order.
+
+[systems]
+language: java
+
 [.assets.code.blocks.content]
 blockid: fixed
 display:----------
@@ -79,4 +86,5 @@ display:----------
 Fixed End
       This block appears at the end.
 ----------
+[]
 []

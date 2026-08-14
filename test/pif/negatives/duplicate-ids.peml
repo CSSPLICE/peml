@@ -1,7 +1,7 @@
-# Example of an almost valid PIF that incorrectly 
-# reuses the same blockid multiple times. Note that the keywords 
-# "fixed" and "reusable" are never flagged for 
-# duplicates. 
+# Example of an almost valid PIF that incorrectly
+# reuses the same blockid multiple times. Note that the keywords
+# "fixed" and "reusable" are never flagged for
+# duplicates.
 
 exercise_id: duplicate_blockids_error
 title: Duplicate Blockids Error
@@ -11,11 +11,15 @@ license.owner.name: Cliff Shaffer
 license.owner.email: shaffer@vt.edu
 
 tags.topics: PEML Demo Parsons Problem
-tags.style: parsons, order
+
+settings.grader.type: order
 
 instructions:----------
 Put the blocks in the proper order.
 ----------
+
+[systems]
+language: java
 
 [.assets.code.blocks.content]
 blockid: fixed
@@ -50,4 +54,5 @@ depends: randomg2b2
 
 blockid: fixed
 display: Fixed End
+[]
 []

@@ -1,0 +1,33 @@
+{
+  "value": {
+    "question_text": "<p>Write a function to swap two elements in the array by reordering the<br />\nlines. Your function should return the array.</p>\n",
+    "options": {
+      "grader": {
+        "type": "exec",
+        "show_feedback": true
+      },
+      "indent": {
+        "active": true,
+        "mode": "free",
+        "max_indents": 3
+      },
+      "adaptive": true,
+      "numbered": false,
+      "language": "java"
+    },
+    "blocks": [
+      {
+        "text": "    return arr;\n}\n",
+        "type": "",
+        "tag": "fixed",
+        "depends": "",
+        "indent": true,
+        "displaymath": false,
+        "feedback": ""
+      }
+    ]
+  },
+  "diags": [
+
+  ]
+}

@@ -18,8 +18,12 @@ license.id: MIT
 license.owner.name: Cliff Shaffer
 license.owner.email: shaffer@vt.edu
 
-tags.topics: PEML Demo Parsons Problem: Swap
-tags.style: parsons, execute
+tags.topics: PIF Demo Parsons Problem: Swap
+
+settings.grader.type: execute
+settings.indent.active: true
+settings.indent.mode: free
+settings.indent.max_indents: 3
 
 instructions:----------
 Write a function to swap two elements in the array by reordering the
@@ -79,4 +83,5 @@ arr, i, j, expected, description
 new int[]{1, 2, 3, 4}, 2, 3, new int[]{1,2,4,3}, example
 new int[]{1, 2, 3, 4}, 0, 3, new int[]{4,2,3,1}, hidden
 ----------
+[]
 []

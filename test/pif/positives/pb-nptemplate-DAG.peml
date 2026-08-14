@@ -11,11 +11,18 @@ license.owner.name: Cliff Shaffer
 license.owner.email: shaffer@vt.edu
 
 tags.topics: PEML NP-completeness
-tags.style: parsons, order
+
+settings.grader.type: order
+settings.indent.active: true
+settings.indent.mode: free
+settings.indent.max_indents: 1
 
 instructions:----------
 Show the general process for an NP-Completeness Proof.
 ----------
+
+[systems]
+language: natural
 
 [.assets.code.blocks.content]
 blockid: starter
@@ -23,7 +30,7 @@ display: To prove that a problem X is NP-complete do this:
 depends:
 
 blockid: xinNP
-display: 1. Show that X is in NP.
+display: 1\. Show that X is in NP.
 depends: starter
 
 blockid: algorithm
@@ -31,7 +38,7 @@ display: Create an algorithm to solve X (that might or might not use non-determi
 depends: xinNP
 
 blockid: starthard
-display: 2. Show that X is NP-hard.
+display: 2\. Show that X is NP-hard.
 depends: algorithm
 
 blockid: choose
@@ -51,10 +58,11 @@ display: Describe a polynomial-time algorithm that takes an arbitrary instance <
 depends: -1
 
 blockid: t2
-display: Describe a polynomial-time transformation from the solution for <b>I’</b> in problem X (call it <b>SLN’</b>) to <b>SLN</b> such that <b>SLN</b> is the solution for <b>I</b> in problem A.
+display: Describe a polynomial-time transformation from the solution for <b>I'</b> in problem X (call it <b>SLN'</b>) to <b>SLN</b> such that <b>SLN</b> is the solution for <b>I</b> in problem A.
 depends: trans
 
 blockid: d2
-display: Describe a polynomial-time transformation from the solution for <b>I’</b> in problem A (call it <b>SLN’</b>) to <b>SLN</b> such that <b>SLN</b> is the solution for <b>I</b> in problem X.
+display: Describe a polynomial-time transformation from the solution for <b>I'</b> in problem A (call it <b>SLN'</b>) to <b>SLN</b> such that <b>SLN</b> is the solution for <b>I</b> in problem X.
 depends: -1
+[]
 []

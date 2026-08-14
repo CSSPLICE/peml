@@ -5,7 +5,7 @@
 
   "definitions": {
     "boolean": {
-      "type": "string", 
+      "type": "string",
       "pattern": "^(true|false)$"
     },
     "nonempty_string": {
@@ -23,20 +23,6 @@
       "type": "string",
       "pattern": "^\\d+$",
       "description": "Numeric value represented as a string."
-    },
-    "id": {
-      "allOf": [
-        { "$ref": "#/definitions/nonempty_string" },
-        { "pattern": "^[^\\s,]+$" }
-      ],
-      "description": "A unique identifier without whitespace."
-    },
-    "email_address": {
-      "allOf": [
-        { "$ref": "#/definitions/nonempty_string" },
-        { "format": "idn-email" }
-      ],
-      "description": "Email address conforming to idn-email format."
     },
     "dependencies": {
       "type": "string",
@@ -79,141 +65,152 @@
 
   "type": "object",
   "required": [
-    "exercise_id",
-    "title",
-    "license",
-    "tags",
-    "instructions",
-    "assets"
+    "settings",
+    "systems"
   ],
   "properties": {
-    "exercise_id": { "$ref": "#/definitions/id" },
-    "title": { "$ref": "#/definitions/nonempty_string" },
-    "license": {
+    "settings": {
       "type": "object",
-      "required": ["id", "owner"],
+      "required": ["grader"],
+      "description": "Exercise-level configuration for grading and rendering.",
       "properties": {
-        "id": { "$ref": "#/definitions/nonempty_string" },
-        "owner": {
+        "grader": {
           "type": "object",
-          "required": ["email", "name"],
+          "required": ["type"],
+          "description": "Grading configuration.",
           "properties": {
-            "email": { "$ref": "#/definitions/email_address" },
-            "name": { "$ref": "#/definitions/nonempty_string" }
+            "type": {
+              "type": "string",
+              "enum": ["order", "execute"],
+              "description": "Grading mode: 'order' for DAG-based ordering, 'execute' for execution-based grading."
+            },
+            "show_feedback": {
+              "$ref": "#/definitions/boolean",
+              "description": "Whether to show feedback to students after grading."
+            }
           }
+        },
+        "indent": {
+          "type": "object",
+          "description": "Indentation configuration for blocks.",
+          "properties": {
+            "active": { "$ref": "#/definitions/boolean" },
+            "mode": {
+              "type": "string",
+              "enum": ["prescribed", "free"],
+              "description": "'prescribed' requires blocks to declare their indent level; 'free' lets students indent freely."
+            },
+            "max_indents": {
+              "$ref": "#/definitions/string_number",
+              "description": "Number of indent levels available to the student. Defaults to 3."
+            }
+          }
+        },
+        "adaptive": {
+          "$ref": "#/definitions/boolean",
+          "description": "Whether the problem uses adaptive (hint-based) mode. Defaults to true."
+        },
+        "numbered": {
+          "$ref": "#/definitions/boolean",
+          "description": "Whether blocks are displayed with position numbers."
         }
       }
     },
     "tags": {
       "type": "object",
-      "required": ["style"],
       "properties": {
-        "style": {
-          "type": "string",
-          "pattern": "^[^,]+(?:\\s*,\\s*[^,]+)*$",
-          "description": "Defines the Parsons Problem style, including 'order', 'execute', and optionally 'indent'."
-        },
         "topics": { "$ref": "#/definitions/nonempty_string" },
         "interface_layout": { "enum": ["horizontal", "vertical"] }
       }
     },
-    "instructions": { "$ref": "#/definitions/nonempty_string" },
     "systems": {
       "type": "array",
       "minItems": 1,
       "maxItems": 1,
       "items": {
         "type": "object",
-        "required": ["language"],
+        "required": ["language", "assets"],
         "properties": {
-          "language": { "$ref": "#/definitions/nonempty_string" }
-        }
-      }
-    },
-    "numbered": { "$ref": "#/definitions/boolean" },
-    "assets": {
-      "type": "object",
-      "required": ["code"],
-      "properties": {
-        "code": {
-          "type": "object",
-          "required": ["blocks"],
-          "properties": {
-            "starter": {
-              "type": "object", 
-              "required": ["files"], 
-              "properties": {
-                "files": {
-                  "type": "array", 
-                  "minItems": 1,
-                  "maxItems": 1, 
-                  "items": {
-                    "type": "object", 
-                    "required": ["content"],
+          "language": { "$ref": "#/definitions/nonempty_string" },
+          "assets": {
+            "type": "object",
+            "required": ["code"],
+            "properties": {
+              "code": {
+                "type": "object",
+                "required": ["blocks"],
+                "properties": {
+                  "starter": {
+                    "type": "object",
+                    "required": ["files"],
                     "properties": {
-                      "content": {
-                        "pattern": ".*___.*"
+                      "files": {
+                        "type": "array",
+                        "minItems": 1,
+                        "maxItems": 1,
+                        "items": {
+                          "type": "object",
+                          "required": ["content"],
+                          "properties": {
+                            "content": { "pattern": ".*___.*" }
+                          }
+                        }
                       }
                     }
-                  }
-                }
-              }
-            },
-            "wrapper": {
-              "type": "object",
-              "required": ["files"],
-              "properties": {
-                "files": {
-                  "type": "array",
-                  "minItems": 1,
-                  "maxItems": 1,
-                  "items": {
+                  },
+                  "wrapper": {
+                    "type": "object",
+                    "required": ["files"],
+                    "properties": {
+                      "files": {
+                        "type": "array",
+                        "minItems": 1,
+                        "maxItems": 1,
+                        "items": {
+                          "type": "object",
+                          "required": ["content"],
+                          "properties": {
+                            "content": { "pattern": ".*___.*" }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "blocks": {
                     "type": "object",
                     "required": ["content"],
                     "properties": {
+                      "delimiter": { "$ref": "#/definitions/char" },
                       "content": {
-                        "pattern": ".*___.*"
+                        "type": "array",
+                        "minItems": 1,
+                        "items": {
+                          "if": { "required": ["blocklist"] },
+                          "then": { "$ref": "#/definitions/blocklist" },
+                          "else": { "$ref": "#/definitions/block" }
+                        }
                       }
                     }
                   }
                 }
-              }
-            },
-            "blocks": {
-              "type": "object",
-              "required": ["content"],
-              "properties": {
-                "delimiter": { "$ref": "#/definitions/char" },
-                "content": {
-                  "type": "array",
-                  "minItems": 1,
-                  "items": {
-                    "if": { "required": ["blocklist"] },
-                    "then": { "$ref": "#/definitions/blocklist" },
-                    "else": { "$ref": "#/definitions/block" }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "test": {
-          "type": "object",
-          "properties": {
-            "files": {
-              "type": "array",
-              "minItems": 1,
-              "maxItems": 1,
-              "items": {
+              },
+              "test": {
                 "type": "object",
-                "required": ["format", "content"],
                 "properties": {
-                  "format": {
-                    "type": "string",
-                    "pattern": "^(text/csv|text/csv-unquoted)$"
-                  },
-                  "pattern_actual": { "$ref": "#/definitions/nonempty_string" },
-                  "content": { "$ref": "#/definitions/nonempty_string" }
+                  "files": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 1,
+                    "items": {
+                      "type": "object",
+                      "required": ["type", "content"],
+                      "properties": {
+                        "type": { "$ref": "#/definitions/nonempty_string" },
+                        "pattern_actual": { "$ref": "#/definitions/nonempty_string" },
+                        "content": { "$ref": "#/definitions/nonempty_string" }
+                      }
+                    }
+                  }
                 }
               }
             }

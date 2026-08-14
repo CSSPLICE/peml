@@ -1,4 +1,3 @@
-
 require_relative 'csv_unquoted_parser'
 require 'dottie/ext'
 require 'csv'

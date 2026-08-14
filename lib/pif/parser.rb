@@ -4,10 +4,14 @@ require 'json_schemer'
 require 'dottie/ext'
 require 'csv'
 
+require "kramdown"
+require 'kramdown-parser-gfm'
+require 'kramdown-math-katex'
+
 module PifParser
   # ------------------------------------------------------------------------------
   # Parses and validates a PIF file/string
-  # Returns a hash structured, by default, as {value: , diags:}
+  # Returns a hash structured, by default, as {value: , diagnostics:}
   # or, if result-only is set to true, the equivalent of hash[:value].
   def self.parse(params = {})
     # Gets file contents
@@ -26,136 +30,188 @@ module PifParser
     # Parses content as PEML
     value = Peml::Loader.new.load(pif).dottie!
 
-    # Validates PEML as PIF
-    if !params[:result_only]
-      # Structural validation based on PIF schema
-      base_dir = File.dirname(File.expand_path(__FILE__))
-      schema_file = "#{base_dir}/schema/PIF.json"
-      schema_path = Pathname.new(schema_file)
-      schema = JSONSchemer.schema(schema_path);
+    if params[:result_only]
+      value
+    else
+      { value: value, diagnostics: validate(value) }
+    end
+  end
 
-      sv = schema.validate(value)
-      diags = Peml::Utils.unpack_schema_diagnostics(sv)
+  # ------------------------------------------------------------------------------
+  # Runs PIF-specific structural and extended validation on an already-loaded
+  # value hash. Returns an array of diagnostic strings (empty means valid).
+  def self.validate(value)
+    # Structural validation based on PIF schema
+    base_dir = File.dirname(File.expand_path(__FILE__))
+    schema_file = "#{base_dir}/schema/PIF.json"
+    schema_path = Pathname.new(schema_file)
+    schema = JSONSchemer.schema(schema_path)
 
+    sv = schema.validate(value)
+    diags = Peml::Utils.unpack_schema_diagnostics(sv)
 
-      # Extended validation
-      if (diags.empty?)
-        style_tag = value["tags.style"] # Structurally required
-        systems = value['systems'] # Optional
-        block_content = value['systems[0].assets.code.blocks.content'] || value['assets.code.blocks.content'] # Structurally required
-        test_content = value['systems[0].assets.test.files[0].content'] || value['assets.test.files[0].content'] # Optional
-        test_format = value['systems[0].assets.test.files[0].format'] || value['assets.test.files[0].format'] # Optional
+    # Extended validation
+    if (diags.empty?)
+      grader_type   = value["settings.grader.type"] # Structurally required
+      block_content = value['systems[0].assets.code.blocks.content'] # Structurally required
+      delimiter     = value['systems[0].assets.code.blocks.delimiter'] || "`" # Optional
+      test_content  = value['systems[0].assets.test.files[0].content'] # Optional
+      test_type     = value['systems[0].assets.test.files[0].type'] # Optional
 
-        # Style tag indicators (case-sensitive)
-        parsed_style_tag = style_tag.split(/\s*,\s*/)
-        has_parsons_tag = parsed_style_tag.include?("parsons")
-        has_execute_tag = parsed_style_tag.include?("execute")
-        has_order_tag = parsed_style_tag.include?("order")
-        has_indent_tag = parsed_style_tag.include?("indent")
+      has_execute_tag  = grader_type == "execute"
+      has_order_tag    = grader_type == "order"
+      indent_active    = value["settings.indent.active"] == "true"
+      indent_mode      = value["settings.indent.mode"]
 
-        # Checks that style tag contains "parsons" AND
-        # EITHER "order" or "execute" (in no specific order)
-        if (!has_parsons_tag ||
-          !(has_execute_tag ||
-            has_order_tag) ||
-          (has_execute_tag && has_order_tag)
-        )
-          diags << "Style tag requires 'parsons' and either 'order' or 'execute' keywords."
-        end
+      # Checks that the required fields for execution-based grading
+      # are included. Language is now guaranteed by the PIF schema (systems[0].language required).
+      if (has_execute_tag && (!test_content || !test_type))
+        diags << "Missing required test content, test type, or language " \
+          "fields for execution-based grading."
+      end
 
-        # Checks that the required fields for execution-based grading
-        # are included
-        if (has_execute_tag && (!test_content || !test_format || !systems))
-          diags << "Missing required test content, test format, or language "\
-            "fields for execution-based grading."
-        end
+      # Separates blocks into normal blocks, blocklists, and distractors
+      # Separated blocks are given an addition "pos" field
+      s = separate_blocks(block_content)
+      normal_blocks = s[0]
+      blocklists = s[1]
+      distractors = s[2]
 
-        # Separates blocks into normal blocks, blocklists, and distractors
-        # Separated blocks are given an addition "pos" field
-        normal_blocks = separate_blocks(block_content)[0]
+      if (violating_blockid = deps_violation(block_content))
+        diags << "Dependencies must refer to previously defined blocks " \
+          "within the same blocklist scope. Violating blockid: #{violating_blockid}"
+      end
 
-        if (deps_violation(block_content))
-          diags << "Dependencies must refer to previously defined blocks "\
-            "within the same blocklist scope."
-        end
+      if (violating_blocklist_id = picklimit_violation(blocklists))
+        diags << "Invalid pick limit, pick limit must be a positive int " \
+          "less than the number of blocks. Violating blockid: #{violating_blocklist_id}"
+      end
 
-        # Checks if indentation is required and, if so,
-        # whether all normal blocks have an indent level
-        if (has_indent_tag &&
-          has_order_tag)
-          normal_blocks.each do |block|
-            indent =  block["indent"]
-            pos = block["pos"]
+      # For prescribed indent mode with order grading, all normal blocks must declare an indent level
+      if (indent_mode == "prescribed" && has_order_tag)
+        normal_blocks.each do |block|
+          indent = block["indent"]
+          pos = block["pos"]
 
-            if indent.nil?
-              diags << "Block at position #{pos} is missing the required "\
-                "indent field."
-            end
-
+          if indent.nil?
+            diags << "Block at position #{pos} is missing the required " \
+              "indent field."
           end
         end
+      end
 
-        # If indent style keyword is not used,
-        # then checks that no block contains an indent level.
-        if (!has_indent_tag)
-          # Could recursively process block_content -
-          # but previous operation has already separated
-          # them into easily workable form
+      # Blocks must not declare indent levels when indent is inactive or mode is free
+      if !indent_active || indent_mode == "free"
+        message = indent_mode == "free" \
+          ? "Block(s) contain indent fields but settings.indent.mode is 'free'." \
+          : "Block(s) contain indent fields but settings.indent.active is not true."
 
-          catch(:illegal_indent) do
-            s.each do |block_group|
-              block_group.each do |block|
-                indent = block["indent"]
-
-                if !indent.nil?
-                  diags << "Block(s) contain indent fields despite missing 'indent' style keyword."
-                  throw :illegal_indent
-                end
+        catch(:illegal_indent) do
+          s.each do |block_group|
+            block_group.each do |block|
+              if !block["indent"].nil?
+                diags << message
+                throw :illegal_indent
               end
             end
           end
-
         end
+      end
 
-        # Checks that blockids are unique
-        blockids = get_blockids(block_content)
-                     .select { |id| id != "fixed" && id != "reusable" }
-        if (blockids.length != blockids.uniq.length)
-          diags << "Duplicate blockids used."
-        end
+      # Checks that blockids are unique
+      blockids = get_blockids(block_content)
+                   .select { |id| id != "fixed" && id != "reusable" }
+      if (blockids.length != blockids.uniq.length)
+        diags << "Duplicate blockids used."
+      end
 
-        # Checks that all blockids are recognized references
-        diags += validate_blockdeps(block_content)
+      # Checks that all blockids are recognized references
+      diags += validate_blockdeps(block_content)
 
-        # Checks that the CSV test content is correctly formatted,
-        # i.e., the header length matches all row lengths
-        if (has_execute_tag && test_content)
-          parsed_test_content = Peml::CsvUnquotedParser.new.parse(
-            test_content
-          )
-          header = parsed_test_content[0]
+      get_toggles_and_text_input(block_content, delimiter)
 
-          parsed_test_content[1..].each_with_index do |row, i|
-            if (row.length != header.length)
-              diags << "Row #{i} of the test content does not match "\
-                "its header length."
-            end
+      # Checks that the CSV test content is correctly formatted,
+      # i.e., the header length matches all row lengths
+      if has_execute_tag && test_content
+        parsed_test_content = Peml::CsvUnquotedParser.new.parse(
+          test_content
+        )
+        header = parsed_test_content[0]
+
+        parsed_test_content[1..].each_with_index do |row, i|
+          if (row.length != header.length)
+            diags << "Row #{i} of the test content does not match " \
+              "its header length."
           end
         end
       end
     end
 
-    if params[:result_only]
-      value
-    else
-      { value: value, diagnostics: diags }
+    diags
+  end
+
+  # ------------------------------------------------------------------------------
+  # Gets all toggle options and text inputs for blocks
+  def self.get_toggles_and_text_input(blocks, delimiter)
+    blocks.each do |block|
+      self.get_toggles_and_text_input_helper(block, delimiter)
     end
   end
 
   # ------------------------------------------------------------------------------
+  # Recursive helper for get_toggles
+  def self.get_toggles_and_text_input_helper(block, delimiter)
+    blocklist = block["blocklist"]
+    if(blocklist)
+      blocklist.each do |child|
+        get_toggles_and_text_input_helper(child, delimiter)
+      end
+    end
+
+    text_options = []
+    toggle_options = []
+
+    if(block["delimiter"])
+      delimiter = block["delimiter"]
+    end
+
+    d = Regexp.escape(delimiter)
+    # this pattern finds: two delimiters + anything + two delimiters
+    pattern = /(?<!#{d})#{d}{2}(.*?)#{d}{2}(?!#{d})/m
+
+    block["display"]&.scan(pattern) do |match|
+      m = Regexp.last_match
+      inner_content = match[0]
+      
+      # if it contains the delimiter inside then it is a toggle
+      # otherwise its a text input
+      if inner_content.include?(delimiter)
+        toggle_options << {
+          start_index: m.begin(0),
+          end_index: m.end(0),
+          values: inner_content.split(delimiter)
+        }
+      else
+        text_options << {
+          start_index: m.begin(0),
+          end_index: m.end(0),
+          inner_content: inner_content
+        }
+      end
+    end
+
+    if !(toggle_options.empty?)
+      block["toggle_options"] = toggle_options
+    end
+
+    if !(text_options.empty?)
+      block["text_options"] = text_options
+    end
+  end
+
   # Gets all blockids for non-distractor elements
   def self.get_blockids(blocks)
-    blocks.inject([]) {|ids, block| ids + get_blockids_helper(block)}
+    blocks.inject([]) { |ids, block| ids + get_blockids_helper(block) }
   end
 
   # ------------------------------------------------------------------------------
@@ -164,7 +220,7 @@ module PifParser
     curr_blockid = block["blockid"]
     blocklist = block["blocklist"]
     is_distractor = block["depends"]&.match?(/\s*-1\s*/) ||
-      !block["feedback"].nil?
+                    !block["feedback"].nil?
 
     # Case: Distractor
     if (is_distractor)
@@ -179,6 +235,7 @@ module PifParser
       return blockids
       # Case: Normal block
     else
+      (blocklist)
       return Array(curr_blockid)
     end
   end
@@ -186,16 +243,16 @@ module PifParser
   # ------------------------------------------------------------------------------
   # Gets all block dependencies for non-distractor elements
   def self.get_blockdeps(blocks)
-    blocks.inject([]) {|depends, block| depends + get_blockdeps_helper(block)}
+    blocks.inject([]) { |depends, block| depends + get_blockdeps_helper(block) }
   end
 
   # ------------------------------------------------------------------------------
   # Recursive helper for get_blockdeps
   def self.get_blockdeps_helper(block)
-    parsed_depends = block["depends"]&.split(/\s*,\s*/)  || []
+    parsed_depends = block["depends"]&.split(/\s*,\s*/) || []
     blocklist = block["blocklist"]
     is_distractor = parsed_depends&.include?("-1") ||
-      !block["feedback"].nil?
+                    !block["feedback"].nil?
 
     # Case: Distractor
     if (is_distractor)
@@ -239,7 +296,7 @@ module PifParser
   def self.separate_blocks(blocks)
     i = 0
 
-    blocks.inject([[],[],[]]) do |res, block|
+    blocks.inject([[], [], []]) do |res, block|
       s = separate_blocks_helper("#{i}", block)
       res[0] += s[0] # normal blocks
       res[1] += s[1] # blocklists
@@ -260,7 +317,7 @@ module PifParser
     feedback = block["feedback"]
     depends = block["depends"]
 
-    block = block.merge({"pos" => pos})
+    block = block.merge({ "pos" => pos })
 
     # Case: Blocklist
     if (blocklist)
@@ -268,7 +325,7 @@ module PifParser
 
       # Recursively separates nested blocks and merges results
       blocklist.each_with_index do |nested_block, i|
-        x, y, z = separate_blocks_helper("#{pos}.#{i+1}", nested_block)
+        x, y, z = separate_blocks_helper("#{pos}.#{i + 1}", nested_block)
         norms += x
         blocklists += y
         distractors += z
@@ -361,26 +418,35 @@ module PifParser
   end
 
   # ------------------------------------------------------------------------------
-  # Ensures that dependencies reference only prior blocks, and nested blocks
-  # only reference blocks in the same list. Prevents cycles as a result.
-  def self.deps_violation(blocks)
-    previous_blocks = []
+  # Ensures that dependencies reference only prior blocks, where a nested block's
+  # priors include both its enclosing scope's prior blocks and its own preceding
+  # siblings. Prevents cycles as a result.
+  # Returns the blockid of the first offending block, or nil if there is no violation.
+  # previous_blocks seeds the scope with blockids already defined by an enclosing
+  # list, so a nested block may depend on anything defined before its blocklist.
+  def self.deps_violation(blocks, previous_blocks = [])
+    previous_blocks = previous_blocks.dup
 
-    blocks.each_with_index do |block|
+    blocks.each do |block|
       blockid = block["blockid"]
       blocklist = block["blocklist"]
-      parsed_depends = block["depends"]&.split(/\s*,\s*/)  || []
+      parsed_depends = block["depends"]&.split(/\s*,\s*/) || []
       is_distractor = parsed_depends&.include?("-1") || block["feedback"]
 
       if (is_distractor)
         next
       end
 
-      # Case: Sublist fails recursive call or dependency not
-      # found among previous blocks
-      if ((blocklist && deps_violation(blocklist)) ||
-        (!(parsed_depends - previous_blocks).empty?))
-        return true
+      # Case: Sublist fails recursive call. The nested scope inherits blocks
+      # defined so far in this scope, but its own additions stay local to it.
+      if (blocklist)
+        nested_violation = deps_violation(blocklist, previous_blocks)
+        return nested_violation if nested_violation
+      end
+
+      # Case: Dependency not found among previous blocks
+      if (!(parsed_depends - previous_blocks).empty?)
+        return blockid
       end
 
       if (blockid && blockid != "fixed" && blockid != "reusable")
@@ -388,7 +454,132 @@ module PifParser
       end
     end
 
-    return false
+    return nil
+  end
+
+  def self.markdown_renderer(hash)
+
+    # puts "instructions: #{hash["instructions"]}"
+    instruction_text = PifParser.identify_inline_delimiters(hash["instructions"])
+    hash["instructions"] = Peml::Utils.render_helper(
+      instruction_text
+    )
+    # option to include path parse
+    # hash["instructions"] = Kramdown::Document.new(
+    #   instruction_text,
+    #   :auto_ids => false,
+    #   input: 'GFM',
+    #   hard_wrap: ["false"],
+    #   math_engine: :mathjax
+    # ).to_html
+    # puts "new instructions: #{hash["instructions"]}"
+
+    if hash.has_key?("systems")
+      language = hash["systems"]&.first&.[]("language")
+      # Default to GFM rendering when no language is specified,
+      # skip rendering only when an explicit programming language is given
+      is_git_flavored_markdown = language.nil? || ["math", "natural"].include?(language.downcase)
+    else
+      is_git_flavored_markdown = true
+    end
+
+    # puts "is_git_flavored_markdown: #{is_git_flavored_markdown}"
+
+    if is_git_flavored_markdown
+      # puts hash["systems"][0]["assets"]["code"]["blocks"]["content"]
+      hash["systems"][0]["assets"]["code"]["blocks"]["content"].each do |block|
+        # puts "block: #{block["display"]}"
+        if block["blocklist"] && !block["blocklist"].empty?
+          block["blocklist"].each do |sub_block|
+            display_text = PifParser.identify_inline_delimiters(sub_block["display"])
+            parsed_to_html = Kramdown::Document.new(
+              display_text,
+              :auto_ids => false,
+              input: 'GFM'
+            ).to_html
+
+            sub_block["display"] = PifParser.strip_tags_and_convert_to_latex(parsed_to_html)
+          end
+
+        else
+          display_text = PifParser.identify_inline_delimiters(block["display"])
+          parsed_to_html = Kramdown::Document.new(
+            display_text,
+            :auto_ids => false,
+            input: 'GFM'
+          ).to_html
+
+          block["display"] = PifParser.strip_tags_and_convert_to_latex(parsed_to_html)
+        end
+
+        # puts "new block: #{block["display"]}"
+
+      end
+    end
+
+    hash
+
+  end
+
+  private
+
+  # Not the cleanest way to do this, but it works.
+  def self.strip_tags_and_convert_to_latex(html)
+    # Remove wrapping <p> and </p> tags
+    html = html.strip.sub(/\A<p[^>]*>/i, '').sub(/<\/p>\z/i, '')
+
+    # HTML tag to LaTeX replacements
+    replacements = {
+      /<b>(.*?)<\/b>/i => '$\\textbf{\1}$',
+      /<strong>(.*?)<\/strong>/i => '$\\textbf{\1}$',
+      /<i>(.*?)<\/i>/i => '$\\textit{\1}$',
+      /<em>(.*?)<\/em>/i => '$\\textit{\1}$',
+      /<u>(.*?)<\/u>/i => '$\\underline{\1}$',
+      /<br\s*\/?>/i => " $\\\\$",
+      /<sup>(.*?)<\/sup>/i => '$^{\1}$',
+      /<sub>(.*?)<\/sub>/i => '$_{\1}$',
+    }
+
+    replacements.each do |regex, replacement|
+      html = html.gsub(regex, replacement)
+    end
+
+    html
+  end
+
+  def self.identify_inline_delimiters(html)
+    # Remove wrapping <p> and </p> tags
+    html = html.strip.sub(/\A<p[^>]*>/i, '').sub(/<\/p>\z/i, '')
+
+    # HTML tag to LaTeX replacements
+    replacements = {
+      /\\\((.*?)\\\)/i => '$\1$',
+      /\\\[(.*?)\\\]/i => '$$\1$$',
+    }
+
+    replacements.each do |regex, replacement|
+      html = html.gsub(regex, replacement)
+    end
+
+    html
+  end
+
+  # Returns the blockid of the first offending blocklist, or nil if there is no violation.
+  def self.picklimit_violation(blocklists)
+    blocklists.each do |blocklist|
+      picklimit = 0
+      begin
+        picklimit = blocklist["picklimit"].to_i
+      rescue StandardError
+        return blocklist["blockid"]
+      end
+
+      if (picklimit < 0 || \
+        picklimit > blocklist["blocklist"].length)
+        return blocklist["blockid"]
+      end
+    end
+
+    return nil
   end
 end
-

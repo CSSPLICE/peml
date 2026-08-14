@@ -10,7 +10,12 @@ parsed:
         email: shaffer@vt.edu
     tags:
       topics: PEML Demo Parsons Problem
-      style: parsons, execute, indent
+    settings:
+      grader:
+        type: execute
+      indent:
+        active: 'true'
+        mode: prescribed
     instructions: 'The constructed code should print the minimum of variables a and
       b.
 
@@ -32,60 +37,26 @@ parsed:
           blocks:
             content:
             - blockid: one1
-              display: if \\a\b\c\\ \\<\>\>=\ b
-              indent: '0'
+              display: if \\a\b\c\\ \\<\>\>=\\ b
             - blockid: two
               display: print(a)
-              indent: '1'
             - blockid: three
+              display: else
+            - blockid: four
               display: print(b)
-              indet: |
-                0
-
-                blockid four
-              indent: '0'
+          wrapper:
+            files:
+            - content: |
+                a = 4
+                b = 2
+                ___
         test:
           files:
-          - type: text/x-unquoted-csv
+          - format: text/csv-unquoted
             content: |
               expected
               2
-  :diagnostics:
-  - 'The document is missing key: assets'
-runestone:
-  value:
-    question_text: 'The constructed code should print the minimum of variables a and
-      b.
-
-      '
-    options:
-      grader:
-        type: exec
-        showFeedback: true
-      maxdist: 0
-      order: ''
-      indent: true
-      adaptive: true
-      numbered: false
-      language: python
-      runnable: true
-    blocks:
-    - text: if \\a\b\c\\ \\<\>\>=\ b
-      type: ''
-      tag: one1
-      depends: ''
-      indent: '0'
-      displaymath: true
-    - text: print(a)
-      type: ''
-      tag: two
-      depends: ''
-      indent: '1'
-      displaymath: true
-    - text: print(b)
-      type: ''
-      tag: three
-      depends: ''
-      indent: '0'
-      displaymath: true
-  diags: []
+  :diagnostics: &1
+  - 'Path ''/systems/0/assets/test/files/0'' is missing key: type'
+renderable:
+  :diagnostics: *1

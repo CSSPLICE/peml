@@ -66,13 +66,11 @@ module Peml
     end
   end
 
-
   # -------------------------------------------------------------
   # Validate a PEML data structure (parsed PEML structured as a nested hash)
   def self.validate(peml)
     Utils.unpack_schema_diagnostics(Utils.schema.validate(peml))
   end
-
 
   # -------------------------------------------------------------
   # inline external file contents in fields inside
@@ -91,7 +89,6 @@ module Peml
     state
   end
 
-
   # -------------------------------------------------------------
   # handle mustache variable interpolation in fields inside
   # a PEML data structure (parsed PEML structured as a nested hash)
@@ -105,7 +102,6 @@ module Peml
     state
   end
 
-
   # -------------------------------------------------------------
   # convert markdown or other markup formats to html in fields inside
   # a PEML data structure (parsed PEML structured as a nested hash)
@@ -114,7 +110,6 @@ module Peml
     Utils.deep_transform_values!(state, :render_helper)
     state
   end
-
 
   # -------------------------------------------------------------
   # parse PEMLtest text input into a data structure
@@ -135,7 +130,6 @@ module Peml
     Peml::PemlTestParser.new.parse(pemltest)
   end
 
-
   # -------------------------------------------------------------
   # render (unparse) a PEML data structure (parsed PEML structured as a
   # nested hash) into plain-text PEML notation
@@ -145,19 +139,51 @@ module Peml
 
 
   # Pif Methods------------------------------------------------------
-  def self.pif_parse(pif)
-    # pif  = {}, Takes string as {pif:"content"}
-    # or filename as {filename:"./file.peml"}
-    PifParser.parse(pif)
+
+  # Returns true if the given content or parsed hash is a PIF document.
+  # Accepts either a raw PEML string or an already-parsed hash.
+  def self.is_pif(input)
+    value = input.is_a?(String) \
+      ? Peml::Loader.new.load(input).dottie! \
+      : input.dottie!
+    !value['settings.grader.type'].nil?
   end
 
+  def self.pif_parse(params)
+    # Accepts string content as {pif: "..."} or a file path as {filename: "..."}
+    # Remap :pif to :peml so Peml.parse can accept it
+    input = {}
+    input[:peml]     = params[:pif]      if params[:pif]
+    input[:filename] = params[:filename] if params[:filename]
+
+    # Step 1: PEML loader + PEML schema validation for common fields
+    # (exercise_id, title, license, instructions, systems.language).
+    state = Peml.parse(input)
+    value = state['value'].dottie!
+    peml_diags = state['diagnostics'] || []
+
+    # Step 2: PIF schema validates PIF-specific fields (settings, blocks, etc.)
+    pif_diags = PifParser.validate(value)
+
+    all_diags = peml_diags + pif_diags
+
+    # Step 3: PIF post-processing (only applied to valid documents)
+    PifParser.markdown_renderer(value) if all_diags.empty?
+
+    params[:result_only] ? value : { value: value, diagnostics: all_diags }
+  end
 
   # -------------------------------------------------------------
   # parsed_pif should be a product of pif.parse
   # format options are 'json' and 'yaml'.
-  #   If nil a ruby has is returned.
-  def self.pif_to_runestone(parsed_pif, format: nil)
-    PifConverter.to_Runestone(parsed_pif, format: format)
+  #   If nil a ruby hash is returned.
+  def self.pif_to_renderable_json(parsed_pif, format = nil)
+    if !parsed_pif[:diagnostics].empty?
+      result = { diagnostics: parsed_pif[:diagnostics] }
+      format == 'json' ? result.to_json : result
+    else
+      PifConverter.to_renderable_json(parsed_pif[:value], format)
+    end
   end
 
 end

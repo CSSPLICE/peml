@@ -8,14 +8,17 @@
 
 exercise_id: https://github.com/CSSPLICE/peml-feasibility-examples/blob/main/parsons/jsparsons-java-example-execute.peml
 
-title: Simple js-parsons Java example assignment - execute
+title: Simple Parsons Java Execte Example 1
 author: Cliff Shaffer (from js-Parsons, converted to PEML)
 license.id: MIT
 license.owner.name: Cliff Shaffer
 license.owner.email: shaffer@vt.edu
 
 tags.topics: PEML Demo Parsons Problem
-tags.style: parsons, execute, indent
+
+settings.grader.type: execute
+settings.indent.active: true
+settings.indent.mode: prescribed
 
 instructions:----------
 Construct code by reordering and indenting the lines.
@@ -63,4 +66,5 @@ content:----------
 expected
 I am a Java program I am a Java program I am a Java program
 ----------
+[]
 []

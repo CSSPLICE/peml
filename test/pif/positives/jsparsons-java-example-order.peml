@@ -15,11 +15,17 @@ license.owner.name: Cliff Shaffer
 license.owner.email: shaffer@vt.edu
 
 tags.topics: PEML Demo Parsons Problem
-tags.style: parsons, order, indent
+
+settings.grader.type: order
+settings.indent.active: true
+settings.indent.mode: prescribed
 
 instructions:----------
 Construct code by reordering and indenting the lines.
 ----------
+
+[systems]
+language: java
 
 [.assets.code.blocks.content]
 blockid: one
@@ -41,4 +47,5 @@ indent: 1
 blockid: five
 display: }
 indent: 0
+[]
 []

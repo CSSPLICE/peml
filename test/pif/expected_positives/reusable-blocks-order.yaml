@@ -1,0 +1,89 @@
+---
+parsed:
+  :value:
+    exercise_id: java_example_order_reuse_negative
+    title: Simple js-parsons Java example assignment - order with reusable blocks
+    author: Sean Rothenberger
+    license:
+      id: MIT
+      owner:
+        name: Sean Rothenberger
+        email: seanr06@vt.edu
+    tags:
+      topics: order grading, reusable blocks
+    settings:
+      grader:
+        type: order
+      indent:
+        active: 'true'
+        mode: prescribed
+    instructions: |
+      <p>Construct code by reordering and indenting the lines.<br />
+      You MUST reuse the <code>}</code> block twice to complete the program.</p>
+    systems:
+    - language: java
+      assets:
+        code:
+          blocks:
+            content:
+            - blockid: one
+              display: for (int i = 0; i < 10; i++) {
+              indent: '0'
+            - blockid: two
+              display: if (i % 2 == 0) {
+              indent: '0'
+            - blockid: three
+              display: System.out.print(i);
+              indent: '0'
+            - blockid: four
+              display: "}"
+              reusable: 'true'
+              indent: '0'
+  :diagnostics: []
+renderable:
+  value:
+    question_text: |
+      <p>Construct code by reordering and indenting the lines.<br />
+      You MUST reuse the <code>}</code> block twice to complete the program.</p>
+    options:
+      grader:
+        type: dag
+        show_feedback: true
+      indent:
+        active: true
+        mode: prescribed
+        max_indents: 3
+      adaptive: true
+      numbered: false
+      language: java
+    blocks:
+    - text: for (int i = 0; i < 10; i++) {
+      type: ''
+      tag: one
+      depends: ''
+      indent: 0
+      displaymath: false
+      feedback: ''
+    - text: if (i % 2 == 0) {
+      type: ''
+      tag: two
+      depends: ''
+      indent: 0
+      displaymath: false
+      feedback: ''
+    - text: System.out.print(i);
+      type: ''
+      tag: three
+      depends: ''
+      indent: 0
+      displaymath: false
+      feedback: ''
+    - text: "}"
+      type: ''
+      tag: four
+      depends: ''
+      indent: 0
+      displaymath: false
+      feedback: ''
+      reusable: true
+  diags: []

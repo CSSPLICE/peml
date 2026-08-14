@@ -49,4 +49,4 @@
           expected
           I am a Java program I am a Java program I am a Java program
 :diagnostics:
-- 'Path ''/assets/test/files/0'' is missing key: format'
+- 'Path ''/systems/0/assets/test/files/0'' is missing key: format'

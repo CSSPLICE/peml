@@ -90,4 +90,3 @@ value:
 
 diagnostics:
 - Path '/difficulty' is not an integer.
-...

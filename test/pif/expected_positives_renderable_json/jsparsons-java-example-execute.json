@@ -1,0 +1,5 @@
+{
+  "diagnostics": [
+    "Path '/systems/0/assets/test/files/0' is missing key: type"
+  ]
+}

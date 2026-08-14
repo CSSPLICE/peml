@@ -1,0 +1,99 @@
+{
+  "value": {
+    "question_text": "<p>Write a function to swap two elements in the array by reordering the<br />\nlines. Your function should return the array.</p>\n",
+    "options": {
+      "grader": {
+        "type": "exec",
+        "show_feedback": true
+      },
+      "indent": {
+        "active": true,
+        "mode": "free",
+        "max_indents": 3
+      },
+      "adaptive": true,
+      "numbered": false,
+      "language": "java"
+    },
+    "blocks": [
+      {
+        "text": "int temp = arr[i];",
+        "type": "",
+        "tag": "one",
+        "depends": "",
+        "indent": true,
+        "displaymath": false,
+        "feedback": ""
+      },
+      {
+        "text": "int temp = arr[i];",
+        "type": "",
+        "tag": "onea",
+        "depends": "",
+        "indent": true,
+        "displaymath": false,
+        "feedback": ""
+      },
+      {
+        "text": "arr[i] = arr[j];",
+        "type": "",
+        "tag": "two",
+        "depends": "",
+        "indent": true,
+        "displaymath": false,
+        "feedback": ""
+      },
+      {
+        "text": "arr[j] = temp;",
+        "type": "",
+        "tag": "three",
+        "depends": "",
+        "indent": true,
+        "displaymath": false,
+        "feedback": ""
+      },
+      {
+        "text": "int temp = arr[j];",
+        "type": "",
+        "tag": "four",
+        "depends": "",
+        "indent": true,
+        "displaymath": false,
+        "feedback": ""
+      },
+      {
+        "text": "public int[] Swap(int[] arr, int i, int j)\n{",
+        "type": "",
+        "toggle_options": [
+
+        ],
+        "text_options": [
+
+        ],
+        "tag": "fixed",
+        "depends": "",
+        "indent": "",
+        "displaymath": false,
+        "feedback": ""
+      },
+      {
+        "text": "return arr;\n}",
+        "type": "",
+        "toggle_options": [
+
+        ],
+        "text_options": [
+
+        ],
+        "tag": "fixed",
+        "depends": "",
+        "indent": "",
+        "displaymath": false,
+        "feedback": ""
+      }
+    ]
+  },
+  "diags": [
+
+  ]
+}
