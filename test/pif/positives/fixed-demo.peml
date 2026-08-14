@@ -29,7 +29,7 @@ Put the blocks **in** the proper order.
 # reasonable order.
 
 [systems]
-language: java
+language: natural
 
 [.assets.code.blocks.content]
 blockid: fixed

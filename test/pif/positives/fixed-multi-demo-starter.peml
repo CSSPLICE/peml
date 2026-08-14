@@ -25,7 +25,7 @@ Put the blocks in the proper order.
 # using [assets.code.starter.files].
 
 [systems]
-language: java
+language: natural
 
 [.assets.code.starter.files]
 content:---------
