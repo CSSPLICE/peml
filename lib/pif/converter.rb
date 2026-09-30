@@ -88,7 +88,7 @@ module PifConverter
         block["blocklist"].each do |sub_block|
           sub_tag = "#{block["blockid"]}-#{sub_block["blockid"]}"
           blockid_to_tag[sub_block["blockid"]] = sub_tag
-          parsons_data_model["blocks"] << {
+          sub_parsons_block = {
             "text" => sub_block["display"],
             "tag" => sub_tag,
             "type" => sub_block["depends"] == -1 || sub_block["feedback"] ? "distractor" : "",
@@ -97,12 +97,15 @@ module PifConverter
             "feedback" => sub_block["feedback"],
             "reusable" => sub_block["reusable"].to_s.strip.downcase == "true",
           }
+          sub_parsons_block["code"] = sub_block["code"] if sub_block["code"]
+          parsons_data_model["blocks"] << sub_parsons_block
         end
 
       # Case: Pickone blocklist
       elsif
         # Adds the root of the blocklist
         parsons_block["text"] = block["blocklist[0].display"]
+        parsons_block["code"] = block["blocklist[0].code"] if block["blocklist[0].code"]
         parsons_block["type"] = ""
         parsons_block["picklimit"] = block["picklimit"].to_i || 0
         parsons_block["tag"] = "#{block["blockid"]}-#{block["blocklist[0].blockid"]}"
@@ -125,7 +128,7 @@ module PifConverter
         selected_distractors.each do |distractor|
           distractor_tag = "#{block["blockid"]}-#{distractor["blockid"]}"
           blockid_to_tag[distractor["blockid"]] = distractor_tag
-          parsons_data_model["blocks"] << {
+          distractor_parsons_block = {
             "text" => distractor["display"],
             "tag" => distractor_tag,
             "type" => "distractor",
@@ -134,9 +137,12 @@ module PifConverter
             "feedback" => distractor["feedback"],
             "reusable" => block["reusable"].to_s.strip.downcase == "true",
           }
+          distractor_parsons_block["code"] = distractor["code"] if distractor["code"]
+          parsons_data_model["blocks"] << distractor_parsons_block
         end
       else
         parsons_block["text"] = block["display"]
+        parsons_block["code"] = block["code"] if block["code"]
         if(block["toggle_options"])
           parsons_block["toggle_options"] = block["toggle_options"]
         end
